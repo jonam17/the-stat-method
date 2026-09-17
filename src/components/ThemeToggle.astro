@@ -1,0 +1,62 @@
+---
+/**
+ * Theme control. Cycles auto → light → dark → auto.
+ *
+ * "Auto" follows the operating system via prefers-color-scheme, which is the
+ * convention people already understand — and on macOS/iOS the OS itself
+ * already switches on real sunrise/sunset, so a clock rule here would fight
+ * it. Time of day is used only as a fallback when the OS expresses no
+ * preference at all.
+ *
+ * The no-flash script that reads this lives inline in <head> in BaseLayout;
+ * it has to run before first paint, so it cannot live in this component.
+ */
+---
+
+<button class="theme-toggle" type="button" data-theme-toggle
+        aria-label="Change colour theme" title="Change colour theme">
+  <span class="theme-ico" data-theme-ico aria-hidden="true"></span>
+  <span class="theme-label" data-theme-label>Auto</span>
+</button>
+
+<script is:inline>
+  (() => {
+    const ORDER = ['auto', 'light', 'dark'];
+    const ICO = { auto: '◐', light: '☀', dark: '☾' };
+    const LBL = { auto: 'Auto', light: 'Light', dark: 'Dark' };
+
+    function resolve(pref) {
+      if (pref !== 'auto') return pref;
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      // Only fall back to the clock when the OS states no preference.
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+      if (mq.matches) return 'dark';
+      const h = new Date().getHours();
+      return (h < 7 || h >= 19) ? 'dark' : 'light';
+    }
+
+    function apply(pref) {
+      const theme = resolve(pref);
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.themePref = pref;
+      document.querySelectorAll('[data-theme-ico]').forEach(e => e.textContent = ICO[pref]);
+      document.querySelectorAll('[data-theme-label]').forEach(e => e.textContent = LBL[pref]);
+      document.querySelectorAll('[data-theme-toggle]').forEach(e =>
+        e.setAttribute('aria-label', `Colour theme: ${LBL[pref]}. Click to change.`));
+    }
+
+    let pref = localStorage.getItem('theme') || 'auto';
+    apply(pref);
+
+    document.querySelectorAll('[data-theme-toggle]').forEach(btn =>
+      btn.addEventListener('click', () => {
+        pref = ORDER[(ORDER.indexOf(pref) + 1) % ORDER.length];
+        localStorage.setItem('theme', pref);
+        apply(pref);
+      }));
+
+    // Follow the OS live while in auto.
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', () => { if (pref === 'auto') apply('auto'); });
+  })();
+</script>

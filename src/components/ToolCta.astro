@@ -1,0 +1,36 @@
+---
+/**
+ * Article → tool call to action.
+ *
+ * Two variants:
+ *   compact — a single-line bar, placed high in the article so mobile readers
+ *             (who never see the sticky sidebar) know the tool exists.
+ *   full    — a richer card before the references, where a reader who finished
+ *             the article is most ready to act.
+ *
+ * Always names the specific calculator. "Open the calculator" tells the reader
+ * nothing about what they are opening.
+ */
+import { findTool } from '../data/tools.js';
+
+const { slug, variant = 'full' } = Astro.props;
+const tool = findTool(slug);
+---
+{tool && variant === 'compact' && (
+  <a class="cta-bar" href={`/tools/${tool.slug}/`}>
+    <span class="cb-label">Calculator</span>
+    <span class="cb-name">{tool.name}</span>
+    <span class="cb-go">Open →</span>
+  </a>
+)}
+
+{tool && variant === 'full' && (
+  <aside class="cta-card">
+    <div class="cc-body">
+      <span class="cc-label">Run the numbers</span>
+      <h3>{tool.name}</h3>
+      <p>{tool.desc}</p>
+    </div>
+    <a class="cc-btn" href={`/tools/${tool.slug}/`}>Open the calculator →</a>
+  </aside>
+)}

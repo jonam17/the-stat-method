@@ -1,0 +1,7 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import TdeeCalculator from '../../components/TdeeCalculator.jsx';
+---
+<ToolLayout slug="tdee-calculator" title="TDEE & BMR Calculator" intro="Five published BMR equations run at once, so you can see how much they disagree instead of trusting one number in isolation.">
+  <TdeeCalculator client:load  />
+</ToolLayout>

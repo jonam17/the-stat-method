@@ -1,0 +1,17 @@
+# Cloudflare Pages security and privacy headers.
+# Keep analytics/ad origins out of this policy until those services are actually enabled.
+# If a third-party script is added later, update CSP deliberately rather than using *.
+# The policy intentionally permits inline style/script because Astro/React emit small
+# inline payloads for the static site and structured data.
+#
+# NOTE: HSTS should only be enabled once the production hostname is HTTPS-only.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'self'; img-src 'self' data: blob:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'
+
+# Enable after the custom domain is live on HTTPS and you are comfortable with
+# browser-enforced HSTS for the site and subdomains.
+# Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

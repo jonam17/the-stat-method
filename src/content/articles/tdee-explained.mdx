@@ -1,0 +1,114 @@
+---
+title: "TDEE explained: why your calorie target keeps moving"
+dek: "Your maintenance number isn't a constant. Here's what actually changes it, and how to tell a real metabolic shift from a week of bad tracking."
+category: Nutrition
+published: 2026-07-28
+updated: 2026-08-20
+readMinutes: 11
+citationsVerified: full
+citationsVerifiedDate: 2026-08-26
+author: The Stat Method
+relatedTool: tdee-calculator
+changelog:
+  - date: 2026-08-20
+    note: >-
+      Corrected an imperial height display that could show an impossible value such as "5 ft 12 in" at certain heights. The underlying calculation was unaffected.
+  - date: 2026-08-20
+    note: >-
+      The calculator now waits for a complete set of inputs before showing results, rather than computing from blank fields treated as zero.
+  - date: 2026-08-20
+    note: >-
+      All calculators now state that they are built for adults aged 18 and over. The equations behind them were developed and validated on adult bodies and do not produce meaningful results for anyone still growing.
+references:
+  - text: "Mifflin MD, St Jeor ST, Hill LA, Scott BJ, Daugherty SA, Koh YO. A new predictive equation for resting energy expenditure in healthy individuals. Am J Clin Nutr, 1990;51(2):241-247."
+    url: "https://pubmed.ncbi.nlm.nih.gov/2305711/"
+    verified: true
+  - text: "Levine JA. Non-exercise activity thermogenesis (NEAT). Best Pract Res Clin Endocrinol Metab, 2002;16(4):679-702."
+    url: "https://doi.org/10.1053/beem.2002.0227"
+    verified: true
+  - text: "Trexler ET, Smith-Ryan AE, Norton LE. Metabolic adaptation to weight loss: implications for the athlete. J Int Soc Sports Nutr, 2014;11(1):7."
+    url: "https://pubmed.ncbi.nlm.nih.gov/24571926/"
+    verified: true
+---
+
+import MacroCalculator from '../../components/MacroCalculator.jsx';
+
+Total daily energy expenditure is the number every diet plan is built on, and it's the
+number almost nobody's plan accounts for correctly. It isn't a fixed property of your
+body. It drifts — sometimes by several hundred calories — in response to what you eat
+and how much you move.
+
+## The four components
+
+Roughly, your daily burn breaks into resting metabolic rate, the thermic effect of food,
+deliberate exercise, and everything else you do while awake. That last category —
+fidgeting, pacing, standing, gesturing — is the one that moves most, and the one you
+have the least conscious control over.
+
+This is why two people with identical training programmes and identical bodyweights can
+have maintenance figures that differ by four hundred calories. It isn't a mystery
+metabolism. It's that one of them takes twelve thousand steps without thinking about it
+and the other takes three thousand.
+
+## What happens when you diet
+
+Cut calories and expenditure falls for two reasons. The obvious one: a lighter body costs
+less to move and maintain. The less obvious one: unconscious activity drops. You sit more.
+You take the lift. Your training sessions get shorter without you deciding to shorten them.
+
+<div class="pull">
+The deficit you calculated in week one is not the deficit you're running in week eight,
+even if you changed nothing.
+</div>
+
+This is why a calculator's job is to give you a starting point, not a prescription.
+Estimate, run it for two to three weeks, then adjust from what the scale actually did.
+
+## Estimate yours
+
+The tool below is the same component as our full calculator — same equations, same
+engine. Set your details and note the maintenance figure, then read the next section
+on what to do with it.
+
+<div class="island">
+  <div class="island-top">
+    <span class="t">Interactive · runs in your browser</span>
+    <a href="/tools/macro-calculator/">Open full tool →</a>
+  </div>
+  <MacroCalculator client:visible />
+</div>
+
+## Reading the result
+
+Start by assuming the number is wrong, because for about half of people it is — by more than
+ten per cent. The Mifflin-St Jeor equation this tool defaults to was derived from 498 adults
+and explains roughly 71 per cent of the variation between people; comparative studies put its
+hit rate for landing within ten per cent of measured resting expenditure at somewhere around
+a half. [1] It is the most accurate of the widely used equations, and that is still the
+accuracy on offer.
+
+There is a third limit, and it is the one people find most surprising: the activity
+multiplier is not a fixed property of you. Non-exercise activity thermogenesis — everything
+you burn that is not sleeping, eating or deliberate exercise — accounts for the majority of
+non-resting energy needs, and it **rises when you overfeed and falls when you underfeed**. [2]
+You fidget less, stand less, and move less around the edges of the day without deciding to.
+
+So the multiplier that described you at maintenance quietly describes you less well three
+weeks into a deficit. That is not a flaw in the estimate; it is your body doing what bodies
+do, and it is another reason the weight trend beats the calculation.
+
+Two further limits worth knowing. The derivation sample ran from **19 to 78 years old**, so
+for anyone much older than that the age term is being extrapolated past its data. And the
+equation knows nothing about your lean mass — which is why entering a body-fat percentage,
+where you have a reliable one, moves the estimate onto a better footing.
+
+None of that makes the number useless. It makes it a *starting* estimate, which is what the
+next paragraph is for.
+
+Track bodyweight daily and take a weekly average; day-to-day swings are water and gut
+contents, not fat. If the weekly average is flat over three weeks, the number above is
+close to your true maintenance. If it's dropping faster than roughly one percent of
+bodyweight per week, your deficit is more aggressive than intended.
+
+Adjust in small increments — a hundred to two hundred calories — and give each change a
+fortnight before judging it.

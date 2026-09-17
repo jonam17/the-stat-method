@@ -1,0 +1,8 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import MacroCalculator from '../../components/MacroCalculator.jsx';
+---
+<ToolLayout slug="macro-calculator" title="Macro & Calorie Calculator"
+  intro="Set your calorie target from a published BMR equation, then split it into protein, carbohydrate and fat — by percentage or in grams.">
+  <MacroCalculator client:load />
+</ToolLayout>

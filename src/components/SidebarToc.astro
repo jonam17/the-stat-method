@@ -1,0 +1,62 @@
+---
+/**
+ * Persistent table of contents for the article sidebar.
+ *
+ * The inline pill row scrolls away immediately, so on a long article the reader
+ * loses both the sense of scope and any way back. This version sits in the
+ * sticky sidebar and highlights the section currently in view.
+ *
+ * Desktop only — below 940px the sidebar is hidden and the inline pill row
+ * (TableOfContents.astro) takes over.
+ */
+const { items = [] } = Astro.props;
+---
+{items.length > 0 && (
+  <nav class="box toc-rail" aria-label="On this page">
+    <h3>On this page</h3>
+    <ol>
+      {items.map(i => (
+        <li><a href={`#${i.id}`} data-toc={i.id}>{i.label}</a></li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<script>
+  // Highlight the section currently in view. Uses IntersectionObserver rather
+  // than scroll handlers so it stays cheap on long pages.
+  const links = [...document.querySelectorAll('[data-toc]')];
+  if (links.length) {
+    const byId = new Map(links.map(a => [a.dataset.toc, a]));
+    const targets = links
+      .map(a => document.getElementById(a.dataset.toc))
+      .filter(Boolean);
+
+    let active = null;
+    const setActive = el => {
+      if (active === el) return;
+      links.forEach(a => a.classList.remove('on'));
+      if (el) el.classList.add('on');
+      active = el;
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      // Pick the topmost heading currently intersecting the upper band.
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) setActive(byId.get(visible[0].target.id));
+    }, {
+      // Band across the upper third of the viewport, offset for the sticky nav.
+      // Measured from the sticky masthead rather than hardcoded, so this
+      // cannot drift out of step with --nav-h / --stick in global.css.
+      rootMargin: `-${(document.querySelector('.nav')?.offsetHeight ?? 64) + 16}px 0px -66% 0px`,
+      threshold: 0,
+    });
+
+    targets.forEach(t => observer.observe(t));
+
+    // Before the first heading scrolls in, mark the first item.
+    if (links[0]) links[0].classList.add('on');
+  }
+</script>

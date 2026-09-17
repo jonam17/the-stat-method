@@ -1,0 +1,334 @@
+# The Stat Method
+
+**Free, open-source fitness calculators that show their methodology**, paired with health
+and training writing that cites its sources.
+
+> **The operating principle: the math is free forever.**
+> Calculations run entirely in your browser and cost nothing per user, so they will never
+> be paywalled, gated behind a signup, or used as a lead magnet for coaching.
+
+**17 calculators · 18 sourced articles · 126 unit tests · zero JavaScript on content pages**
+
+[Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
+
+---
+
+## Why this exists
+
+Most macro calculators hand you three numbers and no reasoning. Ask where the protein
+figure came from and you get a shrug, or a checkout page.
+
+The Stat Method is the opposite trade: every tool names its equations, every article cites
+its sources, and the maths is open source with unit tests. You can read exactly what a
+calculator does before deciding whether to trust what it says.
+
+Every calculator ships with a cornerstone article explaining the topic in depth, and every
+article cites primary sources. Every tool page carries a plain-language glossary of its jargon, brief usage steps above
+the calculator, and a "reading your results" section below it explaining what the numbers
+mean and what to do next.
+
+Where the evidence is uncertain, the tools say so. Several of them display error bars,
+formula disagreement, and caveats that actively reduce confidence in their own output —
+the body-fat tool shows three methods disagreeing by seven points, and the calories-burned
+tool tells you its own figures are inflated by resting expenditure. That is the point.
+
+---
+
+## The tools
+
+### Energy & body composition
+
+#### Deficit & goal-date planner
+
+The flagship. Most calculators use the static "3,500 kcal = 1 lb" rule, which assumes
+expenditure never changes and therefore predicts indefinite linear weight loss. Real
+weight loss **flattens**, because a lighter body costs less to run and adaptive
+thermogenesis lowers expenditure further.
+
+This tool models that: expenditure is recomputed daily against current bodyweight, weight
+change is partitioned between fat and lean tissue via the Forbes relationship, and the
+projection is drawn against the static rule so the error is visible.
+
+![Deficit and goal-date planner](docs/previews/05-deficit-planner.webp)
+
+*Solving "90 kg → 80 kg in 24 weeks" returns 2,092 kcal/day and lands on 80.00 kg. The
+static rule predicts 73.86 kg over the same period — an overestimate of 6.1 kg.*
+
+It also reports **maintenance calories at goal weight**, the number that determines whether
+the weight stays off, and which almost no free tool surfaces.
+
+#### TDEE & BMR calculator
+
+Five published BMR equations run simultaneously so the disagreement between them is visible
+rather than hidden behind a single confident number.
+
+![TDEE and BMR calculator](docs/previews/02-tdee-calculator.webp)
+
+#### Body fat estimator
+
+Three methods side by side, each with its **published error range**.
+
+![Body fat estimator](docs/previews/03-body-fat.webp)
+
+#### Macro calculator
+
+Protein scaled off lean mass when body fat is known, fat floored for hormonal health, and a
+split editor accepting percentages *or* grams with live over-budget warnings.
+
+![Macro calculator](docs/previews/01-macro-calculator.webp)
+
+#### Lean mass & FFMI · Healthy weight range
+
+FFMI is BMI with the fat removed. The healthy-weight tool runs four classical formulas
+alongside waist-to-height ratio, which predicts cardiometabolic risk better than BMI.
+
+<img src="docs/previews/04-ffmi.webp" width="49%"> <img src="docs/previews/15-healthy-weight.webp" width="49%">
+
+---
+
+### Strength
+
+#### DOTS, IPF GL & Wilks score
+
+Modern powerlifting scoring. **DOTS is the default and Wilks is tagged as legacy** — the
+inverse of most incumbent calculators, which still present Wilks as the standard.
+
+![Powerlifting score](docs/previews/09-powerlifting-score.webp)
+
+Coefficients are taken from the official IPF 2020 publication and the DOTS specification,
+not from memory. DOTS and Wilks agree within ~3 points at 82.5 kg and diverge at extreme
+bodyweights, which is the documented behaviour.
+
+#### One-rep max estimator · RPE, RIR & %1RM converter
+
+Five formulas with a full percentage table, plus an RPE converter for prescribing working
+loads by reps in reserve — genuinely underserved by free tools.
+
+<img src="docs/previews/06-one-rep-max.webp" width="49%"> <img src="docs/previews/11-rpe-converter.webp" width="49%">
+
+#### Strength standards · Plate loader
+
+Bodyweight-relative levels scaled for age and sex, and a visual plate loader that reports
+the closest achievable load when a target cannot be made exactly.
+
+<img src="docs/previews/10-strength-standards.webp" width="49%"> <img src="docs/previews/12-plate-loader.webp" width="49%">
+
+---
+
+### Nutrition in practice
+
+#### Hand-portion translator
+
+Converts gram targets into palms, cupped hands and thumbs, so tracking works without a
+scale. Includes a meal splitter with optional peri-workout weighting.
+
+![Hand portion translator](docs/previews/13-hand-portions.webp)
+
+#### Protein target
+
+A daily range from lean body mass, adjusted for deficit depth, training age and older
+adults — and it tells you plainly that the "30 g per meal" absorption limit is a myth.
+
+![Protein target](docs/previews/14-protein-target.webp)
+
+---
+
+### Cardio & recovery
+
+#### Heart rate zones · Calories burned
+
+Karvonen reserve zones built on **Tanaka** rather than "220 − age", and METs-based energy
+estimates from the Compendium of Physical Activities.
+
+<img src="docs/previews/07-heart-rate-zones.webp" width="49%"> <img src="docs/previews/08-calories-burned.webp" width="49%">
+
+#### Running pace · Sleep cycles
+
+Splits and Riegel race predictions flagged by how far the extrapolation stretches, plus
+cycle-aligned bedtimes with an honest note on what cycle timing can and cannot do.
+
+<img src="docs/previews/17-running-pace.webp" width="49%"> <img src="docs/previews/16-sleep-calculator.webp" width="49%">
+
+---
+
+## Architecture: one engine, many UIs
+
+```
+src/
+├── engine/                    ← all maths. No React, no DOM. Import from anywhere.
+│   ├── energy.js              BMR (5 equations), TDEE, calorie targets
+│   ├── body.js                lean mass, BMI, FFMI, waist:height, 3 body-fat methods,
+│   │                          ideal-weight formulas
+│   ├── macros.js              default split, % ↔ g resolution, budget detection
+│   ├── strength.js            1RM (5 formulas), RPE/RIR chart, plate loading
+│   ├── scoring.js             DOTS, IPF GL Points, Wilks
+│   ├── standards.js           bodyweight-relative strength levels
+│   ├── cardio.js              max HR, Karvonen zones, METs, VO₂ max
+│   ├── planner.js             dynamic weight-change simulation
+│   ├── portions.js            hand portions, meal splitting, protein targets
+│   ├── pace.js                running pace, splits, Riegel prediction
+│   ├── sleep.js               sleep cycle timing
+│   ├── units.js               imperial ↔ metric
+│   └── __tests__/             126 unit tests
+├── components/                React islands — state and markup only, zero maths
+├── content/articles/          Markdown/MDX, schema-validated at build time
+├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
+├── data/tool-guides.js        per-tool glossary, usage steps and results interpretation
+├── layouts/
+├── pages/
+├── styles/global.css
+└── scripts/capture-previews.mjs   regenerates docs/previews from the registry
+```
+
+**Rule: no calculation logic in components.** If you are writing arithmetic in a `.jsx`
+file, it belongs in `src/engine/` with a test. This keeps the UI layer disposable — swap
+the framework and the engine ports unchanged.
+
+| Layer | Choice | Why |
+|---|---|---|
+| Framework | **Astro 7** | Zero JS by default; static HTML for articles, hydrates only calculators |
+| Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
+| Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
+| Maths | **`src/engine/`** | Framework-agnostic, unit-tested |
+| Tests | **Vitest** | 126 tests |
+| Hosting | **Cloudflare Pages** | Free static hosting, custom domain |
+
+Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
+
+Content pages ship with **no JavaScript at all** — only pages containing a calculator load
+the React bundle.
+
+---
+
+## Getting started
+
+```bash
+npm install
+npm run dev          # http://localhost:4321
+npm test             # 126 engine tests
+npm run build        # static output to ./dist
+```
+
+### Regenerating the previews in this README
+
+The screenshots above are generated from the tool registry, so adding a tool with
+`live: true` in `src/data/tools.js` picks it up automatically:
+
+```bash
+npm install                       # once — pulls in playwright
+npx playwright install chromium   # once — downloads the browser (~120 MB)
+npm run docs                      # build + capture every tool preview
+```
+
+The browser is only needed for screenshots; `npm run build` and `npm test` do not require
+it. Previews are written as WebP via `sharp` (bundled with Astro), and the output directory
+is cleared each run so stale images cannot accumulate.
+
+Each capture is verified to produce a real result and to throw no console errors, so a
+broken tool fails the run rather than silently shipping a blank screenshot.
+
+---
+
+## Methodology
+
+Every formula names its source in a docstring. A condensed list:
+
+**Basal metabolic rate** — Mifflin-St Jeor (1990, default), revised Harris-Benedict
+(Roza & Shizgal 1984), Katch-McArdle (lean-mass based, default when body fat is supplied),
+Cunningham (1980), Owen (1986–87).
+
+**Body composition** — U.S. Navy circumference (Hodgdon & Beckett 1984, ±3.5%),
+Deurenberg (1991, ±5%), Jackson-Pollock 3-site skinfold (1978) with Siri conversion
+(±3.5%), FFMI normalised (Kouri et al. 1995), waist-to-height (Ashwell & Gibson 2016).
+
+**Ideal weight** — Devine (1974), Robinson (1983), Miller (1983), Hamwi (1964). All were
+derived for clinical drug dosing, not aesthetics, and none accounts for muscularity.
+
+**Strength** — Epley, Brzycki, Lombardi, Wathan, O'Conner; RPE/RIR chart after Helms et al.
+and Zourdos et al. (2016).
+
+**Powerlifting scoring** — DOTS (Konertz 2019), IPF GL Points (IPF official coefficients,
+effective 1 May 2020), Wilks (1994, legacy).
+
+**Cardio** — max HR via Tanaka (2001, preferred), Fox and Gulati for comparison; Karvonen
+heart-rate reserve (1957); METs from Ainsworth et al. (2011); Riegel (1981) race prediction.
+
+**Weight change** — simplified dynamic model after Hall KD et al. (*Lancet* 2011), Forbes
+(1987) partitioning, adaptive thermogenesis after Trexler et al. (2014).
+
+### What these numbers are not
+
+Every equation here was fitted to a population, not to an individual. Two people matching
+on age, sex, height and weight can differ by several hundred calories a day in real
+expenditure, largely through unconscious activity.
+
+Treat any output as a starting estimate, run it for two to three weeks, track a weekly
+average bodyweight, and adjust from what actually happened. That feedback loop beats any
+formula.
+
+**These tools do not diagnose, treat, or replace clinical advice.**
+
+---
+
+## Testing
+
+```bash
+npm test
+```
+
+126 tests cover every formula. Several assert the *honesty properties* of the models rather
+than just their arithmetic:
+
+- the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
+- its projection **decelerates** — the final four weeks lose less than the first four
+- Forbes partitioning removes proportionally more lean mass from leaner people
+- DOTS and Wilks **diverge more at extreme bodyweights** than at mid bodyweights
+- unit toggles round-trip without drift
+
+A test caught a real calibration error during development: the Riegel confidence threshold
+was flagging a 10K → half-marathon prediction as unreliable when it is a standard,
+trustworthy extrapolation. The engine was fixed rather than the test.
+
+---
+
+## Contributing
+
+Bug reports on the maths are especially welcome. If a formula is misapplied or a citation
+is wrong, open an issue with the input values and the result you expected.
+
+Corrections are logged publicly, and articles carry a visible last-updated date.
+
+---
+
+## Licence
+
+MIT for the code. Article content is © its authors.
+
+## Production launch tooling
+
+Phase 8 adds:
+
+- `npm run qa:launch` — builds and checks required static launch artifacts, rendered placeholder leakage, robots/sitemap/manifest presence, and Cloudflare security headers.
+- `npm run qa:growth` — builds and checks the five priority acquisition calculators, route canonicals, metadata, WebApplication schema, and sitemap/robots structure.
+- `.env.example` — documents `PUBLIC_SITE_URL`, the production origin used for canonical URLs, sitemap generation, and Open Graph URLs.
+- `public/_headers` — baseline Cloudflare Pages security/privacy headers. HSTS is intentionally documented but not enabled until the custom domain is HTTPS-only.
+
+## Production / launch commands
+
+Once owner-specific production values are configured:
+
+```bash
+npm run qa:production
+npm run qa:predeploy
+```
+
+See [`DEPLOYMENT.md`](DEPLOYMENT.md), [`SEARCH-CONSOLE.md`](SEARCH-CONSOLE.md), and [`POST-LAUNCH.md`](POST-LAUNCH.md).
+
+## AI / Maintainer handoff
+
+For a complete development history, current architecture, QA baseline, and instructions for future AI-assisted changes, read **`CLAUDE-HANDOFF.md`** first. Use **`CLAUDE-REVIEW-CHECKLIST.md`** as the pre-change checklist.
+
+## Conventions
+
+`docs/CONVENTIONS.md` — safety rails, dark-mode pinning, input bounds, colour taxonomy,
+citation checks, and the pre-ship chain. Read it before adding anything.

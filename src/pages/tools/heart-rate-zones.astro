@@ -1,0 +1,8 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import CardioCalculator from '../../components/CardioCalculator.jsx';
+---
+<ToolLayout slug="heart-rate-zones" title="Heart Rate Zones"
+  intro="Karvonen reserve zones built on Tanaka rather than the familiar but less accurate '220 minus age'.">
+  <CardioCalculator client:load mode="zones" />
+</ToolLayout>

@@ -1,0 +1,34 @@
+---
+import { MONETIZATION } from '../site.config.js';
+/**
+ * End-of-article gear block. Disclosure is rendered automatically and
+ * is not optional — FTC requires it to be clear and conspicuous, and
+ * placed before the links rather than buried in a footer.
+ */
+const { intro = '', items = [] } = Astro.props;
+---
+{MONETIZATION.amazonStorefront && items.length > 0 && (
+  <section class="picks">
+    <div class="picks-head">
+      <h2>Gear that actually helps</h2>
+      <p class="picks-disc">
+        Some links below are affiliate links — if you buy through them we may earn a
+        small commission at no extra cost to you. It never changes what we recommend,
+        and nothing here is required to use any of our calculators.
+      </p>
+    </div>
+    {intro && <p class="picks-intro">{intro}</p>}
+    <div class="picks-grid">
+      {items.map(i => (
+        <div class="pick">
+          <span class="pick-role">{i.role}</span>
+          <h3>{i.name}</h3>
+          <p>{i.why}</p>
+          {i.url
+            ? <a class="pick-link" href={i.url} rel="nofollow sponsored noopener" target="_blank">View product →</a>
+            : <span class="pick-link muted">Link pending</span>}
+        </div>
+      ))}
+    </div>
+  </section>
+)}

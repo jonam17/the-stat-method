@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published - a.data.published);
+
+const articleListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'The Stat Method articles',
+  numberOfItems: articles.length,
+  itemListElement: articles.map((article, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: article.data.title,
+    url: new URL(`/articles/${article.id}/`, Astro.site || 'https://statmethod.invalid').href,
+  })),
+};
+---
+<BaseLayout title="Evidence-Based Health, Fitness & Nutrition Articles — The Stat Method" pageType="CollectionPage" extraJsonLd={[articleListSchema]}
+  description="Health, nutrition and training articles built from primary research, with every claim sourced and every calculator linked.">
+  <div class="wrap section">
+    <div class="section-head">
+      <h1>Articles</h1>
+      <span class="eyebrow">{articles.length} posts</span>
+    </div>
+    <div class="cards">{articles.map(a => <ArticleCard article={a} />)}</div>
+  </div>
+</BaseLayout>

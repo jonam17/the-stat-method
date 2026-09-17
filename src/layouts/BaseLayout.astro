@@ -1,0 +1,243 @@
+---
+import SiteSearch from '../components/SiteSearch.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+// F-026: fonts self-hosted rather than fetched from fonts.googleapis.com.
+// Removes a render-blocking third-party round trip AND the only request that
+// exposed visitor IPs to a third party — which is what lets the privacy page
+// state, truthfully, that no third-party request is made.
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/space-mono/400.css';
+import '@fontsource/space-mono/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '../styles/global.css';
+import { SITE, AUTHOR, authorLine, abs, supportUrl } from '../site.config.js';
+
+const {
+  title, description,
+  ogType = 'website',      // 'article' on article pages
+  published, updated, reviewStatus, clinicalClaims, references, noindex,
+  pageType = 'WebPage', breadcrumbItems = [], extraJsonLd = [],
+} = Astro.props;
+// Search results truncate around 60-65 characters, so the brand suffix is only
+// appended when the page title leaves room for it.
+const BRAND = 'The Stat Method';
+const pageTitle = title.includes(BRAND)
+  ? title
+  : (title.length + BRAND.length + 3 <= 60 ? `${title} — ${BRAND}` : title);
+const nav = [
+  { href: '/',          label: 'Home' },
+  { href: '/articles/', label: 'Articles' },
+  { href: '/tools/',    label: 'Tools' },
+  { href: '/resources/', label: 'Resources' },
+  { href: '/about/',    label: 'About' },
+];
+const path = Astro.url.pathname;
+// F-023: self-referencing canonical, normalised to a trailing slash so
+// /x and /x/ cannot both be indexed as distinct URLs.
+const isPreviewOrigin = /\.workers\.dev$|\.pages\.dev$|FILL-ME-DOMAIN/.test(new URL(SITE.url).hostname);
+const canonical = abs(path.endsWith('/') ? path : `${path}/`);
+const ogImage = abs('/og-default.png');
+
+// F-025: structured data, populated from the editorial metadata the content
+// schema already validates. reviewedBy is emitted ONLY when review actually
+// happened, so the markup never claims a review the site has not had.
+const isArticle = ogType === 'article';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': isArticle ? (clinicalClaims ? 'MedicalWebPage' : 'Article') : pageType,
+  name: title,
+  headline: isArticle ? title : undefined,
+  description,
+  url: canonical,
+  inLanguage: 'en',
+  ...(isArticle && {
+    author: AUTHOR.type === 'organization'
+      ? { '@type': 'Organization', name: AUTHOR.name, url: abs('/') }
+      : { '@type': 'Person', name: authorLine() },
+    publisher: { '@type': 'Organization', name: SITE.name, url: abs('/'), logo: { '@type': 'ImageObject', url: ogImage } },
+    datePublished: published,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    image: [ogImage],
+    dateModified: updated || published,
+    ...(reviewStatus === 'reviewed' && Astro.props.reviewedBy && {
+      reviewedBy: {
+        '@type': 'Person',
+        name: Astro.props.reviewedBy,
+        ...(Astro.props.reviewerCredentials && { honorificSuffix: Astro.props.reviewerCredentials }),
+      },
+    }),
+    ...(references?.length && {
+      citation: references.map(r => ({
+        '@type': 'CreativeWork', name: r.text, url: r.url || undefined,
+      })),
+    }),
+  }),
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: abs('/') },
+    ...breadcrumbItems.map((item, index) => ({
+      '@type': 'ListItem', position: index + 2, name: item.name, item: abs(item.href),
+    })),
+    ...(path !== '/' && !breadcrumbItems.some(item => item.href === path) ? [{
+      '@type': 'ListItem', position: breadcrumbItems.length + 2,
+      name: title, item: canonical,
+    }] : []),
+  ],
+};
+const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  {/* Preview deployments must not be indexed. A workers.dev or pages.dev origin
+      is a temporary address; letting Google index it means competing with your
+      own real domain later and cleaning up duplicates. Indexing turns itself on
+      automatically once PUBLIC_SITE_URL is a real domain. */}
+  <meta name="robots" content={(noindex || isPreviewOrigin) ? 'noindex,follow' : 'index,follow'} />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href={canonical} />
+
+  <!-- F-024: Open Graph / Twitter -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:locale" content={SITE.locale} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content="The Stat Method — evidence-based health, fitness and nutrition tools" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  {published && <meta property="article:published_time" content={published} />}
+  {updated && <meta property="article:modified_time" content={updated} />}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  {AUTHOR.handle && !AUTHOR.handle.startsWith('FILL_ME') &&
+    <meta name="twitter:creator" content={`@${AUTHOR.handle}`} />}
+
+  <!-- F-025: structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  {extraJsonLd.map(item => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="color-scheme" content="light dark" />
+  <script is:inline>
+    /* Runs before first paint to avoid a flash of the wrong theme. Kept tiny
+       and dependency-free on purpose; the toggle component re-applies the same
+       logic once it loads. */
+    (() => {
+      try {
+        const pref = localStorage.getItem('theme') || 'auto';
+        let theme = pref;
+        if (pref === 'auto') {
+          if (window.matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+          else if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+          else { const h = new Date().getHours(); theme = (h < 7 || h >= 19) ? 'dark' : 'light'; }
+        }
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.dataset.themePref = pref;
+      } catch { document.documentElement.dataset.theme = 'light'; }
+    })();
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-in">
+      <a class="brand" href="/">
+        <span class="glyph"><span><i></i><i></i><i></i></span></span>
+        <span class="brandname">The Stat Method<small>Evidence-based health · fitness · nutrition</small></span>
+      </a>
+      <div class="navlinks desktop-navlinks">
+        {nav.map(n => <a href={n.href} class={isOn(n.href) ? 'on' : ''}>{n.label}</a>)}
+      </div>
+      <div class="nav-utils desktop-support">
+        <SiteSearch />
+        <ThemeToggle />
+        <a class="btn-donate nav-donate" href={supportUrl()}
+           rel="noopener">♦ Support</a>
+      </div>
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation"><span class="mobile-nav-label">MENU</span><span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="mobile-nav-panel">
+          {nav.map(n => <a href={n.href} class={isOn(n.href) ? 'on' : ''}>{n.label}</a>)}
+          <div class="mobile-nav-utils">
+            <button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
+              <span class="search-trigger-ico" aria-hidden="true">⌕</span>
+              <span class="search-trigger-label">Search</span>
+            </button>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Change colour theme">
+              <span class="theme-ico" data-theme-ico aria-hidden="true"></span>
+              <span class="theme-label" data-theme-label>Auto</span>
+            </button>
+          </div>
+          <a href={supportUrl()} rel="noopener">♦ Support</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+
+  <main><slot /></main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a class="brand foot-brand" href="/">
+            <span class="glyph"><span><i></i><i></i><i></i></span></span>
+            <span class="brandname">The Stat Method</span>
+          </a>
+          {/* The mission, compact. Was a description of what the site is; this says
+              what it is for, which is the more useful thing to repeat on 48 pages.
+              Full version on /about/. */}
+          <p>Making the arithmetic behind health, fitness and nutrition advice visible,
+            checkable, and free — so you can judge a number instead of trusting it.
+            <a href="/about/">Our mission →</a></p>
+        </div>
+        <div><h5>Tools</h5>
+          <a href="/tools/macro-calculator/">Macro calculator</a>
+          <a href="/tools/">All calculators</a>
+        </div>
+        <div><h5>Topics</h5>
+          <a href="/resources/">Resources</a>
+          <a href="/articles/">Nutrition</a>
+          <a href="/articles/">Training</a>
+          <a href="/articles/">Recovery</a>
+        </div>
+        <div><h5>Site</h5>
+          <a href="/about/">About</a>
+          <a href="/methodology/">Methodology &amp; sources</a>
+          <a href="/editorial-policy/">Editorial &amp; ad policy</a>
+          <a href={`https://github.com/${AUTHOR.handle}`} rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="legal">
+        <span>© {new Date().getFullYear()} The Stat Method. Estimates only — not medical advice.</span>
+        <span class="footer-policy">
+            <a href="/privacy/">Privacy</a> ·
+            <a href="/terms/">Terms</a> ·
+            <a href="/ad-disclosure/">Ad disclosure</a>
+          </span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

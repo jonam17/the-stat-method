@@ -1,0 +1,8 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import CardioCalculator from '../../components/CardioCalculator.jsx';
+---
+<ToolLayout slug="calories-burned" title="Calories Burned by Activity"
+  intro="METs-based estimates drawn from the Compendium of Physical Activities, across thirty-plus activities.">
+  <CardioCalculator client:load mode="burn" />
+</ToolLayout>

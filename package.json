@@ -1,0 +1,49 @@
+{
+  "name": "the-stat-method",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/make-og-image.mjs && astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "previews": "node scripts/capture-previews.mjs",
+    "docs": "npm run build && npm run previews",
+    "audit": "node scripts/audit.mjs",
+    "qa:calculators": "node scripts/calculator-qa.mjs",
+    "check:placeholders": "node scripts/check-placeholders.mjs dist",
+    "verify": "npm run build && npm run check:placeholders && node scripts/citations.mjs lint && npx vitest run",
+    "og": "node scripts/make-og-image.mjs",
+    "citations": "node scripts/citations.mjs",
+    "qa:ui": "node scripts/qa-ui.mjs",
+    "qa:launch": "npm run build && node scripts/launch-qa.mjs",
+    "qa:growth": "npm run build && node scripts/growth-qa.mjs",
+    "qa:production": "node scripts/validate-production-config.mjs",
+    "qa:predeploy": "npm run qa:production && npm run qa:calculators && npm run qa:ui && npm test && npm run build && npm run check:placeholders && npm run citations -- lint && npm run audit",
+    "qa:smoke": "node scripts/smoke-qa.mjs",
+    "qa:release": "npm run qa:predeploy && npm run qa:smoke"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/react": "^6.0.2",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "astro": "^7.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "unist-util-visit": "^5.1.0",
+    "@astrojs/markdown-remark": "^7.2.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1",
+    "sharp": "^0.35.3",
+    "vitest": "^4.1.10"
+  }
+}

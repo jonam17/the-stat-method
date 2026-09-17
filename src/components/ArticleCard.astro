@@ -1,0 +1,12 @@
+---
+const { article } = Astro.props;
+const d = article.data;
+const date = d.published.toLocaleDateString('en-US',
+  { month: 'short', day: 'numeric', year: 'numeric' });
+---
+<a class="card" href={`/articles/${article.id}/`}>
+  <span class="cat" data-cat={d.category}>{d.category}</span>
+  <h2 class="card-h">{d.title}</h2>
+  <p>{d.dek}</p>
+  <span class="meta">{date} · {d.readMinutes} min</span>
+</a>

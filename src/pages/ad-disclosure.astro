@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LEGAL } from '../site.config.js';
+---
+<BaseLayout title="Advertising disclosure" description="How The Stat Method makes money: no paid placements, no advertising inside results, and affiliate disclosure above the links rather than buried in a footer.">
+  <main class="prose-page">
+    <h1>Advertising disclosure</h1>
+
+    <h2>How this site makes money</h2>
+    <p>
+      Some links to products are affiliate links. If you buy through one, we may
+      receive a commission from the retailer at no additional cost to you. Where a
+      block of links is affiliate-based, it says so directly above the links —
+      not in a footnote, and not after you have already clicked.
+    </p>
+
+    <h2>Reader donations</h2>
+  <p>
+    There is a Support button in the header and footer. It goes to a payment page
+    hosted by Stripe, our payment processor — the same way the equipment links go
+    to a retailer.
+  </p>
+  <p>
+    Two things worth stating plainly. <strong>Donating buys nothing.</strong> There
+    is no members' area, no early access, no removal of anything, and no tool or
+    article behind it. Everything on this site is free to everyone whether or not
+    anybody ever donates, and that is not a limited-time position.
+  </p>
+  <p>
+    And <strong>we do not receive your payment details.</strong> Your name, email,
+    card and any message stay with Stripe. Nothing about a donation reaches this
+    site, which has no database and no account system. We cannot see who donated,
+    and we could not tell you if you asked. That is a deliberate design choice, not
+    an oversight — it is what lets the privacy policy say we hold no personal
+    information and mean it literally.
+  </p>
+  <p>
+    Donations never influence what we recommend. A tool's result depends on the
+    numbers you enter and the equation behind it, and there is no mechanism by
+    which a payment could change either.
+  </p>
+
+  <h2>Rules we hold ourselves to</h2>
+    <ul>
+      <li><strong>Recommendations are not for sale.</strong> No manufacturer has
+        ever paid to be included here, and none can. A commission does not
+        influence whether something is recommended or how it is described.</li>
+      <li><strong>No advertising inside results.</strong> Advertising never
+        appears within, above, or beside a calculator's results, and never
+        displaces a safety warning. Health information comes first and
+        advertising fits around it, not the other way around.</li>
+      <li><strong>Nothing is required.</strong> Every calculator on this site is
+        free and complete without buying anything. Nothing in a gear
+        recommendation is needed to get a result.</li>
+      <li><strong>No health claims attached to products.</strong> We will not
+        suggest that a product treats, prevents, or cures anything.</li>
+    </ul>
+
+    <h2>What advertisers learn about you</h2>
+    <p>
+      Nothing you type into a calculator, because that information never leaves
+      your browser. If you follow an affiliate link, the retailer knows you came
+      from this site — the same as any ordinary link. See our
+      <a href="/privacy/">privacy page</a>.
+    </p>
+
+    <h2>FTC disclosure</h2>
+    <p>
+      United States Federal Trade Commission guidance requires that material
+      connections between a publisher and a seller be disclosed clearly and
+      conspicuously, near the recommendation rather than buried. That is why the
+      affiliate notice sits directly above the links it applies to, in the same
+      type size as the surrounding text, rather than in a footer.
+    </p>
+    <p>
+      Questions about any of this:{' '}
+      <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
+    </p>
+  </main>
+</BaseLayout>

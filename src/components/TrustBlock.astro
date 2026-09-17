@@ -1,0 +1,32 @@
+---
+const pillars = [
+  { t: 'Every equation named',
+    d: 'Each calculator lists the formulas it uses and the papers they came from. No black boxes.' },
+  { t: 'Open source, auditable',
+    d: 'The maths is on GitHub with unit tests. Read it before you trust it.' },
+  // Was 'Reviewed by professionals — checked by credentialed reviewers, credited
+  // by name'. That was FALSE: no article has a reviewer, and clinical review is
+  // still pending clinical review. Do not restore it until a
+  // named clinician has actually signed off; the schema only emits reviewedBy
+  // when reviewStatus === 'reviewed', and the homepage must not outrun it.
+  { t: 'Every source verified',
+    d: 'All 80 citations were checked against the original papers — that they exist, and that they support the specific claim made.' },
+  { t: 'Nothing stored, no signup',
+    d: 'Calculators run in your browser. Your numbers never leave your device.' },
+];
+---
+<section class="trust">
+  <div class="trust-head">
+    <span class="eyebrow">Why you can trust these numbers</span>
+    <h2>No upsell, no gatekeeping, no hand-waving.</h2>
+  </div>
+  <div class="trust-grid">
+    {pillars.map((p, i) => (
+      <div class="trust-item">
+        <span class="trust-num">{String(i + 1).padStart(2, '0')}</span>
+        <h3>{p.t}</h3>
+        <p>{p.d}</p>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RESOURCES } from '../data/resources.js';
+---
+<BaseLayout title="Resources — The Stat Method"
+  description="Trackers, primary sources, and people worth following — with honest notes on where each is strong and where to read critically.">
+  <div class="wrap section">
+    <div class="section-head">
+      <h1>Resources</h1>
+      <span class="eyebrow">Curated · caveats included</span>
+    </div>
+
+    <div class="res-intro">
+      <p>
+        Things worth your attention if you use the calculators here. Three rules govern
+        what appears on this page:
+      </p>
+      <ul>
+        <li><strong>Useful, not merely popular.</strong> Audience size is not a criterion.</li>
+        <li><strong>Criticism is stated, not hidden.</strong> Where a source is widely
+          followed but has drawn credible pushback for outrunning its evidence, that note
+          appears alongside the recommendation. An evidence-based site should not launder
+          reputations by omission.</li>
+        <li><strong>Affiliate links are labelled inline</strong> — on the item itself, not
+          in a footer. Nothing on this page is required to use any calculator here.</li>
+      </ul>
+    </div>
+
+    {RESOURCES.map(group => (
+      <section class="res-group">
+        <div class="res-head">
+          <h2 class="res-group-h">{group.group}</h2>
+          {group.affiliate && <span class="res-aff">Contains affiliate links</span>}
+        </div>
+        <p class="res-blurb">{group.blurb}</p>
+        <div class="res-grid">
+          {group.items.map(i => (
+            <div class={`res-card ${i.caveat ? 'has-caveat' : ''}`}>
+              <div class="res-top">
+                <span class="res-role">{i.role}</span>
+                {i.note && <span class={`res-note n-${i.note.toLowerCase().replace(/\s+/g, '-')}`}>{i.note}</span>}
+              </div>
+              <h3>
+                {i.url
+                  ? <a href={i.url} rel={i.note === 'Affiliate'
+                      ? 'nofollow sponsored noopener' : 'noopener'} target="_blank">{i.name}</a>
+                  : i.name}
+              </h3>
+              <p>{i.why}</p>
+              {i.caveat && (
+                <p class="res-caveat"><strong>Read critically:</strong> {i.caveat}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="res-group">
+      <div class="res-head"><h3>Suggest a resource</h3></div>
+      <p class="res-blurb">
+        If something belongs here, or something listed no longer deserves to be, open an
+        issue on GitHub. Removals are as welcome as additions.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TOOLS } from '../../data/tools.js';
+import { SEO_PRIORITY_TOOLS } from '../../data/seo-priority.js';
+
+const live = TOOLS.filter(t => t.live && t.slug);
+const planned = TOOLS.filter(t => !t.live);
+const groups = ['Energy', 'Nutrition', 'Body', 'Performance', 'Cardio', 'Recovery'];
+const toolListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'The Stat Method calculators',
+  numberOfItems: live.length,
+  itemListElement: live.map((t, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: t.name,
+    url: new URL(`/tools/${t.slug}/`, Astro.site || 'https://statmethod.invalid').href,
+  })),
+};
+const categoryIntro = {
+  Energy: 'BMR, expenditure and energy-balance estimates.',
+  Nutrition: 'Calories, macros and practical protein targets.',
+  Body: 'Body-composition and weight-range estimates.',
+  Performance: 'Strength, loading and performance measures.',
+  Cardio: 'Heart rate, running and activity-energy tools.',
+  Recovery: 'Sleep and stimulant timing estimates.',
+};
+---
+<BaseLayout title="Health, Fitness & Nutrition Calculators — The Stat Method" pageType="CollectionPage" extraJsonLd={[toolListSchema]}
+  description="Evidence-based health, fitness and nutrition calculators. Transparent methods, cited sources, and no account required.">
+  <div class="wrap tools-hub">
+    <header class="tools-hero">
+      <div>
+        <div class="eyebrow">01 / THE TOOLKIT</div>
+        <h1>Calculators built<br />to show their work.</h1>
+      </div>
+      <div class="tools-hero-copy">
+        <p>Small, focused instruments for health, fitness, exercise and nutrition. Run a calculation, then inspect the method, assumptions and sources behind it.</p>
+        <div class="tools-proof"><span>{live.length} LIVE TOOLS</span><span>NO SIGNUP</span><span>DATA LOCAL</span></div>
+      </div>
+    </header>
+
+    <section class="tools-start" aria-labelledby="start-here">
+      <div class="tools-start-head">
+        <div>
+          <span class="eyebrow">START HERE</span>
+          <h2 id="start-here">The five tools we built to answer the common questions first.</h2>
+        </div>
+        <p>High-intent calculations with the deepest supporting methodology and guides.</p>
+      </div>
+      <div class="tools-start-grid">
+        {SEO_PRIORITY_TOOLS.map((slug, i) => {
+          const t = live.find(item => item.slug === slug);
+          return t ? <a class="start-tool" href={`/tools/${t.slug}/`}>
+            <span>{String(i + 1).padStart(2, '0')}</span>
+            <strong>{t.name}</strong>
+            <em>{t.category} ↗</em>
+          </a> : null;
+        })}
+      </div>
+    </section>
+
+    <nav class="tool-index-nav" aria-label="Calculator categories">
+      {groups.map((group, i) => {
+        const count = live.filter(t => t.category === group).length;
+        return <a href={`#${group.toLowerCase()}`}><span>{String(i + 1).padStart(2, '0')}</span>{group}<em>{count}</em></a>;
+      })}
+    </nav>
+
+    <div class="tool-groups">
+      {groups.map((group, i) => {
+        const items = live.filter(t => t.category === group);
+        if (!items.length) return null;
+        return (
+          <section class="tool-group" id={group.toLowerCase()}>
+            <div class="tool-group-head">
+              <div>
+                <span class="eyebrow">{String(i + 1).padStart(2, '0')} / {group}</span>
+                <h2>{group}</h2>
+              </div>
+              <p>{categoryIntro[group]}</p>
+            </div>
+            <div class="instrument-library">
+              {items.map((t, index) => (
+                <a class="library-row" href={`/tools/${t.slug}/`}>
+                  <span class="library-num">{String(index + 1).padStart(2, '0')}</span>
+                  <span class="library-main">
+                    <strong>{t.name}</strong>
+                    <span>{t.desc}</span>
+                  </span>
+                  <span class="library-status"><span class="pill-live">LIVE</span></span>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+
+    <section class="tools-development">
+      <div>
+        <span class="eyebrow">07 / IN DEVELOPMENT</span>
+        <h2>What's next.</h2>
+      </div>
+      <div class="planned-list">
+        {planned.map(t => (
+          <div class="planned-row">
+            <strong>{t.name}</strong><span>{t.desc}</span><em>Planned</em>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

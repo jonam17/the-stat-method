@@ -1,0 +1,168 @@
+---
+/**
+ * Site-wide search. Plain <dialog> plus ~90 lines of vanilla JS — no island,
+ * no framework, no runtime dependency. The index is fetched on first open and
+ * cached for the session, so visitors who never search download nothing extra.
+ */
+---
+
+<button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
+  <span class="search-trigger-ico" aria-hidden="true">⌕</span>
+  <span class="search-trigger-label">Search</span>
+  <kbd class="search-trigger-key" aria-hidden="true">/</kbd>
+</button>
+
+<dialog class="search-dialog" aria-label="Search the site">
+  <!-- Deliberately not a <form>. Enter inside a form triggers implicit
+       submission, which closed the dialog before the keyboard handler could
+       navigate to the highlighted result. -->
+  <div class="search-head">
+    <span class="search-head-ico" aria-hidden="true">⌕</span>
+    <input
+      type="search"
+      class="search-input"
+      placeholder="Search calculators, articles, pages…"
+      aria-label="Search calculators, articles and pages"
+      autocomplete="off"
+      spellcheck="false"
+      data-search-input
+    />
+    <button type="button" class="search-close" data-search-close aria-label="Close search">ESC</button>
+  </div>
+  <div class="search-body">
+    <p class="search-hint" data-search-hint>Type to search. <kbd>↑</kbd><kbd>↓</kbd> to move, <kbd>↵</kbd> to open.</p>
+    <ul class="search-results" data-search-results role="listbox" aria-label="Search results"></ul>
+  </div>
+</dialog>
+
+<script is:inline>
+  (() => {
+    const dlg = document.querySelector('.search-dialog');
+    const input = document.querySelector('[data-search-input]');
+    const list = document.querySelector('[data-search-results]');
+    const hint = document.querySelector('[data-search-hint]');
+    if (!dlg || !input || !list) return;
+
+    let index = null;
+    let items = [];
+    let active = -1;
+
+    async function load() {
+      if (index) return index;
+      try {
+        const res = await fetch('/search-index.json');
+        index = await res.json();
+      } catch {
+        index = [];
+        hint.textContent = 'Search is unavailable right now.';
+      }
+      return index;
+    }
+
+    const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    // Deliberately simple: substring matching over title, description and
+    // category, ranked by where the match lands. With ~40 entries this is
+    // instant and predictable — fuzzy matching would add a dependency and
+    // surface odd results on a corpus this small.
+    function score(entry, q) {
+      const t = norm(entry.title), d = norm(entry.desc || ''), c = norm(entry.cat || '');
+      if (t === q) return 100;
+      if (t.startsWith(q)) return 80;
+      if (t.includes(q)) return 60;
+      if (c.includes(q)) return 40;
+      if (d.includes(q)) return 20;
+      // all query words present somewhere
+      const words = q.split(/\s+/).filter(Boolean);
+      if (words.length > 1 && words.every(w => (t + ' ' + d + ' ' + c).includes(w))) return 10;
+      return 0;
+    }
+
+    function render(q) {
+      const query = norm(q.trim());
+      if (!query) {
+        items = [];
+        list.innerHTML = '';
+        hint.hidden = false;
+        return;
+      }
+      hint.hidden = true;
+      items = (index || [])
+        .map(e => ({ e, s: score(e, query) }))
+        .filter(x => x.s > 0)
+        .sort((a, b) => b.s - a.s || a.e.title.length - b.e.title.length)
+        .slice(0, 8)
+        .map(x => x.e);
+
+      active = items.length ? 0 : -1;
+
+      if (!items.length) {
+        list.innerHTML = '<li class="search-empty">No matches. Try a shorter word.</li>';
+        return;
+      }
+      list.innerHTML = items.map((e, i) => `
+        <li>
+          <a href="${e.url}" role="option" aria-selected="${i === 0}" class="${i === 0 ? 'on' : ''}">
+            <span class="search-kind">${e.kind}</span>
+            <span class="search-title">${e.title.replace(/</g, '&lt;')}</span>
+            <span class="search-desc">${(e.desc || '').replace(/</g, '&lt;')}</span>
+          </a>
+        </li>`).join('');
+    }
+
+    function move(step) {
+      const links = list.querySelectorAll('a');
+      if (!links.length) return;
+      active = (active + step + links.length) % links.length;
+      links.forEach((a, i) => {
+        a.classList.toggle('on', i === active);
+        a.setAttribute('aria-selected', i === active);
+      });
+      links[active].scrollIntoView({ block: 'nearest' });
+    }
+
+    async function open() {
+      if (typeof dlg.showModal !== 'function') return; // no <dialog>: trigger stays a no-op
+      dlg.showModal();
+      input.value = '';
+      render('');
+      input.focus();
+      await load();
+    }
+
+    document.querySelectorAll('[data-search-open]').forEach(b =>
+      b.addEventListener('click', open));
+
+    input.addEventListener('input', () => render(input.value));
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+      else if (e.key === 'Escape') {
+        // <input type="search"> swallows the first Escape to clear itself, so
+        // the dialog's native cancel never fires. Close explicitly.
+        e.preventDefault();
+        dlg.close();
+      }
+      else if (e.key === 'Enter') {
+        const links = list.querySelectorAll('a');
+        if (links[active]) { e.preventDefault(); window.location.href = links[active].href; }
+      }
+    });
+
+    // "/" opens search from anywhere, unless the user is already typing.
+    document.addEventListener('keydown', e => {
+      if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+      if (dlg.open) return;
+      e.preventDefault();
+      open();
+    });
+
+    dlg.querySelector('[data-search-close]')?.addEventListener('click', () => dlg.close());
+
+    // Clicking the backdrop closes.
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  })();
+</script>

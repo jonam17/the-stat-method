@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import TrustBlock from '../components/TrustBlock.astro';
+import { getCollection } from 'astro:content';
+import { liveTools } from '../data/tools.js';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published - a.data.published);
+const latest = articles.slice(0, 3);
+---
+<BaseLayout title="Evidence-Based Health, Fitness & Nutrition Tools — The Stat Method" pageType="WebSite"
+  description="Evidence-based health, fitness and nutrition tools with transparent methods, named equations, cited sources, and clearly labeled estimates.">
+
+  <section class="wrap hero-modern">
+    <div class="hero-modern-grid">
+      <div class="hero-copy">
+        <div class="hero-kicker">
+          <span>01 / THE STARTING POINT</span>
+          <span>CALCULATE · CHECK · UNDERSTAND</span>
+        </div>
+        <span class="eyebrow">Evidence-based health · fitness · nutrition</span>
+        <h1>Stop guessing.<br /><span>Show the work.</span></h1>
+        <p class="lede">
+          The Stat Method turns the messy parts of nutrition, training, body composition, and recovery into
+          instruments you can inspect. Change an input, follow the model, and see exactly what moves.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary hero-btn" href="/tools/macro-calculator/">Run a calculation <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-text" href="/methodology/">How we calculate <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-proof" aria-label="The Stat Method principles">
+          <span><b>01</b> Formulas named</span>
+          <span><b>02</b> Sources linked</span>
+          <span><b>03</b> Inputs stay local</span>
+          <span><b>04</b> Estimates labeled</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Preview of the Stat Method calculator">
+        <div class="preview-frame">
+          <!-- Two captures of the same calculator, one per theme. A <picture>
+               with a prefers-color-scheme <source> would only follow the OS and
+               would ignore the manual toggle, so the swap is done in CSS on
+               [data-theme]. The light image stays eager (it is the LCP); the
+               dark one is lazy so light-mode visitors do not pay for it. -->
+          <img
+            class="preview-shot preview-shot--light"
+            src="/statmethod-calculator-preview.webp"
+            alt="Static preview generated from the Stat Method macro and calorie calculator, showing the same interface visitors see when they run the tool"
+            width="1200"
+            height="707"
+            loading="eager"
+            decoding="async"
+          />
+          <img
+            class="preview-shot preview-shot--dark"
+            src="/statmethod-calculator-preview-dark.webp"
+            alt=""
+            aria-hidden="true"
+            width="1200"
+            height="707"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="preview-caption">
+          <span>MODEL 01 · MACRO + ENERGY</span>
+          <span>STATIC PREVIEW · INTERACTIVE TOOL ↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="signal-band">
+    <div class="wrap signal-band-in">
+      <strong>Not another wellness dashboard.</strong>
+      <span>Less motivational wallpaper. More useful math, visible assumptions, and estimates you can interrogate.</span>
+      <a href="/about/">Why The Stat Method ↗</a>
+    </div>
+  </div>
+
+  <section class="wrap section instruments-section">
+    <div class="section-head section-head-wide">
+      <div>
+        <span class="eyebrow">02 / THE INSTRUMENTS</span>
+        <h2>Tools built like tools.</h2>
+      </div>
+      <p>Small, focused calculators. Each one exposes the model behind the result and links you to the source material.</p>
+    </div>
+    <div class="instrument-list">
+      {/* liveTools(), not TOOLS: the raw list includes unreleased phase-3 entries,
+          which would have rendered here linking to the hub instead of a tool. */}
+      {liveTools().slice(0, 10).map((t, i) => (
+        <a class="instrument-row" href={`/tools/${t.slug}/`}>
+          <span class="instrument-num">{String(i + 1).padStart(2, '0')}</span>
+          <span class="instrument-name">{t.name}</span>
+          <span class="instrument-desc">{t.desc}</span>
+          <span class="instrument-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+    <a class="section-more" href="/tools/">View the full toolkit <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="wrap section field-section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">03 / FIELD NOTES</span>
+        <h2>Useful reading, without the filler.</h2>
+      </div>
+      <a href="/articles/">All articles →</a>
+    </div>
+    <div class="cards">{latest.map(a => <ArticleCard article={a} />)}</div>
+  </section>
+
+  <section class="wrap">
+    <TrustBlock />
+  </section>
+
+  <div class="wrap"><AdSlot size="leaderboard" note="below the fold" /></div>
+</BaseLayout>

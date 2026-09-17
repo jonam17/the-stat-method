@@ -1,0 +1,7 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import FfmiCalculator from '../../components/FfmiCalculator.jsx';
+---
+<ToolLayout slug="ffmi" title="Lean Mass & FFMI" intro="Fat-free mass index is BMI with the fat removed — it tells muscle from mass, which BMI cannot.">
+  <FfmiCalculator client:load  />
+</ToolLayout>

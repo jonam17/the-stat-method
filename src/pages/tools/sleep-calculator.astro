@@ -1,0 +1,7 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import SleepCalculator from '../../components/SleepCalculator.jsx';
+---
+<ToolLayout slug="sleep-calculator" title="Sleep Cycle Calculator" intro="Bedtimes and wake times aligned to sleep cycles, with age-based duration guidance and an honest note on what cycle timing can and cannot do.">
+  <SleepCalculator client:load />
+</ToolLayout>

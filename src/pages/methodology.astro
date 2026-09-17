@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const formulas = [
+  { group: 'Basal metabolic rate', items: [
+    { name: 'Mifflin-St Jeor', use: 'Default when body fat is unknown', src: 'Mifflin MD, St Jeor ST, et al. Am J Clin Nutr, 1990' },
+    { name: 'Revised Harris-Benedict', use: 'Comparison / legacy', src: 'Roza AM, Shizgal HM, 1984' },
+    { name: 'Katch-McArdle', use: 'Default when body fat is supplied', src: 'Katch & McArdle' },
+    { name: 'Cunningham', use: 'Athletic populations; runs higher', src: 'Cunningham JJ, 1980' },
+    { name: 'Owen', use: 'Weight-only simple estimate', src: 'Owen OE, et al. 1986–87' },
+  ]},
+  { group: 'Body composition', items: [
+    { name: 'U.S. Navy circumference', use: 'Tape-measure body fat, ±3.5%', src: 'Hodgdon JA, Beckett MB, 1984' },
+    { name: 'Deurenberg', use: 'BMI-based body fat, ±5%', src: 'Deurenberg P, et al. 1991' },
+    { name: 'FFMI', use: 'Lean mass normalised for height', src: 'Kouri EM, et al. 1995' },
+    { name: 'Waist-to-height ratio', use: 'Cardiometabolic risk; outperforms BMI', src: 'Ashwell M, Gibson S, 2016' },
+  ]},
+  { group: 'Macronutrients', items: [
+    { name: 'Protein from lean mass', use: '≈2.2 g/kg LBM when body fat known, else ≈1.8 g/kg bodyweight', src: 'Helms ER, et al. Int J Sport Nutr Exerc Metab, 2014; Morton RW, et al. Br J Sports Med, 2018' },
+    { name: 'Fat floor', use: 'Minimum 0.8 g/kg bodyweight for hormonal health', src: 'Helms ER, et al. The Muscle and Strength Pyramid' },
+    { name: 'Carbohydrate', use: 'Fills the remaining calorie budget', src: 'Derived' },
+  ]},
+];
+---
+<BaseLayout title="Methodology — The Stat Method"
+  description="Every equation used by our calculators, what it is for, and where it was published.">
+  <div class="wrap section">
+    <div class="article-grid">
+      <article class="article">
+        <span class="eyebrow">Methodology</span>
+        <h1>Every equation, and where it came from.</h1>
+        <p class="dek">
+          If a calculator won't tell you what it is doing, you have no way to judge whether
+          its answer is any good. This page lists every formula in our engine.
+        </p>
+
+        <div class="prose">
+          <h2>How the calculators are built</h2>
+          <p>
+            All maths lives in a single open-source module with unit tests covering every
+            formula. The interface is separate from the calculation, so what you see on
+            screen is exactly what the tested code produces. You can read both on GitHub.
+          </p>
+          <p>
+            Calculations run entirely in your browser. Nothing you enter is transmitted,
+            logged, or stored.
+          </p>
+
+          <h2>Formulas in use</h2>
+        </div>
+
+        {formulas.map(g => (
+          <div class="prose">
+            <h3>{g.group}</h3>
+            <div class="picks-grid formula-grid">
+              {g.items.map(f => (
+                <div class="pick">
+                  <span class="pick-role">{f.use}</span>
+                  <h4 class="pick-name">{f.name}</h4>
+                  <p class="pick-src">{f.src}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <div class="prose">
+          <h2>What these numbers are not</h2>
+          <p>
+            Every equation here was fitted to a population, not to you. Two people matching
+            on age, sex, height and weight can differ by several hundred calories a day in
+            real expenditure, largely through unconscious activity.
+          </p>
+          <p>
+            Treat any output as a starting estimate. Run it for two to three weeks, track a
+            weekly average bodyweight, and adjust from what actually happened. That feedback
+            loop beats any formula.
+          </p>
+          <p>
+            These tools do not diagnose, treat, or replace clinical advice. If you have a
+            medical condition, are pregnant, or are managing an eating disorder, talk to a
+            clinician who knows your history.
+          </p>
+
+          <h2>Corrections</h2>
+          <p>
+            If a formula is misapplied or a citation is wrong, we want to know. Open an issue
+            on GitHub with the inputs and the result you expected. Corrections are logged in
+            public and articles carry a visible last-updated date.
+          </p>
+        </div>
+      </article>
+
+      <aside class="aside">
+        <div class="box">
+          <h3>Related</h3>
+          <a href="/editorial-policy/">Editorial &amp; ad policy →</a>
+          <a href="/about/">About this site →</a>
+          <a href="/tools/">All calculators →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

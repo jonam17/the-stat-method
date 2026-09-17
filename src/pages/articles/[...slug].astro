@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { authorLine } from '../../site.config.js';
+import AdSlot from '../../components/AdSlot.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
+import SidebarToc from '../../components/SidebarToc.astro';
+import KeyTakeaways from '../../components/KeyTakeaways.astro';
+import AffiliatePicks from '../../components/AffiliatePicks.astro';
+import { getCollection, render } from 'astro:content';
+import ToolCta from '../../components/ToolCta.astro';
+import { findTool } from '../../data/tools.js';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map(article => ({
+    params: { slug: article.id },
+    props: { article, all: articles },
+  }));
+}
+
+const { article, all } = Astro.props;
+const { Content } = await render(article);
+const d = article.data;
+const refCount = d.references?.length ?? 0;
+// Derived, never hand-entered, so the summary cannot drift from the list.
+const refVerified = d.references?.filter(r => r.verified).length ?? 0;
+const fmtDate = dt => dt.toLocaleDateString('en-US',
+  { month: 'long', day: 'numeric', year: 'numeric' });
+const related = all.filter(a => a.id !== article.id).slice(0, 3);
+const tool = d.relatedTool ? findTool(d.relatedTool) : null;
+---
+<BaseLayout
+  title={d.title}
+  description={d.dek}
+  ogType="article"
+  published={d.published instanceof Date ? d.published.toISOString() : d.published}
+  updated={d.updated instanceof Date ? d.updated.toISOString() : d.updated}
+  reviewStatus={d.reviewStatus}
+  reviewedBy={d.reviewedBy}
+  reviewerCredentials={d.reviewerCredentials}
+  clinicalClaims={d.clinicalClaims}
+  references={d.references}
+  breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: d.category, href: `/articles/#${d.category.toLowerCase()}` }]}
+  >
+  <div class="wrap section">
+    <div class="crumb"><a href="/articles/">Articles</a> / {d.category}</div>
+
+    <div class="article-grid">
+      <article class="article">
+        <!-- category + evidence-based badge -->
+        <div class="artmeta">
+          <span class="cat" data-cat={d.category}>{d.category}</span>
+          {d.evidenceBased && <span class="eb-badge">Sources cited</span>}
+          {d.reviewStatus === 'reviewed' && <span class="eb-badge rev-badge">Professionally reviewed</span>}
+        </div>
+
+        <h1>{d.title}</h1>
+        <p class="dek">{d.dek}</p>
+
+        <!-- byline: reviewer first, as the strongest credibility signal -->
+        <div class="byline">
+          <span>Written by <b>{
+            !d.author || d.author === 'YOUR_NAME' || d.author === 'A. Reader'
+              ? authorLine() : d.author
+          }</b></span>
+          {d.reviewStatus === 'reviewed' && d.reviewedBy && (
+            <span>Reviewed by <b>{d.reviewedBy}{d.reviewerCredentials ? `, ${d.reviewerCredentials}` : ''}</b></span>
+          )}
+          <span class="updated">
+            {d.updated ? `Updated ${fmtDate(d.updated)}` : fmtDate(d.published)}
+          </span>
+          <span>{d.readMinutes} min read</span>
+        </div>
+
+        {d.relatedTool && <ToolCta slug={d.relatedTool} variant="compact" />}
+
+        <TableOfContents items={d.toc} />
+
+        {d.keyTakeaways.length > 0 && <KeyTakeaways points={d.keyTakeaways} />}
+
+        <div class="prose"><Content /></div>
+
+        {d.affiliates.length > 0 && (
+          <AffiliatePicks intro={d.affiliateIntro} items={d.affiliates} />
+        )}
+
+        {d.relatedTool && <ToolCta slug={d.relatedTool} variant="full" />}
+
+        {d.references.length > 0 && (
+          <div class="refs" id="references">
+            <div class="eyebrow">References</div>
+            <ol>
+              {d.references.map((r, i) => (
+                <li id={`ref-${i + 1}`}>
+                  {r.url
+                    ? <a href={r.url} rel="noopener nofollow" target="_blank">{r.text}</a>
+                    : r.text}
+                  {d.citationsVerified === 'full' && (r.verified
+                    ? <span class="cite-state ok">
+                        <i class="ti ti-circle-check" aria-hidden="true"></i>Checked against the original
+                      </span>
+                    : <span class="cite-state pending">
+                        <i class="ti ti-clock" aria-hidden="true"></i>Not yet checked
+                      </span>)}
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
+
+        <!-- transparency block: how this article was produced -->
+        <section class="reviewed">
+          <h2>How we reviewed this article</h2>
+          <p>
+            Every factual claim here is sourced to peer-reviewed research, a government
+            or institutional guideline, or a named textbook. Where a claim carries a
+            numbered marker, it links straight to that source below, so you can check
+            the original rather than take our word for it.
+          </p>
+          {d.reviewStatus === 'reviewed' && d.reviewedBy ? (
+            <p>
+              Reviewed for accuracy by <b>{d.reviewedBy}
+              {d.reviewerCredentials ? `, ${d.reviewerCredentials}` : ''}</b>.
+              Reviewers check the claims, not the prose, and are credited by name.
+            </p>
+          ) : (
+            <p>
+              <b>This article has not been reviewed by a credentialed professional.</b>{' '}
+              It was researched and written from the primary sources listed below, but a
+              reviewer catches things citations cannot — omitted contraindications,
+              misread effect sizes, and questions of emphasis. We would rather tell you
+              that than imply a review that did not happen.
+              {d.clinicalClaims && ' This article touches on health risk, so treat its ' +
+                'claims as general information and raise anything that applies to you ' +
+                'with a clinician.'}
+            </p>
+          )}
+          {/* Production + sourcing disclosure. Two separate claims, deliberately
+              kept apart: how the draft was made, and how far the citations have
+              actually been checked. */}
+          {(d.aiAssisted || d.citationsVerified) && <p>
+            {d.aiAssisted
+              ? <><b>Drafted with AI assistance, then edited and fact-checked by a human.</b>{' '}
+                  No claim is published on the strength of a model's recall.</>
+              : <><b>Written and edited by a person.</b></>}
+            {' '}
+            {d.citationsVerified === 'full' ? (
+              <>All {refCount} citations have been opened and checked against the
+                original — that the source exists, and that it supports the specific
+                claim it is attached to.</>
+            ) : d.citationsVerified === 'existence' ? (
+              <>All {refCount} sources have been confirmed to exist and to be described
+                correctly — journal, year and pages. Whether each one supports the
+                specific claim it is attached to has not been individually checked;
+                that deeper review is reserved for articles making clinical claims.</>
+            ) : (
+              <>The citations below have <b>not yet been individually checked</b> against
+                the original sources. Until they are, treat them as a reading list rather
+                than as verified support for each claim.</>
+            )}
+          </p>}
+
+          <p>
+            We revisit articles as the evidence changes.
+            {d.updated
+              ? ` This one was last updated on ${fmtDate(d.updated)}.`
+              : ` This one was published on ${fmtDate(d.published)}.`}
+            {' '}Spotted an error? <a href="/editorial-policy/">Tell us</a> — corrections are
+            logged publicly.
+          </p>
+          <p><em>Estimates and general guidance only. This is not medical advice.</em></p>
+
+          {d.changelog.length > 0 && (
+            <div class="changelog">
+              <div class="eyebrow">Revision history</div>
+              <ol>
+                {d.changelog
+                  .slice()
+                  .sort((a, b) => b.date - a.date)
+                  .map(c => (
+                    <li>
+                      <time datetime={c.date.toISOString().slice(0, 10)}>
+                        {c.date.toLocaleDateString('en-US',
+                          { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </time>
+                      <span>{c.note}</span>
+                    </li>
+                  ))}
+              </ol>
+            </div>
+          )}
+        </section>
+      </article>
+
+      <aside class="aside">
+        <SidebarToc items={d.toc} />
+        <AdSlot size="rectangle" note="sidebar" />
+        {d.relatedTool && (
+          <div class="box">
+            <h3>Calculator for this topic</h3>
+            <a href={`/tools/${d.relatedTool}/`}>{tool?.name ?? 'Open the calculator'} →</a>
+          </div>
+        )}
+        <div class="box">
+          <h3>Related reading</h3>
+          {related.map(a => <a href={`/articles/${a.id}/`}>{a.data.title}</a>)}
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

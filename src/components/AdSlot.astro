@@ -1,0 +1,29 @@
+---
+/**
+ * Ad placeholder. Renders nothing in production until PUBLIC_ADS_ENABLED is set,
+ * so the site ships ad-free during Phase 1 without deleting the markup.
+ *
+ * Policy: max 2 units/page, never above the fold,
+ * never inside a results panel, never on a tool page before Phase 3.
+ */
+const { size = 'leaderboard', note = '' } = Astro.props;
+const enabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true';
+// The grey placeholder is a DEV affordance. It was rendering to real visitors in
+// production with ads disabled, which is what the comment above already claimed
+// it did not do. Only show it while developing.
+const showPlaceholder = import.meta.env.DEV;
+const dims = { leaderboard: '728 × 90', rectangle: '300 × 250', inline: 'responsive' };
+const cls  = { leaderboard: 'ad-leader', rectangle: 'ad-rect', inline: 'ad-inline' };
+---
+{enabled ? (
+  <div class={`adslot-live ${cls[size]}`}>
+    <!-- AdSense unit goes here. Manual placement only — Auto Ads must stay off. -->
+  </div>
+) : showPlaceholder ? (
+  <div class={`adslot ${cls[size]}`}>
+    <div>
+      <div class="t">Ad slot — {size}</div>
+      <div class="d">{dims[size]}{note ? ` · ${note}` : ''}</div>
+    </div>
+  </div>
+) : null}

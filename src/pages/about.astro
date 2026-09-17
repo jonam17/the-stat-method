@@ -1,0 +1,65 @@
+---
+import { AUTHOR } from '../site.config.js';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="About & methodology — The Stat Method"
+  description="Why this site exists, how it is funded, and how every calculator is built.">
+  <div class="wrap section">
+    <div class="article-grid">
+      <article class="article">
+        <span class="eyebrow">About</span>
+        <h1>Why this site exists.</h1>
+
+        <!-- Mission stated as commitments rather than outcomes. A health site cannot
+             honestly promise to improve anyone's health; it can promise how it will
+             behave. Every line below is checkable against the site itself, which is
+             the point — a mission nobody can hold you to is decoration. -->
+        <aside class="mission">
+          <span class="eyebrow">Our mission</span>
+          <p class="mission-lede">
+            To make the arithmetic behind health, fitness and nutrition advice
+            visible, checkable, and free — so you can judge a number instead of
+            trusting it.
+          </p>
+          <p class="mission-body">
+            We will always name the equation behind a result, cite the paper it came
+            from, say what it cannot tell you, and keep the tools free and free of
+            signups. When the evidence is weak or disputed, we will say so rather than
+            round it into confidence. When we get something wrong, we will correct it
+            in public.
+          </p>
+        </aside>
+        <div class="prose">
+          <p>Most macro calculators hand you three numbers and no reasoning. Ask where the
+            protein figure came from and you get a shrug, or a checkout page.</p>
+          <p>The Stat Method is the opposite trade: every tool shows its equation, every article
+            cites its sources, and nothing is behind a signup. The calculators are open
+            source — you can read exactly what they do before you trust what they say.</p>
+
+          <h2>The math is free forever</h2>
+          <p>Calculations run in your browser and cost us nothing per user, so they will
+            never be paywalled. If we ever charge for anything, it will be for things that
+            genuinely cost money to run — saving your history, syncing across devices,
+            exporting your data. Never for a formula.</p>
+
+          <h2>How it's funded</h2>
+          <p>Ads below the fold on articles, a donation link, and occasional affiliate links
+            on gear worth owning. Never more than two ad units on a page, never beside a
+            results panel, and never on a calculator page. If a recommendation is paid,
+            it says so inline.</p>
+
+          <h2>What this isn't</h2>
+          <p>Medical advice. Equations are fitted to population averages, so treat any output
+            as a starting point and adjust from two to three weeks of your own data. If you
+            have a medical condition, talk to a clinician who knows your history.</p>
+        </div>
+      </article>
+      <aside class="aside">
+        <div class="box">
+          <h3>Open source</h3>
+          <a href={`https://github.com/${AUTHOR.handle}`} rel="noopener">Every calculator on GitHub →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import BodyFatCalculator from '../../components/BodyFatCalculator.jsx';
+---
+<ToolLayout slug="body-fat" title="Body Fat Estimator" intro="Navy tape, BMI-based and skinfold methods side by side, each with its published error range. Consistency matters more than picking the &quot;true&quot; one.">
+  <BodyFatCalculator client:load  />
+</ToolLayout>

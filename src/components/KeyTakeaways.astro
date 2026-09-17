@@ -1,0 +1,7 @@
+---
+const { points = [] } = Astro.props;
+---
+<aside class="takeaways">
+  <span class="takeaways-label">Key takeaways</span>
+  <ul>{points.map(p => <li>{p}</li>)}</ul>
+</aside>

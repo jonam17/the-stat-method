@@ -1,0 +1,41 @@
+# Content licence
+
+**Copyright (C) 2026 The Stat Method. All rights reserved.**
+
+The source code in this repository is licensed separately and permissively —
+see `LICENSE` (AGPL-3.0).
+
+**This file covers the written content**, which is not open source:
+
+- Everything under `src/content/articles/` — all articles, their prose,
+  reference lists and verification metadata
+- Site copy in `src/pages/` and `src/components/` — the mission statement,
+  policy pages, methodology, tool guides, and all explanatory text
+- The wording of safety and eligibility messages in `src/engine/safety.js`
+  (`RAIL_COPY`), which was written deliberately and reviewed line by line
+- The name *The Stat Method*, the wordmark, and the visual design
+
+## What you may do without asking
+
+- **Read it, quote it, and cite it.** Short quotations with attribution and a
+  link are fine, and welcome.
+- **Check our work.** Follow the references, dispute a conclusion, and open an
+  issue if a number looks wrong. That is the entire point of publishing the
+  reasoning.
+- **Use the code** under the terms of `LICENSE`.
+
+## What requires permission
+
+- Republishing an article, in whole or substantial part
+- Using the content to train a model, or redistributing it as a dataset
+- Any commercial use of the writing
+- Use of the name or wordmark in a way implying endorsement or affiliation
+
+Ask first: see the contact address on the site. Reasonable requests are
+usually granted, and requests from clinicians, educators and researchers
+almost always are.
+
+## On the citations themselves
+
+The cited studies belong to their authors and publishers. We link rather than
+reproduce, and nothing in this licence claims any right over them.

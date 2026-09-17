@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, LEGAL } from '../site.config.js';
+const updated = 'August 2026';
+---
+<BaseLayout title="Privacy" description="What this site collects, which is almost nothing, and exactly what our host sees.">
+  <main class="prose-page">
+    <h1>Privacy</h1>
+    <p class="dek">Last updated {updated}.</p>
+
+    <p>
+      This page describes what actually happens on this site, not what a template
+      says usually happens. If anything here does not match the site's real
+      behaviour, that is a bug — please tell us.
+    </p>
+
+    <h2>What we collect about you: nothing</h2>
+    <p>
+      There are no accounts, no logins, no analytics, no advertising pixels, and
+      no tracking of any kind. We do not know who you are, we do not know you
+      visited, and we could not tell you how many people used a calculator today.
+    </p>
+
+    <h2>What happens to the numbers you type in</h2>
+    <p>
+      Every calculator runs entirely inside your browser. Your weight, height,
+      age, sex, body-fat percentage and measurements are used to compute a result
+      on your own device and are discarded when you close or reload the page.
+    </p>
+    <p><strong>Specifically, this information:</strong></p>
+    <ul>
+      <li>is never transmitted to us or to anyone else,</li>
+      <li>is never written into the page's web address, so it cannot leak through
+        a shared link, browser history, or a referrer header,</li>
+      <li>is never saved to your device between visits,</li>
+      <li>is never combined, sold, or shared.</li>
+    </ul>
+    <p>
+      This is a deliberate design decision. Health measurements are sensitive, and
+      the most reliable way to protect sensitive data is not to receive it.
+    </p>
+
+    <h2>Our host, and what it can see</h2>
+    <p>
+      This site is served by {LEGAL.host}. Like any web host, Cloudflare processes
+      the technical details necessary to deliver a page to you — your IP address,
+      the time, the page requested, and your browser's user-agent string. That
+      processing happens at Cloudflare's edge, not by us, and we do not use it for
+      analytics, profiling, or anything connected to what you enter in a
+      calculator.
+    </p>
+    <p>
+      Cloudflare's security features may set a strictly necessary cookie on your
+      device — typically <code>__cf_bm</code>, used for bot detection. It is a
+      short-lived session cookie, it is not set by us, it holds no identifier
+      belonging to this site, and Cloudflare states it is not used to track people
+      between sites. If a security challenge is shown, a <code>cf_clearance</code>
+      cookie may also be set to remember that you passed it.
+    </p>
+    <p>
+      <strong>We set no cookies of our own</strong>, and there is nothing on this
+      site that requires your consent to store or read information for our
+      purposes.
+    </p>
+
+    <h2>Third parties</h2>
+    <p>
+      Fonts are served from this site's own domain rather than a third-party font
+      service, so loading a page does not announce your visit to anyone else. No
+      analytics provider, tag manager, or advertising network is loaded.
+    </p>
+    <p>
+      Some pages link out to other websites — research papers, retailers,
+      reference material. Once you follow a link you are on someone else's site,
+      and their practices apply rather than ours.
+    </p>
+
+    <h2>Affiliate links</h2>
+    <p>
+      Some outbound product links are affiliate links, marked where they appear.
+      If you buy through one we may earn a commission at no extra cost to you. The
+      retailer will know you arrived from here; they will not learn anything you
+      entered into a calculator, because we never had it. See our
+      <a href="/ad-disclosure/">advertising disclosure</a>.
+    </p>
+
+    <h2>Children</h2>
+    <p>
+      These calculators are built for adults aged 18 and over, and the site is not
+      directed at children. We do not knowingly collect information from anyone —
+      of any age — because we do not collect information at all.
+    </p>
+  <h2>If you are in California</h2>
+  <p>
+    We operate from {LEGAL.state}. The California Consumer Privacy Act gives residents
+    the right to know what personal information a business collects, to have it deleted,
+    to correct it, and to opt out of its sale or sharing.
+  </p>
+  <p>
+    Our answer to all of these is the same, and it is unusually short: we collect no
+    personal information, so there is none to disclose, delete, or correct. We have never
+    sold or shared personal information, and we have no mechanism capable of doing so —
+    there is no database, no analytics provider, and no advertising network on this site.
+    That includes the specific meaning "sharing" carries under California law, which covers
+    passing information to advertisers for cross-context behavioural advertising.
+  </p>
+  <p>
+    Because we collect nothing, a Global Privacy Control or Do Not Track signal from your
+    browser has nothing to act on here. There is no opt-out to exercise, and no preference
+    for us to record.
+  </p>
+  <p>
+    To have any of the above confirmed in writing, email
+    <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a> with
+    <em>California privacy request</em> in the subject line. We will reply in writing. We
+    will not ask you to verify your identity first, because we would have nothing to match
+    it against.
+  </p>
+
+  <h2>If you are in the UK or the European Economic Area</h2>
+  <p>
+    This site is operated from {LEGAL.country} and is not directed at the UK or the EEA,
+    but it is reachable from both. The UK GDPR and EU GDPR give people rights of access,
+    rectification, erasure, restriction, objection and portability over personal data held
+    about them.
+  </p>
+  <p>
+    We hold no personal data, so those rights have nothing to attach to. The only personal
+    data processed in connection with your visit is what our host handles to deliver the
+    page — your IP address and request metadata, described above — and that is processed by
+    Cloudflare under its own policies, not ours.
+  </p>
+  <p>
+    Requests may be sent to
+    <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
+  </p>
+
+
+    <h2>Your rights</h2>
+    <p>
+      Privacy laws in {LEGAL.country} and elsewhere give people rights to access,
+      correct, or delete personal information held about them. We hold none, so
+      there is nothing to access, correct, or delete. If you would like that
+      confirmed in writing, email <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>
+      and we will confirm it.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      If this site ever adds analytics, advertising, or any feature that stores
+      your information, this page will be updated before that feature ships and
+      the change noted here rather than made quietly.
+    </p>
+  </main>
+</BaseLayout>
