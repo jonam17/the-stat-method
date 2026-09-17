@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**17 calculators · 18 sourced articles · 126 unit tests · zero JavaScript on content pages**
+**18 calculators · 19 sourced articles · 235 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -169,7 +169,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             126 unit tests
+│   └── __tests__/             235 unit tests
 ├── components/                React islands — state and markup only, zero maths
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -190,8 +190,8 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Maths | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 126 tests |
-| Hosting | **Cloudflare Pages** | Free static hosting, custom domain |
+| Tests | **Vitest** | 235 tests |
+| Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
 
@@ -205,7 +205,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 126 engine tests
+npm test             # 235 engine tests
 npm run build        # static output to ./dist
 ```
 
@@ -238,11 +238,12 @@ Every formula names its source in a docstring. A condensed list:
 Cunningham (1980), Owen (1986–87).
 
 **Body composition** — U.S. Navy circumference (Hodgdon & Beckett 1984, ±3.5%),
-Deurenberg (1991, ±5%), Jackson-Pollock 3-site skinfold (1978) with Siri conversion
-(±3.5%), FFMI normalised (Kouri et al. 1995), waist-to-height (Ashwell & Gibson 2016).
+Deurenberg (1991, SEE 4.1%), Jackson-Pollock 3-site skinfold (1978) with Siri conversion
+(±3.5%), FFMI normalised (Kouri et al. 1995, using the paper's 6.3 coefficient), waist-to-height (Ashwell & Gibson 2016).
 
 **Ideal weight** — Devine (1974), Robinson (1983), Miller (1983), Hamwi (1964). All were
-derived for clinical drug dosing, not aesthetics, and none accounts for muscularity.
+derived in clinical practice rather than for aesthetics — Devine for drug dosing, Hamwi for
+dietary planning in diabetes — and none accounts for muscularity.
 
 **Strength** — Epley, Brzycki, Lombardi, Wathan, O'Conner; RPE/RIR chart after Helms et al.
 and Zourdos et al. (2016).
@@ -254,7 +255,8 @@ effective 1 May 2020), Wilks (1994, legacy).
 heart-rate reserve (1957); METs from Ainsworth et al. (2011); Riegel (1981) race prediction.
 
 **Weight change** — simplified dynamic model after Hall KD et al. (*Lancet* 2011), Forbes
-(1987) partitioning, adaptive thermogenesis after Trexler et al. (2014).
+(1987) partitioning, adaptive thermogenesis after Trexler et al. (2014). Note the 15% cap is a conservative
+modelling choice, not a figure taken from that paper — see `docs/citation-verification-log.md`.
 
 ### What these numbers are not
 
@@ -276,7 +278,7 @@ formula.
 npm test
 ```
 
-126 tests cover every formula. Several assert the *honesty properties* of the models rather
+235 tests cover every formula. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -302,7 +304,7 @@ Corrections are logged publicly, and articles carry a visible last-updated date.
 
 ## Licence
 
-MIT for the code. Article content is © its authors.
+See the Licence section above: code is AGPL-3.0, written content is all rights reserved.
 
 ## Production launch tooling
 
@@ -311,7 +313,7 @@ Phase 8 adds:
 - `npm run qa:launch` — builds and checks required static launch artifacts, rendered placeholder leakage, robots/sitemap/manifest presence, and Cloudflare security headers.
 - `npm run qa:growth` — builds and checks the five priority acquisition calculators, route canonicals, metadata, WebApplication schema, and sitemap/robots structure.
 - `.env.example` — documents `PUBLIC_SITE_URL`, the production origin used for canonical URLs, sitemap generation, and Open Graph URLs.
-- `public/_headers` — baseline Cloudflare Pages security/privacy headers. HSTS is intentionally documented but not enabled until the custom domain is HTTPS-only.
+- `public/_headers` — baseline Cloudflare security/privacy headers. HSTS is intentionally documented but not enabled until the custom domain is HTTPS-only.
 
 ## Production / launch commands
 
@@ -322,11 +324,11 @@ npm run qa:production
 npm run qa:predeploy
 ```
 
-See [`DEPLOYMENT.md`](DEPLOYMENT.md), [`SEARCH-CONSOLE.md`](SEARCH-CONSOLE.md), and [`POST-LAUNCH.md`](POST-LAUNCH.md).
+See [`DEPLOYMENT.md`](DEPLOYMENT.md).
 
 ## AI / Maintainer handoff
 
-For a complete development history, current architecture, QA baseline, and instructions for future AI-assisted changes, read **`CLAUDE-HANDOFF.md`** first. Use **`CLAUDE-REVIEW-CHECKLIST.md`** as the pre-change checklist.
+Read [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) before making changes — it records the rules this codebase follows and the bug behind each one.
 
 ## Conventions
 
