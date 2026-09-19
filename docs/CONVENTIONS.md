@@ -163,7 +163,17 @@ domain should still come from the environment.)
 `SITE.url` is a `workers.dev` / `pages.dev` host or still contains a placeholder, and flips to
 `index,follow` the moment a real domain is set. Nothing to remember at cutover.
 
-## 11. Claims about the site itself
+## 11. Links to the repository
+
+Use `repoUrl()` from `site.config.js`, never a hand-written GitHub URL. The site tells readers
+"every calculator on GitHub" and "the maths is on GitHub with unit tests" — those claims should
+land on the code, not a profile page. `AUTHOR.repo` is the single place the repository name
+lives.
+
+The sponsors link is separate and correctly stays on the profile: `github.com/sponsors/<handle>`
+is a GitHub account URL, not a repository one.
+
+## 12. Claims about the site itself
 
 **The homepage must not outrun the work.** Every trust claim has to be true on the day it
 ships, not true once something pending is finished.

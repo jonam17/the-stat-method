@@ -1,5 +1,5 @@
 ---
-import { AUTHOR } from '../site.config.js';
+import { AUTHOR, repoUrl } from '../site.config.js';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="About & methodology — The Stat Method"
@@ -57,7 +57,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <aside class="aside">
         <div class="box">
           <h3>Open source</h3>
-          <a href={`https://github.com/${AUTHOR.handle}`} rel="noopener">Every calculator on GitHub →</a>
+          <a href={repoUrl()} rel="noopener">Every calculator on GitHub →</a>
         </div>
       </aside>
     </div>

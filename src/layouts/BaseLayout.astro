@@ -16,7 +16,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '../styles/global.css';
-import { SITE, AUTHOR, authorLine, abs, supportUrl } from '../site.config.js';
+import { SITE, AUTHOR, authorLine, abs, supportUrl, repoUrl } from '../site.config.js';
 
 const {
   title, description,
@@ -226,7 +226,7 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
           <a href="/about/">About</a>
           <a href="/methodology/">Methodology &amp; sources</a>
           <a href="/editorial-policy/">Editorial &amp; ad policy</a>
-          <a href={`https://github.com/${AUTHOR.handle}`} rel="noopener">GitHub</a>
+          <a href={repoUrl()} rel="noopener">GitHub</a>
         </div>
       </div>
       <div class="legal">

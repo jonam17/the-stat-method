@@ -53,6 +53,10 @@ export const AUTHOR = {
    */
   credentials: '',
 
+  /** Public source repository. The site claims "every calculator on GitHub";
+   *  that claim should land on the code, not on a profile page. */
+  repo: 'the-stat-method',
+
   /** Social / GitHub handle, without the @. */
   handle: process.env.STATMETHOD_GITHUB_HANDLE || 'jonam17',
 
@@ -137,6 +141,9 @@ export const MONETIZATION = {
  * Falls back to GitHub Sponsors until a Stripe link exists, so the button is
  * never broken and never points nowhere.
  */
+/** Canonical link to the public source repository. */
+export const repoUrl = () => `https://github.com/${AUTHOR.handle}/${AUTHOR.repo}`;
+
 export const supportUrl = () =>
   MONETIZATION.donationUrl || `https://github.com/sponsors/${AUTHOR.handle}`;
 
