@@ -22,7 +22,7 @@ jobs:
         node-version: [22, 24]
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -30,7 +30,7 @@ jobs:
 
       # Cache the browser binary (~120 MB) rather than downloading it per run.
       - name: Cache Playwright browsers
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
