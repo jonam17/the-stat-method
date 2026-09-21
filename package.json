@@ -29,13 +29,13 @@
     "qa:release": "npm run qa:predeploy && npm run qa:smoke"
   },
   "dependencies": {
-    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/mdx": "^8.0.0",
     "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/inter": "^5.3.0",
     "@fontsource/space-grotesk": "^5.3.0",
     "@fontsource/space-mono": "^5.3.0",
-    "astro": "^7.2.0",
+    "astro": "^7.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "unist-util-visit": "^5.1.0",

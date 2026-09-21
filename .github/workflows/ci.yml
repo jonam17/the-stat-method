@@ -12,14 +12,33 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # 22 is the floor declared in package.json engines.
+        # 24 is what Cloudflare Workers Builds actually runs. Testing only 22
+        # meant a Node 24 incompatibility would pass CI and fail in production,
+        # which is the one thing CI is supposed to prevent.
+        node-version: [22, 24]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
           cache: npm
       - run: npm ci
+
+      # Cache the browser binary (~120 MB) rather than downloading it per run.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - run: npx playwright install-deps chromium
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
       - run: npm run qa:calculators
       - run: npm run qa:ui
       - run: npm test

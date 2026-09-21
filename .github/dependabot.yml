@@ -1,0 +1,45 @@
+# Dependency updates.
+#
+# Deliberately conservative. This project has ~400 transitive packages; daily
+# ungrouped PRs would be noise, and noise gets ignored — which is how a real
+# security advisory ends up buried among version bumps nobody reads.
+#
+# Security advisories are raised by Dependabot immediately regardless of the
+# schedule below; `interval` only governs routine version updates.
+version: 2
+
+updates:
+  # --- npm ---
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # One PR for the whole Astro toolchain. These versions are coupled —
+      # upgrading astro without @astrojs/mdx produced an unresolvable peer
+      # conflict in practice, so they should move together or not at all.
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+      # Everything else, batched by type.
+      dev-dependencies:
+        dependency-type: development
+      production-dependencies:
+        dependency-type: production
+    ignore:
+      # Major bumps change behaviour and deserve a deliberate decision, not a
+      # bot PR. Security advisories still come through.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # --- GitHub Actions ---
+  # actions/checkout and actions/setup-node are pinned to v4 and will not
+  # update themselves. These run with repository access, so stale versions
+  # matter more than their low profile suggests.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3

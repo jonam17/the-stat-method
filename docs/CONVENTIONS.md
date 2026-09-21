@@ -136,7 +136,18 @@ vulnerabilities, and 7.3.1 installs only with `--legacy-peer-deps` because `@ast
 peers have not settled. Verified working on 7.3.1 + mdx 8.0.0 — but a flag that suppresses
 peer checking is a reason to wait, not proceed.
 
-Revisit when the integrations resolve cleanly, or if an advisory appears.
+**UPDATED 2026-09-19.** Both conditions were met: a CRITICAL advisory appeared against
+astro <=7.2.7 (RCE via AVIF image optimization; authorization bypass in base-path handling),
+and the peer conflict that previously required `--legacy-peer-deps` has resolved. Now on
+astro 7.3.3 + @astrojs/mdx 8.0.1, `npm audit` clean.
+
+**A note on the upgrade itself.** Deleting `package-lock.json` and installing from scratch
+trips an npm resolver crash (`Cannot read properties of null (reading 'edgesOut')`). The
+working sequence is: install once with `--legacy-peer-deps` to generate the lockfile, delete
+`node_modules` only, then `npm install` normally. Do not delete the lockfile.
+
+**The standing rule is unchanged: do not upgrade for its own sake — upgrade when an advisory
+says to.** `npm audit` is the trigger, not a version number being available.
 
 ## 10. Deployment (Cloudflare)
 
