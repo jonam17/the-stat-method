@@ -141,7 +141,7 @@ estimated by analogy with similar activities. [2] The Compendium was also built 
 self-reported activity comparable *between studies* — not to predict what one particular
 person burned on one particular afternoon.
 
-The arithmetic underneath adds a second approximation. One MET is defined as 3.5 millilitres
+The math underneath adds a second approximation. One MET is defined as 3.5 millilitres
 of oxygen per kilogram per minute, a figure taken from a reference adult. Real resting
 metabolic rate varies with body size, body composition, age and sex, so that constant is
 systematically off for anyone far from the reference — and tends to run high for heavier

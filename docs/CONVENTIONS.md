@@ -81,7 +81,7 @@ for state.
 | Live / free / good | green | `#2F6B43` | `#7FC79A` |
 | Freemium / neutral info | blue | `#2A6070` | `#7FBBD0` |
 | Paid / caution | amber | `#8A5A12` | `#E0B063` |
-| Government / neutral | grey | `#4A4A46` | `#B8B8B2` |
+| Research / neutral | grey | `#4A4A46` | `#B8B8B2` |
 | Affiliate / disclosure | signal | `#9A3D10` | `#FF9E73` |
 
 Affiliate deliberately uses signal: it is a **disclosure**, not metadata, and must not be
@@ -213,3 +213,26 @@ first — those are promises, not copy.
 **Dev affordances must not ship.** `AdSlot` rendered a grey "Ad slot — 728 × 90" placeholder
 to real visitors while ads were disabled, despite a comment saying it rendered nothing in
 production. It is now gated on `import.meta.env.DEV`.
+
+## 13. Releases
+
+**Every change that ships gets a tag and a README changelog entry.** No exceptions for small
+changes — a security fix shipped untagged is exactly the one you will later need to find.
+
+- **Version with semver.** `MAJOR.MINOR.PATCH`:
+  - **Major** — brand, canonical URL, or anything that breaks a published promise or link
+  - **Minor** — new content, tools, pages, resources, or features
+  - **Patch** — fixes, wording, dependency and security updates with no new capability
+- **Add the changelog entry to `README.md` in the same commit**, newest first, under the tag
+  it ships as. Group by what a reader cares about, not by file.
+- **Name phased work in the heading**, e.g. `v2.1.0 — Phase 1 Revision`.
+- **Tag annotated, and push with `--follow-tags`** so the tag and commit cannot drift apart:
+
+  ```bash
+  git tag -a vX.Y.Z -m "Summary"
+  git push --follow-tags
+  ```
+
+> *Learned:* between v2.0.0 and v2.1.0 several changes shipped untagged — including a
+> security upgrade for a critical Astro advisory. They had to be reconstructed into the v2.1.0
+> entry after the fact. Tagging at the time is cheaper than archaeology.

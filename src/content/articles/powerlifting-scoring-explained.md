@@ -71,7 +71,7 @@ intended the formula to be revised every two to five years as the data moved. It
 A rebalanced Wilks-2 finally appeared in March 2020, twenty-six years later, with entirely
 different coefficients. [2]
 
-So the drift people complain about is not a flaw in the maths. It is a curve fitted to one
+So the drift people complain about is not a flaw in the math. It is a curve fitted to one
 era of the sport, left in place across another.
 
 It is also worth saying plainly that **no major federation still uses it**. The IPF scores on

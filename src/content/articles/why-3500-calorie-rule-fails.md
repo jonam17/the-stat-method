@@ -51,12 +51,12 @@ references:
     verified: true
 ---
 
-If you have ever planned a diet, you have used this arithmetic: a pound of fat holds about
+If you have ever planned a diet, you have used this math: a pound of fat holds about
 3,500 calories, so a 500-calorie daily deficit loses a pound a week. Simple, memorable, and
 wrong in a way that compounds.
 
 Run it forward. A 500-calorie deficit for a year predicts 52 pounds lost. Two years
-predicts 104. Continue and the arithmetic eventually predicts a negative bodyweight. The
+predicts 104. Continue and the math eventually predicts a negative bodyweight. The
 rule has no mechanism for stopping, because it assumes the one thing that never holds:
 that your expenditure stays fixed while your body changes.
 
@@ -97,9 +97,9 @@ even if you changed nothing at all.
 </div>
 
 Modelling work quantifying this found that dynamic simulations tracked real weight change
-substantially better than static arithmetic, and that the static rule systematically
+substantially better than static math, and that the static rule systematically
 overestimates loss over meaningful time horizons. [1] The same problem shows up in exercise
-studies: measured weight loss consistently falls short of what the arithmetic predicts, and
+studies: measured weight loss consistently falls short of what the math predicts, and
 part of the shortfall is traceable to the assumptions inside the predictive model itself
 rather than to anything the participants did. [2]
 
@@ -159,7 +159,7 @@ on this page.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Use a dynamic projection rather than linear arithmetic, expect deceleration, find out your maintenance calories at goal weight, and then correct the model against two to three weeks of your own weight data.</p></div>
+<div class="summary-body"><p>Use a dynamic projection rather than linear math, expect deceleration, find out your maintenance calories at goal weight, and then correct the model against two to three weeks of your own weight data.</p></div>
 </aside>
 
 <h2 id="bottom-line">The bottom line</h2>

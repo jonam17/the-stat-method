@@ -71,7 +71,7 @@ are the same instruction; experienced in the gym, they are entirely different se
 
 There is a second problem. The percentage is derived from a one-rep max that is itself an
 estimate, often weeks old, and frequently produced by a formula that disagrees with four
-other formulas. You are applying precise arithmetic to an imprecise input.
+other formulas. You are applying precise math to an imprecise input.
 
 <div class="pull">
 Autoregulation is not a softer approach. It is a more honest one — the load is set by what

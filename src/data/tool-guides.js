@@ -380,7 +380,7 @@ export const GUIDES = {
       ['The 90-minute cycle is an average, not a rule',
        'Real cycles run roughly seventy to a hundred and twenty minutes, vary within a single night, and differ between people. Waking between cycles rather than mid-cycle tends to feel easier, which is what these times aim at — but the effect is a nudge, not a guarantee.'],
       ['Two things matter more than cycle timing',
-       'Total sleep, and consistency of schedule. A regular seven hours generally beats an erratic nine, and no amount of cycle arithmetic compensates for a bedtime that moves around every night. If you have to choose between hitting a cycle boundary and keeping a consistent schedule, keep the schedule.'],
+       'Total sleep, and consistency of schedule. A regular seven hours generally beats an erratic nine, and no amount of cycle math compensates for a bedtime that moves around every night. If you have to choose between hitting a cycle boundary and keeping a consistent schedule, keep the schedule.'],
       ['Why this matters if you are dieting',
        'Short sleep is reliably associated with reduced training performance, higher perceived exertion and poorer appetite regulation. The last of those matters enormously in a deficit — sleep loss makes adherence harder in a way no amount of willpower fully offsets.'],
     ],
@@ -404,7 +404,7 @@ export const GUIDES = {
       ['Even splits are a plan, not a law',
        'Elite performances are frequently run with a slightly faster second half. Terrain, heat and wind all justify deviating. Use the splits as a pacing anchor for the early kilometres, where over-enthusiasm does the most damage.'],
       ['What a prediction does not account for',
-       'Fuelling, heat acclimatisation, course elevation and race-day nerves are all absent from the arithmetic. Treat the predicted time as what your current aerobic fitness permits under good conditions with appropriate preparation.'],
+       'Fuelling, heat acclimatisation, course elevation and race-day nerves are all absent from the math. Treat the predicted time as what your current aerobic fitness permits under good conditions with appropriate preparation.'],
     ],
   },
 };

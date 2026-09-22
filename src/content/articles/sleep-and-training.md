@@ -166,7 +166,7 @@ thing from a measured result. The range exists because individual
 requirement genuinely varies. Find where in it you function well rather than treating a
 number as pass or fail.
 
-Then prioritise **consistency** over cycle arithmetic. A regular seven hours beats an erratic
+Then prioritise **consistency** over cycle math. A regular seven hours beats an erratic
 nine, and going to bed and waking at similar times is the single highest-return change most
 people can make. Use the calculator to pick a bedtime, then keep it — the keeping is the part
 that works.

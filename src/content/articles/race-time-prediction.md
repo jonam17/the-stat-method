@@ -1,6 +1,6 @@
 ---
 title: "Race time predictors: what they know and what they assume"
-dek: "A 5K time can predict your 10K well and your marathon badly. The difference is not the maths — it's an assumption the formula cannot check."
+dek: "A 5K time can predict your 10K well and your marathon badly. The difference is not the math — it's an assumption the formula cannot check."
 category: Training
 published: 2026-08-06
 readMinutes: 8
@@ -89,7 +89,7 @@ telling you which predictions rest on a shakier assumption is more useful than a
 of numbers.
 
 <div class="pull">
-The formula is not wrong about the maths. It is uninformed about your training.
+The formula is not wrong about the math. It is uninformed about your training.
 </div>
 
 <aside class="summary">
@@ -159,5 +159,5 @@ marathon predicted from a 5K as a description of your aerobic potential rather t
 you should attempt to run.
 
 And remember what no formula can see: whether you have done the long runs, practised taking
-on fuel at pace, and rehearsed the effort. Those decide the race. The arithmetic only
+on fuel at pace, and rehearsed the effort. Those decide the race. The math only
 describes the engine.

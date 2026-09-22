@@ -405,7 +405,7 @@ export const RAIL_COPY = {
     `sometimes low, depending on muscle mass and body composition, which vary far ` +
     `more between people at this age than earlier in life. The number below is a ` +
     `starting point rather than a measurement. Track what actually happens to your ` +
-    `weight over a few weeks and trust that over the arithmetic, and involve a ` +
+    `weight over a few weeks and trust that over the math, and involve a ` +
     `doctor or dietitian before making significant changes.`,
 
   overAge:
@@ -463,7 +463,7 @@ export const RAIL_COPY = {
   targetBelowHealthy:
     `We're not going to build a plan for this one. The weight involved falls below ` +
     `the range these tools are designed to work in, and a calculator is the wrong ` +
-    `thing to be steering by from here — it can only do arithmetic, and this needs ` +
+    `thing to be steering by from here — it can only do math, and this needs ` +
     `a person.\n\n` +
     `If you'd like to talk it through with someone, the National Alliance for Eating ` +
     `Disorders runs a free helpline staffed by licensed clinicians at 1-866-662-1235, ` +
@@ -474,7 +474,7 @@ export const RAIL_COPY = {
   currentBelowHealthy:
     `Based on the height and weight entered, further loss isn't something we'll plan ` +
     `for. That's not a judgement about you, and it isn't a diagnosis — it's that this ` +
-    `tool does arithmetic, and arithmetic is the wrong instrument here.\n\n` +
+    `tool does math, and math is the wrong instrument here.\n\n` +
     `If any of this is difficult, the National Alliance for Eating Disorders helpline ` +
     `is free and staffed by licensed clinicians: 1-866-662-1235. A doctor or registered ` +
     `dietitian can give you something a calculator can't.`,

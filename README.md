@@ -19,7 +19,7 @@ Most macro calculators hand you three numbers and no reasoning. Ask where the pr
 figure came from and you get a shrug, or a checkout page.
 
 The Stat Method is the opposite trade: every tool names its equations, every article cites
-its sources, and the maths is open source with unit tests. You can read exactly what a
+its sources, and the math is open source with unit tests. You can read exactly what a
 calculator does before deciding whether to trust what it says.
 
 Every calculator ships with a cornerstone article explaining the topic in depth, and every
@@ -155,7 +155,7 @@ cycle-aligned bedtimes with an honest note on what cycle timing can and cannot d
 
 ```
 src/
-├── engine/                    ← all maths. No React, no DOM. Import from anywhere.
+├── engine/                    ← all math. No React, no DOM. Import from anywhere.
 │   ├── energy.js              BMR (5 equations), TDEE, calorie targets
 │   ├── body.js                lean mass, BMI, FFMI, waist:height, 3 body-fat methods,
 │   │                          ideal-weight formulas
@@ -170,7 +170,7 @@ src/
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
 │   └── __tests__/             235 unit tests
-├── components/                React islands — state and markup only, zero maths
+├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
 ├── data/tool-guides.js        per-tool glossary, usage steps and results interpretation
@@ -189,7 +189,7 @@ the framework and the engine ports unchanged.
 | Framework | **Astro 7** | Zero JS by default; static HTML for articles, hydrates only calculators |
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
-| Maths | **`src/engine/`** | Framework-agnostic, unit-tested |
+| Math | **`src/engine/`** | Framework-agnostic, unit-tested |
 | Tests | **Vitest** | 235 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
@@ -293,10 +293,53 @@ trustworthy extrapolation. The engine was fixed rather than the test.
 
 ---
 
+## Changelog
+
+Every release is tagged. Newest first.
+
+### v2.1.0 — Phase 1 Revision
+
+**Content and wording**
+- "Arithmetic" and the British "maths" replaced with "math" across all visitor-facing text,
+  including the safety refusal messages
+- Homepage and tool-page triad is now `MEASURE · UNDERSTAND · IMPROVE`, above
+  "Stop guessing. Show the work."
+
+**Resources**
+- "Government" pill renamed "Research"
+- Added Marek Health under a new *Testing & clinical services* group, with a caveat that the
+  provider also sells treatment
+- Corrected the *Tracking & data* blurb, which claimed every entry had a free tier
+
+**Repository**
+- `CONTRIBUTING.md` rewritten: issues welcome, content pull requests not merged. States
+  plainly that AGPL-3.0 still permits forks. Build notes moved to `docs/DEVELOPMENT.md`
+- `LICENSE` copyright line: removed inherited indentation
+
+**Also since v2.0.0** — shipped without a tag at the time
+- **Security:** Astro upgraded to 7.3.3 and `@astrojs/mdx` to 8.0.1 for a critical advisory
+  (remote code execution via AVIF image optimization; authorization bypass in base-path
+  handling). `npm audit` clean.
+- **CI:** now tests Node 22 and 24 — production builds on 24, and CI previously tested only
+  22. Playwright browser cached between runs. Actions bumped to checkout v7, setup-node v7,
+  cache v6.
+- **Dependabot:** security advisories immediately; routine updates monthly and grouped, with
+  major versions excluded
+- **Branch protection:** deletion and force-push blocked on `main`
+- GitHub links now point to this repository rather than the maintainer's profile
+- README corrected: licence statement, counts, hosting, and three citation claims
+
+### v2.0.0 — First public release
+
+Rebranded to The Stat Method at thestatmethod.com. Code AGPL-3.0, written content all rights
+reserved. 18 calculators, 19 articles, 235 tests, 80 of 80 citations verified.
+
 ## Contributing
 
-Bug reports on the maths are especially welcome. If a formula is misapplied or a citation
-is wrong, open an issue with the input values and the result you expected.
+Calculators and articles are added and changed by the maintainer only, so pull requests that
+change content are not merged — open an issue instead. Bug reports on the math are especially
+welcome: if a formula is misapplied or a citation is wrong, include the input values and the
+result you expected. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 Corrections are logged publicly, and articles carry a visible last-updated date.
 

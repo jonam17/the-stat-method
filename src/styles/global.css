@@ -1037,14 +1037,14 @@ body{background:var(--paper)}
 .res-note.n-free{color:#2F6B43;background:rgba(47,107,67,.10);border-color:rgba(47,107,67,.42)}
 .res-note.n-freemium{color:#2A6070;background:rgba(42,96,112,.10);border-color:rgba(42,96,112,.40)}
 .res-note.n-paid{color:#8A5A12;background:rgba(138,90,18,.10);border-color:rgba(138,90,18,.40)}
-.res-note.n-government{color:#4A4A46;background:rgba(74,74,70,.08);border-color:var(--line-strong)}
+.res-note.n-research{color:#4A4A46;background:rgba(74,74,70,.08);border-color:var(--line-strong)}
 .res-note.aff,.res-note.n-affiliate{color:#9A3D10;background:rgba(226,85,27,.10);
   border-color:rgba(226,85,27,.45)}
 :root[data-theme="dark"] .res-note{color:var(--ink-mute);border-color:var(--line-strong)}
 :root[data-theme="dark"] .res-note.n-free{color:#7FC79A;background:rgba(127,199,154,.12);border-color:rgba(127,199,154,.36)}
 :root[data-theme="dark"] .res-note.n-freemium{color:#7FBBD0;background:rgba(127,187,208,.12);border-color:rgba(127,187,208,.36)}
 :root[data-theme="dark"] .res-note.n-paid{color:#E0B063;background:rgba(224,176,99,.12);border-color:rgba(224,176,99,.36)}
-:root[data-theme="dark"] .res-note.n-government{color:#B8B8B2;background:rgba(184,184,178,.08);border-color:var(--line-strong)}
+:root[data-theme="dark"] .res-note.n-research{color:#B8B8B2;background:rgba(184,184,178,.08);border-color:var(--line-strong)}
 :root[data-theme="dark"] .res-note.aff,
 :root[data-theme="dark"] .res-note.n-affiliate{color:#FF9E73;background:rgba(255,158,115,.12);border-color:rgba(255,158,115,.38)}
 

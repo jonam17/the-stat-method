@@ -146,7 +146,7 @@ export default function SleepCalculator() {
             <p>
               Two things matter more than cycle timing: getting enough total sleep, and going
               to bed and waking at consistent times. A regular seven hours generally beats an
-              erratic nine, and no amount of cycle arithmetic compensates for a schedule that
+              erratic nine, and no amount of cycle math compensates for a schedule that
               moves around every night.
             </p>
             <p className="refs">

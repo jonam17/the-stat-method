@@ -11,7 +11,7 @@
 export const RESOURCES = [
   {
     group: 'Tracking & data',
-    blurb: 'Software worth the time it takes to set up. All have usable free tiers.',
+    blurb: 'Software worth the time it takes to set up. Most have usable free tiers; the paid ones are labelled.',
     items: [
       { name: 'Cronometer', url: 'https://cronometer.com',
         role: 'Food & micronutrient tracking',
@@ -23,7 +23,7 @@ export const RESOURCES = [
         note: 'Paid' },
       { name: 'Strong', url: 'https://www.strong.app',
         role: 'Workout logging',
-        why: 'Simple, fast lift logging with plate maths and rest timers. Free tier covers most people.',
+        why: 'Simple, fast lift logging with plate math and rest timers. Free tier covers most people.',
         note: 'Freemium' },
       { name: 'Renaissance Periodization RP Hypertrophy', url: 'https://rpstrength.com',
         role: 'Programme design',
@@ -38,7 +38,7 @@ export const RESOURCES = [
       { name: 'PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov',
         role: 'Research database',
         why: 'The index for biomedical literature. Every numbered citation in our articles links here or to the publisher.',
-        note: 'Government' },
+        note: 'Research' },
       { name: 'Examine.com', url: 'https://examine.com',
         role: 'Supplement evidence summaries',
         why: 'Independent, sells no supplements, and grades evidence strength honestly — including verdicts of "probably does nothing". The rare supplement resource with no incentive to overstate.',
@@ -50,11 +50,11 @@ export const RESOURCES = [
       { name: 'NIH Office of Dietary Supplements', url: 'https://ods.od.nih.gov/factsheets/list-all/',
         role: 'Nutrient fact sheets',
         why: 'Government fact sheets on every vitamin and mineral, with RDAs, upper limits, and interactions. Dry, authoritative, and free of marketing.',
-        note: 'Government' },
+        note: 'Research' },
       { name: 'USDA FoodData Central', url: 'https://fdc.nal.usda.gov',
         role: 'Food composition data',
         why: 'The reference database underlying most nutrition apps. Useful when you want to check what a tracker is telling you.',
-        note: 'Government' },
+        note: 'Research' },
     ],
   },
   {
@@ -87,6 +87,17 @@ export const RESOURCES = [
         why: 'Physician focused on healthspan, lipidology and metabolic disease. Detailed and clinically grounded.',
         note: 'Freemium',
         caveat: 'Heavily oriented toward aggressive testing and intervention that may not be warranted, or affordable, for most people. Much of the best material is behind a paid membership.' },
+    ],
+  },
+  {
+    group: 'Testing & clinical services',
+    blurb: 'When an estimate is not enough and you want a measurement. Paid services — read what else each one sells before acting on its interpretation of your results.',
+    items: [
+      { name: 'Marek Health', url: 'https://marekhealth.com',
+        role: 'Lab testing & telehealth',
+        why: 'Diagnostic blood panels paired with one-to-one coaching to interpret them. Useful for replacing guesses about your own physiology with measurements — the same principle this site applies to its calculators.',
+        note: 'Paid',
+        caveat: 'A commercial platform whose services include clinician-prescribed hormone therapy, medications and supplements, so the business interpreting your labs also sells treatment. It is not a clinic itself; it connects clients to partnered providers. US residents only, and not covered by insurance, though FSA and HSA payment is often accepted.' },
     ],
   },
   {

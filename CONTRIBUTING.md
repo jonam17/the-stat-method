@@ -1,84 +1,43 @@
 # Contributing
 
-## Adding a new calculator
+The Stat Method is maintained by one person, who decides what calculators and articles the site
+publishes and how they are written. That is deliberate: every calculator's safety rules and
+every article's citations are checked against a standard, and keeping that consistent is easier
+with a single editor.
 
-Follow these in order. The last two are the ones that get forgotten.
+So **pull requests that add or change calculators, articles, or site content are not merged.**
+Please open an issue instead, and the change will be made directly if it is taken up.
 
-1. **Write the maths in `src/engine/`.** Pure functions, no React, no DOM. Every formula
-   gets a docstring naming its published source.
-2. **Write tests before the UI.** `src/engine/__tests__/`. Cover the arithmetic *and* the
-   behaviour — that a value rises when it should, that invalid input returns `null` rather
-   than `NaN`, that unit conversions round-trip.
-3. **Build the component** in `src/components/`. State and markup only. If you are writing
-   arithmetic in a `.jsx` file, it belongs in the engine.
-4. **Add the page** in `src/pages/tools/` using `ToolLayout`.
-5. **Register the tool** in `src/data/tools.js` with `live: true`, a description, and
-   `related` slugs for cross-linking.
-6. **Add a guide entry** in `src/data/tool-guides.js` — a glossary for any jargon, two to
-   four usage steps, and three or four interpretation sections. Keep the steps short: they
-   render above the calculator, and pushing the tool below the fold is the fastest way to
-   make a tool page worse. Put the substance in `interpreting`, which renders below the
-   results.
-7. **Write a cornerstone article** in `src/content/articles/` with `relatedTool` set to the
-   new slug. A tool with no article has nothing to rank alongside it.
-8. **Regenerate the previews** — `npm run docs`.
-9. **Update `README.md`** — add the tool to the relevant section with its preview image,
-   and update the counts in the header (tool count, test count).
+## What helps most
 
-## Keeping the docs in sync
+Reports like these are genuinely valuable, and they are read:
 
-Three things go stale the moment a tool is added:
+- **A calculator gives a wrong number.** Include the tool, every input you entered, the result
+  you got, and the result you expected — with a source for the expected figure if you have one.
+- **A citation does not support its claim**, is misattributed, or has been superseded by better
+  evidence. Say which article, which claim, and what the source actually says.
+- **Something is broken** — a tool that errors, a page that renders badly, a broken link.
+- **A safety concern** — a result the site should refuse to give, or a message that could
+  mislead someone vulnerable. These are prioritised.
 
-| File | What to update |
-|---|---|
-| `README.md` | Tool list, preview images, tool/test counts in the header |
-| `docs/previews/` | Run `npm run docs` — reads the registry, picks up new tools automatically |
-| `TOOLS-ROADMAP.md` | Move the item to shipped; note any deviation from the plan |
+Open one at the repository's **Issues** tab. Corrections are made publicly and articles carry a
+visible last-updated date.
 
-The preview script verifies each tool produces a real result and throws no console errors,
-so a broken tool fails the run rather than shipping a blank screenshot.
+## Questions
 
-```bash
-npm install                       # once — pulls in playwright
-npx playwright install chromium   # once — downloads the browser (~120 MB)
-npm run docs                      # build + capture all previews
-```
+For questions rather than bug reports, use the contact address on the site.
 
-The browser download is only needed for regenerating screenshots. Building and testing
-the site do not require it.
+## Licensing, and what you may do with this code
 
-Previews are written as WebP via `sharp` (which ships with Astro, so no extra dependency).
-The script clears the output directory first, so a renamed or removed tool cannot leave an
-orphaned image behind, and running it twice is safe.
+This section is here so nobody is misled about their rights.
 
-If Chromium cannot be downloaded (some CI images and sandboxes block it), point at an
-existing binary:
+**The code is AGPL-3.0.** You are free to fork it, study it, modify it and run your own version,
+under that licence's terms — including publishing your modifications if you run a modified
+version as a network service. Declining pull requests here does not restrict any of that. It
+only means changes to *this* repository come from its maintainer.
 
-```bash
-PLAYWRIGHT_CHROMIUM_PATH=/path/to/chrome npm run previews
-```
+**The written content is all rights reserved** — articles, site copy, safety messages, the name
+and the design. See [`LICENSE-CONTENT`](LICENSE-CONTENT). Quoting with attribution is fine and
+welcome; republishing and commercial reuse need permission.
 
-## Before opening a PR
-
-```bash
-npm test          # all engine tests must pass
-npm run build     # must build clean
-npm run previews  # every tool must render a result
-```
-
-## Reporting a maths bug
-
-These are the most valuable reports. Include the exact inputs, the result you got, the
-result you expected, and a source if you have one. Corrections are logged publicly.
-
-## What not to do
-
-- Don't put calculation logic in components.
-- Don't add a tool without an article, or an article without sources.
-- Don't overstate certainty. If a formula has a known error range or a documented
-  limitation, the tool should say so — that transparency is the product.
-
-## Conventions
-
-Before adding a tool, article, or component, read **`docs/CONVENTIONS.md`**. It records the
-rules this codebase already follows and, for each, the bug that produced it.
+Maintainers: see [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).

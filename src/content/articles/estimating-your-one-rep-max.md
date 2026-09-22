@@ -76,7 +76,7 @@ different training populations. That is why they disagree.
 - **Brzycki** — reads lower as reps climb; a linear inverse relationship.
 - **Lombardi** — a power-curve fit, behaving differently at the extremes.
 - **Wathan** — an exponential fit that tends to track well across the widest rep range.
-- **O'Conner** — a simple linear approximation, useful mainly for mental arithmetic.
+- **O'Conner** — a simple linear approximation, useful mainly for mental math.
 
 Feed the same set into all five and you typically get a spread of a few percent. That
 spread is not a defect to be resolved by picking a favourite. It is an honest depiction of

@@ -45,7 +45,7 @@ BMI has one well-known failure mode: it treats all mass identically. A heavily m
 athlete and someone carrying substantial excess fat can produce the same BMI, and the index
 will label both the same way.
 
-Fat-free mass index fixes exactly this, by doing the same arithmetic on lean mass alone.
+Fat-free mass index fixes exactly this, by doing the same math on lean mass alone.
 
 <h2 id="what-it-is">What FFMI actually is</h2>
 
