@@ -1,7 +1,8 @@
 ---
 title: "Training by RPE: how to stop guessing at percentages"
 dek: "A fixed percentage ignores whether you slept. Reps in reserve lets the load follow your actual capacity — though most people stop a rep early."
-category: Training
+category: Exercise
+conclusion: "Reps in reserve is at least as good as percentages and adapts to the day you actually had. Expect to underestimate how close to failure you are."
 published: 2026-08-11
 readMinutes: 9
 citationsVerified: full

@@ -2,6 +2,7 @@
 title: "Why the 3,500-calorie rule fails, and what to use instead"
 dek: "The most repeated number in dieting predicts weight loss that never arrives. Here is why expenditure falls as you do, and how to plan around it."
 category: Nutrition
+conclusion: "The rule is not so much wrong as frozen — it describes the first week of a diet, then keeps describing it."
 published: 2026-08-12
 updated: 2026-08-20
 readMinutes: 11

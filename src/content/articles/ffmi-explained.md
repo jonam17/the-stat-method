@@ -1,7 +1,8 @@
 ---
 title: "FFMI: the number that tells muscle from mass"
 dek: "BMI cannot distinguish a bodybuilder from someone carrying excess fat. Fat-free mass index can, and it is the more useful figure for anyone who trains."
-category: Training
+category: Health
+conclusion: "FFMI tells you what BMI cannot, and still cannot tell you what a mirror or a measuring tape will."
 published: 2026-08-08
 updated: 2026-08-20
 readMinutes: 7

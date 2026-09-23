@@ -1,7 +1,8 @@
 ---
 title: "Body fat percentage: which method to actually trust"
 dek: "Calipers, tape measures, smart scales and DEXA all disagree with each other. The useful question is not which is true, but which is repeatable."
-category: Nutrition
+category: Health
+conclusion: "Pick one method, keep using it, and read the trend rather than the number — the disagreement between methods matters far less than switching between them."
 published: 2026-08-09
 updated: 2026-08-20
 readMinutes: 8

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../data/categories.js';
 
 const articles = (await getCollection('articles', ({ data }) => !data.draft))
   .sort((a, b) => b.data.published - a.data.published);
@@ -26,6 +27,13 @@ const articleListSchema = {
       <h1>Articles</h1>
       <span class="eyebrow">{articles.length} posts</span>
     </div>
+    <nav class="cat-filter" aria-label="Article categories">
+      <a href="/articles/" aria-current="page">All</a>
+      {CATEGORIES.map(c => (
+        <a href={`/articles/${c.slug}/`} data-cat={c.name}>{c.name}</a>
+      ))}
+    </nav>
+
     <div class="cards">{articles.map(a => <ArticleCard article={a} />)}</div>
   </div>
 </BaseLayout>

@@ -297,6 +297,33 @@ trustworthy extrapolation. The engine was fixed rather than the test.
 
 Every release is tagged. Newest first.
 
+### v2.2.0 — Phase 2 Revision
+
+**Article header**
+- Key takeaways and the calculator link are now one box, closing with a conclusion written for
+  that article and a button to the tool. The separate compact call-to-action bar above the
+  title is gone; the full card before the references stays.
+- All 19 articles gained a `conclusion` — written individually, not templated
+
+**Template conformance**
+- `caffeine-and-sleep` was missing section summaries; added five, content unchanged
+- `protein-how-much` and `tdee-explained` used Markdown `##` headings, so their contents lists
+  had nothing to anchor to, and neither had key takeaways, a table of contents, or section
+  summaries. All added; headings converted to `<h2 id>`; no wording changed.
+- New `npm run qa:articles` fails the build on template drift — Markdown headings, missing
+  summaries, or a heading absent from the contents list. Added to CI and the predeploy chain.
+
+**Categories**
+- `Training` renamed `Exercise`, and a fourth category `Health` added
+- Recategorised: `body-fat-methods`, `what-should-i-weigh` and `ffmi-explained` to Health;
+  `calorie-burn-estimates` to Exercise. Now Nutrition 6, Exercise 8, Health 3, Recovery 2.
+- Four static category pages at `/articles/nutrition/`, `/exercise/`, `/health/`, `/recovery/`,
+  with navigation on the index. Static rather than a JavaScript filter: content pages carry no
+  executable JavaScript beyond the theme toggle, and a filter would be invisible to search
+  engines. 52 pages now build, up from 48.
+- Article breadcrumbs pointed at `/articles/#category`, an anchor that never existed; they now
+  point at the category pages
+
 ### v2.1.0 — Phase 1 Revision
 
 **Content and wording**

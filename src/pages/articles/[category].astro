@@ -1,0 +1,68 @@
+---
+/**
+ * One page per category, generated at build time.
+ *
+ * Deliberately not a JavaScript filter on the index. Content pages here ship
+ * with no executable JavaScript beyond the theme toggle, a filter would be the
+ * first, and it would leave the categories invisible to search engines. Four
+ * static pages cost nothing, work without JavaScript, and are indexable.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../data/categories.js';
+
+export async function getStaticPaths() {
+  const all = await getCollection('articles', ({ data }) => !data.draft);
+  return CATEGORIES.map(c => ({
+    params: { category: c.slug },
+    props: {
+      category: c,
+      articles: all
+        .filter(a => a.data.category === c.name)
+        .sort((a, b) => b.data.published - a.data.published),
+    },
+  }));
+}
+
+const { category, articles } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${category.name} articles — The Stat Method`,
+  numberOfItems: articles.length,
+  itemListElement: articles.map((a, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: a.data.title,
+    url: new URL(`/articles/${a.id}/`, Astro.site || 'https://statmethod.invalid').href,
+  })),
+};
+---
+<BaseLayout
+  title={`${category.name} Articles — The Stat Method`}
+  description={category.description}
+  pageType="CollectionPage"
+  extraJsonLd={[schema]}
+  breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: category.name, href: `/articles/${category.slug}/` }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/articles/">Articles</a> / {category.name}</div>
+
+    <div class="section-head">
+      <h1>{category.name}</h1>
+      <span class="eyebrow">{articles.length} {articles.length === 1 ? 'post' : 'posts'}</span>
+    </div>
+    <p class="cat-intro">{category.description}</p>
+
+    <nav class="cat-filter" aria-label="Article categories">
+      <a href="/articles/">All</a>
+      {CATEGORIES.map(c => (
+        <a href={`/articles/${c.slug}/`} data-cat={c.name}
+           aria-current={c.slug === category.slug ? 'page' : undefined}>{c.name}</a>
+      ))}
+    </nav>
+
+    <div class="cards">{articles.map(a => <ArticleCard article={a} />)}</div>
+  </div>
+</BaseLayout>

@@ -2,6 +2,7 @@
 title: "Caffeine and sleep: the cutoff time is only half a rule"
 dek: "Caffeine clears on a half-life, not a deadline — and that half-life varies about threefold between healthy people. Here is what the timing evidence shows."
 category: Recovery
+conclusion: "There is no hour that makes caffeine safe. There is your dose, your clearance, and how you actually slept."
 published: 2026-08-20
 readMinutes: 8
 relatedTool: caffeine-half-life
@@ -65,6 +66,11 @@ pharmacology does not have. What it is really encoding is an assumption about yo
 your bedtime and your clearance rate — and it does not tell you any of them, so you cannot
 tell whether it applies to you.
 
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>Caffeine leaves on a half-life, not a deadline. Each interval removes half of what is left, so a dose does not expire at a fixed hour — it decays, and how fast depends on you.</p></div>
+</aside>
+
 <h2 id="six-hours">The six-hour finding, and its limits</h2>
 
 The most-cited experiment on timing gave participants 400 mg of caffeine at zero, three,
@@ -102,6 +108,11 @@ repeated rule of thumb with actual evidence, which is more than most sleep-hygie
 can claim. They just do not support a universal clock time, and the people quoting them
 usually turn them into one.
 
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>The often-quoted six-hour cutoff comes from a small controlled study of a fixed dose. It is a reasonable default for an average person taking an average amount, and a poor one for anybody outside that description.</p></div>
+</aside>
+
 <h2 id="variation">Why your half-life is probably not five hours</h2>
 
 Five hours is a population midpoint. The usual range reported in healthy non-smoking adults
@@ -123,6 +134,11 @@ cup's worth. Both are normal. Neither is doing anything wrong. A single cutoff h
 be correct for both, and the honest version of the advice acknowledges that rather than
 picking one and presenting it as physiology.
 
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>Clearance varies roughly threefold between healthy adults, and considerably more once smoking, contraceptives, pregnancy or liver function are involved. The average is not a prediction about you.</p></div>
+</aside>
+
 <h2 id="threshold">The threshold that does not exist</h2>
 
 The obvious next question is how much residual caffeine is acceptable at bedtime. It would
@@ -140,6 +156,11 @@ a personally meaningful signal even though it generalises to nobody else. Our
 [caffeine half-life calculator](/tools/caffeine-half-life/) exists to make that number
 visible — and it deliberately shows a range rather than a single figure, because the range
 is the honest answer.
+
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>There is no established amount below which caffeine stops affecting sleep. Any number offered as a safe residual, including the one this calculator defaults to, is a reference point rather than a finding.</p></div>
+</aside>
 
 <h2 id="practical">Using this without overthinking it</h2>
 
@@ -164,6 +185,11 @@ happened once you were asleep.
 **If you are pregnant, on medication that affects liver metabolism, or managing a
 condition that does**, the general figures here are a poor guide and your clinician's
 advice supersedes them.
+
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>Reducing the dose does more than shifting its timing, and the sources people forget account for more than they expect. Watch what your own bad nights have in common.</p></div>
+</aside>
 
 <h2 id="bottom-line">Bottom line</h2>
 

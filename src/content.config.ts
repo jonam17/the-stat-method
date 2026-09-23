@@ -10,7 +10,15 @@ const articles = defineCollection({
   schema: z.object({
     title: z.string(),
     dek: z.string(),
-    category: z.enum(['Nutrition', 'Training', 'Recovery']),
+    category: z.enum(['Nutrition', 'Exercise', 'Health', 'Recovery']),
+
+    /**
+     * Closing line for the key-takeaways box, written per article — not a
+     * template. Rendered last, above the calculator button, so the reader
+     * leaves the summary with a conclusion rather than a list that stops.
+     * Optional: an article without one shows the button alone.
+     */
+    conclusion: z.string().optional(),
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     readMinutes: z.number(),

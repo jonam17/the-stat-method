@@ -1,7 +1,8 @@
 ---
 title: "Warming up for strength: what the ramp is actually for"
 dek: "Not general readiness, and not injury prevention in the way it is usually claimed. Warm-up sets have a narrower and more useful job than that."
-category: Training
+category: Exercise
+conclusion: "Warm up to prepare for the work, not to prevent injury. The evidence supports the first and is much weaker on the second."
 published: 2026-08-10
 readMinutes: 7
 citationsVerified: full

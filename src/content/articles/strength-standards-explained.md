@@ -1,7 +1,8 @@
 ---
 title: "Strength standards: useful orientation, terrible verdict"
 dek: "Every site places you in a different band, and none of them is authoritative. Here is what these tables can and cannot tell you about your training."
-category: Training
+category: Exercise
+conclusion: "A standard tells you which training regime you are currently in. It does not tell you whether you are strong."
 published: 2026-08-12
 readMinutes: 8
 citationsVerified: full

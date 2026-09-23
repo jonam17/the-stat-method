@@ -1,7 +1,8 @@
 ---
 title: "Heart rate zones: what they are for and why '220 minus age' fails"
 dek: "The most repeated formula in cardio is also one of the least accurate. Here is what the zones actually mean and how to set them from your own numbers."
-category: Training
+category: Exercise
+conclusion: "Zones from a formula are a starting map. Your own perceived effort corrects it faster than any equation."
 published: 2026-08-07
 readMinutes: 9
 citationsVerified: full

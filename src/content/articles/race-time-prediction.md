@@ -1,7 +1,8 @@
 ---
 title: "Race time predictors: what they know and what they assume"
 dek: "A 5K time can predict your 10K well and your marathon badly. The difference is not the math — it's an assumption the formula cannot check."
-category: Training
+category: Exercise
+conclusion: "Trust the prediction in proportion to how far you are stretching it — and never plan a marathon off a 5K."
 published: 2026-08-06
 readMinutes: 8
 citationsVerified: full

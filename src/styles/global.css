@@ -17,6 +17,8 @@
   --nutrition:#C0524A;   /* protein  */
   --training:#4A7C8C;    /* carbs    */
   --recovery:#B08A34;    /* fat      */
+  --exercise:var(--training);   /* category alias — --training also paints macros */
+  --health:#4E8C63;             /* fourth category, added Phase 2 */
 
   /* --- instrument state --- */
   --ok:#86B891;
@@ -98,7 +100,8 @@ button{font-family:inherit}
   letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
 .cat::before{content:"";width:16px;height:3px;border-radius:0;background:var(--c,var(--ink))}
 [data-cat="Nutrition"]{--c:var(--nutrition)}
-[data-cat="Training"]{--c:var(--training)}
+[data-cat="Exercise"]{--c:var(--exercise)}
+[data-cat="Health"]{--c:var(--health)}
 [data-cat="Recovery"]{--c:var(--recovery)}
 
 /* ---------- hero ---------- */
@@ -1686,4 +1689,36 @@ footer{border-top:1px solid var(--rule)}
 @media (max-width:640px){
   .mission{padding-left:15px;margin:22px 0 26px}
   .mission-lede{font-size:17px}
+}
+
+/* Article category navigation. Links, not buttons — these are four real pages.
+   The current one is marked with aria-current and styled from it, so the
+   accessible state and the visible state cannot drift apart. */
+.cat-filter{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.cat-filter a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;text-decoration:none;padding:5px 12px;border-radius:999px;
+  border:1px solid var(--line-strong);color:var(--ink-soft);
+  transition:border-color .15s,color .15s}
+.cat-filter a:hover{border-color:var(--ink);color:var(--ink)}
+.cat-filter a[data-cat]{border-color:color-mix(in srgb,var(--c) 45%,transparent);color:var(--c)}
+.cat-filter a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.cat-intro{font-size:15px;color:var(--ink-soft);max-width:60ch;margin:0 0 20px;line-height:1.6}
+
+/* Article brief — key takeaways, closing line and the calculator, in one box.
+   Was three stacked blocks with the contents list wedged between them. */
+.brief{border:1px solid var(--line-strong);border-radius:0;padding:18px 20px;margin:0 0 26px}
+.brief-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);display:block;margin-bottom:11px}
+.brief ul{margin:0;padding-left:18px}
+.brief li{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:7px}
+.brief li:last-child{margin-bottom:0}
+.brief-end{border-top:1px solid var(--line);margin-top:15px;padding-top:14px}
+.brief-conclusion{font-size:15px;line-height:1.6;color:var(--ink);margin:0 0 13px;max-width:62ch}
+.brief-cta{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;
+  text-decoration:none;color:var(--ink);border:1px solid var(--line-strong);
+  border-radius:0;padding:9px 15px;transition:border-color .15s,background .15s}
+.brief-cta:hover{border-color:var(--ink);background:var(--card)}
+@media(max-width:640px){
+  .brief{padding:15px 16px}
+  .brief-cta{width:100%;justify-content:center}
 }

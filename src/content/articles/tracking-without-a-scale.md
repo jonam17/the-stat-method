@@ -2,6 +2,7 @@
 title: "Tracking macros without a food scale"
 dek: "Weighing everything works until it doesn't. Hand portions trade a little precision for a method that survives restaurants, travel and busy weeks."
 category: Nutrition
+conclusion: "Estimation is a skill, not a compromise. Weigh your food for a fortnight, then estimate — that is how you become good at it."
 published: 2026-08-09
 updated: 2026-08-20
 readMinutes: 8

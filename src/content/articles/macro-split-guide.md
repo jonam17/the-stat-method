@@ -2,6 +2,7 @@
 title: "How to set your macro split (and why most people overthink it)"
 dek: "Calories decide whether you gain or lose. The split decides how well you feel and train while it happens — which matters less than the internet suggests."
 category: Nutrition
+conclusion: "Get protein and calories right first. The rest of the split is a comfort and adherence decision, not a metabolic one."
 published: 2026-08-14
 updated: 2026-08-20
 readMinutes: 9

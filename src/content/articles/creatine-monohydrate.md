@@ -2,6 +2,7 @@
 title: "Creatine monohydrate: dosing, timing and the evidence"
 dek: "The most-studied supplement in sports nutrition is also one of the cheapest. Here is what it does, how much to take, and which claims outrun the data."
 category: Nutrition
+conclusion: "Three to five grams of monohydrate daily, taken whenever suits you. Everything past that is marketing."
 published: 2026-08-06
 updated: 2026-08-20
 readMinutes: 10

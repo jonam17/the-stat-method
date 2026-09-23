@@ -1,7 +1,8 @@
 ---
 title: "Why your watch overestimates calories burned"
 dek: "Exercise trackers routinely overstate energy expenditure, sometimes substantially. Here is where the error comes from and how to use the numbers anyway."
-category: Nutrition
+category: Exercise
+conclusion: "Treat any “calories burned” figure as the loosest number in your day, and never eat it back in full."
 published: 2026-08-05
 readMinutes: 8
 citationsVerified: full

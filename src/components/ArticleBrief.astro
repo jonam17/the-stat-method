@@ -1,0 +1,42 @@
+---
+/**
+ * The box at the top of an article: key takeaways, a closing line, and the
+ * calculator the article is about.
+ *
+ * Replaces two separate blocks — a compact `ToolCta` bar and a `KeyTakeaways`
+ * aside — which stacked with the table of contents between them and made the
+ * header read as three unrelated things before a word of the article.
+ *
+ * The conclusion is per-article frontmatter, not generated. A line written for
+ * the piece is worth reading; "run your own numbers" repeated nineteen times is
+ * not, and readers learn to skip a box that always says the same thing.
+ *
+ * Degrades in both directions: no conclusion renders the button alone, and no
+ * related tool renders the takeaways alone.
+ */
+import { findTool } from '../data/tools.js';
+
+const { points = [], conclusion, toolSlug } = Astro.props;
+const tool = toolSlug ? findTool(toolSlug) : null;
+---
+{(points.length > 0 || tool) && (
+  <aside class="brief">
+    {points.length > 0 && (
+      <>
+        <span class="brief-label">Key takeaways</span>
+        <ul>{points.map(p => <li>{p}</li>)}</ul>
+      </>
+    )}
+
+    {(conclusion || tool) && (
+      <div class="brief-end">
+        {conclusion && <p class="brief-conclusion">{conclusion}</p>}
+        {tool && (
+          <a class="brief-cta" href={`/tools/${tool.slug}/`}>
+            Try the {tool.name} <span aria-hidden="true">→</span>
+          </a>
+        )}
+      </div>
+    )}
+  </aside>
+)}

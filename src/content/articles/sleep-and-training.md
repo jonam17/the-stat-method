@@ -2,6 +2,7 @@
 title: "Sleep and training: the recovery variable people skip"
 dek: "Short sleep costs you performance, appetite control and adherence — and it is the one recovery input no supplement or protocol compensates for."
 category: Recovery
+conclusion: "No supplement, split or protocol recovers what short sleep costs. Fix the sleep first."
 published: 2026-08-07
 readMinutes: 9
 citationsVerified: full

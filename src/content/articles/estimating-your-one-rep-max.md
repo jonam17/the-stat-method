@@ -1,7 +1,8 @@
 ---
 title: "Estimating your one-rep max without testing it"
 dek: "Five formulas, one number, and a surprising amount of disagreement. What rep-max estimates are good for, and where they stop being trustworthy."
-category: Training
+category: Exercise
+conclusion: "An estimate is a starting load, not a record. If the number matters to you, test it."
 published: 2026-08-11
 readMinutes: 9
 citationsVerified: full

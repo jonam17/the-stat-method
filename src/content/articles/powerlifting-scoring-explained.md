@@ -1,7 +1,8 @@
 ---
 title: "Wilks is obsolete: what replaced it and why"
 dek: "Comparing a 60 kg lifter to a 120 kg lifter needs a formula. The one most calculators still use has known bias, and two better systems replaced it in 2020."
-category: Training
+category: Exercise
+conclusion: "If you are comparing lifters today, use DOTS or IPF GL. Wilks is a historical record, not a current standard."
 published: 2026-08-13
 readMinutes: 9
 citationsVerified: full

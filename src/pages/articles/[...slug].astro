@@ -4,7 +4,7 @@ import { authorLine } from '../../site.config.js';
 import AdSlot from '../../components/AdSlot.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import SidebarToc from '../../components/SidebarToc.astro';
-import KeyTakeaways from '../../components/KeyTakeaways.astro';
+import ArticleBrief from '../../components/ArticleBrief.astro';
 import AffiliatePicks from '../../components/AffiliatePicks.astro';
 import { getCollection, render } from 'astro:content';
 import ToolCta from '../../components/ToolCta.astro';
@@ -40,7 +40,7 @@ const tool = d.relatedTool ? findTool(d.relatedTool) : null;
   reviewerCredentials={d.reviewerCredentials}
   clinicalClaims={d.clinicalClaims}
   references={d.references}
-  breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: d.category, href: `/articles/#${d.category.toLowerCase()}` }]}
+  breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: d.category, href: `/articles/${d.category.toLowerCase()}/` }]}
   >
   <div class="wrap section">
     <div class="crumb"><a href="/articles/">Articles</a> / {d.category}</div>
@@ -72,11 +72,10 @@ const tool = d.relatedTool ? findTool(d.relatedTool) : null;
           <span>{d.readMinutes} min read</span>
         </div>
 
-        {d.relatedTool && <ToolCta slug={d.relatedTool} variant="compact" />}
+        <ArticleBrief points={d.keyTakeaways} conclusion={d.conclusion}
+                      toolSlug={d.relatedTool} />
 
         <TableOfContents items={d.toc} />
-
-        {d.keyTakeaways.length > 0 && <KeyTakeaways points={d.keyTakeaways} />}
 
         <div class="prose"><Content /></div>
 

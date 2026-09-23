@@ -2,11 +2,22 @@
 title: "How much protein do you actually need?"
 dek: "The gap between the government minimum and what the training literature supports is bigger than most people realise — and neither number is the one on your tub."
 category: Nutrition
+conclusion: "Pick a number inside the band, hold it for a month, and judge it on what happens rather than on what the calculator said."
 published: 2026-08-04
 readMinutes: 9
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method
+keyTakeaways:
+  - "Protein requirement scales with lean mass, not scale weight. Two people at the same weight can differ by twenty kilos of fat, which needs almost none."
+  - "The useful band for trained people in a deficit is roughly 1.6 to 2.4 g per kilogram of lean mass."
+  - "The widely quoted 1.62 g/kg is the centre of a confidence interval running from 1.03 to 2.20, and the breakpoint itself fell short of statistical significance."
+  - "Figures of 2.3 to 3.1 g/kg come from natural bodybuilding contest preparation, and are an upper bound rather than a target."
+  - "Total daily protein matters more than how it is distributed across meals."
+toc:
+  - { id: "start-from-lean-mass-not-scale-weight", label: "Start from lean mass, not scale weight" }
+  - { id: "the-range-that-actually-matters", label: "The range that actually matters" }
+  - { id: "distribution-matters-less-than-the-total", label: "Distribution matters less than the total" }
 relatedTool: protein-target
 references:
   - text: "Morton RW, Murphy KT, McKellar SR, Schoenfeld BJ, Henselmans M, Helms E, Aragon AA, Devries MC, Banfield L, Krieger JW, Phillips SM. A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults. Br J Sports Med, 2018;52(6):376-384."
@@ -35,7 +46,7 @@ deficiency in a sedentary adult. The second is a bulking-era heuristic that surv
 because overshooting protein is fairly harmless. Neither is aimed at someone training
 hard and trying to keep muscle in a deficit.
 
-## Start from lean mass, not scale weight
+<h2 id="start-from-lean-mass-not-scale-weight">Start from lean mass, not scale weight</h2>
 
 The single most common error is calculating protein from total bodyweight. Two people can
 weigh the same and carry twenty kilos' difference in fat, which contributes essentially
@@ -47,7 +58,13 @@ If you don't know your body fat, a bodyweight-based number is a fine approximati
 If you do know it, ignoring it is leaving accuracy on the table.
 </div>
 
-## The range that actually matters
+
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>Calculating protein from total bodyweight overstates the requirement for anyone carrying appreciable fat. If you have a body-fat estimate, using it is free accuracy; if you do not, a bodyweight figure is a reasonable approximation.</p></div>
+</aside>
+
+<h2 id="the-range-that-actually-matters">The range that actually matters</h2>
 
 For trained individuals in a calorie deficit, the useful band lands roughly between
 1.6 and 2.4 g per kilogram of lean mass. Below that, muscle retention suffers during
@@ -73,12 +90,18 @@ standard should not move depending on which way it points.
 
 The upper end of that band deserves its own caveat. Figures around 2.3 to 3.1 g/kg of lean
 mass come from recommendations written for **natural bodybuilding contest preparation** —
-competitors driving toward stage-level leanness under sustained deficits. [2] That is close
+comp
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>The evidence supports a band rather than a number, because the meta-analysis behind the familiar 1.6 figure reports a wide interval around it. Needs rise as calories fall and as trainees age.</p></div>
+</aside>
+
+etitors driving toward stage-level leanness under sustained deficits. [2] That is close
 to the most extreme case in the literature, and the authors note they had to write a
 narrative rather than systematic review because the evidence base was so thin. Useful as an
 upper bound for someone in a hard cut; not a target for someone training normally.
 
-## Distribution matters less than the total
+<h2 id="distribution-matters-less-than-the-total">Distribution matters less than the total</h2>
 
 The "30 g per meal absorption limit" is a persistent myth. Your body handles larger single
 doses fine; the total across the day is what drives outcomes. Spreading intake across three
@@ -86,3 +109,8 @@ or four meals is convenient and probably marginally better for muscle protein sy
 but it isn't the lever people think it is.
 
 Hit the daily number first. Optimise timing afterwards, if ever.
+
+<aside class="summary">
+<span class="summary-label">Summary</span>
+<div class="summary-body"><p>Hitting the daily total is what the evidence supports. Spreading it across meals is a reasonable habit, not a requirement, and the “30 g per meal” ceiling is not a real limit.</p></div>
+</aside>

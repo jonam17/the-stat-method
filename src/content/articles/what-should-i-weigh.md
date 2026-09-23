@@ -1,7 +1,8 @@
 ---
 title: "What should I weigh? The honest answer is a range"
 dek: "Four ideal-weight formulas give four different answers for the same person, and none was designed for the question you are asking."
-category: Nutrition
+category: Health
+conclusion: "These formulas were built to dose drugs, not to set goals. Use the range as a sanity check and nothing more."
 published: 2026-08-08
 updated: 2026-08-20
 readMinutes: 8
