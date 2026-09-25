@@ -236,3 +236,32 @@ changes — a security fix shipped untagged is exactly the one you will later ne
 > *Learned:* between v2.0.0 and v2.1.0 several changes shipped untagged — including a
 > security upgrade for a critical Astro advisory. They had to be reconstructed into the v2.1.0
 > entry after the fact. Tagging at the time is cheaper than archaeology.
+
+## 14. Features that export a result
+
+**Anything that copies, prints, shares or saves a result must render inside the results
+panel's normal branch** — the one a safety rail's `notice` replaces. Placement is the safety
+mechanism: a refused result then has nothing to export, with no separate check to forget.
+
+`src/components/__tests__/result-actions.test.jsx` pins this for Save results. Extend it for
+any new export.
+
+> *Learned:* the Macro Calculator builds its own results section rather than using `Panel`, so
+> it needed its buttons placed by hand inside its own `!r.blocked` guard. A tool that bypasses
+> the shared component also bypasses whatever the shared component was protecting.
+
+## 15. Contact routes and the privacy policy
+
+**Every way a reader can send us something must be described in `/privacy/`.** The site
+collecting nothing is not the same as us receiving nothing. An address that invites mail, on a
+page that says no personal information is collected, is a false statement the moment someone
+writes.
+
+## 16. Recommending people and products
+
+- **Verify credentials against a current primary source** — the person's institution, not a
+  list. Titles in submitted lists are frequently wrong.
+- **State competing interests on the entry itself**, including shared ownership between listed
+  resources.
+- **Record deliberate exclusions** in the review that produced them, so an omission reads as a
+  decision rather than an oversight.

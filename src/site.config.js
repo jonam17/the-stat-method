@@ -80,6 +80,10 @@ export const LEGAL = {
    */
   contactEmail: process.env.STATMETHOD_CONTACT_EMAIL || 'hello@thestatmethod.com',    // e.g. 'hello@yourdomain.com'
 
+  /** Problem reports — the /report/ page. Routed to the same inbox as
+   *  contactEmail, kept separate so reports never bury privacy or legal mail. */
+  supportEmail: 'support@thestatmethod.com',
+
   /** Host, named explicitly in the privacy page. */
   host: 'Cloudflare Pages',
 };

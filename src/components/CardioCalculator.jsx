@@ -101,6 +101,8 @@ export default function CardioCalculator({ mode = 'zones' }) {
 
         {tab === 'zones' ? (
           <Panel label="Training zones" dark
+               copyExtra={(r?.zones ?? []).map(z =>
+                 `Zone ${z.zone} ${z.name}: ${fmt(z.lowBpm)}–${fmt(z.highBpm)} bpm`)}
                notice={(() => {
                  const scope = ageInScope(age);
                  if (scope.reason === 'young') return RAIL_COPY.underAge;

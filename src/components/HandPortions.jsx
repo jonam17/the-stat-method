@@ -136,6 +136,9 @@ export default function HandPortions() {
         </Panel>
 
         <Panel label="Daily portions" dark
+               copyExtra={macros?.blocked ? [] : ROWS
+                 .filter(([, , , v]) => v?.whole != null)
+                 .map(([, name, , v]) => `${name}: ${v.whole} ${v.unit}${v.whole === 1 ? '' : 's'} per day`)}
                incomplete={!(+weight > 0)}
                incompleteNote="Enter your details to see your daily portions."
                notice={(() => {

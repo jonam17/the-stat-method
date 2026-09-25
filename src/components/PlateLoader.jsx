@@ -60,7 +60,12 @@ export default function PlateLoader() {
           </p>
         </Panel>
 
-        <Panel label="Load per side" dark>
+        <Panel label="Load per side" dark
+               copyExtra={r?.possible ? [
+                 ...(r.perSide ?? []).map(p => `${p.plate} ${units} plates: ${p.count} per side`),
+                 '', 'Warm-up ramp',
+                 ...warmups.map(w => `${w.pct}%: ${w.weight} ${units} × ${w.reps}`),
+               ] : []}>
           {!r.possible ? (
             <BigStat value="—" unit="below bar weight"
                      note={<>Your target is lighter than the bar alone ({barW} {units}).</>} />

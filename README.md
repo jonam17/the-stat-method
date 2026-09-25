@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**18 calculators · 19 sourced articles · 235 unit tests · zero JavaScript on content pages**
+**18 calculators · 19 sourced articles · 240 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -169,7 +169,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             235 unit tests
+│   └── __tests__/             240 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -190,7 +190,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 235 tests |
+| Tests | **Vitest** | 240 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -205,7 +205,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 235 engine tests
+npm test             # 240 tests
 npm run build        # static output to ./dist
 ```
 
@@ -278,7 +278,7 @@ formula.
 npm test
 ```
 
-235 tests cover every formula. Several assert the *honesty properties* of the models rather
+240 tests cover every formula, plus the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -296,6 +296,44 @@ trustworthy extrapolation. The engine was fixed rather than the test.
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.3.0 — Phase 3 Revision
+
+**Save your results**
+- Every calculator now has **Copy results** and **Save as PDF**. Copied text includes the
+  inputs that produced the result, not just the result, and closes with a pointer to the
+  method's limits.
+- PDF uses the browser's own print dialog and a print stylesheet — no library on tool pages,
+  and nothing leaves the device.
+- Six tools whose main result lives outside the shared components now pass it explicitly:
+  heart-rate zones, plate breakdown and warm-up ramp, running splits and predictions, the
+  one-rep-max percentage table, hand portions, and macros. Without this, copying Heart Rate
+  Zones would have saved the maximum heart rate and dropped the zones.
+- **The buttons never appear on a refused or incomplete result.** They render inside the
+  results panel's normal branch, which a safety rail replaces entirely. A render test pins
+  this, and was confirmed to fail when the buttons are moved outside that branch.
+
+**Report a problem**
+- New `/report/` page, linked from the footer and from every calculator. Email is the primary
+  route, since most readers do not have GitHub accounts; GitHub issues are offered to those
+  who do.
+- Structured GitHub issue forms for wrong results, citation problems, broken pages and safety
+  concerns. Blank issues disabled.
+
+**Privacy**
+- The policy now says what happens when someone emails us. It previously invited email while
+  stating that no personal information was collected — untrue for anyone who wrote in. The
+  California section and the opening heading are qualified to match.
+
+**Resources** — 20 entries to 31, all verified against current sources
+- Primary sources: Cochrane Library, ClinicalTrials.gov, Google Scholar, JISSN position stands
+- New group, *Researchers worth reading*: Stuart Phillips, Brad Schoenfeld, Eric Helms, Mike
+  Zourdos, Abbie Smith-Ryan, Louise Burke
+- Testing: Function Health and InsideTracker, each with its competing interest stated
+- Stronger by Science now notes it shares a team with MacroFactor, so the two are not read as
+  independent endorsements
+- A submitted list credited one researcher as "Dr." — he holds a master's degree. Checked
+  before publishing rather than after.
 
 ### v2.2.0 — Phase 2 Revision
 

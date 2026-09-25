@@ -73,7 +73,14 @@ export default function RunningPace() {
           </div>
         </Panel>
 
-        <Panel label="Pace & splits" dark>
+        <Panel label="Pace & splits" dark
+               copyExtra={[
+                 '', 'Splits',
+                 ...(r?.splitRows ?? []).map(s => `${s.km}k: ${fmtTime(s.cumulative)}`),
+                 '', 'Predicted times',
+                 ...(r?.predictions ?? []).map(p =>
+                   `${p.name}: ${fmtTime(p.predicted)}${p.confidence?.level === 'poor' ? ' (rough — long extrapolation)' : ''}`),
+               ]}>
           <BigStat value={paceLabel.split(' ')[0]}
                    unit={unitSystem === 'km' ? 'min / km' : 'min / mile'}
                    note={<>{km} km in <b>{fmtTime(seconds)}</b> — about

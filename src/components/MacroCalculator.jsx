@@ -5,7 +5,7 @@ import {
   recommendedPercent, recommendedGrams, resolveSplit, convertSplit,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
-import { Seg, Num, Select, Panel } from './ToolShell.jsx';
+import { ResultActions, Seg, Num, Select, Panel } from './ToolShell.jsx';
 import {
   ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY, GOALS, goalDelta,
   checkEnergyAvailability, checkWeightTarget, ageAccuracyNote,
@@ -310,6 +310,16 @@ export default function MacroCalculator({ compact = false }) {
                   value={r.lbm != null ? fmt(r.lbm) : 'BW'}
                   unit={r.lbm != null ? 'kg' : ''} />
           </div>
+
+          {/* Inside the ageInScope && !r.blocked fragment on purpose: this tool
+              builds its own results section rather than using Panel, so the
+              guard that keeps save buttons off refused results is this one. */}
+          <ResultActions extra={[
+            '', 'Macros',
+            `Protein: ${r.grams?.p} g`,
+            `Carbohydrate: ${r.grams?.c} g`,
+            `Fat: ${r.grams?.f} g`,
+          ]} />
 
           <details className="method">
             <summary>Method &amp; sources</summary>

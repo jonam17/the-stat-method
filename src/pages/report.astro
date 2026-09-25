@@ -1,0 +1,79 @@
+---
+/**
+ * Report a problem.
+ *
+ * Email leads, GitHub follows. Most readers here are working out their protein,
+ * not writing code, and a GitHub-first page would quietly turn away the reports
+ * this site most needs. Nothing on this page collects or stores anything: both
+ * routes leave the site.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LEGAL, repoUrl } from '../site.config.js';
+
+const mail = (subject) =>
+  `mailto:${LEGAL.supportEmail}?subject=${encodeURIComponent(subject)}`;
+const issues = `${repoUrl()}/issues/new/choose`;
+
+const KINDS = [
+  { title: 'A calculator gave a wrong result',
+    subject: 'Wrong result',
+    body: 'Tell us the tool, every value you entered, the result you got, and what you expected — with a source for the expected figure if you have one.' },
+  { title: 'A citation does not support its claim',
+    subject: 'Citation problem',
+    body: 'Tell us the article, the specific claim, and what the source actually says.' },
+  { title: 'Something is broken',
+    subject: 'Something broken',
+    body: 'A tool that errors, a page that renders badly, or a link that goes nowhere. The page and your browser help.' },
+  { title: 'A safety concern',
+    subject: 'Safety concern',
+    body: 'A result the site should refuse to give, or wording that could mislead someone vulnerable. These are read first.',
+    urgent: true },
+];
+---
+<BaseLayout title="Report a problem — The Stat Method"
+  description="Found a wrong number, a citation that does not hold up, or something broken? Tell us — corrections are made publicly.">
+  <div class="wrap section">
+    <article class="article report-page">
+      <span class="eyebrow">Corrections</span>
+      <h1>Report a problem</h1>
+      <p class="dek">
+        If a number looks wrong, a source does not say what we claim, or something is broken,
+        we want to know. Corrections are made publicly, and every article shows when it was
+        last updated.
+      </p>
+
+      <div class="report-kinds">
+        {KINDS.map(k => (
+          <section class={`report-kind${k.urgent ? ' urgent' : ''}`}>
+            <h2>{k.title}</h2>
+            <p>{k.body}</p>
+            <a href={mail(k.subject)}>Email {LEGAL.supportEmail} <span aria-hidden="true">→</span></a>
+          </section>
+        ))}
+      </div>
+
+      <h2>No account needed</h2>
+      <p>
+        Email works for everything above. Each link opens a message with the subject already
+        filled in, so it reaches the right place.
+      </p>
+
+      <h2>Already on GitHub?</h2>
+      <p>
+        You can <a href={issues} rel="noopener">open an issue</a> instead. The form asks for
+        the same details listed above, so nothing gets lost.
+      </p>
+
+      <h2>Questions</h2>
+      <p>
+        Questions rather than problems are welcome at <a href={`mailto:${LEGAL.contactEmail}`}>{LEGAL.contactEmail}</a>.
+      </p>
+
+      <aside class="report-note">
+        Please don't send personal health details. We can't give individual medical advice,
+        and while the site itself stores nothing about you, an email arrives in an ordinary
+        inbox and stays there — so leave out anything you would not want kept.
+      </aside>
+    </article>
+  </div>
+</BaseLayout>

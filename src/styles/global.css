@@ -1722,3 +1722,49 @@ footer{border-top:1px solid var(--rule)}
   .brief{padding:15px 16px}
   .brief-cta{width:100%;justify-content:center}
 }
+
+/* Report a problem */
+.tool-report{font-size:13.5px;color:var(--ink-soft);margin:26px 0 14px}
+.tool-report a{color:var(--ink);font-weight:600}
+.report-kinds{display:grid;gap:12px;margin:26px 0 30px}
+.report-kind{border:1px solid var(--line-strong);padding:16px 18px}
+.report-kind h2{font-size:16px;margin:0 0 6px}
+.report-kind p{font-size:14.5px;color:var(--ink-soft);margin:0 0 10px;line-height:1.55}
+.report-kind a{font-size:14px;font-weight:600;color:var(--ink)}
+/* Safety reports are read first; the page should look like it. */
+.report-kind.urgent{border-color:var(--signal)}
+.report-note{border-left:2px solid var(--line-strong);padding:4px 0 4px 16px;
+  margin:28px 0 0;font-size:14px;color:var(--ink-soft);line-height:1.6}
+
+/* ---- Save results ------------------------------------------------------ */
+.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:16px;
+  border-top:1px solid #2E2E2C}
+.result-actions button{font:600 13.5px/1 var(--sans, inherit);padding:10px 15px;
+  border-radius:0;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.ra-copy{background:transparent;color:#F2F1EE;border:1px solid #F2F1EE}
+.ra-copy:hover{background:#F2F1EE;color:#0E0E0E}
+.ra-pdf{background:transparent;color:#C6C4BE;border:1px solid #4A4A46}
+.ra-pdf:hover{border-color:#C6C4BE;color:#F2F1EE}
+@media(max-width:480px){.result-actions button{flex:1 1 100%}}
+
+/* ---- Print: "Save as PDF" --------------------------------------------------
+   The browser's print dialog is the PDF engine, so there is no library on tool
+   pages and nothing leaves the device. Keep what makes the result meaningful —
+   the inputs, the result, and the method — and drop the site around it.
+   The results panel is dark on screen; print it light, since most PDFs are
+   printed or read on white and a black block wastes ink and reads poorly. */
+@media print{
+  header, footer, nav, .nav, .site-search, .search-dialog, .theme-toggle,
+  .tool-support, .tool-report, .adslot, .result-actions, .crumb,
+  .btn-donate, .cta-card, .tool-related, .tool-guide-nav{display:none !important}
+
+  :root, html, body{background:#fff !important;color:#000 !important}
+  .panel{break-inside:avoid;border:1px solid #999 !important;
+    background:#fff !important;color:#000 !important;box-shadow:none !important}
+  .results, .results *{background:#fff !important;color:#000 !important;
+    border-color:#999 !important}
+  .results .panel-label{color:#444 !important}
+  a{color:#000 !important;text-decoration:underline}
+  input, select{border:1px solid #999 !important;color:#000 !important;background:#fff !important}
+  @page{margin:16mm}
+}

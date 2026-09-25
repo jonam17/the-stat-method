@@ -68,7 +68,12 @@ export default function OneRepMaxCalculator() {
           )}
         </Panel>
 
-        <Panel label="Estimated one-rep max" dark>
+        <Panel label="Estimated one-rep max" dark
+               copyExtra={r ? [
+                 '', 'Percentage table',
+                 ...table.map(row =>
+                   `${row.pct}%: ${fmt(round(row.weight, step))} ${units} (~${row.reps} rep${row.reps > 1 ? 's' : ''})`),
+               ] : []}>
           {r ? (
             <>
               <BigStat value={`${fmt(round(oneRM, step))}`} unit={units}
