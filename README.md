@@ -297,6 +297,18 @@ trustworthy extrapolation. The engine was fixed rather than the test.
 
 Every release is tagged. Newest first.
 
+### v2.3.1 — Hidden files that never shipped
+
+Two earlier entries described changes that did not reach this repository. `.github` is a
+hidden folder, and copying files across by drag-and-drop in macOS Finder silently skips it.
+
+- **`qa:articles` now actually runs in CI.** v2.2.0 said it had been added to CI; it ran only
+  in the local predeploy chain until this release, so template drift would not have failed a
+  build.
+- **GitHub issue forms now exist.** v2.3.0 added them and the report page described them; until
+  this release GitHub showed a blank issue form instead.
+- `CONVENTIONS.md` §17 records the cause, and how to copy changes so it does not recur.
+
 ### v2.3.0 — Phase 3 Revision
 
 **Save your results**

@@ -1,0 +1,20 @@
+name: Safety concern
+description: A result the site should refuse to give, or wording that could mislead someone vulnerable. Read first.
+title: "[Safety] "
+labels: ["safety"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Safety reports are read before anything else.
+        **Please don't include personal health details** — describe the inputs and the result, not your own situation.
+  - type: input
+    id: where
+    attributes: { label: Calculator or article }
+    validations: { required: true }
+  - type: textarea
+    id: concern
+    attributes:
+      label: The concern
+      description: What the site did, and why it could cause harm.
+    validations: { required: true }

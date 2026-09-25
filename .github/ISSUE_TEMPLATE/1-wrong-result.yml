@@ -1,0 +1,30 @@
+name: Wrong result
+description: A calculator gave a number you believe is incorrect.
+title: "[Wrong result] "
+labels: ["wrong-result"]
+body:
+  - type: input
+    id: tool
+    attributes:
+      label: Calculator
+      placeholder: e.g. TDEE & BMR Calculator
+    validations: { required: true }
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Every value you entered
+      description: Paste from the Copy results button if you can — it includes your inputs.
+    validations: { required: true }
+  - type: input
+    id: got
+    attributes: { label: Result you got }
+    validations: { required: true }
+  - type: input
+    id: expected
+    attributes: { label: Result you expected }
+    validations: { required: true }
+  - type: textarea
+    id: source
+    attributes:
+      label: Source for the expected result
+      description: A paper, an official formula, or another calculator. Optional, but it speeds things up.

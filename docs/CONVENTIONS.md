@@ -265,3 +265,23 @@ writes.
   resources.
 - **Record deliberate exclusions** in the review that produced them, so an omission reads as a
   decision rather than an oversight.
+
+## 17. Copying changes into the repository
+
+**Copy with `rsync` from Terminal, not by dragging in Finder.** Finder hides files and folders
+whose names start with a dot, so drag-and-drop silently skips `.github/` — and with it CI,
+Dependabot and the issue forms. Nothing fails; the files are just absent.
+
+From inside the repository, with the new build extracted to `~/Downloads/the-stat-method`:
+
+```bash
+rsync -av --exclude .git --exclude node_modules ~/Downloads/the-stat-method/ ./
+git status
+```
+
+`rsync` copies hidden files and never touches `.git`. Read `git status` before committing —
+a `.github/` path appearing there is the sign it worked.
+
+> *Learned:* v2.2.0 and v2.3.0 both changed files under `.github/`, and neither change reached
+> the repository. It was caught by checking the live repository against the build, not by any
+> test — CI cannot report on a workflow step it was never given.

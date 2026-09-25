@@ -1,0 +1,20 @@
+name: Citation problem
+description: An article cites a source that does not support its claim.
+title: "[Citation] "
+labels: ["citation"]
+body:
+  - type: input
+    id: article
+    attributes: { label: Article }
+    validations: { required: true }
+  - type: textarea
+    id: claim
+    attributes:
+      label: The claim
+      description: Quote the sentence from the article.
+    validations: { required: true }
+  - type: textarea
+    id: says
+    attributes:
+      label: What the source actually says
+    validations: { required: true }

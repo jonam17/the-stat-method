@@ -1,0 +1,8 @@
+# Every report arrives in one of four shapes, with the details needed to act on
+# it. Blank issues are off so "the calculator is wrong" can't be filed without
+# the inputs that would let anyone reproduce it.
+blank_issues_enabled: false
+contact_links:
+  - name: No GitHub account? Email instead
+    url: https://thestatmethod.com/report/
+    about: Every kind of report can be emailed — no account needed.

@@ -41,6 +41,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
       - run: npm run qa:calculators
       - run: npm run qa:ui
+      - run: npm run qa:articles
       - run: npm test
       - run: npm run build
       - run: npm run check:placeholders
