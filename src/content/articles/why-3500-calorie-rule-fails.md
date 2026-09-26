@@ -81,6 +81,8 @@ that shrinks your deficit.
 
 Two mechanisms, one obvious and one less so.
 
+<figure data-chart="static-vs-dynamic"></figure>
+
 **A smaller body costs less to run.** Every kilogram you lose is a kilogram you no longer
 have to maintain at rest or carry when you move. Resting metabolic rate scales with mass,
 and so does the energy cost of walking anywhere. Lose ten kilograms and your maintenance

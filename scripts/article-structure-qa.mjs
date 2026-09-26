@@ -32,6 +32,16 @@ for (const f of files) {
     if (!s.includes(field)) fail(`missing ${field.replace(':', '')}`);
   }
 
+  // A scaffold is created as a draft. If someone un-drafts it before the TODOs
+  // are gone, that is a placeholder about to be published on a Sunday.
+  const isDraft = /^draft:\s*true\s*$/m.test(s);
+  const todos = (s.match(/\bTODO\b/g) || []).length;
+  if (!isDraft && todos) fail(`${todos} TODO placeholder(s) in a non-draft article — it would publish unfinished`);
+
+  // Unverified citations may not publish either.
+  if (!isDraft && /^citationsVerified:\s*none\s*$/m.test(s))
+    fail('citationsVerified is "none" on a non-draft article — verify before publishing');
+
   for (const m of s.matchAll(/<h2 id="([^"]+)"/g)) {
     if (!s.includes(`id: "${m[1]}"`)) fail(`heading #${m[1]} is not in the toc`);
   }

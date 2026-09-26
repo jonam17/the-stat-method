@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { publishedArticles } from '../data/articles.js';
 import { liveTools } from '../data/tools.js';
 
 /**
@@ -26,7 +26,7 @@ const PAGES = [
 ];
 
 export async function GET() {
-  const articles = await getCollection('articles');
+  const articles = await publishedArticles();
 
   const entries = [
     ...liveTools()

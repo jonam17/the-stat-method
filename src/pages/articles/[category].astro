@@ -1,4 +1,5 @@
 ---
+import { publishedArticles } from '../../data/articles.js';
 /**
  * One page per category, generated at build time.
  *
@@ -9,11 +10,10 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../data/categories.js';
 
 export async function getStaticPaths() {
-  const all = await getCollection('articles', ({ data }) => !data.draft);
+  const all = await publishedArticles();
   return CATEGORIES.map(c => ({
     params: { category: c.slug },
     props: {

@@ -1,12 +1,12 @@
 ---
+import { publishedArticles } from '../data/articles.js';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AdSlot from '../components/AdSlot.astro';
 import TrustBlock from '../components/TrustBlock.astro';
-import { getCollection } from 'astro:content';
 import { liveTools } from '../data/tools.js';
 
-const articles = (await getCollection('articles', ({ data }) => !data.draft))
+const articles = (await publishedArticles())
   .sort((a, b) => b.data.published - a.data.published);
 const latest = articles.slice(0, 3);
 ---

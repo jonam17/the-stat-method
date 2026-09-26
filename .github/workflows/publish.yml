@@ -1,0 +1,40 @@
+name: Scheduled publish
+
+# Rebuilds the site daily so articles with a future `published` date appear on
+# that date. Articles are written for Sundays; running daily means a failed or
+# delayed Sunday run is caught the next morning instead of a week later.
+#
+# 10:00 UTC. UTC does not observe daylight saving, so this is the same moment
+# all year — 3:00 AM Pacific in summer, 2:00 AM in winter.
+#
+# GitHub disables scheduled workflows on public repositories after 60 days
+# without activity, and emails the owner when it does. Any commit re-enables it.
+
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch:        # "Run workflow" button, for testing and catch-up
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Cloudflare build
+        env:
+          HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          # Fail loudly rather than skip. A silent skip would mean scheduled
+          # articles quietly never appear, and nothing would say why.
+          if [ -z "$HOOK" ]; then
+            echo "::error::CLOUDFLARE_DEPLOY_HOOK secret is not set — no rebuild, nothing will publish."
+            exit 1
+          fi
+          code=$(curl -s -o /tmp/resp -w '%{http_code}' -X POST "$HOOK")
+          echo "Cloudflare responded HTTP $code"
+          if [ "$code" -lt 200 ] || [ "$code" -ge 300 ]; then
+            echo "::error::Deploy hook returned HTTP $code"; cat /tmp/resp; exit 1
+          fi

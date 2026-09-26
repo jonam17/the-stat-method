@@ -1768,3 +1768,30 @@ footer{border-top:1px solid var(--rule)}
   input, select{border:1px solid #999 !important;color:#000 !important;background:#fff !important}
   @page{margin:16mm}
 }
+
+/* ---- Article charts ------------------------------------------------------
+   Static SVG from src/charts/. Colours come from the existing palette, and each
+   line also has its own dash pattern, so a chart still reads in greyscale print
+   and for colour-blind readers. */
+.chart-figure{margin:30px 0 32px;padding:18px 18px 14px;border:1px solid var(--line-strong)}
+.chart-title{font-family:var(--display);font-weight:600;font-size:15.5px;margin:0 0 10px;color:var(--ink)}
+.chart{display:block;width:100%;height:auto;overflow:visible}
+.ch-grid{stroke:var(--line);stroke-width:1}
+.ch-axis{stroke:var(--line-strong);stroke-width:1}
+.ch-tick{font-family:var(--mono);font-size:11px;fill:var(--ink-mute)}
+.ch-label{font-family:var(--mono);font-size:11px;fill:var(--ink-soft);letter-spacing:.04em}
+.ch-line{fill:none;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round}
+.ch-s0{stroke:var(--ink)}
+.ch-s1{stroke:var(--nutrition)}
+.ch-s2{stroke:var(--training)}
+.ch-s3{stroke:var(--recovery)}
+.ch-s4{stroke:var(--health)}
+.chart-legend{display:flex;flex-wrap:wrap;gap:6px 18px;list-style:none;margin:12px 0 0;padding:0}
+.chart-legend li{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-soft)}
+.chart-legend svg{flex:0 0 auto}
+.chart-figure figcaption{font-size:13.5px;line-height:1.6;color:var(--ink-soft);margin-top:12px;
+  padding-top:11px;border-top:1px solid var(--line)}
+.chart-source{display:block;margin-top:5px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.06em;color:var(--ink-mute)}
+@media(max-width:640px){.chart-figure{padding:14px 12px 12px}.ch-tick{font-size:13px}.ch-label{font-size:13px}}
+@media print{.chart-figure{break-inside:avoid;border-color:#999}.ch-line{stroke-width:1.75}}

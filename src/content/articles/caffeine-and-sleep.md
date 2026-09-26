@@ -119,6 +119,8 @@ Five hours is a population midpoint. The usual range reported in healthy non-smo
 runs from about three to seven hours, and the modifiers move it further than most people
 expect:
 
+<figure data-chart="caffeine-half-lives"></figure>
+
 - **Smoking** induces the liver enzyme that clears caffeine and roughly halves the
   half-life. A smoker's evening coffee behaves very differently from a non-smoker's.
 - **Oral contraceptives** inhibit that same pathway and commonly double it.

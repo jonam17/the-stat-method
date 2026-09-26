@@ -170,6 +170,24 @@ export function simulate({
  * Returns null if the target is not reached within maxDays (i.e. the deficit
  * is too small, or the person plateaus above target).
  */
+/**
+ * The static "3,500 kcal per pound" projection, for comparison with simulate().
+ *
+ * 3,500 kcal/lb × 2.2046 lb/kg = 7,716 kcal/kg. It assumes the starting deficit
+ * never shrinks — no drop in expenditure as weight falls, no adaptation — so it
+ * predicts a straight line. The gap between this and simulate() is the error
+ * the 3,500-calorie article is about.
+ *
+ * Was computed inline in DeficitPlanner.jsx. Moved here so the calculator and
+ * the article's chart use one tested function rather than two copies.
+ */
+export const KCAL_PER_KG_STATIC_RULE = 3500 * 2.2046;
+
+export function staticSeries({ startKg, startTdee, intakeKcal, series }) {
+  const dailyDelta = intakeKcal - startTdee;
+  return series.map(p => ({ day: p.day, kg: startKg + (dailyDelta * p.day) / KCAL_PER_KG_STATIC_RULE }));
+}
+
 export function daysToTarget({ targetKg, maxDays = 1095, ...opts }) {
   const losing = targetKg < opts.kg;
   const { series } = simulate({ ...opts, days: maxDays });

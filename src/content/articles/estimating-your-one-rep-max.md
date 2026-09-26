@@ -73,6 +73,8 @@ None of those uses require the number to be exactly right. They require it to be
 The common equations were each fitted to a different sample, with different lifts and
 different training populations. That is why they disagree.
 
+<figure data-chart="one-rm-divergence"></figure>
+
 - **Epley** — the most widely used; tends to read high at low rep counts.
 - **Brzycki** — reads lower as reps climb; a linear inverse relationship.
 - **Lombardi** — a power-curve fit, behaving differently at the extremes.

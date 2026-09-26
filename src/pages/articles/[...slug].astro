@@ -1,4 +1,5 @@
 ---
+import { publishedArticles } from '../../data/articles.js';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { authorLine } from '../../site.config.js';
 import AdSlot from '../../components/AdSlot.astro';
@@ -11,7 +12,7 @@ import ToolCta from '../../components/ToolCta.astro';
 import { findTool } from '../../data/tools.js';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  const articles = await publishedArticles();
   return articles.map(article => ({
     params: { slug: article.id },
     props: { article, all: articles },

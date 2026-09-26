@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**18 calculators · 19 sourced articles · 240 unit tests · zero JavaScript on content pages**
+**18 calculators · 19 sourced articles · 249 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -169,7 +169,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             240 unit tests
+│   └── __tests__/             249 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -190,7 +190,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 240 tests |
+| Tests | **Vitest** | 249 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -205,7 +205,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 240 tests
+npm test             # 249 tests
 npm run build        # static output to ./dist
 ```
 
@@ -278,7 +278,7 @@ formula.
 npm test
 ```
 
-240 tests cover every formula, plus the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+249 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -293,9 +293,47 @@ trustworthy extrapolation. The engine was fixed rather than the test.
 
 ---
 
+## Writing articles
+
+See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or editing an article.
+
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.4.0 — Phase 4 Revision
+
+**Scheduled publishing**
+- Articles with a future `published` date stay off the site until that date, then appear at
+  10:00 UTC. A daily scheduled rebuild triggers it, so a failed or delayed run is caught the
+  next morning rather than a week later. Needs a Cloudflare deploy hook stored as the
+  `CLOUDFLARE_DEPLOY_HOOK` repository secret; the workflow fails loudly without one rather than
+  silently publishing nothing.
+- **Fixed before it could cause harm:** six places listed articles, each with its own filter,
+  and the search index used none — it included every article whatever its status. Harmless while
+  no drafts existed; on the first Sunday of scheduling it would have made future articles
+  searchable before their date. All six now use one function, tested against the real rule.
+  Verified that a future article is absent from all seven surfaces — pages, index, category
+  pages, search index, sitemap, and tool pages — and appears on all of them once its date passes.
+
+**Charts**
+- Three articles gained charts: one-rep-max formulas diverging with reps, the static
+  3,500-calorie rule against the dynamic model, and caffeine remaining at three half-lives.
+- Computed at build time from the same engine functions the calculators use, so a chart cannot
+  contradict its tool. Every number in every caption is computed, never typed.
+- Static SVG — no JavaScript. A hidden data table for screen readers, and dash patterns as well
+  as colours so charts read in greyscale print. A mistyped chart name fails the build.
+- The static 3,500-calorie line was calculated inside the Deficit Planner component, against the
+  rule that arithmetic belongs in the engine. Moved to `staticSeries()` in the engine, with
+  tests, so the calculator and the chart share one function.
+
+**Drafting workflow**
+- `npm run new:article` creates a fully templated article for the next free Sunday — **as a
+  draft**, so a skeleton cannot publish itself. It warns about overlapping titles.
+- `npm run topics` lists every article by category and status, read from the files.
+- `qa:articles` now refuses to pass a non-draft article that still contains a `TODO` or has
+  unverified citations.
+- `docs/ARTICLE-WORKFLOW.md` — the full process, written to be followed cold.
 
 ### v2.3.1 — Hidden files that never shipped
 

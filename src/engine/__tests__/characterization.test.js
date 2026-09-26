@@ -6,7 +6,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { calorieTarget, tdee, selectBmr, ACTIVITY } from '../energy.js';
-import { intakeForTargetByDate, simulate, weeklyRateCheck } from '../planner.js';
+import { intakeForTargetByDate, simulate, weeklyRateCheck, staticSeries, KCAL_PER_KG_STATIC_RULE } from '../planner.js';
 import { recommendedGrams } from '../macros.js';
 import { riegelConfidence, MARATHON_KM } from '../pace.js';
 import { brzycki, allOneRepMax } from '../strength.js';
@@ -565,5 +565,22 @@ describe('UI change: running pace custom distance unit', () => {
   });
   it('a marathon entered in miles lands on the marathon distance', () => {
     expect(Math.abs(toKm(26.2, 'mi') - MARATHON_KM)).toBeLessThan(0.05);
+  });
+});
+
+describe('static 3,500-kcal rule series (moved from DeficitPlanner.jsx into the engine)', () => {
+  it('uses 3,500 kcal/lb, i.e. about 7,716 kcal/kg', () => {
+    expect(KCAL_PER_KG_STATIC_RULE).toBeCloseTo(7716, 0);
+  });
+  it('is a straight line — it never slows down', () => {
+    const series = [0, 70, 140].map(day => ({ day }));
+    const s = staticSeries({ startKg: 90, startTdee: 2875, intakeKcal: 2092, series });
+    expect(s[1].kg - s[0].kg).toBeCloseTo(s[2].kg - s[1].kg, 9);
+  });
+  it('predicts more loss than the dynamic model over 24 weeks', () => {
+    const sim = simulate({ kg: 90, cm: 180, age: 35, sex: 'male',
+      activityFactor: 1.55, intakeKcal: 2092, days: 168 });
+    const st = staticSeries({ startKg: 90, startTdee: sim.startTdee, intakeKcal: 2092, series: sim.series });
+    expect(st.at(-1).kg).toBeLessThan(sim.finalKg);
   });
 });

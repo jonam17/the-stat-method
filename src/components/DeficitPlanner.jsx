@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import {
-  simulate, daysToTarget, intakeForTargetByDate,
+  simulate, daysToTarget, intakeForTargetByDate, staticSeries as staticRuleSeries,
   ACTIVITY, MIN_INTAKE, MAX_WEEKLY_LOSS_PCT,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
@@ -99,10 +99,9 @@ export default function DeficitPlanner() {
     const sim = simulate({ ...base, intakeKcal: dailyIntake, days: horizon });
 
     // Static "3,500 kcal per pound" curve, for comparison
-    const staticSeries = sim.series.map(p => ({
-      day: p.day,
-      kg: kg + ((dailyIntake - sim.startTdee) * p.day) / 7716,
-    }));
+    const staticSeries = staticRuleSeries({
+      startKg: kg, startTdee: sim.startTdee, intakeKcal: dailyIntake, series: sim.series,
+    });
 
     const weeklyRate = sim.series.length > 1
       ? (sim.series[0].kg - sim.series[1].kg) : 0;

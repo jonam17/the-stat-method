@@ -1,17 +1,16 @@
 ---
+import { publishedArticles } from '../data/articles.js';
 import { AUTHOR, supportUrl } from '../site.config.js';
 import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import { TOOLS, findTool } from '../data/tools.js';
 import { guideFor } from '../data/tool-guides.js';
-import { getCollection } from 'astro:content';
 
 const { slug, title, intro } = Astro.props;
 const tool = findTool(slug);
 const related = (tool?.related || []).map(findTool).filter(Boolean);
 const guide = guideFor(slug);
-const articles = (await getCollection('articles',
-  ({ data }) => !data.draft && data.relatedTool === slug)).slice(0, 3);
+const articles = (await publishedArticles(d => d.relatedTool === slug)).slice(0, 3);
 const category = tool?.category || 'Tool';
 // Several tool titles already end in "calculator"; appending it unconditionally
 // made screen readers announce "…calculator calculator".

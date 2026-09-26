@@ -285,3 +285,18 @@ a `.github/` path appearing there is the sign it worked.
 > *Learned:* v2.2.0 and v2.3.0 both changed files under `.github/`, and neither change reached
 > the repository. It was caught by checking the live repository against the build, not by any
 > test — CI cannot report on a workflow step it was never given.
+
+## 18. Listing articles
+
+**Never call `getCollection('articles')` directly.** Use `publishedArticles()` from
+`src/data/articles.js`. The publishing rule — not a draft, and dated today or earlier — lives in
+one place, so no page can quietly show an article another page hides.
+
+> *Learned:* six pages each wrote their own filter, and the search index wrote none. It would have
+> published scheduled articles into live search before their date.
+
+## 19. Writing articles
+
+Follow `docs/ARTICLE-WORKFLOW.md`. The two rules most likely to be broken under time pressure:
+**no claim from memory**, and **a person checks every AI-drafted article before it publishes** —
+because `aiAssisted: true` tells readers exactly that.

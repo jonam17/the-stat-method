@@ -27,9 +27,12 @@
     "qa:predeploy": "npm run qa:production && npm run qa:calculators && npm run qa:ui && npm run qa:articles && npm test && npm run build && npm run check:placeholders && npm run citations -- lint && npm run audit",
     "qa:smoke": "node scripts/smoke-qa.mjs",
     "qa:release": "npm run qa:predeploy && npm run qa:smoke",
-    "qa:articles": "node scripts/article-structure-qa.mjs"
+    "qa:articles": "node scripts/article-structure-qa.mjs",
+    "new:article": "node scripts/new-article.mjs",
+    "topics": "node scripts/topics.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.2.2",
     "@astrojs/mdx": "^8.0.0",
     "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.7.3",
@@ -37,10 +40,10 @@
     "@fontsource/space-grotesk": "^5.3.0",
     "@fontsource/space-mono": "^5.3.0",
     "astro": "^7.3.1",
+    "hast-util-from-html": "^2.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "unist-util-visit": "^5.1.0",
-    "@astrojs/markdown-remark": "^7.2.2"
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "playwright": "^1.62.1",

@@ -1,10 +1,10 @@
 ---
+import { publishedArticles } from '../../data/articles.js';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../data/categories.js';
 
-const articles = (await getCollection('articles', ({ data }) => !data.draft))
+const articles = (await publishedArticles())
   .sort((a, b) => b.data.published - a.data.published);
 
 const articleListSchema = {
