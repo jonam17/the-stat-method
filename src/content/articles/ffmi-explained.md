@@ -6,6 +6,7 @@ conclusion: "FFMI tells you what BMI cannot, and still cannot tell you what a mi
 published: 2026-08-08
 updated: 2026-08-20
 readMinutes: 7
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-24
 author: The Stat Method

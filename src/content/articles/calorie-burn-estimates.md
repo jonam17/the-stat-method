@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "Treat any “calories burned” figure as the loosest number in your day, and never eat it back in full."
 published: 2026-08-05
 readMinutes: 8
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
 author: The Stat Method

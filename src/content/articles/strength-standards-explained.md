@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "A standard tells you which training regime you are currently in. It does not tell you whether you are strong."
 published: 2026-08-12
 readMinutes: 8
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
 author: The Stat Method

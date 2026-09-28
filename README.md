@@ -301,6 +301,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.4.1 — Accurate AI disclosure on every article
+
+- All 19 articles now carry the same disclosure in their review box: *"Drafted with AI
+  assistance, then edited and fact-checked by a human."* Eighteen had said *"Written and edited
+  by a person,"* which was not accurate.
+- The cause was omission rather than a choice: those articles never set `aiAssisted`, and the
+  schema defaults it to `false`. `qa:articles` now requires the field to be stated explicitly on
+  every article, so leaving it out fails the build instead of quietly claiming human authorship.
+- Placement and prominence are unchanged — one sentence in the existing review box at the foot
+  of each article.
+
 ### v2.4.0 — Phase 4 Revision
 
 **Scheduled publishing**

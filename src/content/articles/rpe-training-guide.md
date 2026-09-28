@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "Reps in reserve is at least as good as percentages and adapts to the day you actually had. Expect to underestimate how close to failure you are."
 published: 2026-08-11
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
 author: The Stat Method

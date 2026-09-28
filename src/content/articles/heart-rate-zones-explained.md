@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "Zones from a formula are a starting map. Your own perceived effort corrects it faster than any equation."
 published: 2026-08-07
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-24
 author: The Stat Method

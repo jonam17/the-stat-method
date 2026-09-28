@@ -6,6 +6,7 @@ conclusion: "Three to five grams of monohydrate daily, taken whenever suits you.
 published: 2026-08-06
 updated: 2026-08-20
 readMinutes: 10
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method

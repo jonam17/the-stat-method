@@ -28,6 +28,12 @@ for (const f of files) {
   // Every section bar the last carries a summary; the last is itself a close.
   if (summaries < h2 - 1) fail(`${summaries} summaries for ${h2} sections (expected ${h2 - 1})`);
 
+  // aiAssisted must be stated, never inherited. Omitting it defaults to false,
+  // which renders "Written and edited by a person" — and that is exactly how
+  // eighteen AI-drafted articles came to say it. Say which, on purpose.
+  if (!/^aiAssisted:\s*(true|false)\s*$/m.test(s))
+    fail('aiAssisted is not set — state true or false explicitly; omitting it silently claims human authorship');
+
   for (const field of ['keyTakeaways:', 'toc:', 'category:', 'conclusion:', 'references:']) {
     if (!s.includes(field)) fail(`missing ${field.replace(':', '')}`);
   }

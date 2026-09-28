@@ -6,6 +6,7 @@ conclusion: "Pick one method, keep using it, and read the trend rather than the 
 published: 2026-08-09
 updated: 2026-08-20
 readMinutes: 8
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-21
 author: The Stat Method

@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "Trust the prediction in proportion to how far you are stretching it — and never plan a marathon off a 5K."
 published: 2026-08-06
 readMinutes: 8
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-24
 author: The Stat Method

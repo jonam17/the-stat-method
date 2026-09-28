@@ -6,6 +6,7 @@ conclusion: "Get protein and calories right first. The rest of the split is a co
 published: 2026-08-14
 updated: 2026-08-20
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method

@@ -297,6 +297,14 @@ one place, so no page can quietly show an article another page hides.
 
 ## 19. Writing articles
 
+**`aiAssisted` is set explicitly on every article.** Omitting it defaults to `false`, which renders
+"Written and edited by a person." `qa:articles` enforces this.
+
+> *Learned:* eighteen AI-drafted articles displayed "Written and edited by a person" — not because
+> anyone chose that, but because the field was left out and a default filled the gap. A default
+> that makes a claim to readers should never be reachable by omission.
+
+
 Follow `docs/ARTICLE-WORKFLOW.md`. The two rules most likely to be broken under time pressure:
 **no claim from memory**, and **a person checks every AI-drafted article before it publishes** —
 because `aiAssisted: true` tells readers exactly that.

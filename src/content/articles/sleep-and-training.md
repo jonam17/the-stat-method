@@ -5,6 +5,7 @@ category: Recovery
 conclusion: "No supplement, split or protocol recovers what short sleep costs. Fix the sleep first."
 published: 2026-08-07
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method

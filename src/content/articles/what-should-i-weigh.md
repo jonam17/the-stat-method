@@ -6,6 +6,7 @@ conclusion: "These formulas were built to dose drugs, not to set goals. Use the 
 published: 2026-08-08
 updated: 2026-08-20
 readMinutes: 8
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-21
 author: The Stat Method

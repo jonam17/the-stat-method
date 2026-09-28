@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "An estimate is a starting load, not a record. If the number matters to you, test it."
 published: 2026-08-11
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method

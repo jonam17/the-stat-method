@@ -6,6 +6,7 @@ conclusion: "The rule is not so much wrong as frozen — it describes the first 
 published: 2026-08-12
 updated: 2026-08-20
 readMinutes: 11
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-21
 author: The Stat Method

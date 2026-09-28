@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "Warm up to prepare for the work, not to prevent injury. The evidence supports the first and is much weaker on the second."
 published: 2026-08-10
 readMinutes: 7
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
 author: The Stat Method

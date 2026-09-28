@@ -5,6 +5,7 @@ category: Nutrition
 conclusion: "Pick a number inside the band, hold it for a month, and judge it on what happens rather than on what the calculator said."
 published: 2026-08-04
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method

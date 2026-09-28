@@ -5,6 +5,7 @@ category: Exercise
 conclusion: "If you are comparing lifters today, use DOTS or IPF GL. Wilks is a historical record, not a current standard."
 published: 2026-08-13
 readMinutes: 9
+aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-26
 author: The Stat Method
