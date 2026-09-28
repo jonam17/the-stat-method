@@ -67,6 +67,8 @@ per year rather than the 1.0 the old formula assumes, and that this holds regard
 or training status. Because the two formulas diverge as age rises, the old one increasingly
 underestimates maximum heart rate in older adults. It is the default our calculator uses. [1]
 
+<figure data-chart="max-hr-formulas"></figure>
+
 **Gulati** and colleagues later derived an equation specifically in women, from 5,437
 asymptomatic women undergoing exercise stress testing. They concluded that the traditional
 male-derived calculation **overestimates** maximum heart rate for age in women, and argued

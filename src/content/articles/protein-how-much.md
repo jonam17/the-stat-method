@@ -79,6 +79,8 @@ significance. [1] The widely repeated "1.6" is the centre of a wide interval, no
 threshold. That is precisely why a *band* is the honest way to express this and a single
 number is not.
 
+<figure data-chart="protein-breakpoint"></figure>
+
 Two further caveats from the same paper. The benefit shrank with age and was larger in
 already-trained lifters. And the senior author declares grant support and honoraria from the
 US National Dairy Council, which funded trials included in the analysis — a conflict we

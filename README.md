@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**18 calculators · 19 sourced articles · 249 unit tests · zero JavaScript on content pages**
+**18 calculators · 19 sourced articles · 251 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -169,7 +169,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             249 unit tests
+│   └── __tests__/             251 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -190,7 +190,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 249 tests |
+| Tests | **Vitest** | 251 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -205,7 +205,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 249 tests
+npm test             # 251 tests
 npm run build        # static output to ./dist
 ```
 
@@ -278,7 +278,7 @@ formula.
 npm test
 ```
 
-249 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+251 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -300,6 +300,40 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.5.0 — Charts across the articles
+
+**Eight more charts**, for eleven in all — each drawing the argument its article makes
+- Line charts: maximum heart rate formulas by age, four ideal-weight formulas by height, five BMR
+  equations by bodyweight, BMI against FFMI as body fat rises, load by rep count at each RPE, and
+  the gap between Wilks and DOTS by bodyweight
+- **A second chart type, for ranges**: protein's reported breakpoint with its confidence interval,
+  and three body-fat methods each with its published error margin
+- **Not charted**, deliberately: creatine, macro split, race prediction, sleep, tracking without a
+  scale, warming up, strength standards and calorie burn. A chart there would be decoration
+- The protein chart shows only per-kilogram-of-bodyweight figures. The article also uses
+  per-kilogram-of-lean-mass figures, and putting both on one axis would invite comparing numbers
+  that are not comparable
+- MDX articles use a `Chart` component; Markdown articles keep the placeholder
+
+**Correction — powerlifting scoring**
+- The article said DOTS and Wilks "part company" at 145 kg. They differ by about 2.4% there; the gap
+  widens among super-heavyweights, to about 5% by 185 kg. It also said lifters around 80 to 90 kg
+  barely notice the change, which holds for men but not women, whose widest gap falls near 87 kg.
+  Logged on the article with the date.
+- **A first draft of this correction was itself wrong.** It said the larger divergence was at the
+  light end, reading a 5% gap at 40 kg off a chart — but no man competes at 40 kg; the lightest
+  class is 59. The chart now plots each sex only across its competition weights, and a comment in
+  its definition says why those ranges must not be widened.
+- New test: DOTS and Wilks reproduce **published 2026 IPF World Championship scores** to within 0.1
+  points. External ground truth that internal consistency could not provide.
+
+**Fixed: charts could go stale**
+- Astro caches each article's rendered output keyed on the article file, and did not know the
+  charts inside depend on chart definitions. Correcting a chart or a formula left the old chart in
+  place until the article happened to change — breaking the promise that a chart cannot contradict
+  its calculator. The build now clears that cache first; verified by changing a definition without
+  touching its article.
 
 ### v2.4.1 — Accurate AI disclosure on every article
 

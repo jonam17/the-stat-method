@@ -74,6 +74,8 @@ Consider two men of the same height and weight. One carries 12 percent body fat,
 30. Their BMI is identical. Their FFMI differs by several points, and it is the FFMI that
 reflects what is actually going on.
 
+<figure data-chart="bmi-vs-ffmi"></figure>
+
 This is the concrete answer to the familiar complaint that BMI misclassifies athletes.
 The complaint is correct, and FFMI is the fix. It is worth being precise about the scope of
 that claim, though: BMI remains a reasonable population-level screening tool, and the

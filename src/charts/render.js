@@ -22,7 +22,59 @@ function niceTicks(min, max, count = 5) {
   return out;
 }
 
+
+/**
+ * Interval chart: one row per item, a bar from low to high with the point
+ * estimate marked. For claims about a RANGE — a confidence interval, or a
+ * measurement with its error margin — where a line would imply a trend.
+ */
+function renderInterval(id, def) {
+  const rows = def.rows;
+  const all = rows.flatMap(r => [r.low, r.high]);
+  const ticks = niceTicks(def.x.min ?? Math.min(...all), def.x.max ?? Math.max(...all), 5);
+  const [x0, x1] = [ticks[0], ticks.at(-1)];
+  const L = 170, R = 24, T = 16, ROW = 46, B = 44;
+  const IW = 640, IH = T + rows.length * ROW + B;
+  const pw = IW - L - R;
+  const x = v => L + ((v - x0) / (x1 - x0)) * pw;
+  const f = v => def.x.digits != null ? Number(v).toFixed(def.x.digits) : v;   // published precision
+
+  const grid = ticks.map(v =>
+    `<line class="ch-grid" x1="${x(v)}" x2="${x(v)}" y1="${T}" y2="${IH - B}"/>` +
+    `<text class="ch-tick" x="${x(v)}" y="${IH - B + 18}" text-anchor="middle">${v}</text>`).join('');
+
+  const bars = rows.map((r, i) => {
+    const cy = T + i * ROW + ROW / 2;
+    const isPoint = r.low === r.high;
+    const bar = isPoint ? '' :
+      `<rect class="ci-bar ch-f${i}" x="${x(r.low)}" y="${cy - 7}" width="${Math.max(1, x(r.high) - x(r.low))}" height="14"/>` +
+      `<text class="ch-tick" x="${x(r.low) - 5}" y="${cy}" text-anchor="end" dominant-baseline="middle">${f(r.low)}</text>` +
+      `<text class="ch-tick" x="${x(r.high) + 5}" y="${cy}" dominant-baseline="middle">${f(r.high)}</text>`;
+    const pt = r.point == null ? '' :
+      `<circle class="ci-point" cx="${x(r.point)}" cy="${cy}" r="5.5"/>` +
+      `<text class="ch-val" x="${x(r.point)}" y="${cy - 13}" text-anchor="middle">${f(r.point)}</text>`;
+    return `<text class="ch-rowlabel" x="${L - 14}" y="${cy}" text-anchor="end" dominant-baseline="middle">${esc(r.label)}</text>` +
+      bar + pt;
+  }).join('');
+
+  const tid = `ch-${id}-t`, did = `ch-${id}-d`;
+  const svg = `<svg class="chart" viewBox="0 0 ${IW} ${IH}" role="img" aria-labelledby="${tid} ${did}">` +
+    `<title id="${tid}">${esc(def.title)}</title><desc id="${did}">${esc(def.desc)}</desc>` +
+    grid + `<line class="ch-axis" x1="${L}" x2="${IW - R}" y1="${IH - B}" y2="${IH - B}"/>` + bars +
+    `<text class="ch-label" x="${L + pw / 2}" y="${IH - 6}" text-anchor="middle">${esc(def.x.label)}</text></svg>`;
+
+  const table = `<table class="sr-only"><caption>${esc(def.title)}</caption>` +
+    `<thead><tr><th scope="col">Item</th><th scope="col">Low</th><th scope="col">Estimate</th><th scope="col">High</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><th scope="row">${esc(r.label)}</th><td>${f(r.low)}</td><td>${r.point == null ? '—' : f(r.point)}</td><td>${f(r.high)}</td></tr>`).join('') +
+    `</tbody></table>`;
+  return { svg, legend: '', table };
+}
+
 export function renderChart(id, def) {
+  if (def.type === 'interval') {
+    const { svg, legend, table } = renderInterval(id, def);
+    return wrap(def, svg, legend, table);
+  }
   const xs = def.x.values;
   const all = def.series.flatMap(s => s.values).filter(v => v != null);
   const yt = niceTicks(Math.min(...all), Math.max(...all));
@@ -34,7 +86,7 @@ export function renderChart(id, def) {
 
   const grid = yt.map(v => `<line class="ch-grid" x1="${M.l}" x2="${W - M.r}" y1="${y(v)}" y2="${y(v)}"/>` +
     `<text class="ch-tick" x="${M.l - 8}" y="${y(v)}" text-anchor="end" dominant-baseline="middle">${v}</text>`).join('');
-  const xTicks = xs.map((v, i) => (i % xStep === 0 || i === xs.length - 1)
+  const xTicks = xs.map((v, i) => (i % xStep === 0 || (i === xs.length - 1 && (xs.length - 1) % xStep > xStep / 2))
     ? `<text class="ch-tick" x="${x(i)}" y="${H - M.b + 18}" text-anchor="middle">${esc(v)}</text>` : '').join('');
 
   const lines = def.series.map((s, si) => {
@@ -67,10 +119,13 @@ export function renderChart(id, def) {
       def.series.map(s => `<td>${s.values[i] ?? '—'}</td>`).join('') + `</tr>`).join('') +
     `</tbody></table>`;
 
+  return wrap(def, svg, legend, table);
+}
+
+function wrap(def, svg, legend, table) {
   const source = def.kind === 'engine'
     ? 'Computed from the same equations the calculator uses.'
     : `Recreated from figures reported in ${esc(def.source || 'the cited study')}.`;
-
   return `<figure class="chart-figure">` +
     `<div class="chart-title">${esc(def.title)}</div>` + svg + legend + table +
     `<figcaption>${esc(def.caption)} <span class="chart-source">${source}</span></figcaption>` +

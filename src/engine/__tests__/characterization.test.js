@@ -584,3 +584,20 @@ describe('static 3,500-kcal rule series (moved from DeficitPlanner.jsx into the 
     expect(st.at(-1).kg).toBeLessThan(sim.finalKg);
   });
 });
+
+describe('DOTS and Wilks reproduce published competition scores', () => {
+  // External ground truth. Official results from the 2026 IPF World Classic
+  // Powerlifting Championships, as published with each lifter's bodyweight and
+  // total. If a coefficient drifts, these fail — no amount of internal
+  // consistency would catch that.
+  const cases = [
+    { lifter: 'Jesus Olivares', total: 1095, bw: 186.1, sex: 'male', dots: 556.97, wilks: 586.30 },
+    { lifter: 'Austin Perkins', total: 891.5, bw: 73.3, sex: 'male', dots: 649.15, wilks: 645.64 },
+  ];
+  for (const c of cases) {
+    it(`${c.lifter}: DOTS ${c.dots}, Wilks ${c.wilks}`, () => {
+      expect(dots(c.total, c.bw, c.sex)).toBeCloseTo(c.dots, 1);
+      expect(wilks(c.total, c.bw, c.sex)).toBeCloseTo(c.wilks, 1);
+    });
+  }
+});

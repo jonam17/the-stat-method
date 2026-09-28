@@ -1,0 +1,13 @@
+---
+/**
+ * A chart, for MDX articles. Markdown articles use <figure data-chart="id"> and
+ * the rehype plugin; MDX turns HTML into JSX, which that plugin never sees, so
+ * MDX imports this instead. Same definitions, same renderer, same output.
+ */
+import { CHARTS } from '../charts/definitions.js';
+import { renderChart } from '../charts/render.js';
+const { id } = Astro.props;
+if (!CHARTS[id]) throw new Error(`Chart: no chart named "${id}". Defined: ${Object.keys(CHARTS).join(', ')}`);
+const html = renderChart(id, CHARTS[id]());
+---
+<Fragment set:html={html} />

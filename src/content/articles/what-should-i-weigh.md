@@ -64,6 +64,8 @@ That disagreement is not a bug in the calculators. It is the honest answer to th
 The four equations that appear in almost every ideal-weight calculator — Devine, Robinson,
 Miller and Hamwi — share an origin that surprises most people who use them.
 
+<figure data-chart="ideal-weight-formulas"></figure>
+
 They come from **clinical practice, not from health research** — though the specific purpose
 varies more than the popular version of this story admits. Devine's equation was devised for
 drug dosing: some medications must be dosed on lean body size rather than total weight, and

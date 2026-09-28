@@ -4,6 +4,7 @@ dek: "Comparing a 60 kg lifter to a 120 kg lifter needs a formula. The one most 
 category: Exercise
 conclusion: "If you are comparing lifters today, use DOTS or IPF GL. Wilks is a historical record, not a current standard."
 published: 2026-08-13
+updated: 2026-09-27
 readMinutes: 9
 aiAssisted: true
 citationsVerified: full
@@ -23,6 +24,10 @@ toc:
   - { id: "dots", label: "DOTS" }
   - { id: "ipf-gl", label: "IPF GL" }
   - { id: "bottom-line", label: "Bottom line" }
+changelog:
+  - date: 2026-09-27
+    note: >-
+      Corrected the comparison of DOTS and Wilks. The article said the two formulas "part company" at 145 kg; they differ by about 2.4% there, and the gap keeps widening among super-heavyweights, to about 5% by 185 kg. It also said lifters around 80 to 90 kg barely notice the change, which holds for men but not women, whose widest gap falls near 87 kg. Added a chart of the gap by bodyweight.
 references:
   - text: "International Powerlifting Federation. IPF GL Coefficients, effective 1 May 2020."
     url: "https://www.powerlifting.sport/fileadmin/ipf/data/ipf-formula/IPF_GL_Coefficients-2020.pdf"
@@ -153,15 +158,16 @@ federations adopted it from 2020, and it has become the default in much of the s
 the IPF.
 
 Structurally it resembles Wilks — a fourth-order polynomial in bodyweight, scaled so the
-resulting numbers land in a familiar range. That similarity is deliberate and useful: at
-mid bodyweights DOTS and Wilks produce very similar scores, so lifters around 80 to 90
-kilograms barely notice the change. The divergence appears where it should, at the light and
-heavy ends.
+resulting numbers land in a familiar range. That similarity is deliberate and useful: for men at
+mid bodyweights, DOTS and Wilks produce very similar scores, so male lifters around 80 to 90
+kilograms barely notice the change.
 
-<div class="pull">
-At 82.5 kg the two formulas agree within a few points. At 145 kg they part company — which
-is the entire reason DOTS exists.
-</div>
+Across the men's weight classes from 59 to 120 kg, the two formulas stay within about 1.3% of
+each other. They separate among super-heavyweights: about 2.4% at 145 kg, rising to about 5%
+by 185 kg — for an elite total, enough to reorder a close ranking. For women the pattern
+differs, with the widest gap, about 3%, near 87 kg.
+
+<figure data-chart="dots-wilks-gap"></figure>
 
 <aside class="summary">
 <span class="summary-label">Summary</span>

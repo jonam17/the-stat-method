@@ -68,6 +68,11 @@ where it belongs. Two kinds only:
 - **Paper** — figures a study reports, cited as a reference. Recreate from the numbers; never copy
   a published figure, which belongs to its publisher.
 
+Two shapes: a **line** chart for how something changes across a range, and an **interval** chart
+(`type: 'interval'`) for a range itself — a confidence interval, or an estimate with its error. In
+MDX articles use `<Chart id="..." />` instead of the placeholder. Read `CONVENTIONS.md` §20 before
+defining one, and look at the rendered chart before publishing it.
+
 ## 4. Verify citations
 
 Apply the six checks in [`citation-checklist.md`](citation-checklist.md) to every reference:

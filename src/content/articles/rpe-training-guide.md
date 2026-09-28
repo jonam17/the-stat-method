@@ -48,6 +48,8 @@ someone who could not know how today would go. RPE was designed to answer it.
 The lifting version of RPE is not the ten-point exertion scale used in cardio. It is defined
 by **reps in reserve** — how many more repetitions you could have completed.
 
+<figure data-chart="rpe-load"></figure>
+
 RPE 10 means none left: a true maximal effort. RPE 9 means one left, RPE 8 means two, and so
 on. The two numbers are simply inverses of each other, and the conversion is
 RPE = 10 − RIR.

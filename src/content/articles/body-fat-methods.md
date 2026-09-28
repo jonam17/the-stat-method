@@ -113,6 +113,8 @@ which is why almost nobody uses it for routine tracking.
 
 Here is the point most articles on this topic miss.
 
+<figure data-chart="body-fat-methods"></figure>
+
 Suppose your true body fat is 18 percent and your tape measurement consistently reads 21.
 That method is wrong by three points — and yet it is entirely fit for purpose, because when
 you actually drop to 15 percent, it will read 18. The error is a constant offset, so the

@@ -308,3 +308,17 @@ one place, so no page can quietly show an article another page hides.
 Follow `docs/ARTICLE-WORKFLOW.md`. The two rules most likely to be broken under time pressure:
 **no claim from memory**, and **a person checks every AI-drafted article before it publishes** —
 because `aiAssisted: true` tells readers exactly that.
+
+## 20. Charts
+
+- **Plot only the range the thing is used in.** A formula is defined far beyond the people it
+  applies to, and a chart will happily draw it there. Plotting DOTS and Wilks down to 40 kg produced
+  a confident, wrong conclusion about the light end — no man competes below 59 kg.
+- **Compute every number in a caption**, including qualitative claims that rest on numbers ("the
+  margins overlap"). A typed figure goes wrong silently when a formula is corrected.
+- **Never put two units on one axis**, even when the numbers look alike. Grams per kilogram of
+  bodyweight and grams per kilogram of lean mass are not the same quantity.
+- **Where an external figure exists, test against it.** DOTS and Wilks are pinned to published
+  competition scores; internal consistency cannot catch a wrong coefficient.
+- **Look at the chart before shipping it.** Every problem above was found by looking at a rendered
+  chart, not by a test.

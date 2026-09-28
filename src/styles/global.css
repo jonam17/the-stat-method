@@ -1795,3 +1795,11 @@ footer{border-top:1px solid var(--rule)}
   letter-spacing:.06em;color:var(--ink-mute)}
 @media(max-width:640px){.chart-figure{padding:14px 12px 12px}.ch-tick{font-size:13px}.ch-label{font-size:13px}}
 @media print{.chart-figure{break-inside:avoid;border-color:#999}.ch-line{stroke-width:1.75}}
+/* Interval charts — ranges, confidence intervals, error margins */
+.ci-bar{opacity:.28}
+.ch-f0{fill:var(--ink)} .ch-f1{fill:var(--nutrition)} .ch-f2{fill:var(--training)}
+.ch-f3{fill:var(--recovery)} .ch-f4{fill:var(--health)}
+.ci-point{fill:var(--ink);stroke:var(--paper);stroke-width:2}
+.ch-val{font-family:var(--mono);font-size:11px;font-weight:600;fill:var(--ink)}
+.ch-rowlabel{font-size:12.5px;fill:var(--ink-soft)}
+@media(max-width:640px){.ch-rowlabel{font-size:14px}.ch-val{font-size:13px}}
