@@ -47,9 +47,12 @@ export const GUIDES = {
       'Choose a goal to see calorie and protein targets, then a target weight to see a timeline.',
     ],
     interpreting: [
-      'Every number here comes from the same code as its standalone calculator. Follow any section\u2019s link to see the full working and adjust the details.',
-      'These are estimates from population equations, not measurements of you. Track your weight for three weeks and let what happens overwrite them.',
-      'If the Baseline declines to show results, it is because at least one of the calculators it draws on would decline too. The individual calculators remain available for narrower questions.',
+      ['Every number here matches its own calculator',
+       'Each section is computed by the same code as the standalone calculator it links to, so the Baseline can never disagree with them. Follow a section\u2019s link to see the full working, compare the equations, or adjust details the Baseline leaves at their defaults.'],
+      ['These are estimates, not measurements',
+       'Every figure comes from equations fitted to populations, not from measuring you. Two people with identical inputs can differ by several hundred calories a day. Use these as a starting point, track your weight for three weeks, and let what actually happens overwrite them.'],
+      ['Why it sometimes declines to answer',
+       'If any calculator the Baseline draws on would decline your situation, the whole Baseline declines, with the same explanation that calculator gives. That is deliberate: one section should never show a number another section would refuse. The individual calculators remain available for narrower questions.'],
     ],
   },
   'tdee-calculator': {

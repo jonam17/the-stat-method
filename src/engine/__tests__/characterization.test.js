@@ -118,8 +118,11 @@ describe('F-015 fmt() guards non-finite values', () => {
 });
 
 describe('F-005 age scope (18-120, per site owner decision)', () => {
-  it('accepts the adult range', () => {
-    for (const a of [18, 30, 65, 119, 120]) expect(ageInScope(a).ok).toBe(true);
+  it('accepts the adult range, 18 to 99', () => {
+    for (const a of [18, 30, 65, 98, 99]) expect(ageInScope(a).ok).toBe(true);
+  });
+  it('rejects ages above 99', () => {
+    for (const a of [100, 101, 120]) expect(ageInScope(a)).toMatchObject({ ok: false, reason: 'high' });
   });
   it('INVARIANT: rejects every age below 18', () => {
     for (let a = 1; a < 18; a++) {

@@ -95,7 +95,10 @@ export const RECOMP_WEEKLY_LOSS_PCT = 0.7;
  * output for people they were never built for — not to enforce anything.
  */
 export const AGE_MIN = 18;
-export const AGE_MAX = 120;
+// 99, a deliberate product limit rather than a physiological one: the
+// equations were not derived on the very old, and a lower ceiling narrows the
+// range the site answers for. Applies to every tool through ageInScope().
+export const AGE_MAX = 99;
 
 /**
  * Above this age the predictive equations lose accuracy badly enough to warn.

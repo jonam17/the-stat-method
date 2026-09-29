@@ -3,6 +3,7 @@ import {
   proteinTarget, lbmFromBodyFat, lbToKg, kgToLb, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
+import { eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
 export default function ProteinTarget() {
   const [units, setUnits] = useState('metric');
@@ -10,7 +11,7 @@ export default function ProteinTarget() {
   const [bodyfat, setBodyfat] = useState('');
   const [deficit, setDeficit] = useState('none');
   const [trainingAge, setTrainingAge] = useState('intermediate');
-  const [older, setOlder] = useState('no');
+  const [age, setAge] = useState('30');
 
   const kg = units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0;
   const bf = bodyfat === '' ? null : Math.min(60, Math.max(3, +bodyfat));
@@ -22,9 +23,12 @@ export default function ProteinTarget() {
     setUnits(to);
   };
 
+  // Older-adult adjustment is decided from age inside the engine.
   const r = useMemo(() => proteinTarget({
-    kg, lbm, deficit, trainingAge, older: older === 'yes',
-  }), [kg, lbm, deficit, trainingAge, older]);
+    kg, lbm, deficit, trainingAge, age,
+  }), [kg, lbm, deficit, trainingAge, age]);
+  // Refusal decided by the engine, the same way every other tool decides it.
+  const gate = eligibility({ age });
 
   const perMeal = n => Math.round(r.midG / n);
 
@@ -61,16 +65,14 @@ export default function ProteinTarget() {
               <option value="intermediate">One to five years</option>
               <option value="advanced">Five years or more</option>
             </Select>
-            <Select label="Over 60" value={older} onChange={setOlder}
-                    hint="Anabolic resistance raises the floor.">
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
-            </Select>
+            <Num label="Age" value={age} onChange={setAge} tag="yrs" min={AGE_MIN} max={AGE_MAX}
+                 hint="From 60, anabolic resistance raises the protein floor." />
           </div>
         </Panel>
 
         <Panel label="Daily protein" dark
-               incomplete={!(kg > 0)}
+               notice={gate.refused ? gate.copy : undefined}
+               incomplete={gate.incomplete || !(kg > 0)}
                incompleteNote="Enter your bodyweight to see a protein target.">
           <BigStat value={`${r.lowG}–${r.highG}`} unit="grams / day"
                    note={<>Scaled from your <b>{r.basis}</b> at

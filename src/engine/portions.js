@@ -68,7 +68,13 @@ export function splitMeals({ proteinG, carbsG, fatG, meals = 4, periIndex = null
  * deficit depth and training age.
  * Ranges follow Morton et al. (2018) and Helms et al. (2014).
  */
-export function proteinTarget({ kg, lbm = null, deficit = 'none', trainingAge = 'intermediate', older = false }) {
+/** Older adults' raised protein floor applies from this age. */
+export const OLDER_ADULT_PROTEIN_AGE = 60;
+
+export function proteinTarget({ kg, lbm = null, deficit = 'none', trainingAge = 'intermediate', older = false, age = null }) {
+  // Decided here from age, so no interface can forget it. The Baseline once
+  // omitted the older flag and gave a 68-year-old the younger range.
+  if (age != null && age !== '') older = Number(age) >= OLDER_ADULT_PROTEIN_AGE;
   const base = lbm != null ? lbm : kg;
   const perKg = lbm != null ? { low: 1.6, high: 2.4 } : { low: 1.3, high: 2.0 };
   let lo = perKg.low, hi = perKg.high;

@@ -69,7 +69,7 @@ export function computeBaseline({
     if (macro.blocked) return { status: 'refused', gate: { ok: false, refused: true, reason: macro.reason } };
     targets = {
       macro,
-      protein: proteinTarget({ kg, lbm, deficit: GOAL_TO_PROTEIN_DEFICIT[goal] ?? 'none' }),
+      protein: proteinTarget({ kg, lbm, age, deficit: GOAL_TO_PROTEIN_DEFICIT[goal] ?? 'none' }),
       portions: toHandPortions({ proteinG: macro.grams.p, carbsG: macro.grams.c, fatG: macro.grams.f }),
     };
   }

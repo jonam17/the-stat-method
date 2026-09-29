@@ -8,7 +8,7 @@
  * some people is the kind that ships.
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { computeBaseline, GOAL_TO_PROTEIN_DEFICIT } from '../baseline.js';
 import { tdeeResult, healthyWeightResult, macroResult } from '../results.js';
 import { eligibility, RAIL_COPY, checkWeightTarget, ageInScope, LIFE_STAGE, effectiveFloor } from '../safety.js';
@@ -52,7 +52,7 @@ describe('Baseline sections equal their standalone calculators', () => {
         if (b.status !== 'ok') continue;
         expect(b.targets.macro).toEqual(macroResult({ ...p, goal }));
         expect(b.targets.protein).toEqual(proteinTarget({
-          kg: p.kg, lbm: lbmFromBodyFat(p.kg, p.bf), deficit: GOAL_TO_PROTEIN_DEFICIT[goal],
+          kg: p.kg, lbm: lbmFromBodyFat(p.kg, p.bf), age: p.age, deficit: GOAL_TO_PROTEIN_DEFICIT[goal],
         }));
       }
   });
@@ -157,5 +157,32 @@ describe('standalone tools run on the same engine functions', () => {
     // multiplying, dividing, adding or subtracting quantities.
     expect(src).not.toMatch(/[a-zA-Z0-9_)\]]\s*[*/]\s*[a-zA-Z0-9_(]/);
     expect(src).not.toMatch(/[a-zA-Z_)\]]\s*[+-]\s*[0-9a-zA-Z_(]/);
+  });
+});
+
+describe('older adults get the older-adult protein range in the Baseline', () => {
+  // Equality with the standalone tool only proves agreement on the inputs
+  // passed. Both sides once omitted age, so they agreed on the wrong answer
+  // for anyone over 60. This checks the outcome directly.
+  it('a 68-year-old gets a higher protein floor than an otherwise identical 30-year-old', () => {
+    const p = { sex: 'male', kg: 80, cm: 178, activity: 'moderate', goal: 'maintain' };
+    const young = computeBaseline({ ...p, age: 30 }).targets.protein;
+    const older = computeBaseline({ ...p, age: 68 }).targets.protein;
+    expect(older.lowG).toBeGreaterThan(young.lowG);
+  });
+});
+
+describe('any calculator that asks for an age gates on it', () => {
+  // Healthy Weight, FFMI and Protein Target once had no age gate, so a
+  // 15-year-old received adult BMI categories. Asking for an age without
+  // acting on it should never pass again.
+
+  it('every component with an Age field refuses through the engine', () => {
+    const dir = 'src/components';
+    const offenders = readdirSync(dir).filter(f => f.endsWith('.jsx')).filter(f => {
+      const s = readFileSync(`${dir}/${f}`, 'utf8');
+      return /label="Age"/.test(s) && !/eligibility\(|ageInScope\(|computeBaseline\(/.test(s);
+    });
+    expect(offenders).toEqual([]);
   });
 });

@@ -5,12 +5,13 @@ import {
 } from '../engine/index.js';
 import { ffmiNormalised } from '../engine/body.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { RAIL_COPY } from '../engine/safety.js';
+import { RAIL_COPY, eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
 /** Fat-free mass index — lean mass normalised for height. */
 export default function FfmiCalculator() {
   const [units, setUnits] = useState('metric');
   const [sex, setSex] = useState('male');
+  const [age, setAge] = useState('30');
   const [weight, setWeight] = useState('80');
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
@@ -44,6 +45,9 @@ export default function FfmiCalculator() {
 
   const scale = Math.max(0, Math.min(100, ((r.ffmi ?? 0) - 15) / 13 * 100));
 
+  // Refusal decided by the engine, the same way every other tool decides it.
+  const gate = eligibility({ age });
+
   return (
     <div className="calc">
       <div className="calc-grid">
@@ -52,6 +56,7 @@ export default function FfmiCalculator() {
                options={[['metric', 'Metric'], ['imperial', 'Imperial']]} />
           <Seg label="Sex" value={sex} onChange={setSex}
                options={[['male', 'Male'], ['female', 'Female']]} />
+          <Num label="Age" value={age} onChange={setAge} tag="yrs" min={AGE_MIN} max={AGE_MAX} />
           <div className="row2">
             <Num label="Weight" value={weight} onChange={setWeight}
                  tag={units === 'imperial' ? 'lb' : 'kg'}
@@ -88,7 +93,8 @@ export default function FfmiCalculator() {
         </Panel>
 
         <Panel label="Fat-free mass index" dark
-               incomplete={!(kg > 0 && cm > 0)}
+               notice={gate.refused ? gate.copy : undefined}
+               incomplete={gate.incomplete || !(kg > 0 && cm > 0)}
                incompleteNote="Enter your weight, height and body fat to see your FFMI.">
           <BigStat value={r.ffmi ? r.ffmi.toFixed(1) : '—'} unit="FFMI"
                    note={<>{r.norm ? ffmiBand(r.norm) : '—'} · normalised to 1.8 m:{' '}

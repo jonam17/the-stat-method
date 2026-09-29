@@ -5,13 +5,14 @@ import {
 } from '../engine/index.js';
 import { healthyWeightResult } from '../engine/results.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { RAIL_COPY } from '../engine/safety.js';
+import { RAIL_COPY, eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
 const IN_TO_CM = 2.54;
 
 export default function HealthyWeight() {
   const [units, setUnits] = useState('metric');
   const [sex, setSex] = useState('male');
+  const [age, setAge] = useState('30');
   const [weight, setWeight] = useState('80');
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
@@ -43,6 +44,9 @@ export default function HealthyWeight() {
   // Stat Method Baseline calls, so the two cannot disagree.
   const r = useMemo(() => healthyWeightResult({ kg, cm, sex, waistCm }), [kg, cm, sex, waistCm]);
 
+  // Refusal decided by the engine, the same way every other tool decides it.
+  const gate = eligibility({ age });
+
   return (
     <div className="calc">
       <div className="calc-grid">
@@ -51,6 +55,7 @@ export default function HealthyWeight() {
                options={[['metric', 'Metric'], ['imperial', 'Imperial']]} />
           <Seg label="Sex" value={sex} onChange={setSex}
                options={[['male', 'Male'], ['female', 'Female']]} />
+          <Num label="Age" value={age} onChange={setAge} tag="yrs" min={AGE_MIN} max={AGE_MAX} />
           <Num label="Weight" value={weight} onChange={setWeight} tag={wTag}
                min={units === 'imperial' ? 50 : 25} max={units === 'imperial' ? 700 : 320} />
           {units === 'imperial' ? (
@@ -84,7 +89,8 @@ export default function HealthyWeight() {
         </Panel>
 
         <Panel label="Healthy weight range" dark
-               incomplete={!(kg > 0 && cm > 0)}
+               notice={gate.refused ? gate.copy : undefined}
+               incomplete={gate.incomplete || !(kg > 0 && cm > 0)}
                incompleteNote="Enter your height and weight to see your healthy range.">
           <BigStat
             value={`${fmt(disp(r.bmiRange.lowKg))}–${fmt(disp(r.bmiRange.highKg))}`}

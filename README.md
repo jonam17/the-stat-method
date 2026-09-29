@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**19 calculators · 19 sourced articles · 264 unit tests · zero JavaScript on content pages**
+**19 calculators · 19 sourced articles · 286 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -185,7 +185,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             264 unit tests
+│   └── __tests__/             286 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -206,7 +206,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 264 tests |
+| Tests | **Vitest** | 286 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -221,7 +221,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 264 tests
+npm test             # 286 tests
 npm run build        # static output to ./dist
 ```
 
@@ -294,7 +294,7 @@ formula.
 npm test
 ```
 
-264 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+286 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -316,6 +316,27 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.7.0 — Age gates on every calculator; fixes to the Baseline
+
+**Age**
+- Every calculator now accepts ages **18 to 99**. The upper limit was 120; it is one shared
+  constant, so the change applies to all tools at once rather than drifting between them.
+- Healthy Weight, FFMI and Protein Target **had no age gate**, so a 15-year-old received adult BMI
+  categories — which do not apply to children. Each now asks for age and refuses through the same
+  engine decision as every other tool. A test now fails if any calculator asks for an age without
+  acting on it.
+- Protein Target's "Over 60" switch is replaced by the age field. The older-adult adjustment is
+  now decided from age inside the engine, so no interface can omit it.
+
+**Fixed in the Baseline**
+- *"What these numbers actually tell you"* showed single letters — "E", "v" — instead of three
+  explanations. The guide entries were plain text where the layout expects a heading and a body,
+  so it displayed each sentence's first two characters. A new test checks every tool's guide.
+- **The Baseline gave over-60s the younger protein range.** It never passed the older-adult flag.
+  The equality test missed it because both sides of the comparison omitted the flag and agreed on
+  the wrong answer — agreement only proves anything about the inputs actually passed. A direct test
+  now checks that older adults get the higher floor.
 
 ### v2.6.0 — Phase 5 Revision: The Stat Method Baseline
 
