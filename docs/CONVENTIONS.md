@@ -322,3 +322,18 @@ because `aiAssisted: true` tells readers exactly that.
   competition scores; internal consistency cannot catch a wrong coefficient.
 - **Look at the chart before shipping it.** Every problem above was found by looking at a rendered
   chart, not by a test.
+
+## 21. One calculation engine, many interfaces
+
+- **A calculator's result is computed in the engine, never in its component.** Components hold
+  input state and render. If a `useMemo` contains more than a call to an engine function, the
+  logic belongs in `src/engine/results.js`.
+- **Refusal is decided by `eligibility()`.** Do not assemble refusals from individual rules in a
+  component. Pass the inputs you have; rules whose inputs are absent do not apply.
+- **Safety wording comes from `RAIL_COPY` or the engine.** Never reuse a message because it is
+  nearby — check that every word is true in the new context.
+- **The Baseline composes; it never computes.** `baseline.test.js` asserts each section equals its
+  standalone result and scans `baseline.js` for arithmetic.
+
+> *Learned:* the Macro Calculator and Deficit Planner applied different calorie floors to the same
+> breastfeeding user, because each composed the rules in its own component. Nothing failed.

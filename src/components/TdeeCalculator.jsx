@@ -3,6 +3,7 @@ import {
   allBmrFormulas, ACTIVITY, lbmFromBodyFat, bmi,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
+import { tdeeResult } from '../engine/results.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
@@ -38,25 +39,9 @@ export default function TdeeCalculator() {
     setUnits(to);
   };
 
-  const r = useMemo(() => {
-    const lbm = lbmFromBodyFat(kg, bf);
-    const input = { kg, cm, age: +age || 0, sex, lbm };
-    const factor = ACTIVITY[activity].factor;
-    const formulas = allBmrFormulas(input)
-      .filter(f => f.value != null)
-      .map(f => ({ ...f, tdee: f.value * factor }));
-    const values = formulas.map(f => f.value);
-    const mean = values.reduce((a, b) => a + b, 0) / (values.length || 1);
-    // Recommended = lean-mass based when body fat is known, else Mifflin
-    const preferredKey = lbm != null ? 'katch' : 'mifflin';
-    const preferred = formulas.find(f => f.key === preferredKey) || formulas[0];
-    return {
-      formulas, mean, meanTdee: mean * factor, preferred, lbm, factor,
-      min: Math.min(...values), max: Math.max(...values),
-      spread: Math.max(...values) - Math.min(...values),
-      bmi: bmi(kg, cm),
-    };
-  }, [kg, cm, age, sex, activity, bf]);
+  // Computed in the engine (src/engine/results.js) — the same function The
+  // Stat Method Baseline calls, so the two cannot disagree.
+  const r = useMemo(() => tdeeResult({ kg, cm, age, sex, activity, bf }), [kg, cm, age, sex, activity, bf]);
 
   const spreadPct = r.mean ? (r.spread / r.mean) * 100 : 0;
 

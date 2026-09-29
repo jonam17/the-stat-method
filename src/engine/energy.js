@@ -80,6 +80,6 @@ export const tdee = (bmr, activityFactor) => bmr * activityFactor;
  *
  * @returns {{ intake:number, requested:number, floor:number, belowFloor:boolean }}
  */
-export function calorieTarget(tdeeValue, delta, sex, maintenanceKcal = tdeeValue) {
-  return checkIntake(tdeeValue + delta, sex, maintenanceKcal);
+export function calorieTarget(tdeeValue, delta, sex, maintenanceKcal = tdeeValue, lifeStage = 'none') {
+  return checkIntake(tdeeValue + delta, sex, maintenanceKcal, lifeStage);
 }

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**18 calculators · 19 sourced articles · 251 unit tests · zero JavaScript on content pages**
+**19 calculators · 19 sourced articles · 264 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -36,11 +36,27 @@ tool tells you its own figures are inflated by resting expenditure. That is the 
 
 ## The tools
 
+### The Stat Method Baseline — the flagship
+
+One short form — sex, age, weight, height and activity — and every result those inputs can
+produce: energy needs, body composition, daily calorie and protein targets, and a timeline to a
+target weight. Body fat, a waist measurement, a goal and a target weight each unlock more.
+
+**One calculation engine, many interfaces.** The Baseline does no arithmetic of its own. Each
+section calls the same engine function its standalone calculator uses, and a test asserts —
+across hundreds of combinations of inputs — that every section equals its standalone result.
+It cannot disagree with the individual calculators, because it *is* them.
+
+**Strict refusal.** If any calculator the Baseline draws on would decline someone's situation,
+the whole Baseline declines, with the same wording. A person refused a weight-loss plan cannot
+read a weight-loss calorie target in a neighbouring section. The individual calculators remain
+for narrower questions.
+
 ### Energy & body composition
 
 #### Deficit & goal-date planner
 
-The flagship. Most calculators use the static "3,500 kcal = 1 lb" rule, which assumes
+Most calculators use the static "3,500 kcal = 1 lb" rule, which assumes
 expenditure never changes and therefore predicts indefinite linear weight loss. Real
 weight loss **flattens**, because a lighter body costs less to run and adaptive
 thermogenesis lowers expenditure further.
@@ -169,7 +185,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             251 unit tests
+│   └── __tests__/             264 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -190,7 +206,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 251 tests |
+| Tests | **Vitest** | 264 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -205,7 +221,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 251 tests
+npm test             # 264 tests
 npm run build        # static output to ./dist
 ```
 
@@ -278,7 +294,7 @@ formula.
 npm test
 ```
 
-251 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+264 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -300,6 +316,36 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.6.0 — Phase 5 Revision: The Stat Method Baseline
+
+**The Stat Method Baseline** — the new flagship, at `/tools/baseline/` and behind the homepage's
+main button. One form produces energy, body composition, daily targets and a plan.
+
+**One calculation engine, many interfaces**
+- The Baseline contains no arithmetic and no safety rules of its own (`src/engine/baseline.js`).
+- Getting there meant moving logic that still lived in React components into the engine: the
+  TDEE, Healthy Weight and Macro calculators each computed their results inside the component.
+  Those bodies moved verbatim into `src/engine/results.js`; the standalone tools and the Baseline
+  now call the same functions.
+- Tests assert, across 324 people and 11,664 refusal cases, that every Baseline section equals
+  its standalone calculator's result and that the Baseline refuses whenever any included tool
+  would. Minimum-assertion guards stop these tests from passing by skipping every case, and both
+  invariants were confirmed to fail when deliberately broken.
+
+**Safety decided once, in the engine**
+- New `eligibility()` owns the refusal decision. Five tools had each assembled refusals from the
+  same rules in their own order; reordering one would have made two tools refuse different
+  people. Now there is one order and one set of words.
+- **Closed a safety gap.** The Deficit Planner raised the calorie floor to 1,800 for someone
+  breastfeeding; the Macro Calculator could not, having no life-stage field. The engine had two
+  floor rules. There is now one: a breastfeeding user on a cut previously got 1,286 kcal from the
+  Macro Calculator and now gets 1,800. With no life stage the floor is exactly as before.
+- The atypical-anorexia caveat on "Normal weight" is now decided in the engine, so the Healthy
+  Weight Calculator and the Baseline cannot word or trigger it differently.
+- Plan states the standalone tools lack have their own wording. The Deficit Planner's
+  "infeasible" message was deliberately not reused — it refers to a target date and an alternative
+  pace, neither of which the Baseline has, so it would have been untrue there.
 
 ### v2.5.0 — Charts across the articles
 

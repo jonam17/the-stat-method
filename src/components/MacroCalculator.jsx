@@ -5,6 +5,7 @@ import {
   recommendedPercent, recommendedGrams, resolveSplit, convertSplit,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
+import { macroResult } from '../engine/results.js';
 import { ResultActions, Seg, Num, Select, Panel } from './ToolShell.jsx';
 import {
   ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY, GOALS, goalDelta,
@@ -34,33 +35,9 @@ export default function MacroCalculator({ compact = false }) {
   const cm = units === 'imperial' ? ftInToCm(+feet || 0, +inches || 0) : +height || 0;
   const bf = bodyfat === '' ? null : Math.min(60, Math.max(3, +bodyfat));
 
-  const r = useMemo(() => {
-    const lbm = lbmFromBodyFat(kg, bf);
-    const input = { kg, cm, age: +age || 0, sex, lbm };
-    const bmr = selectBmr(input, formula) ?? selectBmr(input, 'mifflin');
-    const total = tdee(bmr, ACTIVITY[activity].factor);
-    // F-028: deficit/surplus scales with maintenance instead of a flat kcal figure.
-    // Refuse to produce a cutting target for someone already below a healthy
-    // weight — same rail as the deficit planner (see safety.js).
-    const guard = checkWeightTarget({ currentKg: kg, cm, goal });
-    if (!guard.ok) return { blocked: true, reason: guard.reason };
-
-    const delta = goalDelta(goal, total);
-    const target = calorieTarget(total, delta, sex, total);   // F-001/F-028
-    // F-029: energy availability, using the above-sedentary portion of TDEE as a
-    // rough proxy for training expenditure.
-    const exerciseKcal = Math.max(0, Math.round(bmr * (ACTIVITY[activity].factor - 1.2)));
-    const ea = checkEnergyAvailability({ intakeKcal: target.intake, ffmKg: lbm, exerciseKcal });
-    const cals = target.intake;
-    const recommended = mode === 'grams'
-      ? recommendedGrams({ cals, kg, lbm })
-      : recommendedPercent({ cals, kg, lbm });
-    const raw = split || recommended;
-    const resolved = resolveSplit({ raw, cals, mode });
-    const usingLeanMass = formula === 'katch' || formula === 'cunningham'
-      || (formula === 'auto' && lbm != null);
-    return { bmr, tdee: total, cals, target, delta, ea, lbm, bmi: bmi(kg, cm), raw, usingLeanMass, ...resolved };
-  }, [kg, cm, age, sex, activity, goal, bf, formula, split, mode]);
+  // Computed in the engine (src/engine/results.js) — the same function The
+  // Stat Method Baseline calls, so the two cannot disagree.
+  const r = useMemo(() => macroResult({ kg, cm, age, sex, activity, goal, bf, formula, split, mode }), [kg, cm, age, sex, activity, goal, bf, formula, split, mode]);
 
   // Clear any manual split when the underlying body inputs change.
   const bodyKey = `${kg}|${cm}|${age}|${sex}|${activity}|${bf}|${formula}`;

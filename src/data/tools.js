@@ -3,6 +3,12 @@ export const TOOLS = [
   { slug: 'macro-calculator', name: 'Macro & Calorie Calculator', category: 'Nutrition', live: true, phase: 1,
     desc: 'Calorie target from five BMR equations, split into macros by percent or grams.',
     related: ['tdee-calculator', 'deficit-planner', 'body-fat'] },
+  // The flagship. Composes the calculators below through the same engine
+  // functions, so it can never disagree with them (src/engine/baseline.js).
+  { slug: 'baseline', name: 'The Stat Method Baseline', category: 'Energy', live: true, phase: 5,
+    flagship: true,
+    desc: 'Energy, body composition, daily targets and a timeline — from one short form, each from the same engine as its own calculator.',
+    related: ['tdee-calculator', 'macro-calculator', 'healthy-weight', 'deficit-planner', 'protein-target'] },
   { slug: 'tdee-calculator', name: 'TDEE & BMR Calculator', category: 'Energy', live: true, phase: 1,
     desc: 'Five formulas run side by side so you can see the spread, not one hidden guess.',
     related: ['macro-calculator', 'deficit-planner', 'calories-burned'] },

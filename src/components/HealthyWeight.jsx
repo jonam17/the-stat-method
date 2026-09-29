@@ -3,6 +3,7 @@ import {
   idealWeightFormulas, healthyBmiRange, bmi, bmiCategory,
   waistToHeight, whtrBand, lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
+import { healthyWeightResult } from '../engine/results.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { RAIL_COPY } from '../engine/safety.js';
 
@@ -38,21 +39,9 @@ export default function HealthyWeight() {
     setUnits(to);
   };
 
-  const r = useMemo(() => {
-    const formulas = idealWeightFormulas({ cm, sex });
-    const bmiRange = healthyBmiRange(cm);
-    const vals = formulas.map(f => f.value);
-    const b = bmi(kg, cm);
-    const w = waistToHeight(waistCm, cm);
-    return {
-      formulas, bmiRange, b, w,
-      band: whtrBand(w),
-      category: bmiCategory(b),
-      formulaLow: Math.min(...vals),
-      formulaHigh: Math.max(...vals),
-      inRange: kg >= bmiRange.lowKg && kg <= bmiRange.highKg,
-    };
-  }, [kg, cm, sex, waistCm]);
+  // Computed in the engine (src/engine/results.js) — the same function The
+  // Stat Method Baseline calls, so the two cannot disagree.
+  const r = useMemo(() => healthyWeightResult({ kg, cm, sex, waistCm }), [kg, cm, sex, waistCm]);
 
   return (
     <div className="calc">
@@ -132,10 +121,7 @@ export default function HealthyWeight() {
                 <span className="fx-val">{r.b.toFixed(1)}</span>
               </div>
               <div className="fx-sub">{r.category}</div>
-              <p className="cat-caveat">{RAIL_COPY.categoryCaveat}</p>
-              {r.category === 'Normal weight' && (
-                <p className="cat-caveat">{RAIL_COPY.normalLabelCaveat}</p>
-              )}
+              {r.caveats.map(k => <p key={k} className="cat-caveat">{RAIL_COPY[k]}</p>)}
             </div>
             <div className="fx on">
               <div className="fx-top">

@@ -33,6 +33,25 @@ export const GUIDES = {
     ],
   },
 
+  'baseline': {
+    terms: [
+      ['Baseline', 'A measured starting point: where your energy needs, body composition and targets stand today, before you change anything.'],
+      ['TDEE', 'Total daily energy expenditure — the calories that hold your weight steady at your activity level.'],
+      ['BMI', 'Weight relative to height. A population screening measure; it cannot tell muscle from fat.'],
+      ['FFMI', 'Fat-free mass index — lean mass relative to height. Needs a body-fat estimate.'],
+      ['Waist-to-height', 'Waist divided by height. A better guide to cardiometabolic risk than BMI alone.'],
+    ],
+    howTo: [
+      'Enter the five core details. Energy and body results appear straight away.',
+      'Add body fat or a waist measurement if you have them — each unlocks more.',
+      'Choose a goal to see calorie and protein targets, then a target weight to see a timeline.',
+    ],
+    interpreting: [
+      'Every number here comes from the same code as its standalone calculator. Follow any section\u2019s link to see the full working and adjust the details.',
+      'These are estimates from population equations, not measurements of you. Track your weight for three weeks and let what happens overwrite them.',
+      'If the Baseline declines to show results, it is because at least one of the calculators it draws on would decline too. The individual calculators remain available for narrower questions.',
+    ],
+  },
   'tdee-calculator': {
     terms: [
       ['BMR', 'Basal metabolic rate: energy used at complete rest, before any activity.'],

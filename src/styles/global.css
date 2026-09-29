@@ -1803,3 +1803,15 @@ footer{border-top:1px solid var(--rule)}
 .ch-val{font-family:var(--mono);font-size:11px;font-weight:600;fill:var(--ink)}
 .ch-rowlabel{font-size:12.5px;fill:var(--ink-soft)}
 @media(max-width:640px){.ch-rowlabel{font-size:14px}.ch-val{font-size:13px}}
+
+/* ---- The Stat Method Baseline ------------------------------------------ */
+.bl-section{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:#9A9A94;margin:26px 0 10px;padding-top:18px;border-top:1px solid #2E2E2C;font-weight:500}
+.results .bl-section:first-of-type{margin-top:4px;padding-top:0;border-top:0}
+.bl-link{display:inline-block;margin-top:10px;font-size:13px;color:#C6C4BE;text-decoration:underline;
+  text-underline-offset:3px}
+.bl-link:hover{color:#F2F1EE}
+.bl-unlock{font-size:13.5px;color:#9A9A94;margin:22px 0 0;padding:12px 14px;border:1px dashed #3A3A38}
+.baseline-optional{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-strong)}
+.baseline-optional-label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}

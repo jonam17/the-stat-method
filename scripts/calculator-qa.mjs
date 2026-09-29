@@ -20,8 +20,8 @@ const live = TOOLS.filter(t => t.live && t.slug);
 const routes = new Set(live.map(t => `/tools/${t.slug}/`));
 const categories = new Set(live.map(t => t.category));
 
-if (live.length === 18) ok('18 live tools registered');
-else bad(`Expected 18 live tools, found ${live.length}`);
+if (live.length === 19) ok('19 live tools registered');
+else bad(`Expected 19 live tools, found ${live.length}`);
 if (categories.size === 6) ok('6 calculator categories registered');
 else bad(`Expected 6 categories, found ${categories.size}`);
 

@@ -139,8 +139,13 @@ export const intakeFloor = sex => MIN_INTAKE[sex] ?? MIN_INTAKE_FALLBACK;
  * Returns the safe intake to display plus the flags the UI needs. Callers must
  * render a warning when `belowFloor` is true — the number alone is not enough.
  */
-export function checkIntake(intake, sex, maintenanceKcal = null) {
-  const floor = intakeFloor(sex);
+export function checkIntake(intake, sex, maintenanceKcal = null, lifeStage = 'none') {
+  // Life-stage aware, so there is ONE floor rule. Previously this used
+  // intakeFloor(sex) while the Deficit Planner used effectiveFloor(sex, stage):
+  // two floors, and which applied depended on the tool. With no life stage the
+  // two are identical (asserted in tests), so callers that pass none are
+  // unaffected; a breastfeeding user now gets the raised floor everywhere.
+  const floor = effectiveFloor(sex, lifeStage);
   // For roughly 2% of plausible profiles — typically small, older, sedentary
   // users — estimated MAINTENANCE already sits below the floor. Telling them to
   // "pick a smaller deficit" is useless advice, because no deficit exists that
@@ -520,3 +525,51 @@ export const RAIL_COPY = {
     `This target cannot be reached by that date without dropping below a safe intake. ` +
     `The plan below shows the fastest safe pace instead.`,
 };
+
+/* ========================================================================== *
+ * ELIGIBILITY — the single refusal decision.
+ *
+ * Every tool used to assemble its own refusal from the rules above, each in
+ * its own order and in its own component. Reorder one tool's checks and two
+ * tools would refuse different people for the same input. This function owns
+ * the decision: one fixed order, one set of words.
+ *
+ * It adds NO rules. It only composes ageInScope, LIFE_STAGE and
+ * checkWeightTarget. A tool passes the inputs it has; a rule whose inputs are
+ * absent does not apply — so a tool without a life-stage field is never
+ * refused for pregnancy, exactly as before.
+ *
+ * Order, first match wins:
+ *   1. age outside the validated range   (AAP 2016 below 18; equation limits above)
+ *   2. pregnancy                          (life stage)
+ *   3. weight target below a healthy BMI  (current weight, or the target)
+ * ========================================================================== */
+export const REFUSAL_COPY_KEY = {
+  young: 'underAge',
+  high: 'overAge',
+  pregnant: 'pregnancy',
+  currentUnderweight: 'currentBelowHealthy',
+  targetUnderweight: 'targetBelowHealthy',
+};
+
+export function eligibility({ age, kg, cm, targetKg, goal, lifeStage } = {}) {
+  if (age !== undefined) {
+    const a = ageInScope(age);
+    // A blank or impossible age is missing input, not a refusal.
+    if (a.reason === 'invalid') return { ok: false, incomplete: true, reason: 'invalid' };
+    if (!a.ok) return refuse(a.reason);
+  }
+  if (lifeStage !== undefined && (LIFE_STAGE[lifeStage] ?? LIFE_STAGE.none).blocks) {
+    return refuse('pregnant');
+  }
+  if (targetKg !== undefined || goal !== undefined) {
+    const t = checkWeightTarget({ currentKg: kg, targetKg, cm, goal });
+    if (!t.ok) return refuse(t.reason);
+  }
+  return { ok: true, reason: null };
+}
+
+function refuse(reason) {
+  const key = REFUSAL_COPY_KEY[reason];
+  return { ok: false, refused: true, reason, copyKey: key, copy: RAIL_COPY[key] };
+}
