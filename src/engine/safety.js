@@ -542,10 +542,10 @@ export const RAIL_COPY = {
  * absent does not apply — so a tool without a life-stage field is never
  * refused for pregnancy, exactly as before.
  *
- * Order, first match wins:
- *   1. age outside the validated range   (AAP 2016 below 18; equation limits above)
- *   2. pregnancy                          (life stage)
- *   3. weight target below a healthy BMI  (current weight, or the target)
+ * Order, first match wins — most protective message first:
+ *   1. pregnancy                          (life stage)
+ *   2. weight target below a healthy BMI  (current weight, or the target)
+ *   3. age outside 18-99
  * ========================================================================== */
 export const REFUSAL_COPY_KEY = {
   young: 'underAge',
@@ -556,18 +556,24 @@ export const REFUSAL_COPY_KEY = {
 };
 
 export function eligibility({ age, kg, cm, targetKg, goal, lifeStage } = {}) {
-  if (age !== undefined) {
-    const a = ageInScope(age);
-    // A blank or impossible age is missing input, not a refusal.
-    if (a.reason === 'invalid') return { ok: false, incomplete: true, reason: 'invalid' };
-    if (!a.ok) return refuse(a.reason);
-  }
+  // Order, first match wins. When several refusals apply, the MOST PROTECTIVE
+  // message is shown: pregnancy (routes to a midwife or obstetrician), then a
+  // weight target below a healthy BMI (routes to a clinician-staffed eating-
+  // disorder helpline), then age. Wanting to lose weight while already
+  // underweight is a recognised eating-disorder warning sign, and that message
+  // carries the helpline; the under-18 message does not. Agreed 2026-09-28.
   if (lifeStage !== undefined && (LIFE_STAGE[lifeStage] ?? LIFE_STAGE.none).blocks) {
     return refuse('pregnant');
   }
   if (targetKg !== undefined || goal !== undefined) {
     const t = checkWeightTarget({ currentKg: kg, targetKg, cm, goal });
     if (!t.ok) return refuse(t.reason);
+  }
+  if (age !== undefined) {
+    const a = ageInScope(age);
+    // A blank or impossible age is missing input, not a refusal.
+    if (a.reason === 'invalid') return { ok: false, incomplete: true, reason: 'invalid' };
+    if (!a.ok) return refuse(a.reason);
   }
   return { ok: true, reason: null };
 }

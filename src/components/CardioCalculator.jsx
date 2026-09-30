@@ -4,7 +4,7 @@ import {
   vo2maxCooper, vo2maxFromHr, lbToKg, kgToLb, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
 export default function CardioCalculator({ mode = 'zones' }) {
   const [tab, setTab] = useState(mode);
@@ -103,12 +103,7 @@ export default function CardioCalculator({ mode = 'zones' }) {
           <Panel label="Training zones" dark
                copyExtra={(r?.zones ?? []).map(z =>
                  `Zone ${z.zone} ${z.name}: ${fmt(z.lowBpm)}–${fmt(z.highBpm)} bpm`)}
-               notice={(() => {
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={eligibility({ age }).copy ?? null}>
             <BigStat value={fmt(r.maxHr)} unit="bpm max"
                      note={<>Estimated with <b>Tanaka</b>{r.rest
                        ? <> · zones use the Karvonen reserve method</>

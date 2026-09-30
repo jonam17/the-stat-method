@@ -6,7 +6,7 @@ import {
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
 const IN_TO_CM = 2.54;
 
@@ -157,12 +157,7 @@ export default function BodyFatCalculator() {
         <Panel label="Body fat estimate" dark
                incomplete={!(kg > 0 && cm > 0)}
                incompleteNote="Enter your measurements to see a body-fat estimate."
-               notice={(() => {
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={eligibility({ age }).copy ?? null}>
           {r.best ? (
             <>
               <BigStat value={`${r.best.value.toFixed(1)}%`}

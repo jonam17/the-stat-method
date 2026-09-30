@@ -329,7 +329,11 @@ because `aiAssisted: true` tells readers exactly that.
   input state and render. If a `useMemo` contains more than a call to an engine function, the
   logic belongs in `src/engine/results.js`.
 - **Refusal is decided by `eligibility()`.** Do not assemble refusals from individual rules in a
-  component. Pass the inputs you have; rules whose inputs are absent do not apply.
+  component, and never call `ageInScope` or `checkWeightTarget` from one — a test enforces it.
+  Pass the inputs you have; rules whose inputs are absent do not apply.
+- **When several refusals apply, the most protective message wins**: pregnancy, then a weight
+  target below a healthy BMI, then age. The underweight message carries a clinician-staffed
+  helpline; the under-18 message does not.
 - **Safety wording comes from `RAIL_COPY` or the engine.** Never reuse a message because it is
   nearby — check that every word is true in the new context.
 - **The Baseline composes; it never computes.** `baseline.test.js` asserts each section equals its
@@ -337,3 +341,15 @@ because `aiAssisted: true` tells readers exactly that.
 
 > *Learned:* the Macro Calculator and Deficit Planner applied different calorie floors to the same
 > breastfeeding user, because each composed the rules in its own component. Nothing failed.
+
+## 22. Exercise the refusal, not just the page
+
+**A refusal that works in the engine can still fail on the page.** Every safety rail needs a
+browser check that enters the inputs it should refuse and confirms the message appears —
+`npm run qa:refusals`. Loading a page at its defaults proves nothing about refusals, because
+defaults are chosen to produce a result.
+
+> *Learned:* the Macro Calculator's underweight refusal was correct in the engine and in every
+> unit test, and crashed the page every time it fired — a summary bar read values the refused
+> result did not carry. The people it existed to protect saw a broken calculator. Nothing noticed,
+> because nothing ever typed in an underweight weight.

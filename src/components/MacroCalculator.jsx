@@ -70,13 +70,18 @@ export default function MacroCalculator({ compact = false }) {
     const n = Math.round(+v) || 0;
     return mode === 'grams' ? Math.max(0, Math.min(2000, n)) : Math.max(0, Math.min(100, n));
   };
+  // A refused or incomplete result carries no macro values. Every read of them
+  // must be guarded — not just the results panel (CONVENTIONS §2).
+  const hasResult = !r.blocked && !r.incomplete;
   const setMacro = key => e => {
     const cur = split || r.raw;
+    if (!cur) return;
     setSplit({ p: cur.p, c: cur.c, f: cur.f, [key]: clamp(e.target.value) });
   };
   const switchMode = to => {
     if (to === mode) return;
-    setSplit(convertSplit({ raw: split || r.raw, cals: r.cals, to }));
+    const raw = split || r.raw;
+    if (raw) setSplit(convertSplit({ raw, cals: r.cals, to }));
     setMode(to);
   };
 
@@ -97,7 +102,10 @@ export default function MacroCalculator({ compact = false }) {
         the calculator never looks unresponsive. Hidden above 760px, where the
         results panel sits beside the inputs anyway.
       */}
-      <div className="calc-stickybar" aria-hidden="true">
+      {/* Rendered only with a real result. It read r.grams unguarded, so every
+          refusal — underweight as well as age — crashed the whole calculator
+          instead of showing the refusal message. */}
+      {hasResult && <div className="calc-stickybar" aria-hidden="true">
         <div className="sb-cal">
           <b>{fmt(r.cals)}</b><span>kcal/day</span>
         </div>
@@ -108,7 +116,7 @@ export default function MacroCalculator({ compact = false }) {
             </span>
           ))}
         </div>
-      </div>
+      </div>}
 
       <div className="calc-grid">
         {/* ---------------- inputs ---------------- */}
@@ -180,14 +188,11 @@ export default function MacroCalculator({ compact = false }) {
             explanation instead of results. */}
         <section className="panel results">
           <div className="panel-label">Daily targets</div>
-          {(() => {
-            if (r.blocked) return <p className="notice">{RAIL_COPY.currentBelowHealthy}</p>;
-            const scope = ageInScope(age);
-            if (scope.reason === 'young') return <p className="notice">{RAIL_COPY.underAge}</p>;
-            if (scope.reason === 'high') return <p className="notice">{RAIL_COPY.overAge}</p>;
-            return null;
-          })()}
-          {ageInScope(age).ok && !r.blocked && <>
+          {/* Refusal wording comes from the engine: the same message, for the same
+              person, as every other tool. Previously this always showed the
+              underweight message, whatever the actual reason. */}
+          {r.blocked && <p className="notice">{r.copy}</p>}
+          {!r.blocked && !r.incomplete && <>
           {ageAccuracyNote(age) && (
             <p className="cat-caveat">{ageAccuracyNote(age)}</p>
           )}
@@ -288,7 +293,7 @@ export default function MacroCalculator({ compact = false }) {
                   unit={r.lbm != null ? 'kg' : ''} />
           </div>
 
-          {/* Inside the ageInScope && !r.blocked fragment on purpose: this tool
+          {/* Inside the !r.blocked && !r.incomplete fragment on purpose: this tool
               builds its own results section rather than using Panel, so the
               guard that keeps save buttons off refused results is this one. */}
           <ResultActions extra={[

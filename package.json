@@ -24,12 +24,13 @@
     "qa:launch": "npm run build && node scripts/launch-qa.mjs",
     "qa:growth": "npm run build && node scripts/growth-qa.mjs",
     "qa:production": "node scripts/validate-production-config.mjs",
-    "qa:predeploy": "npm run qa:production && npm run qa:calculators && npm run qa:ui && npm run qa:articles && npm test && npm run build && npm run check:placeholders && npm run citations -- lint && npm run audit",
+    "qa:predeploy": "npm run qa:production && npm run qa:calculators && npm run qa:ui && npm run qa:articles && npm test && npm run build && npm run check:placeholders && npm run citations -- lint && npm run audit && npm run qa:refusals",
     "qa:smoke": "node scripts/smoke-qa.mjs",
     "qa:release": "npm run qa:predeploy && npm run qa:smoke",
     "qa:articles": "node scripts/article-structure-qa.mjs",
     "new:article": "node scripts/new-article.mjs",
-    "topics": "node scripts/topics.mjs"
+    "topics": "node scripts/topics.mjs",
+    "qa:refusals": "node scripts/refusal-qa.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.2",

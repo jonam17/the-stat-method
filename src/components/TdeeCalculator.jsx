@@ -5,7 +5,7 @@ import {
 } from '../engine/index.js';
 import { tdeeResult } from '../engine/results.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
 /**
  * The differentiator: every applicable BMR equation runs at once and the
@@ -96,12 +96,7 @@ export default function TdeeCalculator() {
         <Panel label="Maintenance calories" dark
                incomplete={!(kg > 0 && cm > 0)}
                incompleteNote="Enter your weight and height to see your maintenance calories."
-               notice={(() => {
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={eligibility({ age }).copy ?? null}>
           <BigStat value={fmt(r.preferred?.tdee || 0)} unit="kcal / day"
                    note={<>Using <b>{r.preferred?.name}</b> — {r.lbm != null
                      ? 'lean-mass based, preferred when body fat is known'

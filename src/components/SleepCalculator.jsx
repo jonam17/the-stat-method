@@ -3,7 +3,7 @@ import {
   bedtimesForWake, wakeTimesForBed, sleepNeedFor, CYCLE_MINUTES, FALL_ASLEEP_MINUTES,
 } from '../engine/index.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method , TimePicker } from './ToolShell.jsx';
-import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
 const fmtClock = d => {
   // Format from the Date's local clock fields rather than Intl's default
@@ -87,12 +87,7 @@ export default function SleepCalculator() {
         </Panel>
 
         <Panel label={mode === 'wake' ? 'When to go to bed' : 'When to wake up'} dark
-               notice={(() => {
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={eligibility({ age }).copy ?? null}>
           <BigStat
             value={fmtClock(mode === 'wake' ? best.bedtime : best.wakeAt)}
             unit={mode === 'wake' ? 'suggested bedtime' : 'suggested wake time'}

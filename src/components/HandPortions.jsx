@@ -6,7 +6,7 @@ import {
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import {
-  ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY, GOALS, goalDelta, checkWeightTarget,
+  eligibility, AGE_MIN, AGE_MAX, RAIL_COPY, GOALS, goalDelta,
 } from '../engine/safety.js';
 
 /**
@@ -30,25 +30,33 @@ export default function HandPortions() {
   const [age, setAge] = useState('30');
   const [weight, setWeight] = useState('80');
   const [height, setHeight] = useState('178');
+  const [feet, setFeet] = useState('5');
+  const [inches, setInches] = useState('10');
   const [activity, setActivity] = useState('moderate');
   const [goal, setGoal] = useState('maintain');   // F-028
 
   const macros = useMemo(() => {
     if (source === 'direct') {
+      // Age still applies when macros are entered directly.
+      const g = eligibility({ age });
+      if (g.refused) return { blocked: true, reason: g.reason, copy: g.copy };
       return { p: +pIn || 0, c: +cIn || 0, f: +fIn || 0 };
     }
     const kg = units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0;
-    const cm = units === 'imperial' ? ftInToCm(5, 10) : +height || 0;
+    // Was ftInToCm(5, 10): every imperial user was assumed to be 5'10", so the
+    // underweight check ran at the wrong height. A 6'4", 130 lb user — BMI 15.8 —
+    // computed as 18.6 and was given a weight-loss plan.
+    const cm = units === 'imperial' ? ftInToCm(+feet || 0, +inches || 0) : +height || 0;
     const input = { kg, cm, age: +age || 30, sex, lbm: null };
-    const guard = checkWeightTarget({ currentKg: kg, cm, goal });
-    if (!guard.ok) return { blocked: true, reason: guard.reason };
+    const guard = eligibility({ age, kg, cm, goal });
+    if (guard.refused) return { blocked: true, reason: guard.reason, copy: guard.copy };
 
     const total = tdee(selectBmr(input, 'auto'), ACTIVITY[activity].factor);
     const target = calorieTarget(total, goalDelta(goal, total), sex, total);   // F-001, F-028
     const cals = target.intake;
     const g = recommendedGrams({ cals, kg, lbm: null });
     return { p: g.p, c: g.c, f: g.f, target };
-  }, [source, pIn, cIn, fIn, units, sex, age, weight, height, activity, goal]);
+  }, [source, pIn, cIn, fIn, units, sex, age, weight, height, feet, inches, activity, goal]);
 
   const portions = useMemo(
     () => toHandPortions({ proteinG: macros.p, carbsG: macros.c, fatG: macros.f, handSize }),
@@ -101,9 +109,27 @@ export default function HandPortions() {
                      tag={units === 'imperial' ? 'lb' : 'kg'}
                  min={units === 'imperial' ? 50 : 25} max={units === 'imperial' ? 700 : 320} />
               </div>
-              {units === 'metric' && (
+              {units === 'metric' ? (
                 <Num label="Height" value={height} onChange={setHeight} tag="cm"
                  min={120} max={230} />
+              ) : (
+                <div className="field">
+                  <label>Height</label>
+                  <div className="row2">
+                    <div className="unit">
+                      <input type="number" inputMode="decimal" min={3} max={8} step="1" value={feet}
+                             aria-label="Feet" onWheel={e => e.currentTarget.blur()}
+                             onChange={e => setFeet(e.target.value)} />
+                      <span className="tag">ft</span>
+                    </div>
+                    <div className="unit">
+                      <input type="number" inputMode="decimal" min={0} max={11} step="1" value={inches}
+                             aria-label="Inches" onWheel={e => e.currentTarget.blur()}
+                             onChange={e => setInches(e.target.value)} />
+                      <span className="tag">in</span>
+                    </div>
+                  </div>
+                </div>
               )}
               <Select label="Activity" value={activity} onChange={setActivity}>
                 {Object.entries(ACTIVITY).map(([k, v]) => (
@@ -141,14 +167,8 @@ export default function HandPortions() {
                  .map(([, name, , v]) => `${name}: ${v.whole} ${v.unit}${v.whole === 1 ? '' : 's'} per day`)}
                incomplete={!(+weight > 0)}
                incompleteNote="Enter your details to see your daily portions."
-               notice={(() => {
-                 // Takes precedence over children, so no portions are rendered.
-                 if (macros.blocked) return RAIL_COPY.currentBelowHealthy;
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               // Takes precedence over children, so no portions are rendered.
+               notice={macros.blocked ? macros.copy : null}>
           {macros.target?.belowFloor && (
             <div className="warnbar">
               {RAIL_COPY.belowFloor(macros.target.floor)}

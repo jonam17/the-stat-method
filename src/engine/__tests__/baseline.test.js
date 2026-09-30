@@ -172,17 +172,22 @@ describe('older adults get the older-adult protein range in the Baseline', () =>
   });
 });
 
-describe('any calculator that asks for an age gates on it', () => {
-  // Healthy Weight, FFMI and Protein Target once had no age gate, so a
-  // 15-year-old received adult BMI categories. Asking for an age without
-  // acting on it should never pass again.
+describe('every refusal is decided by the engine', () => {
+  // Five tools once assembled refusals themselves, in different orders, so the
+  // same person could see different messages in different tools. And three
+  // more checked age directly. Now no component may call a rule itself.
+  const dir = 'src/components';
+  const files = readdirSync(dir).filter(f => f.endsWith('.jsx'));
+  const src = f => readFileSync(`${dir}/${f}`, 'utf8');
+
+  it('no component calls ageInScope or checkWeightTarget directly', () => {
+    const offenders = files.filter(f => /\b(ageInScope|checkWeightTarget)\(/.test(src(f)));
+    expect(offenders).toEqual([]);
+  });
 
   it('every component with an Age field refuses through the engine', () => {
-    const dir = 'src/components';
-    const offenders = readdirSync(dir).filter(f => f.endsWith('.jsx')).filter(f => {
-      const s = readFileSync(`${dir}/${f}`, 'utf8');
-      return /label="Age"/.test(s) && !/eligibility\(|ageInScope\(|computeBaseline\(/.test(s);
-    });
+    const offenders = files.filter(f => /label="Age"/.test(src(f)) &&
+      !/eligibility\(|macroResult\(|deficitPlanResult\(|computeBaseline\(/.test(src(f)));
     expect(offenders).toEqual([]);
   });
 });

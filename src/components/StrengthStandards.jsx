@@ -4,7 +4,7 @@ import {
   lbToKg, kgToLb, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { ageInScope, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
 export default function StrengthStandards() {
   const [units, setUnits] = useState('kg');
@@ -62,12 +62,7 @@ export default function StrengthStandards() {
         </Panel>
 
         <Panel label={`${liftName} standard`} dark
-               notice={(() => {
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={eligibility({ age }).copy ?? null}>
           <BigStat value={r.level} unit={`${r.multiple.toFixed(2)}× bw`}
                    note={r.nextLevel
                      ? <>{fmt(disp(r.toNextKg))} {units} to reach <b>{r.nextLevel}</b>.</>

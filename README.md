@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**19 calculators · 19 sourced articles · 286 unit tests · zero JavaScript on content pages**
+**19 calculators · 19 sourced articles · 294 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -185,7 +185,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             286 unit tests
+│   └── __tests__/             294 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -206,7 +206,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 286 tests |
+| Tests | **Vitest** | 294 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -221,7 +221,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 286 tests
+npm test             # 294 tests
 npm run build        # static output to ./dist
 ```
 
@@ -294,7 +294,7 @@ formula.
 npm test
 ```
 
-286 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+294 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -316,6 +316,38 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.7.1 — Every refusal decided in one place, and shown
+
+**Fixed: the Macro Calculator crashed instead of refusing.** A summary bar read macro values
+that a refused result does not carry, so every refusal threw an error and blanked the
+calculator. That included the underweight refusal, which predates this release — so an
+underweight user asking to cut saw a broken page, never the eating-disorder helpline the refusal
+exists to show. The engine refused correctly; the page never displayed it.
+
+**Fixed: Hand Portions ignored imperial height.** Every imperial user was assumed to be 5′10″,
+so the underweight check ran at the wrong height. A 6′4″, 130 lb user — BMI about 15.8 — was
+computed at about 18.6 and given a weight-loss plan, while a healthy 5′0″ user was refused.
+Imperial users now enter feet and inches.
+
+**Changed: one refusal order, the most protective first.** The tools disagreed. Macro, Hand
+Portions and the Deficit Planner checked weight before age; the Baseline checked age first. An
+underweight 16-year-old asking to lose weight saw the helpline in three tools and not in the
+Baseline. Every tool now refuses in one order — pregnancy, then weight target, then age — so the
+message with the clinician-staffed helpline wins wherever it applies.
+
+**Every refusal now comes from the engine.** The Deficit Planner's calculation moved into
+`deficitPlanResult()`, and all eleven tools with an age field refuse through `eligibility()`. No
+component calls a safety rule directly; a test enforces it.
+
+**New checks**
+- `refusal-consistency.test.js` — the same person sees the same message in every tool. The
+  Baseline test had only checked that messages came from the approved list, not that they
+  matched.
+- `npm run qa:refusals` — enters inputs that should be refused, in a real browser, across every
+  tool that refuses. The existing audit loaded pages at their defaults, where no refusal ever
+  fires, which is how the crash went unnoticed. Added to CI; confirmed to fail on the original
+  crash.
 
 ### v2.7.0 — Age gates on every calculator; fixes to the Baseline
 

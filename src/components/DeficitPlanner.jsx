@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { deficitPlanResult } from '../engine/results.js';
 import {
   simulate, daysToTarget, intakeForTargetByDate, staticSeries as staticRuleSeries,
   ACTIVITY, MIN_INTAKE, MAX_WEEKLY_LOSS_PCT,
@@ -59,73 +60,18 @@ export default function DeficitPlanner() {
 
   // Checked BEFORE any projection is computed. A plan that exists has already
   // done the harm, whatever warning sits next to it (audit: weight-target rail).
-  const targetCheck = checkWeightTarget({ currentKg: kg, targetKg, cm });
-  const stage = LIFE_STAGE[lifeStage] ?? LIFE_STAGE.none;
   const floorNow = effectiveFloor(sex, lifeStage);
   const olderAdult = checkOlderAdultWeight({ age, currentKg: kg, targetKg, cm });
 
-  const r = useMemo(() => {
-    if (stage.blocks) return { blocked: true, reason: 'pregnant' };
-    if (!targetCheck.ok) return { blocked: true, reason: targetCheck.reason };
-    // A blank or cleared target is missing input, not an impossible goal. Without
-    // this the solver is asked to reach 0 kg, returns "unreachable", and the panel
-    // replaces the calculator with a failure state while the user is mid-edit.
-    if (!(targetKg > 0)) return { incomplete: true };
-    const base = {
-      kg, cm, age: +age || 0, sex, bodyFatPct: bf,
-      activityFactor: ACTIVITY[activity].factor,
-    };
-    const days = Math.max(7, (+weeks || 1) * 7);
-    let dailyIntake, reachedDay, unreachable = false;
-    let infeasibleReason = null, achievableKg = null;
-
-    if (mode === 'date') {
-      // F-002/F-003: solver is floor-bounded and reports feasibility.
-      const solved = intakeForTargetByDate({ ...base, targetKg, days });
-      dailyIntake = solved.intake;
-      reachedDay = days;
-      if (!solved.feasible) {
-        unreachable = true;
-        infeasibleReason = solved.reason;
-        achievableKg = solved.achievableKg;
-      }
-    } else {
-      dailyIntake = +intake || 2000;
-      reachedDay = daysToTarget({ ...base, intakeKcal: dailyIntake, targetKg });
-      if (reachedDay == null) unreachable = true;
-    }
-
-    const horizon = Math.min(1095, Math.max(days, (reachedDay ?? days) + 56));
-    const sim = simulate({ ...base, intakeKcal: dailyIntake, days: horizon });
-
-    // Static "3,500 kcal per pound" curve, for comparison
-    const staticSeries = staticRuleSeries({
-      startKg: kg, startTdee: sim.startTdee, intakeKcal: dailyIntake, series: sim.series,
-    });
-
-    const weeklyRate = sim.series.length > 1
-      ? (sim.series[0].kg - sim.series[1].kg) : 0;
-    const weeklyPct = kg ? (weeklyRate / kg) * 100 : 0;
-    const floor = floorNow;   // life-stage aware (breastfeeding raises it)
-
-    return {
-      sim, staticSeries, dailyIntake, reachedDay, unreachable,
-      infeasibleReason, achievableKg,
-      deficit: sim.startTdee - dailyIntake,
-      weeklyRate, weeklyPct,
-      tooLow: dailyIntake < floor,
-      tooFast: weeklyPct > MAX_WEEKLY_LOSS_PCT,
-      floor,
-      etaDate: reachedDay != null && nowMs != null
-        ? new Date(nowMs + reachedDay * DAY_MS)
-        : null,
-    };
-  }, [kg, cm, age, sex, bf, activity, targetKg, mode, weeks, intake, nowMs,
-      targetCheck.ok, stage.blocks, floorNow]);
+  // Computed in the engine (src/engine/results.js). Refusal — pregnancy, then
+  // weight target, then age — comes from eligibility(), as in every tool.
+  const r = useMemo(() => deficitPlanResult({
+    kg, cm, age, sex, bf, activity, targetKg, lifeStage, mode, weeks, intake, nowMs,
+  }), [kg, cm, age, sex, bf, activity, targetKg, lifeStage, mode, weeks, intake, nowMs]);
 
   // ---- chart geometry ----
   const chart = useMemo(() => {
-    if (r.blocked || r.incomplete || !r.sim?.series) return null;   // no plan computed — see targetCheck
+    if (r.blocked || r.incomplete || !r.sim?.series) return null;   // no plan computed — see deficitPlanResult
     const pts = r.sim.series;
     if (pts.length < 2) return null;
     const W = 520, H = 190, PL = 6, PR = 6, PT = 10, PB = 20;
@@ -225,18 +171,7 @@ export default function DeficitPlanner() {
                    ? 'Enter your current weight and height to see a projection.'
                    : 'Enter a target weight to see a projection.'
                }
-               notice={(() => {
-                 if (stage.blocks) return RAIL_COPY.pregnancy;
-                 if (!targetCheck.ok) {
-                   return targetCheck.reason === 'currentUnderweight'
-                     ? RAIL_COPY.currentBelowHealthy
-                     : RAIL_COPY.targetBelowHealthy;
-                 }
-                 const scope = ageInScope(age);
-                 if (scope.reason === 'young') return RAIL_COPY.underAge;
-                 if (scope.reason === 'high') return RAIL_COPY.overAge;
-                 return null;
-               })()}>
+               notice={r.blocked ? r.copy : null}>
           {/* Nothing below is evaluated when a plan was refused — children are
               built before Panel decides what to show, so the guard is here. */}
           {r.blocked || r.incomplete ? null : r.unreachable ? (
