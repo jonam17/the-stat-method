@@ -1,0 +1,176 @@
+# Calcium — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 22 Jun 2026. Numbered markers
+# [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+draft: true
+name: Calcium
+kind: mineral
+dek: The most abundant mineral in the body. Almost all of it is stored in bones and teeth, and the gut needs vitamin D to absorb it.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 1000, female: 1000, pregnancy: 1000, lactation: 1000 }
+    - { group: "51–70", male: 1000, female: 1200 }
+    - { group: ">70", male: 1200, female: 1200 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has higher values — 1,300 mg a day, including in pregnancy and breastfeeding, with an upper limit of 3,000 mg.
+
+# REVIEW: the fact sheet defines the UL as a "maximum daily intake unlikely to
+# cause adverse health effects" and nowhere restricts calcium's to supplements,
+# so it is recorded as total. Unlike iron's sheet, it does not say "from food and
+# supplements" in so many words, so the note below does not claim it either.
+ul:
+  rows:
+    - { group: "19–50", male: 2500, female: 2500, pregnancy: 2500, lactation: 2500 }
+    - { group: "51–70", male: 2000, female: 2000 }
+    - { group: ">70", male: 2000, female: 2000 }
+  appliesTo: total
+  note: The upper limit is the most a day that is unlikely to cause harm, not a target. For adults it falls from 2,500 mg to 2,000 mg at age 51.
+
+does: >-
+  Calcium is the most abundant mineral in the body. Almost all of it — 98% — is stored in the bones,
+  which act as a reservoir the body draws on to keep blood levels steady [1]. It makes up much of the
+  structure of bones and teeth, and the small amount in the blood and tissues is needed for blood
+  vessels to contract and relax, for muscles and nerves to work, for blood to clot and for hormones to
+  be released [1]. Vitamin D is required for the gut to absorb calcium by active transport and to keep
+  blood levels adequate [1].
+
+forms: >-
+  Supplements usually contain calcium carbonate or calcium citrate [1]. Calcium carbonate is 40% calcium
+  by weight and calcium citrate 21%, but the label lists the amount of calcium itself, so there is
+  nothing to calculate [1]. Calcium citrate depends less on stomach acid and can be taken without food;
+  calcium carbonate is absorbed less well by people with low stomach acid unless it is taken with a meal,
+  and it causes more gas, bloating and constipation, especially in older adults [1]. Calcium carbonate is
+  also the calcium in some antacids, such as Tums and Rolaids [1].
+
+absorption: >-
+  The more calcium taken in at once, the smaller the share absorbed: about 45% of an intake of 200 mg a day
+  from food, but only 15% above 2,000 mg a day [1]. From supplements, absorption is highest at 500 mg or
+  less at a time — the body absorbs about 36% of a 300 mg dose and 28% of a 1,000 mg dose — and is greater
+  when they are taken with food [1]. Absorption also falls with age, to about 25% in adulthood and lower
+  after that [1]. Some plants contain compounds that bind calcium: only 5% of the calcium in spinach is
+  absorbed, against 27% from milk, while broccoli, kale and cabbage are absorbed about as well as milk,
+  though they contain less [1]. Caffeine and phosphorus reduce absorption slightly, and low vitamin D
+  status reduces it more [1].
+
+pairing:
+  heading: What about vitamin D?
+  text: >-
+    Calcium is often sold together with vitamin D [1]. The reason is real — vitamin D is needed for the gut
+    to absorb calcium by active transport — and the Food and Drug Administration allows supplements that
+    contain both to claim they reduce the risk of osteoporosis [1]. Whether the combination prevents
+    fractures is less clear. A meta-analysis of eight trials in 30,970 adults over 50, who took 500 to
+    1,200 mg of calcium and 10 to 20 mcg (400 to 800 IU) of vitamin D a day, found 15% fewer fractures
+    overall and 30% fewer hip fractures; two other reviews, one of 11 trials in 51,419 adults, found no
+    effect on hip or total fractures [1]. The U.S. Preventive Services Task Force concluded with moderate
+    certainty that daily amounts below 1,000 mg of calcium and 10 mcg (400 IU) of vitamin D do not prevent
+    fractures in postmenopausal women, and that the evidence on larger amounts is inadequate [4]. The
+    combination also brings a question of risk. In the Women's Health Initiative, 36,282 women aged 50 to
+    79 took 1,000 mg of calcium and 10 mcg of vitamin D a day or a placebo. Its link between supplemental
+    calcium and kidney stones is the basis for the upper limit, although two later systematic reviews found
+    no such link [1]. Over a median 22.3 years of follow-up, women given the supplements had 7% lower cancer
+    mortality but a 6% higher risk of death from cardiovascular disease [3].
+
+deficiency: >-
+  Calcium deficiency reduces bone strength and can lead to osteoporosis, with fragile bones and a higher
+  risk of falling [1]. Chronic deficiency can also cause osteomalacia — poorly mineralised, softened bone —
+  although that is more often caused by lack of vitamin D [1]. Low blood calcium (hypocalcemia) usually
+  results not from diet but from vitamin D or magnesium deficiency, parathyroid problems, critical illness
+  or certain medicines; when it causes symptoms, the most common are numbness around the mouth, tingling in
+  the hands and feet, and muscle spasms [1]. A blood test does not show calcium status, because blood
+  levels are tightly controlled; a bone density scan reflects status over a lifetime [1].
+
+atRisk:
+  - Postmenopausal women — falling estrogen reduces calcium absorption and increases losses from urine and bone, and women lose about 1% of their bone density a year after menopause; the recommended amount rises to 1,200 mg after 50 to lessen that loss [1]
+  - People who avoid dairy, including those with lactose intolerance or a milk allergy, and vegans; lactose-free dairy has the same calcium, but those who avoid dairy entirely typically need fortified foods or supplements to reach recommended amounts [1]
+
+usIntake: >-
+  Many Americans get less calcium than recommended: in national survey data from 2007–2010, 39% of everyone
+  aged 4 and older took in less than the estimated average requirement from food and supplements [1]. Men
+  aged 20 and older average 1,083 mg a day from food and drink and women 842 mg; about 22% of men and 32%
+  of women take a supplement containing calcium, bringing average totals to 1,156 mg and 1,009 mg [1].
+  About 72% of the calcium Americans eat comes from dairy products and foods with dairy ingredients [1].
+  Inadequate intake is more common among non-Hispanic Black and non-Hispanic Asian Americans (47% to 48%)
+  than among Hispanic (30%) and non-Hispanic White Americans (24%), and among adults 50 and older in
+  low-income households [1].
+
+# The sentence about fish liver oils in vitamin D's rule is left out: no oil or
+# extract appears in this table, so nothing was excluded.
+sources:
+  rule: The five foods with the most calcium per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Yogurt, plain, low fat", serving: "8 ounces", amount: 415 }
+    - { food: "Orange juice, calcium fortified", short: "Orange juice, fortified", serving: "1 cup", amount: 349, fortified: true }
+    - { food: "Yogurt, fruit, low fat", serving: "8 ounces", amount: 344 }
+    - { food: "Mozzarella, part skim", serving: "1.5 ounces", amount: 333 }
+    - { food: "Sardines, canned in oil, with bones", short: "Sardines, with bones", serving: "3 ounces", amount: 325 }
+
+evidence:
+  established: >-
+    Bone maintenance. For adults, the official values were set mainly at the amount needed to maintain bone
+    and keep calcium balance neutral [2], and the recommended amount for women rises from 1,000 mg to
+    1,200 mg after age 50 to lessen bone loss after menopause [1].
+  notSupported: >-
+    Weight loss: a meta-analysis of 41 trials in 4,802 adults found that calcium supplements had no effect
+    on body weight or body fat, and that more calcium from dairy had none either except when combined with
+    an energy-restricted diet [5]. Cancer prevention: most trials do not support it — the Women's Health
+    Initiative found no effect on cancer incidence during the 7-year trial or over 22.3 years of follow-up,
+    and a meta-analysis of 10 trials in 10,496 people who took at least 500 mg of calcium a day found no
+    change in total cancer risk [1].
+  mixed: >-
+    Bone density and fractures in older adults: some trials and meta-analyses find that calcium, usually
+    with vitamin D, increases bone density, but whether the increases matter clinically is not clear, and
+    results for fractures conflict — see "What about vitamin D?" above [1]. The U.S. Preventive Services Task
+    Force found the evidence inadequate to judge calcium for preventing fractures in men and premenopausal
+    women [4]. Heart disease: some trials and cohort studies suggest calcium supplements raise
+    cardiovascular risk and others find no link; an expert panel of the National Osteoporosis Foundation
+    and the American Society for Preventive Cardiology judged that calcium from food or supplements neither
+    increases nor decreases it, and that intakes within the upper limit are safe for the heart [6].
+    Pre-eclampsia: supplements in pregnancy might reduce the risk, but possibly only for women with low
+    calcium intakes, and much of the evidence comes from studies with methodological weaknesses [1].
+
+disagreements: >-
+  Several bodies recommend calcium supplements in pregnancy, to reduce the risk of pre-eclampsia, for women
+  whose intake is low. The World Health Organization recommends 1,500 to 2,000 mg a day for pregnant women
+  with low dietary intakes, and the American College of Obstetricians and Gynecologists says that amount
+  might reduce the severity of pre-eclampsia in women who take in less than 600 mg a day [1]. Canadian,
+  international, and Australian and New Zealand groups make similar recommendations [1].
+
+tooMuch: >-
+  High blood and urine calcium are rare in healthy people and usually result from cancer, overactive
+  parathyroid glands or other conditions, not diet [1]. They can cause poor muscle tone, kidney problems,
+  constipation, nausea, weight loss, fatigue, frequent urination and heart rhythm problems [1]. Some studies
+  suggest that high intakes may raise the risk of cardiovascular disease and of prostate cancer — for
+  prostate cancer, possibly only calcium from dairy — but not all studies agree [1]. The evidence behind
+  the upper limit itself, a link with kidney stones, is described under "What about vitamin D?" above [1].
+
+interactions: >-
+  Calcium supplements can substantially lower blood levels of the HIV drug dolutegravir (Tivicay, Dovato),
+  and the drug's labels advise taking it 2 hours before or 6 hours after calcium. Calcium carbonate can
+  interfere with the absorption of levothyroxine, a thyroid hormone, and its label advises not taking the
+  two within 4 hours of each other. Calcium supplements reduce the absorption of quinolone antibiotics such
+  as ciprofloxacin, which taking the antibiotic 2 hours before or after the calcium prevents. Long-term use
+  of lithium can raise blood calcium, and calcium supplements could add to that risk [1]. If you take any of
+  these regularly, talk to your doctor or pharmacist before taking a calcium supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Calcium, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/
+  lastModified: 2026-06-22
+  checked: 2026-09-30
+
+references:
+  - text: "NIH Office of Dietary Supplements. Calcium — Fact Sheet for Health Professionals. Last modified 22 June 2026."
+    url: https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/
+  - text: "Institute of Medicine. Dietary Reference Intakes for Calcium and Vitamin D. Washington, DC: The National Academies Press; 2011."
+  - text: "Thomson CA, Aragaki AK, Prentice RL, Stefanick ML, Manson JE, et al. Long-Term Effect of Randomization to Calcium and Vitamin D Supplementation on Health in Older Women: Postintervention Follow-up of a Randomized Clinical Trial. Ann Intern Med 2024;177(4):428-438."
+    url: https://pubmed.ncbi.nlm.nih.gov/38467003/
+  - text: "U.S. Preventive Services Task Force, Grossman DC, Curry SJ, Owens DK, Barry MJ, Caughey AB, et al. Vitamin D, calcium, or combined supplementation for the primary prevention of fractures in community-dwelling adults: US Preventive Services Task Force Recommendation Statement. JAMA 2018;319:1592-9."
+    url: https://pubmed.ncbi.nlm.nih.gov/29677309/
+  - text: "Booth AO, Huggins CE, Wattanapenpaiboon N, Nowson CA. Effect of increasing dietary calcium through supplements and dairy food on body weight and body composition: a meta-analysis of randomised controlled trials. Br J Nutr 2015;114:1013-25."
+    url: https://pubmed.ncbi.nlm.nih.gov/26234296/
+  - text: "Kopecky SL, Bauer DC, Gulati M, Nieves JW, Singer AJ, Toth PP, et al. Lack of evidence linking calcium with or without vitamin D supplementation to cardiovascular disease in generally healthy adults: a clinical guideline from the National Osteoporosis Foundation and the American Society for Preventive Cardiology. Ann Intern Med 2016;165:867-8."
+    url: https://pubmed.ncbi.nlm.nih.gov/27776362/
+
+aiAssisted: true

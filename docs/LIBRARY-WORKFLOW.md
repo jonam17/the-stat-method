@@ -32,6 +32,14 @@ for men and women, plus **pregnancy and breastfeeding on the 19–50 row**. Note
 an RDA or an AI (an asterisk usually marks AI) and set `intake.type`. Then write `eighteenNote` from
 the **14–18** row: 18-year-olds fall in that bracket, and the site accepts ages 18 and over.
 
+- **If the table splits 19–50** into 19–30 and 31–50 with different values (magnesium), copy both rows
+  as they are — groups `19–30`, `31–50`, `51–70`, `>70` — with pregnancy and breastfeeding on each.
+  Never merge them: either value would be wrong for half the range.
+- **If the table has a single row for older adults** ("51+" or "19+"), repeat its values in each
+  bracket it covers, and say so in the comment at the top of the file.
+- **If something about the table alone would mislead** — iron's requirement is 1.8 times higher for
+  vegetarians — put it in `intake.note`, which appears directly beneath the table.
+
 **3. Upper limit — the "Tolerable Upper Intake Levels" table.** Same rows. **Read the text around
 the table to see what the limit covers**, and set `ul.appliesTo`:
 
@@ -42,15 +50,27 @@ the table to see what the limit covers**, and set `ul.appliesTo`:
 | `preformed` | Preformed vitamin A only, not beta-carotene | **Vitamin A** |
 
 Getting this wrong is dangerous in both directions. Magnesium's upper limit is *lower* than its
-recommended amount — that is correct, because it only covers supplements. **If a nutrient has no
-upper limit**, leave out `ul.rows` and say so in `ul.note`. Many B vitamins, vitamin K and chromium
-have none.
+recommended amount — that is correct, because it only covers supplements.
 
-**4. Food sources — the food table.** Take the **five foods with the most per serving**, in order.
+- **For any limit that is not `total`, write `ul.scope`** — the sentence shown above the table — in
+  the fact sheet's own terms. Magnesium's covers "supplements and medicines"; folate's covers folic
+  acid from supplements and fortified foods. They are not interchangeable, so there is no default: the
+  build fails without it.
+- **If the sheet does not say outright what the limit covers**, choose the reading its text supports,
+  leave a `# REVIEW:` comment explaining it, and keep `ul.note` from claiming more than the sheet does.
+- **If a nutrient has no upper limit**, leave out both `ul.rows` and `ul.appliesTo`, and say so in
+  `ul.note` — a test checks that it does. Many B vitamins, vitamin K and chromium have none.
+- `ul.note` appears beneath the table, after the scope warning, so write it to stand on its own.
+
+**4. Food sources — the food table.** Take the **five foods with the most per serving**, in order
+(a range sorts by its high end). **If foods tie for fifth place, take the one listed first** and leave
+a `# REVIEW:` comment naming the others.
 Mark fortified foods `fortified: true`. Leave out oils and extracts sold and used like supplements
 (cod liver oil). Where the table gives a range, use `[low, high]`. Add a `short` label (26 characters
 at most) for any name too long for the chart. Keep the `sources.rule` sentence identical across
-files, changing only the nutrient's name.
+files, changing only the nutrient's name — except that the sentence saying what was left out appears
+only when something was. Vitamin D's mentions fish liver oils; a table with nothing excluded does not
+say so.
 
 **5. The prose fields**, each from the fact sheet's own section, each claim marked with `[n]`:
 
@@ -68,7 +88,10 @@ files, changing only the nutrient's name.
 | `absorption` *(optional)* | What helps or hinders absorption |
 | `pairing` *(optional)* | A nutrient it is commonly sold with. Say what is claimed, what the evidence shows, and any risk the pairing brings — the vitamin D page's vitamin K section is the model |
 
-Label a food's `form` only where the fact sheet says which form it contains. Never infer it.
+Label a food's `form` only where the fact sheet says which form it contains. Never infer it. A rule
+the sheet states for a whole category counts — iron's sheet says plants and fortified foods contain only
+nonheme iron, and meat and seafood both — but a form the sheet mentions only in passing does not (the
+calcium sheet says some fortified juices use calcium citrate malate; that does not tell you which).
 
 **Evidence is the section that matters most.** Split it honestly: `established` (what the official
 values rest on), `notSupported` (what trials have tested and not found), and `mixed`. Describe
@@ -78,7 +101,8 @@ large trials by who was studied and what they took. Never round a weak finding i
 the text** and its details were **visible on screen** — a test fails if any reference is never cited.
 Never write a PMID, DOI or volume from memory.
 
-**7. Check.**
+**7. Check.** Every claim marker must be a single number in brackets — write `[1] … [6]`, never
+`[1, 6]`, which the citation check cannot read.
 
 ```bash
 npm test && npm run build
@@ -88,7 +112,9 @@ npm test && npm run build
 amount, that sources are highest first, that every marker has a reference and every reference is
 cited, and that the file was checked on or after the source's last update.
 
-**8. Review locally, then hand over.** `npm run dev` shows drafts at `/library/`. The maintainer
+**8. Review locally, then hand over.** `npm run dev` shows drafts at `/library/`. Look at every page,
+in light and dark mode and at phone width: the summary boxes, the scope warning and the chart are where
+problems show that no test catches. The maintainer
 checks every value against the fact sheet, then removes `draft: true`. The Library tab appears in the
 navigation once the first nutrient is published.
 

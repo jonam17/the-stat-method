@@ -1826,6 +1826,11 @@ footer{border-top:1px solid var(--rule)}
 .lib-list a{font-family:var(--display);font-weight:600;font-size:17px}
 .lib-list span{font-size:14px;color:var(--ink-soft)}
 .lib-note,.lib-small{font-size:13.5px;color:var(--ink-soft)}
+/* .warnbar was designed for the dark results panel; on the Library's light page
+   its pink-on-pink text measured 1.39:1. These carry safety copy (what an upper
+   limit covers), so they get the safety-copy contrast: 8.9:1 light, 9.7:1 dark. */
+.lib-page .warnbar{color:#6B1E14;font-size:13.5px}
+:root[data-theme="dark"] .lib-page .warnbar{color:#F0B3A8}
 .lib-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:22px 0 8px}
 .lib-facts div{border:1px solid var(--line-strong);padding:12px 14px}
 .lib-facts span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}

@@ -364,4 +364,21 @@ defaults are chosen to produce a result.
   only once a nutrient is published — decided by reading the files, not by a setting someone must
   remember to change.
 - **Say what an upper limit covers.** A supplement-only limit below the recommended amount is correct,
-  not a typo. `ul.appliesTo` records which, so no one "fixes" a true value.
+  not a typo. `ul.appliesTo` records which, so no one "fixes" a true value. For any limit that is not
+  total, the words come from the file (`ul.scope`), never from the template — there is no default.
+- **A summary never shows a value under a label wider than the range it applies to.** The summary
+  boxes are built from runs of age brackets with identical values (`src/data/brackets.js`), and men and
+  women are shown separately where they differ. The template, chart and tests all read brackets through
+  that one module.
+
+> *Learned:* the first template showed the higher 19–50 value under "Adults 19–70". Correct for vitamin
+> D, where every bracket to 70 is the same; for iron it would have told men and everyone over 50 to aim
+> for 18 mg instead of 8. The template also printed "supplements and fortified foods" above every
+> supplement-only limit — false for magnesium, whose sheet says supplements and medicines. Neither
+> showed until a second nutrient used the template.
+
+> *Learned:* `.warnbar` was designed for the calculators' dark results panel. On a Library page, on the
+> light background, its pink text measured 1.39:1 — the scope warning, the most important sentence on
+> the magnesium page, was nearly illegible. Vitamin D's limit is total, so the warning had never
+> rendered on a published page. When a shared component moves onto a new background, measure it
+> again (§3).

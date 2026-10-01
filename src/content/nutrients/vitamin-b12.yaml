@@ -1,0 +1,153 @@
+# Vitamin B12 — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 2 Jul 2025. Numbered markers
+# [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# The fact sheet's "19+ years" row covers all three adult brackets.
+draft: true
+name: Vitamin B12
+kind: vitamin
+dek: A vitamin found naturally only in animal foods, needed for nerves, red blood cells and DNA. Absorbing it depends on stomach acid and a protein the stomach makes.
+unit: mcg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 2.4, female: 2.4, pregnancy: 2.6, lactation: 2.8 }
+    - { group: "51–70", male: 2.4, female: 2.4 }
+    - { group: ">70", male: 2.4, female: 2.4 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 2.4 mcg a day, 2.6 mcg in pregnancy and 2.8 mcg when breastfeeding.
+
+# No UL: "The FNB did not establish a UL for vitamin B12 because of its low
+# potential for toxicity." So no rows and no appliesTo.
+ul:
+  note: No upper limit has been set for vitamin B12, because its potential for toxicity is low. That does not make large doses useful — most of a large dose is not absorbed.
+
+does: >-
+  Vitamin B12 is needed for the development, myelination and function of the central nervous system, for
+  healthy red blood cells and for making DNA [1]. Compounds with vitamin B12 activity are called cobalamins,
+  because the vitamin contains the mineral cobalt [1]. The body stores about 1 to 5 mg — 1,000 to 2,000 times
+  as much as a person typically eats in a day — which is why deficiency can take several years to show [1].
+
+forms: >-
+  Methylcobalamin and 5-deoxyadenosylcobalamin are the forms the body uses; cyanocobalamin and
+  hydroxycobalamin become active once converted to them [1]. Most supplements contain cyanocobalamin, and others
+  use adenosylcobalamin, methylcobalamin or hydroxycobalamin; no evidence indicates that absorption differs by
+  form [1]. Tablets or lozenges dissolved under the tongue appear no more effective than those swallowed [1].
+  Injections and a nasal gel are prescription medicines, used mainly to treat deficiency [1].
+
+absorption: >-
+  In food, vitamin B12 is bound to protein. Stomach acid and enzymes release it, and it is then absorbed
+  together with intrinsic factor, a protein made by the stomach [1]. The vitamin added to fortified foods and
+  supplements is already free, so it does not need that release step [1]. Absorption drops steeply once a dose
+  exceeds what intrinsic factor can carry, about 1 to 2 mcg: around half of a small dose is absorbed, but only
+  about 2% of 500 mcg and 1.3% of 1,000 mcg [1]. Vitamin B12 from dairy appears to be about three times as
+  available as from meat, fish and poultry, and from supplements about 50% more available than from food [1].
+
+pairing:
+  heading: What about folic acid?
+  text: >-
+    Vitamin B12 is often sold in B-complex supplements alongside other B vitamins, usually in larger amounts
+    than in multivitamins [1], and several of the trials described below gave it with folic acid. The idea is
+    that together they lower homocysteine, a compound associated with heart disease and dementia. They do lower
+    it — but in those trials, that did not translate into fewer heart attacks or better cognitive function [2][3].
+    The combination may also carry risks. In U.S. survey data on adults aged 60 and older, low vitamin B12
+    status together with high folic acid or folate was associated with about two to three times the risk of
+    cognitive impairment — a cross-sectional finding that cannot show cause [6]. In a trial of 400 mcg of folic
+    acid and 500 mcg of vitamin B12 a day for 2 to 3 years, colorectal cancer was more common in the supplement
+    group (3.4% against 2%), although this might have been due to the folic acid rather than the vitamin B12,
+    and overall cancer risk did not differ [5].
+
+deficiency: >-
+  Causes include difficulty absorbing the vitamin from food, lack of intrinsic factor (as in pernicious
+  anemia), stomach or intestinal surgery, long-term use of some medicines, and a diet without it [1]. The
+  hallmark is megaloblastic anemia — large, abnormal red blood cells — along with low blood counts, an inflamed
+  tongue, fatigue, palpitations, pale skin, dementia, weight loss and infertility [1]. Numbness and tingling in
+  the hands and feet can occur without anemia, so early diagnosis matters to avoid irreversible damage [1]. In
+  pregnant and breastfeeding women, deficiency might cause neural tube defects, developmental delays, failure
+  to thrive and anemia in the baby [1]. Blood levels below 200 or 250 pg/mL are generally considered low, and
+  methylmalonic acid is the most sensitive marker [1]. Deficiency is usually treated with injections; in three
+  small trials, very high oral doses (1,000 to 2,000 mcg) normalised blood levels about as well, though the
+  evidence was of low quality [7].
+
+atRisk:
+  - Older adults — between 3% and 43% of older adults living in the community are deficient, depending on the definition used; atrophic gastritis, which reduces stomach acid and intrinsic factor, affects 8% to 9% of adults 65 and older [1]
+  - People with pernicious anemia, an autoimmune disease that stops the stomach making intrinsic factor and the most common cause of clinically evident deficiency worldwide [1]
+  - People with celiac disease, who have higher rates of deficiency; for Crohn's disease the evidence is mixed [1]
+  - People who have had stomach or intestinal surgery, including weight-loss surgery, which removes cells that make stomach acid and intrinsic factor [1]
+  - Vegans and vegetarians, because natural sources are limited to animal foods; fortified foods and supplements substantially reduce the risk [1]
+
+usIntake: >-
+  Most people in the United States get enough vitamin B12 [1]. In national survey data from 2017 to March
+  2020, men aged 20 and older averaged 5.84 mcg a day from food and drink and women 3.69 mcg; only 5% of men
+  and 11% of women fell below the average requirement of 2 mcg [1]. About 24% of men and 29% of women take a
+  supplement containing it [1]. Even so, in 2007–2018 data about 3.6% of adults had vitamin B12 deficiency
+  (blood levels below 200 pg/mL) and about 12.5% had insufficiency (below 300 pg/mL) [1]. People of low
+  socioeconomic status, women and non-Hispanic Black Americans are the most likely to have low intakes [1].
+
+sources:
+  rule: The five foods with the most vitamin B12 per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, cooked, pan fried", short: "Beef liver, pan fried", serving: "3 ounces", amount: 70.7 }
+    - { food: "Nutritional yeast, fortified, from several brands (check label)", short: "Nutritional yeast", serving: "about ¼ cup", amount: [8.3, 24], fortified: true }
+    - { food: "Clams (without shells), cooked", short: "Clams, cooked", serving: "3 ounces", amount: 17 }
+    - { food: "Oysters, eastern, wild, cooked", short: "Oysters, eastern, wild", serving: "3 ounces", amount: 14.9 }
+    - { food: "Salmon, Atlantic, cooked", short: "Salmon, Atlantic", serving: "3 ounces", amount: 2.6 }
+
+evidence:
+  established: >-
+    Healthy blood and nerves. For adults, the official values were set mainly at the amount needed to maintain
+    healthy blood cell status and serum vitamin B12 levels, and enough vitamin B12 prevents the anemia and nerve
+    damage of deficiency [1].
+  notSupported: >-
+    Heart disease: supplements lower homocysteine, but a Cochrane review of 15 studies in 71,422 people concluded
+    that vitamin B12, alone or with other B vitamins, does not prevent heart attacks or reduce deaths in people
+    with or at risk of cardiovascular disease [2]. Cognition: in a trial of 2,919 adults aged 65 and older given
+    500 mcg of vitamin B12 and 400 mcg of folic acid a day or a placebo for 2 years, homocysteine fell but
+    cognitive test scores did not differ [3], and a Cochrane review of 14 studies in 27,882 mostly older people
+    found little to no effect on overall cognitive function [1]. Cancer: a meta-analysis of 18 trials in 74,498
+    people found that B-vitamin supplements including 20 to 2,000 mcg of vitamin B12 a day had little or no
+    effect on cancer incidence, cancer deaths or overall mortality [4]. Energy: although it is often promoted as
+    an energy and endurance booster, vitamin B12 appears to do nothing for athletic performance in people who are
+    not deficient [1].
+  mixed: >-
+    Whether vitamin B12 status affects cancer risk is unclear. Some observational studies link high blood
+    levels, or long-term use of at least 55 mcg a day from supplements, with more cancer — in one study, lung
+    cancer in men; others link low levels with more gastric, colorectal or prostate cancer; and others find no
+    link at all [1]. Some studies have found associations between low vitamin B12 and depression [1].
+
+tooMuch: >-
+  No upper limit has been set: the Food and Nutrition Board judged vitamin B12's potential for toxicity to be
+  low, and even large doses are generally considered safe because the body does not store the excess [1]. That
+  is a statement about safety, not benefit — see the evidence above, including the unresolved observational
+  links between high levels and some cancers [1].
+
+interactions: >-
+  Proton pump inhibitors such as omeprazole and lansoprazole, and H2 blockers such as cimetidine, reduce
+  stomach acid and can interfere with absorbing vitamin B12 from food, leading to deficiency. Metformin, used
+  for prediabetes and diabetes, might reduce absorption and significantly lower blood levels [1]. If you take
+  any of these regularly, talk to your doctor or pharmacist about your vitamin B12 status.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin B12, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/
+  lastModified: 2025-07-02
+  checked: 2026-09-30
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin B12 — Fact Sheet for Health Professionals. Last modified 2 July 2025."
+    url: https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/
+  - text: "Martí-Carvajal AJ, Solà I, Lathyris D, Dayer M. Homocysteine-lowering interventions for preventing cardiovascular events. Cochrane Database Syst Rev 2017;8:CD006612."
+    url: https://pubmed.ncbi.nlm.nih.gov/28816346/
+  - text: "van der Zwaluw NL, Dhonukshe-Rutten RA, van Wijngaarden JP, Brouwer-Brolsma EM, van de Rest O, In 't Veld PH, et al. Results of 2-year vitamin B treatment on cognitive performance: Secondary data from an RCT. Neurology 2014;83:2158-66."
+    url: https://pubmed.ncbi.nlm.nih.gov/25391305/
+  - text: "Zhang S-L, Chen T-S, Ma C-Y, Meng Y-B, Zhang Y-F, Chen Y-W, et al. Effect of vitamin B supplementation on cancer incidence, death due to cancer, and total mortality: A PRISMA-compliant cumulative meta-analysis of randomized controlled trials. Medicine (Baltimore) 2016;95:e3485."
+    url: https://pubmed.ncbi.nlm.nih.gov/27495015/
+  - text: "Oliai Araghi S, Kiefte-de Jong JC, van Dijk SC, Swart KMA, van Laarhoven HW, van Schoor NM, et al. Folic acid and vitamin B12 supplementation and the risk of cancer: Long-term follow-up of the B Vitamins for the Prevention of Osteoporotic Fractures (B-PROOF) trial. Cancer Epidemiol Biomarkers Prev 2019;28:275-82."
+    url: https://pubmed.ncbi.nlm.nih.gov/30341095/
+  - text: "Bailey RL, Jun S, Murphy L, Green R, Gahche JJ, Dwyer JT, et al. High folic acid or folate combined with low vitamin B-12 status: Potential but inconsistent association with cognitive function in a nationally representative cross-sectional sample of US older adults participating in the NHANES. Am J Clin Nutr 2020;112:1547-57."
+    url: https://pubmed.ncbi.nlm.nih.gov/32860400/
+  - text: "Wang H, Li L, Qin LL, Song Y, Vidal-Alaball J, Liu TH. Oral vitamin B(12) versus intramuscular vitamin B(12) for vitamin B(12) deficiency. Cochrane Database Syst Rev 2018;3:CD004655."
+    url: https://pubmed.ncbi.nlm.nih.gov/29543316/
+
+aiAssisted: true

@@ -1,0 +1,165 @@
+# Iron — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 4 Sep 2025. Numbered markers
+# [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# The fact sheet's "51+ years" row covers both 51–70 and >70.
+draft: true
+name: Iron
+kind: mineral
+dek: A mineral the body needs to make hemoglobin, which carries oxygen in the blood. Women aged 19 to 50 need more than twice as much as men.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 8, female: 18, pregnancy: 27, lactation: 9 }
+    - { group: "51–70", male: 8, female: 8 }
+    - { group: ">70", male: 8, female: 8 }
+  note: People who follow vegetarian diets need 1.8 times these amounts, because the nonheme iron in plant foods is less well absorbed than the heme iron in meat.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 11 mg a day for males and 15 mg for females, 27 mg in pregnancy and 10 mg when breastfeeding, with an upper limit of 45 mg.
+
+# The text says: "The FNB has established ULs for iron from food and supplements".
+ul:
+  rows:
+    - { group: "19–50", male: 45, female: 45, pregnancy: 45, lactation: 45 }
+    - { group: "51–70", male: 45, female: 45 }
+    - { group: ">70", male: 45, female: 45 }
+  appliesTo: total
+  note: The upper limit covers iron from food and supplements combined, and was set at the amounts linked with stomach and gut side effects from iron supplements. It is the most that is unlikely to cause harm, not a target. Doctors sometimes prescribe more — to replenish iron stores in iron-deficiency anemia, for example.
+
+does: >-
+  Iron is an essential part of hemoglobin, the protein in red blood cells that carries oxygen from the lungs
+  to the tissues [1]. As part of myoglobin, another oxygen-carrying protein, it supports muscle metabolism and
+  healthy connective tissue, and it is needed for physical growth, neurological development, cellular
+  functioning and making some hormones [1]. Most of the 3 to 4 grams in an adult is in hemoglobin; much of the
+  rest is stored in the liver, spleen and bone marrow [1]. The body loses only small amounts, except through
+  bleeding — which is why losses are greater in women who menstruate [1].
+
+forms: >-
+  Food contains two forms of iron. Meat, seafood and poultry contain both heme and nonheme iron; plants and
+  iron-fortified foods contain only nonheme iron [1]. Heme iron is better absorbed and less affected by other
+  foods, though it supplies only about 10% to 15% of the iron in Western diets [1]. Supplements mostly use iron
+  salts such as ferrous sulfate, ferrous gluconate, ferric citrate and ferric sulfate; the ferrous forms
+  dissolve better and are more bioavailable than the ferric [1]. Forms differ in how much iron they carry —
+  ferrous fumarate is 33% iron by weight, ferrous sulfate 20% and ferrous gluconate 12% — but the label lists
+  the iron itself [1]. Other forms, such as heme iron polypeptides, carbonyl iron and iron amino-acid chelates,
+  might cause fewer stomach side effects than iron salts [1].
+
+absorption: >-
+  About 14% to 18% of the iron in mixed diets that include substantial amounts of meat, seafood and vitamin C
+  is absorbed, against 5% to 12% from vegetarian diets [1]. Vitamin C, meat, poultry and seafood all increase
+  the absorption of nonheme iron, while phytate in grains and beans and some polyphenols reduce it; calcium
+  might reduce the absorption of both forms [1]. In a typical Western diet these effects are weakened and make
+  little difference to most people's iron status [1]. In some plant foods that contain iron, such as spinach,
+  it is poorly absorbed because they also contain polyphenols [1]. Because calcium might interfere, experts suggest
+  taking separate calcium and iron supplements at different times of day [1].
+
+deficiency: >-
+  Iron deficiency develops in stages: first the body's stores run down, then the supply to new red blood cells
+  falls while hemoglobin is still normal, and finally iron-deficiency anemia sets in, with low hemoglobin and
+  small, pale red blood cells [1]. Anemia brings gastrointestinal problems, weakness, fatigue and difficulty
+  concentrating, and can impair thinking, immune function, exercise and work capacity, and temperature control
+  [1]. Serum ferritin, a measure of iron stores, is the most efficient and cost-effective test: below 30 mcg/L
+  suggests iron deficiency and below 10 mcg/L suggests anemia, though inflammation can raise ferritin [1].
+  Because iron deficiency goes with poor diet, malabsorption and blood loss, people who have it often lack other
+  nutrients too [1].
+
+atRisk:
+  - Pregnant women — needs rise as blood volume expands, and deficiency raises the risk of maternal and infant death, premature birth and low birthweight [1]
+  - Women with heavy menstrual bleeding, which affects at least 10% of women who menstruate and might account for a third or more of iron-deficiency anemia in women of reproductive age [1]
+  - Frequent blood donors — 25% to 35% of regular donors develop iron deficiency [1]
+  - People with cancer — up to 60% of people with colon cancer have iron deficiency when diagnosed [1]
+  - People with celiac disease, ulcerative colitis or Crohn's disease, or who have had stomach or intestinal surgery [1]
+  - People with chronic heart failure, about 60% of whom have iron deficiency [1]
+
+usIntake: >-
+  Most people in the United States get enough iron from their diets, but teenage girls, pregnant women and
+  premenopausal women are among those at risk of getting too little [1]. Adult men average 16.3 to 18.2 mg a
+  day from food and adult women 12.6 to 13.5 mg; with supplements, totals are 19.3 to 20.5 mg for men and 17.0
+  to 18.9 mg for women [1]. About half of dietary iron comes from bread, cereal and other grain products, and
+  wheat flour in the United States is fortified with iron [1]. About 14% to 18% of Americans take a supplement
+  containing iron, rising to 72% of pregnant women [1]. Among pregnant women, iron deficiency is more common in
+  Mexican American (23.6%) and non-Hispanic Black women (29.6%) than in non-Hispanic White women (13.9%) [1].
+
+# REVIEW: lentils, spinach and tofu tie for fifth at 3 mg. Lentils is listed first
+# of the three in the table, so it is taken. Forms are labelled from the sheet's
+# own rule (plants and fortified foods: nonheme only; meat and seafood: both).
+sources:
+  rule: The five foods with the most iron per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Breakfast cereals, fortified with 100% of the Daily Value for iron", short: "Cereal, fortified", form: nonheme, serving: "1 serving", amount: 18, fortified: true }
+    - { food: "Oysters, eastern, cooked with moist heat", short: "Oysters, eastern, cooked", form: "heme + nonheme", serving: "3 ounces", amount: 8 }
+    - { food: "White beans, canned", form: nonheme, serving: "1 cup", amount: 8 }
+    - { food: "Beef liver, pan fried", form: "heme + nonheme", serving: "3 ounces", amount: 5 }
+    - { food: "Lentils, boiled and drained", short: "Lentils, boiled", form: nonheme, serving: "½ cup", amount: 3 }
+
+evidence:
+  established: >-
+    Iron is essential for making hemoglobin, and enough of it prevents iron-deficiency anemia [1]. In
+    pregnancy, a Cochrane review found that daily supplements of 9 to 90 mg reduced anemia at term by 70% and
+    iron deficiency at term by 57%, and that low birthweight was less common (8.4% against 10.2%) [2]. In a
+    trial of 215 adults who had given blood in the previous 3 to 8 days, those given 37.5 mg of iron a day for
+    24 weeks recovered their lost hemoglobin and iron in less than half the time of those given none [5].
+  notSupported: >-
+    For pregnant women without symptoms, trials have not settled whether routine supplements do more good than
+    harm: the U.S. Preventive Services Task Force concluded that the evidence is insufficient to weigh the
+    benefits and harms of routine screening or supplementation [3]. In anemia caused by chronic disease, only a
+    few small studies have tested oral iron, and its use there is controversial because iron might increase the
+    risk of infection and cardiovascular events [1].
+  mixed: >-
+    Heart failure: two prospective studies linked iron deficiency in people with heart failure with a higher
+    risk of heart transplant and death, independent of anemia, but an analysis of U.S. survey data on adults
+    with self-reported heart failure found no link with mortality [1].
+
+disagreements: >-
+  U.S. bodies disagree about iron in pregnancy. The American College of Obstetricians and Gynecologists
+  recommends low-dose iron supplements from the first trimester, and screening all pregnant women for anemia
+  [4]. The U.S. Preventive Services Task Force finds the evidence insufficient to assess routine screening or
+  supplementation for pregnant women without symptoms [3]. The Food and Nutrition Board notes that pregnant
+  women's median intake is well below the average requirement and that they need supplements, and the Dietary
+  Guidelines for Americans advises taking one when an obstetrician or other health care provider recommends it
+  [1].
+
+tooMuch: >-
+  Adults with normal digestion have very little risk of iron overload from food [1]. Supplements are different:
+  25 mg or more can reduce zinc absorption, and high doses can cause stomach upset, constipation, nausea,
+  abdominal pain, vomiting and diarrhea — taking them with food can lessen this [1]. Large overdoses can kill.
+  Accidental swallowing of iron supplements caused about a third of the child poisoning deaths reported in the
+  United States between 1983 and 1991, and iron supplements sold as tablets or capsules must carry an FDA
+  warning that accidental overdose is a leading cause of fatal poisoning in children under 6 — keep them out of
+  children's reach [1]. People with hereditary hemochromatosis absorb too much iron and, without treatment,
+  typically develop signs of iron toxicity, such as liver and heart disease, by their 30s [1]. About 1 in 10
+  White people carry the most common gene variant, though far fewer have the disease [1], and liver specialists
+  recommend that people with it avoid iron and vitamin C supplements [6].
+
+interactions: >-
+  Iron supplements can reduce the absorption of levodopa, used for Parkinson's disease and restless legs
+  syndrome, and its labels warn that this may make it less effective. Taking iron and levothyroxine, a thyroid
+  hormone, together can make the levothyroxine less effective; some labels advise not taking it within 4 hours
+  of an iron supplement. Proton pump inhibitors such as lansoprazole and omeprazole reduce stomach acid and can
+  reduce iron absorption; long-term use is not associated with iron depletion in people with normal iron stores,
+  but people with iron deficiency who take them can respond poorly to iron supplements [1]. If you take any of
+  these regularly, talk to your doctor or pharmacist before taking an iron supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Iron, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/
+  lastModified: 2025-09-04
+  checked: 2026-09-30
+
+references:
+  - text: "NIH Office of Dietary Supplements. Iron — Fact Sheet for Health Professionals. Last modified 4 September 2025."
+    url: https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/
+  - text: "Pena-Rosas JP, De-Regil LM, Dowswell T, Viteri FE. Daily oral iron supplementation during pregnancy. Cochrane Database Syst Rev 2012;12:CD004736."
+    url: https://pubmed.ncbi.nlm.nih.gov/23235616/
+  - text: "U.S. Preventive Services Task Force. Screening and Supplementation for Iron Deficiency and Iron Deficiency Anemia During Pregnancy: US Preventive Services Task Force Recommendation Statement. JAMA 2024."
+    url: https://pubmed.ncbi.nlm.nih.gov/39163015/
+  - text: "The American College of Obstetricians and Gynecologists. Anemia in Pregnancy: ACOG Practice Bulletin, Number 233. Obstet Gynecol 2021;138(2):e55-e64."
+    url: https://pubmed.ncbi.nlm.nih.gov/34293770/
+  - text: "Kiss JE, Brambilla D, Glynn SA, Mast AE, Spencer BR, Stone M, et al. Oral iron supplementation after blood donation: a randomized clinical trial. JAMA 2015;313:575-83."
+    url: https://pubmed.ncbi.nlm.nih.gov/25668261/
+  - text: "Bacon BR, Adams PC, Kowdley KV, Powell LW, Tavill AS. Diagnosis and management of hemochromatosis: 2011 practice guideline by the American Association for the Study of Liver Diseases. Hepatology 2011;54:328-43."
+    url: https://pubmed.ncbi.nlm.nih.gov/21452290/
+
+aiAssisted: true

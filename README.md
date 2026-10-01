@@ -317,6 +317,33 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.9.0 — Library: calcium, magnesium, iron and vitamin B12 (drafts)
+
+**Four new Library pages, written and awaiting review.** Calcium, magnesium, iron and vitamin B12 are
+drafted from their NIH Office of Dietary Supplements fact sheets and stay as drafts — visible in
+`npm run dev`, absent from the live site, sitemap and search — until each is checked against its source.
+They were chosen because each tests a case vitamin D did not: magnesium's supplement-only upper limit,
+iron's large differences by sex and in pregnancy, and B12's lack of any upper limit.
+
+The template was built around vitamin D, and these exposed three things it got wrong for other nutrients.
+None affected the live vitamin D page, which renders identically.
+
+- **Summary boxes that could state the wrong amount.** The boxes at the top showed the higher 19–50 value
+  under "Adults 19–70" — right for vitamin D, but for iron it would have shown 18 mg to men and to everyone
+  over 50, who need 8. They are now built from runs of ages with identical values, with men and women
+  shown separately where they differ. An upper limit that changes with age is shown as a range.
+- **Age brackets the source splits.** Magnesium's fact sheet gives different values for 19–30 and 31–50.
+  Files can now copy both rows rather than having to merge them.
+- **What a supplement-only limit covers, in the source's words.** The template printed "supplements and
+  fortified foods" above every such limit; magnesium's sheet says supplements and medicines. Each file
+  now states it, and the build fails if a non-total limit does not.
+- **A readable warning.** That scope warning measured 1.39:1 against the Library's light background — it
+  was styled for the calculators' dark panels. It is now 8.9:1 in light mode and 9.7:1 in dark.
+- Also: an "Upper limit" section that says so when none is set; a note beneath the intake table for
+  anything the table alone would mislead about, such as iron's higher requirement for vegetarians; and
+  four new checks run on every file, including that every non-total limit says what it covers.
+- `docs/LIBRARY-WORKFLOW.md` covers each new case, so the next batch does not rediscover them.
+
 ### v2.8.1 — Vitamin D: forms, absorption, and vitamin K
 
 - **Forms.** The page now distinguishes vitamin D2 (ergocalciferol) from D3 (cholecalciferol): the

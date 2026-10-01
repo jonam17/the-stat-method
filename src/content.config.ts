@@ -103,11 +103,21 @@ const articles = defineCollection({
  * (src/engine/__tests__/library.test.js). Follow docs/LIBRARY-WORKFLOW.md.
  */
 const amount = z.number().nonnegative();
+/**
+ * Adult brackets. Most fact sheets give 19–50, 51–70 and over 70. Where a sheet
+ * splits 19–50 into 19–30 and 31–50 with different values (magnesium), the file
+ * copies both rows rather than choosing one — a page that merged them would
+ * state a value the source does not give for half of that range.
+ */
+const BRACKETS = [['19–50', '51–70', '>70'], ['19–30', '31–50', '51–70', '>70']];
 const intakeRow = z.object({
-  group: z.enum(['19–50', '51–70', '>70']),
+  group: z.enum(['19–50', '19–30', '31–50', '51–70', '>70']),
   male: amount, female: amount,
   pregnancy: amount.optional(), lactation: amount.optional(),
 });
+const rowsInOrder = z.array(intakeRow).refine(
+  rows => BRACKETS.some(b => b.length === rows.length && b.every((g, i) => rows[i].group === g)),
+  { message: 'Rows must be 19–50, 51–70, >70 — or 19–30, 31–50, 51–70, >70 where the source splits 19–50' });
 const nutrients = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/nutrients' }),
   schema: z.object({
@@ -120,16 +130,30 @@ const nutrients = defineCollection({
     altUnit: z.object({ unit: z.string(), perUnit: z.number().positive() }).optional(),
     intake: z.object({
       type: z.enum(['RDA', 'AI']),
-      rows: z.array(intakeRow).length(3),
+      rows: rowsInOrder,
       eighteenNote: z.string(),          // 18-year-olds fall in the 14–18 bracket
+      // Anything the table alone would mislead about — iron's higher requirement
+      // for vegetarians, for example. Shown directly beneath the table.
+      note: z.string().optional(),
     }),
     ul: z.object({
-      rows: z.array(intakeRow).length(3).optional(),   // some nutrients have no UL
+      rows: rowsInOrder.optional(),      // some nutrients have no UL
       // What the limit covers. For magnesium, folate and niacin it applies only to
-      // supplements and fortified foods — magnesium's is LOWER than its RDA, and
-      // that is correct. Only a 'total' limit can be compared with intake.
-      appliesTo: z.enum(['total', 'supplemental', 'preformed']),
+      // supplements (and, for some, fortified foods or medicines) — magnesium's is
+      // LOWER than its RDA, and that is correct. Only a 'total' limit can be
+      // compared with intake. Required whenever there are rows.
+      appliesTo: z.enum(['total', 'supplemental', 'preformed']).optional(),
+      // The sentence shown above a non-total limit, in the source's own terms:
+      // "supplements and medicines" for magnesium is not "supplements and
+      // fortified foods" for folate. Required for any non-total limit, so the
+      // page never fills the gap with a default that is wrong for the nutrient.
+      scope: z.string().optional(),
       note: z.string(),
+    }).superRefine((ul, ctx) => {
+      if (ul.rows && !ul.appliesTo)
+        ctx.addIssue({ code: 'custom', message: 'ul.appliesTo is required when ul.rows are given' });
+      if (ul.rows && ul.appliesTo && ul.appliesTo !== 'total' && !ul.scope)
+        ctx.addIssue({ code: 'custom', message: 'ul.scope is required for a limit that is not total' });
     }),
     does: z.string(),
     forms: z.string().optional(),          // e.g. vitamin D2 and D3 — which form comes from where

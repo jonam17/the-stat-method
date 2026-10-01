@@ -9,6 +9,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { publishedNutrients, KINDS, inAltUnit } from '../../../data/nutrients.js';
 import { sourcesChart } from '../../../charts/library.js';
 import { renderChart } from '../../../charts/render.js';
+import { bands, adultRange, groupLabel } from '../../../data/brackets.js';
 
 export async function getStaticPaths() {
   return (await publishedNutrients()).map(n => ({
@@ -29,10 +30,16 @@ const amt = v => v == null ? '—'
 const food = f => Array.isArray(f.amount)
   ? `${num(f.amount[0])}–${num(f.amount[1])} ${d.unit}` : `${num(f.amount)} ${d.unit}`;
 const typeName = d.intake.type === 'RDA' ? 'Recommended Dietary Allowance' : 'Adequate Intake';
-const young = d.intake.rows.find(r => r.group === '19–50');
-const old = d.intake.rows.find(r => r.group === '>70');
-const ulAdult = d.ul.rows?.find(r => r.group === '19–50');
-const groupLabel = g => ({ '19–50': '19–50 years', '51–70': '51–70 years', '>70': 'Over 70' }[g]);
+// Summary boxes: one per run of brackets with identical values, so a value is
+// never shown under a label that covers a bracket it does not apply to. Where
+// men and women differ, both are shown.
+const bandValue = b => b.male === b.female ? amt(b.male)
+  : `${amt(b.male)} <small>men</small><br>${amt(b.female)} <small>women</small>`;
+const factBands = bands(d.intake.rows);
+// The upper limit as a range across adult brackets, labelled by what it covers.
+const ulRange = d.ul.rows && adultRange(d.ul.rows);
+const ulValue = ulRange && (ulRange[0] === ulRange[1] ? amt(ulRange[0]) : `${num(ulRange[0])}–${amt(ulRange[1])}`);
+const ulLabel = { total: 'Upper limit, adults', supplemental: 'Upper limit, supplemental', preformed: 'Upper limit, preformed' }[d.ul.appliesTo];
 const chart = renderChart(`${n.id}-sources`, sourcesChart(n));
 const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
@@ -46,10 +53,9 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
       <p class="dek">{d.dek}</p>
 
       <div class="lib-facts">
-        <div><span>Adults 19–70</span><b set:html={amt(Math.max(young.male, young.female))} /></div>
-        {(old.male !== young.male || old.female !== young.female) &&
-          <div><span>Over 70</span><b set:html={amt(Math.max(old.male, old.female))} /></div>}
-        {ulAdult && <div><span>Upper limit, adults</span><b set:html={amt(Math.max(ulAdult.male, ulAdult.female))} /></div>}
+        {factBands.map(b => <div><span>{b.label}</span><b set:html={bandValue(b)} /></div>)}
+        {ulValue ? <div><span>{ulLabel}</span><b set:html={ulValue} /></div>
+          : <div><span>Upper limit</span><b>None set</b></div>}
       </div>
 
       <div class="prose">
@@ -61,12 +67,12 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
             <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
               <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
           </tbody></table></div>
+        {d.intake.note && <p class="lib-small">{d.intake.note}</p>}
         <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
 
+        <h2 id="upper-limit">Upper limit</h2>
         {d.ul.rows && <>
-          <h2 id="upper-limit">Upper limit</h2>
-          {d.ul.appliesTo !== 'total' && <p class="warnbar">This limit applies only to {d.ul.appliesTo === 'supplemental'
-            ? 'supplements and fortified foods' : 'preformed vitamin A'}, not to the total from food.</p>}
+          {d.ul.appliesTo !== 'total' && <p class="warnbar">{d.ul.scope}</p>}
           <div class="lib-table-wrap"><table class="lib-table">
             <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
             <tbody>{d.ul.rows.map(r => (

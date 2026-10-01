@@ -1,0 +1,160 @@
+# Magnesium — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 6 Jan 2026. Numbered markers
+# [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# The fact sheet splits 19–50 into 19–30 and 31–50 with different values, so
+# both rows are copied as they are. Its "51+ years" row covers both 51–70 and >70.
+draft: true
+name: Magnesium
+kind: mineral
+dek: A mineral that more than 300 enzyme systems depend on — for muscle and nerve function, blood sugar and blood pressure control, energy production and bone.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–30", male: 400, female: 310, pregnancy: 350, lactation: 310 }
+    - { group: "31–50", male: 420, female: 320, pregnancy: 360, lactation: 320 }
+    - { group: "51–70", male: 420, female: 320 }
+    - { group: ">70", male: 420, female: 320 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 410 mg a day for males and 360 mg for females, 400 mg in pregnancy and 360 mg when breastfeeding. The upper limit for supplemental magnesium is the same 350 mg.
+
+# The UL table is titled "for Supplemental Magnesium", and the text says the ULs
+# "only include magnesium from dietary supplements and medications; they do not
+# include magnesium found naturally in food and beverages." Hence supplemental,
+# and a limit LOWER than the RDA — correctly.
+ul:
+  rows:
+    - { group: "19–30", male: 350, female: 350, pregnancy: 350, lactation: 350 }
+    - { group: "31–50", male: 350, female: 350, pregnancy: 350, lactation: 350 }
+    - { group: "51–70", male: 350, female: 350 }
+    - { group: ">70", male: 350, female: 350 }
+  appliesTo: supplemental
+  scope: This limit applies only to magnesium from supplements and medicines — not to magnesium found naturally in food and drink.
+  note: The limit is the most magnesium from supplements and medicines a day that is unlikely to cause harm, not a target. It is lower than the recommended amount, and that is correct — the recommended amount counts magnesium from every source, while the limit counts only supplements and medicines. Magnesium from food poses no risk to healthy people, because the kidneys remove the excess.
+
+does: >-
+  Magnesium is a cofactor in more than 300 enzyme systems that regulate reactions throughout the body,
+  including protein synthesis, muscle and nerve function, blood sugar control and blood pressure
+  regulation [1]. It is required for energy production, contributes to the structure of bone, and is
+  needed to make DNA, RNA and the antioxidant glutathione [1]. It also helps move calcium and potassium
+  across cell membranes, which matters for nerve signals, muscle contraction and a normal heart rhythm
+  [1]. An adult body holds about 25 grams, 50% to 60% of it in the bones [1].
+
+forms: >-
+  Supplements contain magnesium in several forms, including oxide, citrate and chloride, and the label
+  states the amount of magnesium itself, not the weight of the whole compound [1]. Forms that dissolve well
+  in liquid are absorbed more completely: small studies have found the aspartate, citrate, lactate and
+  chloride forms better absorbed than magnesium oxide and sulfate [1]. Magnesium is also a main ingredient
+  in some laxatives and in some remedies for heartburn and indigestion. Phillips' Milk of Magnesia, for
+  example, provides 500 mg per tablespoon — well above the upper limit, though some is not absorbed
+  because of the laxative effect [1].
+
+absorption: >-
+  About 30% to 40% of the magnesium in food and drink is absorbed [1]. Refining grains in ways that remove
+  the germ and bran substantially lowers their magnesium [1]. Tap, mineral and bottled water can add some,
+  though the amount varies widely by source and brand, from 1 mg to more than 120 mg per liter [1]. One
+  study found that very high doses of zinc from supplements — 142 mg a day — interfered with magnesium
+  absorption and balance [1]. When magnesium status is low, the kidneys excrete less of it [1].
+
+deficiency: >-
+  Deficiency from diet alone is uncommon in otherwise healthy people, because the kidneys limit how much
+  is lost in urine [1]. It can follow habitually low intakes, or losses caused by some health conditions,
+  chronic alcoholism or certain medicines [1]. Early signs include loss of appetite, nausea, vomiting,
+  fatigue and weakness; as it worsens, numbness, tingling, muscle cramps, seizures, personality changes,
+  abnormal heart rhythms and coronary spasms can follow, and severe deficiency can cause low blood calcium
+  or potassium [1]. Status is hard to measure because most magnesium is inside cells or in bone; blood
+  levels are the usual test but reflect the body's total poorly [1].
+
+atRisk:
+  - People with gastrointestinal diseases such as Crohn's disease or celiac disease, or who have had part of the small intestine removed or bypassed — chronic diarrhea and fat malabsorption deplete magnesium over time [1]
+  - People with type 2 diabetes or insulin resistance, who can lose more magnesium in their urine [1]
+  - People with alcohol dependence, in whom magnesium deficiency is common [1]
+  - Older adults, who eat less magnesium, absorb less of it and lose more in urine, and are more likely to have conditions or take medicines that affect it [1]
+
+usIntake: >-
+  Many Americans get less magnesium from food than they need: in national survey data from 2013–2016, 48%
+  of people of all ages took in less than their estimated average requirement from food and drink, with
+  men 71 and older and teenagers most likely to fall short [1]. In 2003–2006 data, adults who took a
+  magnesium supplement also ate more from food — 350 mg a day for men and 267 mg for women, against 268 mg
+  and 234 mg for those who did not — and their totals including supplements averaged 449 mg and 387 mg [1].
+  There are no current data on magnesium status in the United States: the national survey has not measured
+  blood magnesium since 1974, and routine hospital and clinic blood tests do not include it [1].
+
+sources:
+  rule: The five foods with the most magnesium per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Pumpkin seeds, roasted", serving: "1 ounce", amount: 156 }
+    - { food: "Chia seeds", serving: "1 ounce", amount: 111 }
+    - { food: "Almonds, dry roasted", serving: "1 ounce", amount: 80 }
+    - { food: "Spinach, boiled", serving: "½ cup", amount: 78 }
+    - { food: "Cashews, dry roasted", serving: "1 ounce", amount: 74 }
+
+evidence:
+  established: >-
+    Magnesium is essential: more than 300 enzyme systems depend on it, and it is needed to build bone [1].
+    The fact sheet states that diets providing the recommended amounts enhance bone health [1].
+  notSupported: >-
+    Blood sugar control in diabetes: the American Diabetes Association states that the evidence is
+    insufficient to support routine use of magnesium to improve glycemic control [3], and the few small,
+    short trials have had conflicting results [1]. Blood pressure: trials find only a marginal effect — a
+    Cochrane review of 12 trials in 545 people with high blood pressure, who took about 243 to 973 mg a day
+    for 8 to 26 weeks, found a reduction of only 2.2 mmHg in diastolic pressure [2]. The FDA allows foods and
+    supplements to say that adequate magnesium may reduce the risk of high blood pressure, but only together
+    with its own conclusion that the evidence is inconsistent and inconclusive [1].
+  mixed: >-
+    Heart disease and stroke: in several long-term observational studies, people with higher magnesium
+    intakes or blood levels had lower rates of sudden cardiac death, heart disease or stroke, but such
+    studies cannot rule out other dietary factors, and a large, well-designed trial is still needed [1].
+    Type 2 diabetes risk: in a meta-analysis of cohort studies, each extra 100 mg a day was associated with a
+    15% lower risk, with the same limitation [1]. Bone: higher intakes are associated with greater bone
+    density, and a few small studies suggest more magnesium might increase it in postmenopausal women, but
+    its role in preventing osteoporosis needs more research [1]. Migraine: three of four small, short trials
+    found modest reductions in how often migraines occurred, and the American Academy of Neurology and the
+    American Headache Society concluded that magnesium is probably effective for prevention [4] — but the
+    amounts typically used exceed the upper limit, so the fact sheet says this should be done only under a
+    health care provider's direction and supervision [1].
+
+tooMuch: >-
+  Magnesium from food is not a risk for healthy people, because the kidneys remove the excess in urine [1].
+  High doses from supplements or medicines often cause diarrhea, sometimes with nausea and abdominal
+  cramping — most commonly reported with magnesium carbonate, chloride, gluconate and oxide [1]. Very large
+  doses from laxatives and antacids, typically more than 5,000 mg a day, have caused magnesium toxicity,
+  including deaths [1]. Its signs include low blood pressure, nausea, vomiting, facial flushing, urine
+  retention and lethargy, progressing to muscle weakness, difficulty breathing, irregular heartbeat and
+  cardiac arrest [1]. The risk is greater when kidney function is impaired, because the kidneys cannot
+  remove the excess [1].
+
+interactions: >-
+  Magnesium-rich supplements or medicines can reduce the absorption of oral bisphosphonates for
+  osteoporosis, such as alendronate (Fosamax); taking them at least 2 hours apart minimises this [1].
+  Magnesium binds tetracycline antibiotics such as doxycycline and quinolones such as ciprofloxacin, which
+  should be taken at least 2 hours before or 4 to 6 hours after a magnesium supplement [1]. Long-term use of
+  loop and thiazide diuretics, such as furosemide and hydrochlorothiazide, increases the magnesium lost in
+  urine, while potassium-sparing diuretics such as spironolactone reduce it [1]. Proton pump inhibitors such
+  as esomeprazole and lansoprazole can cause low blood magnesium when taken for long periods, typically more
+  than a year; in the cases the FDA reviewed, supplements often corrected it but in a quarter did not and the
+  drug had to be stopped, and the FDA advises doctors to consider checking magnesium before and during
+  long-term treatment [5]. If you take any of these regularly, talk to your doctor or pharmacist before
+  taking a magnesium supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Magnesium, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/
+  lastModified: 2026-01-06
+  checked: 2026-09-30
+
+references:
+  - text: "NIH Office of Dietary Supplements. Magnesium — Fact Sheet for Health Professionals. Last modified 6 January 2026."
+    url: https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/
+  - text: "Dickinson HO, Nicolson D, Campbell F, Cook JV, Beyer FR, Ford GA, Mason J. Magnesium supplementation for the management of primary hypertension in adults. Cochrane Database of Systematic Reviews 2006: CD004640."
+    url: https://pubmed.ncbi.nlm.nih.gov/16856052/
+  - text: "Evert AB, Boucher JL, Cypress M, Dunbar SA, Franz MJ, Mayer-Davis EJ, Neumiller JJ, Nwankwo R, Verdi CL, Urbanski P, Yancy WS Jr. Nutrition therapy recommendations for the management of adults with diabetes. Diabetes Care 2013;36:3821-42."
+    url: https://pubmed.ncbi.nlm.nih.gov/24107659/
+  - text: "Holland S, Silberstein SD, Freitag F, Dodick DW, Argoff C, Ashman E. Evidence-based guideline update: NSAIDs and other complementary treatments for episodic migraine prevention in adults. Neurology 2012;78:1346-53."
+    url: https://pubmed.ncbi.nlm.nih.gov/22529203/
+  - text: "U.S. Food and Drug Administration. Proton Pump Inhibitor Drugs (PPIs): Drug Safety Communication — Low Magnesium Levels Can Be Associated With Long-Term Use. 2 March 2011."
+    url: https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-low-magnesium-levels-can-be-associated-long-term-use-proton-pump
+
+aiAssisted: true
