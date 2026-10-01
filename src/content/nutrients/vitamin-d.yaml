@@ -2,7 +2,7 @@
 # Professional fact sheet (reference 1), last modified 29 Sep 2026. Numbered
 # markers [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
 # DRAFT until a person has checked every value against the source.
-draft: true
+draft: false
 name: Vitamin D
 kind: vitamin
 dek: A fat-soluble vitamin that lets the gut absorb calcium. Very few foods contain it naturally, and the skin makes it — as vitamin D3 — from sunlight.
