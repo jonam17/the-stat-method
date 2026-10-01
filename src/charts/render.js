@@ -70,7 +70,52 @@ function renderInterval(id, def) {
   return { svg, legend: '', table };
 }
 
+/**
+ * Bar chart: one horizontal bar per row, with an optional reference line — for
+ * "how much of X does each item give". A row may carry a range (lo–value);
+ * the bar is drawn to the LOW end and the label shows the whole range, so the
+ * chart never overstates.
+ */
+function renderBar(id, def) {
+  const rows = def.rows;
+  const top = Math.max(def.x.max ?? 0, ...rows.map(r => r.value), def.reference?.value ?? 0);
+  const ticks = niceTicks(0, top, 5);
+  const x1 = ticks.at(-1);
+  const L = 200, R = 70, T = 22, ROW = 34, B = 42;
+  const BW = 640, BH = T + rows.length * ROW + B;
+  const pw = BW - L - R;
+  const x = v => L + (v / x1) * pw;
+
+  const grid = ticks.map(v =>
+    `<line class="ch-grid" x1="${x(v)}" x2="${x(v)}" y1="${T}" y2="${BH - B}"/>` +
+    `<text class="ch-tick" x="${x(v)}" y="${BH - B + 17}" text-anchor="middle">${v}</text>`).join('');
+  const bars = rows.map((r, i) => {
+    const cy = T + i * ROW + ROW / 2, len = r.lo ?? r.value;
+    return `<text class="ch-rowlabel" x="${L - 12}" y="${cy}" text-anchor="end" dominant-baseline="middle">${esc(r.label)}</text>` +
+      `<rect class="bar-fill" x="${L}" y="${cy - 8}" width="${Math.max(1, x(len) - L)}" height="16"/>` +
+      `<text class="ch-val" x="${x(len) + 6}" y="${cy}" dominant-baseline="middle">${esc(r.display)}</text>`;
+  }).join('');
+  const ref = def.reference
+    ? `<line class="bar-ref" x1="${x(def.reference.value)}" x2="${x(def.reference.value)}" y1="${T - 12}" y2="${BH - B}"/>` +
+      `<text class="ch-tick" x="${x(def.reference.value)}" y="${T - 15}" text-anchor="middle">${esc(def.reference.label)}</text>`
+    : '';
+  const tid = `ch-${id}-t`, did = `ch-${id}-d`;
+  const svg = `<svg class="chart" viewBox="0 0 ${BW} ${BH}" role="img" aria-labelledby="${tid} ${did}">` +
+    `<title id="${tid}">${esc(def.title)}</title><desc id="${did}">${esc(def.desc)}</desc>` +
+    grid + `<line class="ch-axis" x1="${L}" x2="${BW - R}" y1="${BH - B}" y2="${BH - B}"/>` + ref + bars +
+    `<text class="ch-label" x="${L + pw / 2}" y="${BH - 6}" text-anchor="middle">${esc(def.x.label)}</text></svg>`;
+  const table = `<table class="sr-only"><caption>${esc(def.title)}</caption>` +
+    `<thead><tr><th scope="col">Item</th><th scope="col">${esc(def.x.label)}</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><th scope="row">${esc(r.label)}</th><td>${esc(r.display)}</td></tr>`).join('') +
+    `</tbody></table>`;
+  return { svg, legend: '', table };
+}
+
 export function renderChart(id, def) {
+  if (def.type === 'bar') {
+    const { svg, legend, table } = renderBar(id, def);
+    return wrap(def, svg, legend, table);
+  }
   if (def.type === 'interval') {
     const { svg, legend, table } = renderInterval(id, def);
     return wrap(def, svg, legend, table);
@@ -125,7 +170,9 @@ export function renderChart(id, def) {
 function wrap(def, svg, legend, table) {
   const source = def.kind === 'engine'
     ? 'Computed from the same equations the calculator uses.'
-    : `Recreated from figures reported in ${esc(def.source || 'the cited study')}.`;
+    : def.kind === 'source'
+      ? `Computed from the figures on this page, taken from ${esc(def.source)}.`
+      : `Recreated from figures reported in ${esc(def.source || 'the cited study')}.`;
   return `<figure class="chart-figure">` +
     `<div class="chart-title">${esc(def.title)}</div>` + svg + legend + table +
     `<figcaption>${esc(def.caption)} <span class="chart-source">${source}</span></figcaption>` +

@@ -1815,3 +1815,30 @@ footer{border-top:1px solid var(--rule)}
 .baseline-optional{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-strong)}
 .baseline-optional-label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+/* Bar charts (library) */
+.bar-fill{fill:var(--nutrition);opacity:.75}
+.bar-ref{stroke:var(--ink);stroke-width:1.25;stroke-dasharray:4 3}
+
+/* ---- Library ------------------------------------------------------------ */
+.lib-kind{margin-top:34px}
+.lib-list{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line)}
+.lib-list li{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.lib-list a{font-family:var(--display);font-weight:600;font-size:17px}
+.lib-list span{font-size:14px;color:var(--ink-soft)}
+.lib-note,.lib-small{font-size:13.5px;color:var(--ink-soft)}
+.lib-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:22px 0 8px}
+.lib-facts div{border:1px solid var(--line-strong);padding:12px 14px}
+.lib-facts span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)}
+.lib-facts b{display:block;font-size:20px;margin-top:4px}
+.lib-facts small,.lib-table small{font-weight:400;color:var(--ink-soft)}
+.lib-table-wrap{overflow-x:auto}
+.lib-table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+.lib-table th,.lib-table td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.lib-table td small{display:block;font-size:11.5px}
+.lib-table thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.lib-foods{padding-left:22px}
+.lib-foods li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;padding:6px 0;border-bottom:1px solid var(--line)}
+.lib-serv{color:var(--ink-soft);font-size:13.5px}
+.lib-tag{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-left:8px;padding:1px 6px;border:1px solid var(--line-strong);color:var(--ink-soft)}
+.cite{text-decoration:none;font-size:.78em}
+@media(max-width:640px){.lib-foods li{grid-template-columns:1fr auto}.lib-serv{grid-column:1}}

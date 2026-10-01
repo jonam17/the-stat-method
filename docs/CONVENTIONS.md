@@ -353,3 +353,15 @@ defaults are chosen to produce a result.
 > unit test, and crashed the page every time it fired — a summary bar read values the refused
 > result did not carry. The people it existed to protect saw a broken calculator. Nothing noticed,
 > because nothing ever typed in an underweight weight.
+
+## 23. The Library
+
+- **`publishedNutrients()` is the only way to list nutrients** — the same rule as articles. Drafts
+  show in `npm run dev` and never in a build.
+- **Every value comes from the nutrient's data file**; the page template contains no numbers. Follow
+  `docs/LIBRARY-WORKFLOW.md` to add one.
+- **Never link to an empty section.** The Library tab, index, sitemap entry and search results appear
+  only once a nutrient is published — decided by reading the files, not by a setting someone must
+  remember to change.
+- **Say what an upper limit covers.** A supplement-only limit below the recommended amount is correct,
+  not a typo. `ul.appliesTo` records which, so no one "fixes" a true value.

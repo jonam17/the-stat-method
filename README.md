@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**19 calculators · 19 sourced articles · 294 unit tests · zero JavaScript on content pages**
+**19 calculators · 19 sourced articles · 301 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -185,7 +185,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             294 unit tests
+│   └── __tests__/             301 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -206,7 +206,7 @@ the framework and the engine ports unchanged.
 | Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 294 tests |
+| Tests | **Vitest** | 301 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
@@ -221,7 +221,7 @@ the React bundle.
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 294 tests
+npm test             # 301 tests
 npm run build        # static output to ./dist
 ```
 
@@ -294,7 +294,7 @@ formula.
 npm test
 ```
 
-294 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+301 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -316,6 +316,43 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.8.1 — Vitamin D: forms, absorption, and vitamin K
+
+- **Forms.** The page now distinguishes vitamin D2 (ergocalciferol) from D3 (cholecalciferol): the
+  skin makes D3, animal foods provide mainly D3, mushrooms provide D2, supplements contain either,
+  and D3 may raise blood levels higher and for longer. Food sources are labelled by form where the
+  NIH says which. Where a source does not say — such as which form a trial used — the page does not
+  guess.
+- **Absorption.** Fat in the same meal improves absorption; age and obesity do not change it;
+  fat-malabsorption conditions reduce it.
+- **Vitamin K.** Vitamin D3 is often sold with K2. The page explains that the claim is about
+  directing calcium into bone, not absorbing vitamin D, that the evidence is limited and
+  inconclusive, and — from the NIH's vitamin K fact sheet — that vitamin K can interact seriously
+  with blood thinners such as warfarin.
+- Three optional sections any nutrient can use: forms, absorption, and a commonly paired nutrient.
+
+### v2.8.0 — The Library
+
+**A reference library of vitamins and minerals**, at `/library/`. Each page gives the official adult
+intake — including pregnancy and breastfeeding — the upper limit, the five best food sources, U.S.
+intake data, who runs low, what deficiency looks like, medicine interactions, and **what the
+evidence does and does not support**, including where official bodies disagree.
+
+- **One source for every value**: the NIH Office of Dietary Supplements fact sheets, which present
+  the official U.S. intake recommendations. A test fails if a page cites any other source for them.
+- **Values as data, not prose.** Each nutrient is a data file in `src/content/nutrients/`; the page,
+  its tables and its chart are all rendered from it, so they cannot disagree. Tests check the data
+  itself: brackets complete, upper limits consistent, sources in order, every reference cited.
+- **Upper limits say what they cover.** For some nutrients the limit applies only to supplements —
+  magnesium's is lower than its recommended amount, correctly. Each file states which, and the page
+  says so.
+- **A chart on every page**: how far one serving of each food goes toward a day's amount, computed
+  from the page's own figures.
+- **Drafts stay invisible.** Every page is created as a draft until a person has checked it against
+  the source. The Library tab, its pages, sitemap entries and search results appear only once the
+  first page is published — never a link to an empty section.
+- Vitamin D is complete and awaiting review. `docs/LIBRARY-WORKFLOW.md` covers adding the rest.
 
 ### v2.7.1 — Every refusal decided in one place, and shown
 

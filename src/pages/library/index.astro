@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
+const all = await publishedNutrients();
+const kinds = await kindsWithEntries();
+---
+<BaseLayout noindex={all.length === 0} title="Library — The Stat Method"
+  description="Vitamins and minerals: how much you need, the best food sources, and what the evidence does and does not support — every value from the NIH.">
+  <div class="wrap section">
+    <p class="eyebrow">Reference</p>
+    <h1>Library</h1>
+    <p class="dek">How much of each vitamin and mineral you need, where to get it, and what the evidence
+      really supports. Every value comes from the NIH Office of Dietary Supplements, which presents the
+      official U.S. intake recommendations, and each page is checked against its source.</p>
+    {kinds.map(k => (
+      <section class="lib-kind">
+        <h2><a href={`/library/${k.slug}/`}>{k.label}</a></h2>
+        <ul class="lib-list">
+          {all.filter(n => n.data.kind === k.key).map(n => (
+            <li><a href={`/library/${k.slug}/${n.id}/`}>{n.data.name}</a><span>{n.data.dek}</span></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <p class="lib-note">More vitamins and minerals are added as each is checked against its source.</p>
+  </div>
+</BaseLayout>

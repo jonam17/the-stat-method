@@ -47,6 +47,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
+    "js-yaml": "^4.3.2",
     "playwright": "^1.62.1",
     "sharp": "^0.35.3",
     "vitest": "^4.1.10"

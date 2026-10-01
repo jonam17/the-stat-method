@@ -96,4 +96,72 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { articles };
+/**
+ * Library: one data file per nutrient. Every number is its own field, with the
+ * source it came from and the date it was checked — so a page cannot state a
+ * value that is not in the data, and tests can check the data itself
+ * (src/engine/__tests__/library.test.js). Follow docs/LIBRARY-WORKFLOW.md.
+ */
+const amount = z.number().nonnegative();
+const intakeRow = z.object({
+  group: z.enum(['19–50', '51–70', '>70']),
+  male: amount, female: amount,
+  pregnancy: amount.optional(), lactation: amount.optional(),
+});
+const nutrients = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/nutrients' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    name: z.string(),
+    kind: z.enum(['vitamin', 'mineral']),
+    dek: z.string().min(40).max(200),
+    unit: z.enum(['mcg', 'mg', 'g']),
+    // Some nutrients are also labelled in a second unit (vitamin D in IU).
+    altUnit: z.object({ unit: z.string(), perUnit: z.number().positive() }).optional(),
+    intake: z.object({
+      type: z.enum(['RDA', 'AI']),
+      rows: z.array(intakeRow).length(3),
+      eighteenNote: z.string(),          // 18-year-olds fall in the 14–18 bracket
+    }),
+    ul: z.object({
+      rows: z.array(intakeRow).length(3).optional(),   // some nutrients have no UL
+      // What the limit covers. For magnesium, folate and niacin it applies only to
+      // supplements and fortified foods — magnesium's is LOWER than its RDA, and
+      // that is correct. Only a 'total' limit can be compared with intake.
+      appliesTo: z.enum(['total', 'supplemental', 'preformed']),
+      note: z.string(),
+    }),
+    does: z.string(),
+    forms: z.string().optional(),          // e.g. vitamin D2 and D3 — which form comes from where
+    absorption: z.string().optional(),     // what helps or hinders absorption
+    // A nutrient it is commonly sold or taken with, and what the evidence says
+    // about the pairing — including any risk the pairing brings.
+    pairing: z.object({ heading: z.string(), text: z.string() }).optional(),
+    deficiency: z.string(),
+    atRisk: z.array(z.string()).min(1),
+    usIntake: z.string(),                 // how people in the United States actually fare
+    sources: z.object({
+      rule: z.string(),
+      foods: z.array(z.object({
+        food: z.string(), serving: z.string(),
+        short: z.string().max(26).optional(),   // chart label; the full name is used everywhere else
+        form: z.string().optional(),            // e.g. "D3" — only where the source says which
+        amount: z.union([amount, z.tuple([amount, amount])]),
+        fortified: z.boolean().default(false),
+      })).min(1).max(5),
+    }),
+    evidence: z.object({ established: z.string(), notSupported: z.string(), mixed: z.string().optional() }),
+    disagreements: z.string().optional(),
+    tooMuch: z.string(),
+    interactions: z.string(),
+    source: z.object({
+      name: z.string(), url: z.string().url(),
+      lastModified: z.coerce.date(),     // the fact sheet's own date
+      checked: z.coerce.date(),          // when a person checked this file against it
+    }),
+    references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
+    aiAssisted: z.boolean(),
+  }),
+});
+
+export const collections = { articles, nutrients };

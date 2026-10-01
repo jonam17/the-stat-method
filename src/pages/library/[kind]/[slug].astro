@@ -1,0 +1,151 @@
+---
+/**
+ * One nutrient. Every value on this page is read from its data file in
+ * src/content/nutrients/ — nothing is typed into this template — and the chart
+ * is computed from the same file, so the page, the table and the chart cannot
+ * disagree.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedNutrients, KINDS, inAltUnit } from '../../../data/nutrients.js';
+import { sourcesChart } from '../../../charts/library.js';
+import { renderChart } from '../../../charts/render.js';
+
+export async function getStaticPaths() {
+  return (await publishedNutrients()).map(n => ({
+    params: { kind: KINDS.find(k => k.key === n.data.kind).slug, slug: n.id },
+    props: { n },
+  }));
+}
+const { n } = Astro.props;
+const d = n.data;
+const kind = KINDS.find(k => k.key === d.kind);
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+// "[1]" markers become links to the numbered reference below.
+const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i}" class="cite">[${i}]</a></sup>`);
+const num = v => (Number.isInteger(v) ? v.toLocaleString('en-US') : v.toFixed(1));
+const amt = v => v == null ? '—'
+  : `${num(v)} ${d.unit}${d.altUnit ? ` <small>(${inAltUnit(n, v).toLocaleString('en-US')} ${d.altUnit.unit})</small>` : ''}`;
+const food = f => Array.isArray(f.amount)
+  ? `${num(f.amount[0])}–${num(f.amount[1])} ${d.unit}` : `${num(f.amount)} ${d.unit}`;
+const typeName = d.intake.type === 'RDA' ? 'Recommended Dietary Allowance' : 'Adequate Intake';
+const young = d.intake.rows.find(r => r.group === '19–50');
+const old = d.intake.rows.find(r => r.group === '>70');
+const ulAdult = d.ul.rows?.find(r => r.group === '19–50');
+const groupLabel = g => ({ '19–50': '19–50 years', '51–70': '51–70 years', '>70': 'Over 70' }[g]);
+const chart = renderChart(`${n.id}-sources`, sourcesChart(n));
+const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout title={`${d.name} — Library — The Stat Method`} description={d.dek}
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: kind.label, href: `/library/${kind.slug}/` }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / <a href={`/library/${kind.slug}/`}>{kind.label}</a></div>
+    <article class="article lib-page">
+      {d.draft && <p class="warnbar">Draft — visible only in local development until checked against the source.</p>}
+      <h1>{d.name}</h1>
+      <p class="dek">{d.dek}</p>
+
+      <div class="lib-facts">
+        <div><span>Adults 19–70</span><b set:html={amt(Math.max(young.male, young.female))} /></div>
+        {(old.male !== young.male || old.female !== young.female) &&
+          <div><span>Over 70</span><b set:html={amt(Math.max(old.male, old.female))} /></div>}
+        {ulAdult && <div><span>Upper limit, adults</span><b set:html={amt(Math.max(ulAdult.male, ulAdult.female))} /></div>}
+      </div>
+
+      <div class="prose">
+        <h2 id="how-much">How much you need</h2>
+        <p>The official {typeName} for adults, per day:</p>
+        <div class="lib-table-wrap"><table class="lib-table">
+          <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
+          <tbody>{d.intake.rows.map(r => (
+            <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
+              <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
+          </tbody></table></div>
+        <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
+
+        {d.ul.rows && <>
+          <h2 id="upper-limit">Upper limit</h2>
+          {d.ul.appliesTo !== 'total' && <p class="warnbar">This limit applies only to {d.ul.appliesTo === 'supplemental'
+            ? 'supplements and fortified foods' : 'preformed vitamin A'}, not to the total from food.</p>}
+          <div class="lib-table-wrap"><table class="lib-table">
+            <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
+            <tbody>{d.ul.rows.map(r => (
+              <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
+                <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
+            </tbody></table></div>
+        </>}
+        <p class="lib-small">{d.ul.note}</p>
+
+        <h2 id="what-it-does">What it does</h2>
+        <p set:html={cite(d.does)} />
+
+        {d.forms && <>
+          <h2 id="forms">Forms</h2>
+          <p set:html={cite(d.forms)} />
+        </>}
+
+        <h2 id="sources">Where it comes from</h2>
+        <ol class="lib-foods">{d.sources.foods.map(f => (
+          <li><span>{f.food}{f.form && <em class="lib-tag">{f.form}</em>}{f.fortified && <em class="lib-tag">fortified</em>}</span><span class="lib-serv">{f.serving}</span><b>{food(f)}</b></li>))}
+        </ol>
+        <p class="lib-small">How these five were chosen: {d.sources.rule}</p>
+        <Fragment set:html={chart} />
+
+        {d.absorption && <>
+          <h2 id="absorption">Getting the most from it</h2>
+          <p set:html={cite(d.absorption)} />
+        </>}
+
+        {d.pairing && <>
+          <h2 id="pairing">{d.pairing.heading}</h2>
+          <p set:html={cite(d.pairing.text)} />
+        </>}
+
+        <h2 id="united-states">In the United States</h2>
+        <p set:html={cite(d.usIntake)} />
+
+        <h2 id="at-risk">Who is most likely to run low</h2>
+        <ul>{d.atRisk.map(a => <li set:html={cite(a)} />)}</ul>
+
+        <h2 id="deficiency">What deficiency looks like</h2>
+        <p set:html={cite(d.deficiency)} />
+
+        <h2 id="evidence">What the evidence supports, and what it doesn't</h2>
+        <p><b>Established.</b> <span set:html={cite(d.evidence.established)} /></p>
+        <p><b>Not supported by trials.</b> <span set:html={cite(d.evidence.notSupported)} /></p>
+        {d.evidence.mixed && <p><b>Mixed.</b> <span set:html={cite(d.evidence.mixed)} /></p>}
+
+        {d.disagreements && <>
+          <h2 id="disagreements">Where official guidance disagrees</h2>
+          <p set:html={cite(d.disagreements)} />
+        </>}
+
+        <h2 id="too-much">Too much</h2>
+        <p set:html={cite(d.tooMuch)} />
+
+        <h2 id="interactions">Medicines that interact</h2>
+        <p set:html={cite(d.interactions)} />
+      </div>
+
+      <section class="refs">
+        <h2>References</h2>
+        <ol>{d.references.map((r, i) => (
+          <li id={`ref-${i + 1}`}>{r.text}{r.url && <> <a href={r.url} rel="noopener">{new URL(r.url).hostname.replace(/^www\./, '')}</a></>}</li>))}
+        </ol>
+      </section>
+
+      <section class="reviewed">
+        <h2>How we reviewed this page</h2>
+        <p>Every value on this page comes from the {d.source.name}, which presents the official U.S.
+          intake recommendations set by the National Academies. The source was last updated on
+          {' '}{fmtDate(d.source.lastModified)}, and this page was checked against it on {fmtDate(d.source.checked)}.
+          Numbered markers link to the source for each claim, so you can check the original rather than
+          take our word for it.</p>
+        {d.aiAssisted && <p><b>Drafted with AI assistance, then edited and fact-checked by a human.</b> No
+          value is published on the strength of a model's recall.</p>}
+        <p>Spotted an error? <a href="/report/">Tell us</a> — corrections are logged publicly.</p>
+        <p><em>General information only. This is not medical advice.</em></p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

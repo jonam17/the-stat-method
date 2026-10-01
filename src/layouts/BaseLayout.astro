@@ -1,4 +1,5 @@
 ---
+import { publishedNutrients } from '../data/nutrients.js';
 import SiteSearch from '../components/SiteSearch.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 // F-026: fonts self-hosted rather than fetched from fonts.googleapis.com.
@@ -30,10 +31,14 @@ const BRAND = 'The Stat Method';
 const pageTitle = title.includes(BRAND)
   ? title
   : (title.length + BRAND.length + 3 <= 60 ? `${title} — ${BRAND}` : title);
+// The Library tab appears only once at least one nutrient page is published —
+// never a link to an empty section.
+const libraryLive = (await publishedNutrients()).length > 0;
 const nav = [
   { href: '/',          label: 'Home' },
   { href: '/articles/', label: 'Articles' },
   { href: '/tools/',    label: 'Tools' },
+  ...(libraryLive ? [{ href: '/library/', label: 'Library' }] : []),
   { href: '/resources/', label: 'Resources' },
   { href: '/about/',    label: 'About' },
 ];

@@ -1,0 +1,164 @@
+# Vitamin D — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), last modified 29 Sep 2026. Numbered
+# markers [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+draft: true
+name: Vitamin D
+kind: vitamin
+dek: A fat-soluble vitamin that lets the gut absorb calcium. Very few foods contain it naturally, and the skin makes it — as vitamin D3 — from sunlight.
+unit: mcg
+altUnit: { unit: IU, perUnit: 40 }
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 15, female: 15, pregnancy: 15, lactation: 15 }
+    - { group: "51–70", male: 15, female: 15 }
+    - { group: ">70", male: 20, female: 20 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 15 mcg (600 IU) a day, with an upper limit of 100 mcg (4,000 IU).
+
+ul:
+  rows:
+    - { group: "19–50", male: 100, female: 100, pregnancy: 100, lactation: 100 }
+    - { group: "51–70", male: 100, female: 100 }
+    - { group: ">70", male: 100, female: 100 }
+  appliesTo: total
+  note: The upper limit covers vitamin D from food, drink and supplements combined. It is the most that is unlikely to cause harm, not a target.
+
+does: >-
+  Vitamin D helps the gut absorb calcium and keeps blood calcium and phosphate at the levels bones
+  need to mineralise; without enough, bones can become thin, brittle or misshapen [1]. In adults,
+  enough vitamin D prevents osteomalacia, and together with calcium it helps protect older adults
+  from osteoporosis [1]. The skin makes vitamin D3 when ultraviolet B light strikes it — though not
+  through a window, because glass blocks those rays [1].
+
+forms: >-
+  In food and supplements, vitamin D comes in two main forms: D2 (ergocalciferol) and D3
+  (cholecalciferol), which differ chemically only in one side chain [1]. The skin makes D3 [1].
+  Animal foods — including fish, egg yolks and cheese — provide mainly D3, along with a related
+  compound, 25-hydroxyvitamin D3; mushrooms provide D2, and some are treated with UV light to raise
+  it [1]. Supplements can contain either form [6]. Both raise the amount of vitamin D in the blood,
+  but D3 may raise it higher and keep it there longer than D2 [6].
+
+absorption: >-
+  Because vitamin D dissolves in fat, eating some fat at the same time improves how much is
+  absorbed, although some is absorbed even without it [1]. The NIH advises taking a supplement with
+  a meal or snack that contains some fat [6]. Neither age nor obesity changes how well the gut
+  absorbs vitamin D [1], but conditions that limit fat absorption — such as Crohn's disease, celiac
+  disease and ulcerative colitis — reduce it [6].
+
+pairing:
+  heading: What about vitamin K?
+  text: >-
+    Vitamin D3 is often sold together with vitamin K2. The claim made for the pairing is not that K2
+    helps you absorb vitamin D, but that it helps direct calcium into bone. The evidence is limited: a
+    review describes a meta-analysis of 16 trials in postmenopausal women in which K2 improved spine
+    bone density in 10, but in subgroup analysis only K2 combined with other treatments had a
+    significant effect — and many studies used high, pharmacological doses [7]. Another review called
+    the evidence promising but still inconclusive [8]. One risk matters more than any benefit: vitamin
+    K can interact seriously and dangerously with blood thinners such as warfarin (Coumadin), and
+    people taking them need to keep their vitamin K intake consistent [9]. If you take a blood thinner,
+    talk to your doctor before taking any supplement that contains vitamin K.
+
+deficiency: >-
+  In adults, long-term deficiency causes osteomalacia, in which bone is poorly mineralised and
+  weakens, bringing bone pain and deformity [1]. Status is judged by a blood test for
+  25-hydroxyvitamin D. The National Academies' committee put the risk of deficiency below 30 nmol/L
+  (12 ng/mL) and considered 50 nmol/L (20 ng/mL) or more sufficient for most people [1]. The U.S.
+  Preventive Services Task Force found insufficient evidence to assess screening adults who have no
+  symptoms [1].
+
+atRisk:
+  - Older adults — the skin makes less vitamin D with age, and many spend more time indoors [1]
+  - People with limited sun exposure, including the homebound and those whose clothing or work keeps skin covered [1]
+  - People with darker skin, which makes less vitamin D from sunlight; whether the lower blood levels harm health is not clear [1]
+  - People with conditions that limit fat absorption, such as Crohn's disease, celiac disease or cystic fibrosis [1]
+  - People with obesity or who have had gastric bypass surgery [1]
+
+usIntake: >-
+  Most people in the United States get less than the recommended amount from food: in national
+  survey data from 2015–2016, average intake from food and drink was 5.1 mcg (204 IU) a day for men
+  and 4.2 mcg (168 IU) for women [1]. Blood levels are better than intake suggests, largely because of
+  sun exposure — in 2011–2014 data, 18% of people were at risk of inadequacy and 5% at risk of
+  deficiency [1]. Fortified foods supply most of the vitamin D in American diets; almost all U.S. milk
+  is voluntarily fortified with about 3 mcg (120 IU) per cup [1].
+
+sources:
+  rule: The five foods with the most vitamin D per serving in the NIH fact sheet's food table. Fortified foods are marked. Fish liver oils, which are sold and used like supplements, are left out.
+  foods:
+    - { food: "Trout (rainbow), farmed, cooked", short: "Trout, farmed", form: D3, serving: "3 ounces", amount: 16.2 }
+    - { food: "Salmon (sockeye), cooked", short: "Salmon (sockeye)", form: D3, serving: "3 ounces", amount: 14.2 }
+    - { food: "White mushrooms, exposed to UV light, raw", short: "Mushrooms, UV-exposed", form: D2, serving: "½ cup, sliced", amount: 9.2 }
+    - { food: "Soy, almond or oat milk", short: "Soy, almond or oat milk", serving: "1 cup", amount: [2.5, 3.6], fortified: true }
+    - { food: "Milk, 2% milkfat", short: "Milk, 2%", serving: "1 cup", amount: 2.9, fortified: true }
+
+evidence:
+  established: >-
+    Bone health and normal calcium metabolism. The official values were set to maintain them [2], and the
+    committee that set them found the evidence inadequate or too contradictory to conclude that vitamin
+    D affects any other outcome [1]. A later government review of nearly 250 studies reached the same
+    conclusion [1].
+  notSupported: >-
+    In VITAL, a U.S. trial in which 25,871 adults aged 50 and over took 50 mcg (2,000 IU) a day or a
+    placebo for a median of 5.3 years, rates of breast, prostate and colorectal cancer did not differ, and
+    heart attacks, strokes and cardiovascular deaths were not significantly reduced; fracture risk was not
+    lowered and depression was not prevented [1]. The U.S. Preventive Services Task Force concluded with
+    moderate certainty that supplements do not reduce falls in community-dwelling adults 65 and older [1].
+    In a trial of 2,423 adults with prediabetes given 100 mcg (4,000 IU) a day, supplements did not
+    significantly prevent diabetes [1]. They do not promote weight loss [1].
+  mixed: >-
+    Meta-analyses of trials find that supplements do not change how many people develop cancer, but may
+    reduce cancer deaths by 12% to 13% [1]. In older adults, vitamin D with calcium slightly increases bone
+    density and reduces fractures in people living in care institutions, while results for people living
+    independently are inconsistent [1].
+
+disagreements: >-
+  The United Kingdom recommends 10 mcg (400 IU) a day for everyone aged 4 and over, less than the U.S.
+  figure [3]. The Endocrine Society recommends routine supplements for children and teenagers, pregnant
+  women, adults with prediabetes and adults 75 and older — but not for healthy adults aged 19 to 74 — while
+  advising that everyone meet the U.S. recommended amount [4]. A peer-reviewed analysis argues the U.S.
+  recommended amount rests on a statistical error and should be reconsidered [5]. The NIH attributes such
+  differences to an incomplete understanding of vitamin D's biology and to guidelines written for
+  different purposes [1].
+
+tooMuch: >-
+  Too much vitamin D raises blood calcium, which can cause nausea, vomiting, muscle weakness, confusion,
+  excessive thirst and kidney stones; in extreme cases it leads to kidney failure, calcium deposits in
+  soft tissue, irregular heart rhythm and death [1]. It almost always comes from supplements — the sun
+  cannot cause it, though frequent tanning-bed use can drive levels very high [1]. The National
+  Academies' committee noted that symptoms are unlikely below 250 mcg (10,000 IU) a day, but that
+  intakes below the upper limit may still have adverse effects over time [1].
+
+interactions: >-
+  The weight-loss drug orlistat reduces vitamin D absorption. Statins may reduce the body's own vitamin D
+  production, and high intakes of vitamin D may make atorvastatin, lovastatin and simvastatin less
+  effective. Corticosteroids such as prednisone impair vitamin D metabolism, and thiazide diuretics taken
+  with vitamin D can raise blood calcium too high, especially in older adults [1]. If you take any of these
+  regularly, talk to your doctor or pharmacist before taking a vitamin D supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin D, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/
+  lastModified: 2026-09-29
+  checked: 2026-09-29
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin D — Fact Sheet for Health Professionals. Last modified 29 September 2026."
+    url: https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/
+  - text: "Institute of Medicine, Food and Nutrition Board. Dietary Reference Intakes for Calcium and Vitamin D. Washington, DC: National Academy Press, 2010."
+  - text: "Scientific Advisory Committee on Nutrition. Vitamin D and Health. 2016."
+    url: https://www.gov.uk/government/publications/sacn-vitamin-d-and-health-report
+  - text: "Demay MB, Pittas AG, Bikle DD, et al. Vitamin D for the Prevention of Disease: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2024;109(8):1907-1947."
+    url: https://pubmed.ncbi.nlm.nih.gov/38828931/
+  - text: "A Statistical Error in the Estimation of the Recommended Dietary Allowance for Vitamin D. Nutrients."
+    url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4210929/
+  - text: "NIH Office of Dietary Supplements. Vitamin D — Fact Sheet for Consumers."
+    url: https://ods.od.nih.gov/factsheets/VitaminD-Consumer/
+  - text: "The Importance of Vitamin K and the Combination of Vitamins K and D for Calcium Metabolism and Bone Health: A Review."
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC11313760/
+  - text: "Calcium, vitamin D, vitamin K2, and magnesium supplementation and skeletal health."
+    url: https://www.sciencedirect.com/science/article/abs/pii/S037851222030284X
+  - text: "NIH Office of Dietary Supplements. Vitamin K — Fact Sheet for Health Professionals."
+    url: https://ods.od.nih.gov/factsheets/VitaminK-HealthProfessional/
+
+aiAssisted: true
