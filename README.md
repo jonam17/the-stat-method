@@ -317,6 +317,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.10.1 — Review dates on the new Library pages
+
+- Calcium, magnesium, iron and vitamin B12 now show the date they were reviewed against their fact
+  sheets. v2.10.0 published them still showing the date the drafts were prepared.
+- v2.10.0 shipped without a changelog entry; it is recorded below.
+
+### v2.10.0 — Library: calcium, magnesium, iron and vitamin B12 published
+
+**Four more Library pages are live**, each checked against its NIH Office of Dietary Supplements fact
+sheet: calcium, magnesium, iron and vitamin B12. The Library now has a Minerals section, which appears in
+navigation, the sitemap and search automatically now that it has entries.
+
 ### v2.9.0 — Library: calcium, magnesium, iron and vitamin B12 (drafts)
 
 **Four new Library pages, written and awaiting review.** Calcium, magnesium, iron and vitamin B12 are
