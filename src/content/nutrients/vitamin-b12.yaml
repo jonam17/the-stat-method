@@ -4,7 +4,7 @@
 # DRAFT until a person has checked every value against the source.
 #
 # The fact sheet's "19+ years" row covers all three adult brackets.
-draft: true
+draft: false
 name: Vitamin B12
 kind: vitamin
 dek: A vitamin found naturally only in animal foods, needed for nerves, red blood cells and DNA. Absorbing it depends on stomach acid and a protein the stomach makes.

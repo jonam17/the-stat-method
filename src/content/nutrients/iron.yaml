@@ -4,7 +4,7 @@
 # DRAFT until a person has checked every value against the source.
 #
 # The fact sheet's "51+ years" row covers both 51–70 and >70.
-draft: true
+draft: false
 name: Iron
 kind: mineral
 dek: A mineral the body needs to make hemoglobin, which carries oxygen in the blood. Women aged 19 to 50 need more than twice as much as men.

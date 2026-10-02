@@ -5,7 +5,7 @@
 #
 # The fact sheet splits 19–50 into 19–30 and 31–50 with different values, so
 # both rows are copied as they are. Its "51+ years" row covers both 51–70 and >70.
-draft: true
+draft: false
 name: Magnesium
 kind: mineral
 dek: A mineral that more than 300 enzyme systems depend on — for muscle and nerve function, blood sugar and blood pressure control, energy production and bone.

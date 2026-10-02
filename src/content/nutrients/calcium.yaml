@@ -2,7 +2,7 @@
 # Professional fact sheet (reference 1), updated 22 Jun 2026. Numbered markers
 # [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
 # DRAFT until a person has checked every value against the source.
-draft: true
+draft: false
 name: Calcium
 kind: mineral
 dek: The most abundant mineral in the body. Almost all of it is stored in bones and teeth, and the gut needs vitamin D to absorb it.
