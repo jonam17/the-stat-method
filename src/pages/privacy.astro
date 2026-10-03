@@ -4,7 +4,8 @@ import { SITE, LEGAL } from '../site.config.js';
 const updated = 'August 2026';
 ---
 <BaseLayout title="Privacy" description="What this site collects, which is almost nothing, and exactly what our host sees.">
-  <main class="prose-page">
+  <div class="wrap section">
+    <article class="article prose">
     <h1>Privacy</h1>
     <p class="dek">Last updated {updated}.</p>
 
@@ -169,5 +170,6 @@ const updated = 'August 2026';
       your information, this page will be updated before that feature ships and
       the change noted here rather than made quietly.
     </p>
-  </main>
+    </article>
+  </div>
 </BaseLayout>

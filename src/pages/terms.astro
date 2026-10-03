@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, LEGAL } from '../site.config.js';
 ---
 <BaseLayout title="Terms of use" description="The terms that apply to using this site, including the important one about medical advice.">
-  <main class="prose-page">
+  <div class="wrap section">
+    <article class="article prose">
     <h1>Terms of use</h1>
 
     <h2>This is not medical advice</h2>
@@ -78,5 +79,6 @@ import { SITE, LEGAL } from '../site.config.js';
       under the terms stated in its repository. Cited studies belong to their
       authors and publishers; we link rather than reproduce.
     </p>
-  </main>
+    </article>
+  </div>
 </BaseLayout>

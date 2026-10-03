@@ -86,7 +86,11 @@ button{font-family:inherit}
 @media(max-width:520px){.nav-donate{display:none}}
 
 /* ---------- shared blocks ---------- */
-.section{padding:clamp(38px,6vw,64px) 0}
+/* padding-block, not padding: .section sits on the same element as .wrap on most
+   pages, and a horizontal 0 here would cancel .wrap's side gutter (it did, until
+   v2.10.3 — text touched the screen edge below 1,150px). Classes that share an
+   element with .wrap set vertical padding only. */
+.section{padding-block:clamp(38px,6vw,64px)}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;
   gap:16px;flex-wrap:wrap;border-bottom:1.5px solid var(--ink);padding-bottom:12px;margin-bottom:26px}
 .section-head h2{font-family:var(--display);font-weight:600;font-size:clamp(20px,3vw,25px);
@@ -847,7 +851,10 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 }
 
 
-/* Visually-hidden live-region text for assistive technology (audit F-014). */
+/* Visually-hidden live-region text for assistive technology (audit F-014).
+   Never put this on a <table>: tables ignore width and overflow, so the hidden
+   table keeps its full width and the page scrolls sideways on phones. Put it on
+   a wrapping <div> instead, as the chart renderer does. */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
@@ -930,7 +937,7 @@ body{background:var(--paper)}
 .brandname{letter-spacing:.02em}
 .brandname small{color:var(--ink-mute)}
 
-.hero-modern{padding:24px 0 clamp(48px,7vw,78px)}
+.hero-modern{padding-block:24px clamp(48px,7vw,78px)}  /* shares an element with .wrap: see .section */
 .hero-modern-grid{display:grid;grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:clamp(34px,4.5vw,58px);align-items:center;min-height:min(680px,calc(100vh - 105px));overflow:visible}
 .hero-copy{padding-top:4px;min-width:0;position:relative;z-index:2}
 .hero-kicker{display:flex;justify-content:space-between;gap:20px;padding:0 0 12px;margin-bottom:clamp(38px,6vw,76px);border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft)}
@@ -1261,11 +1268,13 @@ button,input,select{touch-action:manipulation}
   padding-left:16px;
 }
 /* The hang only works when the page gutter is wide enough to receive it.
-   .wrap is capped at --wrap (1120px), so the space outside the text column is
-   (100vw - 1120) / 2. A 148px quote plus a 24px gap plus edge breathing room
-   needs roughly 190px of that, which means a viewport of about 1500px. Gating
-   any lower clips the quote off the left edge of the screen — at 1280px it
-   lands at x=-52. Below this, the indented-rule fallback applies. */
+   .wrap is capped at --wrap (1120px) and pads its content 32px at these widths,
+   so the space outside the text column is (100vw - 1120) / 2 + 32. A 148px
+   quote plus a 24px gap plus edge breathing room needs roughly 190px of that.
+   Measured (v2.10.3): at 1500px the hung quote's left edge sits at x=50; at
+   1280px it would land at x=-60, off screen. Before v2.10.3 .section cancelled
+   .wrap's padding and those were x=18 and x=-92. Below 1500px the
+   indented-rule fallback applies. */
 @media(min-width:1500px){
   .pull{
     margin-left:-172px;padding-left:0;padding-right:24px;

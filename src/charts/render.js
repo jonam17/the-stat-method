@@ -63,7 +63,7 @@ function renderInterval(id, def) {
     grid + `<line class="ch-axis" x1="${L}" x2="${IW - R}" y1="${IH - B}" y2="${IH - B}"/>` + bars +
     `<text class="ch-label" x="${L + pw / 2}" y="${IH - 6}" text-anchor="middle">${esc(def.x.label)}</text></svg>`;
 
-  const table = `<table class="sr-only"><caption>${esc(def.title)}</caption>` +
+  const table = `<table><caption>${esc(def.title)}</caption>` +
     `<thead><tr><th scope="col">Item</th><th scope="col">Low</th><th scope="col">Estimate</th><th scope="col">High</th></tr></thead><tbody>` +
     rows.map(r => `<tr><th scope="row">${esc(r.label)}</th><td>${f(r.low)}</td><td>${r.point == null ? '—' : f(r.point)}</td><td>${f(r.high)}</td></tr>`).join('') +
     `</tbody></table>`;
@@ -104,7 +104,7 @@ function renderBar(id, def) {
     `<title id="${tid}">${esc(def.title)}</title><desc id="${did}">${esc(def.desc)}</desc>` +
     grid + `<line class="ch-axis" x1="${L}" x2="${BW - R}" y1="${BH - B}" y2="${BH - B}"/>` + ref + bars +
     `<text class="ch-label" x="${L + pw / 2}" y="${BH - 6}" text-anchor="middle">${esc(def.x.label)}</text></svg>`;
-  const table = `<table class="sr-only"><caption>${esc(def.title)}</caption>` +
+  const table = `<table><caption>${esc(def.title)}</caption>` +
     `<thead><tr><th scope="col">Item</th><th scope="col">${esc(def.x.label)}</th></tr></thead><tbody>` +
     rows.map(r => `<tr><th scope="row">${esc(r.label)}</th><td>${esc(r.display)}</td></tr>`).join('') +
     `</tbody></table>`;
@@ -157,7 +157,7 @@ export function renderChart(id, def) {
     `<li><svg viewBox="0 0 28 8" width="28" height="8"><line class="ch-line ch-s${si}" x1="1" y1="4" x2="27" y2="4"` +
     `${DASH[si] ? ` stroke-dasharray="${DASH[si]}"` : ''}/></svg>${esc(s.name)}</li>`).join('') + `</ul>`;
 
-  const table = `<table class="sr-only"><caption>${esc(def.title)}</caption>` +
+  const table = `<table><caption>${esc(def.title)}</caption>` +
     `<thead><tr><th scope="col">${esc(def.x.label)}</th>` +
     def.series.map(s => `<th scope="col">${esc(s.name)}</th>`).join('') + `</tr></thead><tbody>` +
     xs.map((v, i) => `<tr><th scope="row">${esc(v)}</th>` +
@@ -174,7 +174,9 @@ function wrap(def, svg, legend, table) {
       ? `Computed from the figures on this page, taken from ${esc(def.source)}.`
       : `Recreated from figures reported in ${esc(def.source || 'the cited study')}.`;
   return `<figure class="chart-figure">` +
-    `<div class="chart-title">${esc(def.title)}</div>` + svg + legend + table +
+    `<div class="chart-title">${esc(def.title)}</div>` + svg + legend +
+    // .sr-only on a wrapper, not the table: a table ignores overflow:hidden (global.css).
+    `<div class="sr-only">${table}</div>` +
     `<figcaption>${esc(def.caption)} <span class="chart-source">${source}</span></figcaption>` +
     `</figure>`;
 }

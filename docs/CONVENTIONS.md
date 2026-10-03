@@ -389,3 +389,19 @@ defaults are chosen to produce a result.
 > the magnesium page, was nearly illegible. Vitamin D's limit is total, so the warning had never
 > rendered on a published page. When a shared component moves onto a new background, measure it
 > again (§3).
+
+## 24. Layout at phone width
+
+- **A class that shares an element with `.wrap` sets vertical padding only** — `padding-block`, never
+  the `padding` shorthand. A horizontal `0` in a later rule silently cancels the side gutter.
+- **Never put `.sr-only` on a `<table>`.** Tables ignore `width` and `overflow`, so a hidden table keeps
+  its full width and the page scrolls sideways. Hide a wrapping `<div>` instead.
+- **Every page needs a layout wrapper.** A page that brings its own `<main>` gets no gutter and nests
+  inside the layout's `<main>`; use `<div class="wrap section">` like the others.
+- `npm run audit` checks every page at 360px wide. A desktop screenshot cannot show any of the above.
+
+> *Learned:* below 1,150px, every article, Library page and text page had no side margin, the legal
+> pages had none at any width, and every page with a chart scrolled sideways on phones — the worst by
+> 357px. All of it shipped past unit tests, a clean build and the Playwright audit, because the audit ran
+> at 1,280px only. Found by looking at the Library on a phone.
+

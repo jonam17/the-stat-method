@@ -317,6 +317,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.10.3 — Side margins on phones, on every page
+
+- **Text no longer touches the screen edge on phones and tablets.** Below about 1,150px wide, articles,
+  Library pages, the homepage hero and the text pages lost their side margin: `.section` (and
+  `.hero-modern` on the homepage) set horizontal padding to 0, cancelling the gutter `.wrap` provides.
+  Both now set vertical padding only. On desktop, those pages' content column now lines up with the
+  navigation and the tool pages, 32px in from where it was.
+- **Pages with a chart no longer scroll sideways on phones.** Each chart carries a hidden data table for
+  screen readers; tables ignore the hiding styles' width, so it kept its full width and widened the page —
+  by up to 357px. The table is now hidden inside a wrapper that clips it. Screen readers still read it.
+- **Privacy, Terms and Advertising disclosure have a page layout.** They had none — flush to the left edge
+  at every width — and each nested a second `<main>`. They now use the same layout as the other text pages.
+- **New check:** `npm run audit` loads every page at 360px and fails if text comes within 8px of the screen
+  edge or the page scrolls sideways.
+
 ### v2.10.2 — Recorded: an npm audit warning that does not apply
 
 - `npm audit` reports a high-severity flaw in http-cache-semantics, a dependency of astro

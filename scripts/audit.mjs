@@ -150,6 +150,41 @@ async function main() {
     if (!linkedFrom.has(p)) add('warn', `orphan page ${p} — not linked from anywhere`);
   }
 
+  // --- phone layout ---
+  // Every page at 360px, the narrowest common phone width: text must not touch
+  // the screen edge, and the page must not scroll sideways. Both shipped for
+  // weeks (v2.10.3) — .section cancelled .wrap's gutter, and chart pages were
+  // widened by a hidden data table — and only a browser can see either.
+  // Text inside a horizontal scroll box (wide tables) or .sr-only is exempt.
+  const phone = await browser.newPage({ viewport: { width: 360, height: 800 } });
+  for (const path of pages) {
+    await phone.goto(`http://localhost:${PORT}${path}`, { waitUntil: 'networkidle' });
+    const m = await phone.evaluate(() => {
+      const vw = document.documentElement.clientWidth;
+      const exempt = el => el.closest('.sr-only') || (() => {
+        for (let e = el; e && e !== document.body; e = e.parentElement) {
+          if (getComputedStyle(e).overflowX !== 'visible') return true;
+        }
+        return false;
+      })();
+      let tight = null;
+      const walker = document.createTreeWalker(document.querySelector('main') || document.body, NodeFilter.SHOW_TEXT);
+      for (let n; (n = walker.nextNode());) {
+        if (!n.textContent.trim() || !n.parentElement || exempt(n.parentElement)) continue;
+        const range = document.createRange(); range.selectNodeContents(n);
+        for (const b of range.getClientRects()) {
+          if (b.width < 1) continue;
+          const gap = Math.min(b.left, vw - b.right);
+          if (gap < 8 && (!tight || gap < tight.gap)) tight = { gap: Math.round(gap), text: n.textContent.trim().slice(0, 40) };
+        }
+      }
+      return { overflow: document.documentElement.scrollWidth - vw, tight };
+    });
+    if (m.overflow > 0) add('error', `${path} — scrolls sideways by ${m.overflow}px at 360px wide`);
+    if (m.tight) add('error', `${path} — text ${m.tight.gap}px from the screen edge at 360px wide: "${m.tight.text}"`);
+  }
+  await phone.close();
+
   if (consoleErrors.length) {
     const deduped = [...new Map(consoleErrors.map(x => [`${x.path}|${x.message}`, x])).values()];
     for (const { path, message } of deduped) add('error', `JS error on ${new URL(path).pathname}: ${message.slice(0, 220)}`);
