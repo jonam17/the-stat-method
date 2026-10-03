@@ -317,6 +317,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.10.2 — Recorded: an npm audit warning that does not apply
+
+- `npm audit` reports a high-severity flaw in http-cache-semantics, a dependency of astro
+  (GHSA-ch52-4w7c-c8xp). No fixed version exists, and the suggested fix would downgrade astro to 2.10.9.
+  The flaw needs a shared server-side cache; this site is fully prerendered and has none. The decision
+  and when to revisit it are recorded in `docs/CONVENTIONS.md` §9.
+
 ### v2.10.1 — Review dates on the new Library pages
 
 - Calcium, magnesium, iron and vitamin B12 now show the date they were reviewed against their fact

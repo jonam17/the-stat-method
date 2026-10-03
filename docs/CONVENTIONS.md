@@ -141,6 +141,13 @@ astro <=7.2.7 (RCE via AVIF image optimization; authorization bypass in base-pat
 and the peer conflict that previously required `--legacy-peer-deps` has resolved. Now on
 astro 7.3.3 + @astrojs/mdx 8.0.1, `npm audit` clean.
 
+**Not acted on, 2026-10-01: GHSA-ch52-4w7c-c8xp (http-cache-semantics, via astro).** No patched
+version exists; `npm audit fix --force` would downgrade astro to 2.10.9. The flaw lets one visitor
+read another's response from a shared HTTP cache. This site is fully prerendered: astro runs only at
+build time, nothing it runs serves visitors, and no session cookies exist, so there is no shared cache
+to read. Revisit when a patched version ships (kornelski/http-cache-semantics#56) — then upgrade
+through the normal update, not `--force`.
+
 **A note on the upgrade itself.** Deleting `package-lock.json` and installing from scratch
 trips an npm resolver crash (`Cannot read properties of null (reading 'edgesOut')`). The
 working sequence is: install once with `--legacy-peer-deps` to generate the lockfile, delete
