@@ -317,6 +317,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.10.5 — The navigation fits on 360px phones
+
+- **The navigation no longer overflows on narrow phones.** At its 20px minimum gaps the bar needs 372px,
+  so below that it ran past the screen edge; at 360px it fitted by 1.6px, and GitHub's newer Chromium
+  rendered it 2px wider, failing the phone check on every page. Below 420px the minimum gap is now 8px.
+  The bar spreads spare width into those gaps, so phones 372px and wider look exactly as before
+  (pixel-identical at 375, 390 and 414px). At 320px it still overflows, by 14px instead of 38px.
+- **The homepage headline is slightly smaller on phones** (13.5vw instead of 14vw), so "Show the work."
+  keeps clear of the right edge; it sat 7–9px from it.
+
 ### v2.10.4 — The release check works again; missing spaces on the legal pages
 
 - **`npm run qa:smoke` passes again**, so `qa:release` can finish. Since v2.6.0 it had looked for a homepage

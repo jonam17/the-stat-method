@@ -399,6 +399,12 @@ defaults are chosen to produce a result.
 - **Every page needs a layout wrapper.** A page that brings its own `<main>` gets no gutter and nests
   inside the layout's `<main>`; use `<div class="wrap section">` like the others.
 - `npm run audit` checks every page at 360px wide. A desktop screenshot cannot show any of the above.
+- **Fit with room to spare, not by a pixel or two.** CI runs a different Chromium, and text renders a
+  little wider or narrower there. A layout that fits by 2px on your machine can fail on GitHub.
+
+> *Learned (v2.10.5):* the navigation fitted at 360px by 1.6px — locally and in review. GitHub's newer
+> Chromium drew it 2px wider and the phone check failed on all 62 pages. The measurement that showed the
+> bar never shrank below 358px had been taken and read as "fits", not as "has no slack".
 
 > *Learned:* below 1,150px, every article, Library page and text page had no side margin, the legal
 > pages had none at any width, and every page with a chart scrolled sideways on phones — the worst by

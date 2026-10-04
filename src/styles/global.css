@@ -1007,7 +1007,7 @@ body{background:var(--paper)}
 }
 @media(max-width:520px){
   .hero-kicker span:last-child{display:none}
-  .hero-modern h1{font-size:clamp(45px,14vw,66px)}
+  .hero-modern h1{font-size:clamp(45px,13.5vw,66px)}  /* 14vw put "Show the work." (nowrap) into the right gutter */
   .hero-actions{gap:12px}
   .instrument-row{padding:13px 0}
 }
@@ -1165,7 +1165,11 @@ button,input,select{touch-action:manipulation}
 }
 
 @media(max-width:420px){
-  .nav-in{padding-left:14px;padding-right:14px}
+  /* gap 8px, not 20: the row needs 372px at 20px gaps, so below that it overflowed
+     (1.6px to spare at 360px; GitHub's newer Chromium tipped it over, v2.10.5).
+     space-between still spreads spare width into the gaps, so wider phones look
+     exactly as before. */
+  .nav-in{padding-left:14px;padding-right:14px;gap:8px}
   .brand{gap:8px}
   .glyph{width:29px;height:29px}
 }
