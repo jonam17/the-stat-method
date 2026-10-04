@@ -317,6 +317,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.11.0 — Training volume article (draft); the drafting session verifies its citations
+
+- **New article, as a draft:** "Training volume: how many sets do you actually need?" — the dose-response
+  evidence for muscle size and strength, built on Schoenfeld 2017 and 2019 and the 2025 Pelland
+  meta-regression. Two new paper charts from Schoenfeld 2019 (`volume-thigh-growth`,
+  `volume-squat-strength`). Its five citations are verified and it stays `draft: true` until the maintainer
+  has reviewed them; it is not visible on the site.
+- **`npm run citations -- complete` did nothing on new articles.** It wrote `citationsVerified: full` only
+  when the line was absent, but every scaffold from `new:article` starts with `citationsVerified: none` —
+  so it reported success and left the article unverified, with no green "Checked against the original"
+  badges. It now replaces the existing value and sets the date, and leaves an article already at `full`
+  (and its date) untouched.
+- **Citation verification is now part of drafting.** `docs/ARTICLE-WORKFLOW.md` step 4: the drafting
+  session reads each paper, closes access gaps, checks every cited sentence, marks the references, runs
+  `complete`, and writes a review record in `docs/citation-reviews/`. Step 5 is the maintainer's review of
+  that record, and only the maintainer removes `draft: true`. The first record is for this article.
+- `docs/citation-checklist.md` no longer repeats its closing sentence.
+
 ### v2.10.5 — The navigation fits on 360px phones
 
 - **The navigation no longer overflows on narrow phones.** At its 20px minimum gaps the bar needs 372px,

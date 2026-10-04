@@ -4,7 +4,6 @@ dek: "More sets build more muscle, but each extra set buys less than the last â€
 category: Exercise
 conclusion: "Choose your weekly sets by what you can recover from and repeat, not by a number from a meta-analysis. Past a modest dose, extra sets buy a little more muscle and almost no extra strength."
 published: 2026-10-04
-draft: true
 readMinutes: 11
 # aiAssisted: true renders "Drafted with AI assistance, then edited and
 # fact-checked by a human." Set false ONLY if no AI drafted any of it.
