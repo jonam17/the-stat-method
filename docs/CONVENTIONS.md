@@ -405,3 +405,26 @@ defaults are chosen to produce a result.
 > 357px. All of it shipped past unit tests, a clean build and the Playwright audit, because the audit ran
 > at 1,280px only. Found by looking at the Library on a phone.
 
+## 25. Line breaks next to inline tags
+
+**Never wrap a source line directly before or after an inline tag** — `<a>`, `<code>`, `<em>`,
+`<strong>`, `<b>`. The build drops that line break, so the words on either side run together. Break
+between two plain words instead:
+
+```html
+<!-- wrong: renders "See ouradvertising disclosure" -->
+See our
+<a href="/ad-disclosure/">advertising disclosure</a>.
+
+<!-- right -->
+because we never had it.
+See our <a href="/ad-disclosure/">advertising disclosure</a>.
+```
+
+`npm run audit` fails on letters touching an inline tag with no space, unless CSS supplies the gap.
+
+> *Learned:* seven places on the Privacy and Advertising disclosure pages read as run-together words,
+> including all three email links on the Privacy page. The source looked correct; only the built page was
+> wrong. Fixing them by hand, a new line break went straight back in next to an `</em>` — the audit
+> caught it, which is the case for having the check.
+

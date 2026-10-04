@@ -317,6 +317,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.10.4 — The release check works again; missing spaces on the legal pages
+
+- **`npm run qa:smoke` passes again**, so `qa:release` can finish. Since v2.6.0 it had looked for a homepage
+  button labelled "Run a calculation", renamed "Get your baseline" in that release, and failed every run.
+  It now checks that the homepage's primary button leads to the tool marked `flagship` in
+  `src/data/tools.js`, and that the page loads — by the button's role, not its wording.
+- Fixing it uncovered two faults the failure had been hiding. The stale check crashed rather than failed,
+  skipping the overflow and console-error checks after it; and on a pass, the script never exited, because
+  stopping the preview server left the server itself running. Both fixed. The console check also no longer
+  counts the test's own deliberate 404, or a favicon request that only happens when a plain file such as
+  robots.txt is opened in a browser tab.
+- **Seven places on Privacy and Advertising disclosure ran two words together**, such as "a cf_clearancecookie"
+  and "See ouradvertising disclosure". The build drops a line break next to a link, code or emphasis
+  tag, so wherever the source wrapped there, the space disappeared. Fixed in the source.
+- **New check:** `npm run audit` fails when letters run into a link, code, bold or italic text with no
+  space between them.
+
 ### v2.10.3 — Side margins on phones, on every page
 
 - **Text no longer touches the screen edge on phones and tablets.** Below about 1,150px wide, articles,

@@ -94,6 +94,22 @@ async function main() {
         placeholders: /YOUR_HANDLE|YOUR_NAME|YOUR_STOREFRONT|Jane Doe|John Roe|lorem ipsum/i
           .test(document.body.innerHTML),
         text: document.body.innerText.length,
+        // Words run together at an inline tag: "a <code>x</code>cookie". The build
+        // drops a line break after an inline closing tag (v2.10.4), so text that
+        // wraps there in the source loses its space. Ignored when CSS supplies
+        // the gap (a margin on the element, as on .lib-tag pills). Letters only:
+        // a number against its unit ("144g") is a deliberate compact style.
+        glued: [...document.querySelectorAll('main a, main code, main strong, main em, main b')]
+          .filter(el => getComputedStyle(el).display === 'inline')
+          .flatMap(el => {
+            const cs = getComputedStyle(el), t = el.textContent, hits = [];
+            const next = el.nextSibling, prev = el.previousSibling;
+            if (next?.nodeType === 3 && /[A-Za-z]$/.test(t) && /^[A-Za-z]/.test(next.textContent)
+                && !parseFloat(cs.marginRight)) hits.push(t.slice(-20) + next.textContent.slice(0, 12));
+            if (prev?.nodeType === 3 && /[A-Za-z]$/.test(prev.textContent) && /^[A-Za-z]/.test(t)
+                && !parseFloat(cs.marginLeft)) hits.push(prev.textContent.slice(-12) + t.slice(0, 20));
+            return hits;
+          }),
       };
     });
 
@@ -119,6 +135,7 @@ async function main() {
     // --- content ---
     if (d.placeholders) add('error', `${path} — contains placeholder text (YOUR_NAME etc.)`);
     if (d.text < 300) add('info', `${path} — only ${d.text} chars of text (thin page)`);
+    for (const g of d.glued) add('error', `${path} — words run together: "${g.replace(/\s+/g, ' ').trim()}"`);
 
     for (const href of d.links) {
       if (!href || href.startsWith('#') || href.startsWith('mailto:')) continue;
