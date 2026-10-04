@@ -109,5 +109,3 @@ Judge each reference against the sentence it is attached to. A tool-backed artic
 usually contain both kinds.
 
 Checks 3 and 4 found more than any other. If time is short, do those before check 5.
-
-Checks 3 and 4 found more than any other. If time is short, do those before check 5.

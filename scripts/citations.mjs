@@ -74,10 +74,24 @@ if (cmd === 'complete') {
     console.error(`refusing: ${v}/${r.length} checked. Finish the article first.`);
     process.exit(1);
   }
-  if (!/citationsVerified:/.test(fm(s))) {
-    s = s.replace(/^(readMinutes:.*)$/m,
-      `$1\ncitationsVerified: full\ncitationsVerifiedDate: ${new Date().toISOString().slice(0, 10)}`);
-    writeFileSync(join(DIR, f), s);
+  // The scaffold from new:article already contains `citationsVerified: none`.
+  // This used to insert the claim only when the line was ABSENT, so on every
+  // scaffolded article it printed success and changed nothing. Replace an
+  // existing value (and any old date) instead; insert only when there is none.
+  if (/^citationsVerified:\s*full\s*$/m.test(fm(s))) {
+    console.log(`${f}: already citationsVerified: full — date left unchanged.`);
+    process.exit(0);
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  const claim = `citationsVerified: full\ncitationsVerifiedDate: ${today}`;
+  s = s.replace(/^citationsVerifiedDate:.*\n/m, '');
+  s = /^citationsVerified:.*$/m.test(fm(s))
+    ? s.replace(/^citationsVerified:.*$/m, claim)
+    : s.replace(/^(readMinutes:.*)$/m, `$1\n${claim}`);
+  writeFileSync(join(DIR, f), s);
+  if (!/^citationsVerified:\s*full\s*$/m.test(fm(read(f)))) {
+    console.error(`${f}: could not set citationsVerified: full — edit the frontmatter by hand.`);
+    process.exit(1);
   }
   console.log(`${f}: all ${r.length} citations checked — now claims "All ${r.length} citations".`);
 }

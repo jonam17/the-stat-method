@@ -267,4 +267,50 @@ export const CHARTS = {
       { label: 'Morton 2018 breakpoint', low: 1.03, high: 2.20, point: 1.62 },
     ],
   }),
+
+  // Schoenfeld et al. (2019), Med Sci Sports Exerc 51(1):94–103, Table 1: baseline-adjusted
+  // change with 95% CI. Lower-body weekly sets were 9, 27 and 45 (1, 3 and 5 sets per exercise).
+  // The two outcomes are separate charts because they are in different units (mm and kg).
+  'volume-thigh-growth': () => {
+    const rows = [
+      { label: '9 sets a week',  low: 1.6, high: 4.5, point: 3.1 },
+      { label: '27 sets a week', low: 3.5, high: 6.3, point: 4.9 },
+      { label: '45 sets a week', low: 5.2, high: 8.3, point: 6.8 },
+    ];
+    const [lo, , hi] = rows;
+    const apart = lo.high < hi.low;
+    return {
+      type: 'interval', kind: 'paper', source: 'Schoenfeld et al. (2019)',
+      title: 'More leg sets, more leg muscle',
+      desc: 'Gain in outer-thigh muscle thickness after eight weeks in trained men doing 9, 27 or 45 weekly sets for the legs, with 95% confidence intervals.',
+      caption: `Thirty-four trained men, eight weeks, every set to failure. Average gains of ` +
+        `${rows.map(r => r.point.toFixed(1)).join(', ')} mm, adjusted for starting thickness. ` +
+        (apart ? `The intervals for the lowest and highest volumes do not overlap: ${hi.point.toFixed(1)} mm against ${lo.point.toFixed(1)} mm.`
+               : 'The intervals for the lowest and highest volumes overlap.'),
+      x: { label: 'Gain in vastus lateralis thickness (mm)', min: 0, max: 9, digits: 1 },
+      rows,
+    };
+  },
+
+  'volume-squat-strength': () => {
+    const rows = [
+      { label: '9 sets a week',  low: 13.7, high: 23.4, point: 18.6 },
+      { label: '27 sets a week', low: 9.5,  high: 18.7, point: 14.1 },
+      { label: '45 sets a week', low: 14.9, high: 24.0, point: 19.5 },
+    ];
+    const overlapAll = Math.max(...rows.map(r => r.low)) <= Math.min(...rows.map(r => r.high));
+    const spread = Math.max(...rows.map(r => r.point)) - Math.min(...rows.map(r => r.point));
+    return {
+      type: 'interval', kind: 'paper', source: 'Schoenfeld et al. (2019)',
+      title: 'Five times the leg sets, the same squat',
+      desc: 'Gain in squat one-rep max after eight weeks in the same trained men doing 9, 27 or 45 weekly leg sets, with 95% confidence intervals.',
+      caption: `The same study and programme. Average squat gains of ` +
+        `${rows.map(r => r.point.toFixed(1)).join(', ')} kg, adjusted for starting strength, ` +
+        `a spread of ${spread.toFixed(1)} kg with no consistent direction. ` +
+        (overlapAll ? 'All three intervals overlap, and the lowest volume did about as well as the highest.'
+                    : 'Not every interval overlaps.'),
+      x: { label: 'Gain in squat 1RM (kg)', min: 0, max: 25, digits: 1 },
+      rows,
+    };
+  },
 };

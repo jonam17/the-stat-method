@@ -73,28 +73,62 @@ Two shapes: a **line** chart for how something changes across a range, and an **
 MDX articles use `<Chart id="..." />` instead of the placeholder. Read `CONVENTIONS.md` §20 before
 defining one, and look at the rendered chart before publishing it.
 
-## 4. Verify citations
+## 4. Verify citations — done by the drafting session
 
-Apply the six checks in [`citation-checklist.md`](citation-checklist.md) to every reference:
-exists · supports the specific claim · population fit · provenance of any number ·
-funding and competing interests · superseded since. Population fit catches the most.
+The session that drafted the article verifies it, **in the same conversation, before handing it
+over**. A draft delivered without this step is not finished. The maintainer's job is to review the
+verification (step 5), not to do it from scratch.
 
 **Never write an identifier from memory** — no PMID, DOI, volume or page unless it was on screen
 from the source. If one cannot be confirmed, cite without it and say so.
 
-## 5. Publish — the human gate
+1. **Read each paper itself.** Apply the six checks in
+   [`citation-checklist.md`](citation-checklist.md) to every reference: exists · supports the
+   specific claim · population fit · provenance of any number · funding and competing interests ·
+   superseded since. Population fit catches the most.
+2. **Close the gaps rather than marking over them.** If the full text was read from a third-party
+   copy, confirm it against the publisher's page. If a paper is paywalled, look for the accepted
+   manuscript in a university repository or the preprint. If a declaration is missing, record that
+   it is missing — absence is a finding, not a pass.
+3. **Check every cited sentence against a passage.** `npm run citations -- markers <file>` shows
+   which reference each marker points at. Check the uncited sentences around each marker too —
+   they usually carry the details. Fix the article wherever it says more than the paper does.
+4. **A claim may only rest on what was read.** If only the abstract could be read, the claim must be
+   fully supported by the published abstract, or rewritten until it is. If a claim cannot be
+   supported from what was read, do not mark that reference — `complete` will then refuse, and the
+   article shows no green badges, which is the honest outcome.
+5. **Mark each reference once it passes, then publish the claim:**
+   ```bash
+   npm run citations -- list <file>       # numbered references, ✓ for checked
+   npm run citations -- mark <file> <n>   # adds verified: true to reference n
+   npm run citations -- complete <file>   # sets citationsVerified: full and today's date
+   ```
+   `<file>` is the file name only, e.g. `training-volume-how-many-sets-do-you-actually-need.md`.
+   `complete` refuses until every reference is marked — the page claims all or nothing. On the site,
+   each reference then shows a green "Checked against the original"; that badge appears only when
+   the article is `full` **and** the reference is marked.
+6. **Write the review record** at `docs/citation-reviews/<slug>.md`, following the existing ones:
+   for each reference, what was read and where, the six checks, a table of every article claim
+   with the passage that supports it, the most important claims marked ★ for spot-checking, and
+   any corrections made or doubts left. It is public, like the rest of the repository; keep it to
+   sources and findings.
+7. **Leave `draft: true` in place.** Verification never un-drafts an article.
+
+## 5. Publish — the human review gate
 
 `aiAssisted: true` tells readers the article was **"edited and fact-checked by a human."** That
-sentence is a promise the maintainer keeps. Before an AI-drafted article publishes, a person must
-have read it and checked its claims against their sources.
+sentence is a promise the maintainer keeps, and this step is where it is kept. Only a person
+removes `draft: true`, and only after reviewing the verification.
 
-Only then:
-
-1. Set `citationsVerified: full` and `citationsVerifiedDate`
-2. Confirm `aiAssisted` is correct
-3. Check the date is the intended Sunday
-4. **Remove `draft: true`**
-5. Run the checks:
+1. **Read the article**, then the review record in `docs/citation-reviews/`.
+2. **Spot-check the ★ claims** against their sources, using the passages the record names, and
+   read any notes or doubts it raises. If anything doesn't match, send it back to a drafting session
+   with the record — don't fix the flags by hand, and don't un-draft.
+3. Confirm `aiAssisted` is correct.
+4. Check the date is the intended Sunday — a date already past publishes on the next build.
+5. Add your review to the record's header (`Human review: <name>, <date>`).
+6. **Delete the `draft: true` line** (the live articles have no `draft:` line; `false` also works).
+7. Run the checks:
 
 ```bash
 npm run qa:articles && npm run citations -- lint && npm test && npm run build
@@ -144,3 +178,5 @@ chemicals, and that fact belongs in the article.
 | `npm run new:article -- "Title" Category` | New draft, fully templated, next free Sunday |
 | `npm run qa:articles` | Template conformance, and the publish guards |
 | `npm run citations -- lint` | Reference formatting and marker numbering |
+| `npm run citations -- list <file>` / `mark <file> <n>` / `complete <file>` | Per-reference verification, then the article-level claim (step 4) |
+| `npm run citations -- markers <file>` | Which reference each inline marker points at |
