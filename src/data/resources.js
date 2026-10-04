@@ -167,6 +167,17 @@ export const RESOURCES = [
     ],
   },
   {
+    group: 'Choosing what you buy',
+    blurb: 'Independent ratings of the food and products you buy. Each grades something specific — check what before letting a score decide for you.',
+    items: [
+      { name: 'Cornucopia Institute scorecards', url: 'https://www.cornucopia.org/scorecards/',
+        role: 'Organic brand ratings',
+        why: 'Rates organic egg, dairy, beef, poultry and plant-based beverage brands on how the food is produced — ownership, pasture access, and how openly a brand answers questions about its farms — so you can see which brands do more than the organic label requires.',
+        note: 'Free',
+        caveat: 'Cornucopia is an advocacy nonprofit for small, independent organic farms, and the ratings reflect that position. They grade farming practices, not nutrition: a top-rated brand is not more nutritious for its score. Some scorecards are several years old and at least one is no longer maintained, so check the date on any you use.' },
+    ],
+  },
+  {
     group: 'Equipment',
     blurb: 'Only things that make measurement or consistency easier. Nothing here is required to use any calculator on this site.',
     affiliate: true,

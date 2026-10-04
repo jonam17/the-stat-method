@@ -1,7 +1,7 @@
 # Citation review — Training volume: how many sets do you actually need?
 
 Article: `src/content/articles/training-volume-how-many-sets-do-you-actually-need.md`
-Verified by: the AI drafting session, 2026-10-04 · **Human review: pending**
+Verified by: the AI drafting session, 2026-10-04 · Human review: Jonathan Morales, 2026-10-04
 Method: `docs/citation-checklist.md`, six checks per reference, then every cited sentence checked
 against a specific passage. The article stays `draft: true` until a person has reviewed this record.
 

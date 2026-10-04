@@ -317,6 +317,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.12.0 — Mission wording; Cornucopia scorecards in Resources
+
+- **The mission now ends "…instead of trusting it blindly"**, in the footer of every page and on About.
+- **New Resources group, "Choosing what you buy"**, starting with the Cornucopia Institute's organic brand
+  scorecards. Its caveat says what the scores measure — farming practices, from an advocacy group for
+  small organic farms — and what they don't: nutrition.
+- README: "AI / Maintainer handoff" is now "Maintainer handoff". Nothing in the repository linked to the
+  old heading.
+- **Correction to v2.11.0:** its entry says the training volume article stayed a draft. It was reviewed
+  and published in that release — the tagged commit removed `draft: true`. Its review record now carries
+  the maintainer's sign-off.
+
 ### v2.11.0 — Training volume article (draft); the drafting session verifies its citations
 
 - **New article, as a draft:** "Training volume: how many sets do you actually need?" — the dose-response
@@ -771,7 +783,7 @@ npm run qa:predeploy
 
 See [`DEPLOYMENT.md`](DEPLOYMENT.md).
 
-## AI / Maintainer handoff
+## Maintainer handoff
 
 Read [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) before making changes — it records the rules this codebase follows and the bug behind each one.
 
