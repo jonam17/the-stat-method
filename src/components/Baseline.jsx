@@ -136,7 +136,7 @@ export default function Baseline() {
           {ok && <>
             {r.advisories.map(a => <p key={a} className="cat-caveat">{a}</p>)}
 
-            <h3 className="bl-section">Energy</h3>
+            <h2 className="bl-section">Energy</h2>
             <BigStat value={fmt(e.preferred.tdee)} unit="kcal / day to maintain your weight"
                      note={`${e.preferred.name}, the equation this site prefers for your inputs.`} />
             <StatStrip items={[
@@ -146,7 +146,7 @@ export default function Baseline() {
             ]} />
             <a className="bl-link" href="/tools/tdee-calculator/">See all equations in the TDEE & BMR Calculator →</a>
 
-            <h3 className="bl-section">Body</h3>
+            <h2 className="bl-section">Body</h2>
             {/* At most four figures per row: six in one row truncated "Overweight". */}
             <StatStrip items={[
               { label: 'BMI', value: b.b.toFixed(1) },
@@ -166,7 +166,7 @@ export default function Baseline() {
             <a className="bl-link" href="/tools/healthy-weight/">Full breakdown in the Healthy Weight Calculator →</a>
 
             {t ? <>
-              <h3 className="bl-section">Daily targets</h3>
+              <h2 className="bl-section">Daily targets</h2>
               <StatStrip items={[
                 { label: 'Calories', value: fmt(t.macro.cals), unit: ' kcal' },
                 { label: 'Protein', value: t.macro.grams.p, unit: ' g' },
@@ -188,7 +188,7 @@ export default function Baseline() {
             )}
 
             {p ? <>
-              <h3 className="bl-section">Plan</h3>
+              <h2 className="bl-section">Plan</h2>
               {p.status !== 'ok'
                 ? <p className="bl-unlock">{p.copy}</p>
                 : <StatStrip items={[

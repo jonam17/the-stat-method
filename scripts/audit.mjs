@@ -87,7 +87,7 @@ async function main() {
         description: meta('description'),
         h1Count: document.querySelectorAll('h1').length,
         headings,
-        imagesNoAlt: [...document.querySelectorAll('img')].filter(i => !i.alt).length,
+        imagesNoAlt: [...document.querySelectorAll('img')].filter(i => !i.hasAttribute('alt')).length,
         links: [...document.querySelectorAll('a[href]')].map(a => a.getAttribute('href')),
         emptyLinks: [...document.querySelectorAll('a[href]')]
           .filter(a => !a.textContent.trim() && !a.querySelector('img,svg')).length,
@@ -201,6 +201,54 @@ async function main() {
     if (m.tight) add('error', `${path} — text ${m.tight.gap}px from the screen edge at 360px wide: "${m.tight.text}"`);
   }
   await phone.close();
+
+  // --- every width: no sideways scroll, mouse and touch (v2.12.1) ---
+  // The header is shared, so one page swept at every width catches what the
+  // fixed 360px check above cannot: before v2.12.1 every page scrolled sideways
+  // at 300–336px, 762–864px (iPads in portrait) and 1102–1236px. Touch matters
+  // too, because pointer:coarse makes the header controls 44px wide.
+  for (const touch of [false, true]) {
+    const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, hasTouch: touch });
+    const sweep = await ctx.newPage();
+    await sweep.goto(`http://localhost:${PORT}/tools/`, { waitUntil: 'networkidle' });
+    const bad = [];
+    for (let w = 320; w <= 1440; w += 4) {
+      await sweep.setViewportSize({ width: w, height: 800 });
+      const o = await sweep.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      if (o > 0) bad.push([w, o]);
+    }
+    if (bad.length) {
+      const ranges = []; for (const [w, o] of bad) { const r = ranges.at(-1);
+        if (r && w - r.to <= 4) { r.to = w; r.max = Math.max(r.max, o); } else ranges.push({ from: w, to: w, max: o }); }
+      for (const r of ranges) add('error', `/tools/ — scrolls sideways at ${r.from}–${r.to}px wide (${touch ? 'touch' : 'mouse'}), up to ${r.max}px`);
+    }
+    await ctx.close();
+  }
+
+  // --- touch targets: 44px on touch screens (v2.12.1) ---
+  // Every control on every page at 390px with a touch screen, where pointer:coarse
+  // applies the 44px rules in global.css. Links inside running text (display:inline)
+  // are exempt, as WCAG allows. An invisible ::after hit area counts.
+  const tctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+  const tpage = await tctx.newPage();
+  const small = new Map();
+  for (const path of pages) {
+    await tpage.goto(`http://localhost:${PORT}${path}`, { waitUntil: 'networkidle' });
+    for (const t of await tpage.evaluate(() => {
+      const out = [];
+      for (const el of document.querySelectorAll('a[href], button, input:not([type=hidden]), select, textarea, summary, [role=button]')) {
+        const s = getComputedStyle(el), r = el.getBoundingClientRect();
+        if (!r.width || !r.height || s.visibility === 'hidden' || el.closest('.sr-only')) continue;
+        if (el.tagName === 'A' && s.display === 'inline') continue;
+        const a = getComputedStyle(el, '::after');
+        const h = Math.max(r.height, a.content !== 'none' && a.position === 'absolute' ? parseFloat(a.height) || 0 : 0);
+        if (h < 44) out.push(`${el.tagName.toLowerCase()}${typeof el.className === 'string' && el.className.trim() ? '.' + el.className.trim().split(/\s+/)[0] : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}" is ${Math.round(h)}px tall`);
+      }
+      return out;
+    })) { if (!small.has(t)) small.set(t, path); }
+  }
+  for (const [t, path] of small) add('error', `${path} — touch target ${t} (needs 44px on touch screens)`);
+  await tctx.close();
 
   if (consoleErrors.length) {
     const deduped = [...new Map(consoleErrors.map(x => [`${x.path}|${x.message}`, x])).values()];

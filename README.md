@@ -317,6 +317,34 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.12.1 — Mobile and performance audit
+
+Measured in a real browser — every page at eight widths, the header at every width from 300 to 1500px with
+mouse and touch, and Lighthouse's mobile simulation before and after.
+
+- **No page scrolls sideways at any width.** Every page did at 300–336px, 762–864px (every iPad in portrait)
+  and 1102–1236px (iPad landscape, small laptops): the header ran out of room. The menu now replaces the link
+  row up to 920px, the Search/Auto labels appear from 1281px, and on the narrowest phones the theme toggle
+  (below 401px) and search icon (below 360px) move into the menu. The header icons sit beside Menu.
+- **Touch targets are 44px on touch screens** — header and menu controls, footer links, calculator toggles
+  and buttons, "Method & sources" panels, link lists and breadcrumbs. Applied only for `pointer: coarse`, so
+  desktop is unchanged; text-style links keep their look and get an invisible hit area, checked not to
+  overlap anything.
+- **Text no longer jumps when fonts load.** Metric-matched fallback fonts (Arial and Courier New resized to
+  each web font's measurements) mean the swap changes letterforms, not layout. Caffeine-and-sleep's layout
+  shift (CLS) went from 0.155 to 0.003; the homepage from 0.067 to 0.003. Preloading the fonts was tested and
+  made load times worse, so it is not used — the stylesheet says why.
+- **Accessibility 100 in Lighthouse on every page tested** (was 84–93): the search button has an accessible
+  name when only its icon shows; footer headings no longer jump to `<h5>`; category colours have text
+  variants that pass contrast in light and dark mode (red and teal also failed in dark mode); the macro
+  bar's labels and the TDEE cards' captions pass.
+- Audit warnings cleared: shorter homepage and articles-index titles; Baseline's description under 165
+  characters; its form sections are `h2`, so headings no longer skip from `h1` to `h3`.
+- **`npm run audit` now checks every width and every touch target.** It sweeps the header from 320 to
+  1440px with mouse and touch, and checks every control on every page at phone size. Run against v2.12.0 it
+  reports 223 errors; against this release, none. Its alt-text check no longer flags `alt=""`, which is the
+  correct markup for a decorative image.
+
 ### v2.12.0 — Mission wording; Cornucopia scorecards in Resources
 
 - **The mission now ends "…instead of trusting it blindly"**, in the footer of every page and on About.

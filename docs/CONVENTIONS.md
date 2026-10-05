@@ -126,7 +126,10 @@ npm run qa:release          # production config · calculators · UI · tests ·
 `qa:production` needs `dist/`, so build first. Env values must be **shell exports or host
 environment settings** — a `.env` file satisfies the build but not the standalone QA scripts.
 
-**The Playwright audit is not optional.** It is the only check that runs a real browser. A
+**The Playwright audit is not optional.** It is the only check that runs a real browser. Since v2.12.1
+it also sweeps the header at every width from 320 to 1440px (mouse and touch) and checks that every
+control on every page is 44px on a touch screen; new controls need a `pointer: coarse` rule in the
+MOBILE & PERFORMANCE section at the end of `global.css`. A
 nested `<p>` shipped past 230 passing unit tests and a clean build; only the audit caught it.
 
 ## 9. Dependencies

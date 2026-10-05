@@ -359,7 +359,7 @@ details.method p{font-size:12px;color:#B8B8B2;margin:10px 0 0;line-height:1.6}
 footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 44px}
 .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
 @media(max-width:760px){.foot{grid-template-columns:1fr 1fr}}
-.foot h5{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+.foot .foot-h{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink-mute);margin:0 0 12px}
 .foot a{display:block;text-decoration:none;font-size:13px;color:var(--ink-soft);padding:4px 0}
 .foot a:hover{color:var(--ink)}
@@ -1860,3 +1860,108 @@ footer{border-top:1px solid var(--rule)}
 .lib-tag{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-left:8px;padding:1px 6px;border:1px solid var(--line-strong);color:var(--ink-soft)}
 .cite{text-decoration:none;font-size:.78em}
 @media(max-width:640px){.lib-foods li{grid-template-columns:1fr auto}.lib-serv{grid-column:1}}
+
+/* =====================================================================
+   MOBILE & PERFORMANCE AUDIT — v2.12.1
+   Last in the file on purpose: these rules settle cascade conflicts left
+   by earlier passes. Every number below was measured in a browser; the
+   audit (scripts/audit.mjs) re-checks them on every run.
+   ===================================================================== */
+
+/* ---- Fonts: metric-matched fallbacks ----
+   With font-display:swap, text first paints in a fallback font and moves
+   when the web font arrives — the main source of layout shift (CLS 0.16 on
+   article pages). These fallbacks are local fonts resized to occupy the same
+   space as each web font, so the swap changes the letterforms and nothing
+   else. Values computed from the font files: size-adjust matches the average
+   advance width over English letter frequencies; the overrides are each
+   font's own ascent, descent and line gap divided by that size.
+   Liberation Sans/Mono are metric clones of Arial/Courier New (Linux).
+   Do not add <link rel="preload"> for these fonts: tested in v2.12.1, preloading
+   three faces made LCP worse on every page measured (homepage 2.0 → 2.7s) by
+   competing with the stylesheet. The fallbacks alone took CLS to ~0. */
+@font-face{font-family:'Inter Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans');
+  size-adjust:107.35%;ascent-override:90.24%;descent-override:22.47%;line-gap-override:0%}
+@font-face{font-family:'Space Grotesk Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans');
+  size-adjust:110.90%;ascent-override:88.73%;descent-override:26.33%;line-gap-override:0%}
+@font-face{font-family:'Space Mono Fallback';src:local('Courier New'),local('CourierNewPSMT'),local('Liberation Mono');
+  size-adjust:101.98%;ascent-override:109.82%;descent-override:35.40%;line-gap-override:0%}
+:root{
+  --sans:'Inter','Inter Fallback',system-ui,sans-serif;
+  --display:'Space Grotesk','Space Grotesk Fallback',system-ui,sans-serif;
+  --mono:'Space Mono','Space Mono Fallback',ui-monospace,monospace;
+}
+
+/* ---- Navigation: no sideways scrolling at any width ----
+   Measured overflow before this release: 300–336px (38px), 762–864px (102px,
+   every iPad in portrait), 1102–1236px (77px, iPad landscape and small laptops).
+   Note the cascade: `.nav-utils{display:flex}` (NAV UTILITIES, above) comes
+   after the 760px rule hiding `.desktop-support`, so the search and theme icons
+   have always shown in the phone header. That is kept — it is useful — and made
+   explicit here instead of accidental.
+   - The menu replaces the link row up to 920px (the row needs 865).
+   - Search/theme labels appear from 1281px (the row with labels needs 1238).
+   - Below 401px the theme toggle leaves the bar (it is in the menu), and below
+     360px the search icon does too, so logo + Menu always fit at 320px. */
+@media(max-width:920px){
+  .desktop-navlinks{display:none}
+  .mobile-nav{display:block}
+  .brandname small{display:none}
+  .nav-utils .nav-donate{display:none}
+  .nav-utils{margin-left:auto}  /* icons sit beside Menu, not mid-bar */
+}
+@media(max-width:1280px){
+  .search-trigger-label,.theme-label,.search-trigger-key{display:none}
+  .theme-toggle{min-width:0}
+}
+.mobile-nav-utils .search-trigger-label,
+.mobile-nav-utils .theme-label{display:inline}
+@media(max-width:400px){ .nav-utils .theme-toggle{display:none} }
+@media(max-width:359px){ .nav-utils .search-trigger{display:none} }
+
+/* ---- Touch targets: 44px on touch screens ----
+   pointer:coarse matches phones and tablets, not mice, so desktop density is
+   unchanged. Text-style controls get an invisible 44px hit area (::after)
+   rather than padding, so they look exactly as before. Links inside running
+   text are exempt, as WCAG allows. */
+@media(pointer:coarse){
+  .search-trigger,.theme-toggle{min-height:44px;min-width:44px;justify-content:center}
+  .mobile-nav summary{min-height:44px}
+  .mobile-nav-panel a{min-height:44px;display:flex;align-items:center;box-sizing:border-box}
+  .brand{min-height:44px}
+  .foot a{padding:12px 0}
+  .seg button{min-height:44px}
+  .ra-copy,.ra-pdf,.btn,.btn-donate,.brief-cta{min-height:44px}
+  details.method summary,.tb-terms summary{display:flex;align-items:center;min-height:44px}
+  input:not([type=checkbox]):not([type=radio]):not([type=range]),select{min-height:44px}
+  /* Lists of links become 44px rows. */
+  .aside .box a,.toc a,.cat-filter a,.lib-list a,.tool-index-nav a{
+    min-height:44px;display:flex;align-items:center;box-sizing:border-box}
+  /* Text-style controls and "→" links keep their look; the hit area grows. */
+  .reset,.section-more,.bl-link,.section-head a,.signal-band-in>a,.island-top a,.tool-crumb a{position:relative}
+  .reset::after,.section-more::after,.bl-link::after,.section-head a::after,
+  .signal-band-in>a::after,.island-top a::after,.tool-crumb a::after{
+    content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+}
+
+/* ---- Colour contrast for small text ----
+   The category colours are kept for fills, the logo and charts. As small text
+   they fall short of 4.5:1 — gold 3.0 on paper; red and teal 3.8 in dark mode.
+   These -ink variants keep each hue with the lightness nudged until it passes
+   (≥4.7 on paper and card in light mode, on every dark surface in dark mode). */
+:root{--nutrition-ink:#BC4A41;--training-ink:#467685;--recovery-ink:#896B28;--health-ink:#447A56}
+:root[data-theme="dark"]{--nutrition-ink:#C96A63;--training-ink:#558EA0;--recovery-ink:#B08A34;--health-ink:#529368}
+[data-cat="Nutrition"]{--c-ink:var(--nutrition-ink)}
+[data-cat="Exercise"]{--c-ink:var(--training-ink)}
+[data-cat="Health"]{--c-ink:var(--health-ink)}
+[data-cat="Recovery"]{--c-ink:var(--recovery-ink)}
+.cat-filter a[data-cat]{color:var(--c-ink)}
+.cat-filter a[aria-current="page"]{color:var(--paper)}
+/* Macro bar: labels sit on the fills. Red and teal fills deepen a shade so white
+   text passes (5.0:1); gold keeps its colour and takes dark text (5.6:1). */
+.seg-fill.fill-pro{background:#BC4A41}
+.seg-fill.fill-carb{background:#467685}
+.seg-fill span{color:#FFFFFF}
+.seg-fill.fill-fat span{color:#141414}
+/* Captions on the dark formula cards (TDEE): #82827C was 4.3:1. */
+.fx-val small,.fx-sub{color:#94948E}
