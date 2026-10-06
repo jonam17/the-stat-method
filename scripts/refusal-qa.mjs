@@ -47,6 +47,9 @@ const CASES = [
       'sleep-calculator', 'strength-standards', 'hand-portions', 'deficit-planner', 'baseline']
     .map(tool => ({ tool, why: 'age 16', fill: { Age: '16' }, expect: 'underAge' })),
   ...['tdee-calculator', 'baseline', 'protein-target'].map(tool => ({ tool, why: 'age 100', fill: { Age: '100' }, expect: 'refused' })),
+  // Severe pain must compute nothing — and the milder answers must not refuse.
+  { tool: 'progressive-overload', why: 'severe pain', click: ['Severe'], expect: 'refused' },
+  { tool: 'progressive-overload', why: 'moderate pain holds, does not refuse', click: ['Moderate'], expect: 'allowed' },
 ];
 
 const { chromium } = await import('playwright');

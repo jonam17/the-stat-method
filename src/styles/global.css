@@ -1861,6 +1861,18 @@ footer{border-top:1px solid var(--rule)}
 .cite{text-decoration:none;font-size:.78em}
 @media(max-width:640px){.lib-foods li{grid-template-columns:1fr auto}.lib-serv{grid-column:1}}
 
+/* ---- Progressive Overload Calculator ---- */
+.po-reps{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:8px}
+.po-reps .field{margin:0}
+.po-reps .field label{font-size:9.5px}
+.po-reasons{margin:4px 0 16px;padding-left:18px;font-size:13.5px;line-height:1.55;color:#E4E3DF}
+.po-reasons li{margin:5px 0}
+.po-conf{font-size:12.5px;line-height:1.5;color:#B8B8B2;margin:-6px 0 16px}
+.po-work{display:grid;gap:6px;margin:10px 0 4px;font-size:13px}
+.po-work div{display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:12px;border-bottom:1px solid #2E2E2C;padding-bottom:6px}
+.po-work dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#9A9A94}
+.po-work dd{margin:0;font-variant-numeric:tabular-nums;color:#F2F1EE}
+
 /* =====================================================================
    MOBILE & PERFORMANCE AUDIT — v2.12.1
    Last in the file on purpose: these rules settle cascade conflicts left

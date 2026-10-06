@@ -39,7 +39,7 @@ export const TOOLS = [
     related: ['one-rep-max', 'powerlifting-score', 'plate-loader'] },
   { slug: 'rpe-converter', name: 'RPE, RIR & %1RM Converter', category: 'Performance', live: true, phase: 2,
     desc: 'Prescribe working loads by reps in reserve instead of a fixed percentage.',
-    related: ['one-rep-max', 'strength-standards', 'plate-loader'] },
+    related: ['one-rep-max', 'strength-standards', 'plate-loader', 'progressive-overload'] },
   { slug: 'plate-loader', name: 'Plate Loader & Warm-Up Ramp', category: 'Performance', live: true, phase: 2,
     desc: 'What to put on each side, plus a warm-up progression to the working set.',
     related: ['one-rep-max', 'rpe-converter'] },
@@ -65,6 +65,10 @@ export const TOOLS = [
     desc: 'Enter ingredients, get per-serving macros.' },
   { slug: 'caffeine-half-life', name: 'Caffeine Half-Life', category: 'Recovery', live: true, phase: 3,
     desc: 'When your last coffee actually clears before bed.' },
+  // ---- Phase 6 ---- (last, so existing preview numbers in docs/previews stay stable)
+  { slug: 'progressive-overload', name: 'Progressive Overload Calculator', category: 'Performance', live: true, phase: 6,
+    desc: 'More weight, more reps, hold or back off — decided from what you actually did, with the rules shown.',
+    related: ['rpe-converter', 'one-rep-max', 'plate-loader'] },
 ];
 
 export const liveTools = () => TOOLS.filter(t => t.live);

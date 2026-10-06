@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**19 calculators · 19 sourced articles · 301 unit tests · zero JavaScript on content pages**
+**20 calculators · 20 sourced articles · 399 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -122,6 +122,17 @@ loads by reps in reserve — genuinely underserved by free tools.
 
 <img src="docs/previews/06-one-rep-max.webp" width="49%"> <img src="docs/previews/11-rpe-converter.webp" width="49%">
 
+#### Progressive overload calculator
+
+Enter what you actually did — load, reps per set, reps in reserve, technique, pain — and it
+returns one decision: add weight, add reps, hold, or back off. **Pain or a technique breakdown can
+never produce a heavier load**, and severe pain refuses to calculate at all. The weight step is the
+smallest your equipment allows inside a band for the exercise type, so a 15 → 20 lb dumbbell jump
+(+33%) on a lateral raise becomes "keep adding reps". Every rule it applied is shown, and rules
+that are practical conventions rather than research findings are labelled as such.
+
+![Progressive overload calculator](docs/previews/19-progressive-overload.webp)
+
 #### Strength standards · Plate loader
 
 Bodyweight-relative levels scaled for age and sex, and a visual plate loader that reports
@@ -185,7 +196,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             301 unit tests
+│   └── __tests__/             399 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -316,6 +327,34 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.13.0 — Progressive Overload Calculator
+
+- **New calculator: Progressive Overload** (`/tools/progressive-overload/`). From one session — load,
+  reps per set, reps in reserve, technique, pain, the smallest weight jump available, and optionally
+  last session's reps — it returns one decision: increase the load, add reps, hold, or reduce, with a
+  confidence grade, the reasons, and every step of the calculation ("Show the work").
+  - Decided in a fixed order — pain, technique, reps, reps in reserve, last session, exercise type,
+    equipment — so nothing later overrides something earlier. Severe pain computes nothing; mild or
+    moderate pain and degraded technique hold the load.
+  - The weight step is the smallest available that lands in a band for the exercise type (2.5–5%
+    compound, 2–5% isolation, 1–2.5% small isolation), within ACSM's 2–10% guidance and its advice to
+    go lower on small-muscle exercises. When even one step is too big, it keeps adding reps until every
+    set goes two past the top of the range, then allows the jump.
+  - Nothing is stored: last session is typed in each time, consistent with the privacy policy.
+  - Engine in `src/engine/overload.js`, reusing the Epley formula from the One-Rep Max calculator; 53
+    tests including property sweeps (pain never raises the load; unit conversion never changes the
+    decision; more reps never make the decision worse). Severe and moderate pain are checked in the
+    browser by `qa:refusals`.
+- **New article, as a draft:** "Progressive overload: how to keep making progress", dated 2026-10-11,
+  with its citations verified and a review record in `docs/citation-reviews/`. It stays `draft: true`
+  until the maintainer has reviewed them.
+- The calculator's specification cited six sources; verification replaced ACSM 2002 with the 2009
+  stand that superseded it (restoring two conditions the spec had dropped from the 2–10% rule), added
+  the authors of a review cited without them, and added Plotkin 2022 and Halperin 2022.
+- The training volume article now links to the calculator. Its link to the new article follows when
+  that article publishes, so no live page links to a draft.
+- `qa:calculators` expects 20 live tools.
 
 ### v2.12.1 — Mobile and performance audit
 

@@ -275,6 +275,30 @@ export const GUIDES = {
     ],
   },
 
+  'progressive-overload': {
+    terms: [
+      ['Progressive overload', 'Asking a little more of a muscle over time — more weight, more reps or more sets — so it keeps adapting.'],
+      ['RIR', 'Reps in reserve: how many more reps you could have done. 0 means you reached failure.'],
+      ['Double progression', 'Add reps at the same weight until every set reaches the top of the range, then add weight and start again near the bottom.'],
+      ['Volume load', 'Load × total reps. A descriptive number for tracking, not a measure of how much a session built muscle.'],
+    ],
+    howTo: [
+      'Pick the exercise type and your goal; adjust the rep range if your program uses another.',
+      'Enter the load, the smallest weight jump your equipment allows, and the reps in each set.',
+      'Be honest about technique and pain — they decide before your reps do.',
+    ],
+    interpreting: [
+      ['Why "add reps" is often the answer',
+       'Progress does not have to mean more weight. Adding reps at the same load is progression in its own right, and in trained lifters it built strength and muscle about as well as adding load. The tool asks for every set to reach the top of your range before the weight goes up, so the heavier load is earned rather than hoped for.'],
+      ['Why the weight sometimes does not go up even at the top of the range',
+       'Small exercises with coarse equipment are the usual reason: going from 15 to 20 lb dumbbells is a 33% jump, far more than the 1–2.5% suited to a lateral raise. The tool keeps you adding reps until every set goes two past the top of the range, then allows the jump and resets the rep target. Smaller plates or a micro-loading pin avoid the problem altogether.'],
+      ['What the confidence grade means',
+       'Confidence reflects how much supporting evidence you gave, not how good the session was. Reps in reserve and last session each add evidence; leaving either out, or rating a set as very easy — where people judge reps in reserve least accurately — lowers it. Low confidence means the advice leans on your reps and technique alone.'],
+      ['What this tool will not do',
+       'It will not raise the weight when you report pain or a breakdown in technique, and severe pain stops the calculation entirely. It does not predict injury, diagnose pain or replace a coach who can watch you lift. Its percentages are practical rules informed by research, labelled as such in the method notes.'],
+    ],
+  },
+
   'plate-loader': {
     terms: [
       ['Per side', 'Plates are loaded symmetrically — the figures shown go on each end of the bar.'],

@@ -20,8 +20,8 @@ const live = TOOLS.filter(t => t.live && t.slug);
 const routes = new Set(live.map(t => `/tools/${t.slug}/`));
 const categories = new Set(live.map(t => t.category));
 
-if (live.length === 19) ok('19 live tools registered');
-else bad(`Expected 19 live tools, found ${live.length}`);
+if (live.length === 20) ok('20 live tools registered');
+else bad(`Expected 20 live tools, found ${live.length}`);
 if (categories.size === 6) ok('6 calculator categories registered');
 else bad(`Expected 6 categories, found ${categories.size}`);
 
@@ -48,6 +48,7 @@ function componentFor(slug) {
     'strength-standards':'StrengthStandards','rpe-converter':'RpeConverter','plate-loader':'PlateLoader',
     'hand-portions':'HandPortions','protein-target':'ProteinTarget','healthy-weight':'HealthyWeight',
     'sleep-calculator':'SleepCalculator','running-pace':'RunningPace','caffeine-half-life':'CaffeineHalfLife',
+    'progressive-overload':'ProgressiveOverload',
   };
   return map[slug] || null;
 }

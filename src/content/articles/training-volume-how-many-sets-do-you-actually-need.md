@@ -2,6 +2,7 @@
 title: "Training volume: how many sets do you actually need?"
 dek: "More sets build more muscle, but each extra set buys less than the last — and strength stops paying out far sooner than size does."
 category: Exercise
+relatedTool: progressive-overload
 conclusion: "Choose your weekly sets by what you can recover from and repeat, not by a number from a meta-analysis. Past a modest dose, extra sets buy a little more muscle and almost no extra strength."
 published: 2026-10-04
 readMinutes: 11
