@@ -11,14 +11,21 @@
  * so the Sunday 10:00 UTC build includes it.
  */
 import { getCollection } from 'astro:content';
-import { isPublished } from './publishing.js';
+import { isPublished, isVisible, articleStatus } from './publishing.js';
 
-export { isPublished };
+export { isPublished, articleStatus };
+
+/**
+ * Local preview: `npm run dev` also shows drafts and scheduled articles, with a
+ * banner on the article page, so they can be reviewed without editing dates.
+ * import.meta.env.DEV is false in `npm run build`, so production is unaffected.
+ */
+export const PREVIEW = import.meta.env.DEV;
 
 /** Published articles, newest first. `filter` narrows further, e.g. by tool. */
 export async function publishedArticles(filter = () => true) {
   const now = new Date();
   return (await getCollection('articles',
-    ({ data }) => isPublished(data, now) && filter(data)))
+    ({ data }) => isVisible(data, now, PREVIEW) && filter(data)))
     .sort((a, b) => b.data.published - a.data.published);
 }

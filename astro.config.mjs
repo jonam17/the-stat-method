@@ -1,5 +1,6 @@
 import { rehypeCitations } from './src/plugins/rehype-citations.mjs';
 import { rehypeCharts } from './src/plugins/rehype-charts.mjs';
+import { rehypeScheduledLinks } from './src/plugins/rehype-scheduled-links.mjs';
 import { unified } from '@astrojs/markdown-remark';
 import { SITE } from './src/site.config.js';
 import { defineConfig } from 'astro/config';
@@ -16,7 +17,11 @@ const LIBRARY_LIVE = existsSync(NUTRIENTS) && readdirSync(NUTRIENTS)
 export default defineConfig({
   // Update to the real domain before launch — sitemap URLs depend on it.
   site: SITE.url,
-  markdown: { processor: unified({ rehypePlugins: [rehypeCharts, rehypeCitations] }) },
+  // `astro dev` is the local preview, where drafts and scheduled articles are shown —
+  // so links to them stay live there. Every build turns them into plain text until
+  // their date (src/plugins/rehype-scheduled-links.mjs).
+  markdown: { processor: unified({ rehypePlugins: [rehypeCharts, rehypeCitations,
+    [rehypeScheduledLinks, { preview: process.argv.includes('dev') }]] }) },
   integrations: [react(), mdx(), sitemap({
     // The library index is left out of the sitemap until at least one nutrient
     // is published — read from the files themselves, so publishing one is all

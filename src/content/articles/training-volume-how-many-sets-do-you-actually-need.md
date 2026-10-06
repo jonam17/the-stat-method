@@ -168,7 +168,7 @@ gain was nearly 4 per cent, which is a lot to a powerlifter, so smaller benefits
 may well exist. And the authors suspect many participants were tested on lifts they had not practised much,
 so early gains partly reflect learning the movement.
 
-The idea that ties this together is **progressive overload**: you keep improving by gradually
+The idea that ties this together is [**progressive overload**](/articles/progressive-overload-how-to-keep-making-progress/): you keep improving by gradually
 asking more of the body over time, through heavier loads, more reps or more sets. For strength,
 the pooled data suggest that practising the lift more often pays off more reliably than piling on
 sets: weekly frequency had a clear positive effect on strength, with diminishing returns, while

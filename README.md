@@ -328,6 +328,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.14.0 — Progressive overload article scheduled; local preview; links that wait for their article
+
+- **"Progressive overload: how to keep making progress" is reviewed and scheduled** for Sunday
+  2026-10-11. The maintainer's review is recorded in its citation review, and `draft: true` is gone; it
+  appears at that day's 10:00 UTC rebuild. The training volume article now links to it.
+- **Links to articles that are not live yet render as plain text**, and become links by themselves on
+  the target's date (`src/plugins/rehype-scheduled-links.mjs`). So the training volume article's new
+  link reads as ordinary text until the 11th, and no published page links to a 404. It relies on every
+  build clearing Astro's render cache first, which `npm run build` already does.
+- **Local preview of drafts and scheduled articles.** `npm run dev` now shows them, with a banner saying
+  "Draft — not published" or "Scheduled for…", so reviewing no longer means editing dates. Every
+  `npm run build`, including the deploy, still shows only published articles — the same rule, one
+  function (`isVisible()` in `src/data/publishing.js`), with preview on only in development. The Library
+  already worked this way for draft nutrients.
+- `docs/ARTICLE-WORKFLOW.md` step 5: the maintainer reviews in local preview and says so; the drafting
+  session then signs the record, removes the draft line, adds any held-back links, updates the backlog
+  and prepares the release. Step 6 notes that GitHub's scheduled runs can start late.
+
 ### v2.13.0 — Progressive Overload Calculator
 
 - **New calculator: Progressive Overload** (`/tools/progressive-overload/`). From one session — load,

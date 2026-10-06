@@ -4,7 +4,7 @@ Article: `src/content/articles/progressive-overload-how-to-keep-making-progress.
 Also covers: the evidence statements in the Progressive Overload Calculator's "Method & sources"
 panel (`src/components/ProgressiveOverload.jsx`) and guide (`src/data/tool-guides.js`), which cite
 the same sources.
-Verified by: the AI drafting session, 2026-10-05 · **Human review: pending**
+Verified by: the AI drafting session, 2026-10-05 · Human review: Jonathan Morales, 2026-10-05
 Method: `docs/citation-checklist.md`, six checks per reference, then every cited sentence checked
 against a specific passage. The article stays `draft: true` until a person has reviewed this record.
 

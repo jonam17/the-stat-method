@@ -5,7 +5,6 @@ category: Exercise
 relatedTool: progressive-overload
 conclusion: "Add reps until every set reaches the top of your range, then add the smallest weight your equipment allows. Stop short of failure most of the time, and never push through pain or broken technique to earn a heavier load."
 published: 2026-10-11
-draft: true
 readMinutes: 8
 # aiAssisted: true renders "Drafted with AI assistance, then edited and
 # fact-checked by a human." Set false ONLY if no AI drafted any of it.

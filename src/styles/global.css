@@ -1861,6 +1861,10 @@ footer{border-top:1px solid var(--rule)}
 .cite{text-decoration:none;font-size:.78em}
 @media(max-width:640px){.lib-foods li{grid-template-columns:1fr auto}.lib-serv{grid-column:1}}
 
+/* ---- Local preview banner (npm run dev only; never rendered in a build) ---- */
+.preview-banner{font-family:var(--mono);font-size:12px;letter-spacing:.04em;line-height:1.5;
+  background:#FFF4D6;color:#5C4400;border:1px solid #E0C068;padding:10px 14px;margin:0 0 18px}
+
 /* ---- Progressive Overload Calculator ---- */
 .po-reps{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:8px}
 .po-reps .field{margin:0}

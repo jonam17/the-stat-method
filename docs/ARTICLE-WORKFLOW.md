@@ -117,18 +117,43 @@ from the source. If one cannot be confirmed, cite without it and say so.
 ## 5. Publish — the human review gate
 
 `aiAssisted: true` tells readers the article was **"edited and fact-checked by a human."** That
-sentence is a promise the maintainer keeps, and this step is where it is kept. Only a person
-removes `draft: true`, and only after reviewing the verification.
+sentence is a promise the maintainer keeps, and this step is where it is kept. Nothing publishes
+until the maintainer has reviewed it and said so.
 
-1. **Read the article**, then the review record in `docs/citation-reviews/`.
-2. **Spot-check the ★ claims** against their sources, using the passages the record names, and
-   read any notes or doubts it raises. If anything doesn't match, send it back to a drafting session
-   with the record — don't fix the flags by hand, and don't un-draft.
-3. Confirm `aiAssisted` is correct.
-4. Check the date is the intended Sunday — a date already past publishes on the next build.
-5. Add your review to the record's header (`Human review: <name>, <date>`).
-6. **Delete the `draft: true` line** (the live articles have no `draft:` line; `false` also works).
-7. Run the checks:
+**The maintainer reviews:**
+
+1. **Read the article in local preview** — no date editing needed:
+   ```bash
+   npm run dev
+   ```
+   then open `http://localhost:4321/articles/<slug>/`. In `npm run dev` only, drafts and scheduled
+   articles appear, with a yellow banner saying which they are; every `npm run build` (including the
+   deploy) shows only published articles. Links between them work in preview too.
+2. **Read the review record** in `docs/citation-reviews/`, and spot-check the ★ claims against their
+   sources using the passages it names. Read any notes or doubts it raises.
+3. If anything doesn't match, send it back to a drafting session with the record — don't fix the
+   flags by hand, and don't un-draft.
+4. If it checks out, **tell the drafting session the review is done** (and anything to change, such
+   as the date).
+
+**The drafting session then publishes**, in one release:
+
+1. **Signs the record**: `Human review: <maintainer>, <date of review>` in its header — only on the
+   maintainer's word that they reviewed it.
+2. **Deletes the `draft: true` line** (the live articles have no `draft:` line).
+3. **Keeps the scheduled date** unless told otherwise. A date already past publishes on the next
+   build; a future date publishes at that day's 10:00 UTC rebuild (step 6).
+4. **Adds the links held back for this article** — any "link this when it publishes" notes in
+   ARTICLE-BACKLOG.md or in other articles. These can go in now, even before the date: a link to an
+   article that is not live yet renders as plain text, and becomes a link by itself when the target
+   publishes (`src/plugins/rehype-scheduled-links.mjs`). No published page ever links to a 404.
+5. **Updates the article's row in ARTICLE-BACKLOG.md** to `scheduled` (or `live` if dated today or
+   earlier).
+6. **Adds a changelog entry and an annotated tag** (CONVENTIONS §13 — publishing content is a minor
+   release), and gives the maintainer the release commands chained with `&&`, starting with
+   `rm -rf dist`, so nothing commits or tags if a check fails.
+
+The checks every release runs:
 
 ```bash
 npm run qa:articles && npm run citations -- lint && npm test && npm run build
@@ -140,11 +165,16 @@ npm run qa:articles && npm run citations -- lint && npm test && npm run build
 ## 6. Schedule
 
 Commit and push. The article appears on its date at **10:00 UTC** — 3:00 AM Pacific in summer,
-2:00 AM in winter — when the daily rebuild runs.
+2:00 AM in winter — when the daily rebuild runs (`.github/workflows/publish.yml`).
 
 - **It is readable on GitHub as soon as you push**, because the repository is public. Only the
   website waits. Keep an article in the private folder until its week if that matters.
+- **Links to it from other articles go live with it.** Until its date they render as plain text, so
+  they can be committed in the same release.
 - **Several at once is fine.** Write four, date them for consecutive Sundays, commit together.
+- **GitHub's scheduled runs can start late** — usually minutes, occasionally longer at busy times —
+  so "10:00 UTC" means "shortly after". If an article hasn't appeared by mid-morning UTC, use the
+  workflow's "Run workflow" button; a missed day is also caught by the next day's run.
 - **GitHub pauses the schedule after 60 days with no commits**, and emails the owner. Any commit
   restarts it.
 

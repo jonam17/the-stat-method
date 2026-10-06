@@ -1,5 +1,5 @@
 ---
-import { publishedArticles } from '../../data/articles.js';
+import { publishedArticles, articleStatus, PREVIEW } from '../../data/articles.js';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { authorLine } from '../../site.config.js';
 import AdSlot from '../../components/AdSlot.astro';
@@ -29,6 +29,8 @@ const fmtDate = dt => dt.toLocaleDateString('en-US',
   { month: 'long', day: 'numeric', year: 'numeric' });
 const related = all.filter(a => a.id !== article.id).slice(0, 3);
 const tool = d.relatedTool ? findTool(d.relatedTool) : null;
+// Local preview only (npm run dev): say plainly that this page is not live yet.
+const status = PREVIEW ? articleStatus(d) : 'live';
 ---
 <BaseLayout
   title={d.title}
@@ -55,6 +57,13 @@ const tool = d.relatedTool ? findTool(d.relatedTool) : null;
           {d.reviewStatus === 'reviewed' && <span class="eb-badge rev-badge">Professionally reviewed</span>}
         </div>
 
+        {status !== 'live' && (
+          <p class="preview-banner" role="note">
+            <b>Local preview.</b> {status === 'draft'
+              ? 'Draft — not published. It appears on the live site only after draft: true is removed.'
+              : `Scheduled for ${fmtDate(d.published)}. It appears on the live site at that day’s 10:00 UTC rebuild.`}
+          </p>
+        )}
         <h1>{d.title}</h1>
         <p class="dek">{d.dek}</p>
 
