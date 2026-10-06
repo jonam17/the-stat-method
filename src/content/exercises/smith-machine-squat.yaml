@@ -1,0 +1,31 @@
+# Quadriceps · Smith machine squat. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-quadriceps.md.
+draft: true
+name: Smith machine squat
+group: quadriceps
+dek: A squat with the bar on a fixed track. Machine training built muscle and strength about as well as free weights.
+primary: [Quadriceps]
+secondary: [Glutes]
+equipment: [machine]
+progressionClass: large_compound
+whyHere: >-
+  The Smith machine guides the bar along a fixed track, so there is less to balance and safety stops
+  are easy to set. In a trial comparing training with machines, including the Smith machine squat,
+  against free weights, both built muscle and strength to a similar degree [1].
+evidence:
+  - kind: training
+    claim: >-
+      Men and women trained with either free weights or machines, including the Smith machine squat
+      and bench press. Muscle mass and strength increased similarly in both groups; squat and bench
+      press strength rose 11–19% [1].
+howTo:
+  - Set the bar's hooks at shoulder height and the safety stops just below the bottom of your squat.
+  - Stand with your feet about shoulder-width apart and slightly in front of the bar.
+  - Unhook the bar, squat as deep as you can control, and drive back up.
+  - Re-hook the bar at the top of your last rep.
+alternatives: [back-squat, leg-press]
+checked: 2026-10-06
+references:
+  - text: "Schwanbeck SR, Cornish SM, Barss T, Chilibeck PD. Effects of training with free weights versus machines on muscle mass, strength, free testosterone, and free cortisol levels. J Strength Cond Res, 2020;34(7):1851-1859."
+    url: "https://doi.org/10.1519/JSC.0000000000003349"
+aiAssisted: true

@@ -1,0 +1,32 @@
+# Quadriceps · Bulgarian split squat. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-quadriceps.md.
+draft: true
+name: Bulgarian split squat
+group: quadriceps
+dek: One leg at a time, rear foot on a bench. Needs only dumbbells or body weight, and matched the back squat for strength.
+primary: [Quadriceps]
+secondary: [Glutes]
+equipment: [dumbbell, bodyweight]
+progressionClass: moderate_compound
+whyHere: >-
+  The Bulgarian split squat trains one leg at a time with the rear foot raised, so it loads each leg on
+  its own and needs nothing heavier than a pair of dumbbells — or just your body weight to start. In a
+  five-week trial, it improved strength, sprint speed and agility as much as the back squat [1].
+evidence:
+  - kind: training
+    claim: >-
+      Eighteen academy rugby players trained twice a week for five weeks with either the rear-foot-
+      elevated split squat or the back squat. Both groups improved squat and split-squat strength,
+      40-metre sprint time and agility, with no difference between them. The trial measured strength
+      and performance, not muscle size, in young athletes [1].
+howTo:
+  - Stand about a stride in front of a knee-high bench and rest the top of your back foot on it.
+  - Lower straight down until your front thigh is roughly parallel to the floor, keeping your front heel down.
+  - Push back up through your front foot. Finish all reps on one side, then switch.
+  - Once body weight is easy, hold a dumbbell in each hand.
+alternatives: [back-squat, leg-press]
+checked: 2026-10-06
+references:
+  - text: "Speirs DE, Bennett MA, Finn CV, Turner AP. Unilateral vs. bilateral squat training for strength, sprints, and agility in academy rugby players. J Strength Cond Res, 2016;30(2):386-392."
+    url: "https://doi.org/10.1519/JSC.0000000000001096"
+aiAssisted: true

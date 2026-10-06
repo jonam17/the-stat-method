@@ -1,0 +1,33 @@
+# Quadriceps · Leg press. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-quadriceps.md.
+draft: true
+name: Leg press
+group: quadriceps
+dek: Heavy quadriceps work with nothing to balance, so sets can go close to failure and the load can rise in small steps.
+primary: [Quadriceps]
+secondary: [Glutes]
+equipment: [machine]
+progressionClass: large_compound
+whyHere: >-
+  The leg press loads the quadriceps heavily without a bar to balance, which makes it easier to take
+  sets close to failure and to add weight in small increments. In an eight-week comparison, leg press
+  and squat training both improved strength and functional outcomes, each transferring best to
+  itself [1].
+evidence:
+  - kind: training
+    claim: >-
+      Squat-only, leg-press-only and combined groups trained for eight weeks. Leg press strength rose
+      in every group, squat training transferred more to squat strength, and the authors conclude that
+      both free weights and machines can improve functional outcomes. The trial reported strength and
+      function; it is not evidence about muscle size [1].
+howTo:
+  - Sit with your back flat against the pad and your feet about hip-width apart on the platform.
+  - Release the safety handles and lower the platform under control until your knees are well bent, stopping before your lower back lifts off the pad.
+  - Press back up through your whole foot without snapping your knees straight at the top.
+  - Re-engage the safety handles before you step out.
+alternatives: [back-squat, smith-machine-squat, leg-extension]
+checked: 2026-10-06
+references:
+  - text: "Rossi FE, Schoenfeld BJ, Ocetnik S, Young J, Vigotsky A, Contreras B, Krieger JW, Miller MG, Cholewa J. Strength, body composition, and functional outcomes in the squat versus leg press exercises. J Sports Med Phys Fitness, 2018;58(3):263-270."
+    url: "https://www.minervamedica.it/en/journals/sports-med-physical-fitness/article.php?cod=R40Y2018N03A0263"
+aiAssisted: true

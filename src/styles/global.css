@@ -1861,6 +1861,12 @@ footer{border-top:1px solid var(--rule)}
 .cite{text-decoration:none;font-size:.78em}
 @media(max-width:640px){.lib-foods li{grid-template-columns:1fr auto}.lib-serv{grid-column:1}}
 
+/* ---- Exercise library ---- */
+.ex-evidence{list-style:none;padding-left:0}
+.ex-evidence li{margin:0 0 12px;padding-left:0}
+.ex-kind{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--rule,#ccc);padding:2px 7px;margin-right:6px;vertical-align:1px}
+
 /* ---- Local preview banner (npm run dev only; never rendered in a build) ---- */
 .preview-banner{font-family:var(--mono);font-size:12px;letter-spacing:.04em;line-height:1.5;
   background:#FFF4D6;color:#5C4400;border:1px solid #E0C068;padding:10px 14px;margin:0 0 18px}

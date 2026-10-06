@@ -1,0 +1,39 @@
+# Quadriceps · Barbell back squat. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-quadriceps.md.
+draft: true
+name: Barbell back squat
+group: quadriceps
+dek: The classic lower-body lift. Squatting deeper grew the glutes and adductors more, and the quadriceps just as well.
+primary: [Quadriceps]
+secondary: [Glutes, Adductors]
+equipment: [barbell]
+progressionClass: large_compound
+whyHere: >-
+  The back squat trains the quadriceps, glutes and adductors together, with a load that can keep
+  rising for years. In a ten-week trial, full squats grew the quadriceps as much as half squats and
+  grew the glutes and adductors more [1]. Squat training also carries over to squat strength better
+  than leg press training does [2].
+evidence:
+  - kind: training
+    claim: >-
+      Seventeen untrained men squatted twice a week for ten weeks, to full depth (140° of knee bend)
+      or half depth (90°). Quadriceps volume rose similarly in both groups; the full-squat group
+      gained more in the adductors and glutes. Neither group's hamstrings grew [1].
+  - kind: training
+    claim: >-
+      Over eight weeks, squat training improved maximum squat strength more than leg press training,
+      while leg press strength rose with either — the authors conclude that strength transfers most
+      to the exercise you train [2].
+howTo:
+  - Rest the bar across your upper back, not your neck. Stand with your feet about shoulder-width apart, toes turned slightly out.
+  - Brace your trunk, then bend at the hips and knees together, keeping the bar over the middle of your feet.
+  - Go as deep as you can while your back holds its position and your heels stay down. In the trial above, deeper squats grew the glutes and adductors more [1].
+  - Drive back up through the whole foot. Use safety bars or a spotter when sets get close to failure.
+alternatives: [smith-machine-squat, leg-press, bulgarian-split-squat]
+checked: 2026-10-06
+references:
+  - text: "Kubo K, Ikebukuro T, Yata H. Effects of squat training with different depths on lower limb muscle volumes. Eur J Appl Physiol, 2019;119(9):1933-1942."
+    url: "https://doi.org/10.1007/s00421-019-04181-y"
+  - text: "Rossi FE, Schoenfeld BJ, Ocetnik S, Young J, Vigotsky A, Contreras B, Krieger JW, Miller MG, Cholewa J. Strength, body composition, and functional outcomes in the squat versus leg press exercises. J Sports Med Phys Fitness, 2018;58(3):263-270."
+    url: "https://www.minervamedica.it/en/journals/sports-med-physical-fitness/article.php?cod=R40Y2018N03A0263"
+aiAssisted: true

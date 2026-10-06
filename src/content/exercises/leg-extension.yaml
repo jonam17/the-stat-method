@@ -1,0 +1,36 @@
+# Quadriceps · Leg extension. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-quadriceps.md.
+draft: true
+name: Leg extension
+group: quadriceps
+dek: Isolates the quadriceps. The knee-bent half of the movement is the part a trial found grew them most.
+primary: [Quadriceps]
+equipment: [machine]
+progressionClass: isolation
+whyHere: >-
+  The leg extension works the quadriceps on their own, with nothing else limiting the set. How you use
+  its range matters: in a twelve-week trial, training the knee-bent part of the movement grew parts of
+  the quadriceps more than full-range training, while training only the straight-legged end did
+  least [1].
+evidence:
+  - kind: training
+    claim: >-
+      Forty-five untrained women trained the leg extension for twelve weeks in one of four ranges.
+      Training only the knee-bent range (100° to 65° of knee bend) produced greater relative growth
+      than every other condition at one measured site, and more than full-range training at two
+      others; training only the straight-legged range (65° to 30°) did no better than not training at
+      two sites [1].
+  - kind: training
+    claim: >-
+      The same trial found no range beat varied-range training for strength. Its participants were
+      untrained, so whether the knee-bent advantage holds for experienced lifters is less certain [1].
+howTo:
+  - Set the seat so your knees line up with the machine's pivot and the pad rests on your lower shins.
+  - Start with your knees well bent and straighten them under control.
+  - Lower slowly all the way back to the bent position. Don't cut the bottom short — that knee-bent range is where the trial above found the most growth [1].
+alternatives: [leg-press, smith-machine-squat]
+checked: 2026-10-06
+references:
+  - text: "Pedrosa GF, Lima FV, Schoenfeld BJ, Lacerda LT, Simões MG, Pereira MR, Diniz RCR, Chagas MH. Partial range of motion training elicits favorable improvements in muscular adaptations when carried out at long muscle lengths. Eur J Sport Sci, 2022;22(8):1250-1260."
+    url: "https://pubmed.ncbi.nlm.nih.gov/33977835/"
+aiAssisted: true

@@ -1,0 +1,38 @@
+---
+/**
+ * /library/exercises/ — built only when at least one exercise is published, so
+ * the live site never shows an empty section. (A rest parameter with no value is
+ * the section's own URL.)
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedExercises, GROUPS, equipmentText } from '../../../data/exercises.js';
+
+export async function getStaticPaths() {
+  const all = await publishedExercises();
+  return all.length ? [{ params: { index: undefined }, props: { all } }] : [];
+}
+const { all } = Astro.props;
+const groups = GROUPS.filter(g => all.some(e => e.data.group === g.key));
+---
+<BaseLayout title="Exercises — Library — The Stat Method"
+  description="Well-supported exercises for each muscle group, with the research behind every one and the kind of evidence it is."
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / Exercises</div>
+    <h1>Exercises</h1>
+    <p class="dek">Five well-supported choices for each muscle group — not a ranked top five, which the
+      research rarely supports. Each page says why the exercise is here, cites the studies, and labels
+      what kind of evidence they are.</p>
+    {groups.map(g => (
+      <section class="lib-kind">
+        <h2 id={g.key}>{g.label}</h2>
+        <ul class="lib-list">
+          {all.filter(e => e.data.group === g.key).map(e => (
+            <li><a href={`/library/exercises/${e.id}/`}>{e.data.name}</a>
+              <span>{equipmentText(e.data.equipment)} · {e.data.dek}</span></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

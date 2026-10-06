@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
+import { publishedExercises, GROUPS } from '../../data/exercises.js';
 const all = await publishedNutrients();
+const exercises = await publishedExercises();
+const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key));
 const kinds = await kindsWithEntries();
 ---
-<BaseLayout noindex={all.length === 0} title="Library — The Stat Method"
+<BaseLayout noindex={all.length === 0 && exercises.length === 0} title="Library — The Stat Method"
   description="Vitamins and minerals: how much you need, the best food sources, and what the evidence does and does not support — every value from the NIH.">
   <div class="wrap section">
     <p class="eyebrow">Reference</p>
@@ -22,6 +25,16 @@ const kinds = await kindsWithEntries();
         </ul>
       </section>
     ))}
+    {exercises.length > 0 && (
+      <section class="lib-kind">
+        <h2><a href="/library/exercises/">Exercises</a></h2>
+        <ul class="lib-list">
+          {exGroups.map(g => (
+            <li><a href={`/library/exercises/#${g.key}`}>{g.label}</a><span>{exercises.filter(e => e.data.group === g.key).map(e => e.data.name).join(' · ')}</span></li>
+          ))}
+        </ul>
+      </section>
+    )}
     <p class="lib-note">More vitamins and minerals are added as each is checked against its source.</p>
   </div>
 </BaseLayout>

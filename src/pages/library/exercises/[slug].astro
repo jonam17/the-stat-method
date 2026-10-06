@@ -1,0 +1,88 @@
+---
+/**
+ * One exercise page. Every claim is cited and labelled with the kind of evidence
+ * behind it (docs/EXERCISE-WORKFLOW.md). Drafts exist only in `npm run dev`.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedExercises, GROUPS, EVIDENCE_KINDS, equipmentText } from '../../../data/exercises.js';
+import { PROGRESSION_CLASSES } from '../../../engine/overload.js';
+
+export async function getStaticPaths() {
+  const all = await publishedExercises();
+  return all.map(e => ({ params: { slug: e.id }, props: { e, all } }));
+}
+const { e, all } = Astro.props;
+const d = e.data;
+const group = GROUPS.find(g => g.key === d.group);
+const klass = PROGRESSION_CLASSES[d.progressionClass];
+const pct = x => `${(x * 100).toFixed(x * 100 % 1 ? 1 : 0)}%`;
+// Only alternatives that are themselves published become links.
+const alts = d.alternatives.map(slug => all.find(x => x.id === slug)).filter(Boolean);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i}" class="cite">[${i}]</a></sup>`);
+const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout title={`${d.name} — Exercises — Library — The Stat Method`} description={d.dek}
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Exercises', href: '/library/exercises/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / <a href="/library/exercises/">Exercises</a> / {group.label}</div>
+    <article class="article lib-page">
+      {d.draft && <p class="warnbar">Draft — visible only in local development until checked against its sources.</p>}
+      <h1>{d.name}</h1>
+      <p class="dek">{d.dek}</p>
+
+      <div class="lib-facts">
+        <div><span>Main muscles</span><b>{d.primary.join(', ')}</b></div>
+        <div><span>Also works</span><b>{d.secondary.length ? d.secondary.join(', ') : '—'}</b></div>
+        <div><span>Equipment</span><b>{equipmentText(d.equipment)}</b></div>
+        <div><span>Weight steps</span><b>{klass.name}, {pct(klass.band[0])}–{pct(klass.band[1])}</b></div>
+      </div>
+
+      <div class="prose">
+        <h2 id="why">Why it's here</h2>
+        <p set:html={cite(d.whyHere)} />
+
+        <h2 id="evidence">The evidence</h2>
+        <ul class="ex-evidence">
+          {d.evidence.map(x => (<li><span class="ex-kind">{EVIDENCE_KINDS[x.kind]}</span> <span set:html={cite(x.claim)} /></li>))}
+        </ul>
+
+        <h2 id="how">How to do it</h2>
+        <ol>{d.howTo.map(s => <li set:html={cite(s)} />)}</ol>
+        <p class="lib-small">Stop an exercise that causes significant or unusual pain and have it assessed.
+          This page describes the movement; it is not rehabilitation advice.</p>
+
+        <h2 id="progress">Making it harder over time</h2>
+        <p>This is a <b>{klass.name.toLowerCase()}</b> exercise in the <a href="/tools/progressive-overload/">Progressive Overload Calculator</a>, which adds weight in
+          steps of {pct(klass.band[0])}–{pct(klass.band[1])} once every set reaches the top of your rep
+          range, and adds reps until then.</p>
+
+        {alts.length > 0 && <>
+          <h2 id="alternatives">Alternatives</h2>
+          <ul>{alts.map(a => <li><a href={`/library/exercises/${a.id}/`}>{a.data.name}</a> — {a.data.dek}</li>)}</ul>
+        </>}
+      </div>
+
+      <section class="refs">
+        <h2>References</h2>
+        <ol>{d.references.map((r, i) => (
+          <li id={`ref-${i + 1}`}>{r.text}{r.url && <> <a href={r.url} rel="noopener">{new URL(r.url).hostname.replace(/^www\./, '')}</a></>}</li>))}
+        </ol>
+      </section>
+
+      <section class="reviewed">
+        <h2>How we reviewed this page</h2>
+        <p>Every claim is cited to research we opened and read, and labelled with the kind of evidence
+          behind it. Training studies, which measure muscle or strength over weeks, carry the most weight;
+          an exercise is listed only if at least one training study or review supports it. Studies of
+          muscle activation (EMG) can add detail but are never the reason an exercise is here. Sources were
+          last checked on {fmtDate(d.checked)}.</p>
+        <p>These are five well-supported choices for this muscle group, not a ranked "top five" — the
+          research rarely supports one.</p>
+        {d.aiAssisted && <p><b>Drafted with AI assistance, then edited and fact-checked by a human.</b></p>}
+        <p>Spotted an error? <a href="/report/">Tell us</a> — corrections are logged publicly.</p>
+        <p><em>General information only. This is not medical advice.</em></p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>

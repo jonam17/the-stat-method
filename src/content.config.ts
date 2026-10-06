@@ -1,4 +1,6 @@
 import { defineCollection, z } from 'astro:content';
+import { GROUPS, EVIDENCE_KINDS, EQUIPMENT } from './data/exercise-meta.js';
+import { PROGRESSION_CLASSES } from './engine/overload.js';
 import { glob } from 'astro/loaders';
 
 /**
@@ -188,4 +190,36 @@ const nutrients = defineCollection({
   }),
 });
 
-export const collections = { articles, nutrients };
+/**
+ * Exercises: one data file per exercise. Every claim is cited and labelled with
+ * the kind of evidence behind it; an exercise needs at least one training study
+ * or review to be included. Follow docs/EXERCISE-WORKFLOW.md; integrity tests are
+ * in src/engine/__tests__/exercises.test.js.
+ */
+const exercises = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/exercises' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    name: z.string(),
+    group: z.enum(GROUPS.map(g => g.key)),
+    dek: z.string().min(40).max(200),
+    primary: z.array(z.string()).min(1),
+    secondary: z.array(z.string()).default([]),
+    equipment: z.array(z.enum(Object.keys(EQUIPMENT))).min(1),
+    // Links each exercise to the Progressive Overload Calculator's classes, so the
+    // page can say which weight-step band applies.
+    progressionClass: z.enum(Object.keys(PROGRESSION_CLASSES)),
+    whyHere: z.string(),
+    evidence: z.array(z.object({
+      kind: z.enum(Object.keys(EVIDENCE_KINDS)),
+      claim: z.string(),
+    })).min(1),
+    howTo: z.array(z.string()).min(2),
+    alternatives: z.array(z.string()).default([]),   // slugs of other exercise files
+    checked: z.coerce.date(),                          // when the sources were last read
+    references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
+    aiAssisted: z.boolean(),
+  }),
+});
+
+export const collections = { articles, nutrients, exercises };

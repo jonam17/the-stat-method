@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 20 sourced articles · 399 unit tests · zero JavaScript on content pages**
+**20 calculators · 20 sourced articles · 444 unit tests · zero JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -196,7 +196,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             399 unit tests
+│   └── __tests__/             444 unit tests
 ├── components/                React islands — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -327,6 +327,22 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.15.0 — Exercise library (drafts): the method, and the quadriceps
+
+- **A third Library section, Exercises**, at `/library/exercises/`: five well-supported choices per muscle
+  group — framed as that, not a ranked top five. Each page gives the muscles and equipment, why the exercise
+  is here, the evidence with each item labelled by kind (training study, review, muscle-length study, EMG),
+  how to do it, alternatives, and its weight-step band in the Progressive Overload Calculator, with a link.
+- **The inclusion rule is tested:** an exercise is listed only on a training study or review — never on EMG
+  alone, which shows activation during a set rather than growth or strength over weeks.
+  `src/engine/__tests__/exercises.test.js` (38 tests) also checks every citation, alternative, equipment
+  type and calculator class, and caps each group at five.
+- **First group, as drafts: quadriceps** — barbell back squat, leg press, leg extension, Bulgarian split squat
+  and Smith machine squat, each resting on a training study, with what each study did not measure stated.
+  Review record: `docs/citation-reviews/exercises-quadriceps.md`. Visible only in `npm run dev` until
+  reviewed; the section and its pages are built only once an exercise is published.
+- `docs/EXERCISE-WORKFLOW.md`: how a muscle group is added, written to be followed cold.
 
 ### v2.14.0 — Progressive overload article scheduled; local preview; links that wait for their article
 
