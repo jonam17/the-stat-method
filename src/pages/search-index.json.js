@@ -1,6 +1,7 @@
 import { publishedArticles } from '../data/articles.js';
 import { liveTools } from '../data/tools.js';
 import { publishedNutrients, KINDS } from '../data/nutrients.js';
+import { publishedExercises } from '../data/exercises.js';
 
 /**
  * Prebuilt search index, emitted as a static file at build time.
@@ -29,6 +30,7 @@ const PAGES = [
 export async function GET() {
   const articles = await publishedArticles();
   const nutrients = await publishedNutrients();
+  const exercises = await publishedExercises();
 
   const entries = [
     ...liveTools()
@@ -53,6 +55,14 @@ export async function GET() {
       url: `/library/${KINDS.find(k => k.key === n.data.kind).slug}/${n.id}/`,
       title: n.data.name,
       desc: n.data.dek,
+      cat: 'Library',
+      kind: 'Library',
+    })),
+
+    ...exercises.map(e => ({
+      url: `/library/exercises/${e.id}/`,
+      title: e.data.name,
+      desc: e.data.dek,
       cat: 'Library',
       kind: 'Library',
     })),

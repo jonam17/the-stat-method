@@ -8,13 +8,18 @@ const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key))
 const kinds = await kindsWithEntries();
 ---
 <BaseLayout noindex={all.length === 0 && exercises.length === 0} title="Library — The Stat Method"
-  description="Vitamins and minerals: how much you need, the best food sources, and what the evidence does and does not support — every value from the NIH.">
+  description={exercises.length
+    ? 'Vitamins and minerals, with every value from the NIH; and exercises for each muscle group, with the research behind each one.'
+    : 'Vitamins and minerals: how much you need, the best food sources, and what the evidence does and does not support — every value from the NIH.'}>
   <div class="wrap section">
     <p class="eyebrow">Reference</p>
     <h1>Library</h1>
     <p class="dek">How much of each vitamin and mineral you need, where to get it, and what the evidence
       really supports. Every value comes from the NIH Office of Dietary Supplements, which presents the
       official U.S. intake recommendations, and each page is checked against its source.</p>
+    {exercises.length > 0 && <p class="dek">Exercises for each muscle group have no official source to
+      copy, so every claim on those pages is cited to a study we read and labelled with the kind of
+      evidence it is.</p>}
     {kinds.map(k => (
       <section class="lib-kind">
         <h2><a href={`/library/${k.slug}/`}>{k.label}</a></h2>
@@ -35,6 +40,6 @@ const kinds = await kindsWithEntries();
         </ul>
       </section>
     )}
-    <p class="lib-note">More vitamins and minerals are added as each is checked against its source.</p>
+    <p class="lib-note">More {exercises.length ? 'vitamins, minerals and muscle groups are' : 'vitamins and minerals are'} added as each is checked against its sources.</p>
   </div>
 </BaseLayout>

@@ -328,6 +328,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.16.0 — Exercise library: the quadriceps published
+
+- **Five quadriceps exercises are live** at `/library/exercises/`: barbell back squat, leg press, leg
+  extension, Bulgarian split squat and Smith machine squat. The maintainer reviewed them on 2026-10-06; the
+  review is signed in `docs/citation-reviews/exercises-quadriceps.md`.
+- **The Exercises section appears in the Library index, the sitemap and site search** now that it has
+  entries — search previously listed only nutrients, and would have missed the new pages. The Library tab
+  and the index's sitemap entry are now decided by nutrients *or* exercises, read from the files as before.
+- **The Library index no longer implies that every page comes from the NIH.** It now says the exercise
+  pages have no official source to copy, so each claim on them is cited to a study and labelled by kind.
+
 ### v2.15.0 — Exercise library (drafts): the method, and the quadriceps
 
 - **A third Library section, Exercises**, at `/library/exercises/`: five well-supported choices per muscle

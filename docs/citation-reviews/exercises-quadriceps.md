@@ -1,9 +1,9 @@
 # Citation review — Exercises: quadriceps
 
 Files: `src/content/exercises/{back-squat,leg-press,leg-extension,bulgarian-split-squat,smith-machine-squat}.yaml`
-Verified by: the AI drafting session, 2026-10-06 · **Human review: pending**
-Method: `docs/EXERCISE-WORKFLOW.md` and `docs/citation-checklist.md`. Every file stays `draft: true` until
-a person has reviewed this record.
+Verified by: the AI drafting session, 2026-10-06 · Human review: Jonathan Morales, 2026-10-06
+Method: `docs/EXERCISE-WORKFLOW.md` and `docs/citation-checklist.md`. The files stayed `draft: true` until
+a person had reviewed this record; published in v2.16.0.
 
 ## Summary
 

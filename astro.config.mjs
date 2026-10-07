@@ -9,10 +9,11 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 
-const NUTRIENTS = './src/content/nutrients';
-const LIBRARY_LIVE = existsSync(NUTRIENTS) && readdirSync(NUTRIENTS)
+// The Library is live once any nutrient or exercise is published.
+const published = dir => existsSync(dir) && readdirSync(dir)
   .filter(f => f.endsWith('.yaml'))
-  .some(f => !/^draft:\s*true\s*$/m.test(readFileSync(`${NUTRIENTS}/${f}`, 'utf8')));
+  .some(f => !/^draft:\s*true\s*$/m.test(readFileSync(`${dir}/${f}`, 'utf8')));
+const LIBRARY_LIVE = published('./src/content/nutrients') || published('./src/content/exercises');
 
 export default defineConfig({
   // Update to the real domain before launch — sitemap URLs depend on it.
@@ -24,7 +25,7 @@ export default defineConfig({
     [rehypeScheduledLinks, { preview: process.argv.includes('dev') }]] }) },
   integrations: [react(), mdx(), sitemap({
     // The library index is left out of the sitemap until at least one nutrient
-    // is published — read from the files themselves, so publishing one is all
+    // or exercise is published — read from the files themselves, so publishing one is all
     // it takes. (An environment variable here would silently go stale.)
     filter: page => !page.endsWith('/library/') || LIBRARY_LIVE,
   })],
