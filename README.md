@@ -328,6 +328,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.18.0 — Exercise library: the chest published
+
+- **Five chest exercises are live** at `/library/exercises/`: barbell bench press, dumbbell bench press, push-up,
+  Smith machine incline press and pec deck. The maintainer reviewed them on 2026-10-08; the review is signed in
+  `docs/citation-reviews/exercises-chest.md`. They appear in the Library index, the sitemap and site search
+  automatically, as the quadriceps did.
+- **Exercise page titles now follow the nutrient pages'** — "Pec deck — Library — The Stat Method". The
+  extra "Exercises" segment pushed the Smith machine incline press title to 67 characters, past the 65 at
+  which search results cut titles off; the audit caught it.
+
 ### v2.17.0 — Exercise library (drafts): the chest
 
 - **Second group, as drafts: chest** — barbell bench press, dumbbell bench press, push-up, Smith machine incline

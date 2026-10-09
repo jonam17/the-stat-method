@@ -22,7 +22,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;',
 const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i}" class="cite">[${i}]</a></sup>`);
 const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
-<BaseLayout title={`${d.name} — Exercises — Library — The Stat Method`} description={d.dek}
+<BaseLayout title={`${d.name} — Library — The Stat Method`} description={d.dek}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Exercises', href: '/library/exercises/' }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / <a href="/library/exercises/">Exercises</a> / {group.label}</div>

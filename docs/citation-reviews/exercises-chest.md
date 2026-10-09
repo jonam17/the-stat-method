@@ -1,9 +1,9 @@
 # Citation review — Exercises: chest
 
 Files: `src/content/exercises/{barbell-bench-press,dumbbell-bench-press,push-up,smith-machine-incline-press,pec-deck}.yaml`
-Verified by: the AI drafting session, 2026-10-06 · **Human review: pending**
-Method: `docs/EXERCISE-WORKFLOW.md` and `docs/citation-checklist.md`. Every file stays `draft: true` until
-a person has reviewed this record.
+Verified by: the AI drafting session, 2026-10-06 · Human review: Jonathan Morales, 2026-10-08
+Method: `docs/EXERCISE-WORKFLOW.md` and `docs/citation-checklist.md`. The files stayed `draft: true` until
+a person had reviewed this record; published in v2.18.0.
 
 ## Summary
 
