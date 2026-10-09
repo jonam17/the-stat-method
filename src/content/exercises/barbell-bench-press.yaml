@@ -1,0 +1,34 @@
+# Chest · Barbell bench press. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-chest.md.
+draft: true
+name: Barbell bench press
+group: chest
+dek: The standard upper-body press. In men who had benched for at least a year, ten weeks of it thickened the chest by about 17%.
+primary: [Chest]
+secondary: [Triceps, Front of the shoulders]
+equipment: [barbell]
+progressionClass: large_compound
+whyHere: >-
+  The bench press trains the chest, triceps and front of the shoulders together, with a load that can
+  keep rising in small steps for years. In a ten-week trial of men who had been benching for at least
+  a year, chest muscle thickness rose by about 17% on a barbell bench press program [1].
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-two trained men, each with at least a year of bench press experience, benched three times
+      a week for ten weeks in a powerlifting-style program, with or without an elastic support device.
+      Chest thickness and one-rep max rose in both groups — the chest by about 17% in the group using
+      the bar alone — with no difference between groups; triceps thickness did not change significantly.
+      The trial had no non-training control group, and its program also included rows, chin-ups, squats
+      and deadlifts [1].
+howTo:
+  - Lie on the bench with your eyes under the bar and your feet flat on the floor.
+  - Grip the bar a little wider than your shoulders, lift it off the rack and hold it over your shoulders with your arms straight.
+  - Lower it under control to your lower chest, then press it back up until your arms are straight. In the trial above, every rep touched the chest and finished with the elbows fully straight [1].
+  - Use safety bars or a spotter when sets get close to failure.
+alternatives: [dumbbell-bench-press, smith-machine-incline-press, push-up]
+checked: 2026-10-06
+references:
+  - text: "Gavanda S, Wischtukat D, Ruckdeschel M, Geisler S, Held S. Training with an elastic bench press device provides comparable adaptations to conventional resistance training in trained men. Biol Sport, 2026;43:839-846."
+    url: "https://doi.org/10.5114/biolsport.2026.157993"
+aiAssisted: true

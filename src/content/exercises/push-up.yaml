@@ -1,0 +1,40 @@
+# Chest · Push-up. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-chest.md.
+draft: true
+name: Push-up
+group: chest
+dek: Needs nothing but the floor. Push-ups matched a light bench press for chest growth, and a banded version matched a heavy one for strength.
+primary: [Chest]
+secondary: [Triceps, Front of the shoulders]
+equipment: [bodyweight, band]
+progressionClass: moderate_compound
+whyHere: >-
+  Push-ups train the chest, triceps and front of the shoulders with no equipment, and can be made easier
+  or harder by changing your position or adding resistance. In untrained men, eight weeks of push-ups
+  grew the chest and built bench press strength as well as a light bench press did [1]; in experienced
+  lifters, push-ups against an elastic band built strength as well as a heavy bench press [2].
+evidence:
+  - kind: training
+    claim: >-
+      Eighteen untrained young men trained twice a week for eight weeks, to failure, with either a bench
+      press at 40% of their maximum or push-ups adjusted — for example, kneeling — to the same load. Both
+      groups increased chest and triceps thickness and bench press strength [1].
+  - kind: training
+    claim: >-
+      Thirty university students with advanced resistance-training experience trained for five weeks
+      with either a bench press or push-ups against an elastic band, each at a load they could lift only
+      six times. Both groups improved their one-rep and six-rep maximums by similar amounts, while a
+      control group did not change. This trial measured strength only [2].
+howTo:
+  - Place your hands slightly wider than your shoulders and step your feet back until your body forms a straight line from head to heels.
+  - Lower your chest to just above the floor, keeping your body straight, then push back up.
+  - If you can't yet do the reps you want, drop to your knees or put your hands on a bench. The first trial above scaled push-ups by position, for example kneeling [1].
+  - When ordinary push-ups get easy, raise your feet, wear a weighted vest, or add resistance with an elastic band, as the second trial did [2].
+alternatives: [barbell-bench-press, dumbbell-bench-press]
+checked: 2026-10-06
+references:
+  - text: "Kikuchi N, Nakazato K. Low-load bench press and push-up induce similar muscle hypertrophy and strength gain. J Exerc Sci Fit, 2017;15(1):37-42."
+    url: "https://pubmed.ncbi.nlm.nih.gov/29541130/"
+  - text: "Calatayud J, Borreani S, Colado JC, Martin F, Tella V, Andersen LL. Bench press and push-up at comparable levels of muscle activity results in similar strength gains. J Strength Cond Res, 2015;29(1):246-253."
+    url: "https://doi.org/10.1519/JSC.0000000000000589"
+aiAssisted: true

@@ -328,6 +328,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.17.0 — Exercise library (drafts): the chest
+
+- **Second group, as drafts: chest** — barbell bench press, dumbbell bench press, push-up, Smith machine incline
+  press and pec deck, across barbell, dumbbells, body weight or band, and machines. Each rests on a training
+  study, with its population stated and, where a trial measured only strength, that said too. The one trial of
+  muscle size in experienced lifters (Gavanda 2026) backs the barbell bench press; the incline entry is named
+  for the Smith machine because every press in its trial was done on one.
+- Review record: `docs/citation-reviews/exercises-chest.md`, including the studies considered and left out — one
+  not yet published, one whose abstract and methods describe different participants. Visible only in
+  `npm run dev` until reviewed.
+
 ### v2.16.0 — Exercise library: the quadriceps published
 
 - **Five quadriceps exercises are live** at `/library/exercises/`: barbell back squat, leg press, leg

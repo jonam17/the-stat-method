@@ -1,0 +1,33 @@
+# Chest · Pec deck. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-chest.md.
+draft: true
+name: Pec deck
+group: chest
+dek: A machine fly that works the chest on its own. In a twelve-week trial in untrained men, one hard set grew the chest as much as three.
+primary: [Chest]
+secondary: [Front of the shoulders]
+equipment: [machine]
+progressionClass: isolation
+whyHere: >-
+  The pec deck brings the arms together in front of the chest with the elbows held nearly still, so the
+  chest does the work without the triceps limiting the set. In a twelve-week trial in untrained men, it
+  thickened both the upper and the main lower part of the chest, and one set per session worked as well
+  as three [1].
+evidence:
+  - kind: training
+    claim: >-
+      Fifteen untrained young men trained the pec deck one arm at a time for twelve weeks, one arm with
+      one set and the other with three, every set to failure. Both the upper (clavicular) and lower
+      (sternocostal) parts of the chest thickened by 17–21% and pec deck strength rose 43–46%, with no
+      difference between one set and three, and no sign that either part grew more than the other [1].
+howTo:
+  - Set the seat so the handles are level with the middle of your chest.
+  - Sit with your back against the pad and, with a slight bend in your elbows, bring the handles together in front of your chest.
+  - Let them open back out slowly until you feel a stretch across your chest, keeping your shoulders back against the pad, then bring them together again.
+  - If your machine allows it, you can train one arm at a time, as the trial above did [1].
+alternatives: [dumbbell-bench-press, barbell-bench-press]
+checked: 2026-10-06
+references:
+  - text: "Pinto MD, Ughini C, Nunes JP, Cadore EL, Pinto RS. Pectoralis clavicular and sternocostal thicknesses increase similarly in response to one and three sets of pec deck resistance training in untrained young men. J Strength Cond Res, 2025;39(5):523-530."
+    url: "https://doi.org/10.1519/JSC.0000000000005045"
+aiAssisted: true

@@ -1,0 +1,33 @@
+# Chest · Dumbbell bench press. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-chest.md.
+draft: true
+name: Dumbbell bench press
+group: chest
+dek: A bench press with a dumbbell in each hand. In trained men it built pressing strength over ten weeks, most of all in the dumbbell press itself.
+primary: [Chest]
+secondary: [Triceps, Front of the shoulders]
+equipment: [dumbbell]
+progressionClass: moderate_compound
+whyHere: >-
+  Dumbbells let each arm press on its own and need nothing more than a bench and a pair of weights. In a
+  ten-week trial of resistance-trained men, a dumbbell chest press program improved pressing strength,
+  with the largest gains in the dumbbell press itself [1].
+evidence:
+  - kind: training
+    claim: >-
+      Thirty-six resistance-trained men did a chest press twice a week for ten weeks — four sets of six —
+      on a Swiss ball, on a Smith machine or with dumbbells. Every group got stronger, fastest in the first
+      seven sessions, and the dumbbell group improved most in the exercise it trained. Whether dumbbells
+      beat the Smith machine was not shown: that difference fell short of statistical significance. The
+      trial measured strength, not muscle size [1].
+howTo:
+  - Sit on the end of a flat bench with a dumbbell resting on each thigh, then lie back and bring them to your chest.
+  - Press both dumbbells up until your arms are straight above your shoulders.
+  - Lower them under control until they are level with your chest, then press again.
+  - To finish, bring the dumbbells back to your chest and sit up with them resting on your thighs.
+alternatives: [barbell-bench-press, push-up, pec-deck]
+checked: 2026-10-06
+references:
+  - text: "Saeterbakken AH, Andersen V, Behm DG, et al. Resistance-training exercises with different stability requirements: time course of task specificity. Eur J Appl Physiol, 2016;116:2247-2256."
+    url: "https://doi.org/10.1007/s00421-016-3470-3"
+aiAssisted: true

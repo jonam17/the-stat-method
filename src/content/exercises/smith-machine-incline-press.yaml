@@ -1,0 +1,34 @@
+# Chest · Smith machine incline press. Sources read 2026-10-06 — see
+# docs/citation-reviews/exercises-chest.md.
+draft: true
+name: Smith machine incline press
+group: chest
+dek: A press on a bench tilted to about 45°. In a trial on a Smith machine, it grew the top of the chest more than the flat press did.
+primary: [Chest]
+secondary: [Front of the shoulders, Triceps]
+equipment: [machine]
+progressionClass: moderate_compound
+whyHere: >-
+  Tilting the bench moves the press toward the top of the chest. In an eight-week trial in untrained
+  men, all pressing on a Smith machine, the incline press grew the uppermost of three measured parts of
+  the chest more than the flat press or a mix of both, and built strength just as well [1].
+evidence:
+  - kind: training
+    claim: >-
+      Forty-seven untrained men trained once a week for eight weeks with a flat press, an incline press at
+      44°, or both, all on a Smith machine and with the same number of sets. Muscle thickness, measured in
+      30 of them, grew more with the incline press at the highest of three sites — between the second and
+      third ribs, below the middle of the collarbone; at the other two sites the groups did not differ.
+      Bench press strength, tested isometrically, rose similarly in every group. The trial did not test
+      free-bar or dumbbell incline presses [1].
+howTo:
+  - Set an adjustable bench to about 45° under the Smith machine, so the bar comes down onto your upper chest. The trial above used 44° [1].
+  - Set the safety stops so the bar stops just below the point where it touches your chest.
+  - Unhook the bar, lower it under control until it touches your upper chest, then press until your arms are straight. In the trial, every rep touched the chest and finished with the elbows fully straight [1].
+  - Re-hook the bar at the top of your last rep.
+alternatives: [barbell-bench-press, dumbbell-bench-press]
+checked: 2026-10-06
+references:
+  - text: "Chaves SFN, Rocha-Júnior VA, Encarnação IGA, Martins-Costa HC, Freitas EDS, Coelho DB, Franco FSC, Loenneke JP, Bottaro M, Ferreira-Júnior JB. Effects of horizontal and incline bench press on neuromuscular adaptations in untrained young men. Int J Exerc Sci, 2020;13(6):859-872."
+    url: "https://digitalcommons.wku.edu/ijes/vol13/iss6/12"
+aiAssisted: true
