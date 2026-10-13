@@ -82,7 +82,11 @@ if (cmd === 'complete') {
     console.log(`${f}: already citationsVerified: full — date left unchanged.`);
     process.exit(0);
   }
-  const today = new Date().toISOString().slice(0, 10);
+  // The local calendar date, not UTC: toISOString() stamped the next day for any
+  // verification finished after 5 pm Pacific (4 pm in winter).
+  const now = new Date();
+  const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+    .map((n, i) => String(n).padStart(i ? 2 : 4, '0')).join('-');
   const claim = `citationsVerified: full\ncitationsVerifiedDate: ${today}`;
   s = s.replace(/^citationsVerifiedDate:.*\n/m, '');
   s = /^citationsVerified:.*$/m.test(fm(s))

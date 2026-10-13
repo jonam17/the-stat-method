@@ -313,4 +313,53 @@ export const CHARTS = {
       rows,
     };
   },
+
+  // Grgic et al. (2018), Sports Med 48(5):1207–1220, accepted manuscript (Victoria University
+  // repository): pooled effect sizes with 95% CIs by weekly frequency, Table 3 (all studies) and the
+  // volume-equated subgroup (7 studies, 42 effect sizes). Two charts on one scale so they compare.
+  'frequency-strength-all': () => {
+    const rows = [
+      { label: 'Once a week',      low: 0.48, high: 1.01, point: 0.74 },
+      { label: 'Twice a week',     low: 0.55, high: 1.09, point: 0.82 },
+      { label: 'Three times',      low: 0.65, high: 1.21, point: 0.93 },
+      { label: 'Four or more',     low: 0.74, high: 1.42, point: 1.08 },
+    ];
+    const rising = rows.every((r, i) => i === 0 || r.point > rows[i - 1].point);
+    return {
+      type: 'interval', kind: 'paper', source: 'Grgic et al. (2018)',
+      title: 'All studies: strength gains rise with frequency',
+      desc: 'Pooled effect sizes for strength gain by weekly training frequency across 21 studies, with 95% confidence intervals.',
+      caption: `Every study in the analysis, whether or not weekly volume was matched. The estimates ` +
+        (rising ? `rise at each step, from ${rows[0].point.toFixed(2)} at once a week to ${rows.at(-1).point.toFixed(2)} at four or more`
+                : 'do not rise at every step') +
+        ` — but most of these studies did not match weekly volume, so a higher frequency could simply mean more sets.`,
+      x: { label: 'Standardised effect size for strength gain', min: -0.5, max: 2, digits: 2 },
+      rows,
+    };
+  },
+
+  'frequency-strength-equated': () => {
+    const rows = [
+      { label: 'Once a week',      low: 0.13,  high: 0.93, point: 0.53 },
+      { label: 'Twice a week',     low: -0.25, high: 1.86, point: 0.80 },
+      { label: 'Three times',      low: 0.21,  high: 1.07, point: 0.64 },
+      { label: 'Four or more',     low: 0.45,  high: 0.72, point: 0.58 },
+    ];
+    const rising = rows.every((r, i) => i === 0 || r.point > rows[i - 1].point);
+    const top = rows.reduce((a, b) => (b.point > a.point ? b : a));
+    const widest = rows.reduce((a, b) => (b.high - b.low > a.high - a.low ? b : a));
+    return {
+      type: 'interval', kind: 'paper', source: 'Grgic et al. (2018)',
+      title: 'Volume matched: no consistent rise',
+      desc: 'Pooled effect sizes for strength gain by weekly frequency in the seven studies that matched weekly volume, with 95% confidence intervals.',
+      caption: `Only the seven studies that kept weekly volume the same across frequencies. ` +
+        (rising ? 'The estimates still rise at each step.'
+                : `The estimates no longer rise steadily: the highest is ${top.point.toFixed(2)} at ` +
+                  `${top.label.toLowerCase()}`) +
+        (widest === top ? ', which also has the widest interval' : '') +
+        `. The analysis found no significant effect of frequency (P = 0.421).`,
+      x: { label: 'Standardised effect size for strength gain', min: -0.5, max: 2, digits: 2 },
+      rows,
+    };
+  },
 };

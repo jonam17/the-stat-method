@@ -26,7 +26,7 @@ const refCount = d.references?.length ?? 0;
 // Derived, never hand-entered, so the summary cannot drift from the list.
 const refVerified = d.references?.filter(r => r.verified).length ?? 0;
 const fmtDate = dt => dt.toLocaleDateString('en-US',
-  { month: 'long', day: 'numeric', year: 'numeric' });
+  { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const related = all.filter(a => a.id !== article.id).slice(0, 3);
 const tool = d.relatedTool ? findTool(d.relatedTool) : null;
 // Local preview only (npm run dev): say plainly that this page is not live yet.
@@ -190,7 +190,7 @@ const status = PREVIEW ? articleStatus(d) : 'live';
                     <li>
                       <time datetime={c.date.toISOString().slice(0, 10)}>
                         {c.date.toLocaleDateString('en-US',
-                          { month: 'short', day: 'numeric', year: 'numeric' })}
+                          { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                       </time>
                       <span>{c.note}</span>
                     </li>

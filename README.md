@@ -328,6 +328,25 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.19.0 — Training frequency and rest days article scheduled
+
+- **"Training frequency and rest days" is reviewed and scheduled** for Sunday 2026-10-18, in the Progressive
+  Overload cluster. It treats how often to train a muscle and how much rest training needs as one question:
+  frequency makes little difference to muscle growth once weekly sets are matched, practising a lift more
+  often helps strength with diminishing returns, and recovery depends mostly on how close sets go to failure.
+  It links to the training volume article rather than repeating it. Eight references, all checked against
+  the originals; the maintainer's review is signed in `docs/citation-reviews/training-frequency-and-rest-days.md`,
+  which also records the four papers that could be read only as abstracts and the claims limited to match.
+- **Two paper charts** recreate Grgic et al. (2018): strength gains by weekly frequency across all studies, and
+  in the seven studies that matched volume, on one scale so the difference shows. Captions are computed from
+  the rows.
+- **Fixed: two time-zone slips, both invisible on the live site.** `npm run citations -- complete` stamped the
+  UTC date, so a verification finished after 5 pm Pacific (4 pm in winter) was dated the next day; it now uses
+  the local calendar date. And article dates — the byline, the cards, the changelog list and the preview
+  banner — were formatted in the build machine's time zone. Cloudflare builds in UTC, so the live site was
+  right, but `npm run dev` on a Pacific machine showed every article a day early ("Scheduled for October 17"
+  for an article dated the 18th). They now format in UTC, as the Library pages already did.
+
 ### v2.18.0 — Exercise library: the chest published
 
 - **Five chest exercises are live** at `/library/exercises/`: barbell bench press, dumbbell bench press, push-up,
