@@ -123,11 +123,12 @@ async function main() {
   const errors = [];
   page.on('pageerror', e => errors.push(String(e).slice(0, 120)));
 
-  let n = 0, failed = 0;
+  // Named by slug alone. Numbering by registry position renamed nearly every file
+  // whenever a tool was added ahead of the others, and broke the README's links.
+  let failed = 0;
   for (const tool of live) {
-    n += 1;
     errors.length = 0;
-    const name = `${String(n).padStart(2, '0')}-${tool.slug}.${ext}`;
+    const name = `${tool.slug}.${ext}`;
     await page.goto(`http://localhost:${PORT}/tools/${tool.slug}/`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(800);
 
@@ -202,7 +203,7 @@ async function main() {
   // Keep the homepage preview in lockstep with the real Macro Calculator UI.
   // The homepage intentionally uses a static image, so visitors see the same
   // interface they'll get after clicking Run a calculation.
-  const macroPreview = join(OUT, `01-macro-calculator.${ext}`);
+  const macroPreview = join(OUT, `macro-calculator.${ext}`);
   const homepagePreview = join(ROOT, 'public', `statmethod-calculator-preview.${ext}`);
   if (existsSync(macroPreview)) {
     await writeFile(homepagePreview, await readFile(macroPreview));

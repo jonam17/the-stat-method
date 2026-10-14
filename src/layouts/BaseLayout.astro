@@ -18,7 +18,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '../styles/global.css';
-import { SITE, AUTHOR, authorLine, abs, supportUrl, repoUrl } from '../site.config.js';
+import { SITE, AUTHOR, SOCIAL, authorLine, abs, supportUrl, repoUrl } from '../site.config.js';
 
 const {
   title, description,
@@ -134,8 +134,7 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
-  {AUTHOR.handle && !AUTHOR.handle.startsWith('FILL_ME') &&
-    <meta name="twitter:creator" content={`@${AUTHOR.handle}`} />}
+  {SOCIAL.x && <meta name="twitter:creator" content={`@${SOCIAL.x}`} />}
 
   <!-- F-025: structured data -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -144,7 +143,9 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
 
   <link rel="sitemap" href="/sitemap-index.xml" />
   <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="color-scheme" content="light dark" />
   <script is:inline>
     /* Runs before first paint to avoid a flash of the wrong theme. Kept tiny

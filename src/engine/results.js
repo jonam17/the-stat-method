@@ -91,6 +91,30 @@ export function macroResult({ kg, cm, age, sex, activity, goal, bf, formula = 'a
   return { bmr, tdee: total, cals, target, delta, ea, lbm, bmi: bmi(kg, cm), raw, usingLeanMass, ...resolved };
 }
 
+/**
+ * Hand Portions: the daily macros its portions are built from.
+ *
+ * "I know them": the macros as entered. Age still gates the result, exactly as
+ * before, but a blank age is not missing input here — the Age field is not shown.
+ *
+ * "Calculate them": the Macro Calculator's own result in grams mode with no body fat —
+ * the calculation Hand Portions used to repeat in its component. Identical output for
+ * every valid input (pinned in __tests__/hand-portions.test.js). One deliberate change:
+ * a blank or impossible age or body size is now incomplete, where the component used to
+ * substitute an age of 30 and show a result for details nobody entered.
+ */
+export function handPortionsResult({ source, direct, kg, cm, age, sex, activity, goal }) {
+  if (source === 'direct') {
+    const g = eligibility({ age });
+    if (g.refused) return { blocked: true, reason: g.reason, copy: g.copy };
+    return { p: +direct.p || 0, c: +direct.c || 0, f: +direct.f || 0 };
+  }
+  if (!(kg > 0) || !(cm > 0)) return { incomplete: true };
+  const r = macroResult({ kg, cm, age, sex, activity, goal, bf: null, mode: 'grams' });
+  if (r.blocked || r.incomplete) return r;
+  return { p: r.grams.p, c: r.grams.c, f: r.grams.f, target: r.target };
+}
+
 const DAY_MS = 86400000;
 
 /**

@@ -187,7 +187,7 @@ describe('every refusal is decided by the engine', () => {
 
   it('every component with an Age field refuses through the engine', () => {
     const offenders = files.filter(f => /label="Age"/.test(src(f)) &&
-      !/eligibility\(|macroResult\(|deficitPlanResult\(|computeBaseline\(/.test(src(f)));
+      !/eligibility\(|macroResult\(|handPortionsResult\(|deficitPlanResult\(|computeBaseline\(/.test(src(f)));
     expect(offenders).toEqual([]);
   });
 });

@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "previews": "node scripts/capture-previews.mjs",
+    "favicons": "node scripts/make-favicons.mjs",
     "docs": "npm run build && npm run previews",
     "audit": "node scripts/audit.mjs",
     "qa:calculators": "node scripts/calculator-qa.mjs",

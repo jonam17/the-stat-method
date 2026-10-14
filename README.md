@@ -65,7 +65,7 @@ This tool models that: expenditure is recomputed daily against current bodyweigh
 change is partitioned between fat and lean tissue via the Forbes relationship, and the
 projection is drawn against the static rule so the error is visible.
 
-![Deficit and goal-date planner](docs/previews/05-deficit-planner.webp)
+![Deficit and goal-date planner](docs/previews/deficit-planner.webp)
 
 *Solving "90 kg → 80 kg in 24 weeks" returns 2,092 kcal/day and lands on 80.00 kg. The
 static rule predicts 73.86 kg over the same period — an overestimate of 6.1 kg.*
@@ -78,27 +78,27 @@ the weight stays off, and which almost no free tool surfaces.
 Five published BMR equations run simultaneously so the disagreement between them is visible
 rather than hidden behind a single confident number.
 
-![TDEE and BMR calculator](docs/previews/02-tdee-calculator.webp)
+![TDEE and BMR calculator](docs/previews/tdee-calculator.webp)
 
 #### Body fat estimator
 
 Three methods side by side, each with its **published error range**.
 
-![Body fat estimator](docs/previews/03-body-fat.webp)
+![Body fat estimator](docs/previews/body-fat.webp)
 
 #### Macro calculator
 
 Protein scaled off lean mass when body fat is known, fat floored for hormonal health, and a
 split editor accepting percentages *or* grams with live over-budget warnings.
 
-![Macro calculator](docs/previews/01-macro-calculator.webp)
+![Macro calculator](docs/previews/macro-calculator.webp)
 
 #### Lean mass & FFMI · Healthy weight range
 
 FFMI is BMI with the fat removed. The healthy-weight tool runs four classical formulas
 alongside waist-to-height ratio, which predicts cardiometabolic risk better than BMI.
 
-<img src="docs/previews/04-ffmi.webp" width="49%"> <img src="docs/previews/15-healthy-weight.webp" width="49%">
+<img src="docs/previews/ffmi.webp" width="49%"> <img src="docs/previews/healthy-weight.webp" width="49%">
 
 ---
 
@@ -109,7 +109,7 @@ alongside waist-to-height ratio, which predicts cardiometabolic risk better than
 Modern powerlifting scoring. **DOTS is the default and Wilks is tagged as legacy** — the
 inverse of most incumbent calculators, which still present Wilks as the standard.
 
-![Powerlifting score](docs/previews/09-powerlifting-score.webp)
+![Powerlifting score](docs/previews/powerlifting-score.webp)
 
 Coefficients are taken from the official IPF 2020 publication and the DOTS specification,
 not from memory. DOTS and Wilks agree within ~3 points at 82.5 kg and diverge at extreme
@@ -120,7 +120,7 @@ bodyweights, which is the documented behaviour.
 Five formulas with a full percentage table, plus an RPE converter for prescribing working
 loads by reps in reserve — genuinely underserved by free tools.
 
-<img src="docs/previews/06-one-rep-max.webp" width="49%"> <img src="docs/previews/11-rpe-converter.webp" width="49%">
+<img src="docs/previews/one-rep-max.webp" width="49%"> <img src="docs/previews/rpe-converter.webp" width="49%">
 
 #### Progressive overload calculator
 
@@ -131,14 +131,14 @@ smallest your equipment allows inside a band for the exercise type, so a 15 → 
 (+33%) on a lateral raise becomes "keep adding reps". Every rule it applied is shown, and rules
 that are practical conventions rather than research findings are labelled as such.
 
-![Progressive overload calculator](docs/previews/19-progressive-overload.webp)
+![Progressive overload calculator](docs/previews/progressive-overload.webp)
 
 #### Strength standards · Plate loader
 
 Bodyweight-relative levels scaled for age and sex, and a visual plate loader that reports
 the closest achievable load when a target cannot be made exactly.
 
-<img src="docs/previews/10-strength-standards.webp" width="49%"> <img src="docs/previews/12-plate-loader.webp" width="49%">
+<img src="docs/previews/strength-standards.webp" width="49%"> <img src="docs/previews/plate-loader.webp" width="49%">
 
 ---
 
@@ -149,14 +149,14 @@ the closest achievable load when a target cannot be made exactly.
 Converts gram targets into palms, cupped hands and thumbs, so tracking works without a
 scale. Includes a meal splitter with optional peri-workout weighting.
 
-![Hand portion translator](docs/previews/13-hand-portions.webp)
+![Hand portion translator](docs/previews/hand-portions.webp)
 
 #### Protein target
 
 A daily range from lean body mass, adjusted for deficit depth, training age and older
 adults — and it tells you plainly that the "30 g per meal" absorption limit is a myth.
 
-![Protein target](docs/previews/14-protein-target.webp)
+![Protein target](docs/previews/protein-target.webp)
 
 ---
 
@@ -167,14 +167,14 @@ adults — and it tells you plainly that the "30 g per meal" absorption limit is
 Karvonen reserve zones built on **Tanaka** rather than "220 − age", and METs-based energy
 estimates from the Compendium of Physical Activities.
 
-<img src="docs/previews/07-heart-rate-zones.webp" width="49%"> <img src="docs/previews/08-calories-burned.webp" width="49%">
+<img src="docs/previews/heart-rate-zones.webp" width="49%"> <img src="docs/previews/calories-burned.webp" width="49%">
 
 #### Running pace · Sleep cycles
 
 Splits and Riegel race predictions flagged by how far the extrapolation stretches, plus
 cycle-aligned bedtimes with an honest note on what cycle timing can and cannot do.
 
-<img src="docs/previews/17-running-pace.webp" width="49%"> <img src="docs/previews/16-sleep-calculator.webp" width="49%">
+<img src="docs/previews/running-pace.webp" width="49%"> <img src="docs/previews/sleep-calculator.webp" width="49%">
 
 ---
 
@@ -249,7 +249,8 @@ npm run docs                      # build + capture every tool preview
 
 The browser is only needed for screenshots; `npm run build` and `npm test` do not require
 it. Previews are written as WebP via `sharp` (bundled with Astro), and the output directory
-is cleared each run so stale images cannot accumulate.
+is cleared each run so stale images cannot accumulate. Each file is named by the tool's slug
+(`docs/previews/tdee-calculator.webp`), so adding a tool never renames the others.
 
 Each capture is verified to produce a real result and to throw no console errors, so a
 broken tool fails the run rather than silently shipping a blank screenshot.
@@ -327,6 +328,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.19.1 — Hand Portions on the engine; icons; previews named by slug
+
+- **Hand Portions now calls the engine for its macros** (`handPortionsResult()` in `src/engine/results.js`),
+  the Macro Calculator's own calculation in grams mode, instead of repeating it in the component. A new test
+  sweeps 5,040 input combinations against the old calculation, copied verbatim: identical grams, calorie
+  targets and refusals for every valid input. One deliberate change: a blank age now shows "Enter your
+  details", where the tool used to assume an age of 30 and show a result nobody's details produced.
+- **The site no longer credits @jonam17 on X.** Every page's `twitter:creator` tag reused the GitHub handle,
+  so share cards credited an X account the site does not own. Social handles now live in `SOCIAL` in
+  `src/site.config.js`, empty until an account exists; an empty handle emits nothing.
+- **`/favicon.ico` and `/apple-touch-icon.png`**, generated from `favicon.svg` by `npm run favicons`. Older
+  browsers, feed readers and crawlers request `/favicon.ico` regardless and were getting a 404; iPhones ignore
+  SVG icons, so "Add to Home Screen" showed a screenshot of the page instead of the mark.
+- **README previews are named by slug** (`docs/previews/tdee-calculator.webp`), so adding a tool never renames
+  the others; `npm run previews` used to number them in registry order, which had drifted since the Baseline
+  joined. All twenty regenerated, the Baseline's included, showing the current results panel.
 
 ### v2.19.0 — Training frequency and rest days article scheduled
 

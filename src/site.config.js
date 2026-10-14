@@ -57,10 +57,20 @@ export const AUTHOR = {
    *  that claim should land on the code, not on a profile page. */
   repo: 'the-stat-method',
 
-  /** Social / GitHub handle, without the @. */
+  /** GitHub handle, without the @. Used for the repository and sponsors links only —
+   *  never as a social handle; social accounts are in SOCIAL below. */
   handle: process.env.STATMETHOD_GITHUB_HANDLE || 'jonam17',
 
   url: '',                          // optional personal site
+};
+
+/**
+ * The site's own social accounts, as handles without the @. Leave a value empty
+ * until the account exists: an empty handle emits nothing, so no page can credit
+ * or link to an account someone else owns.
+ */
+export const SOCIAL = {
+  x: '',            // emitted as twitter:creator on every page
 };
 
 /**

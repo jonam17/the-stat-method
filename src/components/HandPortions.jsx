@@ -1,13 +1,10 @@
 import { useState, useMemo } from 'react';
 import {
-  toHandPortions, splitMeals, HAND_UNITS,
-  selectBmr, tdee, calorieTarget, ACTIVITY, lbmFromBodyFat,
-  recommendedGrams, lbToKg, ftInToCm, fmt,
+  toHandPortions, splitMeals, HAND_UNITS, ACTIVITY, lbToKg, ftInToCm, fmt,
 } from '../engine/index.js';
+import { handPortionsResult } from '../engine/results.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import {
-  eligibility, AGE_MIN, AGE_MAX, RAIL_COPY, GOALS, goalDelta,
-} from '../engine/safety.js';
+import { AGE_MIN, AGE_MAX, RAIL_COPY, GOALS } from '../engine/safety.js';
 
 /**
  * Converts macro targets into body-scaled hand portions, so tracking works
@@ -35,28 +32,15 @@ export default function HandPortions() {
   const [activity, setActivity] = useState('moderate');
   const [goal, setGoal] = useState('maintain');   // F-028
 
-  const macros = useMemo(() => {
-    if (source === 'direct') {
-      // Age still applies when macros are entered directly.
-      const g = eligibility({ age });
-      if (g.refused) return { blocked: true, reason: g.reason, copy: g.copy };
-      return { p: +pIn || 0, c: +cIn || 0, f: +fIn || 0 };
-    }
-    const kg = units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0;
-    // Was ftInToCm(5, 10): every imperial user was assumed to be 5'10", so the
-    // underweight check ran at the wrong height. A 6'4", 130 lb user — BMI 15.8 —
-    // computed as 18.6 and was given a weight-loss plan.
-    const cm = units === 'imperial' ? ftInToCm(+feet || 0, +inches || 0) : +height || 0;
-    const input = { kg, cm, age: +age || 30, sex, lbm: null };
-    const guard = eligibility({ age, kg, cm, goal });
-    if (guard.refused) return { blocked: true, reason: guard.reason, copy: guard.copy };
-
-    const total = tdee(selectBmr(input, 'auto'), ACTIVITY[activity].factor);
-    const target = calorieTarget(total, goalDelta(goal, total), sex, total);   // F-001, F-028
-    const cals = target.intake;
-    const g = recommendedGrams({ cals, kg, lbm: null });
-    return { p: g.p, c: g.c, f: g.f, target };
-  }, [source, pIn, cIn, fIn, units, sex, age, weight, height, feet, inches, activity, goal]);
+  // Computed in the engine (CONVENTIONS §21), on the Macro Calculator's own calculation.
+  // Imperial height used to be fixed at 5'10", so the underweight check ran at the wrong
+  // height: a 6'4", 130 lb user — BMI 15.8 — computed as 18.6 and got a weight-loss plan.
+  const macros = useMemo(() => handPortionsResult({
+    source, direct: { p: pIn, c: cIn, f: fIn },
+    kg: units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0,
+    cm: units === 'imperial' ? ftInToCm(+feet || 0, +inches || 0) : +height || 0,
+    age, sex, activity, goal,
+  }), [source, pIn, cIn, fIn, units, sex, age, weight, height, feet, inches, activity, goal]);
 
   const portions = useMemo(
     () => toHandPortions({ proteinG: macros.p, carbsG: macros.c, fatG: macros.f, handSize }),
@@ -162,10 +146,10 @@ export default function HandPortions() {
         </Panel>
 
         <Panel label="Daily portions" dark
-               copyExtra={macros?.blocked ? [] : ROWS
+               copyExtra={macros.blocked || macros.incomplete ? [] : ROWS
                  .filter(([, , , v]) => v?.whole != null)
                  .map(([, name, , v]) => `${name}: ${v.whole} ${v.unit}${v.whole === 1 ? '' : 's'} per day`)}
-               incomplete={!(+weight > 0)}
+               incomplete={macros.incomplete}
                incompleteNote="Enter your details to see your daily portions."
                // Takes precedence over children, so no portions are rendered.
                notice={macros.blocked ? macros.copy : null}>
