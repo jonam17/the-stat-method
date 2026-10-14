@@ -25,6 +25,8 @@ const {
   ogType = 'website',      // 'article' on article pages
   published, updated, reviewStatus, clinicalClaims, references, noindex,
   pageType = 'WebPage', breadcrumbItems = [], extraJsonLd = [],
+  ogImage: ogImagePath = '/og-default.png',   // a page's own card (src/og/pages.js), or the site's
+  ogImageAlt,
 } = Astro.props;
 // Search results truncate around 60-65 characters, so the brand suffix is only
 // appended when the page title leaves room for it.
@@ -48,7 +50,9 @@ const path = Astro.url.pathname;
 // /x and /x/ cannot both be indexed as distinct URLs.
 const isPreviewOrigin = /\.workers\.dev$|\.pages\.dev$|FILL-ME-DOMAIN/.test(new URL(SITE.url).hostname);
 const canonical = abs(path.endsWith('/') ? path : `${path}/`);
-const ogImage = abs('/og-default.png');
+const ogImage = abs(ogImagePath);
+const siteCard = abs('/og-default.png');
+const ogAlt = ogImageAlt || 'The Stat Method — evidence-based health, fitness and nutrition tools';
 
 // F-025: structured data, populated from the editorial metadata the content
 // schema already validates. reviewedBy is emitted ONLY when review actually
@@ -66,7 +70,7 @@ const jsonLd = {
     author: AUTHOR.type === 'organization'
       ? { '@type': 'Organization', name: AUTHOR.name, url: abs('/') }
       : { '@type': 'Person', name: authorLine() },
-    publisher: { '@type': 'Organization', name: SITE.name, url: abs('/'), logo: { '@type': 'ImageObject', url: ogImage } },
+    publisher: { '@type': 'Organization', name: SITE.name, url: abs('/'), logo: { '@type': 'ImageObject', url: siteCard } },
     datePublished: published,
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
     image: [ogImage],
@@ -125,7 +129,7 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
-  <meta property="og:image:alt" content="The Stat Method — evidence-based health, fitness and nutrition tools" />
+  <meta property="og:image:alt" content={ogAlt} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   {published && <meta property="article:published_time" content={published} />}

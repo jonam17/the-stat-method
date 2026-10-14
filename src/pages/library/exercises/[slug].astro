@@ -6,6 +6,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { publishedExercises, GROUPS, EVIDENCE_KINDS, equipmentText } from '../../../data/exercises.js';
 import { PROGRESSION_CLASSES } from '../../../engine/overload.js';
+import { ogPath } from '../../../og/pages.js';
 
 export async function getStaticPaths() {
   const all = await publishedExercises();
@@ -23,6 +24,7 @@ const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i
 const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout title={`${d.name} — Library — The Stat Method`} description={d.dek}
+  ogImage={ogPath.exercise(e.id)} ogImageAlt={`${d.name} — The Stat Method Library`}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Exercises', href: '/library/exercises/' }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / <a href="/library/exercises/">Exercises</a> / {group.label}</div>

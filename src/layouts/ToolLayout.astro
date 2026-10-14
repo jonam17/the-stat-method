@@ -5,6 +5,7 @@ import BaseLayout from './BaseLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import { TOOLS, findTool } from '../data/tools.js';
 import { guideFor } from '../data/tool-guides.js';
+import { ogPath } from '../og/pages.js';
 
 const { slug, title, intro } = Astro.props;
 const tool = findTool(slug);
@@ -50,6 +51,7 @@ const toolSchema = tool?.live ? {
 } : null;
 ---
 <BaseLayout title={seoTitle} description={intro} pageType="WebPage"
+  ogImage={tool?.live ? ogPath.tool(slug) : undefined} ogImageAlt={tool ? `${tool.name} — The Stat Method` : undefined}
   breadcrumbItems={[{ name: 'Calculators', href: '/tools/' }, { name: category, href: `/tools/#${category.toLowerCase()}` }]}
   extraJsonLd={toolSchema ? [toolSchema] : []}>
   <div class="wrap tool-page">

@@ -7,6 +7,7 @@
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { publishedNutrients, KINDS, inAltUnit } from '../../../data/nutrients.js';
+import { ogPath } from '../../../og/pages.js';
 import { sourcesChart } from '../../../charts/library.js';
 import { renderChart } from '../../../charts/render.js';
 import { bands, adultRange, groupLabel } from '../../../data/brackets.js';
@@ -44,6 +45,7 @@ const chart = renderChart(`${n.id}-sources`, sourcesChart(n));
 const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout title={`${d.name} — Library — The Stat Method`} description={d.dek}
+  ogImage={ogPath.nutrient(kind.slug, n.id)} ogImageAlt={`${d.name} — The Stat Method Library`}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: kind.label, href: `/library/${kind.slug}/` }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / <a href={`/library/${kind.slug}/`}>{kind.label}</a></div>

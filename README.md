@@ -329,6 +329,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.20.0 — Share cards for every page; dependency security updates
+
+- **Every article, calculator and Library entry now has its own share card**, so a link posted on X,
+  Reddit, iMessage or Slack shows that page's title instead of the same site-wide image. Articles carry their
+  category and, when every reference has been checked, "All N citations checked"; calculators say "No
+  account · inputs stay local"; nutrients "Values from the NIH fact sheet"; exercises "Chosen on training
+  studies". Every word comes from the page's own data (`src/og/pages.js`). Pages without a card of their own
+  keep the site-wide one, which looks as before.
+- **Cards are drawn from the site's own fonts**, converted to outlines with `opentype.js` (`src/og/card.js`),
+  so they look the same whichever machine builds them, and titles wrap on real glyph widths. A title too long
+  for three lines fails the build; a subtitle that does not fit is left off rather than cut short.
+- **`npm run build` no longer modifies a committed file.** The cards, `/og-default.png` included, are
+  generated into `dist/`; `public/og-default.png` and `scripts/make-og-image.mjs` are gone.
+- **Security: `npm audit` is clean.** Advisories against sharp (its librsvg, which renders these cards),
+  http-cache-semantics (now patched; CONVENTIONS §9 had been waiting for this), source-map-js and smol-toml,
+  fixed by a plain `npm audit fix`: patch versions only, astro unchanged at 7.3.3.
+
 ### v2.19.1 — Hand Portions on the engine; icons; previews named by slug
 
 - **Hand Portions now calls the engine for its macros** (`handPortionsResult()` in `src/engine/results.js`),

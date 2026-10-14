@@ -151,6 +151,11 @@ build time, nothing it runs serves visitors, and no session cookies exist, so th
 to read. Revisit when a patched version ships (kornelski/http-cache-semantics#56) — then upgrade
 through the normal update, not `--force`.
 
+**Resolved, 2026-10-13 (v2.20.0).** A patched http-cache-semantics (4.3.0) shipped, and `npm audit` had
+also picked up advisories against sharp (librsvg, which renders the share cards), source-map-js and
+smol-toml. All four were fixed by a plain `npm audit fix` — patch versions only, astro unchanged at
+7.3.3 — and `npm audit` reports zero vulnerabilities.
+
 **A note on the upgrade itself.** Deleting `package-lock.json` and installing from scratch
 trips an npm resolver crash (`Cannot read properties of null (reading 'edgesOut')`). The
 working sequence is: install once with `--legacy-peer-deps` to generate the lockfile, delete
@@ -437,3 +442,19 @@ See our <a href="/ad-disclosure/">advertising disclosure</a>.
 > wrong. Fixing them by hand, a new line break went straight back in next to an `</em>` — the audit
 > caught it, which is the case for having the check.
 
+## 26. Share cards
+
+- **A card says only what its page says.** Every word on a share card comes from the page's own data —
+  title, dek, category, citation count (`src/og/pages.js`). Nothing is typed onto a card, so a card cannot
+  claim "all citations checked" for an article that is not `full`.
+- **Text is drawn from the site's font files, not system fonts** (`src/og/card.js`). librsvg resolves
+  named fonts against whatever the build machine has installed, and Cloudflare builds the site.
+- **Whole or not at all.** A title that does not fit three lines fails the build; a subtitle that does not
+  fit is left off. A card never ends a claim with an ellipsis.
+- **Built, never committed.** Cards, including `/og-default.png`, are endpoints written into `dist/`, so a
+  build leaves the working tree clean. Drafts and scheduled pages get no card in a build, because the
+  lists come from the same functions the pages use.
+
+> *Learned:* until v2.20.0 every page shared the same image, so a link to any article looked
+> like a link to the homepage. And the old generator rewrote a committed `og-default.png` on every build,
+> which then had to be remembered and left out of every commit.

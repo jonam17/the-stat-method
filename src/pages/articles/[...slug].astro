@@ -10,6 +10,7 @@ import AffiliatePicks from '../../components/AffiliatePicks.astro';
 import { getCollection, render } from 'astro:content';
 import ToolCta from '../../components/ToolCta.astro';
 import { findTool } from '../../data/tools.js';
+import { ogPath } from '../../og/pages.js';
 
 export async function getStaticPaths() {
   const articles = await publishedArticles();
@@ -35,6 +36,8 @@ const status = PREVIEW ? articleStatus(d) : 'live';
 <BaseLayout
   title={d.title}
   description={d.dek}
+  ogImage={ogPath.article(article.id)}
+  ogImageAlt={`${d.title} — The Stat Method`}
   ogType="article"
   published={d.published instanceof Date ? d.published.toISOString() : d.published}
   updated={d.updated instanceof Date ? d.updated.toISOString() : d.updated}
