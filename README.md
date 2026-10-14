@@ -329,6 +329,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.21.1 — Warmer key takeaways: the strength-training articles
+
+- **The takeaway box on seven articles is rewritten to read warmer and plainer**: warming up, one-rep max,
+  RPE, strength standards, powerlifting scoring, training volume and progressive overload. Speaking to the
+  reader, leading with what to do, plain words; the numbers stay. Wording changed, claims did not: every
+  point restates its article's body, mapped section by section in `docs/takeaways-review.md`.
+- **Three takeaways said more than their articles do, and now match them.** The one-rep-max box called the
+  formulas "curve fits to population data" where the article shows most began as coaches' charts; the RPE box
+  said novices underestimate their reps in reserve where the article reports no established effect of
+  experience; the strength-standards box claimed a table says nothing about "how long you have trained",
+  which the article never says.
+- **Two body sentences that contradicted their own articles are corrected** — the one-rep-max formulas'
+  origin, and the RPE section summary about novices — listed separately in the review record.
+
 ### v2.21.0 — Resources: workout and run logging, DEXA providers, meal-prep equipment
 
 - **Seven additions to Resources.** Hevy and Strava under Tracking & data; BodySpec and DexaFit, for DEXA

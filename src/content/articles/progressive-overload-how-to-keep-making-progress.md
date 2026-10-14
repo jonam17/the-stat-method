@@ -13,11 +13,11 @@ citationsVerified: full
 citationsVerifiedDate: 2026-10-05
 author: The Stat Method
 keyTakeaways:
-  - "Progressive overload means gradually asking more of a muscle — through load, reps, sets or how the reps are done, not only through heavier weights."
-  - "In trained lifters, progressing reps at the same load built about as much muscle and strength over eight weeks as progressing the load."
-  - "Muscle growth looks similar across a wide range of loads when sets are hard; strength favours heavier loads, so load needs to rise eventually if strength is the goal."
-  - "Training to failure is not required. Most sets can stop a rep or two short, though people tend to underestimate how many reps they have left."
-  - "A workable rule: add reps until every set reaches the top of your range, then add the smallest weight step available — and let pain or broken technique veto any increase."
+  - "Progress does not only mean a heavier bar. Adding reps or sets, or changing how you do the reps, also asks more of the muscle."
+  - "In trained lifters, adding reps at the same weight built about as much muscle and strength over eight weeks as adding weight."
+  - "For muscle, light and heavy weights work about equally when sets are hard. For strength, heavier is better, so the weight has to rise eventually."
+  - "You do not need to train to failure. Stopping a rep or two short works — and most people have about one more rep in them than they think."
+  - "A simple rule: add reps until every set reaches the top of your range, then add the smallest weight step you can. Pain or broken technique always cancels the increase."
 toc:
   - { id: "what-it-means", label: "What progressive overload means" }
   - { id: "reps-count", label: "Adding reps is progress" }

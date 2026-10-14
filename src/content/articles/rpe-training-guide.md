@@ -2,7 +2,7 @@
 title: "Training by RPE: how to stop guessing at percentages"
 dek: "A fixed percentage ignores whether you slept. Reps in reserve lets the load follow your actual capacity — though most people stop a rep early."
 category: Exercise
-conclusion: "Reps in reserve is at least as good as percentages and adapts to the day you actually had. Expect to underestimate how close to failure you are."
+conclusion: "Reps in reserve works at least as well as percentages and adjusts to the day you actually had. Expect to think you are closer to failure than you are."
 published: 2026-08-11
 readMinutes: 9
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: rpe-converter
 evidenceBased: true
 keyTakeaways:
-  - "RPE on the lifting scale means reps in reserve: RPE 8 is two reps short of failure."
-  - "A fixed percentage of 1RM is the same number on a good day and a terrible one."
-  - "Trained lifters estimate proximity to failure reasonably well, especially within a few reps."
-  - "Novices systematically underestimate how many reps they have left."
-  - "Most volume work sits well at RPE 7–8; accumulating sets at RPE 10 builds fatigue faster than capacity."
+  - "In lifting, RPE simply counts the reps you had left: RPE 8 means you could have done two more."
+  - "A percentage of your max asks the same of you on a great day and a terrible one. Reps in reserve adjusts to how you actually feel."
+  - "People judge their reps in reserve reasonably well, and better the closer they get to failure."
+  - "Almost everyone underestimates what they have left, by about one rep — so “two in reserve” is usually closer to three. Whether experience fixes this is not settled."
+  - "Do most of your sets at RPE 7–8 and save all-out sets for testing. Sets to failure tire you out of proportion to the extra benefit."
 toc:
   - { id: "the-scale", label: "The scale" }
   - { id: "why-percentages-fail", label: "Why percentages fail" }
@@ -125,7 +125,7 @@ gets repeated.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Trained lifters judge reps in reserve reasonably well, particularly near failure. Novices under-rate their remaining capacity, and accuracy falls at high rep counts.</p></div>
+<div class="summary-body"><p>Trained lifters judge reps in reserve reasonably well, particularly near failure. Almost everyone under-rates their remaining capacity by about a rep, and accuracy falls at high rep counts.</p></div>
 </aside>
 
 <h2 id="programming">Using it in a programme</h2>

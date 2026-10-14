@@ -13,11 +13,11 @@ citationsVerified: full
 citationsVerifiedDate: 2026-10-04
 author: The Stat Method
 keyTakeaways:
-  - "Research counts volume as hard sets per muscle per week — sets taken reasonably close to failure, not every set you happen to do."
-  - "Muscle growth rises with weekly sets, but with diminishing returns: the largest pooled analysis found detectable growth from about four sets, and each further step needed more sets than the one before."
-  - "Strength responds to far less. In trained men, one set per exercise three times a week matched five sets for strength while taking about a fifth of the time."
-  - "The popular 10-set and 12–20-set figures rest on smaller evidence than they suggest, mostly from young men over a few months."
-  - "No study here measured the costs of high volume — injury, burnout, sustainability — so the right dose is the most you can recover from and keep doing."
+  - "Studies count volume as hard sets per muscle per week — sets that end reasonably close to failure, not every set you happen to do."
+  - "More weekly sets build more muscle, but each extra set buys a little less. Growth was detectable from about four sets a week."
+  - "Strength needs far less. In trained men, one set per exercise matched five sets for strength, in about a fifth of the time."
+  - "The popular “10 sets” and “12–20 sets” targets rest on smaller evidence than they suggest, mostly from young men over a few months."
+  - "No study here measured the costs of high volume, like injury or burnout, so the right amount is the most you can recover from and keep doing."
 toc:
   - { id: "what-counts", label: "What counts as a set" }
   - { id: "the-curve", label: "The dose-response curve" }

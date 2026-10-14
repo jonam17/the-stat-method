@@ -2,7 +2,7 @@
 title: "Wilks is obsolete: what replaced it and why"
 dek: "Comparing a 60 kg lifter to a 120 kg lifter needs a formula. The one most calculators still use has known bias, and two better systems replaced it in 2020."
 category: Exercise
-conclusion: "If you are comparing lifters today, use DOTS or IPF GL. Wilks is a historical record, not a current standard."
+conclusion: "If you are comparing lifters today, use DOTS or IPF GL. Keep Wilks for reading older records."
 published: 2026-08-13
 updated: 2026-09-27
 readMinutes: 9
@@ -13,11 +13,11 @@ author: The Stat Method
 relatedTool: powerlifting-score
 evidenceBased: true
 keyTakeaways:
-  - "Absolute total favours heavier lifters, so federations use coefficients to compare across bodyweights."
-  - "Wilks was the standard for about twenty-five years but has documented bias at the extremes."
-  - "DOTS was published in 2019 and adopted by USPA, WRPF and others from 2020."
-  - "IPF GL Points became the IPF's official system on 1 May 2020."
-  - "The three scales are not interchangeable — IPF GL runs to about 100 where DOTS runs in the hundreds."
+  - "Heavier lifters lift more in absolute terms, so federations score totals with formulas that adjust for bodyweight."
+  - "Wilks was the standard for about twenty-five years, but it was fitted to equipped results from 1987–1994 and never updated as planned. No major federation still uses it."
+  - "DOTS, published in 2019 and built on modern competition data, was adopted by USPA, WRPF and others from 2020."
+  - "IPF GL Points have been the IPF's official system since 1 May 2020."
+  - "The scales are not interchangeable: about 100 is elite in IPF GL, while DOTS and Wilks run in the hundreds."
 toc:
   - { id: "why-coefficients", label: "Why coefficients" }
   - { id: "wilks", label: "The Wilks era" }

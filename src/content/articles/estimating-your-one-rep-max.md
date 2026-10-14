@@ -2,7 +2,7 @@
 title: "Estimating your one-rep max without testing it"
 dek: "Five formulas, one number, and a surprising amount of disagreement. What rep-max estimates are good for, and where they stop being trustworthy."
 category: Exercise
-conclusion: "An estimate is a starting load, not a record. If the number matters to you, test it."
+conclusion: "An estimate is a sensible starting weight, not a record. If the exact number matters to you, test it."
 published: 2026-08-11
 readMinutes: 9
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: one-rep-max
 evidenceBased: true
 keyTakeaways:
-  - "Rep-max formulas are curve fits to population data, not laws. They disagree with each other by design."
-  - "Estimates are most reliable from sets of two to six reps."
-  - "Above roughly twelve reps, fatigue and technique dominate and the estimates diverge sharply."
-  - "The spread between formulas is useful information — treat your 1RM as a range, not a point."
-  - "For programming, RPE and reps-in-reserve are usually more practical than percentages of an estimated max."
+  - "Most one-rep-max formulas began as coaches' loading charts rather than research, and they disagree by a few percent — so read your estimate as a range, not one number."
+  - "Estimate from a set of two to six reps taken close to failure. That is where the formulas are most reliable."
+  - "Past about twelve reps, fatigue and technique take over and the formulas drift apart; the answer is barely worth calculating."
+  - "Estimates tend to read low for the deadlift, so treat a deadlift figure as a floor."
+  - "For everyday training, choosing loads by reps in reserve is often more practical than percentages, because it adjusts to how you feel that day."
 toc:
   - { id: "why-estimate", label: "Why estimate" }
   - { id: "the-formulas", label: "The formulas" }
@@ -71,8 +71,8 @@ None of those uses require the number to be exactly right. They require it to be
 
 <h2 id="the-formulas">Five formulas, five answers</h2>
 
-The common equations were each fitted to a different sample, with different lifts and
-different training populations. That is why they disagree.
+The common equations come from different sources — most began as coaches' loading charts
+rather than studies, as the next section explains. That is why they disagree.
 
 <figure data-chart="one-rm-divergence"></figure>
 
@@ -93,7 +93,7 @@ much confidence the number deserves.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Each formula was fitted to a different population, so they disagree by a few percent. The spread is the uncertainty, not an error to be eliminated.</p></div>
+<div class="summary-body"><p>Each formula comes from a different source, so they disagree by a few percent. The spread is the uncertainty, not an error to be eliminated.</p></div>
 </aside>
 
 <h2 id="accuracy">Where the estimates break down</h2>

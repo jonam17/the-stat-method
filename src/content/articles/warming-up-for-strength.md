@@ -2,7 +2,7 @@
 title: "Warming up for strength: what the ramp is actually for"
 dek: "Not general readiness, and not injury prevention in the way it is usually claimed. Warm-up sets have a narrower and more useful job than that."
 category: Exercise
-conclusion: "Warm up to prepare for the work, not to prevent injury. The evidence supports the first and is much weaker on the second."
+conclusion: "Warm up to get ready for the work, not to ward off injury. The evidence is solid for the first and thin for the second."
 published: 2026-08-10
 readMinutes: 7
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: plate-loader
 evidenceBased: true
 keyTakeaways:
-  - "The main job of warm-up sets is rehearsing the movement pattern at increasing load."
-  - "Static stretching before heavy lifting can transiently reduce force output."
-  - "Heavier compound lifts justify more warm-up steps than isolation work."
-  - "Warm-up sets should not accumulate meaningful fatigue — keep reps low as load rises."
-  - "The evidence that warming up prevents injury is weaker than commonly claimed."
+  - "Warm-up sets are practice: they let you rehearse the lift at rising weights, so your working sets start well."
+  - "How the warm-up feels is a useful read on the day. If a weight that usually flies feels heavy, you know before your top set."
+  - "Use more warm-up steps for heavy squats and deadlifts than for light isolation work, and drop the reps as the weight climbs so you arrive fresh."
+  - "Long static stretches right before heavy lifting can briefly sap strength — by about 5% in the largest analysis. A short mobility drill to reach a position is fine."
+  - "Warming up is often sold as injury prevention, but the evidence for that is thin. The performance reasons are enough on their own."
 toc:
   - { id: "what-for", label: "What it is for" }
   - { id: "the-ramp", label: "Building the ramp" }

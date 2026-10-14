@@ -2,7 +2,7 @@
 title: "Strength standards: useful orientation, terrible verdict"
 dek: "Every site places you in a different band, and none of them is authoritative. Here is what these tables can and cannot tell you about your training."
 category: Exercise
-conclusion: "A standard tells you which training regime you are currently in. It does not tell you whether you are strong."
+conclusion: "A standard tells you roughly where you are, not whether you are strong. Your own training log, over months, answers that."
 published: 2026-08-12
 readMinutes: 8
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: strength-standards
 evidenceBased: true
 keyTakeaways:
-  - "Standards are expressed as multiples of bodyweight, because absolute load favours larger lifters."
-  - "No table is authoritative — published sources disagree substantially with each other."
-  - "Progress between levels slows dramatically; that deceleration is normal, not failure."
-  - "Standards say nothing about your potential, your health, or how long you have trained."
-  - "Their real use is picking a next milestone, not settling an argument."
+  - "Standards compare lifts as multiples of bodyweight, so lifters of different sizes can be measured on one scale."
+  - "Every table is built from a different group of lifters, and labels like “intermediate” are editorial choices — so expect different sites to place you differently."
+  - "Progress slows a lot between levels: the first can come in months, later ones take years. That slowdown is normal, not a sign your programme has failed."
+  - "A standard is one number on one day. It says nothing about your potential, your health or how well you train."
+  - "Their best use is picking your next milestone and spotting a lift that lags behind the others."
 toc:
   - { id: "what-they-are", label: "What they are" }
   - { id: "disagreement", label: "Why tables disagree" }
