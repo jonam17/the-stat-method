@@ -25,6 +25,17 @@ export const RESOURCES = [
         role: 'Workout logging',
         why: 'Simple, fast lift logging with plate math and rest timers. Free tier covers most people.',
         note: 'Freemium' },
+      // Checked 2026-10-14 against hevyapp.com and its help centre's Hevy Pro article.
+      { name: 'Hevy', url: 'https://www.hevyapp.com',
+        role: 'Workout logging',
+        why: 'Lift logging on iOS, Android, the web, Apple Watch and Wear OS, with a feed for following other lifters. The free version keeps four routines, seven custom exercises and three months of history; Hevy Pro removes those limits and adds a warm-up calculator.',
+        note: 'Freemium' },
+      // Checked 2026-10-14 against strava.com/subscription, /pricing and the Privacy Controls help article.
+      { name: 'Strava', url: 'https://www.strava.com',
+        role: 'Run, ride & swim logging',
+        why: 'Logs runs, rides and swims and shares them with the people you follow. A subscription adds routes, segment leaderboards and advanced training analysis.',
+        note: 'Freemium',
+        caveat: 'Activities visible to everyone feed Strava Metro and the Global Heatmap by default; you can opt out under Privacy Controls. Check who can see your map before sharing runs that start at home. Its calorie figures are estimates like any device’s — our calorie-burn article explains why they run high.' },
       { name: 'Renaissance Periodization RP Hypertrophy', url: 'https://rpstrength.com',
         role: 'Programme design',
         why: 'Volume-landmark-based programming from Mike Israetel and colleagues. Opinionated, evidence-informed, and unusually explicit about its reasoning.',
@@ -164,6 +175,18 @@ export const RESOURCES = [
         why: 'Founded in 2009 by researchers from MIT and Tufts. A membership plus per-test fees, and it can import results from blood work done elsewhere.',
         note: 'Paid',
         caveat: 'The peer-reviewed study it promotes as evidence was funded by InsideTracker, which also helped design its methodology.' },
+      // DEXA providers checked 2026-10-14 against bodyspec.com and dexafit.com. Prices go stale;
+      // re-check before relying on them.
+      { name: 'BodySpec', url: 'https://www.bodyspec.com',
+        role: 'DEXA body composition scans',
+        why: 'DEXA scans at storefronts and mobile clinics in about a dozen US metro areas, from around $40 a scan and under fifteen minutes. Reports body fat by region, lean mass, visceral fat and bone density — a measurement to check the body-fat estimator against.',
+        note: 'Paid',
+        caveat: 'DEXA is the practical reference standard, not a perfect one: readings vary between machines, so repeat scans at the same place. Our body-fat article covers the limits.' },
+      { name: 'DexaFit', url: 'https://www.dexafit.com',
+        role: 'DEXA, VO2 max & resting metabolic rate',
+        why: 'DEXA scans plus measured VO2 max and resting metabolic rate — measurements that replace the estimates in our heart-rate-zone and TDEE calculators. Locations in more than 40 states.',
+        note: 'Paid',
+        caveat: 'Locations are independently owned, so services and prices vary by site. It also sells biomarker blood panels alongside its results. The DEXA caveat above applies here too.' },
     ],
   },
   {
@@ -179,19 +202,29 @@ export const RESOURCES = [
   },
   {
     group: 'Equipment',
-    blurb: 'Only things that make measurement or consistency easier. Nothing here is required to use any calculator on this site.',
-    affiliate: true,
+    blurb: 'Only things that make measurement or consistency easier. Nothing here is required to use any calculator on this site, and no brand is recommended.',
+    // No affiliate relationship exists, so nothing here is labelled one (until v2.21.0 the group
+    // said "Contains affiliate links" with no links at all). When affiliate links arrive, they go
+    // through a dedicated affiliate component that adds the label and rel attributes, so none can ship without them.
     items: [
-      // The storefront is intentionally omitted until a real affiliate slug is configured.
       { name: 'Digital kitchen scale (0.1 g)', role: 'Food weighing',
         why: 'The single highest-return purchase for anyone tracking intake. Portion estimates are wrong by a wide margin; a scale removes the guesswork.',
-        note: 'Affiliate' },
+      },
       { name: 'Flexible tape measure', role: 'Navy method measurements',
         why: 'Needed for the body fat estimator. A retracting tape with a tension button improves repeatability.',
-        note: 'Affiliate' },
+      },
       { name: 'Body fat calipers', role: 'Skinfold measurements',
         why: 'Only worth it if you will measure consistently. Accuracy depends far more on technique than on the caliper itself.',
-        note: 'Affiliate' },
+      },
+      { name: 'Glass meal-prep containers', role: 'Batch cooking',
+        why: 'Cooking and portioning several meals at once makes intake predictable for the days they cover — the hardest part of hitting a target is the meals you did not plan.',
+      },
+      { name: 'Portion-control containers', role: 'Portioning without a scale',
+        why: 'Fixed-volume containers give the same portion every time. Volume is a rougher measure than weight, but it travels — the same trade-off as the Hand Portions calculator.',
+      },
+      { name: 'Pressure cooker or multicooker', role: 'Batch cooking',
+        why: 'Cooks dried beans, grains and tough cuts of meat much faster than a pot on the stove, which makes batch cooking practical on a weeknight.',
+      },
     ],
   },
 ];

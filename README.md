@@ -329,6 +329,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.21.0 — Resources: workout and run logging, DEXA providers, meal-prep equipment
+
+- **Seven additions to Resources.** Hevy and Strava under Tracking & data; BodySpec and DexaFit, for DEXA
+  scans and (at DexaFit) measured VO2 max and resting metabolic rate, under Testing & clinical services;
+  glass meal-prep containers, portion-control containers and a pressure cooker under Equipment. Each
+  entry's facts come from the provider's own pages, checked 2026-10-14; the review, with what was left out
+  and why, is in `docs/resources-review.md`. None is an affiliate link.
+- **Fixed: Equipment was labelled "Contains affiliate links", and its items "Affiliate", with no links and
+  no affiliate relationship.** Both labels are gone. Affiliate links, if any are added, will go through a
+  component that adds the disclosure itself.
+
 ### v2.20.0 — Share cards for every page; dependency security updates
 
 - **Every article, calculator and Library entry now has its own share card**, so a link posted on X,
