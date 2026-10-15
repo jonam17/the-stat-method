@@ -2,7 +2,7 @@
 title: "What should I weigh? The honest answer is a range"
 dek: "Four ideal-weight formulas give four different answers for the same person, and none was designed for the question you are asking."
 category: Health
-conclusion: "These formulas were built to dose drugs, not to set goals. Use the range as a sanity check and nothing more."
+conclusion: "These formulas were built for the clinic, not for setting goals. Use the healthy range as a sanity check and nothing more."
 published: 2026-08-08
 updated: 2026-08-20
 readMinutes: 8
@@ -14,11 +14,11 @@ relatedTool: healthy-weight
 evidenceBased: true
 clinicalClaims: true
 keyTakeaways:
-  - "The classical ideal-weight formulas were derived for clinical drug dosing, not health or aesthetics."
-  - "They disagree with each other by several kilograms for the same height and sex."
-  - "BMI is a reasonable population screening tool that fails predictably at the muscular and sarcopenic extremes."
-  - "Waist-to-height ratio needs one measurement, has almost no estimation error, and predicts risk better."
-  - "A healthy weight is a band, not a number."
+  - "The classic ideal-weight formulas came from clinical practice — drug dosing, diabetic diet planning — not from research on what is healthy."
+  - "They disagree with each other by five kilograms or more for the same height."
+  - "BMI works for screening large groups but misjudges individuals at the extremes: muscular people, and people with low muscle mass."
+  - "Waist-to-height is the better single number, and the easiest to remember: keep your waist under half your height."
+  - "A healthy weight is a range — about fifteen to twenty kilograms wide for most heights — not one number."
 toc:
   - { id: "the-formulas", label: "Where the formulas came from" }
   - { id: "bmi", label: "What BMI is for" }
@@ -84,7 +84,7 @@ as well above their "ideal" weight while being nothing of the sort.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>The classical ideal-weight formulas were built for clinical drug dosing on limited data. They contain no information about body composition and were never designed as health targets.</p></div>
+<div class="summary-body"><p>The classical ideal-weight formulas came from clinical practice — drug dosing, diabetic diet planning — on limited data. They contain no information about body composition and were never designed as health targets.</p></div>
 </aside>
 
 <h2 id="bmi">What BMI is and is not for</h2>

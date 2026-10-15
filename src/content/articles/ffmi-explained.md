@@ -13,11 +13,11 @@ author: The Stat Method
 relatedTool: ffmi
 evidenceBased: true
 keyTakeaways:
-  - "FFMI is lean mass divided by height squared — BMI with the fat removed."
-  - "It explains why muscular people register as 'overweight' on BMI while being nothing of the sort."
-  - "The normalised figure adjusts to a 1.8 m reference so different heights can be compared."
-  - "Values around 25 are often cited as a natural ceiling for men, but this comes from a small sample."
-  - "FFMI is only as good as the body-fat figure you feed it."
+  - "FFMI is BMI with the fat taken out: your lean mass divided by your height squared."
+  - "It shows what BMI cannot — why a muscular person can read “overweight” without carrying much fat."
+  - "The normalised figure adjusts everyone to a 1.8 m height, so different heights compare fairly."
+  - "The famous “natural limit” of 25 comes from one small 1995 study whose authors called their findings preliminary. It is not a verdict on anyone."
+  - "FFMI is only as good as the body-fat estimate you feed it."
 toc:
   - { id: "what-it-is", label: "What it is" }
   - { id: "vs-bmi", label: "Against BMI" }

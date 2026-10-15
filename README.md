@@ -329,6 +329,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.21.3 — Warmer key takeaways: the last nine articles; summaries can no longer split a sentence
+
+- **The takeaway box on the remaining nine articles is rewritten** — protein, creatine, tracking without a scale,
+  body fat, FFMI, what should I weigh, sleep, caffeine and training frequency — completing the pass across all 22.
+  Wording changed, claims did not; mapped in `docs/takeaways-review.md`.
+- **Boxes brought back in line with their articles.** Tracking without a scale repeated the "fifty percent"
+  under-reporting figure its own article debunks; what-should-I-weigh said the formulas were all for drug dosing,
+  where the article says drug dosing and diabetic diet planning; creatine's box overstated one trial as several.
+- **Fixed: the protein article split the word "competitors" around a summary box.** Whole again.
+- **`npm run qa:articles` now fails if a summary box interrupts a sentence**, the bug behind both this and the
+  TDEE fix in v2.21.2. It catches both when run against the earlier files.
+
 ### v2.21.2 — Warmer key takeaways: the cardio and energy articles
 
 - **The takeaway box on six more articles is rewritten in the warmer, plainer voice**: calorie burn, race-time

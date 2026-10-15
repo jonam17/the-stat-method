@@ -182,3 +182,70 @@ unchanged figures.
   "Estimate yours" section after the calculator ("the calculator below" → "the calculator here",
   since it now follows it). The "What happens when you diet" summary moved out of the pull-quote it
   was nested in, to the end of its section like every other summary.
+
+---
+
+## Batch 3 — nutrition, body, recovery, training frequency (2026-10-14)
+
+Same rule: each takeaway restates its article's body. Section references in brackets.
+
+- **Protein** — lean mass, not scale weight [Start from lean mass]; 1.6–2.4 g/kg lean mass, lower half at
+  maintenance, top in a hard cut [The range that actually matters]; 1.62 g/kg is the centre of 1.03–2.20, not
+  significant [same, ref 1]; 2.3–3.1 g/kg from contest prep, an upper bound [same, ref 2]; total over
+  distribution, no 30 g limit [Distribution matters less than the total].
+- **Creatine** — short hard efforts, an extra rep [How it works]; 3–5 g daily, loading only faster
+  [Dosing and timing]; buffered form no better in a head-to-head trial [same, ref 4]; no kidney harm in healthy
+  adults, creatinine marker, mention before blood tests [Safety and side effects, refs 1, 5]; early gain partly
+  water, effects modest [What the benefits actually are, ref 3].
+- **Tracking without a scale** — hands scale with body size, always available [How hand portions work];
+  10–20% error, better than guessing [The accuracy trade]; under-reporting common and grows with body size; the
+  47% figure is from ten selected people [Where weighing breaks down, ref 2]; practise by weighing first [same,
+  ref 1]; recalibrate on a stall, weigh fats [Using the system well].
+- **Body fat** — home methods off by ~3–4 points, some more [The realistic options, refs 1–4]; consistency
+  beats accuracy [Repeatability beats accuracy]; tape is the default [The realistic options]; impedance swings
+  with hydration [same]; changes smaller than the error are noise; leave a guess blank [Using the number
+  sensibly].
+- **FFMI** — definition [What FFMI actually is]; muscular people read overweight on BMI [Why it beats BMI];
+  1.8 m normalisation [What FFMI actually is]; the 25 limit is one small 1995 study, authors called it
+  preliminary [The "natural limit" claim, ref 1]; only as good as the body-fat input [same; The bottom line].
+- **What should I weigh** — clinical origins: drug dosing and diabetic diet planning [Where the formulas
+  actually came from, ref 1]; disagree by five kilograms or more [opening]; BMI fine for groups, poor at the
+  extremes [What BMI is and is not for, ref 3]; waist under half your height [The better single number, ref 4];
+  15–20 kg healthy band [Choosing a target].
+- **Sleep and training** — cycles 70–120 minutes [About those ninety-minute cycles]; regular seven beats
+  erratic nine [The bottom line]; single heavy lifts robust, sessions feel harder, nights add up [What sleep loss
+  does to training, ref 1]; dieting and hunger, small studies, same direction [Why this matters more in a
+  deficit, refs 2, 3]; trackers good on total, poor on stages [What sleep trackers can and cannot tell you,
+  ref 5].
+- **Caffeine and sleep** — halves, ~5 h average [Caffeine halves]; 3–7 h range [Why your half-life is probably
+  not five hours]; 400 mg six hours before bed still disrupted sleep; six hours a floor [The six-hour finding,
+  ref 1]; smoking, contraceptives, pregnancy [Why your half-life…, ref 5]; no safe residual; dose over timing
+  [The threshold that does not exist; Using this without overthinking it].
+- **Training frequency** — voice only; each point restates the takeaway it replaces, verified in
+  `docs/citation-reviews/training-frequency-and-rest-days.md`.
+
+### Corrections
+
+- **Tracking without a scale — takeaway.** "Untrained visual portion estimates are … often [wrong] by fifty
+  percent or more." The article explains that the 47% figure comes from a study of ten people selected for
+  under-reporting and is not a rule for everyone. The box repeated the claim its article warns against; it now
+  says what the article does.
+- **What should I weigh — takeaway and closing line.** "Derived for clinical drug dosing." The article says
+  the formulas came from clinical practice: Devine's for drug dosing, Hamwi's for diabetic diet planning. Now
+  matches.
+- **Creatine — takeaways.** "Newer, pricier variants have not beaten it in trials" rested on one trial, now
+  stated as one; "weight gain in the first weeks is intracellular water" now "partly water", as the article
+  says.
+
+### Body corrections (reviewed text — check these)
+
+- **Protein — structure only.** A summary box split the word "competitors" ("comp … etitors") on the live
+  page. The word is whole and the summary closes its section.
+- **What should I weigh — section summary.** "Built for clinical drug dosing" → "came from clinical practice —
+  drug dosing, diabetic diet planning", matching the section it summarises.
+
+### A check so it cannot recur
+
+`npm run qa:articles` now fails when a summary box interrupts a sentence: the text before it must end a
+sentence and the text after it must not continue one. Run against the earlier protein and TDEE files, it
+reports both bugs.

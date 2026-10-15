@@ -14,11 +14,11 @@ relatedTool: macro-calculator
 evidenceBased: true
 clinicalClaims: true
 keyTakeaways:
-  - "Creatine increases the muscle's stored phosphocreatine, improving performance in short, high-effort work."
-  - "Three to five grams daily is sufficient. A loading phase only fills stores faster; it is not required."
-  - "Monohydrate is the best-supported form. Newer, pricier variants have not beaten it in trials."
-  - "The early kidney-damage concerns did not survive testing in healthy adults."
-  - "Weight gain in the first weeks is intracellular water, not fat."
+  - "Creatine tops up the energy store your muscles use for short, hard efforts — worth an extra rep or a slightly faster sprint."
+  - "Take three to five grams a day, at any time, every day. A loading phase only fills your stores in about a week instead of three to four."
+  - "Buy plain monohydrate. A pricier “buffered” version did no better in a head-to-head trial."
+  - "No kidney harm has been found in healthy adults at standard doses, but creatine raises a blood marker used to check the kidneys — so mention it before blood tests."
+  - "Early weight gain is partly water drawn into muscle, not fat. The gains are modest: an addition to good training, not a replacement for it."
 toc:
   - { id: "what-it-is", label: "What it is" }
   - { id: "how-it-works", label: "How it works" }

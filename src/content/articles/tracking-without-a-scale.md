@@ -13,11 +13,11 @@ author: The Stat Method
 relatedTool: hand-portions
 evidenceBased: true
 keyTakeaways:
-  - "Hand size scales roughly with body size, so the measure adapts to the person using it."
-  - "Expect ten to twenty percent error against weighed food — usually an acceptable trade."
-  - "Untrained visual portion estimates are considerably worse than that, often by fifty percent or more."
-  - "A method you sustain beats a more accurate one you abandon."
-  - "Weigh food temporarily to recalibrate, then go back to hands."
+  - "Hands scale roughly with body size, so the measure fits the person using it — and it is always with you."
+  - "Expect ten to twenty percent error against weighed food. That is a big improvement on guessing, which is what hands replace."
+  - "People commonly under-report what they eat, more so as body size rises. The often-quoted 47% comes from a study of ten specially selected people, so it is not a rule for everyone."
+  - "Weigh your food for a fortnight before you estimate. Practice is what makes estimation accurate."
+  - "Re-check with a scale if progress stalls, and keep weighing calorie-dense fats like oil and nut butter."
 toc:
   - { id: "the-problem", label: "The problem with weighing" }
   - { id: "how-it-works", label: "How hand portions work" }

@@ -14,11 +14,11 @@ relatedTool: body-fat
 evidenceBased: true
 clinicalClaims: true
 keyTakeaways:
-  - "Every consumer body-fat method carries an error range of roughly three to five percentage points."
-  - "Consistency beats accuracy. A method that is reliably three points off still tracks change correctly."
-  - "Tape measurements are free, repeatable, and good enough for most purposes."
-  - "Impedance scales are heavily affected by hydration — use the trend, ignore the daily number."
-  - "A body-fat figure improves calorie and protein targets, but only if the input is reasonable."
+  - "Every home method is an estimate, typically off by about three to four percentage points, and some by more."
+  - "Consistency beats accuracy: a method that is always three points off still shows your changes correctly."
+  - "A tape measure is free, repeatable and good enough for most people."
+  - "Smart scales swing with how much water you have drunk. Trust the trend, not the daily reading."
+  - "Only treat changes bigger than your method's error as real, and leave the body-fat field blank rather than enter a wild guess."
 toc:
   - { id: "why-it-matters", label: "Why it matters" }
   - { id: "the-methods", label: "The methods" }

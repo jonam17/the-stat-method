@@ -51,6 +51,18 @@ for (const f of files) {
   for (const m of s.matchAll(/<h2 id="([^"]+)"/g)) {
     if (!s.includes(`id: "${m[1]}"`)) fail(`heading #${m[1]} is not in the toc`);
   }
+
+  // A summary must sit between paragraphs, never inside one. Two articles had a
+  // summary box dropped mid-sentence — one mid-word ("comp … etitors") — and both
+  // shipped past every other check. The text on either side of a summary has to
+  // end and start a sentence.
+  for (const m of s.matchAll(/([^\n]*)\n<aside class="summary">[\s\S]*?<\/aside>\n\n?([^\n]*)/g)) {
+    const before = m[1].trim(), after = m[2].trim();
+    if (before && !/^<|[.!?:”"’)\]]$/.test(before))
+      fail(`a summary interrupts a sentence ending "…${before.slice(-30)}"`);
+    if (/^[a-z]/.test(after))
+      fail(`text after a summary continues mid-sentence: "${after.slice(0, 30)}…"`);
+  }
 }
 
 console.log(`\nArticle structure — ${files.length} articles checked`);

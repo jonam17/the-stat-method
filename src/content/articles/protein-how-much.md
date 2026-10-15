@@ -10,11 +10,11 @@ citationsVerified: full
 citationsVerifiedDate: 2026-08-25
 author: The Stat Method
 keyTakeaways:
-  - "Protein requirement scales with lean mass, not scale weight. Two people at the same weight can differ by twenty kilos of fat, which needs almost none."
-  - "The useful band for trained people in a deficit is roughly 1.6 to 2.4 g per kilogram of lean mass."
-  - "The widely quoted 1.62 g/kg is the centre of a confidence interval running from 1.03 to 2.20, and the breakpoint itself fell short of statistical significance."
-  - "Figures of 2.3 to 3.1 g/kg come from natural bodybuilding contest preparation, and are an upper bound rather than a target."
-  - "Total daily protein matters more than how it is distributed across meals."
+  - "Work out protein from lean mass if you can. Two people at the same weight can differ by twenty kilos of fat, which needs almost no protein."
+  - "For trained people in a deficit, a sensible band is about 1.6 to 2.4 g per kilogram of lean mass — the lower half at maintenance, the top when cutting hard."
+  - "The famous “1.6 g/kg” is the middle of a wide range, 1.03 to 2.20, and the study's breakpoint was not statistically significant."
+  - "Figures of 2.3 to 3.1 g/kg come from bodybuilders preparing for the stage. Treat them as an upper limit for a hard cut, not an everyday target."
+  - "Your daily total matters more than how you split it across meals. There is no 30-gram-per-meal limit."
 toc:
   - { id: "start-from-lean-mass-not-scale-weight", label: "Start from lean mass, not scale weight" }
   - { id: "the-range-that-actually-matters", label: "The range that actually matters" }
@@ -93,16 +93,15 @@ standard should not move depending on which way it points.
 
 The upper end of that band deserves its own caveat. Figures around 2.3 to 3.1 g/kg of lean
 mass come from recommendations written for **natural bodybuilding contest preparation** —
-comp
+competitors driving toward stage-level leanness under sustained deficits. [2] That is close
+to the most extreme case in the literature, and the authors note they had to write a
+narrative rather than systematic review because the evidence base was so thin. Useful as an
+upper bound for someone in a hard cut; not a target for someone training normally.
+
 <aside class="summary">
 <span class="summary-label">Summary</span>
 <div class="summary-body"><p>The evidence supports a band rather than a number, because the meta-analysis behind the familiar 1.6 figure reports a wide interval around it. Needs rise as calories fall and as trainees age.</p></div>
 </aside>
-
-etitors driving toward stage-level leanness under sustained deficits. [2] That is close
-to the most extreme case in the literature, and the authors note they had to write a
-narrative rather than systematic review because the evidence base was so thin. Useful as an
-upper bound for someone in a hard cut; not a target for someone training normally.
 
 <h2 id="distribution-matters-less-than-the-total">Distribution matters less than the total</h2>
 

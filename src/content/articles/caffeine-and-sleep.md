@@ -12,11 +12,11 @@ aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-20
 keyTakeaways:
-  - "Caffeine clears by halving, not by wearing off at a fixed hour."
-  - "Half-life runs roughly 3 to 7 hours in healthy non-smoking adults — a threefold spread."
-  - "400 mg six hours before bed measurably disrupted sleep in a controlled study."
-  - "Smoking roughly halves half-life; oral contraceptives and pregnancy extend it substantially."
-  - "No residual amount is established as the point where sleep stops being affected."
+  - "Caffeine does not wear off at a set hour. It halves, on average about every five hours."
+  - "That interval runs from about three to seven hours in healthy adults, so the same coffee affects two people very differently."
+  - "In a small study, 400 mg six hours before bed still disrupted sleep. Six hours is a floor, not a safe point."
+  - "Smoking roughly halves the half-life; birth-control pills commonly double it, and pregnancy extends it substantially."
+  - "There is no proven safe amount to have left at bedtime. Cutting the dose helps more than moving it earlier."
 toc:
   - { id: "halving", label: "It halves, not wears off" }
   - { id: "six-hours", label: "The six-hour finding" }

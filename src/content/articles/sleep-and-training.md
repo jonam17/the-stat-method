@@ -13,11 +13,11 @@ relatedTool: sleep-calculator
 evidenceBased: true
 clinicalClaims: true
 keyTakeaways:
-  - "The 90-minute sleep cycle is an average — real cycles run roughly 70 to 120 minutes."
-  - "Consistency of schedule matters at least as much as total duration."
-  - "Sleep loss raises perceived exertion reliably; its effect on raw output is less consistent than usually claimed."
-  - "In a deficit, short sleep makes appetite control measurably harder."
-  - "Consumer trackers estimate total sleep reasonably and sleep stages poorly."
+  - "The 90-minute sleep cycle is an average; real cycles run about 70 to 120 minutes. Bedtime calculators are a nudge, not a schedule."
+  - "A regular seven hours beats an erratic nine. Going to bed and waking at similar times is the biggest win for most people."
+  - "One bad night costs less than you fear — a single heavy lift holds up — but sessions feel harder, and several short nights add up."
+  - "When you are dieting, short sleep makes hunger harder to manage. The studies are small, but they point the same way."
+  - "Trackers estimate total sleep reasonably and sleep stages poorly. Read duration and consistency; ignore the nightly deep-sleep score."
 toc:
   - { id: "cycles", label: "About those cycles" }
   - { id: "performance", label: "Training performance" }

@@ -13,10 +13,10 @@ citationsVerified: full
 citationsVerifiedDate: 2026-10-11
 author: The Stat Method
 keyTakeaways:
-  - "For muscle growth, how often you train a muscle makes little difference once weekly sets are matched, so choose the schedule you will keep."
-  - "For strength, practising a lift more often appears to help beyond the extra sets it brings, with each added session worth less than the one before."
-  - "Recovery depends on how hard the session was. In trained men, sets taken to failure kept performance down for 24–48 hours; the same reps stopped short of failure recovered faster."
-  - "No marker other than a sustained drop in performance has been shown to signal overtraining reliably, so judge rest by your performance across sessions, not by one bad day."
+  - "For muscle growth, how often you train a muscle makes little difference once weekly sets are matched — so pick the schedule you will keep."
+  - "For strength, practising a lift more often appears to help beyond the extra sets it brings, with each added session worth a little less."
+  - "How much rest you need depends on how hard you train. In trained men, sets to failure kept performance down for 24–48 hours; the same reps stopped short recovered faster."
+  - "Only a sustained drop in performance has been shown to signal overtraining reliably, so judge rest over several sessions, not one bad day."
   - "In beginners, a ten-week break cost some strength and muscle, and both came back within five weeks of returning."
 toc:
   - { id: "what-frequency-means", label: "What frequency means" }
