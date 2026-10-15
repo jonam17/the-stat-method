@@ -8,7 +8,8 @@
  * site had just refused to make.
  */
 import { describe, it, expect } from 'vitest';
-import { renderToStaticMarkup } from 'react-dom/server';
+// The same renderer the site ships: Preact through its React-compatibility layer.
+import { renderToStaticMarkup } from 'preact/compat/server';
 import { Panel, BigStat } from '../ToolShell.jsx';
 
 const render = props => renderToStaticMarkup(

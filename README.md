@@ -182,7 +182,7 @@ cycle-aligned bedtimes with an honest note on what cycle timing can and cannot d
 
 ```
 src/
-├── engine/                    ← all math. No React, no DOM. Import from anywhere.
+├── engine/                    ← all math. No UI framework, no DOM. Import from anywhere.
 │   ├── energy.js              BMR (5 equations), TDEE, calorie targets
 │   ├── body.js                lean mass, BMI, FFMI, waist:height, 3 body-fat methods,
 │   │                          ideal-weight formulas
@@ -197,7 +197,7 @@ src/
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
 │   └── __tests__/             444 unit tests
-├── components/                React islands — state and markup only, zero math
+├── components/                UI islands (React syntax, run on Preact) — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
 ├── data/tool-guides.js        per-tool glossary, usage steps and results interpretation
@@ -214,16 +214,16 @@ the framework and the engine ports unchanged.
 | Layer | Choice | Why |
 |---|---|---|
 | Framework | **Astro 7** | Zero JS by default; static HTML for articles, hydrates only calculators |
-| Interactivity | **React 19 islands** | Mounted with `client:load` / `client:visible` |
+| Interactivity | **Preact islands, written as React** | `preact/compat`; mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 301 tests |
+| Tests | **Vitest** | 489 tests |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
 
 Content pages ship with **no JavaScript at all** — only pages containing a calculator load
-the React bundle.
+any, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands from React to Preact.
 
 ---
 
@@ -328,6 +328,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.22.0 — Calculators run on Preact: about 80% less JavaScript
+
+- **Every calculator page now loads about 51–56 KB of JavaScript instead of about 246–252 KB** (22–24 KB compressed,
+  from about 81 KB). The interactive islands moved from React 19 to Preact 10 through its React-compatibility
+  layer; the components are unchanged and still written as React (CONVENTIONS §27). Article pages still load
+  none until a calculator scrolls into view.
+- **Verified by behaviour, not just by build.** All 20 calculators were driven through the same script under
+  React and under Preact — defaults, typed values, cleared fields, toggles and selects, 140 states — and every
+  visible result matched exactly, with no console errors. Refusals, the Copy and Save buttons, the article-embedded
+  calculator, and the dev preview were checked separately.
+- `@astrojs/react`, `react` and `react-dom` are removed; `@astrojs/preact` 6.0.6 and `preact` 10.29.8 added.
+  Tests resolve `react` to Preact too, so the component test renders with what visitors run. `npm audit` clean.
 
 ### v2.21.3 — Warmer key takeaways: the last nine articles; summaries can no longer split a sentence
 

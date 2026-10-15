@@ -458,3 +458,20 @@ See our <a href="/ad-disclosure/">advertising disclosure</a>.
 > *Learned:* until v2.20.0 every page shared the same image, so a link to any article looked
 > like a link to the homepage. And the old generator rewrote a committed `og-default.png` on every build,
 > which then had to be remembered and left out of every commit.
+
+## 27. Components are written as React and run on Preact
+
+- **Write components exactly as React** — `import { useState } from 'react'`, `onChange`, the usual hooks.
+  `@astrojs/preact` with `compat: true` resolves `react` to `preact/compat` at build time, and `vitest.config.js`
+  does the same for tests, so tests render with what visitors actually run.
+- **Do not add React back as a dependency**, and do not import `react-dom` anywhere — there is no React in the
+  build. The swap cut a calculator page's JavaScript from about 250 KB to about 55 KB.
+- **Preact is pinned to 10.x.** `@astrojs/preact` 6 supports Preact 10 only; Preact 11 waits for the
+  integration.
+- **A React API that `preact/compat` lacks fails at runtime, not at build.** Before using an unusual one, check
+  it exists in `preact/compat`, then click through the calculator in `npm run dev`.
+
+> *Learned (v2.22.0):* the swap was verified by recording all 20 calculators' visible results under React —
+> defaults, typed values, cleared fields, toggles and selects, 140 states — then replaying the same script under
+> Preact. All 140 matched. A build and the unit tests alone could not have shown that, because neither types
+> into a form.

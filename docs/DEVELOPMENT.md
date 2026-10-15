@@ -8,7 +8,7 @@ by the maintainer only.
 
 Follow these in order. The last two are the ones that get forgotten.
 
-1. **Write the math in `src/engine/`.** Pure functions, no React, no DOM. Every formula
+1. **Write the math in `src/engine/`.** Pure functions, no UI framework, no DOM. Every formula
    gets a docstring naming its published source.
 2. **Write tests before the UI.** `src/engine/__tests__/`. Cover the arithmetic *and* the
    behaviour — that a value rises when it should, that invalid input returns `null` rather
