@@ -2,7 +2,7 @@
 title: "Race time predictors: what they know and what they assume"
 dek: "A 5K time can predict your 10K well and your marathon badly. The difference is not the math — it's an assumption the formula cannot check."
 category: Exercise
-conclusion: "Trust the prediction in proportion to how far you are stretching it — and never plan a marathon off a 5K."
+conclusion: "Trust a prediction in proportion to how far you stretch it — and never plan a marathon off a 5K."
 published: 2026-08-06
 readMinutes: 8
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: running-pace
 evidenceBased: true
 keyTakeaways:
-  - "Riegel's formula scales time by the distance ratio raised to the power 1.06."
-  - "It assumes you have trained appropriately for the target distance — which it cannot verify."
-  - "Predictions between adjacent distances are reasonably reliable; large extrapolations are not."
-  - "The marathon is where predictions fail most, because fuelling and durability dominate."
-  - "Even splits are a sound default, not a law — conditions justify deviating."
+  - "Most race predictors use Riegel's 1981 formula, which slows your predicted pace by a fixed rule as the distance grows."
+  - "That rule was fitted to world records, then applied to everyone else."
+  - "It assumes you are equally trained for both distances. It cannot know whether you have done the long runs or practised fuelling."
+  - "Predictions hold up reasonably to the half marathon. At the marathon, one large study found them at least ten minutes too fast for half of runners — even from a half-marathon time."
+  - "Even pacing is a good default, especially early on, but do not defend a goal pace up a hill or into the wind."
 toc:
   - { id: "the-formula", label: "The formula" }
   - { id: "the-assumption", label: "The hidden assumption" }

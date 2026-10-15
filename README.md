@@ -329,6 +329,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.21.2 — Warmer key takeaways: the cardio and energy articles
+
+- **The takeaway box on six more articles is rewritten in the warmer, plainer voice**: calorie burn, race-time
+  prediction, heart-rate zones, TDEE, the 3,500-calorie rule and macro split. Wording changed, claims did not;
+  each point is mapped to its article section in `docs/takeaways-review.md`.
+- **Three statements in the boxes said more than their articles, and now match them**: the 3,500-calorie box
+  put a six-month figure over a year; the heart-rate box said easy volume supplies most of the benefit, where the
+  article says most training volume is easy; and its closing line credited perceived effort, which the article
+  never discusses.
+- **Fixed: a sentence on the TDEE article was split in two by a summary box** ("give you a [summary] starting
+  point"). The sentence is whole again and each summary closes its own section. Structure only; no wording
+  changed beyond "the calculator below" becoming "the calculator here" now that the box follows it.
+
 ### v2.21.1 — Warmer key takeaways: the strength-training articles
 
 - **The takeaway box on seven articles is rewritten to read warmer and plainer**: warming up, one-rep max,

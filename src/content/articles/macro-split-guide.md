@@ -13,11 +13,11 @@ author: The Stat Method
 relatedTool: macro-calculator
 evidenceBased: true
 keyTakeaways:
-  - "Total calories drive weight change. The macro split drives how you feel and perform while doing it."
-  - "Set protein first, then fat to a minimum floor, then let carbohydrate take the remainder."
-  - "There is no single correct ratio. Wide ranges produce similar outcomes when calories and protein match."
-  - "Very low fat and very low carbohydrate both carry costs that are easy to overlook."
-  - "The best split is the one you can repeat next month."
+  - "Total calories decide whether your weight changes. The split between carbohydrate and fat mostly decides how you feel and train."
+  - "Set protein first, then a floor for fat — about 0.8 g per kilogram of bodyweight — and let carbohydrate fill the rest."
+  - "There is no magic ratio. With calories and protein matched, a wide range of splits gives similar results."
+  - "Going very low on either has a cost: very low carbohydrate shows up first in hard training, very low fat in food that stops satisfying and possible hormonal effects."
+  - "The best split is the one you can still follow next month."
 toc:
   - { id: "hierarchy", label: "The hierarchy" }
   - { id: "protein-first", label: "Protein first" }

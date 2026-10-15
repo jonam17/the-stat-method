@@ -14,11 +14,11 @@ relatedTool: deficit-planner
 evidenceBased: true
 clinicalClaims: true
 keyTakeaways:
-  - "The 3,500-calorie rule assumes your expenditure never changes. It always does."
-  - "A lighter body costs less to run, so the same intake becomes a smaller deficit every week."
-  - "Adaptive thermogenesis lowers expenditure further, beyond what mass loss alone explains."
-  - "Real weight loss curves flatten. Straight-line predictions overshoot, often by several kilograms over a year."
-  - "Plan for your maintenance calories at goal weight, not just the deficit that gets you there."
+  - "The 3,500-calorie rule assumes your daily burn never changes. During a diet, it always does."
+  - "A lighter body costs less to run — lose ten kilograms and maintenance drops by roughly 100 to 150 calories a day — so the same eating becomes a smaller deficit."
+  - "Your body also cuts back beyond that, partly by moving less without you noticing. The effect is real and largely reversible, but it does not stop weight loss."
+  - "Real weight loss slows over time. Over a six-month cut, a straight-line forecast can be off by several kilograms."
+  - "Before you start, find your maintenance calories at your goal weight. They will be lower than today's, and not knowing them is a common route back."
 toc:
   - { id: "the-rule", label: "The rule" }
   - { id: "why-it-fails", label: "Why it fails" }

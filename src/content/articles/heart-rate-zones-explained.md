@@ -2,7 +2,7 @@
 title: "Heart rate zones: what they are for and why '220 minus age' fails"
 dek: "The most repeated formula in cardio is also one of the least accurate. Here is what the zones actually mean and how to set them from your own numbers."
 category: Exercise
-conclusion: "Zones from a formula are a starting map. Your own perceived effort corrects it faster than any equation."
+conclusion: "Zones from a formula are a rough map. Use them mostly to keep your easy days genuinely easy."
 published: 2026-08-07
 readMinutes: 9
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: heart-rate-zones
 evidenceBased: true
 keyTakeaways:
-  - "'220 minus age' overestimates maximum heart rate in younger adults and underestimates it in older ones."
-  - "Tanaka's equation is better validated across age groups and is the sensible default."
-  - "Any max-HR formula carries roughly ten beats per minute of individual variation."
-  - "Adding a resting heart rate switches you to the Karvonen method, which accounts for conditioning."
-  - "Most endurance benefit comes from accumulating easy volume, not from living in the hard zones."
+  - "“220 minus age” was an informal fit, not a designed equation: it overestimates maximum heart rate in younger adults and underestimates it in older ones."
+  - "Tanaka's equation, drawn from 351 studies and more than 18,000 people, is the better default."
+  - "Any maximum-heart-rate formula can be off by about ten beats a minute for you, either way — so every zone boundary is approximate."
+  - "Adding your resting heart rate, measured on waking, makes the zones reflect your fitness, and can shift them a lot."
+  - "Keep most of your training genuinely easy and a smaller part genuinely hard. The common mistake is too much in between."
 toc:
   - { id: "the-formula-problem", label: "The formula problem" }
   - { id: "better-estimates", label: "Better estimates" }

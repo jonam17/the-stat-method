@@ -2,7 +2,7 @@
 title: "Why your watch overestimates calories burned"
 dek: "Exercise trackers routinely overstate energy expenditure, sometimes substantially. Here is where the error comes from and how to use the numbers anyway."
 category: Exercise
-conclusion: "Treat any “calories burned” figure as the loosest number in your day, and never eat it back in full."
+conclusion: "Treat any “calories burned” figure as the roughest number in your day, and never eat it back in full."
 published: 2026-08-05
 readMinutes: 8
 aiAssisted: true
@@ -12,11 +12,11 @@ author: The Stat Method
 relatedTool: calories-burned
 evidenceBased: true
 keyTakeaways:
-  - "Wearables measure heart rate and movement well; they estimate calories poorly."
-  - "Validation studies have found energy-expenditure errors commonly exceeding twenty percent."
-  - "Any exercise calorie figure includes the calories you would have burned at rest anyway."
-  - "MET-based estimates are population averages and ignore individual efficiency."
-  - "Do not 'eat back' exercise calories at face value — it is the most common route to a stalled diet."
+  - "Your watch measures heart rate well, but its calorie figure is a guess built on top of that reading — and the guess is where it goes wrong."
+  - "Validation studies often find calorie errors above twenty percent, and overestimates are common."
+  - "Every exercise calorie figure includes what you would have burned anyway — roughly 70 to 100 calories an hour for most adults, just sitting still."
+  - "Activity-based estimates are averages from other people. They cannot see your fitness, your technique or how hard you actually worked."
+  - "Do not eat exercise calories back at face value; if you eat some back, start with half. Your weekly average weight is the real check."
 toc:
   - { id: "the-problem", label: "The problem" }
   - { id: "why-wrong", label: "Why they're wrong" }

@@ -98,3 +98,87 @@ unchanged figures.
 - **RPE, summary of "How well can people actually judge it".** "Novices under-rate their remaining
   capacity" contradicted the section it summarises. Now: "Almost everyone under-rates their remaining
   capacity by about a rep."
+
+---
+
+## Batch 2 — cardio and energy (2026-10-14)
+
+### Why your watch overestimates calories burned
+
+| Takeaway (new) | Restates |
+|---|---|
+| Heart rate measured well; the calorie figure is a guess on top of it | "What the research finds" [1] — "it is the model that fails" |
+| Errors often above 20%; overestimates common | Same section and its summary; "overestimation is common" |
+| Figures include ~70–100 kcal/hour you would burn anyway | "The overlap nobody mentions" |
+| MET estimates are averages; cannot see fitness, technique, effort | "Where the error comes from"; "How to use these numbers" — Compendium paragraph [2] |
+| Do not eat back at face value; half as a start; weekly average weight is the check | "How to use these numbers anyway" |
+
+### Race time predictors
+
+| Takeaway (new) | Restates |
+|---|---|
+| Riegel 1981 slows predicted pace by a fixed rule as distance grows | "What the formula does" |
+| Fitted to world records, applied to everyone | Same — [1] |
+| Assumes equal training for both distances | "The assumption it cannot verify" |
+| Holds to the half; marathon ≥10 min too fast for half of runners, even from a half | "Why the marathon breaks predictions" — 2,303 runners [2] |
+| Even pacing a good default, early especially; not up a hill or into wind | "Using splits on race day" |
+
+### Heart rate zones
+
+| Takeaway (new) | Restates |
+|---|---|
+| 220 − age an informal fit; too high young, too low older | "Where '220 minus age' came from" |
+| Tanaka: 351 studies, 18,000+ people; better default | "Better estimates" [1] |
+| Any formula ±~10 bpm individually; boundaries approximate | Same section; "The bottom line" |
+| Resting heart rate (on waking) makes zones reflect fitness; can shift a lot | "Why resting heart rate improves the zones" |
+| Mostly easy, a little hard; common mistake is the middle | "What the zones are for" |
+
+### TDEE explained
+
+| Takeaway (new) | Restates |
+|---|---|
+| Maintenance falls with weight loss and with less unconscious movement | "What happens when you diet" |
+| Four components; everyday movement varies most | "The four components" |
+| Mifflin-St Jeor most accurate common equation; within 10% for ~half | "Reading the result" [1] |
+| Week-one deficit is not week-eight deficit | "What happens when you diet" |
+| Weigh daily, average weekly, correct after three weeks in 100–200 kcal steps | "Reading the result", final paragraphs |
+
+### Why the 3,500-calorie rule fails
+
+| Takeaway (new) | Restates |
+|---|---|
+| Rule assumes burn never changes | "Where the rule came from" |
+| Lighter body costs less; −10 kg ≈ −100–150 kcal/day | "Why the prediction drifts" |
+| Body cuts back further, partly by moving less; real, largely reversible, does not stop loss | "Adaptive thermogenesis" [3][4] |
+| Loss slows; six-month cut, straight line off by several kg | "What to use instead" |
+| Find maintenance at goal weight first | Same — "Plan the exit before you start" |
+
+### How to set your macro split
+
+| Takeaway (new) | Restates |
+|---|---|
+| Calories decide weight change; carb/fat split how you feel and train | "The hierarchy that actually matters" |
+| Protein first, fat floor ~0.8 g/kg, carbohydrate the rest | "Set protein first"; "Then a fat floor"; "Carbohydrate takes the remainder" |
+| No magic ratio at matched calories and protein | "Carbohydrate takes the remainder" [1] |
+| Very low carb costs hard training; very low fat costs satisfaction and possibly hormones | Same; "Then a fat floor" |
+| Best split is the one you can follow next month | "The bottom line" |
+
+### Corrections
+
+- **3,500-calorie rule — takeaway.** "Straight-line predictions overshoot, often by several kilograms
+  over a year." The article says several kilograms over a **six-month** cut. Now matches.
+- **Heart rate zones — takeaway.** "Most endurance benefit comes from accumulating easy volume." The
+  article says trained athletes do most of their *volume* easy, and that easy volume builds aerobic
+  capacity at low fatigue cost — not that it supplies most of the benefit. Now restates that.
+- **Heart rate zones — closing line.** "Your own perceived effort corrects it faster than any
+  equation." Perceived effort is not discussed in the article. The new line uses the article's own
+  bottom line: use zones mainly to keep easy days easy.
+
+### Body corrections (reviewed text — check these)
+
+- **TDEE explained — structure only, no wording.** A summary box sat in the middle of a sentence,
+  so the live page read "a calculator's job is to give you a [summary] starting point, not a
+  prescription". The sentence is rejoined. That box, which describes the calculator, now closes the
+  "Estimate yours" section after the calculator ("the calculator below" → "the calculator here",
+  since it now follows it). The "What happens when you diet" summary moved out of the pull-quote it
+  was nested in, to the end of its section like every other summary.
