@@ -329,6 +329,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.25.0 — Exercise library: shoulders published, with one exercise
+
+- **The lateral raise is live** at `/library/exercises/`, as the shoulders group's only entry, with dumbbell
+  and cable as one exercise: the trial behind it compared the two and found them equal. The maintainer
+  reviewed it on 2026-10-16; the review is signed in `docs/citation-reviews/exercises-shoulders.md`.
+- **One, not five.** No training study or review was found for the overhead press, machine shoulder press or
+  any rear-delt exercise — only single-session EMG comparisons, which the inclusion rule does not accept. The
+  page states its group's count and why. Shoulders and back are queued for a re-search with full PubMed
+  access.
+
 ### v2.24.0 — Exercise library: hamstrings and glutes published
 
 - **Five hamstring and glute exercises are live** at `/library/exercises/`: hip thrust, seated leg curl, lying

@@ -1,0 +1,33 @@
+# Shoulders · Lateral raise. Sources read 2026-10-16 — see
+# docs/citation-reviews/exercises-shoulders.md.
+name: Lateral raise
+group: shoulders
+dek: Isolates the side of the shoulder. In experienced lifters, dumbbells and cables grew it by the same small amount over eight weeks.
+primary: [Side of the shoulders (lateral deltoid)]
+secondary: [Upper trapezius]
+equipment: [dumbbell, cable]
+progressionClass: small_isolation
+whyHere: >-
+  The lateral raise lifts the arm out to the side, the side deltoid's main job, with little help from
+  other muscles. In an eight-week trial in experienced lifters, each person trained one arm with a dumbbell
+  and the other with a cable; the side deltoid thickened by about 3–5% with either, and the two tools
+  did equally well [1]. Use whichever you have.
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-four adults (16 men, 8 women) with at least three years of resistance training raised one arm
+      with a dumbbell and the other on a cable, twice a week for eight weeks, five sets of 12–16 per arm
+      taken to failure. Side-deltoid thickness rose by about 3–5% at both measured sites for both tools,
+      with the analysis favouring no difference between them. There was no group that did not train, and
+      the authors note the changes were small relative to the measurement's error. The trial was funded
+      by Jaquish Biomedical, and one author formerly sat on the scientific advisory board of Tonal [1].
+howTo:
+  - Stand holding a dumbbell at your side, or a cable handle with the pulley set level with your hand, as in the trial above [1].
+  - With your elbow straight, raise your arm out to the side until it is level with your shoulder, at about 90° [1].
+  - Lower it back to your side under control and repeat. The trial used about one second up and one second down [1].
+alternatives: []
+checked: 2026-10-16
+references:
+  - text: "Larsen S, Wolf M, Schoenfeld BJ, Sandberg NØ, Fredriksen AB, Kristiansen BS, van den Tillaar R, Swinton PA, Falch HN. Dumbbell versus cable lateral raises for lateral deltoid hypertrophy: an experimental study. Front Physiol, 2025;16:1611468."
+    url: "https://doi.org/10.3389/fphys.2025.1611468"
+aiAssisted: true
