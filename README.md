@@ -329,6 +329,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.22.2 — Homepage headline no longer runs into the calculator preview
+
+- **"Show the work." now fits its column on desktop.** The line is set not to wrap, so its orange
+  underline stays whole; at 98px it ran 115px into the calculator preview at every width from 1280px up
+  (56px at 1024px), covering the activity-level field. On two-column layouts the headline is now sized to
+  its own column, about 70px, ending where the rule above it ends. It clears the preview at every width
+  tested from 982 to 1920px. Phones and tablets, where the columns stack, are unchanged.
+- **Nothing else moved.** Every built page was screenshotted before and after at 1440 light, 1100 dark,
+  820 light and 390 dark. Only the homepage differs, and only at the two desktop widths.
+
 ### v2.22.1 — Unused CSS removed; the stylesheet stays one file
 
 - **About 6 KB of CSS that styled nothing on the site is gone**, about 65 rules, mostly from

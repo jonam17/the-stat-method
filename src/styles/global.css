@@ -858,6 +858,14 @@ body{background:var(--paper)}
 .hero-modern h1{font-family:var(--display);font-size:clamp(58px,7.9vw,98px);line-height:.9;letter-spacing:-.055em;font-weight:600;margin:14px 0 26px;max-width:8.5ch}
 .hero-modern h1 span{position:relative;white-space:nowrap}
 .hero-modern h1 span::after{content:"";position:absolute;left:0;right:0;bottom:.03em;height:.08em;background:var(--signal);z-index:-1}
+/* Two columns: "Show the work." cannot wrap (nowrap keeps the underline whole), so at 98px it ran
+   115px into the calculator preview at every desktop width. Size it to its own column instead —
+   14.6cqi ends the line where the kicker rule above it ends. Below 981px the columns stack and the
+   breakpoint sizes further down apply. */
+@media(min-width:981px){
+  .hero-copy{container-type:inline-size}
+  .hero-modern h1{font-size:min(clamp(58px,7.9vw,98px),14.6cqi)}
+}
 .hero-modern .lede{max-width:46ch;font-size:16px;line-height:1.55;color:var(--ink-soft);margin:0 0 22px}
 .hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .hero-btn{padding:12px 17px;border-radius:0;background:var(--ink);color:var(--paper);font-size:12px}
