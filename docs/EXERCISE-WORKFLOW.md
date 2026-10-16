@@ -10,9 +10,13 @@ adding an exercise.**
 
 ## The standard
 
-- **Five well-supported choices per muscle group, not a ranked top five.** The research rarely
+- **Up to five well-supported choices per muscle group, not a ranked top five.** The research rarely
   supports a strict ranking; every page says so. Mix equipment — free weights, machines, cables, body
   weight — so the group works in different gyms and at home.
+- **Fewer than five is a correct outcome, not a gap to fill.** Back has three: no training study or
+  review was found for the barbell row, dumbbell row or inverted row (searches recorded in
+  `docs/citation-reviews/exercises-back.md`). Never relax the inclusion rule to reach five; the pages
+  state each group's real count. Re-search a short group when its next neighbour is drafted.
 - **No single official source exists for exercises**, unlike the nutrients. So every claim is cited to
   research that was opened and read, and **every evidence item is labelled with its kind**:
 

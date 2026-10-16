@@ -1,0 +1,42 @@
+# Back · Pull-up. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-back.md.
+name: Pull-up
+group: back
+dek: Needs only a bar. In trained men, stopping each set while reps were still quick built more pull-up strength than grinding on.
+primary: [Lats (latissimus dorsi)]
+secondary: [Biceps, Rear of the shoulders, Middle and lower trapezius]
+equipment: [bodyweight]
+progressionClass: moderate_compound
+whyHere: >-
+  The pull-up trains the back and arms with nothing but a bar. In strength-trained men, eight weeks of
+  pull-ups improved strength and maximum reps when each set stopped once the reps had slowed by about
+  a quarter; pushing on until they had slowed by half produced no measurable gain [1]. For beginners,
+  assisted and lowering-only pull-ups are a route in: in a trial that used them for eight weeks, pull-ups
+  went up in every group [2].
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-nine strength-trained men did body-weight overhand pull-ups for eight weeks (sixteen
+      sessions). The group that ended each set once rep speed had dropped by 25% improved in every measure, including estimated one-rep maximum and maximum
+      reps; the group that continued to a 50% drop did not change. The trial measured strength and
+      endurance, not muscle size [1].
+  - kind: training
+    claim: >-
+      Thirty physically inactive young men trained twice a week for eight weeks with assisted pull-ups,
+      inverted rows, underhand pull-ups and lowering-only pull-ups, plus one of three add-ons (running
+      intervals, forearm work or core work). Pull-ups rose in all three groups, from about three or four
+      to roughly seven to thirteen. Every group did an add-on and there was no untrained control,
+      so the gain cannot be credited to the pull-up routine alone [2].
+howTo:
+  - Hang from the bar with an overhand grip a little wider than your shoulders and your arms straight.
+  - Pull until your chin passes the bar, then lower yourself under control until your arms are straight again.
+  - End each set while you can still pull at a reasonable speed, rather than grinding out slow reps. In the first trial above, stopping once reps had slowed by a quarter worked better than going further [1].
+  - If you can't do one yet, start with assisted pull-ups (on an assisted pull-up machine or with a band) and lowering-only pull-ups, where you jump to the top and lower yourself slowly. The second trial above used both kinds [2]. The lat pulldown trains the same movement at a lighter load.
+alternatives: [lat-pulldown, seated-cable-row]
+checked: 2026-10-15
+references:
+  - text: "Sánchez-Moreno M, Cornejo-Daza PJ, González-Badillo JJ, Pareja-Blanco F. Effects of velocity loss during body mass prone-grip pull-up training on strength and endurance performance. J Strength Cond Res, 2020;34(4):911-917."
+    url: "https://doi.org/10.1519/JSC.0000000000003500"
+  - text: "Sepehri Rahnama H, Ganji S, Vadasz K, Prokai J. Comparative effects of core versus forearm training on pull-up repetition performance in physically inactive males. Sports, 2025;13(12):433."
+    url: "https://doi.org/10.3390/sports13120433"
+aiAssisted: true

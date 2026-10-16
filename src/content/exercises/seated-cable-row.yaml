@@ -1,0 +1,31 @@
+# Back · Seated cable row. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-back.md.
+name: Seated cable row
+group: back
+dek: A supported row that trains the middle of the back. Paired with the pulldown, it was half of the pulling work that grew lat fibres in eight weeks.
+primary: [Lats (latissimus dorsi), Middle trapezius and rhomboids]
+secondary: [Biceps, Rear of the shoulders]
+equipment: [cable]
+progressionClass: moderate_compound
+whyHere: >-
+  The seated cable row pulls horizontally, toward the body, where the pulldown pulls from overhead, and
+  you sit supported with your feet braced on a plate. Its evidence is shared with the pulldown: in
+  eight weeks of training whose only pulling exercises were the seated row and the lat pulldown, muscle
+  fibres sampled from the lats grew [1]. No trial we found tested the seated row on its own.
+evidence:
+  - kind: training
+    claim: >-
+      Eighteen young men with no regular resistance training for at least two years trained for eight
+      weeks with six exercises, of which the seated row and the lat pulldown were the only pulling
+      exercises. Muscle fibres taken from the lats grew. The trial cannot say how much each of the two
+      exercises contributed [1].
+howTo:
+  - Sit with your feet against the plate and your knees slightly bent, and take the handle with your arms straight.
+  - Sit tall and pull the handle to your lower ribs, bringing your shoulder blades together.
+  - Let your arms straighten under control until you feel your shoulder blades spread, without rounding your lower back, then pull again.
+alternatives: [lat-pulldown, pull-up]
+checked: 2026-10-15
+references:
+  - text: "Paoli A, Pacelli QF, Cancellara P, Toniolo L, Moro T, Canato M, Miotti D, Neri M, Morra A, Quadrelli M, Reggiani C. Protein supplementation does not further increase latissimus dorsi muscle fiber hypertrophy after eight weeks of resistance training in novice subjects, but partially counteracts the fast-to-slow muscle fiber transition. Nutrients, 2016;8(6):331."
+    url: "https://doi.org/10.3390/nu8060331"
+aiAssisted: true

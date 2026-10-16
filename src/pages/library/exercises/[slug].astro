@@ -18,6 +18,9 @@ const group = GROUPS.find(g => g.key === d.group);
 const klass = PROGRESSION_CLASSES[d.progressionClass];
 const pct = x => `${(x * 100).toFixed(x * 100 % 1 ? 1 : 0)}%`;
 // Only alternatives that are themselves published become links.
+// The group's count, said plainly: up to five, fewer where the research supports fewer.
+const groupCount = all.filter(x => x.data.group === d.group).length;
+const countWords = ['none', 'one', 'two', 'three', 'four', 'five'];
 const alts = d.alternatives.map(slug => all.find(x => x.id === slug)).filter(Boolean);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i}" class="cite">[${i}]</a></sup>`);
@@ -79,8 +82,10 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
           an exercise is listed only if at least one training study or review supports it. Studies of
           muscle activation (EMG) can add detail but are never the reason an exercise is here. Sources were
           last checked on {fmtDate(d.checked)}.</p>
-        <p>These are five well-supported choices for this muscle group, not a ranked "top five" — the
-          research rarely supports one.</p>
+        <p>{[
+          `${groupCount === 1 ? 'This is the one well-supported choice' : `These are ${countWords[groupCount]} well-supported choices`} we list for this muscle group, not a ranked "top five" — the research rarely supports one.`,
+          groupCount < 5 ? 'We list up to five, and fewer where only fewer meet the rule above: an exercise is never added to fill a group.' : '',
+        ].filter(Boolean).join(' ')}</p>
         {d.aiAssisted && <p><b>Drafted with AI assistance, then edited and fact-checked by a human.</b></p>}
         <p>Spotted an error? <a href="/report/">Tell us</a> — corrections are logged publicly.</p>
         <p><em>General information only. This is not medical advice.</em></p>

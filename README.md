@@ -329,6 +329,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.23.0 — Exercise library: the back published, with three exercises
+
+- **Three back exercises are live** at `/library/exercises/`: lat pulldown, pull-up and seated cable row. The
+  maintainer reviewed them on 2026-10-15; the review is signed in `docs/citation-reviews/exercises-back.md`.
+  They appear in the Library index, the sitemap and site search automatically.
+- **Three, not five, on purpose.** No training study or review was found for the barbell row, dumbbell row or
+  inverted row, so they are not listed; the inclusion rule is never relaxed to fill a group. The seated cable
+  row's one trial trained it alongside the pulldown, and its page says so. The record lists every source
+  considered and why it was not used; PubMed was unreachable, so the rows should be re-searched later.
+- **Pages state each group's real count.** The Exercises page said "five well-supported choices for each
+  muscle group" and every exercise page "these are five"; both now say up to five, and a short group's
+  pages say why it is short. `docs/EXERCISE-WORKFLOW.md` records the rule.
+
 ### v2.22.2 — Homepage headline no longer runs into the calculator preview
 
 - **"Show the work." now fits its column on desktop.** The line is set not to wrap, so its orange

@@ -1,0 +1,42 @@
+# Back · Lat pulldown. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-back.md.
+name: Lat pulldown
+group: back
+dek: The pull-up's movement at any load you choose. Eight weeks of it raised pulldown strength by over a quarter and more than doubled pull-ups.
+primary: [Lats (latissimus dorsi)]
+secondary: [Biceps, Rear of the shoulders, Middle and lower trapezius]
+equipment: [cable]
+progressionClass: moderate_compound
+whyHere: >-
+  The lat pulldown trains the same pulling movement as a pull-up, but you choose the weight, so it
+  works whether you can do a pull-up or not. In recreationally active young men, eight weeks of
+  pulldowns raised pulldown strength by about 28% and more than doubled the number of pull-ups they
+  could do [1]. In a separate trial, muscle fibres sampled from the lats grew over eight weeks of a
+  program whose only pulling exercises were the pulldown and the seated row [2].
+evidence:
+  - kind: training
+    claim: >-
+      Thirty-four recreationally active male students trained the lat pulldown three times a week for
+      eight weeks, four sets of twelve, with the weight rising from 65% to 80% of their maximum. On a
+      standard machine, maximal pulling force (tested as an all-out static pull) rose by about 28%, and
+      pull-ups went from about two to about six.
+      The trial measured strength and pull-ups, not muscle size, and had no untrained comparison
+      group [1].
+  - kind: training
+    claim: >-
+      Eighteen young men with no regular resistance training for at least two years trained for eight
+      weeks with six exercises, of which the lat pulldown and the seated row were the only pulling
+      exercises. Muscle fibres taken from the lats grew, and pulldown strength rose by about 17%. Because
+      both exercises trained the lats, the trial cannot say how much each one contributed [2].
+howTo:
+  - Set the thigh pad so your legs are held firmly in place, and take the bar with an overhand grip a little wider than your shoulders. The first trial above used 10–20 cm wider than shoulder width [1].
+  - Keeping your head neutral, pull the bar down in front of your face to just below your chin, as in that trial [1].
+  - Let the bar rise under control until your arms are straight, then pull again.
+alternatives: [pull-up, seated-cable-row]
+checked: 2026-10-15
+references:
+  - text: "Li Q, Yan J, Qiao M, Quan J, Chen Y, Gong M, Niu W, Wang L. Eight-week lat pull-down resistance training with joint instability leads to superior pull-up endurance performance and reduced antagonist coactivation in recreationally active male college students. Eur J Sport Sci, 2025;25(1):e12243."
+    url: "https://doi.org/10.1002/ejsc.12243"
+  - text: "Paoli A, Pacelli QF, Cancellara P, Toniolo L, Moro T, Canato M, Miotti D, Neri M, Morra A, Quadrelli M, Reggiani C. Protein supplementation does not further increase latissimus dorsi muscle fiber hypertrophy after eight weeks of resistance training in novice subjects, but partially counteracts the fast-to-slow muscle fiber transition. Nutrients, 2016;8(6):331."
+    url: "https://doi.org/10.3390/nu8060331"
+aiAssisted: true
