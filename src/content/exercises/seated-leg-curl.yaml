@@ -1,0 +1,41 @@
+# Hamstrings and glutes · Seated leg curl. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-hamstrings-glutes.md.
+name: Seated leg curl
+group: hamstrings-glutes
+dek: Curls the knee with the hips bent, which stretches the hamstrings further. In the same people, it grew them more than the lying curl did.
+primary: [Hamstrings]
+equipment: [machine]
+progressionClass: isolation
+whyHere: >-
+  Most hamstring muscles cross both the hip and the knee, so sitting with the hips bent holds them at a
+  longer length while you curl. In a twelve-week MRI trial, each person trained one leg on a seated curl
+  and the other on a lying curl; the seated leg's hamstrings grew about 14%, against about 9% [1]. A
+  second trial found a hip-bent curl, with the lowering emphasised, grew the hamstrings more than Nordic
+  curls did [2].
+evidence:
+  - kind: training
+    claim: >-
+      Twenty young adults with no structured resistance training in the previous year trained twice a week
+      for twelve weeks, five sets of ten at 70% of their maximum, one leg seated (hips bent to about 90°)
+      and the other lying (about 30°). Hamstring volume rose about 14% in the seated leg and 9% in the
+      lying leg, with the largest gap in the biceps femoris long head (14% against 7%). Strength gains did
+      not differ between legs [1].
+  - kind: training
+    claim: >-
+      Forty-two young men trained for twelve weeks (34 sessions) with either Nordic curls or a weight-stack
+      knee curl done with the hips bent and the lowering phase emphasised, or did not train. The hip-bent
+      curl grew the hamstrings by 18% against 11% for Nordic curls, and the biceps femoris long head by 19%
+      against 5%; the untrained group did not change. That exercise is a close relative of the seated leg
+      curl rather than the standard machine [2].
+howTo:
+  - Set the machine so your knees line up with its pivot, with the thigh pad holding your legs down and the lower pad just above your heels.
+  - Curl your heels down and back as far as the machine allows, then return under control until your knees are nearly straight.
+  - Don't cut the straight-knee end short — that is where the hamstrings are most stretched in this position, the condition the first trial above found grew them most [1].
+alternatives: [lying-leg-curl, nordic-hamstring-curl, stiff-leg-deadlift]
+checked: 2026-10-15
+references:
+  - text: "Maeo S, Huang M, Wu Y, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Greater hamstrings muscle hypertrophy but similar damage protection after training at long versus short muscle lengths. Med Sci Sports Exerc, 2021;53(4):825-837."
+    url: "https://doi.org/10.1249/MSS.0000000000002523"
+  - text: "Maeo S, Balshaw TG, Nin DZ, Mc Dermott EJ, Osborne T, Cooper NB, Massey GJ, Kong PW, Pain MTG, Folland JP. Hamstrings hypertrophy is specific to the training exercise: Nordic hamstring versus lengthened state eccentric training. Med Sci Sports Exerc, 2024;56(10):1893-1905."
+    url: "https://doi.org/10.1249/MSS.0000000000003490"
+aiAssisted: true

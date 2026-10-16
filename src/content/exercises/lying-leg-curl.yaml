@@ -1,0 +1,30 @@
+# Hamstrings and glutes · Lying leg curl. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-hamstrings-glutes.md.
+name: Lying leg curl
+group: hamstrings-glutes
+dek: The most common hamstring machine. It grew the hamstrings by about 9% in twelve weeks, though the seated version grew them more.
+primary: [Hamstrings]
+equipment: [machine]
+progressionClass: isolation
+whyHere: >-
+  The lying leg curl isolates the hamstrings face down, and many gyms have it when they have no seated
+  curl. In a twelve-week MRI trial it grew the hamstrings by about 9% and built strength as well as the
+  seated curl did — but in the same people, the seated curl grew them more [1]. If you have both, the
+  seated curl is the better-supported choice for muscle size.
+evidence:
+  - kind: training
+    claim: >-
+      Twenty young adults with no structured resistance training in the previous year trained one leg on a
+      lying curl (hips nearly straight, about 30° of bend) and the other on a seated curl, twice a week for
+      twelve weeks, five sets of ten at 70% of their maximum. Hamstring volume rose about 9% in the lying
+      leg and 14% in the seated leg; strength gains did not differ [1].
+howTo:
+  - Lie face down with your knees just off the end of the bench, lined up with the machine's pivot, and the pad just above your heels.
+  - Keeping your hips on the bench, curl your heels toward your backside as far as the machine allows.
+  - Lower under control until your knees are nearly straight, then curl again.
+alternatives: [seated-leg-curl, nordic-hamstring-curl]
+checked: 2026-10-15
+references:
+  - text: "Maeo S, Huang M, Wu Y, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Greater hamstrings muscle hypertrophy but similar damage protection after training at long versus short muscle lengths. Med Sci Sports Exerc, 2021;53(4):825-837."
+    url: "https://doi.org/10.1249/MSS.0000000000002523"
+aiAssisted: true

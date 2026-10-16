@@ -1,0 +1,47 @@
+# Hamstrings and glutes · Nordic hamstring curl. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-hamstrings-glutes.md.
+name: Nordic hamstring curl
+group: hamstrings-glutes
+dek: Needs only something to hold your ankles. In trials with groups that did not train, it grew the hamstrings, most of all the semitendinosus.
+primary: [Hamstrings]
+equipment: [bodyweight]
+progressionClass: isolation
+whyHere: >-
+  The Nordic curl lowers your body forward from a kneeling position while the hamstrings brake the fall,
+  with nothing but your ankles held. In MRI trials against groups that did not train, it grew the hamstrings by
+  about 11% in twelve weeks [1] and grew the semitendinosus in ten [2]. Its growth is uneven: it favours
+  the semitendinosus, and a hip-bent curl grew the biceps femoris long head several times more [1].
+evidence:
+  - kind: training
+    claim: >-
+      Forty-two young men trained for twelve weeks (34 sessions) with Nordic curls, a hip-bent weight-stack
+      curl with the lowering emphasised, or no training. Nordic curls grew the hamstrings by 11% and the
+      biceps femoris long head by 5%, against 18% and 19% for the hip-bent curl; the untrained group did
+      not change. In the knee-bending muscles that do not also extend the hip, Nordic curls produced about
+      twice the growth of the hip-bent curl [1].
+  - kind: training
+    claim: >-
+      Thirty recreationally active men did ten weeks of Nordic curls, hip extensions, or no training.
+      Both exercises grew the semitendinosus compared with no training, by similar amounts; hip extensions
+      grew the biceps femoris long head more than Nordic curls did [2].
+  - kind: training
+    claim: >-
+      In thirty-six physically active students over nine weeks, Nordic curls grew hamstring volume by
+      about 11% — the semitendinosus by about 24% — against about 1% in a group that did not train, and
+      raised Nordic strength by about 37%. These figures are from the preprint; a peer-reviewed version has
+      since been published [3].
+howTo:
+  - Kneel on a pad with your ankles held down by a partner, a bench or a Nordic machine, and your body upright from knees to head.
+  - Keeping your hips straight, lower your body forward as slowly as you can, braking with your hamstrings.
+  - Catch yourself with your hands when you can no longer hold the descent, and push back up to the start.
+  - The movement is very hard at first; lowering only partway, or using a machine with a counterweight as one trial did [3], makes it easier.
+alternatives: [seated-leg-curl, lying-leg-curl, stiff-leg-deadlift]
+checked: 2026-10-15
+references:
+  - text: "Maeo S, Balshaw TG, Nin DZ, Mc Dermott EJ, Osborne T, Cooper NB, Massey GJ, Kong PW, Pain MTG, Folland JP. Hamstrings hypertrophy is specific to the training exercise: Nordic hamstring versus lengthened state eccentric training. Med Sci Sports Exerc, 2024;56(10):1893-1905."
+    url: "https://doi.org/10.1249/MSS.0000000000003490"
+  - text: "Bourne MN, Duhig SJ, Timmins RG, Williams MD, Opar DA, Al Najjar A, Kerr GK, Shield AJ. Impact of the Nordic hamstring and hip extension exercises on hamstring architecture and morphology: implications for injury prevention. Br J Sports Med, 2017;51(5):469-477."
+    url: "https://doi.org/10.1136/bjsports-2016-096130"
+  - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. medRxiv (preprint), 2024."
+    url: "https://doi.org/10.1101/2024.12.17.24319207"
+aiAssisted: true

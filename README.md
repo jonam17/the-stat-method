@@ -329,6 +329,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.24.0 — Exercise library: hamstrings and glutes published
+
+- **Five hamstring and glute exercises are live** at `/library/exercises/`: hip thrust, seated leg curl, lying
+  leg curl, Nordic hamstring curl and stiff-leg deadlift. The maintainer reviewed them on 2026-10-16; the review
+  is signed in `docs/citation-reviews/exercises-hamstrings-glutes.md`. They appear in the Library index, the
+  sitemap and site search automatically.
+- **The best-supported group so far.** Every entry rests on trials that measured muscle size (MRI, or 3D
+  ultrasound), and four of the five trials had a group that did not train. The pages say where the evidence is
+  narrower than it sounds: the hip thrust matched the back squat for glute growth rather than beating it, and
+  two of that trial's authors sell exercise products; the seated curl's second trial used a close relative of
+  the machine.
+- **One source is cited as a preprint.** The Nordic-versus-stiff-leg-deadlift trial was read in full on
+  medRxiv; its peer-reviewed version (J Strength Cond Res) could not be opened, so the pages say their figures
+  come from the preprint. To be swapped when the published version can be checked.
+
 ### v2.23.0 — Exercise library: the back published, with three exercises
 
 - **Three back exercises are live** at `/library/exercises/`: lat pulldown, pull-up and seated cable row. The

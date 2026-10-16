@@ -1,0 +1,38 @@
+# Hamstrings and glutes · Hip thrust. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-hamstrings-glutes.md.
+name: Hip thrust
+group: hamstrings-glutes
+dek: Works the glutes with your back on a bench. In a nine-week MRI trial, it grew them about as much as the back squat did.
+primary: [Glutes (gluteus maximus)]
+secondary: [Hamstrings]
+equipment: [barbell, machine]
+progressionClass: large_compound
+whyHere: >-
+  The hip thrust drives the hips up from a bench-supported position, loading the glutes without a weight
+  on your back. In a nine-week trial that measured muscle with MRI, hip thrusts and back squats grew the
+  glutes by similar amounts. The squat grew the front and inner thigh more, so the hip thrust is the more
+  glute-focused of the two, not a stronger glute builder [1].
+evidence:
+  - kind: training
+    claim: >-
+      Thirty-four untrained adults (11 men, 23 women) trained twice a week for nine weeks with either hip
+      thrusts or back squats, building from three to six sets of eight to twelve reps. Glute growth was
+      similar in the two groups; the estimates leaned slightly toward the hip thrust but varied widely. The
+      smaller gluteus medius and minimus grew little or not at all, and the hamstrings did not grow in
+      either group [1].
+  - kind: training
+    claim: >-
+      The squat group gained more in the quadriceps and inner thigh (adductors). Each group got stronger
+      most in its own exercise, and deadlift strength rose by the same amount in both. Two of the authors
+      sell exercise products, and one helped fund the trial [1].
+howTo:
+  - Sit on the floor with your upper back against a bench and the bar (with a pad) across your hips, or use a hip-thrust machine as the trial above did [1].
+  - Place your feet flat, about one to one and a half times shoulder width apart [1].
+  - Drive your hips up until your shins are vertical and your thighs level with the floor — the trial's standard for a full rep [1].
+  - Lower in about two seconds until the plates or your hips nearly touch the floor, then drive up again [1].
+alternatives: [back-squat, stiff-leg-deadlift, bulgarian-split-squat]
+checked: 2026-10-15
+references:
+  - text: "Plotkin DL, Rodas MA, Vigotsky AD, et al. Hip thrust and back squat training elicit similar gluteus muscle hypertrophy and transfer similarly to the deadlift. Front Physiol, 2023;14:1279170."
+    url: "https://doi.org/10.3389/fphys.2023.1279170"
+aiAssisted: true

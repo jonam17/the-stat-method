@@ -1,0 +1,33 @@
+# Hamstrings and glutes · Stiff-leg deadlift. Sources read 2026-10-15 — see
+# docs/citation-reviews/exercises-hamstrings-glutes.md.
+name: Stiff-leg deadlift
+group: hamstrings-glutes
+dek: A hip hinge with nearly straight knees. In a nine-week trial it grew the hamstrings and raised its own one-rep max by about a third.
+primary: [Hamstrings]
+secondary: [Glutes, Lower back (spinal erectors)]
+equipment: [barbell]
+progressionClass: large_compound
+whyHere: >-
+  The stiff-leg deadlift bends at the hips with the knees only slightly unlocked, loading the hamstrings
+  through a long stretch with a barbell. In a nine-week randomised trial with a comparison group that did
+  not do the training, it grew the hamstrings by about 7% and raised its own one-rep maximum by about a
+  third. It grew mostly the semimembranosus, where the Nordic curl grew mostly the semitendinosus, and the
+  authors recommend using both [1].
+evidence:
+  - kind: training
+    claim: >-
+      Thirty-six physically active students trained three times a week for nine weeks with stiff-leg
+      deadlifts, Nordic curls, or no training. Stiff-leg deadlifts grew hamstring volume by about 7%
+      (semimembranosus about 11%, semitendinosus about 6%) against about 1% in the group that did not train, and raised
+      the lift's one-rep maximum by about 34%. Nordic curls grew the semitendinosus most instead. These
+      figures are from the preprint; a peer-reviewed version has since been published [1].
+howTo:
+  - Stand with your feet about shoulder width apart, holding the bar in front of your thighs.
+  - With your knees only slightly unlocked and your back neutral, push your hips back and lower the bar by bending at the hips. In the trial above, participants bent from upright to about 90° at the hip [1].
+  - Stand back up by driving your hips forward, keeping the bar close to your legs.
+alternatives: [hip-thrust, nordic-hamstring-curl, seated-leg-curl]
+checked: 2026-10-15
+references:
+  - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. medRxiv (preprint), 2024."
+    url: "https://doi.org/10.1101/2024.12.17.24319207"
+aiAssisted: true
