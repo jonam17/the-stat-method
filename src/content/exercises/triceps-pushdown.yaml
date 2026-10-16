@@ -1,0 +1,31 @@
+# Arms · Triceps pushdown. Sources read 2026-10-16 (PDF supplied by the maintainer) — see
+# docs/citation-reviews/exercises-arms.md.
+name: Triceps pushdown
+group: arms
+dek: Straightens the elbow with the arm at your side. It grew the triceps by about 14% in twelve weeks, though the overhead version grew them more.
+primary: [Triceps]
+equipment: [cable]
+progressionClass: isolation
+whyHere: >-
+  The pushdown trains the triceps with the arm at your side, and lets you handle more weight than the
+  overhead version. In a twelve-week MRI trial it grew the triceps by about 14% and built strength in
+  proportion to the overhead version — but in the same people, the overhead arm's triceps grew about 1.4
+  times as much [1]. If you have room for both, the overhead extension is the better-supported choice for
+  size.
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-one young adults (14 men, 7 women) with no structured resistance training in the previous year
+      trained one arm at the side and the other overhead, on a cable machine, twice a week for twelve weeks,
+      five sets of ten. Triceps volume rose about 14% with the arm at the side against 20% overhead. Its
+      one-rep maximum was always higher than the overhead arm's, and rose by a similar proportion [1].
+howTo:
+  - Stand facing a cable stack with the pulley set high, upper arm against your side and elbow bent to about 90°.
+  - Keeping your upper arm still at your side, push the handle down until your elbow is straight.
+  - Let it back up under control to about 90°. The trial above used this range, about two seconds each way [1].
+alternatives: [overhead-triceps-extension]
+checked: 2026-10-16
+references:
+  - text: "Maeo S, Wu Y, Huang M, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position. Eur J Sport Sci, 2023;23(7):1240-1250."
+    url: "https://doi.org/10.1080/17461391.2022.2100279"
+aiAssisted: true

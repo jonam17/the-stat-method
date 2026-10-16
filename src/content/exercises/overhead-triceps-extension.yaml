@@ -1,0 +1,31 @@
+# Arms · Overhead triceps extension. Sources read 2026-10-16 (PDF supplied by the maintainer) — see
+# docs/citation-reviews/exercises-arms.md.
+name: Overhead triceps extension
+group: arms
+dek: Straightens the elbow with the arm overhead. In a twelve-week MRI trial it grew the triceps about 1.4 times as much as the arm-at-side version.
+primary: [Triceps]
+equipment: [cable]
+progressionClass: isolation
+whyHere: >-
+  With the arm raised overhead, the long head of the triceps — the part that also crosses the shoulder —
+  is stretched further while it works. In a twelve-week MRI trial, each person trained one arm overhead
+  and the other with the arm at the side; the overhead arm's triceps grew about 20% against 14%, even
+  though it lifted lighter weights [1].
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-one young adults (14 men, 7 women) with no structured resistance training in the previous year
+      trained one arm overhead and the other at the side, on a cable machine, twice a week for twelve weeks,
+      five sets of ten. Triceps volume rose about 20% overhead against 14% at the side; the long head about
+      29% against 20%, and the other two heads about 15% against 11%. Strength rose by similar proportions in
+      both arms, although the overhead arm always used less weight [1].
+howTo:
+  - Face away from a cable stack with the pulley set low, and hold the handle behind your head with your upper arm pointing straight up — the shoulder position the trial above held throughout [1].
+  - Keeping your upper arm still, straighten your elbow until your arm is fully extended overhead.
+  - Lower the handle back behind your head until your elbow is bent to about 90°. The trial used about two seconds each way [1].
+alternatives: [triceps-pushdown]
+checked: 2026-10-16
+references:
+  - text: "Maeo S, Wu Y, Huang M, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position. Eur J Sport Sci, 2023;23(7):1240-1250."
+    url: "https://doi.org/10.1080/17461391.2022.2100279"
+aiAssisted: true

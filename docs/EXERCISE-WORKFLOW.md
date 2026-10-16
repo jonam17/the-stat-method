@@ -16,7 +16,8 @@ adding an exercise.**
 - **Fewer than five is a correct outcome, not a gap to fill.** Back has three: no training study or
   review was found for the barbell row, dumbbell row or inverted row. Shoulders has one, the lateral raise:
   none was found for the overhead press or any rear-delt exercise (searches recorded in each group's
-  `docs/citation-reviews/exercises-<group>.md`). Never relax the inclusion rule to reach five; the pages
+  `docs/citation-reviews/exercises-<group>.md`). Arms has four, from three trials that each compared two
+  versions of an exercise; a fifth was not searched for. Never relax the inclusion rule to reach five; the pages
   state each group's real count. Re-search a short group when its next neighbour is drafted.
 - **No single official source exists for exercises**, unlike the nutrients. So every claim is cited to
   research that was opened and read, and **every evidence item is labelled with its kind**:
@@ -34,6 +35,9 @@ adding an exercise.**
 - **Say what a study did not measure.** A trial of strength is not evidence about muscle size; a trial in
   untrained women is not proof for experienced men. Put that in the evidence item itself.
 - **Never write a PMID, DOI or volume from memory.** Only what was on screen from the source.
+- **Sources the AI session cannot reach** (PubMed's bot check, paywalled full text) are requested from the
+  maintainer with their PubMed links and supplied as PDFs. A supplied PDF counts as read; the review record
+  says which file it was — the full paper, or only its PubMed abstract page.
 - **No rehabilitation or injury advice.** Every page carries the same line: stop an exercise that causes
   significant or unusual pain and have it assessed. Exercises for injuries or conditions wait for the
   clinical review (PENDING.md).

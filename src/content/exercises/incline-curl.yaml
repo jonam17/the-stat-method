@@ -1,0 +1,31 @@
+# Arms · Incline curl. Sources read 2026-10-16 (PubMed page supplied by the maintainer) — see
+# docs/citation-reviews/exercises-arms.md.
+name: Incline curl
+group: arms
+dek: Curls lying back on an incline bench, arms hanging behind the body. In an eight-week trial it grew the upper end of the biceps more than the preacher curl.
+primary: [Biceps]
+secondary: [Brachialis, Forearms]
+equipment: [dumbbell]
+progressionClass: isolation
+whyHere: >-
+  Lying back on an incline bench lets the arms hang behind the body, which puts the biceps on a stretch
+  at the start of each curl. In an eight-week trial in young women, incline curls grew the elbow flexors
+  more near the shoulder than preacher curls did, while preacher curls grew them more near the elbow — so
+  the two complement each other rather than one replacing the other [1].
+evidence:
+  - kind: training
+    claim: >-
+      Sixty-three young women trained twice a week for eight weeks with either incline or preacher curls.
+      Incline curls increased elbow-flexor thickness more near the shoulder, preacher curls more near the
+      elbow, and each group gained most strength in its own exercise. Only the trial's abstract was
+      available to us, so set counts and training background are not given here [1].
+howTo:
+  - Set a bench to an incline and lie back with a dumbbell in each hand, arms hanging straight down behind your torso.
+  - Keeping your upper arms still, curl the weights up toward your shoulders.
+  - Lower them under control until your elbows are straight again.
+alternatives: [preacher-curl]
+checked: 2026-10-16
+references:
+  - text: "Kassiano W, Costa B, Kunevaliki G, Lisboa F, Stavinski N, Prado A, Tricoli I, Francsuel J, Lima L, Nunes JP, Ribeiro AS, Cyrino ES. Distinct muscle growth and strength adaptations after preacher and incline biceps curls. Int J Sports Med, 2025;46(5):334-343."
+    url: "https://doi.org/10.1055/a-2517-0509"
+aiAssisted: true

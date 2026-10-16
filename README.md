@@ -329,6 +329,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.26.0 — Exercise library: arms published, with four exercises
+
+- **Four arm exercises are live** at `/library/exercises/`: preacher curl, incline curl, overhead triceps
+  extension and triceps pushdown. The maintainer reviewed them on 2026-10-16; the review is signed in
+  `docs/citation-reviews/exercises-arms.md`.
+- **The first group drafted from sources supplied through PubMed.** The AI session cannot get past PubMed's
+  bot check or journal paywalls; the maintainer fetched the papers through UCSD and attached them.
+  `docs/EXERCISE-WORKFLOW.md` records that a supplied PDF counts as read, and each record says whether it was
+  the full paper or only its abstract page.
+- **Each page is comparative, because each trial was.** The overhead extension grew the triceps about 1.4
+  times as much as the pushdown in the same people; the preacher and incline curls grew opposite ends of
+  the biceps. The incline curl rests on its trial's abstract only — the full text could not be obtained —
+  and the page says what that leaves out.
+
 ### v2.25.1 — Exercise pages checked against sources supplied through PubMed
 
 - **The stiff-leg deadlift and Nordic curl pages now cite the published trial** (J Strength Cond Res

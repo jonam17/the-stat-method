@@ -1,0 +1,40 @@
+# Arms · Preacher curl. Sources read 2026-10-16 (PDFs supplied by the maintainer) — see
+# docs/citation-reviews/exercises-arms.md.
+name: Preacher curl
+group: arms
+dek: Curls with the upper arm braced on a pad. It grew the biceps near the elbow more than the incline curl did, and its elbow-straight half grew that region most.
+primary: [Biceps]
+secondary: [Brachialis, Forearms]
+equipment: [dumbbell]
+progressionClass: isolation
+whyHere: >-
+  The preacher curl braces the upper arm on an angled pad, so the biceps works without the body helping
+  the weight up. In an eight-week trial in young women, it grew the lower end of the elbow flexors more
+  than the incline curl did, while the incline curl grew the upper end more [1]. Within the preacher
+  curl, the half of the lift nearest a straight elbow grew the lower biceps more, and built more
+  strength, than the half nearest the top [2].
+evidence:
+  - kind: training
+    claim: >-
+      Sixty-three young women trained twice a week for eight weeks with either preacher or incline curls.
+      Preacher curls increased elbow-flexor thickness more near the elbow, incline curls more near the
+      shoulder, and each group gained most strength in its own exercise [1].
+  - kind: training
+    claim: >-
+      Nineteen untrained young women trained a seated dumbbell preacher curl with each arm in a different
+      half of the range, three times a week for eight weeks, every set to failure. Both arms' biceps grew.
+      The arm trained from a straight elbow to about 68° of bend grew more near the elbow (70% of upper-arm
+      length) than the arm trained from 68° to the top, grew about the same at mid-arm, and gained more
+      full-range strength (about 43% against 19%) [2].
+howTo:
+  - Sit at a preacher bench with the back of your upper arm flat on the pad and a dumbbell in your hand. The second trial above set the pad so the upper arm sat at about 45° to the body [2].
+  - Curl the weight up until your forearm is vertical.
+  - Lower it slowly all the way until your elbow is straight. The bottom half is the part that grew the lower biceps most in that trial [2]; the trial took about two seconds each way.
+alternatives: [incline-curl]
+checked: 2026-10-16
+references:
+  - text: "Kassiano W, Costa B, Kunevaliki G, Lisboa F, Stavinski N, Prado A, Tricoli I, Francsuel J, Lima L, Nunes JP, Ribeiro AS, Cyrino ES. Distinct muscle growth and strength adaptations after preacher and incline biceps curls. Int J Sports Med, 2025;46(5):334-343."
+    url: "https://doi.org/10.1055/a-2517-0509"
+  - text: "Pedrosa GF, Simões MG, Figueiredo MOC, Lacerda LT, Schoenfeld BJ, Lima FV, Chagas MH, Diniz RCR. Training in the initial range of motion promotes greater muscle adaptations than at final in the arm curl. Sports, 2023;11(2):39."
+    url: "https://doi.org/10.3390/sports11020039"
+aiAssisted: true
