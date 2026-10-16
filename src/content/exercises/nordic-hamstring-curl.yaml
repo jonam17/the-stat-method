@@ -26,22 +26,21 @@ evidence:
       grew the biceps femoris long head more than Nordic curls did [2].
   - kind: training
     claim: >-
-      In thirty-six physically active students over nine weeks, Nordic curls grew hamstring volume by
-      about 11% — the semitendinosus by about 24% — against about 1% in a group that did not train, and
-      raised Nordic strength by about 37%. These figures are from the preprint; a peer-reviewed version has
-      since been published [3].
+      In a blinded randomised trial of thirty-six adults without resistance-training experience, nine
+      weeks of Nordic curls grew hamstring volume by about 11% — the semitendinosus by about 24% — where a
+      third group did not train [3].
 howTo:
   - Kneel on a pad with your ankles held down by a partner, a bench or a Nordic machine, and your body upright from knees to head.
   - Keeping your hips straight, lower your body forward as slowly as you can, braking with your hamstrings.
   - Catch yourself with your hands when you can no longer hold the descent, and push back up to the start.
   - The movement is very hard at first; lowering only partway, or using a machine with a counterweight as one trial did [3], makes it easier.
 alternatives: [seated-leg-curl, lying-leg-curl, stiff-leg-deadlift]
-checked: 2026-10-15
+checked: 2026-10-16
 references:
   - text: "Maeo S, Balshaw TG, Nin DZ, Mc Dermott EJ, Osborne T, Cooper NB, Massey GJ, Kong PW, Pain MTG, Folland JP. Hamstrings hypertrophy is specific to the training exercise: Nordic hamstring versus lengthened state eccentric training. Med Sci Sports Exerc, 2024;56(10):1893-1905."
     url: "https://doi.org/10.1249/MSS.0000000000003490"
   - text: "Bourne MN, Duhig SJ, Timmins RG, Williams MD, Opar DA, Al Najjar A, Kerr GK, Shield AJ. Impact of the Nordic hamstring and hip extension exercises on hamstring architecture and morphology: implications for injury prevention. Br J Sports Med, 2017;51(5):469-477."
     url: "https://doi.org/10.1136/bjsports-2016-096130"
-  - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. medRxiv (preprint), 2024."
-    url: "https://doi.org/10.1101/2024.12.17.24319207"
+  - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. J Strength Cond Res, 2025;39(9):924-932."
+    url: "https://doi.org/10.1519/JSC.0000000000005159"
 aiAssisted: true

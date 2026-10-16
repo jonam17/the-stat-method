@@ -3,7 +3,7 @@
 Files: `src/content/exercises/{hip-thrust,seated-leg-curl,lying-leg-curl,nordic-hamstring-curl,stiff-leg-deadlift}.yaml`
 Verified by: the AI drafting session, 2026-10-15 · Human review: Jonathan Morales, 2026-10-16
 Method: `docs/EXERCISE-WORKFLOW.md` and `docs/citation-checklist.md`. The files stayed `draft: true` until a
-person had reviewed this record; published in v2.24.0. Morin 2024 remains cited as its preprint (see below).
+person had reviewed this record; published in v2.24.0. Morin is cited as its published version from v2.25.1 (see below).
 
 ## Summary
 
@@ -12,21 +12,29 @@ person had reviewed this record; published in v2.24.0. Morin 2024 remains cited 
 | Hip thrust | Barbell / machine | Plotkin 2023 | Training | **Full text** (publisher, open access) + DOAJ abstract | 34 untrained adults (11 men, 23 women), 9 weeks |
 | Seated leg curl | Machine | Maeo 2021; Maeo 2024 | Training ×2 | **Full text** (PMC); abstract (White Rose repository) | 20 previously untrained young adults, 12 weeks; 42 young men, 12 weeks |
 | Lying leg curl | Machine | Maeo 2021 | Training | **Full text** (PMC) | as above |
-| Nordic hamstring curl | Body weight | Maeo 2024; Bourne 2017; Morin 2024 (preprint) | Training ×3 | Abstract; abstract (BJSM + ACU repository); **full text** (medRxiv) | 42 young men; 30 recreationally active men, 10 weeks; 36 physically active students, 9 weeks |
-| Stiff-leg deadlift | Barbell | Morin 2024 (preprint) | Training | **Full text** (medRxiv) | 36 physically active students, 9 weeks |
+| Nordic hamstring curl | Body weight | Maeo 2024; Bourne 2017; Morin 2025 | Training ×3 | Abstract; abstract (BJSM + ACU repository); published abstract (PubMed, supplied by the maintainer) + **full-text preprint** (medRxiv) | 42 young men; 30 recreationally active men, 10 weeks; 36 resistance-untrained adults, 9 weeks |
+| Stiff-leg deadlift | Barbell | Morin 2025 | Training | Published abstract (PubMed, supplied by the maintainer) + **full-text preprint** (medRxiv) | 36 resistance-untrained adults, 9 weeks |
 
 All five meet the inclusion rule on a training study, and every one of them measured **muscle size** (MRI, or
 3D ultrasound in Morin) — a stronger evidence base than back or chest. Four of five trials had a non-training
 comparison (Maeo 2021 is within-person, seated vs lying). None rests on EMG. Glute size was measured only
 in Plotkin 2023; the other entries say "hamstrings" and list glutes as secondary without a size claim.
 
-**One source is a preprint.** Morin 2024 was read in full on medRxiv. A peer-reviewed version has been
-published in J Strength Cond Res (DOI 10.1519/JSC.0000000000005159, PubMed 40644669 — both seen only in
-search results). Its publisher page, PubMed and the author's HAL CV all blocked automated access, so its
-volume and pages, and whether any number changed in review, could not be checked. Both entries that use it
-say "These figures are from the preprint". ★ **Spot-check:** if you can open the published version, compare
-the four numbers used (hamstrings +11.4% / +7.0%, semitendinosus +24.4%, semimembranosus +11.2%, 1RM +37.4% /
-+34.0%) and give me its volume and pages; I will switch the reference.
+**Morin: from preprint to published version (v2.25.1).** The trial was first read in full as its medRxiv
+preprint. On 2026-10-16 the maintainer supplied the PubMed page of the published version: **Morin T, Doguet V,
+Nordez A, Caillet A, Lacourpaille L. J Strength Cond Res 2025;39(9):924–932, doi 10.1519/JSC.0000000000005159,
+PMID 40644669.** Checked against its abstract:
+
+| Figure on the pages | Published abstract | Kept? |
+|---|---|---|
+| Hamstrings +11.4% Nordic, +7.0% stiff-leg deadlift | "NHE: 11.4 ± 6.5%, and SDL: 7.0 ± 8.1%" | ★ Yes |
+| Semitendinosus ~24% (Nordic), semimembranosus ~11% (SLDL) | "ST (24.3 ± 10.8%) and SM (11.2 ± 12.7%)" | ★ Yes |
+| Three times a week, nine weeks; control group; 3D ultrasound | Stated | Yes |
+| Participants "physically active students … familiar with resistance training" (preprint) | "36 resistance-untrained individuals" | **Changed** to the published wording |
+| Control group ~1%; SLDL semitendinosus ~6%; 1RM +37% / +34% | Not in the abstract | **Removed** — not confirmed in the published version |
+
+The how-to details (counterweight Nordic machine; hip flexion 0°–90° with knees slightly unlocked) come from
+the preprint's methods for the same registered trial (NCT06164249); the abstract does not describe technique.
 
 ## Hip thrust
 
@@ -103,7 +111,7 @@ none declared.
 
 The paper's title concerns injury prevention. The page makes no injury claim, per the workflow.
 
-**[3] Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. medRxiv preprint 2024.** https://doi.org/10.1101/2024.12.17.24319207 (Nordic [3], stiff-leg deadlift [1])
+**[3] Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. J Strength Cond Res 2025;39(9):924–932.** https://doi.org/10.1519/JSC.0000000000005159 (Nordic [3], stiff-leg deadlift [1]). Read first as the medRxiv preprint (doi 10.1101/2024.12.17.24319207); the table below is from that reading, and the published abstract supersedes it where they differ — see the top of this record.
 
 Read: full text on medRxiv. Funding: Région Pays de la Loire, "Étoiles Montantes" grant to L. Lacourpaille.
 Competing interests: none declared. Registered NCT06164249.
@@ -124,7 +132,7 @@ Sex of participants was not reported.
 
 ## Stiff-leg deadlift
 
-**[1] Morin 2024** — above.
+**[1] Morin 2025** — above.
 
 ## Searched and not used
 

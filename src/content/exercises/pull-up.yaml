@@ -16,9 +16,10 @@ whyHere: >-
 evidence:
   - kind: training
     claim: >-
-      Twenty-nine strength-trained men did body-weight overhand pull-ups for eight weeks (sixteen
-      sessions). The group that ended each set once rep speed had dropped by 25% improved in every measure, including estimated one-rep maximum and maximum
-      reps; the group that continued to a 50% drop did not change. The trial measured strength and
+      Twenty-nine strength-trained men, who could already do about sixteen pull-ups, did body-weight
+      overhand pull-ups for eight weeks (sixteen sessions). The group that ended each set once rep speed had
+      dropped by 25% improved in every measure, including estimated one-rep maximum and maximum reps; the
+      group that continued to a 50% drop did not change. The trial measured strength and
       endurance, not muscle size [1].
   - kind: training
     claim: >-
@@ -33,7 +34,7 @@ howTo:
   - End each set while you can still pull at a reasonable speed, rather than grinding out slow reps. In the first trial above, stopping once reps had slowed by a quarter worked better than going further [1].
   - If you can't do one yet, start with assisted pull-ups (on an assisted pull-up machine or with a band) and lowering-only pull-ups, where you jump to the top and lower yourself slowly. The second trial above used both kinds [2]. The lat pulldown trains the same movement at a lighter load.
 alternatives: [lat-pulldown, seated-cable-row]
-checked: 2026-10-15
+checked: 2026-10-16
 references:
   - text: "Sánchez-Moreno M, Cornejo-Daza PJ, González-Badillo JJ, Pareja-Blanco F. Effects of velocity loss during body mass prone-grip pull-up training on strength and endurance performance. J Strength Cond Res, 2020;34(4):911-917."
     url: "https://doi.org/10.1519/JSC.0000000000003500"

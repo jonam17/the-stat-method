@@ -329,6 +329,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.25.1 — Exercise pages checked against sources supplied through PubMed
+
+- **The stiff-leg deadlift and Nordic curl pages now cite the published trial** (J Strength Cond Res
+  2025;39(9):924–932) instead of its preprint. Its abstract confirms the hypertrophy figures the pages use,
+  describes the participants as resistance-untrained (the preprint said familiar with training), and does not
+  report the one-rep-maximum gains or the control group's figure, so those are removed rather than left
+  resting on the preprint.
+- **The pull-up page gives the trial's starting point**: the strength-trained men could already do about
+  sixteen pull-ups — a figure that had been too garbled to use where it was first read.
+- Both review records say what changed and why. One supplied paper was read and not used for rows: its
+  seated-row gain came from blood-flow-restriction training.
+
 ### v2.25.0 — Exercise library: shoulders published, with one exercise
 
 - **The lateral raise is live** at `/library/exercises/`, as the shoulders group's only entry, with dumbbell

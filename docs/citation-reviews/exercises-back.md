@@ -77,8 +77,11 @@ were not reachable. Funding declaration not read.
 | Strength and endurance only, no muscle size | Abstract (outcome list) |
 
 Doubt: the repository's abstract text is garbled at the participant count ("Twenty-nine nine"). 29 matches
-the group sizes (15 + 14). A figure after the body mass ("15.9 ± 4.9 PU") may be the baseline pull-up count,
-but it was too garbled to use, so the entry does not give one.
+the group sizes (15 + 14).
+
+**Update 2026-10-16 (v2.25.1):** the PubMed abstract page, supplied by the maintainer as a PDF, reads
+"Twenty-nine strength-trained men (… 15.9 ± 4.9 PU repetitions to failure)", so the entry now says they
+could already do about sixteen pull-ups. That page does not carry a funding declaration; still not read.
 
 **[2] Sepehri Rahnama H, Ganji S, Vadasz K, Prokai J. Sports 2025;13(12):433.** https://doi.org/10.3390/sports13120433
 
@@ -112,7 +115,7 @@ that no trial testing the seated row alone was found.
 | IJSC 2023 seated-row grip study; Birjand pulldown/cable-row study; Vural et al., PLoS ONE 2023 (TRX row) | EMG or force in a single session — not training studies |
 | Russo et al., J Funct Morphol Kinesiol 2024 (foam rolling between pulldown sets) | Single-session |
 | Miras-Moreno et al., Heliyon 2023; Applied Sciences 2023 (prone bench pull) | Load–velocity testing, not training |
-| PLoS ONE 2024 (journal.pone.0301164) | Not read — the site rate-limited the request |
+| Nancekievill et al., PLoS ONE 2025;20(1):e0301164 (read in full, PDF supplied by the maintainer, 2026-10-16) | Seated-row 1RM rose, but in a six-week whole-body program done with blood-flow-restriction cuffs at 30% of 1RM, in physically inactive adults; the gain cannot be credited to an ordinary seated row |
 
 PubMed searches and Europe PMC were not reachable from this session (bot check; rate limit). A future pass
 with PubMed access should re-search the barbell row, dumbbell row and inverted row before the group is
