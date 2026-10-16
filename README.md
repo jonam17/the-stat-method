@@ -329,6 +329,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.22.1 — Unused CSS removed; the stylesheet stays one file
+
+- **About 6 KB of CSS that styled nothing on the site is gone**, about 65 rules, mostly from
+  designs that were replaced: the original homepage hero and its quick calculator, an old newsletter form, the
+  earlier featured-tools list, and affiliate labels on resources that have none. The shipped stylesheet goes
+  from 103.1 KB to 97.0 KB (18.3 to 17.4 KB compressed).
+- **Every page looks exactly as it did.** All 76 built pages produce the same HTML apart from the stylesheet's
+  file name, and each was screenshotted before and after at four widths in light and dark (1280 light, 390 dark,
+  1440 dark, 820 light). The two sets match pixel for pixel.
+- **The stylesheet was not split per page type.** Measured, a page uses 7–23% of the rules. But the file is
+  18 KB compressed and cached after the first visit, so splitting would save a first-time visitor a few
+  kilobytes. It would also make each later page type fetch its own file, and the file's override order would
+  become something the build decides rather than something you can read top to bottom. Not worth it at this size.
+
 ### v2.22.0 — Calculators run on Preact: about 80% less JavaScript
 
 - **Every calculator page now loads about 51–56 KB of JavaScript instead of about 246–252 KB** (22–24 KB compressed,

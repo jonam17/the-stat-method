@@ -46,7 +46,7 @@ once it flips, the panel and its text collapse to the same value.
 
 Every such rule needs `:root[data-theme="dark"] .thing{background:#171717;color:#F2F1EE}`.
 
-Currently pinned: `.results` `.stat` `.cta-card` `.quick` `.band` `.tool-feature` `.pctrow`.
+Currently pinned: `.results` `.stat` `.cta-card` `.band` `.pctrow`.
 
 **Measure contrast, do not eyeball it.** AA is 4.5:1 for body text, 3:1 for graphics. Compute
 it. Safety copy currently runs 8.4:1–14.7:1 and should stay there — it is the most important
