@@ -39,6 +39,11 @@ the **14–18** row: 18-year-olds fall in that bracket, and the site accepts age
   bracket it covers, and say so in the comment at the top of the file.
 - **If something about the table alone would mislead** — iron's requirement is 1.8 times higher for
   vegetarians — put it in `intake.note`, which appears directly beneath the table.
+- **Copy the unit as the table prints it.** Where the sheet qualifies it — vitamin A in *mcg RAE*,
+  folate in *mcg DFE*, niacin in *mg NE* — set `unit` to the plain unit (`mcg`, `mg`) and
+  `intake.unitLabel` to the label (`mcg RAE`). The chart uses the same label. **Check the food table's
+  unit separately:** niacin's foods are in plain mg (niacin alone, without tryptophan), so its file sets
+  `sources.unitLabel: mg`. Say what the difference means in `intake.note`.
 
 **3. Upper limit — the "Tolerable Upper Intake Levels" table.** Same rows. **Read the text around
 the table to see what the limit covers**, and set `ul.appliesTo`:
@@ -60,6 +65,10 @@ recommended amount — that is correct, because it only covers supplements.
   leave a `# REVIEW:` comment explaining it, and keep `ul.note` from claiming more than the sheet does.
 - **If a nutrient has no upper limit**, leave out both `ul.rows` and `ul.appliesTo`, and say so in
   `ul.note` — a test checks that it does. Many B vitamins, vitamin K and chromium have none.
+- **The limit table prints the plain unit** — vitamin A's limit is in mcg of preformed vitamin A, folate's in
+  mcg of folic acid, niacin's in mg — so once `intake.unitLabel` is set, the two tables read differently,
+  as they should. Explain the difference in `ul.note` in the sheet's terms. A file with a `unitLabel` cannot
+  also have an `altUnit`: one IU factor cannot convert two measures (vitamin A's IU differs by form).
 - `ul.note` appears beneath the table, after the scope warning, so write it to stand on its own.
 
 **4. Food sources — the food table.** Take the **five foods with the most per serving**, in order

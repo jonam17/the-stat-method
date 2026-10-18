@@ -4,6 +4,7 @@
  * figures printed beside it.
  */
 import { YOUNG, youngAdultDaily } from '../data/brackets.js';
+import { intakeUnit } from '../data/units.js';
 
 const fmtN = v => (Number.isInteger(v) ? String(v) : v.toFixed(1));
 
@@ -14,6 +15,7 @@ export function sourcesChart(n) {
   // where the source splits the bracket — use the highest, so no food looks
   // like more of a day's worth than it is for anyone aged 19 to 50.
   const daily = youngAdultDaily(d.intake.rows);
+  const unit = intakeUnit(d);   // the food table and the chart are measured against the intake table
   const pct = v => (v / daily) * 100;
   const rows = d.sources.foods.map(f => {
     const [lo, hi] = Array.isArray(f.amount) ? f.amount : [null, f.amount];
@@ -30,9 +32,9 @@ export function sourcesChart(n) {
     title: `How far one serving goes toward a day's ${d.name[0].toLowerCase() + d.name.slice(1)}`,
     desc: `Percentage of the adult daily amount of ${d.name} provided by one serving of each food listed.`,
     caption: `Against the ${d.intake.type === 'RDA' ? 'recommended' : 'adequate'} daily amount for adults 19 to 50: ` +
-      `${fmtN(daily)} ${d.unit}${same ? '' : ', the highest value for men or women in that age range'}. ` +
+      `${fmtN(daily)} ${unit}${same ? '' : ', the highest value for men or women in that age range'}. ` +
       'Where a food varies by brand, the bar shows the lowest figure and the label the full range.',
-    x: { label: `Percent of the adult daily amount (${fmtN(daily)} ${d.unit})` },
+    x: { label: `Percent of the adult daily amount (${fmtN(daily)} ${unit})` },
     reference: { value: 100, label: "One day's amount" },
     rows,
   };

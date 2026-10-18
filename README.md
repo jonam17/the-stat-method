@@ -329,6 +329,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.27.0 — Library: vitamin A, folate, niacin and vitamin K
+
+- **Four vitamins are live** at `/library/vitamins/`: vitamin A, folate, niacin and vitamin K, each drawn
+  from its NIH Office of Dietary Supplements Health Professional fact sheet alone, and checked against it
+  by the maintainer on 2026-10-18. The Library now covers nine nutrients.
+- **Each table is printed in its own unit.** Vitamin A's recommended amount is in mcg RAE, folate's in
+  mcg DFE and niacin's in mg NE, while their upper limits are in plain mcg or mg — not the same measure.
+  New optional fields `intake.unitLabel` and `sources.unitLabel` (`src/data/units.js`) carry the fact
+  sheet's label to the tables, summary boxes and chart; niacin's food table is plain mg, because it
+  leaves out tryptophan. A label must begin with the file's unit and cannot be combined with a second
+  unit such as IU. The five earlier nutrients render exactly as before.
+- **Three cases the template had not yet shown.** Vitamin A's limit covers preformed vitamin A only, not
+  beta-carotene — the first use of `appliesTo: preformed` — and the page notes that one serving of beef
+  liver is more than twice it. Folate's limit covers folic acid from supplements and fortified foods;
+  niacin's covers supplemental niacin, and the page says no more than its fact sheet does. Vitamin K has
+  no upper limit, and its page says that this does not make changing intake safe for anyone taking
+  warfarin.
+
 ### v2.26.0 — Exercise library: arms published, with four exercises
 
 - **Four arm exercises are live** at `/library/exercises/`: preacher curl, incline curl, overhead triceps

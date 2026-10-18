@@ -1,0 +1,159 @@
+# Niacin — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 18 Nov 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-17. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. Recommended amounts are in mg NE (niacin equivalents, counting
+# tryptophan). The food table is in plain mg — its footnote: "These values are
+# for the niacin content of foods only. They do not include the contribution of
+# tryptophan" — so sources.unitLabel is set. The upper-limit table is plain mg.
+draft: false
+name: Niacin
+kind: vitamin
+dek: A B vitamin, also called vitamin B3, that the body turns into NAD — a coenzyme more than 400 enzymes need. The body also makes some from tryptophan in protein.
+unit: mg
+
+intake:
+  type: RDA
+  unitLabel: mg NE
+  rows:
+    - { group: "19–50", male: 16, female: 14, pregnancy: 18, lactation: 17 }
+    - { group: "51–70", male: 16, female: 14 }
+    - { group: ">70", male: 16, female: 14 }
+  note: Amounts are in niacin equivalents (NE), which count the niacin the body makes from tryptophan, an amino acid in protein — 1 mg NE is 1 mg of niacin or 60 mg of tryptophan. The food amounts further down are niacin alone; they leave out tryptophan, some of which the body turns into niacin.
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 16 mg NE a day for males and 14 mg NE for females, 18 mg NE in pregnancy and 17 mg NE when breastfeeding. Its upper limit for supplemental niacin is lower, at 30 mg.
+
+# The text: "The FNB has established ULs for niacin that apply only to
+# supplemental niacin", based on flushing, applied to "both forms of
+# supplemental niacin" (nicotinic acid and nicotinamide); "the UL does not apply
+# to individuals who are receiving supplemental niacin under medical
+# supervision"; and "No adverse effects have been reported from the consumption
+# of naturally occurring niacin in foods."
+# Checked by the maintainer 2026-10-18: unlike folate's, this sheet never says whether niacin added to
+# enriched and fortified foods counts toward the limit. PENDING.md section 4
+# assumed it does; the sheet does not say so, so `scope` says only what the
+# sheet says and does not mention fortified foods either way.
+ul:
+  rows:
+    - { group: "19–50", male: 35, female: 35, pregnancy: 35, lactation: 35 }
+    - { group: "51–70", male: 35, female: 35 }
+    - { group: ">70", male: 35, female: 35 }
+  appliesTo: supplemental
+  scope: This limit applies only to supplemental niacin — both nicotinic acid and nicotinamide — not to niacin found naturally in food.
+  note: The limit is the most supplemental niacin a day that is unlikely to cause harm, not a target. It is based on the skin flushing nicotinic acid causes, and also covers nicotinamide, which does not cause flushing, to guard against its other effects. No adverse effects have been reported from niacin found naturally in food. The limit does not apply to people taking niacin under medical supervision.
+
+does: >-
+  Niacin, also called vitamin B3, is the name for nicotinic acid, nicotinamide and related compounds [1].
+  Every tissue converts it into NAD, a coenzyme that more than 400 enzymes require — more than for any other
+  coenzyme made from a vitamin [1]. NAD helps transfer the energy in carbohydrates, fats and proteins to
+  ATP, the cell's energy currency, and is needed to maintain DNA and control gene expression [1]. Its partner
+  NADP is used to make cholesterol and fatty acids and helps maintain the cell's antioxidant defences [1].
+
+forms: >-
+  Most niacin in food is nicotinic acid or nicotinamide [1]. Animal foods such as poultry, beef and fish
+  provide about 5 to 10 mg per serving, mainly in highly available forms, while nuts, legumes and grains
+  provide about 2 to 5 mg, mainly as nicotinic acid [1]. The body also makes NAD from tryptophan: about 60 mg
+  of tryptophan yields 1 mg of niacin, though the rate varies considerably between people [1]. Supplements
+  mostly contain nicotinic acid or nicotinamide, and some niacin-only products contain 500 mg or more per
+  serving [1]. Supplements of inositol hexanicotinate, often labelled flush-free, deliver on average 30% less
+  niacin than nicotinic acid or nicotinamide [1]. Extended-release nicotinic acid, 500 to 1,000 mg, is a
+  prescription medicine for high cholesterol [1].
+
+absorption: >-
+  Niacin is almost completely absorbed, even in very high doses of 3 to 4 g [1]. In some grain products,
+  the niacin naturally present is bound in a form that makes only about 30% of it available, while niacin
+  added to enriched and fortified foods is free and highly available [1]. People who get too little
+  riboflavin, vitamin B6 or iron make less niacin from tryptophan [1].
+
+deficiency: >-
+  Severe deficiency causes pellagra: a pigmented rash or brown discoloration on skin exposed to sunlight, a
+  bright red tongue, vomiting, constipation or diarrhea, and neurological symptoms — depression, apathy,
+  headache, fatigue and memory loss that can progress to aggressive, paranoid and suicidal behaviour and
+  hallucinations [1]. As it progresses, appetite is lost and, eventually, the person dies [1]. Pellagra is
+  very rare in the United States and mostly limited to people living in poverty on very limited diets low in
+  niacin and protein, although some people have marginal or low niacin status [1]. Blood levels are not a
+  reliable measure; the most reliable is the amount of two niacin metabolites excreted in urine [1].
+
+atRisk:
+  - People who are undernourished because of poverty, anorexia, alcohol use disorder, AIDS, inflammatory bowel disease or liver cirrhosis [1]
+  - People who get too little riboflavin, vitamin B6 or iron, which the body needs to make niacin from tryptophan [1]
+  - People with Hartnup disease, a rare genetic disorder that limits the absorption of tryptophan [1]
+  - People with carcinoid syndrome, in whom tryptophan is used to make serotonin instead of niacin [1]
+
+usIntake: >-
+  Most Americans get more than the recommended amount: in national survey data from 2015–2016, average
+  intake from food and drink was 31.4 mg a day for men and 21.3 mg for women [1]. In 2009–2012 data, only 1% of
+  adults took in less than the average requirement from food and drink [1]. About 21% of people aged 2 and
+  older take a supplement containing niacin, rising to 39% of men and 40% of women aged 60 and older, and
+  supplements doubled or tripled total intakes [1]. In 2003–2006 data, 10% of supplement users had total
+  intakes at or above the upper limit [1].
+
+# Checked by the maintainer 2026-10-18: fifth place is a tie at 8.6 mg — "Salmon, sockeye, cooked" and "Tuna,
+# light, canned in water, drained", both 3 ounces. Salmon is listed first, so it
+# is taken. Second and third places tie too (chicken and marinara, 10.3 mg);
+# both are in, in the table's order.
+sources:
+  rule: The five foods with the most niacin per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  unitLabel: mg
+  foods:
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 14.9 }
+    - { food: "Chicken breast, meat only, grilled", short: "Chicken breast", serving: "3 ounces", amount: 10.3 }
+    - { food: "Marinara (spaghetti) sauce, ready to serve", short: "Marinara sauce", serving: "1 cup", amount: 10.3 }
+    - { food: "Turkey breast, meat only, roasted", short: "Turkey breast", serving: "3 ounces", amount: 10.0 }
+    - { food: "Salmon, sockeye, cooked", short: "Salmon (sockeye)", serving: "3 ounces", amount: 8.6 }
+
+evidence:
+  established: >-
+    NAD and NADP, made from niacin, are needed for most of the oxidation and reduction reactions in cells,
+    and too little niacin causes pellagra [1]. Pellagra caused by the tuberculosis drug isoniazid can be
+    prevented with more niacin, and the World Health Organization treats pellagra with nicotinamide [1].
+  notSupported: >-
+    Heart disease. Very high doses of nicotinic acid — more than 100 times the recommended amount — improve
+    blood lipids, but the fact sheet concludes that they have no significant effect on the risk of
+    cardiovascular events [1]. In the largest trial, 25,673 adults aged 50–80 (83% men) with cardiovascular
+    disease, already taking a statin, took 2 g of extended-release nicotinic acid a day or a placebo for a
+    median of 4 years: major vascular events did not fall, and diabetes, digestive problems, bleeding and skin
+    problems increased [1]. A review of 23 trials in 39,195 people found no reduction in deaths, heart attacks
+    or strokes [1]. The American College of Cardiology and the American Heart Association do not recommend
+    niacin as an add-on to statins [1].
+  mixed: >-
+    In a 1970s trial, 8,341 people aged 30 to 64 who had had a heart attack took one of five
+    cholesterol-lowering drugs — one of them 3,000 mg of nicotinic acid a day — or a placebo for an average of
+    6.2 years; those on nicotinic acid had fewer
+    nonfatal heart attacks but more irregular heart rhythms, and no fewer deaths during the trial [1]. Nine
+    years after it ended, they had 11% fewer deaths from any cause than the placebo group [1]. A 2018 review of
+    three trials in 29,195 patients found that adding 1 to 3 g of extended-release nicotinic acid to a statin
+    increased deaths from any cause by 10% [1].
+
+tooMuch: >-
+  Niacin naturally present in food has not been reported to cause harm [1]. From supplements, 30 to 50 mg or
+  more of nicotinic acid typically causes flushing — reddening of the face, arms and chest with burning,
+  tingling and itching — which is usually transient but can come with headache, rash, dizziness or a fall in
+  blood pressure [1]. Doses of 1,000 to 3,000 mg a day can cause low blood pressure severe enough to risk
+  falls, fatigue, impaired glucose tolerance and insulin resistance, nausea, heartburn and abdominal pain, and
+  blurred vision or fluid at the centre of the retina [1]. Taken for months or years, high doses can damage the
+  liver, up to acute liver failure, more often with extended-release forms [1]. Nicotinamide does not cause
+  flushing, but 3,000 mg a day can cause nausea, vomiting and signs of liver toxicity [1]. Doses in the
+  thousands of milligrams to treat high cholesterol are drug use, and the fact sheet says they should be taken
+  only with medical approval and supervision [1].
+
+interactions: >-
+  Isoniazid and pyrazinamide, used to treat tuberculosis, interfere with the body's production of niacin from
+  tryptophan; pellagra can occur during isoniazid treatment and can be prevented with more niacin [1]. Large
+  doses of nicotinic acid can raise blood sugar — most likely at 1.5 g a day or more — so people taking
+  medicines for diabetes who also take high-dose nicotinic acid should have their blood sugar monitored [1].
+  If you take any of these regularly, talk to your doctor or pharmacist before taking a niacin supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Niacin, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Niacin-HealthProfessional/
+  lastModified: 2022-11-18
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Niacin — Fact Sheet for Health Professionals. Updated 18 November 2022."
+    url: https://ods.od.nih.gov/factsheets/Niacin-HealthProfessional/
+
+aiAssisted: true

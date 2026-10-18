@@ -133,6 +133,9 @@ const nutrients = defineCollection({
     intake: z.object({
       type: z.enum(['RDA', 'AI']),
       rows: rowsInOrder,
+      // The unit as the fact sheet labels this table — "mcg RAE", "mcg DFE", "mg NE"
+      // — when it is not plain `unit`. Must begin with `unit` (src/data/units.js).
+      unitLabel: z.string().optional(),
       eighteenNote: z.string(),          // 18-year-olds fall in the 14–18 bracket
       // Anything the table alone would mislead about — iron's higher requirement
       // for vegetarians, for example. Shown directly beneath the table.
@@ -168,6 +171,9 @@ const nutrients = defineCollection({
     usIntake: z.string(),                 // how people in the United States actually fare
     sources: z.object({
       rule: z.string(),
+      // The food table's unit, where it is not the intake table's: niacin's foods are
+      // in mg of niacin alone, its recommended amount in mg NE. Must begin with `unit`.
+      unitLabel: z.string().optional(),
       foods: z.array(z.object({
         food: z.string(), serving: z.string(),
         short: z.string().max(26).optional(),   // chart label; the full name is used everywhere else
@@ -187,6 +193,15 @@ const nutrients = defineCollection({
     }),
     references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
     aiAssisted: z.boolean(),
+  }).superRefine((d, ctx) => {
+    for (const [path, label] of [['intake', d.intake.unitLabel], ['sources', d.sources.unitLabel]]) {
+      if (label != null && !label.startsWith(d.unit))
+        ctx.addIssue({ code: 'custom', path: [path, 'unitLabel'], message: `${path}.unitLabel must begin with the unit (${d.unit})` });
+    }
+    // One conversion factor cannot serve two different measures: vitamin A's IU
+    // differs by form, so a second unit is allowed only where both tables use one.
+    if (d.altUnit && (d.intake.unitLabel || d.sources.unitLabel))
+      ctx.addIssue({ code: 'custom', path: ['altUnit'], message: 'altUnit cannot be combined with a unitLabel' });
   }),
 });
 

@@ -7,6 +7,8 @@ import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import yaml from 'js-yaml';
 import { BRACKETS, YOUNG, matchingRow } from '../../data/brackets.js';
+import { intakeUnit, sourcesUnit } from '../../data/units.js';
+import { sourcesChart } from '../../charts/library.js';
 
 const DIR = 'src/content/nutrients';
 const files = readdirSync(DIR).filter(f => f.endsWith('.yaml'));
@@ -55,6 +57,21 @@ describe('library files', () => {
           for (const k of ['male', 'female', 'pregnancy', 'lactation'])
             if (i[k] != null && u[k] != null) expect(u[k], `${i.group} ${k}`).toBeGreaterThanOrEqual(i[k]);
         }
+      });
+
+      it('labels each table with a unit that begins with the file\'s unit', () => {
+        // "mcg RAE" and "mcg" are both micrograms; "mg NE" on an mcg file would be a typo
+        // the arithmetic could not survive.
+        expect(intakeUnit(d).startsWith(d.unit), intakeUnit(d)).toBe(true);
+        expect(sourcesUnit(d).startsWith(d.unit), sourcesUnit(d)).toBe(true);
+        // One IU factor cannot convert two different measures.
+        if (d.altUnit) expect(d.intake.unitLabel ?? d.sources.unitLabel, 'altUnit with a unitLabel').toBeUndefined();
+      });
+
+      it('the chart is measured in the same unit as the intake table', () => {
+        const c = sourcesChart({ id: f, data: d });
+        expect(c.x.label).toContain(`${intakeUnit(d)})`);
+        expect(c.caption).toContain(` ${intakeUnit(d)}`);
       });
 
       it('lists at most five food sources, highest first', () => {

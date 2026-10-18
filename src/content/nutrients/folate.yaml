@@ -1,0 +1,161 @@
+# Folate — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 30 Nov 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-17. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. Recommended amounts are in mcg DFE; the upper-limit table is in
+# plain mcg of folic acid ("unlike the RDAs, the ULs are in mcg, not mcg DFE").
+draft: false
+name: Folate
+kind: vitamin
+dek: A B vitamin needed to make DNA and for cell division. Folate occurs naturally in food; folic acid is the form added to fortified foods and most supplements.
+unit: mcg
+
+intake:
+  type: RDA
+  unitLabel: mcg DFE
+  rows:
+    - { group: "19–50", male: 400, female: 400, pregnancy: 600, lactation: 500 }
+    - { group: "51–70", male: 400, female: 400 }
+    - { group: ">70", male: 400, female: 400 }
+  note: Amounts are in dietary folate equivalents (DFE), which allow for folic acid being better absorbed than the folate in food — 1 mcg DFE is 1 mcg of food folate, 0.6 mcg of folic acid from fortified foods or from supplements taken with food, or 0.5 mcg of folic acid from a supplement taken on an empty stomach. Separately, the Food and Nutrition Board advises everyone who could become pregnant to get 400 mcg of folic acid a day from supplements, fortified foods or both, on top of the folate in a varied diet.
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 400 mcg DFE a day, 600 mcg DFE in pregnancy and 500 mcg DFE when breastfeeding. Its upper limit is lower, at 800 mcg of folic acid from supplements and fortified foods.
+
+# Table 3 is titled "for Folate from Supplements or Fortified Foods". The text:
+# "the FNB established a UL for the synthetic forms of folate available in
+# dietary supplements and fortified foods ... did not establish a UL for folate
+# from food", and "The ULs do not apply to individuals taking high doses of
+# supplemental folate under medical supervision."
+ul:
+  rows:
+    - { group: "19–50", male: 1000, female: 1000, pregnancy: 1000, lactation: 1000 }
+    - { group: "51–70", male: 1000, female: 1000 }
+    - { group: ">70", male: 1000, female: 1000 }
+  appliesTo: supplemental
+  scope: This limit applies only to folic acid and other synthetic forms of folate from supplements and fortified foods — not to folate found naturally in food.
+  note: The limit is the most folic acid from supplements and fortified foods a day that is unlikely to cause harm, not a target. It is in plain mcg, not mcg DFE like the recommended amount — 1,000 mcg of folic acid equals 1,667 mcg DFE. It was set because of the way folate interacts with vitamin B12; no limit was set for folate from food, because high intakes from food have not been reported to cause harm. It does not apply to people taking high doses under medical supervision.
+
+does: >-
+  Folate, sometimes called vitamin B9, is a water-soluble B vitamin [1]. It works as a coenzyme in making
+  DNA and RNA and in the metabolism of amino acids, including the conversion of homocysteine to methionine
+  [1]. One folate-dependent step in making DNA is required for proper cell division; when it fails, the
+  result can be megaloblastic anemia, a hallmark of folate deficiency [1]. The body holds about 15 to 30 mg
+  of folate, about half of it in the liver [1].
+
+forms: >-
+  Folate is the general term for the folates found naturally in food and the forms in supplements and
+  fortified foods [1]. Folic acid is the form used in fortified foods and most supplements; some supplements
+  contain 5-MTHF (also sold as L-methylfolate) instead [1]. At least 85% of folic acid is absorbed when taken
+  with food, and nearly 100% on an empty stomach, against about 50% of the folate naturally present in food
+  [1]. 5-MTHF is absorbed as well as folic acid or better, but no official factor for converting it to DFE
+  has been set [1]. Common supplement amounts for adults are 680 to 1,360 mcg DFE (400 to 800 mcg folic acid)
+  [1].
+
+deficiency: >-
+  Isolated folate deficiency is uncommon; it usually comes with other deficiencies, because it is closely
+  linked with poor diet, alcohol use disorder and malabsorption [1]. Its main sign is megaloblastic anemia,
+  with weakness, fatigue, difficulty concentrating, irritability, headache, heart palpitations and shortness
+  of breath [1]. It can also cause soreness and shallow ulcers on the tongue and inside the mouth; changes in
+  skin, hair or fingernail colour; digestive symptoms; and raised blood homocysteine [1]. Women with too
+  little folate are at greater risk of having a baby with a neural tube defect [1]. A serum folate above 3
+  ng/mL, or a red blood cell folate above 140 ng/mL, indicates adequate status [1].
+
+atRisk:
+  - People with alcohol use disorder — diets are often poor, and alcohol interferes with folate absorption and speeds its breakdown and excretion [1]
+  - Women who could become pregnant — some get too little even when they take supplements [1]
+  - Pregnant women, whose recommended amount rises from 400 to 600 mcg DFE, which can be hard to reach through diet alone [1]
+  - People with malabsorptive disorders such as tropical sprue, celiac disease and inflammatory bowel disease, or with reduced stomach acid [1]
+  - People with the 677C>T variant of the MTHFR gene, who convert folate to its active form less efficiently — about 25% of Hispanics, 10% of Caucasians and Asians, and 1% of African Americans carry two copies [1]
+
+usIntake: >-
+  Most Americans get enough folate: in national survey data from 2013–2014, average intake from food was 602
+  mcg DFE a day for men aged 20 and older and 455 mcg DFE for women [1]. Some groups still fall short — even
+  counting supplements, 17% of women aged 19 to 30 and 23% of non-Hispanic black women do not meet the
+  average requirement [1]. Since 1998 the FDA has required folic acid to be added to enriched breads,
+  cereals, flours, corn meals, pastas, rice and other grain products, which raised average folic acid
+  intake by about 190 mcg a day [1]. About 35% of adults take a supplement containing folic acid, and about
+  5% of adults aged 51 to 70 and of men 71 and older take in more than the upper limit, mainly from
+  supplements [1].
+
+# Checked by the maintainer 2026-10-18: the fourth food, "Breakfast cereals, fortified with 25% of the DV",
+# has no serving in Table 2; "1 serving" follows the column heading "per
+# serving". The cereal and the rice carry the table's dagger: "Fortified with
+# folic acid as part of the folate fortification program."
+sources:
+  rule: The five foods with the most folate per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, braised", short: "Beef liver", serving: "3 ounces", amount: 215 }
+    - { food: "Spinach, boiled", serving: "½ cup", amount: 131 }
+    - { food: "Black-eyed peas (cowpeas), boiled", short: "Black-eyed peas", serving: "½ cup", amount: 105 }
+    - { food: "Breakfast cereals, fortified with 25% of the Daily Value", short: "Breakfast cereal", serving: "1 serving", amount: 100, fortified: true }
+    - { food: "Rice, white, medium grain, cooked", short: "Rice, white, cooked", serving: "½ cup", amount: 90, fortified: true }
+
+evidence:
+  established: >-
+    Neural tube defects. Trial evidence shows that enough folic acid around conception prevents a
+    substantial share of neural tube defects, and since mandatory fortification began in 1998, U.S. rates
+    have fallen by 28% [1]. Folate is also essential for making DNA, which is why the recommended amount
+    rises in pregnancy [1].
+  notSupported: >-
+    Heart disease: folic acid lowers homocysteine but does not reduce the risk of heart attacks or other
+    cardiovascular outcomes apart from stroke — in one trial, 5,442 U.S. women aged 42 or older at high risk
+    of cardiovascular disease who took 2,500 mcg folic acid with vitamins B12 and B6 a day for 7.3 years had
+    no fewer major cardiovascular events [1]. Cognition: most trials find no effect on cognitive function or
+    dementia even as homocysteine falls; a meta-analysis of 11 trials in more than 20,000 older adults found
+    no effect on cognitive ageing [1]. Cancer prevention: a 2015 expert panel convened by the National
+    Toxicology Program and the NIH Office of Dietary Supplements concluded that folic acid supplements do not
+    reduce cancer risk in people whose folate status is already adequate [1].
+  mixed: >-
+    Stroke: folic acid, alone or with other B vitamins, reduces stroke risk, especially where folate status
+    is low. In a trial in 20,702 adults with high blood pressure in regions of China without fortification,
+    800 mcg a day with the blood pressure drug enalapril for a median of 4.5 years cut strokes by 21%
+    compared with enalapril alone; the fact sheet suggests the benefit is mainly for people with too little
+    folate, which is less common in fortified countries such as the United States [1]. Cancer risk at high
+    doses: some trials have found more cancers with folic acid — a meta-analysis of six trials in 25,738 men
+    found 24% more prostate cancer — and the fact sheet calls its effect on cancer unclear [1]. Autism:
+    observational studies suggest a possible link between folic acid around conception and lower risk, but
+    confounding prevents firm conclusions [1]. Depression: results are mixed, and many doses studied exceed
+    the upper limit and should be taken only under medical supervision [1].
+
+disagreements: >-
+  For anyone who could become pregnant, the Food and Nutrition Board advises 400 mcg of folic acid a day from
+  supplements, fortified foods or both [1]. The U.S. Preventive Services Task Force recommends a daily
+  supplement of 400 to 800 mcg folic acid, starting at least 1 month before conception and continuing
+  through the first 2 to 3 months of pregnancy [1]. The CDC recommends folic acid rather than 5-MTHF, even for
+  people with the MTHFR variant [1]. The Food and Nutrition Board has made no recommendation for women who have
+  had a pregnancy affected by a neural tube defect; other experts recommend 4,000 to 5,000 mcg a day, which
+  exceeds the upper limit and should be taken only under medical supervision [1].
+
+tooMuch: >-
+  Large amounts of folate can correct the anemia caused by vitamin B12 deficiency but not its nerve damage,
+  so high intakes from supplements might hide a B12 deficiency until the damage is irreversible; concern has
+  since shifted to the possibility that large amounts worsen the anemia and cognitive symptoms of B12
+  deficiency [1]. High folic acid intakes might speed the progression of precancerous lesions, raising the
+  risk of colorectal and possibly other cancers in some people [1]. Intakes of 1,000 mcg or more a day from
+  supplements around conception have been linked to lower scores on tests of cognitive development in
+  children at age 4 to 5 [1]. Folic acid beyond what the body can process circulates unmetabolised; single
+  doses of 300 or 400 mcg produce detectable levels, and what that means for health is not well understood
+  [1]. Folate from food has not been reported to cause harm [1].
+
+interactions: >-
+  Methotrexate, used to treat cancer and autoimmune diseases, works against folate: people taking it for
+  cancer should consult their oncologist before taking folate supplements, although supplements might reduce
+  the digestive side effects of low-dose methotrexate for rheumatoid arthritis or psoriasis [1]. Antiepileptic
+  drugs such as phenytoin (Dilantin), carbamazepine and valproate can lower blood folate, and folate
+  supplements might lower blood levels of these drugs [1]. Sulfasalazine (Azulfidine), used mainly for
+  ulcerative colitis, blocks folate absorption and can cause deficiency [1]. If you take any of these
+  regularly, talk to your doctor or pharmacist before taking a folate supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Folate, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/
+  lastModified: 2022-11-30
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Folate — Fact Sheet for Health Professionals. Updated 30 November 2022."
+    url: https://ods.od.nih.gov/factsheets/Folate-HealthProfessional/
+
+aiAssisted: true

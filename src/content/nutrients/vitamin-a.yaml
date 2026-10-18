@@ -1,0 +1,166 @@
+# Vitamin A — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet "Vitamin A and Carotenoids" (reference 1), updated
+# 10 Mar 2025. Read from the full-page PDF supplied by the maintainer on
+# 2026-10-17; checked against it by the maintainer on 2026-10-18. Numbered markers [n] refer to `references` below. Follow
+# docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives one "51+ years" row; its values are repeated in 51–70 and >70.
+# Table 3 (upper limits) gives one "19+ years" row; repeated in every bracket.
+# Recommended amounts are in mcg RAE; the upper-limit table prints plain mcg
+# (of preformed vitamin A), so intake.unitLabel is set and the limit is not.
+# No altUnit: the sheet says IU convert to RAE differently for each form.
+draft: false
+name: Vitamin A
+kind: vitamin
+dek: A fat-soluble vitamin needed for vision, immune function, growth and reproduction. Animal foods provide it ready-made; plants provide carotenoids the body converts.
+unit: mcg
+
+intake:
+  type: RDA
+  unitLabel: mcg RAE
+  rows:
+    - { group: "19–50", male: 900, female: 700, pregnancy: 770, lactation: 1300 }
+    - { group: "51–70", male: 900, female: 700 }
+    - { group: ">70", male: 900, female: 700 }
+  note: Amounts are in retinol activity equivalents (RAE), which count each form by how much vitamin A the body gets from it — 1 mcg RAE is 1 mcg of retinol, 2 mcg of beta-carotene from supplements, 12 mcg of beta-carotene from food, or 24 mcg of alpha-carotene or beta-cryptoxanthin from food. Older labels used International Units (IU), which convert differently for each form, so a mixed diet's IU cannot be read off a single figure.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 900 mcg RAE a day for males and 700 mcg RAE for females, 750 mcg RAE in pregnancy and 1,200 mcg RAE when breastfeeding. The upper limit for preformed vitamin A in that group is 2,800 mcg.
+
+# Table 3 is titled "for Preformed Vitamin A". The text says the ULs "apply to
+# both food and supplement intakes"; the footnote says they "apply only to
+# products from animal sources and supplements whose vitamin A comes entirely
+# from retinol or its ester forms", and that for mixed supplements only the
+# retinol/retinyl ester share counts. "The FNB has not established ULs for
+# beta-carotene and other provitamin A carotenoids."
+# Checked by the maintainer 2026-10-18: the last sentence of `note` (beef liver) is arithmetic from two of the
+# sheet's numbers, not a statement the sheet makes. Table 2's note says animal
+# foods "contain primarily preformed vitamin A". Approved in principle
+# 2026-10-17; check the wording.
+ul:
+  rows:
+    - { group: "19–50", male: 3000, female: 3000, pregnancy: 3000, lactation: 3000 }
+    - { group: "51–70", male: 3000, female: 3000 }
+    - { group: ">70", male: 3000, female: 3000 }
+  appliesTo: preformed
+  scope: This limit applies only to preformed vitamin A — retinol and its esters, such as retinyl palmitate — from animal foods and supplements. It does not apply to beta-carotene or other carotenoids. For a supplement that contains both, count only the share from retinol or its esters.
+  note: The limit is the most preformed vitamin A a day, from food and supplements combined, that is unlikely to cause harm — not a target. It is in mcg of preformed vitamin A, where 1 mcg equals 1 mcg RAE. It was set from the amounts linked to liver abnormalities, birth defects and toxic effects in infants and children. No limit has been set for beta-carotene or the other carotenoids the body converts to vitamin A. One 3-ounce serving of pan-fried beef liver, the first food listed below, provides 6,582 mcg RAE, mainly as preformed vitamin A — more than twice the limit.
+
+does: >-
+  Vitamin A is a group of fat-soluble compounds, mainly retinol and retinyl esters [1]. It is involved in
+  immune function, communication between cells, growth and development, and reproduction, and supports the
+  normal formation and maintenance of the heart, lungs, eyes and other organs [1]. It is essential for
+  vision: it is part of rhodopsin, the light-sensitive protein in the retina, and keeps the cornea and the
+  membranes covering the eye working normally [1]. Most of the body's vitamin A is stored in the liver [1].
+
+forms: >-
+  The diet provides vitamin A in two forms [1]. Preformed vitamin A — retinol and retinyl esters — is
+  found in animal foods, including dairy products, eggs, fish and organ meats [1]. Provitamin A carotenoids
+  — beta-carotene, alpha-carotene and beta-cryptoxanthin — are plant pigments that the body converts into
+  vitamin A in the intestine, although how efficiently varies between people, partly for genetic reasons
+  [1]. Other carotenoids, such as lycopene, lutein and zeaxanthin, are not converted [1]. In the United
+  States, about 65% to 80% of the vitamin A people consume is preformed [1]. Supplements contain retinyl
+  acetate, retinyl palmitate, beta-carotene or a mix; 3,000 mcg RAE is a common amount, and multivitamins
+  often contain 750 to 1,050 mcg RAE [1].
+
+absorption: >-
+  The body may absorb 75% to 100% of the retinol in food but, in most cases, only 10% to 30% of the
+  beta-carotene [1]. Cooking and heat treatment can make the beta-carotene in food more available [1]. From
+  supplements, 70% to 90% of preformed vitamin A is absorbed, and 8.7% to 65% of beta-carotene [1]. Vitamin A
+  is routinely added to some foods, including milk and margarine, and some ready-to-eat cereals are
+  fortified with it [1].
+
+deficiency: >-
+  Frank deficiency is rare in the United States but still common in many low-income countries [1]. Its
+  most common sign is xerophthalmia, and the first symptom is night blindness — difficulty seeing in low
+  light or darkness — caused by low levels of rhodopsin in the retina [1]. Xerophthalmia also damages the
+  cornea and can end in permanent blindness; vitamin A deficiency is one of the top causes of preventable
+  blindness in children [1]. Chronic deficiency is also linked to respiratory diseases such as pneumonia,
+  anemia, and more severe and deadly infections, particularly measles and diarrhea [1]. Blood retinol does
+  not fall until the liver's stores are almost depleted, but a level of 20 mcg/dL or less often reflects
+  moderate deficiency, and 10 mcg/dL or less severe deficiency [1].
+
+atRisk:
+  - Pregnant and breastfeeding women in low- and middle-income countries — pregnancy raises the need for vitamin A, and about 10% to 20% of pregnant women in low-income countries are deficient [1]
+  - People with cystic fibrosis — up to 90% have pancreatic insufficiency, which makes fat, and with it vitamin A, hard to absorb [1]
+  - People with Crohn's disease or ulcerative colitis, especially those who have had the disorder for several years [1]
+  - Some people with newly diagnosed celiac disease; a gluten-free diet can, but does not always, correct the deficiency [1]
+
+usIntake: >-
+  In national survey data from 2017–2018, average intake from food and drink was 682 mcg RAE a day for men
+  aged 20 and older and 616 mcg RAE for women [1]. Even so, fewer than 1% of Americans have a blood retinol
+  level below 20 mcg/dL, so deficiency is uncommon [1]. In data from 1988–1994, about 26% of the vitamin A
+  men consumed and 34% of what women consumed came from carotenoids, and the rest from preformed vitamin A,
+  mostly retinyl esters [1]. About 12% to 40% of people, depending on age, take a supplement containing
+  vitamin A; adults 71 and older are among the most likely to [1].
+
+# Table 2's note: "The foods from animal sources in Table 2 contain primarily
+# preformed vitamin A, the plant-based foods have provitamin A, and the foods
+# with a mixture of ingredients from animals and plants contain both" — a rule
+# for whole categories, so the form tags below follow it.
+sources:
+  rule: The five foods with the most vitamin A per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, pan fried", short: "Beef liver", form: preformed, serving: "3 ounces", amount: 6582 }
+    - { food: "Sweet potato, baked in skin", short: "Sweet potato", form: provitamin A, serving: "1 whole", amount: 1403 }
+    - { food: "Spinach, frozen, boiled", short: "Spinach, boiled", form: provitamin A, serving: "½ cup", amount: 573 }
+    - { food: "Pumpkin pie, commercially prepared", short: "Pumpkin pie", form: both forms, serving: "1 piece", amount: 488 }
+    - { food: "Carrots, raw", form: provitamin A, serving: "½ cup", amount: 459 }
+
+evidence:
+  established: >-
+    Vision, immune function, growth and reproduction depend on vitamin A, and night blindness is the first
+    sign of deficiency [1]. Deficiency is one of the top causes of preventable blindness in children [1].
+  notSupported: >-
+    Cancer prevention. Among nonsmokers, beta-carotene and vitamin A supplements do not appear to affect
+    the risk of cancer [1]. In smokers they have done harm. In CARET, 18,314 current and former smokers and
+    asbestos-exposed workers aged 45–74 took 30 mg beta-carotene plus 7,500 mcg RAE (25,000 IU) retinyl
+    palmitate a day or a placebo; the trial was stopped early, after a mean of 4 years, when lung cancer
+    was 28% higher, lung cancer deaths 46% higher and deaths from all causes 17% higher [1]. In ATBC, 29,133
+    male smokers aged 50–69 who took 20 mg beta-carotene a day for 5 to 8 years had 18% more lung cancer
+    and an 8% higher death rate [1]. In AREDS2, in which no current smokers were given beta-carotene, more
+    lung cancers occurred in the beta-carotene group (23 against 11), 31 of the 34 in former smokers [1].
+    Three other trials, with smaller shares of smokers, found no effect on lung cancer [1].
+  mixed: >-
+    Age-related macular degeneration: in AREDS, people at high risk of advanced AMD who took a daily
+    supplement of beta-carotene (15 mg), vitamins C and E, zinc and copper for 5 years had a 25% lower risk
+    of advanced AMD than those on placebo [1]. AREDS2 found the formula protected as well without
+    beta-carotene, and replacing it with lutein and zeaxanthin lowered the risk of progression further [1].
+    The fact sheet advises people who have or are developing AMD to talk to their health care provider about
+    the AREDS formulations [1]. Other cancers: observational studies link higher intakes of retinol,
+    carotenoids, or fruit and vegetables with lower risk of several cancers, while others find no link [1].
+    Measles: in a 2022 Cochrane review, six trials in 19,566 children aged 6 months to 5 years in low- and
+    middle-income countries found that high-dose vitamin A halved new cases of measles, but six trials in
+    more than a million children found no effect on deaths from measles [1].
+
+tooMuch: >-
+  Because vitamin A is fat-soluble, the body stores the excess, mainly in the liver [1]. One or a few very
+  high doses — typically more than 100 times the recommended amount — cause acute toxicity within days to
+  weeks: severe headache, blurred vision, nausea, dizziness, aching muscles and poor coordination, and in
+  severe cases raised fluid pressure around the brain, drowsiness, coma and death [1]. Regular high doses
+  cause dry skin, painful muscles and joints, fatigue, depression and abnormal liver test results [1]. Total
+  intakes of preformed vitamin A above the upper limit can cause birth defects of the eye, skull, lungs and
+  heart, and experts advise women who are or might be pregnant, and those who are breastfeeding, not to take
+  supplements providing more than 3,000 mcg RAE (10,000 IU) a day [1]. Beta-carotene is not known to cause
+  birth defects; too much over a long time turns the skin yellow-orange, a harmless condition that reverses
+  when intake stops [1]. Even so, the Food and Nutrition Board advises against beta-carotene supplements for
+  the general population, except as a source of vitamin A to prevent deficiency [1].
+
+interactions: >-
+  Orlistat (Alli, Xenical), a weight-loss drug, reduces the absorption of vitamin A, beta-carotene and the
+  other fat-soluble vitamins, and its makers recommend a multivitamin that contains them [1]. Synthetic
+  retinoids taken by mouth — such as acitretin (Soriatane) for psoriasis and bexarotene (Targretin) for the
+  skin effects of T-cell lymphoma — can raise the risk of vitamin A toxicity when combined with vitamin A
+  supplements [1]. If you take any of these regularly, talk to your doctor or pharmacist before taking a
+  vitamin A supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin A and Carotenoids, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/
+  lastModified: 2025-03-10
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin A and Carotenoids — Fact Sheet for Health Professionals. Updated 10 March 2025."
+    url: https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/
+
+aiAssisted: true

@@ -1,0 +1,139 @@
+# Vitamin K — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 29 Mar 2021. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-17. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes, with one "19+ years" row; its values are
+# repeated in every adult bracket. There is no upper limit: "The FNB did not
+# establish ULs for vitamin K because of its low potential for toxicity."
+draft: false
+name: Vitamin K
+kind: vitamin
+dek: A fat-soluble vitamin the body needs to make proteins for blood clotting and bone. It comes mainly from green leafy vegetables, and gut bacteria make some too.
+unit: mcg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 120, female: 90, pregnancy: 90, lactation: 90 }
+    - { group: "51–70", male: 120, female: 90 }
+    - { group: ">70", male: 120, female: 90 }
+  note: These are Adequate Intakes, not Recommended Dietary Allowances — there was not enough evidence to set a requirement, so they are based on how much vitamin K healthy people eat.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 75 mcg a day for males and females, including in pregnancy and when breastfeeding. There is no upper limit at any age.
+
+ul:
+  note: No upper limit has been set for vitamin K, because its potential for toxicity is low — no adverse effects from vitamin K in food or supplements have been reported in humans or animals. That does not make it safe for everyone to change how much they take. Vitamin K can interact seriously and dangerously with warfarin (Coumadin) and similar blood thinners; see Medicines that interact, below.
+
+does: >-
+  Vitamin K is a family of compounds: phylloquinone (vitamin K1) and the menaquinones (vitamin K2), numbered
+  MK-4 to MK-13 [1]. It is a coenzyme for an enzyme needed to make the proteins involved in blood clotting —
+  including prothrombin — and in bone metabolism [1]. Warfarin (Coumadin) works by blocking vitamin K, which is
+  why people taking it need a consistent vitamin K intake [1]. Compared with the other fat-soluble vitamins,
+  very little circulates in the blood, because it is quickly used and excreted [1].
+
+forms: >-
+  Phylloquinone, the main form in the diet, is found mainly in green leafy vegetables [1]. Menaquinones come
+  mostly from bacteria: natto (fermented soybeans) is rich in them, cheese and other fermented foods contain
+  some, and meat, dairy foods and eggs contain modest amounts [1]. Bacteria in the gut make menaquinones too,
+  which experts believe meet at least some of the body's need [1]. The body also makes MK-4 from
+  phylloquinone [1]. Supplements contain phylloquinone, phytonadione (a synthetic vitamin K1), MK-4 or MK-7;
+  menadione, sometimes called vitamin K3, is no longer used in supplements or fortified foods because it
+  damaged liver cells in laboratory studies [1].
+
+absorption: >-
+  Free phylloquinone is about 80% absorbed, but much less is absorbed from food, because in plants it is
+  tightly bound — the body absorbs only 4% to 17% as much from spinach as from a tablet [1]. Eating vegetables
+  with some fat improves absorption, although it stays lower than from oils [1].
+
+deficiency: >-
+  Bleeding and hemorrhage are the classic signs, but only in severe deficiency, which is judged by a
+  significantly longer prothrombin time — how long blood takes to clot [1]. Deficiency could also reduce bone
+  mineralisation and contribute to osteoporosis [1]. In adults, clinically significant deficiency is very rare
+  and usually limited to people with malabsorption disorders or taking drugs that interfere with vitamin K; in
+  healthy people eating a varied diet, an intake low enough to affect blood clotting is almost impossible [1].
+  Newborns are the exception: vitamin K crosses the placenta poorly and breast milk contains little, so the
+  American Academy of Pediatrics recommends a single injection of vitamin K1 at birth [1].
+
+atRisk:
+  - People with malabsorption syndromes and other digestive disorders, such as cystic fibrosis, celiac disease, ulcerative colitis and short bowel syndrome [1]
+  - People who have had bariatric surgery, whose vitamin K status can be low even without clinical signs [1]
+
+usIntake: >-
+  Most U.S. diets contain enough vitamin K [1]. In national survey data from 2011–2012, average intake from
+  food for adults aged 20 and older was 138 mcg a day for men and 122 mcg for women, rising to 182 mcg and
+  164 mcg with supplements [1]. Analyses of earlier surveys found only about a third of people above the
+  Adequate Intake, but the fact sheet notes that the AI is only an estimate of need, deficiency in adults is
+  very rare, and food databases count mainly phylloquinone, missing menaquinones from food and gut bacteria
+  [1].
+
+# Table 2 is "Vitamin K (Phylloquinone, Except as Indicated)" — so the plant
+# foods are phylloquinone (K1) and natto, marked "(as MK-7)", is K2.
+sources:
+  rule: The five foods with the most vitamin K per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Natto", form: K2 (MK-7), serving: "3 ounces", amount: 850 }
+    - { food: "Collards, frozen, boiled", short: "Collards, boiled", form: K1, serving: "½ cup", amount: 530 }
+    - { food: "Turnip greens, frozen, boiled", short: "Turnip greens, boiled", form: K1, serving: "½ cup", amount: 426 }
+    - { food: "Spinach, raw", form: K1, serving: "1 cup", amount: 145 }
+    - { food: "Kale, raw", form: K1, serving: "1 cup", amount: 113 }
+
+evidence:
+  established: >-
+    Blood clotting. Vitamin K is needed to make prothrombin and other clotting proteins, and the only
+    clinically significant measure of vitamin K status is prothrombin time [1]. To prevent vitamin K
+    deficiency bleeding in newborns, the American Academy of Pediatrics recommends a single dose at birth
+    [1].
+  notSupported: >-
+    Bone density in older adults: trials since 2006 have found that vitamin K supplements did not change bone
+    density in elderly men or women. In one, 381 postmenopausal women took 1 mg phylloquinone, 45 mg MK-4 or a
+    placebo a day for 12 months, all with calcium and vitamin D; both forms lowered undercarboxylated
+    osteocalcin, but bone density at the spine and hip did not differ [1].
+  mixed: >-
+    Fractures: a 2006 review of 13 trials, mostly in postmenopausal women in Japan, found that 12 improved
+    bone density, and in the seven with fracture data — all using MK-4 at pharmacological doses of 15 or 45 mg
+    a day — fractures of the hip, spine and other bones were reduced [1]. A later trial found that 180 mcg of
+    MK-7 a day for 3 years improved bone strength in postmenopausal women [1]. Whether any form reduces the
+    risk of osteoporosis is unclear; giving vitamin D or calcium alongside vitamin K may explain some positive
+    results [1]. Heart disease: in Dutch observational studies, higher menaquinone intake — but not
+    phylloquinone — was linked to less arterial calcification, and in 4,807 adults aged 55 and older, to 57%
+    lower coronary heart disease mortality in the highest third of intake [1]. In a trial of 388 healthy adults
+    aged 60–80 given 500 mcg phylloquinone a day for 3 years, coronary calcification did not differ overall,
+    but progressed less among the 295 who took the supplements as directed; the authors called for larger
+    studies [1].
+
+disagreements: >-
+  The European Food Safety Authority has approved a health claim that "a cause and effect relationship has
+  been established between the dietary intake of vitamin K and the maintenance of normal bone" [1]. The FDA
+  has not authorised a health claim for vitamin K in the United States [1]. In Japan and other parts of Asia,
+  a pharmacological dose of MK-4, 45 mg, is used to treat osteoporosis [1].
+
+tooMuch: >-
+  No adverse effects from vitamin K in food or supplements have been reported in humans or animals, so the
+  Food and Nutrition Board set no upper limit [1]. The risk that matters is interaction, not toxicity: for
+  anyone taking warfarin or a similar blood thinner, a sudden change in vitamin K intake — up or down — can
+  strengthen or weaken the drug's effect [1].
+
+interactions: >-
+  Warfarin (Coumadin), and similar anticoagulants used in some European countries — phenprocoumon,
+  acenocoumarol and tioclomarol — work against vitamin K, and the interaction can be serious and dangerous:
+  people taking them need to keep their vitamin K intake from food and supplements consistent, because sudden
+  changes can increase or decrease the drug's effect [1]. Antibiotics can kill the gut bacteria that make
+  vitamin K, especially cephalosporins such as cefoperazone, although supplements are usually needed only when
+  antibiotic use is prolonged and intake is poor [1]. Bile acid sequestrants such as cholestyramine (Questran)
+  and colestipol (Colestid) can reduce vitamin K absorption [1]. Orlistat (Alli, Xenical) reduces the
+  absorption of fat-soluble vitamins, and combined with warfarin can significantly lengthen prothrombin time
+  [1]. If you take a blood thinner, talk to your doctor before changing how much vitamin K you eat or taking any
+  supplement that contains it; for the other medicines, ask your doctor or pharmacist.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin K, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminK-HealthProfessional/
+  lastModified: 2021-03-29
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin K — Fact Sheet for Health Professionals. Updated 29 March 2021."
+    url: https://ods.od.nih.gov/factsheets/VitaminK-HealthProfessional/
+
+aiAssisted: true
