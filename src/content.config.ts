@@ -158,6 +158,14 @@ const nutrients = defineCollection({
       // warfarin; "None set" in the summary must not read as "safe for everyone".
       warning: z.string().optional(),
       note: z.string(),
+      /**
+       * A Chronic Disease Risk Reduction Intake (CDRR): the intake above which
+       * cutting back is expected to lower the risk of chronic disease. The National
+       * Academies introduced it for sodium in 2019 and set it apart from the upper
+       * limit, which now covers toxicity only — so it is its own table under its own
+       * name, and never shown as an upper limit. Each value reads "reduce if above".
+       */
+      cdrr: z.object({ rows: rowsInOrder, note: z.string() }).optional(),
     }).superRefine((ul, ctx) => {
       if (ul.rows && !ul.appliesTo)
         ctx.addIssue({ code: 'custom', message: 'ul.appliesTo is required when ul.rows are given' });
@@ -173,8 +181,13 @@ const nutrients = defineCollection({
     deficiency: z.string(),
     atRisk: z.array(z.string()).min(1),
     usIntake: z.string(),                 // how people in the United States actually fare
+    // Five foods from the source's per-serving table, charted against the intake —
+    // or, where the source has no such table (the National Academies reports behind
+    // sodium and chloride), what it says about where the nutrient comes from, in
+    // prose with [n] markers. One or the other, never both.
     sources: z.object({
-      rule: z.string(),
+      rule: z.string().optional(),       // how the five were chosen; required with foods
+      text: z.string().optional(),
       // The food table's unit, where it is not the intake table's: niacin's foods are
       // in mg of niacin alone, its recommended amount in mg NE. Must begin with `unit`.
       unitLabel: z.string().optional(),
@@ -184,16 +197,38 @@ const nutrients = defineCollection({
         form: z.string().optional(),            // e.g. "D3" — only where the source says which
         amount: z.union([amount, z.tuple([amount, amount])]),
         fortified: z.boolean().default(false),
-      })).min(1).max(5),
+      })).min(1).max(5).optional(),
+    }).superRefine((src, ctx) => {
+      if (!src.foods === !src.text)
+        ctx.addIssue({ code: 'custom', message: 'sources needs either foods or text, not both' });
+      if (src.foods && !src.rule)
+        ctx.addIssue({ code: 'custom', path: ['rule'], message: 'sources.rule is required with foods' });
+      if (src.text && src.unitLabel)
+        ctx.addIssue({ code: 'custom', path: ['unitLabel'], message: 'sources.unitLabel labels a food table' });
     }),
     evidence: z.object({ established: z.string(), notSupported: z.string(), mixed: z.string().optional() }),
     disagreements: z.string().optional(),
     tooMuch: z.string(),
     interactions: z.string(),
+    /**
+     * Where every value on the page comes from. Normally the NIH Office of Dietary
+     * Supplements fact sheet. Where NIH has none (sodium, chloride), the National
+     * Academies report that set the values: it carries a year rather than an update
+     * date, and `read` says which parts were read in full, because a 600-page report
+     * is not read cover to cover the way a fact sheet is.
+     */
     source: z.object({
+      kind: z.enum(['factsheet', 'report']).default('factsheet'),
       name: z.string(), url: z.string().url(),
-      lastModified: z.coerce.date(),     // the fact sheet's own date
+      lastModified: z.coerce.date().optional(),   // a fact sheet's own date
+      year: z.number().int().optional(),          // a report's publication year
+      read: z.string().optional(),                // a report: the parts read in full
       checked: z.coerce.date(),          // when a person checked this file against it
+    }).superRefine((s, ctx) => {
+      if (s.kind === 'factsheet' && !s.lastModified)
+        ctx.addIssue({ code: 'custom', path: ['lastModified'], message: 'a fact sheet needs lastModified' });
+      if (s.kind === 'report' && (s.year == null || !s.read || s.lastModified))
+        ctx.addIssue({ code: 'custom', message: 'a report needs year and read, and no lastModified' });
     }),
     references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
     aiAssisted: z.boolean(),

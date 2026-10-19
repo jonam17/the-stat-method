@@ -12,7 +12,14 @@ AI session with no memory of how the library was built. **Read all of it before 
 - **One source for every intake value**: the NIH Office of Dietary Supplements *Health
   Professional* fact sheet for that nutrient (`ods.od.nih.gov/factsheets/<Name>-HealthProfessional/`).
   It presents the official Dietary Reference Intakes set by the National Academies. A test fails
-  if `source.url` is on any other site.
+  if `source.url` is on any other site — with one exception, below.
+- **Where NIH has no fact sheet, the National Academies report that set the values** (sodium:
+  *Dietary Reference Intakes for Sodium and Potassium*, 2019; chloride: *Dietary Reference Intakes for
+  Water, Potassium, Sodium, Chloride, and Sulfate*, 2005). The file sets `source.kind: report`, gives
+  the report's `year` instead of `lastModified`, its `https://doi.org/10.17226/…` address as the URL,
+  and `source.read` — one sentence naming the parts read in full, which the page prints. The nutrient
+  must be on the `REPORT_ONLY` list in `library.test.js`; add to it only after confirming on
+  `ods.od.nih.gov/factsheets/list-all/` that no fact sheet exists.
 - **Every number is opened and read on the fact sheet.** Never from memory — not even a value that
   "everyone knows". If a number is not on the fact sheet, it does not go in the file.
 - **United States first.** Intake figures, food examples and survey data are American. Other
@@ -145,3 +152,20 @@ navigation once the first nutrient is published.
 
 When a fact sheet's *Last modified* date moves, recheck the file against it, then update both
 `source.lastModified` and `source.checked`. A file checked before its source's last update is stale.
+
+## When the source is a National Academies report
+
+A report differs from a fact sheet in three ways the template handles:
+
+- **No per-serving food table.** Use `sources.text` — what the report says about where the nutrient
+  comes from, with `[n]` markers — instead of `sources.foods` and `sources.rule`. The page then shows
+  that paragraph and says why there is no top-five list or chart. Never fill the gap from another
+  database: the one-source rule holds.
+- **A Chronic Disease Risk Reduction Intake (CDRR).** Since 2019 the National Academies separate the
+  upper limit, which now covers toxicity only, from the intake above which cutting back lowers the
+  risk of chronic disease. Sodium has no upper limit and a CDRR of 2,300 mg. Put a CDRR in `ul.cdrr`
+  (`rows`, `note`), never in `ul.rows`: the page shows it in its own table, every value reading
+  "Above …", under the report's own name. Where a CDRR exists but no limit does, add a `ul.warning` so
+  "None set" in the summary cannot read as "no risk".
+- **Length.** Read the summary and every chapter on the nutrient in full, reference lists excepted;
+  say in `source.read` exactly what was read, and in the file's header comment which pages.

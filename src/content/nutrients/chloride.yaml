@@ -1,0 +1,125 @@
+# Chloride — every value from the Institute of Medicine (National Academies)
+# report Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and
+# Sulfate (2005; reference 1), the only report that sets chloride's values. The
+# NIH Office of Dietary Supplements has no chloride fact sheet (confirmed by the
+# maintainer 2026-10-18). Read from the PDF supplied by the maintainer on
+# 2026-10-18: the summary, and chapter 6 (sodium and chloride) except the
+# hazard-identification review of sodium and blood pressure (pp. 323–379), which
+# the 2019 sodium report supersedes. Numbered markers [n] refer to `references`
+# below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the source by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Values are in grams, as the report gives them. Adequate Intakes (chapter 6,
+# pp. 310–316): 2.3 g for 19–50 (split 19–30 / 31–50, identical), pregnancy and
+# lactation; 2.0 g for 51–70; 1.8 g for over 70 — each set mole for mole equal to
+# the 2005 sodium AI. Upper limit 3.6 g (100 mmol) for every adult group,
+# pregnancy and lactation (pp. 381–383), equimolar to the 2005 sodium UL of 2.3 g.
+# Checked by the maintainer 2026-10-18: the summary's text says "The equivalent UL for chloride is 3.5 g"
+# (p. 16), but its Table S-4 and every chapter table say 3.6 g, as does the 2019
+# report's summary table; 3.6 g is used.
+# Checked by the maintainer 2026-10-18: reference 2 (the 2019 sodium report) is a second source, used only to
+# say that the sodium UL behind chloride's was replaced in 2019 and that the 2019
+# summary tables still list chloride's 2005 values. Without it the page would
+# show a limit derived from a sodium limit that no longer exists, without saying
+# so. Kept by the maintainer as the one exception to the one-source rule.
+draft: false
+name: Chloride
+kind: mineral
+dek: The partner of sodium in salt, needed for fluid balance and stomach acid. Its official values date from 2005 and were set to match sodium's, molecule for molecule.
+unit: g
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 2.3, female: 2.3, pregnancy: 2.3, lactation: 2.3 }
+    - { group: "51–70", male: 2.0, female: 2.0 }
+    - { group: ">70", male: 1.8, female: 1.8 }
+  note: These are Adequate Intakes, set in 2005 to match the sodium Adequate Intakes of the time molecule for molecule, because almost all chloride in the diet comes with sodium, as salt — 2.3 g of chloride is the amount in 3.8 g of salt. The lower values after 50 followed the lower sodium values then set for older adults; sodium's were raised in 2019, but chloride's were not revisited.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 2.3 g a day, including in pregnancy and when breastfeeding. Its upper limit is the same as for adults, 3.6 g.
+
+ul:
+  rows:
+    - { group: "19–50", male: 3.6, female: 3.6, pregnancy: 3.6, lactation: 3.6 }
+    - { group: "51–70", male: 3.6, female: 3.6 }
+    - { group: ">70", male: 3.6, female: 3.6 }
+  appliesTo: total
+  note: The upper limit is the most chloride a day that is unlikely to cause harm, not a target. It was set to match, molecule for molecule, the 2005 upper limit for sodium, which was based on the rise in blood pressure as salt intake increases; that sodium limit has since been replaced, as "Too much" below explains.
+
+does: >-
+  Chloride, paired with sodium, is the main osmotically active negative ion in the fluid outside cells, and is
+  important in maintaining fluid and electrolyte balance [1]. It is also a component of gastric juice, as hydrochloric acid [1].
+  Sodium and chloride are absorbed mainly in the small intestine — about 98% across a wide range of intakes — and
+  most is excreted in the urine [1].
+
+forms: >-
+  Almost all chloride in the diet comes with sodium, as sodium chloride — salt [1]. Where potassium is added to
+  processed foods, and in potassium supplements, it usually comes as potassium chloride, and salt substitutes are
+  potassium chloride too [1].
+
+deficiency: >-
+  Severe chloride depletion causes low blood chloride and a condition called hypochloremic metabolic alkalosis, seen
+  in people who vomit heavily and so lose hydrochloric acid [1]. Most of what is known comes from infants who were
+  fed formulas mistakenly made with too little chloride: they had growth failure, lethargy, irritability, poor
+  appetite, gastrointestinal symptoms and weakness, and nine to ten years later their growth and thinking had
+  recovered, though some had language deficits [1]. Deficiency is otherwise rare, because foods that contain sodium
+  also provide chloride [1].
+
+atRisk:
+  - People losing fluid through heavy vomiting or diarrhea [1]
+  - People taking diuretics, which increase chloride loss in urine; low blood chloride has been seen with their use [1]
+  - People with cystic fibrosis, whose sweat is very high in sodium and chloride, especially when they exercise [1]
+  - People with Bartter syndrome or kidney tubule disorders, which cause chloride loss [1]
+
+usIntake: >-
+  The report did not estimate chloride intake on its own: almost all chloride comes with sodium, so its intake
+  follows sodium's [1]. In the 1988–1994 national survey, median sodium intake from food, not counting salt added at
+  the table, ranged by age from 3.1 to 4.7 g a day for men and 2.3 to 3.1 g for women — the amount in 7.8 to 11.8 g
+  of salt for men and 5.8 to 7.8 g for women [1].
+
+sources:
+  text: >-
+    Almost all chloride comes from salt, and most salt is added to food before it reaches the table [1]. An estimated
+    77% of the salt eaten is added in processing, 6% while eating and 5% in cooking, while about 12% occurs naturally
+    in food and less than 1% comes from tap water [1]. Foods high in salt added in processing include luncheon meats
+    and hot dogs, canned vegetables, processed cheese and potato chips, and most breads, baked goods and breakfast
+    cereals contain some; so do condiments such as soy sauce, ketchup and bouillon cubes [1].
+
+evidence:
+  established: >-
+    Chloride is essential: it maintains fluid and electrolyte balance and forms the hydrochloric acid in stomach juice
+    [1]. Infants fed formula lacking chloride failed to grow normally [1].
+  notSupported: >-
+    There were too few dose-response data to set an average requirement for chloride, so its Adequate Intakes were
+    not derived from studies of chloride but matched to sodium's [1].
+  mixed: >-
+    Chloride's own part in blood pressure is unclear: in some studies, sodium given without chloride, as sodium
+    bicarbonate, did not raise blood pressure as much as sodium chloride did [1].
+
+tooMuch: >-
+  The chloride upper limit of 3.6 g a day was set to match the 2005 sodium upper limit of 2.3 g, which rested on the
+  rise in blood pressure as salt intake increases [1]. Older people, African Americans, and people with high blood
+  pressure, diabetes or chronic kidney disease are especially sensitive to that effect [1]. In 2019 the National
+  Academies replaced the sodium upper limit with a Chronic Disease Risk Reduction Intake of 2,300 mg; that review
+  covered sodium and potassium only, and its summary tables still give chloride's 2005 values, including the 3.6 g
+  upper limit [2].
+
+interactions: >-
+  Diuretics increase the loss of chloride in urine, and low blood chloride has been seen with their use [1]. If you
+  take a diuretic, ask your doctor or pharmacist whether you need to watch your salt or electrolyte intake.
+
+source:
+  kind: report
+  name: Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate
+  url: https://doi.org/10.17226/10925
+  year: 2005
+  read: We read its summary and its chapter on sodium and chloride in full, except the detailed review of sodium and blood pressure, which the 2019 sodium report has since replaced; that report's summary tables confirm chloride's values are still current.
+  checked: 2026-10-18
+
+references:
+  - text: "Institute of Medicine. Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate. Washington, DC: The National Academies Press; 2005."
+    url: https://doi.org/10.17226/10925
+  - text: "National Academies of Sciences, Engineering, and Medicine. Dietary Reference Intakes for Sodium and Potassium. Washington, DC: The National Academies Press; 2019. Appendix J, Dietary Reference Intakes summary tables."
+    url: https://doi.org/10.17226/25353
+
+aiAssisted: true

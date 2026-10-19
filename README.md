@@ -329,6 +329,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.32.0 — Library: sodium and chloride; every vitamin and mineral is in
+
+- **Sodium and chloride are live** at `/library/minerals/`, checked by the maintainer on 2026-10-18. The
+  Library now covers twenty-nine nutrients: every vitamin and mineral with official U.S. intake values.
+- **Where NIH has no fact sheet, the page says where its values come from instead.** Sodium's come from
+  the National Academies' 2019 report *Dietary Reference Intakes for Sodium and Potassium*, chloride's from
+  the 2005 report that set them; each page names the report, its year and the chapters read, and the
+  Library index says so too. A test allows a report as the source only for these two.
+- **Sodium's 2,300 mg is shown as what it is.** It is a Chronic Disease Risk Reduction Intake — the
+  level above which eating less is expected to lower the risk of heart disease — not an upper limit, so
+  it has its own table, and a red bar explains that "no upper limit" does not mean more is harmless.
+- **Pages without a per-serving food table** quote what their source says about where the nutrient comes
+  from, and say why there is no chart.
+
 ### v2.31.0 — Library: the last six minerals
 
 - **Six minerals are live** at `/library/minerals/`: potassium, phosphorus, chromium, fluoride, manganese and

@@ -48,7 +48,14 @@ const factBands = bands(d.intake.rows);
 const ulRange = d.ul.rows && adultRange(d.ul.rows);
 const ulValue = ulRange && (ulRange[0] === ulRange[1] ? ulAmt(ulRange[0]) : `${num(ulRange[0])}–${ulAmt(ulRange[1])}`);
 const ulLabel = { total: 'Upper limit, adults', supplemental: 'Upper limit, supplemental', preformed: 'Upper limit, preformed' }[d.ul.appliesTo];
-const chart = renderChart(`${n.id}-sources`, sourcesChart(n));
+// Sodium's Chronic Disease Risk Reduction Intake: "reduce if above" this amount.
+// Not an upper limit, so it gets its own box and its own table, never the limit's.
+const cdrrRange = d.ul.cdrr && adultRange(d.ul.cdrr.rows);
+const cdrrValue = cdrrRange && (cdrrRange[0] === cdrrRange[1] ? ulAmt(cdrrRange[0]) : `${num(cdrrRange[0])}–${ulAmt(cdrrRange[1])}`);
+const above = v => v == null ? '—' : `Above ${ulAmt(v)}`;
+// A chart needs a per-serving food table; a source without one is quoted in prose.
+const chart = d.sources.foods ? renderChart(`${n.id}-sources`, sourcesChart(n)) : '';
+const isReport = d.source.kind === 'report';
 const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout title={`${d.name} — Library — The Stat Method`} description={d.dek}
@@ -65,6 +72,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         {factBands.map(b => <div><span>{b.label}</span><b set:html={bandValue(b)} /></div>)}
         {ulValue ? <div><span>{ulLabel}</span><b set:html={ulValue} /></div>
           : <div><span>Upper limit</span><b>None set</b></div>}
+        {cdrrValue && <div><span>Cut back if above</span><b set:html={cdrrValue} /></div>}
       </div>
 
       <div class="prose">
@@ -91,6 +99,18 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
             </tbody></table></div>
         </>}
         <p class="lib-small">{d.ul.note}</p>
+        {d.ul.cdrr && <>
+          <h3 id="cdrr">Chronic Disease Risk Reduction Intake</h3>
+          <p>Not a safety limit: the daily intake above which eating less is expected to lower the risk of
+            chronic disease. For adults:</p>
+          <div class="lib-table-wrap"><table class="lib-table">
+            <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
+            <tbody>{d.ul.cdrr.rows.map(r => (
+              <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={above(r.male)} /><td set:html={above(r.female)} />
+                <td set:html={above(r.pregnancy)} /><td set:html={above(r.lactation)} /></tr>))}
+            </tbody></table></div>
+          <p class="lib-small">{d.ul.cdrr.note}</p>
+        </>}
 
         <h2 id="what-it-does">What it does</h2>
         <p set:html={cite(d.does)} />
@@ -101,11 +121,17 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         </>}
 
         <h2 id="sources">Where it comes from</h2>
-        <ol class="lib-foods">{d.sources.foods.map(f => (
-          <li><span>{f.food}{f.form && <em class="lib-tag">{f.form}</em>}{f.fortified && <em class="lib-tag">fortified</em>}</span><span class="lib-serv">{f.serving}</span><b>{food(f)}</b></li>))}
-        </ol>
-        <p class="lib-small">How these five were chosen: {d.sources.rule}</p>
-        <Fragment set:html={chart} />
+        {d.sources.foods ? <>
+          <ol class="lib-foods">{d.sources.foods.map(f => (
+            <li><span>{f.food}{f.form && <em class="lib-tag">{f.form}</em>}{f.fortified && <em class="lib-tag">fortified</em>}</span><span class="lib-serv">{f.serving}</span><b>{food(f)}</b></li>))}
+          </ol>
+          <p class="lib-small">How these five were chosen: {d.sources.rule}</p>
+          <Fragment set:html={chart} />
+        </> : <>
+          <p set:html={cite(d.sources.text)} />
+          <p class="lib-small">The source gives no per-serving food table, so this page has no top-five list or
+            chart; the paragraph above is what it says about where {d.name.toLowerCase()} comes from.</p>
+        </>}
 
         {d.absorption && <>
           <h2 id="absorption">Getting the most from it</h2>
@@ -152,11 +178,17 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
 
       <section class="reviewed">
         <h2>How we reviewed this page</h2>
-        <p>Every value on this page comes from the {d.source.name}, which presents the official U.S.
+        {isReport ? <p>The NIH Office of Dietary Supplements, the source for the rest of the Library, has no
+          fact sheet on {d.name.toLowerCase()}. Every value on this page comes instead from <cite>{d.source.name}</cite>,
+          the {d.source.year} report in which the National Academies set the official U.S. and Canadian intake
+          values. {d.source.read} This page was checked against it on {fmtDate(d.source.checked)}.
+          Numbered markers link to the source for each claim, so you can check the original rather than
+          take our word for it.</p>
+        : <p>Every value on this page comes from the {d.source.name}, which presents the official U.S.
           intake recommendations set by the National Academies. The source was last updated on
           {' '}{fmtDate(d.source.lastModified)}, and this page was checked against it on {fmtDate(d.source.checked)}.
           Numbered markers link to the source for each claim, so you can check the original rather than
-          take our word for it.</p>
+          take our word for it.</p>}
         {d.aiAssisted && <p><b>Drafted with AI assistance, then edited and fact-checked by a human.</b> No
           value is published on the strength of a model's recall.</p>}
         <p>Spotted an error? <a href="/report/">Tell us</a> — corrections are logged publicly.</p>

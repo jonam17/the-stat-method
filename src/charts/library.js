@@ -27,7 +27,7 @@ export function sourcesChart(n) {
   });
   const same = d.intake.rows.filter(r => YOUNG.includes(r.group)).every(r => r.male === daily && r.female === daily);
   return {
-    type: 'bar', kind: 'source', source: 'the NIH fact sheet',
+    type: 'bar', kind: 'source', source: d.source.kind === 'report' ? 'the National Academies report' : 'the NIH fact sheet',
     // "vitamin D", "calcium", "folate": lower-case the first letter only.
     title: `How far one serving goes toward a day's ${d.name[0].toLowerCase() + d.name.slice(1)}`,
     desc: `Percentage of the adult daily amount of ${d.name} provided by one serving of each food listed.`,

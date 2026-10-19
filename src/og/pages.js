@@ -54,7 +54,8 @@ export async function shareCards() {
       path: ogPath.nutrient(kind.slug, n.id),
       card: {
         kicker: `Library · ${kind.noun}`, title: n.data.name, subtitle: n.data.dek,
-        footLeft: host(), footRight: 'Values from the NIH fact sheet', accent: PALETTE.nutrition,
+        footLeft: host(), accent: PALETTE.nutrition,
+        footRight: n.data.source.kind === 'report' ? 'Values from the National Academies' : 'Values from the NIH fact sheet',
       },
     });
   }

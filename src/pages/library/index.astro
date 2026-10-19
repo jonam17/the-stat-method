@@ -9,17 +9,23 @@ const kinds = await kindsWithEntries();
 // Name what is actually in the Library: choline is neither a vitamin nor a mineral.
 const nutrientWords = kinds.some(k => k.key === 'other') ? 'vitamins, minerals and other essential nutrients' : 'vitamins and minerals';
 const Cap = s => s[0].toUpperCase() + s.slice(1);
+// Sodium and chloride have no NIH fact sheet; their values come from the National
+// Academies reports that set them. Say so wherever the Library names its source.
+const reports = all.filter(n => n.data.source.kind === 'report').map(n => n.data.name.toLowerCase());
+const fromWhom = reports.length ? 'the NIH or, where it has no fact sheet, the National Academies' : 'the NIH';
 ---
 <BaseLayout noindex={all.length === 0 && exercises.length === 0} title="Library — The Stat Method"
   description={exercises.length
-    ? `${Cap(nutrientWords)}, with every value from the NIH; and exercises for each muscle group, with the research behind each one.`
-    : `${Cap(nutrientWords)}: how much you need, the best food sources, and what the evidence does and does not support — every value from the NIH.`}>
+    ? `${Cap(nutrientWords)}, with every value from ${fromWhom}; and exercises for each muscle group, with the research behind each one.`
+    : `${Cap(nutrientWords)}: how much you need, the best food sources, and what the evidence does and does not support — every value from ${fromWhom}.`}>
   <div class="wrap section">
     <p class="eyebrow">Reference</p>
     <h1>Library</h1>
     <p class="dek">How much of each of the {nutrientWords} you need, where to get it, and what the evidence
       really supports. Every value comes from the NIH Office of Dietary Supplements, which presents the
-      official U.S. intake recommendations, and each page is checked against its source.</p>
+      official U.S. intake recommendations{reports.length > 0 && <> (or, for {reports.join(' and ')}, which have no
+      NIH fact sheet, from the National Academies reports that set their values)</>}, and each page is checked
+      against its source.</p>
     {exercises.length > 0 && <p class="dek">Exercises for each muscle group have no official source to
       copy, so every claim on those pages is cited to a study we read and labelled with the kind of
       evidence it is.</p>}

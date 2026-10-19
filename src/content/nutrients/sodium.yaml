@@ -1,0 +1,125 @@
+# Sodium — every value from the National Academies report Dietary Reference
+# Intakes for Sodium and Potassium (2019; reference 1). The NIH Office of Dietary
+# Supplements has no sodium fact sheet (confirmed by the maintainer 2026-10-18),
+# so this file takes the report as its single source instead. Read from the PDF
+# supplied by the maintainer on 2026-10-18: the summary, chapter 3's section on
+# the biological roles of sodium, and chapters 8 to 11 in full (reference lists
+# excepted). Numbered markers [n] refer to `references` below. Follow
+# docs/LIBRARY-WORKFLOW.md.
+# Checked against the source by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table S-2 gives Adequate Intakes of 1,500 mg for every adult group, pregnancy
+# and lactation, split 19–30 / 31–50 with identical values (one 19–50 row here).
+# There is NO upper limit: "insufficient evidence of sodium toxicity risk ... to
+# establish a sodium Tolerable Upper Intake Level (UL)". The 2,300 mg figure is the
+# Chronic Disease Risk Reduction Intake ("Reduce intakes if above 2,300 mg/day"),
+# shown in ul.cdrr, never as a limit. The 2005 report's UL of 2,300 mg and its
+# lower AIs for adults over 50 (1,300 and 1,200 mg) were replaced in 2019.
+# The report has no per-serving food table, so `sources.text` quotes what it says
+# about where sodium comes from (Tables 11-7 and the Harnack et al. study, p. 385).
+draft: false
+name: Sodium
+kind: mineral
+dek: The main mineral in the fluid outside cells, eaten mostly as salt. Most U.S. adults eat more than the level above which cutting back is expected to lower the risk of heart disease.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 1500, female: 1500, pregnancy: 1500, lactation: 1500 }
+    - { group: "51–70", male: 1500, female: 1500 }
+    - { group: ">70", male: 1500, female: 1500 }
+  note: These are Adequate Intakes, based on the lowest intakes studied in trials in which no deficiency was seen and on the best-designed balance study. They apply to adults at normal temperatures who are not doing high-intensity physical activity; people in high heat or doing intense activity may need more, but how much could not be estimated. In 2019 the adequate intake for adults over 50 was raised to 1,500 mg, from 1,300 mg (51–70) and 1,200 mg (over 70).
+  eighteenNote: People aged 18 fall in the official 14–18 group — also 1,500 mg a day, including in pregnancy and when breastfeeding — and its Chronic Disease Risk Reduction Intake is the same as for adults, 2,300 mg.
+
+ul:
+  warning: No upper limit does not mean more is harmless. Above 2,300 mg a day, eating less sodium is expected to lower the risk of heart disease and high blood pressure — and 88% of U.S. adults eat more than that.
+  note: No upper limit has been set for sodium. In 2019 the National Academies found too little evidence of a toxic effect from habitual intake to set one; the 2,300 mg upper limit set in 2005 was based on blood pressure, a risk now covered by the Chronic Disease Risk Reduction Intake below.
+  cdrr:
+    rows:
+      - { group: "19–50", male: 2300, female: 2300, pregnancy: 2300, lactation: 2300 }
+      - { group: "51–70", male: 2300, female: 2300 }
+      - { group: ">70", male: 2300, female: 2300 }
+    note: Based on trials in which eating less sodium lowered blood pressure and the risk of cardiovascular disease and of developing high blood pressure. Below 2,300 mg, eating less still lowers blood pressure, but its effect on disease could not be established. It applies to adults with and without high blood pressure; the report could not say whether it applies to people with diabetes, kidney disease or obesity. For adults over 70, and in pregnancy and breastfeeding, it was extended from younger adults.
+
+does: >-
+  About 95% of the body's sodium is in the fluid outside cells [1]. With chloride, it maintains the volume of that
+  fluid and the concentration of the blood, and it is a critical determinant of the electrical potential across cell
+  membranes and of the active transport of molecules into and out of cells [1]. About 98% of the sodium eaten is
+  absorbed, across a wide range of intakes [1].
+
+forms: >-
+  Most sodium is eaten as sodium chloride — salt — which food makers use to preserve and ferment food, to give meat
+  and bread their texture, and for flavor [1]. Other sodium compounds are added too: sodium phosphates to improve
+  protein solubility and control bacterial growth, sodium lactate and sodium diacetate in precooked meats, sodium bicarbonate to leaven
+  cakes, sodium caseinate in creamers and dressings, sodium benzoate and sodium propionate as preservatives, and
+  sodium bisulfite and metabisulfite to prevent browning [1].
+
+deficiency: >-
+  Low blood sodium — hyponatremia, below 135 mmol/L, and severe below 120 mmol/L — can cause nausea, poor balance,
+  decreased ability to think, headaches, confusion, seizures or coma [1]. But it is almost always caused by
+  disturbed fluid balance rather than by eating too little sodium [1]. No deficiency symptoms were seen in a tightly
+  controlled feeding trial whose low-sodium period went as low as 949 mg a day [1].
+
+atRisk:
+  - People who lose large amounts of sodium in sweat, through high temperatures, high-intensity physical activity or both — sodium in sweat ranges from 230 to 3,358 mg per litre, and how much more these people need could not be estimated [1]
+  - People with orthostatic hypotension — low blood pressure on standing — for whom a low-sodium diet may be ill-advised; they need advice on sodium from their health care provider [1]
+
+usIntake: >-
+  Too little sodium is not a concern in the United States [1]. In 2009–2014, median intake was 4,027 mg a day for
+  men and 2,888 mg for women; 97% of men and 80% of women — 88% of all adults — ate more than the Chronic Disease Risk
+  Reduction Intake, and 20% of men ate more than 5,000 mg [1]. These survey figures leave out salt added at the
+  table, so they slightly underestimate intake [1].
+
+sources:
+  text: >-
+    Most sodium is added to food before it reaches the table [1]. In a study of 450 U.S. adults, 70.9% of sodium came
+    from sources outside the home, 14.2% was naturally present in food, 5.6% was added in home cooking and 4.9% at the
+    table; tap water, supplements and nonprescription antacids each supplied less than 0.5% [1]. The largest
+    contributors in the U.S. diet in 2013–2014 were yeast breads (6.2% of sodium eaten), pizza (5.9%), sandwiches
+    (5.7%), cold cuts and cured meats (5.4%), soups (3.8%) and burritos and tacos (3.8%) [1].
+
+evidence:
+  established: >-
+    Eating less sodium lowers systolic and diastolic blood pressure — more in people with high blood pressure, but in
+    people without it too — and the National Academies rated this evidence high [1]. Trials also gave moderate-strength
+    evidence that eating less lowers the risk of cardiovascular disease and of developing high blood pressure [1].
+    Between 2,300 and 4,100 mg a day, each 1,000 mg less is expected to cut cardiovascular disease risk by 27% and the
+    risk of high blood pressure by 20% [1].
+  notSupported: >-
+    There is insufficient evidence that low intakes are harmful [1]. The observational studies that linked low sodium
+    to higher mortality mostly estimated intake from single urine samples, and the report concludes that their J- and
+    U-shaped results are likely caused by those methods [1]. Evidence on stroke, heart attack, osteoporosis and kidney
+    disease was too weak to use [1].
+  mixed: >-
+    Below 2,300 mg a day, eating less still lowers blood pressure, but the evidence that it further lowers the risk of
+    disease is of low strength [1]. Death from any cause: the committee's analysis of trials found 11% to 15% lower
+    risk with reduced sodium, a result that was not statistically significant [1].
+
+tooMuch: >-
+  No toxic effect of habitually high intake could be identified, but very large single doses can kill: case reports
+  describe deaths from acute ingestion of massive amounts of salt, the lowest in an adult an estimated 6,800 to
+  10,200 mg taken as an emetic [1]. In two small trials, sodium added to tomato juice caused side effects at the
+  highest dose, and some participants withdrew because of high blood pressure, headaches, nausea or vomiting [1].
+  Headaches were less common at lower intakes in several trials [1]. Over the long term, intakes above 2,300 mg a day
+  raise the risk of high blood pressure and cardiovascular disease [1].
+
+interactions: >-
+  Blood sodium can be thrown out of balance by some medicines, including thiazide diuretics, synthetic vasopressin,
+  nonsteroidal anti-inflammatory drugs and antidepressants [1]. If you take medicines for blood pressure, or have heart or kidney
+  disease, ask your doctor or pharmacist how much sodium suits you.
+
+source:
+  kind: report
+  name: Dietary Reference Intakes for Sodium and Potassium
+  url: https://doi.org/10.17226/25353
+  year: 2019
+  read: We read its summary, its section on the biological roles of sodium, and all four sodium chapters (8 to 11) in full; its potassium chapters are not used here.
+  checked: 2026-10-18
+
+references:
+  - text: "National Academies of Sciences, Engineering, and Medicine. Dietary Reference Intakes for Sodium and Potassium. Washington, DC: The National Academies Press; 2019."
+    url: https://doi.org/10.17226/25353
+
+aiAssisted: true
