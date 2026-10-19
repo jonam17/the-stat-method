@@ -4,7 +4,7 @@
  * Starts Astro preview, checks critical routes, captures browser console/page errors,
  * validates the homepage CTA, and checks mobile overflow on representative pages.
  */
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import process from 'node:process';
@@ -30,7 +30,15 @@ const preview = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--
 // Killing only npm left the astro server running, which kept this script from
 // ever exiting after a pass (unseen until v2.10.4: every run used to fail, and
 // the failure path force-exits).
-const stopPreview = () => { try { process.kill(-preview.pid, 'SIGTERM'); } catch { preview.kill('SIGTERM'); } };
+// Astro 7 can also run the preview server in the background, outside that
+// process group, where the kill above does not reach it. It then outlived
+// qa:release and held port 4321, so a following `npm run dev` moved to 4322 and
+// the localhost:4321 review links showed the production build (no drafts).
+// `astro preview stop` is Astro's own way to end it; it is a no-op if none runs.
+const stopPreview = () => {
+  try { process.kill(-preview.pid, 'SIGTERM'); } catch { preview.kill('SIGTERM'); }
+  spawnSync('npx', ['astro', 'preview', 'stop'], { cwd: root, stdio: 'ignore' });
+};
 
 let previewOutput = '';
 preview.stdout.on('data', chunk => { previewOutput += chunk.toString(); });

@@ -1,0 +1,106 @@
+# Riboflavin — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 11 May 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18; checked against it by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives a "51+ years" row, repeated in 51–70 and >70. There is no upper
+# limit: "the FNB did not establish ULs for riboflavin".
+draft: false
+name: Riboflavin
+kind: vitamin
+dek: A B vitamin, also called vitamin B2, that forms two coenzymes needed for energy production, growth and the metabolism of fats and drugs. Milk, eggs and meat are rich sources.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 1.3, female: 1.1, pregnancy: 1.4, lactation: 1.6 }
+    - { group: "51–70", male: 1.3, female: 1.1 }
+    - { group: ">70", male: 1.3, female: 1.1 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 1.3 mg a day for males and 1.0 mg for females, 1.4 mg in pregnancy and 1.6 mg when breastfeeding. There is no upper limit at any age.
+
+ul:
+  note: No upper limit has been set for riboflavin, because no harm has been reported from high intakes from food or supplements, including 400 mg a day for at least 3 months. The Food and Nutrition Board says that limited data do not prove high intakes are harmless, and urges caution about excessive amounts.
+
+does: >-
+  Riboflavin, also called vitamin B2, is an essential part of two coenzymes, FMN and FAD, which play major roles
+  in energy production; in cell function, growth and development; and in the metabolism of fats, drugs and
+  steroids [1]. FAD is needed to convert tryptophan to niacin, and FMN to convert vitamin B6 into its active
+  form [1]. Riboflavin also helps keep blood homocysteine at normal levels [1].
+
+forms: >-
+  More than 90% of the riboflavin in food is in the form of FAD or FMN, although the main form in eggs and milk is
+  free riboflavin [1]. In most supplements it is in the free form; multivitamins commonly provide 1.3 mg [1].
+
+absorption: >-
+  About 95% of the riboflavin in food is absorbed, up to about 27 mg per meal or dose [1]. Boiling loses about
+  twice as much as steaming or microwaving, because riboflavin dissolves in the cooking water [1]. Light rapidly
+  breaks it down, which is why milk is not usually sold in glass [1].
+
+deficiency: >-
+  Deficiency is extremely rare in the United States [1]. Its signs include skin disorders, redness and swelling
+  of the mouth and throat, sores at the corners of the mouth, swollen and cracked lips, hair loss, reproductive
+  problems, sore throat, itchy red eyes and degeneration of the liver and nervous system [1]. Because people with
+  riboflavin deficiency usually lack other nutrients too, some of these signs may come from those [1]. Severe,
+  prolonged deficiency can cause anemia and cataracts; early changes are easily reversed, but later ones, such as
+  cataracts, rarely are [1].
+
+atRisk:
+  - Vegetarian athletes — exercise increases the need, and some vegetarians avoid milk, yogurt, cheese and eggs, good sources of riboflavin [1]
+  - Pregnant or breastfeeding women who rarely eat meat or dairy products, including some vegetarians in the United States [1]
+  - People who are vegan or consume little milk [1]
+  - People with riboflavin transporter deficiency, a rare neurological disorder that prevents riboflavin from being absorbed and transported [1]
+
+usIntake: >-
+  Most Americans get enough riboflavin: in 2003–2006 data, fewer than 6% had intakes from food and supplements
+  below the average requirement [1]. Adults average 2.5 mg a day from food for men and 1.8 mg for women, and 4.5
+  mg and 4.7 mg including supplements [1]. Milk and milk drinks, bread, meat dishes, ready-to-eat cereals and grain
+  dishes are the largest sources, and grains and cereals are fortified with riboflavin in the United States [1].
+
+sources:
+  rule: The five foods with the most riboflavin per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 2.9 }
+    - { food: "Breakfast cereals, fortified with 100% of the Daily Value for riboflavin", short: "Breakfast cereal", serving: "1 serving", amount: 1.3, fortified: true }
+    - { food: "Oats, instant, fortified, cooked with water", short: "Oats, instant", serving: "1 cup", amount: 1.1, fortified: true }
+    - { food: "Yogurt, plain, fat free", short: "Yogurt, fat free", serving: "1 cup", amount: 0.6 }
+    - { food: "Milk, 2% fat", short: "Milk, 2%", serving: "1 cup", amount: 0.5 }
+
+evidence:
+  established: >-
+    Riboflavin is essential for the coenzymes FMN and FAD, which energy production and the metabolism of other
+    B vitamins depend on; severe deficiency impairs the metabolism of other nutrients [1]. In riboflavin
+    transporter deficiency, high-dose riboflavin can be a life-saving treatment, especially when started soon
+    after symptoms begin [1].
+  notSupported: >-
+    Cancer prevention: data are limited and findings mixed — large observational studies disagree on lung and
+    colorectal cancer, and the fact sheet says clinical trials are needed to find out whether supplements reduce
+    cancer risk [1].
+  mixed: >-
+    Migraine: in a trial in 55 adults with migraine, 400 mg a day reduced attacks by two a month compared with
+    placebo, but two small trials in children found that 50 to 200 mg a day did not reduce headaches [1]. The
+    American Academy of Neurology and the American Headache Society concluded that riboflavin is probably
+    effective for preventing migraine, and the Canadian Headache Society recommends it while calling the
+    evidence low quality [1].
+
+tooMuch: >-
+  Intakes from food many times the recommended amount show no toxicity, possibly because riboflavin is poorly
+  soluble and its absorption is limited [1]. No harm has been reported from 400 mg a day for at least 3 months,
+  although the Food and Nutrition Board urges caution about excessive amounts [1].
+
+interactions: >-
+  Riboflavin is not known to have any clinically relevant interactions with medicines [1]. If you take medicines
+  regularly, your doctor or pharmacist can still tell you whether any supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Riboflavin, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Riboflavin-HealthProfessional/
+  lastModified: 2022-05-11
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Riboflavin — Fact Sheet for Health Professionals. Updated 11 May 2022."
+    url: https://ods.od.nih.gov/factsheets/Riboflavin-HealthProfessional/
+
+aiAssisted: true

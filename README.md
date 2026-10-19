@@ -329,6 +329,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.29.0 — Library: vitamin C and the last four B vitamins; every vitamin is in
+
+- **Five vitamins are live** at `/library/vitamins/`: vitamin C, thiamin, riboflavin, pantothenic acid and
+  biotin, each from its NIH Office of Dietary Supplements Health Professional fact sheet alone and checked
+  against it by the maintainer on 2026-10-18. Every vitamin now has a page; the Library covers seventeen
+  nutrients.
+- **Biotin carries the second warning bar.** It has no upper limit, but high doses can make blood tests —
+  thyroid tests and troponin, a test for heart attack — read falsely high or low, and the FDA reports a death
+  after a falsely low troponin result. The bar says so at the top of the upper-limit section.
+- **Vitamin C states its adjustment for smokers.** Its fact sheet gives people who smoke a separate,
+  higher requirement (35 mg a day more); the page shows it directly beneath the intake table.
+- **`qa:release` no longer leaves a server running.** Astro 7 runs `astro preview` in the background, out of
+  reach of the smoke test's kill, so the preview kept port 4321 after a release and a following `npm run dev`
+  moved to 4322. `scripts/smoke-qa.mjs` now also runs `astro preview stop`.
+
 ### v2.28.0 — Library: vitamin E, vitamin B6 and choline; a warning where no limit is set
 
 - **Three nutrients are live**, each from its NIH Office of Dietary Supplements Health Professional fact

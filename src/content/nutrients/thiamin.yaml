@@ -1,0 +1,113 @@
+# Thiamin — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 9 Feb 2023. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18; checked against it by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives a "51+ years" row, repeated in 51–70 and >70. There is no upper
+# limit: "the FNB did not establish ULs for thiamin".
+draft: false
+name: Thiamin
+kind: vitamin
+dek: A B vitamin, also called vitamin B1, that is critical for turning food into energy. The body stores very little, so it needs a steady supply from food.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 1.2, female: 1.1, pregnancy: 1.4, lactation: 1.4 }
+    - { group: "51–70", male: 1.2, female: 1.1 }
+    - { group: ">70", male: 1.2, female: 1.1 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 1.2 mg a day for males and 1.0 mg for females, and 1.4 mg in pregnancy and when breastfeeding. There is no upper limit at any age.
+
+ul:
+  note: No upper limit has been set for thiamin, because there are no reports of harm from high intakes (50 mg a day or more) from food or supplements — possibly because absorption falls quickly above 5 mg. The Food and Nutrition Board noted that excessive intakes could still have adverse effects.
+
+does: >-
+  Thiamin, also called vitamin B1, plays a critical role in energy metabolism and so in the growth,
+  development and function of cells [1]. Its main active form, thiamin diphosphate, is an essential cofactor
+  for five enzymes involved in the metabolism of glucose, amino acids and fats [1]. The body holds only about 25
+  to 30 mg, stored mainly in the liver in very small amounts, and thiamin has a short half-life, so people need
+  a continuous supply from the diet [1].
+
+forms: >-
+  Supplements most often contain thiamin mononitrate or thiamin hydrochloride; multivitamins with thiamin
+  typically provide about 1.5 mg [1]. Benfotiamine, a synthetic derivative used in some supplements, is
+  converted to thiamin in the body [1].
+
+absorption: >-
+  Heat reduces thiamin: bread has 20% to 30% less than its raw ingredients [1]. Because it dissolves in water,
+  much is lost when cooking water is thrown away, and unless white rice is enriched, it has a tenth of the
+  thiamin in brown rice [1]. About half the thiamin in the U.S. diet comes from foods it has been added to [1].
+
+deficiency: >-
+  Early deficiency can cause weight loss and loss of appetite, confusion, short-term memory loss, muscle
+  weakness and heart symptoms such as an enlarged heart [1]. Its most common effect is beriberi, mainly nerve
+  damage and wasting, which in rare cases causes heart failure; supplemental thiamin cures it quickly [1]. In the
+  United States, deficiency more often shows as Wernicke-Korsakoff syndrome: Wernicke's encephalopathy, which
+  kills up to 20% of those untreated, followed by Korsakoff's psychosis, with severe short-term memory loss,
+  disorientation and confabulation [1]. In about a quarter of people at that chronic stage, treatment does not
+  bring recovery [1].
+
+atRisk:
+  - People with alcohol dependence — up to 80% of people with chronic alcoholism develop thiamin deficiency, because alcohol reduces its absorption and storage [1]
+  - Older adults — up to 20% to 30% have laboratory signs of some degree of deficiency [1]
+  - People with HIV/AIDS [1]
+  - People with type 1 or type 2 diabetes, whose blood thiamin can be much lower than in healthy people [1]
+  - People who have had bariatric surgery, after which severe deficiency can lead to beriberi or Wernicke's encephalopathy [1]
+
+usIntake: >-
+  Most Americans get enough thiamin: in 2003–2006 data, only 6% had usual intakes below the average requirement
+  [1]. Adults aged 20 and older average 1.95 mg a day from food for men and 1.39 mg for women, and 4.89 mg and
+  4.90 mg including supplements [1]. Cereals and bread are the most common sources in the U.S. diet, and pork is
+  another major source [1]. There are no current data on how many Americans are deficient [1].
+
+# Third to fifth places tie at 0.4 mg (pork chop, trout, black beans, in the
+# table's order); all three are in. "Enriched" egg noodles have thiamin added,
+# so they are marked fortified.
+sources:
+  rule: The five foods with the most thiamin per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Breakfast cereals, fortified with 100% of the Daily Value for thiamin", short: "Breakfast cereal", serving: "1 serving", amount: 1.2, fortified: true }
+    - { food: "Egg noodles, enriched, cooked", short: "Egg noodles, enriched", serving: "1 cup", amount: 0.5, fortified: true }
+    - { food: "Pork chop, bone in, broiled", short: "Pork chop", serving: "3 ounces", amount: 0.4 }
+    - { food: "Trout, cooked, dry heat", short: "Trout", serving: "3 ounces", amount: 0.4 }
+    - { food: "Black beans, boiled", short: "Black beans", serving: "½ cup", amount: 0.4 }
+
+evidence:
+  established: >-
+    Thiamin is essential for energy metabolism, and deficiency causes beriberi and Wernicke-Korsakoff syndrome
+    [1]. Supplemental thiamin quickly cures beriberi [1].
+  notSupported: >-
+    Alzheimer's disease: a 2001 Cochrane review of three trials of 3 g a day, each with fewer than 20
+    patients, could draw no conclusions [1]. Wernicke-Korsakoff syndrome: a 2013 Cochrane review found the
+    trial evidence insufficient to guide the dose, frequency, duration or route of thiamin treatment — although
+    guidelines still treat it with high-dose thiamin, preferably by injection [1].
+  mixed: >-
+    Diabetes: some small studies found that 150 to 300 mg a day lowered blood sugar in people with type 2
+    diabetes or impaired glucose tolerance, without assessing whether that mattered clinically, and studies of
+    benfotiamine for diabetic nerve and kidney damage have mixed results [1]. Heart failure: a meta-analysis of
+    two small trials found that thiamin improved how well the heart pumped, but its clinical significance was
+    not assessed [1].
+
+tooMuch: >-
+  The body excretes excess thiamin in urine, and no harm has been reported from high intakes from food or
+  supplements [1].
+
+interactions: >-
+  Thiamin is not known to interact with any medicines, but some medicines lower thiamin [1]. Furosemide (Lasix),
+  a diuretic, increases thiamin loss in urine, possibly to deficient levels [1]. Fluorouracil, a chemotherapy drug,
+  has caused cases of beriberi and Wernicke's encephalopathy [1]. If you take either regularly, talk to your doctor
+  or pharmacist about your thiamin status.
+
+source:
+  name: NIH Office of Dietary Supplements — Thiamin, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Thiamin-HealthProfessional/
+  lastModified: 2023-02-09
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Thiamin — Fact Sheet for Health Professionals. Updated 9 February 2023."
+    url: https://ods.od.nih.gov/factsheets/Thiamin-HealthProfessional/
+
+aiAssisted: true

@@ -1,0 +1,112 @@
+# Biotin — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 10 Jan 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18; checked against it by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes with one "19+ years" row; its values are
+# repeated in every adult bracket. There is no upper limit, but the sheet's
+# "Interactions with Laboratory Tests" section describes a real risk at high
+# intakes, so `ul.warning` carries it (the second use, after vitamin K).
+# Table 2 gives no serving for "Egg, whole, cooked"; "1 serving" follows the
+# column heading. Fourth and fifth places tie at 3.8 mcg (pork chop, then
+# hamburger patty, in the table's order); both are in.
+draft: false
+name: Biotin
+kind: vitamin
+dek: A B vitamin the body needs to metabolise fats, glucose and amino acids. Deficiency is rare, but high-dose supplements can make some laboratory tests give false results.
+unit: mcg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 30, female: 30, pregnancy: 30, lactation: 35 }
+    - { group: "51–70", male: 30, female: 30 }
+    - { group: ">70", male: 30, female: 30 }
+  note: These are Adequate Intakes, not Recommended Dietary Allowances — there was not enough evidence to set a requirement, so they were extrapolated by body weight from the amount of biotin in breast milk.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 25 mcg a day for males and females, 30 mcg in pregnancy and 35 mcg when breastfeeding. There is no upper limit at any age.
+
+ul:
+  warning: No upper limit does not mean no risk. High-dose biotin supplements can make some blood tests read falsely high or low — including thyroid tests and troponin, a test for heart attack — and the FDA reports a death after a falsely low troponin result. If you take biotin, tell your doctor before any blood test.
+  note: No upper limit has been set for biotin, because there is no evidence in humans that it is toxic at high intakes — several studies found no adverse effects from 10 to 50 mg a day. The risk from high intakes is to laboratory tests, not to the body directly; see Too much, below.
+
+does: >-
+  Biotin is a cofactor for five enzymes that carry out critical steps in the metabolism of fatty acids, glucose
+  and amino acids [1]. It also plays key roles in gene regulation and cell signalling [1]. Most of the biotin in
+  food is bound to protein and released during digestion; it is absorbed in the small intestine and mostly stored
+  in the liver [1].
+
+forms: >-
+  Biotin is sold alone, in B-complex supplements and in some multivitamins [1]. Free biotin taken by mouth is
+  completely absorbed, even in doses of up to 20 mg a day [1].
+
+absorption: >-
+  Avidin, a protein in raw egg whites, binds tightly to biotin and stops it being absorbed; cooking destroys
+  avidin [1]. Canning and some other processing can reduce the biotin in food [1].
+
+deficiency: >-
+  Deficiency is rare, and severe deficiency has never been reported in healthy people eating a normal mixed diet
+  [1]. Its signs appear gradually and include thinning hair that can progress to loss of all body hair; a scaly
+  red rash around the eyes, nose, mouth and genitals; conjunctivitis; acid build-up in the blood and urine;
+  seizures; skin infection; brittle nails; and, in adults, depression, lethargy, hallucinations and tingling in
+  the hands and feet [1].
+
+atRisk:
+  - People with biotinidase deficiency, a rare inherited disorder that stops the body releasing free biotin; all U.S. newborns are screened for it, and lifelong biotin from birth prevents its symptoms [1]
+  - People with chronic alcohol exposure, which inhibits biotin absorption — blood biotin is low in 15% of people with chronic alcoholism [1]
+  - Pregnant and breastfeeding women — at least a third of pregnant women develop marginal deficiency despite normal intakes, although the clinical significance is not yet understood [1]
+
+usIntake: >-
+  There are no nationally representative estimates of biotin intake in the United States, but in other Western
+  populations average intake from food is about 35 to 70 mcg a day, suggesting most people get enough [1].
+
+sources:
+  rule: The five foods with the most biotin per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, cooked", short: "Beef liver", serving: "3 ounces", amount: 30.8 }
+    - { food: "Egg, whole, cooked", short: "Egg", serving: "1 serving", amount: 10.0 }
+    - { food: "Salmon, pink, canned in water", short: "Salmon, canned", serving: "3 ounces", amount: 5.0 }
+    - { food: "Pork chop, cooked", short: "Pork chop", serving: "3 ounces", amount: 3.8 }
+    - { food: "Hamburger patty, cooked", short: "Hamburger patty", serving: "3 ounces", amount: 3.8 }
+
+evidence:
+  established: >-
+    Biotin is an essential cofactor for enzymes in fat, glucose and amino acid metabolism [1]. In biotinidase
+    deficiency, oral biotin started at birth, before symptoms develop, and continued for life prevents the
+    disorder's neurological and skin symptoms [1].
+  notSupported: >-
+    Hair, skin and nails in healthy people: biotin is widely promoted for them, but the claims rest, at best, on a
+    few case reports and small studies [1]. Evidence for hair comes only from case reports in children with a rare
+    hair-shaft disorder, and for skin only from case reports in infants [1].
+  mixed: >-
+    Brittle nails: three small studies without a placebo group, none reporting participants' starting biotin
+    status, gave 2.5 mg a day for several months; in one, 41 of 45 patients had firmer, harder nails, and in
+    another, 22 of 35 improved [1].
+
+tooMuch: >-
+  There is no evidence that biotin is toxic at high intakes, and doses up to 200 mg a day by mouth have caused no
+  symptoms of toxicity in people with biotinidase deficiency [1]. The risk is to laboratory tests: high intakes,
+  and potentially even intakes above the Adequate Intake, can make tests that use biotin-streptavidin technology
+  — common for thyroid hormones, vitamin D and other measures — read falsely high or low [1]. Case reports describe
+  results falsely suggesting Graves' disease and severe hyperthyroidism in people taking 10 to 300 mg a day, and a
+  single 10 mg dose has interfered with thyroid tests taken within 24 hours [1]. The FDA reports that a patient
+  with a high biotin intake died after a troponin test for heart attack gave a falsely low result, and advises
+  health care providers to ask patients about biotin supplements [1].
+
+interactions: >-
+  Anticonvulsants — carbamazepine, primidone, phenytoin and phenobarbital — taken for at least a year were linked
+  to significantly lower blood biotin in a study of 264 people with epilepsy, possibly because they speed biotin's
+  breakdown and reduce its absorption [1]. If you take any of these regularly, talk to your doctor or pharmacist
+  about your biotin status, and tell your doctor about any biotin supplement before a blood test.
+
+source:
+  name: NIH Office of Dietary Supplements — Biotin, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Biotin-HealthProfessional/
+  lastModified: 2022-01-10
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Biotin — Fact Sheet for Health Professionals. Updated 10 January 2022."
+    url: https://ods.od.nih.gov/factsheets/Biotin-HealthProfessional/
+
+aiAssisted: true

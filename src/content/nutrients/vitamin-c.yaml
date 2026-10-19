@@ -1,0 +1,144 @@
+# Vitamin C — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 31 Jul 2025. Read from the
+# full-page PDF (sections expanded) supplied by the maintainer on 2026-10-18;
+# checked against it by the maintainer on 2026-10-18.
+# Numbered markers [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. Table 1 adds a row: "Individuals who smoke require 35 mg/day
+# more vitamin C than people who do not smoke" — the first adjustment of its
+# kind in the Library; it goes in intake.note, directly beneath the table.
+draft: false
+name: Vitamin C
+kind: vitamin
+dek: A water-soluble vitamin the body cannot make, needed to build collagen and for immune function. It improves iron absorption from plants; too little causes scurvy.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 90, female: 75, pregnancy: 85, lactation: 120 }
+    - { group: "51–70", male: 90, female: 75 }
+    - { group: ">70", male: 90, female: 75 }
+  note: People who smoke need 35 mg a day more than these amounts, because smoking increases oxidative stress and lowers vitamin C levels. People regularly exposed to secondhand smoke should make sure they meet the recommended amount.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 75 mg a day for males and 65 mg for females, 80 mg in pregnancy and 115 mg when breastfeeding, plus 35 mg for people who smoke. Its upper limit is 1,800 mg.
+
+# The text: "The FNB has established ULs for vitamin C that apply to both food
+# and supplement intakes"; "The ULs do not apply to individuals who are
+# receiving vitamin C for medical treatment".
+ul:
+  rows:
+    - { group: "19–50", male: 2000, female: 2000, pregnancy: 2000, lactation: 2000 }
+    - { group: "51–70", male: 2000, female: 2000 }
+    - { group: ">70", male: 2000, female: 2000 }
+  appliesTo: total
+  note: The upper limit covers vitamin C from food and supplements combined. It is the most that is unlikely to cause harm, not a target; long-term intakes above it may increase the risk of adverse effects. It does not apply to people receiving vitamin C as medical treatment, who should be under a doctor's care.
+
+does: >-
+  Unlike most animals, humans cannot make vitamin C, so it must come from the diet [1]. It is needed to make
+  collagen — an essential part of the connective tissue that plays a vital role in wound healing — as well as
+  L-carnitine and some neurotransmitters, and it is involved in protein metabolism [1]. It is an important
+  antioxidant that helps regenerate others, including vitamin E, plays an important role in immune function,
+  and improves the absorption of nonheme iron, the form found in plant foods [1].
+
+forms: >-
+  Supplements usually contain ascorbic acid, which is absorbed as well as the vitamin C naturally present in
+  foods such as orange juice and broccoli [1]. Other forms include sodium and calcium ascorbate, ascorbic acid
+  with bioflavonoids, and combination products such as Ester-C [1]. In one study, plasma levels and urinary
+  excretion did not differ between ascorbic acid, Ester-C and ascorbic acid with bioflavonoids, and its authors
+  concluded that simple ascorbic acid is the preferred source [1].
+
+absorption: >-
+  About 70% to 90% of vitamin C is absorbed at intakes of 30 to 180 mg a day, but above 1 g a day absorption
+  falls below 50%, and the excess is excreted in urine [1]. Cells appear to be saturated at about 100 mg a day,
+  and above 200 mg blood levels rise only marginally [1]. Vitamin C dissolves in water and is destroyed by heat,
+  so long storage and cooking reduce it; steaming or microwaving may lessen the losses, and many of the best
+  sources are eaten raw [1].
+
+deficiency: >-
+  Deficiency causes scurvy, which can appear within a month of eating less than about 10 mg a day [1]. Early
+  symptoms include fatigue, malaise and inflamed gums; as it progresses, weakened connective tissue causes small
+  red or purple spots and bruising under the skin, joint pain, poor wound healing, thickened skin and corkscrew
+  hairs, along with depression, swollen and bleeding gums, and loose or lost teeth [1]. Iron deficiency anemia
+  can follow, and untreated, scurvy is fatal [1]. It is rare in developed countries but can still occur in people
+  with very limited diets [1].
+
+atRisk:
+  - People who smoke, and people exposed to secondhand smoke — smoking lowers vitamin C levels in blood and white blood cells [1]
+  - People with limited food variety, including some older people on low incomes who cook for themselves, people who misuse alcohol or drugs, food faddists and people with mental illness [1]
+  - People with severe intestinal malabsorption or cachexia, some people with cancer, and people with end-stage kidney disease on hemodialysis [1]
+
+usIntake: >-
+  Most Americans get enough vitamin C: in 2001–2002 national survey data, average intake from food and drink was
+  105.2 mg a day for men and 83.6 mg for women, meeting the recommended amount for most nonsmoking adults [1]. In
+  1999–2000, about 35% of adults took a multivitamin, which typically contains vitamin C, and 12% took a separate
+  vitamin C supplement [1]. Citrus fruits, tomatoes and tomato juice, and potatoes are major sources in the
+  American diet, and five varied servings of fruit and vegetables a day can provide more than 200 mg [1].
+
+# Third and fourth places tie at 70 mg (orange, then grapefruit juice, in the
+# table's order); both are in.
+sources:
+  rule: The five foods with the most vitamin C per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Red pepper, sweet, raw", short: "Red pepper, raw", serving: "½ cup", amount: 95 }
+    - { food: "Orange juice", serving: "¾ cup", amount: 93 }
+    - { food: "Orange", serving: "1 medium", amount: 70 }
+    - { food: "Grapefruit juice", serving: "¾ cup", amount: 70 }
+    - { food: "Kiwifruit", serving: "1 medium", amount: 64 }
+
+evidence:
+  established: >-
+    Vitamin C prevents and cures scurvy; in the mid-1700s, James Lind showed that citrus fruit cured it, although
+    ascorbic acid was not proven to be the active component until 1932 [1]. The recommended amounts are based on
+    vitamin C's functions in white blood cells and are much higher than the amount needed to prevent deficiency
+    [1].
+  notSupported: >-
+    The common cold in the general population: a 2007 Cochrane review found that taking at least 200 mg a day did
+    not reduce the risk of catching a cold, and taking it after symptoms began did not shorten colds or ease
+    symptoms [1]. Cancer prevention: most trials, usually of vitamin C with other nutrients, found no effect —
+    in the Physicians' Health Study II, 500 mg a day with vitamin E every other day for a mean of 8 years did not
+    reduce prostate or total cancer [1]. Heart disease: in the Women's Antioxidant Cardiovascular Study, 8,171
+    women aged 40 and older with a history of cardiovascular disease took 500 mg a day for a mean of 9.4 years
+    with no overall effect on cardiovascular events, and 500 mg a day had no effect on major cardiovascular
+    events in the Physicians' Health Study II [1]. Cataracts: in AREDS, 500 mg of vitamin C with vitamin E and
+    beta-carotene for an average of 6.3 years did not lower the risk of cataracts [1].
+  mixed: >-
+    The common cold under physical stress: in trials of marathon runners, skiers and soldiers exposed to extreme
+    exercise or cold, 250 mg to 1 g a day halved the number of colds, and in the general population regular
+    vitamin C shortened colds modestly — by 8% in adults and 14% in children [1]. Age-related macular
+    degeneration: vitamin C has not been shown to prevent AMD, but in AREDS, people at high risk of advanced AMD
+    who took 500 mg of vitamin C with vitamin E, beta-carotene, zinc and copper had a 28% lower risk of
+    progressing to it over an average of 6.3 years [1]. Diet and disease: observational studies link diets high
+    in vitamin C, fruit and vegetables with lower risks of several cancers and of heart disease, but the results
+    of prospective studies are inconsistent, and many trials may have started with people whose vitamin C levels
+    were already near saturation [1].
+
+tooMuch: >-
+  Vitamin C has low toxicity and is not believed to cause serious harm at high intakes [1]. The most common
+  complaints are diarrhea, nausea, abdominal cramps and other digestive upsets, from unabsorbed vitamin C in the
+  gut [1]. High intakes could raise oxalate and uric acid in urine and contribute to kidney stones, although
+  studies conflict; the best evidence is in people with pre-existing hyperoxaluria [1]. Because vitamin C
+  increases iron absorption, chronic high doses could worsen iron overload in people with hereditary
+  hemochromatosis [1].
+
+interactions: >-
+  The safety of vitamin C and other antioxidants during cancer treatment is controversial: some data suggest they
+  might protect tumour cells from radiation and chemotherapy drugs, and people having chemotherapy or radiation
+  should consult their oncologist before taking vitamin C or other antioxidant supplements, especially in high
+  doses [1]. Vitamin C combined with other antioxidants may blunt the rise in HDL cholesterol from combined niacin
+  and simvastatin (Zocor) therapy, and health care providers should monitor lipid levels in people taking both
+  statins and antioxidant supplements [1]. If you take any of these regularly, talk to your doctor or pharmacist
+  before taking a vitamin C supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin C, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminC-HealthProfessional/
+  lastModified: 2025-07-31
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin C — Fact Sheet for Health Professionals. Updated 31 July 2025."
+    url: https://ods.od.nih.gov/factsheets/VitaminC-HealthProfessional/
+
+aiAssisted: true

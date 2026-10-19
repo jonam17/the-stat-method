@@ -1,0 +1,99 @@
+# Pantothenic acid — every value from the NIH Office of Dietary Supplements
+# Health Professional fact sheet (reference 1), updated 1 May 2026. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18; checked against it by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes with one "19+ years" row; its values are
+# repeated in every adult bracket. There is no upper limit. The fortified
+# cereal's serving is not given in Table 2; "1 serving" follows the column
+# heading "per serving".
+draft: false
+name: Pantothenic acid
+kind: vitamin
+dek: A B vitamin, also called vitamin B5, that the body uses to make coenzyme A, essential for building and breaking down fats. Almost every food contains some.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 5, female: 5, pregnancy: 6, lactation: 7 }
+    - { group: "51–70", male: 5, female: 5 }
+    - { group: ">70", male: 5, female: 5 }
+  note: These are Adequate Intakes, not Recommended Dietary Allowances — there was not enough evidence to set a requirement, so they are based on usual intakes in healthy people.
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 5 mg a day, 6 mg in pregnancy and 7 mg when breastfeeding. There is no upper limit at any age.
+
+ul:
+  note: No upper limit has been set for pantothenic acid, because there are no reports of toxicity in humans at high intakes. Some people taking very large doses, such as 10 g a day, develop mild diarrhea and digestive upset.
+
+does: >-
+  Pantothenic acid, also called vitamin B5, is mainly used to make coenzyme A and acyl carrier protein [1].
+  Coenzyme A is essential for building and breaking down fatty acids and for many other processes that build up
+  or break down molecules in the body; acyl carrier protein's main role is making fatty acids [1].
+
+forms: >-
+  About 85% of the pantothenic acid in food is in the form of coenzyme A or phosphopantetheine, which digestion
+  converts to pantothenic acid [1]. Supplements usually contain calcium pantothenate, sometimes pantethine, in
+  amounts from about 10 mg in multivitamins to as much as 1,000 mg in B-complex or single-nutrient products; no
+  studies have compared how well the forms are absorbed [1].
+
+absorption: >-
+  Limited data suggest the body absorbs 40% to 61% of the pantothenic acid in food — about half, on average [1].
+  Food processing can destroy from 20% to almost 80% of it [1].
+
+deficiency: >-
+  Because almost all foods contain some pantothenic acid, deficiency is rare except in severe malnutrition, and it
+  usually comes with other deficiencies [1]. The only people known to have developed it ate diets with virtually
+  none or took a drug that blocks it [1]. From the experience of prisoners of war in World War II and such
+  studies, deficiency is associated with numbness and burning of the hands and feet, headache, fatigue,
+  irritability, restlessness, disturbed sleep, and digestive upset with loss of appetite [1].
+
+atRisk:
+  - People with a mutation in the PANK2 gene, which causes a rare inherited brain disorder (PKAN) by reducing the conversion of pantothenic acid to coenzyme A; whether supplements help is not known [1]
+
+usIntake: >-
+  Few U.S. data exist, but a typical mixed American diet provides an estimated 6 mg a day, suggesting most people
+  get enough [1]. A 1996–1997 study in New Brunswick, Canada, found average intakes of 4.0 mg a day in women and
+  5.5 mg in men [1]. Pantothenic acid is added to some breakfast cereals and drinks, such as energy drinks [1].
+
+sources:
+  rule: The five foods with the most pantothenic acid per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, boiled", short: "Beef liver", serving: "3 ounces", amount: 8.3 }
+    - { food: "Breakfast cereals, fortified with 100% of the Daily Value", short: "Breakfast cereal", serving: "1 serving", amount: 5, fortified: true }
+    - { food: "Shiitake mushrooms, cooked, pieces", short: "Shiitake mushrooms", serving: "½ cup", amount: 2.6 }
+    - { food: "Sunflower seeds", serving: "¼ cup", amount: 2.4 }
+    - { food: "Chicken, breast meat, skinless, roasted", short: "Chicken breast", serving: "3 ounces", amount: 1.3 }
+
+evidence:
+  established: >-
+    Pantothenic acid is essential for making coenzyme A, which fat metabolism and many other processes depend on
+    [1]. Deficiency is rare because almost all foods contain it [1].
+  notSupported: >-
+    Pantothenic acid itself does not appear to lower blood lipids; the effects described below are for
+    pantethine, a related form [1].
+  mixed: >-
+    Blood lipids: a 2005 review of 28 small trials in 646 adults with high blood lipids, who took a median of 900
+    mg of pantethine a day for an average of 12.7 weeks, found triglycerides down 32.9% and LDL cholesterol down
+    20.1% at 4 months [1]. Later trials found smaller but significant reductions, partly confounded by dietary
+    advice given at the same time, and the fact sheet calls for more studies [1].
+
+tooMuch: >-
+  There are no reports of pantothenic acid toxicity in humans at high intakes [1]. Some people taking large doses
+  of supplements, such as 10 g a day, develop mild diarrhea and digestive upset [1].
+
+interactions: >-
+  Pantothenic acid is not known to have any clinically relevant interactions with medicines [1]. If you take
+  medicines regularly, your doctor or pharmacist can still tell you whether any supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Pantothenic Acid, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/PantothenicAcid-HealthProfessional/
+  lastModified: 2026-05-01
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Pantothenic Acid — Fact Sheet for Health Professionals. Updated 1 May 2026."
+    url: https://ods.od.nih.gov/factsheets/PantothenicAcid-HealthProfessional/
+
+aiAssisted: true

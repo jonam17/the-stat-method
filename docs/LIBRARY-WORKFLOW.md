@@ -70,8 +70,10 @@ recommended amount — that is correct, because it only covers supplements.
   `ul.note` — a test checks that it does. Many B vitamins, vitamin K and chromium have none.
 - **If the limit, or its absence, would hide a risk**, write it in `ul.warning`, shown in the red bar at
   the top of the section. Vitamin K's summary says "None set", but changing intake is dangerous on
-  warfarin; its warning says so where a reader looks first. Use it sparingly — a bar on every page stops
-  being read.
+  warfarin; its warning says so where a reader looks first. Biotin has none either, but high doses make
+  some blood tests read falsely. Use it sparingly — a bar on every page stops being read.
+- **Adjustments the table states in a row of its own** — vitamin C's "people who smoke require 35 mg/day
+  more" — go in `intake.note`, directly beneath the table.
 - **The limit table prints the plain unit** — vitamin A's limit is in mcg of preformed vitamin A, folate's in
   mcg of folic acid, niacin's in mg — so once `intake.unitLabel` is set, the two tables read differently,
   as they should. Explain the difference in `ul.note` in the sheet's terms. A file with a `unitLabel` cannot
