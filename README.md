@@ -329,6 +329,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.30.0 — Library: zinc, copper, iodine and selenium
+
+- **Four minerals are live** at `/library/minerals/`: zinc, copper, iodine and selenium, each from its NIH Office
+  of Dietary Supplements Health Professional fact sheet alone and checked against it by the maintainer on
+  2026-10-18. The Library now covers twenty-one nutrients.
+- **Where one serving passes the limit, the page says so.** A 3-ounce serving of beef liver has more copper
+  than the adult upper limit, and an ounce of Brazil nuts more selenium — the selenium sheet itself warns
+  that Brazil nuts eaten regularly could cause toxicity.
+- **Where official limits disagree, both are shown.** Selenium's U.S. upper limit is 400 mcg a day and the
+  European Food Safety Authority's 255 mcg; for iodine in pregnancy, the World Health Organization recommends
+  250 mcg against the U.S. 220 mcg.
+
 ### v2.29.0 — Library: vitamin C and the last four B vitamins; every vitamin is in
 
 - **Five vitamins are live** at `/library/vitamins/`: vitamin C, thiamin, riboflavin, pantothenic acid and

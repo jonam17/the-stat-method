@@ -1,0 +1,126 @@
+# Iodine — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 5 Nov 2024. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. The text: "The FNB has established iodine ULs for food and
+# supplement intakes" — so the limit is total.
+# The two breads in the top five are "made with iodate dough conditioner"; the
+# table notes only about 20% of U.S. breads are. They are not marked fortified
+# (a dough conditioner is not fortification), and the full names say so.
+draft: false
+name: Iodine
+kind: mineral
+dek: A trace mineral the thyroid needs to make its hormones, which control metabolism and are essential for brain and bone development before birth and in infancy.
+unit: mcg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 150, female: 150, pregnancy: 220, lactation: 290 }
+    - { group: "51–70", male: 150, female: 150 }
+    - { group: ">70", male: 150, female: 150 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 150 mcg a day, 220 mcg in pregnancy and 290 mcg when breastfeeding. Its upper limit is 900 mcg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 1100, female: 1100, pregnancy: 1100, lactation: 1100 }
+    - { group: "51–70", male: 1100, female: 1100 }
+    - { group: ">70", male: 1100, female: 1100 }
+  appliesTo: total
+  note: The upper limit covers iodine from food and supplements combined. It is the most that is unlikely to cause harm, not a target; long-term intakes above it increase the risk of adverse effects. Some people, such as those with autoimmune thyroid disease, may be harmed by intakes considered safe for others. The limit does not apply to people receiving iodine as medical treatment, who should be under a doctor's care.
+
+does: >-
+  Iodine is an essential part of the thyroid hormones thyroxine (T4) and triiodothyronine (T3), which regulate
+  many reactions, including protein synthesis and enzyme activity, and are critical to metabolic activity [1].
+  They are also needed for normal development of the skeleton and nervous system in fetuses and infants [1]. A
+  healthy adult holds about 15 to 20 mg of iodine, 70% to 80% of it in the thyroid [1].
+
+forms: >-
+  In food and iodized salt, iodine occurs as several salts, mostly iodide and iodate, which are almost completely
+  absorbed [1]. Supplements usually contain potassium or sodium iodide, or kelp; many multivitamins provide 150 mcg,
+  and some iodine-only supplements contain more than the upper limit [1].
+
+absorption: >-
+  Iodized salt in the United States provides about 45 mcg per gram, but most salt Americans eat comes from processed
+  foods, which almost always use noniodized salt [1]. Sea salt, kosher salt and other specialty salts are not
+  usually iodized [1]. The iodine in dairy depends on the iodine fed to cows and the sanitisers used, the iodine in
+  plants on the soil, and most bread contains very little unless it is made with an iodate dough conditioner [1].
+
+deficiency: >-
+  Iodine deficiency is the most common cause of preventable intellectual disability in the world [1]. The earliest
+  sign is usually goiter, an enlarged thyroid, and intakes below about 10 to 20 mcg a day cause hypothyroidism [1].
+  In pregnancy, deficiency of this degree can cause serious developmental problems in the fetus, miscarriage and
+  stillbirth; milder deficiency in children may lower IQ, and in adults causes goiter and impaired mental function
+  [1]. Overt deficiency is now uncommon in North America [1].
+
+atRisk:
+  - People who do not use iodized salt [1]
+  - Pregnant women — the requirement rises from 150 to 220 mcg, and many in the United States may fall short [1]
+  - Vegans and people who eat few or no dairy products, seafood and eggs [1]
+  - People living where soils are low in iodine, such as mountainous regions and flood-prone river valleys [1]
+  - People with marginal iodine status who eat a lot of goitrogens, found in soy, cassava and cruciferous vegetables such as cabbage and broccoli — not a concern for most Americans [1]
+
+usIntake: >-
+  The U.S. population as a whole gets enough iodine: in 2008–2012 data, average intake was 216 mcg a day, without
+  counting iodized salt added at home [1]. Urinary iodine has been stable since 2000 [1]. Some pregnant women may not
+  get enough, especially those who eat no dairy: their median urinary iodine was 100 mcg/L, against 163 mcg/L in
+  those who did [1].
+
+sources:
+  rule: The five foods with the most iodine per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Bread, white, enriched, made with iodate dough conditioner", short: "White bread (iodate)", serving: "2 slices", amount: 296 }
+    - { food: "Bread, whole-wheat, made with iodate dough conditioner", short: "Whole-wheat bread (iodate)", serving: "2 slices", amount: 273 }
+    - { food: "Cod, baked", short: "Cod", serving: "3 ounces", amount: 146 }
+    - { food: "Seaweed, nori, dried, flaked", short: "Nori, dried", serving: "2 tablespoons (5 g)", amount: 116 }
+    - { food: "Oysters, cooked", short: "Oysters", serving: "3 ounces", amount: 93 }
+
+evidence:
+  established: >-
+    Iodine is essential for thyroid hormones, and severe deficiency causes goiter, hypothyroidism and, before birth,
+    lasting harm to development [1]. Salt iodization has dramatically reduced iodine deficiency worldwide [1].
+  notSupported: >-
+    Child development from supplements in pregnancy: two trials that gave 150 or 200 mcg a day from early pregnancy
+    found no effect on children's cognitive, language or motor scores at age 1.5 to 2, and one still found none at 5
+    to 6 [1].
+  mixed: >-
+    In New Zealand, 184 mildly iodine-deficient children aged 10 to 13 who took 150 mcg a day for 28 weeks improved
+    in some measures of cognition [1]. Small trials in fibrocystic breast disease found less pain with iodine, but at
+    1,500 to 6,000 mcg a day — several times the upper limit — which the fact sheet says should be taken only under a
+    doctor's guidance [1].
+
+disagreements: >-
+  The World Health Organization recommends 250 mcg a day during pregnancy and breastfeeding, slightly more than the
+  U.S. 220 mcg in pregnancy [1]. The American Thyroid Association recommends that women who are planning a pregnancy,
+  pregnant or breastfeeding take a supplement of 150 mcg a day, and the American Academy of Pediatrics recommends at
+  least 150 mcg a day with iodized salt [1]. Yet in 2011–2014, only 17.8% of pregnant women who took a supplement took
+  one containing iodine [1].
+
+tooMuch: >-
+  Too much iodine can cause some of the same problems as too little — goiter, raised thyroid-stimulating hormone and
+  hypothyroidism — and can also cause hyperthyroidism, thyroiditis and thyroid papillary cancer [1]. Acute poisoning
+  is rare, usually from doses of many grams, and causes burning of the mouth, throat and stomach, fever, nausea,
+  vomiting, diarrhea, weak pulse and coma [1]. In most people, intakes from food and supplements are unlikely to
+  exceed the upper limit [1].
+
+interactions: >-
+  High doses of iodine taken with antithyroid medicines such as methimazole (Tapazole) can have an additive effect
+  and could cause hypothyroidism [1]. Potassium iodide taken with ACE inhibitors such as lisinopril, or with
+  potassium-sparing diuretics such as spironolactone, can raise blood potassium too high [1]. If you take any of
+  these regularly, talk to your doctor or pharmacist before taking an iodine supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Iodine, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Iodine-HealthProfessional/
+  lastModified: 2024-11-05
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Iodine — Fact Sheet for Health Professionals. Updated 5 November 2024."
+    url: https://ods.od.nih.gov/factsheets/Iodine-HealthProfessional/
+
+aiAssisted: true

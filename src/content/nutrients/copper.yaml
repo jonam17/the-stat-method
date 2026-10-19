@@ -1,0 +1,114 @@
+# Copper — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 18 Oct 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. The text: "The FNB has established ULs for copper from food and
+# supplements" — so the limit is total.
+# Checked by the maintainer 2026-10-18: the beef liver sentence in ul.note is arithmetic from two of the sheet's
+# numbers (12,400 mcg per 3 ounces; a 10,000 mcg limit), as on the vitamin A page.
+draft: false
+name: Copper
+kind: mineral
+dek: A mineral that enzymes for energy production, iron metabolism, connective tissue and brain chemicals depend on. Shellfish, organ meats, nuts, seeds and chocolate are rich sources.
+unit: mcg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 900, female: 900, pregnancy: 1000, lactation: 1300 }
+    - { group: "51–70", male: 900, female: 900 }
+    - { group: ">70", male: 900, female: 900 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 890 mcg a day, 1,000 mcg in pregnancy and 1,300 mcg when breastfeeding. Its upper limit is 8,000 mcg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 10000, female: 10000, pregnancy: 10000, lactation: 10000 }
+    - { group: "51–70", male: 10000, female: 10000 }
+    - { group: ">70", male: 10000, female: 10000 }
+  appliesTo: total
+  note: The upper limit covers copper from food and supplements combined. It is the most that is unlikely to cause harm, not a target, and was set from the amounts linked to liver damage. It does not apply to people taking copper under medical supervision. One 3-ounce serving of pan-fried beef liver, the first food listed below, provides 12,400 mcg — more than the limit.
+
+does: >-
+  Copper is a cofactor for several enzymes involved in energy production, iron metabolism, activating
+  neuropeptides, making connective tissue and making neurotransmitters [1]. It is also involved in forming blood
+  vessels, brain development, pigmentation and immune function, and the body's defence against oxidative damage
+  depends mainly on copper-containing enzymes [1]. The body holds only 50 to 120 mg, almost two-thirds of it in the
+  skeleton and muscle [1].
+
+forms: >-
+  Supplements contain cupric oxide, cupric sulfate, copper amino acid chelates, copper gluconate and other forms,
+  in amounts from a few micrograms to 15 mg; no studies have compared how well the forms are absorbed [1].
+
+absorption: >-
+  How much copper the body absorbs depends strongly on how much is in the diet: about 75% when a diet provides only
+  400 mcg a day, and 12% at 7.5 mg a day [1]. Tap water and other drinks can also provide copper, in amounts that
+  vary by source [1]. High intakes of zinc interfere with copper absorption [1].
+
+deficiency: >-
+  Copper deficiency is uncommon [1]. From studies in animals and people, its effects include anemia, loss of
+  pigmentation, high cholesterol, connective tissue disorders, osteoporosis and other bone defects, abnormal fat
+  metabolism, loss of coordination and a higher risk of infection [1]. No biomarker reliably measures copper
+  status, and it is not routinely assessed [1].
+
+atRisk:
+  - People with celiac disease — in one study, 15% of 200 people with it were copper deficient [1]
+  - People with Menkes disease, a rare inherited disorder that sharply reduces copper absorption [1]
+  - People taking high doses of zinc supplements or overusing zinc-containing denture creams — zinc blocks copper absorption, even at about 60 mg a day for up to 10 weeks [1]
+
+usIntake: >-
+  Typical U.S. diets meet or exceed the recommended amount: adults aged 20 and older average 1,400 mcg a day from
+  food for men and 1,100 mcg for women [1]. In 2009–2012 data, 6% to 15% of adults who did not take a supplement
+  containing copper had intakes below the average requirement, against 2.2% to 7.2% of those who did [1].
+
+sources:
+  rule: The five foods with the most copper per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 12400 }
+    - { food: "Oysters, eastern, wild, cooked", short: "Oysters", serving: "3 ounces", amount: 4850 }
+    - { food: "Baking chocolate, unsweetened", short: "Baking chocolate", serving: "1 ounce", amount: 938 }
+    - { food: "Potatoes, cooked, flesh and skin", short: "Potato", serving: "1 medium potato", amount: 675 }
+    - { food: "Mushrooms, shiitake, cooked", short: "Shiitake mushrooms", serving: "½ cup", amount: 650 }
+
+evidence:
+  established: >-
+    Copper is essential for enzymes involved in energy production, iron metabolism and connective tissue, and
+    deficiency causes anemia, bone defects and other problems [1]. In Menkes disease, copper injections started in
+    the first weeks after birth can reduce the risk of death and improve development [1].
+  notSupported: >-
+    Alzheimer's disease: in a trial in 68 people aged 50 to 80 with mild Alzheimer's disease, 8 mg of copper a day
+    for 12 months did not change cognition [1]. Heart disease: a few small studies in healthy adults found little
+    evidence that copper supplements affect cardiovascular risk factors, and no trials have been done in people at
+    higher risk [1].
+  mixed: >-
+    Observational studies of copper and heart disease disagree: in an Italian study, people eating the most copper
+    had lower blood pressure and cholesterol, but in U.S. and German studies, those with the highest blood copper
+    had higher rates of death from heart disease [1]. Studies of Alzheimer's disease conflict too — low copper has
+    been found in the brains of people with the disease, but meta-analyses find higher blood copper [1].
+
+tooMuch: >-
+  Chronic exposure to high levels of copper can damage the liver and cause abdominal pain, cramps, nausea,
+  diarrhea and vomiting [1]. Copper toxicity is rare in healthy people, but it has occurred from drinking water that
+  stood in copper pipes and fixtures; the Environmental Protection Agency's recommended limit for public water is
+  1.3 mg per litre [1]. People with Wilson's disease, a rare inherited disorder that stops the body clearing copper,
+  are at high risk of toxicity and can develop liver and nerve damage [1].
+
+interactions: >-
+  Copper is not known to have any clinically relevant interactions with medicines [1]. High-dose zinc supplements,
+  though, can reduce copper absorption [1]. If you take medicines or zinc regularly, your doctor or pharmacist can tell you
+  whether a supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Copper, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Copper-HealthProfessional/
+  lastModified: 2022-10-18
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Copper — Fact Sheet for Health Professionals. Updated 18 October 2022."
+    url: https://ods.od.nih.gov/factsheets/Copper-HealthProfessional/
+
+aiAssisted: true

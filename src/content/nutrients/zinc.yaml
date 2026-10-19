@@ -1,0 +1,128 @@
+# Zinc — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 6 Jan 2026. Read from the
+# full-page PDF (sections expanded) supplied by the maintainer on 2026-10-18.
+# Numbered markers [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket. The text: "The FNB has established ULs for zinc from food and
+# supplements" — so the limit is total.
+# Checked by the maintainer 2026-10-18: the AREDS sentence in ul.note compares two of the sheet's numbers (80
+# mg in the formula the National Eye Institute recommends; a 40 mg limit); the
+# sheet itself says the ULs "do not apply to individuals who are receiving zinc
+# for medical treatment".
+draft: false
+name: Zinc
+kind: mineral
+dek: A mineral that hundreds of enzymes need, involved in immune function, protein and DNA synthesis, wound healing and the sense of taste. Oysters and beef are rich sources.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 11, female: 8, pregnancy: 11, lactation: 12 }
+    - { group: "51–70", male: 11, female: 8 }
+    - { group: ">70", male: 11, female: 8 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 11 mg a day for males and 9 mg for females, 12 mg in pregnancy and 13 mg when breastfeeding. Its upper limit is 34 mg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 40, female: 40, pregnancy: 40, lactation: 40 }
+    - { group: "51–70", male: 40, female: 40 }
+    - { group: ">70", male: 40, female: 40 }
+  appliesTo: total
+  note: The upper limit covers zinc from food and supplements combined. It is the most that is unlikely to cause harm, not a target, and was set from the amount that harms copper status. It does not apply to people taking zinc as medical treatment, who should be under a doctor's care — the AREDS formula the National Eye Institute recommends for macular degeneration contains 80 mg, twice the limit.
+
+does: >-
+  Zinc is needed for the activity of hundreds of enzymes and plays a role in immune function, making protein and
+  DNA, wound healing, and cell signalling and division [1]. It supports growth and development during pregnancy,
+  infancy, childhood and adolescence, and is involved in the sense of taste [1]. The body holds about 1.5 g in
+  women and 2.5 g in men, mostly in muscle and bone [1].
+
+forms: >-
+  Supplements contain zinc sulfate, acetate, gluconate and other forms, and the label states the amount of
+  elemental zinc, not the weight of the whole compound [1]. About 61% of the zinc in citrate or gluconate is
+  absorbed in young adults, and 50% from zinc oxide [1]. Zinc is also in some cold lozenges, nasal sprays,
+  homeopathic products and denture adhesive creams [1].
+
+absorption: >-
+  The body absorbs from 5% to more than 50% of the zinc in food, depending on how much of the diet is plant-based
+  [1]. Beans, nuts and whole grains contain phytates, which bind zinc and block its absorption; soaking beans,
+  grains and seeds for several hours before cooking reduces this, and fermented foods might help [1]. Taking an
+  iron supplement of 25 mg or more at the same time as zinc can reduce zinc absorption, although the iron in
+  fortified foods does not [1].
+
+deficiency: >-
+  Zinc deficiency affects many tissues, including the skin, bones, and the digestive, reproductive, nervous and
+  immune systems [1]. In children it causes diarrhea, hair loss, delayed growth and frequent infections; it can
+  also dull taste and smell, and in older adults delay wound healing and change thinking and mood [1]. In
+  populations with little absorbable zinc, deficiency in pregnancy increases the risk of premature birth, low
+  birth weight and other adverse outcomes [1]. Serum zinc below 70 mcg/dL in women or 74 mcg/dL in men indicates
+  inadequate status, although the test has important limitations [1].
+
+atRisk:
+  - People with inflammatory bowel disease — 15% to 40% are zinc deficient — and people with celiac disease or who have had bariatric surgery [1]
+  - People who follow vegetarian or vegan diets, whose phytate-rich foods make zinc harder to absorb [1]
+  - Pregnant and breastfeeding women, whose requirement rises by 3 and 4 mg a day [1]
+  - People with alcohol use disorder — low zinc status is found in 30% to 50% [1]
+
+usIntake: >-
+  Most Americans get enough zinc, although older adults may have marginal intakes [1]. Average intake from food is
+  13 mg a day for men and 9.2 mg for women, and 16.4 mg and 12.6 mg including supplements [1]. Even so, in
+  2005–2016 data, 15% of adults took in less than the average requirement [1]. Oysters contain more zinc per
+  serving than any other food, but beef provides 20% of the zinc Americans eat because it is so common, and
+  fortified breakfast cereals are a major source [1].
+
+sources:
+  rule: The five foods with the most zinc per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Oysters, Eastern, farmed, raw", short: "Oysters, Eastern, raw", serving: "3 ounces", amount: 32 }
+    - { food: "Oysters, Pacific, cooked", short: "Oysters, Pacific", serving: "3 ounces", amount: 28.2 }
+    - { food: "Beef, bottom sirloin, roasted", short: "Beef sirloin", serving: "3 ounces", amount: 3.8 }
+    - { food: "Blue crab, cooked", short: "Blue crab", serving: "3 ounces", amount: 3.2 }
+    - { food: "Breakfast cereals, fortified with 25% of the Daily Value for zinc", short: "Breakfast cereal", serving: "1 serving", amount: 2.8, fortified: true }
+
+evidence:
+  established: >-
+    Zinc is essential for hundreds of enzymes, immune function and growth [1]. In AREDS, 4,757 people aged 50 to
+    80 at high risk of advanced macular degeneration who took a daily formula of 80 mg zinc with copper, beta-
+    carotene and vitamins C and E for 5 years had a 25% lower risk of advanced disease than those on placebo, and
+    AREDS2 confirmed the benefit [1]. The fact sheet advises people with or developing macular degeneration to
+    talk to their health care provider about these formulations [1].
+  notSupported: >-
+    Preventing colds: a 2024 Cochrane review of 34 trials in 8,526 people found that zinc makes little or no
+    difference to the chance of catching a cold [1]. Type 2 diabetes: the fact sheet finds the evidence
+    insufficient to support any conclusion about zinc supplements and diabetes [1].
+  mixed: >-
+    Treating colds: the same review found that zinc, mostly as lozenges, may shorten a cold by about 2 days, with
+    an unclear effect on how bad the symptoms are — all on low to very low certainty evidence [1]. Childhood
+    diarrhea: in low-income countries, where deficiency is common, zinc shortens acute diarrhea, but the effect may
+    be marginal in well-nourished children [1].
+
+tooMuch: >-
+  High intakes can cause nausea, dizziness, headaches, stomach upset, vomiting and loss of appetite [1]. Taken for
+  weeks, 50 mg a day or more — usually from supplements or overuse of zinc-containing denture creams — can block
+  copper absorption and cause low copper status, reduce immune function and lower HDL cholesterol [1]. Food rarely
+  provides as much as 50 mg, so the zinc in food is unlikely to cause toxicity [1]. Chronic overuse of denture
+  creams containing zinc has caused nerve damage and anemia; zinc-free creams are available [1].
+
+interactions: >-
+  Quinolone antibiotics such as ciprofloxacin and tetracycline antibiotics can bind zinc in the gut, reducing the
+  absorption of both; taking the antibiotic at least 2 hours before or 4 to 6 hours after the zinc supplement
+  minimises this [1]. Zinc reduces the absorption and action of penicillamine, used for rheumatoid arthritis and
+  Wilson disease, so the two should be taken at least 1 hour apart [1]. Thiazide diuretics such as
+  hydrochlorothiazide increase zinc loss in urine [1]. If you take any of these regularly, talk to your doctor or
+  pharmacist before taking a zinc supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Zinc, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/
+  lastModified: 2026-01-06
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Zinc — Fact Sheet for Health Professionals. Updated 6 January 2026."
+    url: https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/
+
+aiAssisted: true

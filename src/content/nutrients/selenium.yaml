@@ -1,0 +1,124 @@
+# Selenium — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 4 Sep 2025. Read from the
+# full-page PDF (sections expanded) supplied by the maintainer on 2026-10-18.
+# Numbered markers [n] refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 give 19–50 and "51+ years" rows; the 51+ values are repeated in
+# 51–70 and >70. The text: "The FNB has established ULs for selenium from food
+# and supplements" — so the limit is total. Brazil nuts: the sheet itself says
+# they "could cause selenium toxicity if consumed regularly"; the comparison with
+# the limit in ul.note (544 mcg per ounce against 400 mcg) is arithmetic.
+# Fifth place is a tie at 37 mcg — "Pork chop, bone-in, broiled" and "Beef
+# steak, bottom round, roasted", both 3 ounces. Pork is listed first, so it is taken.
+draft: false
+name: Selenium
+kind: mineral
+dek: A mineral built into 25 proteins that matter for thyroid hormones, DNA synthesis, reproduction and protection from oxidative damage. Brazil nuts are exceptionally rich in it.
+unit: mcg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 55, female: 55, pregnancy: 60, lactation: 70 }
+    - { group: "51–70", male: 55, female: 55 }
+    - { group: ">70", male: 55, female: 55 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 55 mcg a day, 60 mcg in pregnancy and 70 mcg when breastfeeding — and the same upper limit, 400 mcg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 400, female: 400, pregnancy: 400, lactation: 400 }
+    - { group: "51–70", male: 400, female: 400 }
+    - { group: ">70", male: 400, female: 400 }
+  appliesTo: total
+  note: The upper limit covers selenium from food and supplements combined. It is the most that is unlikely to cause harm, not a target, and was set from the amounts linked to brittle and lost hair and nails. It does not apply to people taking selenium under a doctor's care. One ounce of Brazil nuts, the first food listed below, provides 544 mcg — more than the limit — and the fact sheet warns they could cause toxicity if eaten regularly. The European Food Safety Authority set a lower limit in 2023; see Where official guidance disagrees, below.
+
+does: >-
+  Selenium is part of 25 selenoproteins, which play critical roles in thyroid hormone metabolism, DNA synthesis,
+  reproduction, and protection from oxidative damage and infection [1]. The thyroid holds more selenium than any
+  other organ, and selenoproteins convert the thyroid hormone T4 into its active form, T3 [1].
+
+forms: >-
+  In food, selenium is mainly selenomethionine, with some selenocysteine [1]. Supplements contain selenomethionine,
+  selenium-enriched yeast, sodium selenite or sodium selenate, all up to about 90% absorbed [1]. Many multivitamins
+  contain 55 mcg; selenium-only supplements typically contain 100 to 400 mcg [1].
+
+absorption: >-
+  Selenium in food is readily absorbed, largely regardless of selenium status [1]. The amount in plant foods depends
+  on the soil they grow in and varies widely by region, but animal foods vary much less, because animals regulate
+  their tissue levels [1]. Breads, grains, meat, poultry, seafood and eggs are the main sources in the U.S. diet [1].
+
+deficiency: >-
+  Selenium deficiency alone rarely causes overt illness, but it may make people under other stresses more likely to
+  develop certain diseases [1]. It is linked to Keshan disease, a heart muscle disease in low-selenium parts of
+  China, and to Kashin-Beck disease, a form of osteoarthritis, and it could worsen iodine deficiency [1]. Plasma or
+  serum selenium of 8 mcg/dL or more is considered sufficient [1].
+
+atRisk:
+  - People in regions with low-selenium soils whose diets come mainly from local vegetables, such as parts of China [1]
+  - People on long-term kidney dialysis, which removes some selenium from the blood [1]
+  - People living with HIV, who often have low selenium [1]
+
+usIntake: >-
+  Deficiency is very rare in the United States and Canada, because food travels widely [1]. In 2017–March 2020 data,
+  average intake from food and drink was 132 mcg a day for men and 94 mcg for women, and 17% to 19% of adults take a
+  supplement containing selenium [1]. People who follow vegetarian or vegan diets may get less, and people who smoke
+  tend to have lower selenium status [1].
+
+sources:
+  rule: The five foods with the most selenium per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Brazil nuts (6–8 nuts)", short: "Brazil nuts", serving: "1 ounce", amount: 544 }
+    - { food: "Tuna, yellowfin, cooked", short: "Tuna, yellowfin", serving: "3 ounces", amount: 92 }
+    - { food: "Sardines, canned in oil, drained, with bone", short: "Sardines", serving: "3 ounces", amount: 45 }
+    - { food: "Shrimp, cooked", short: "Shrimp", serving: "3 ounces", amount: 42 }
+    - { food: "Pork chop, bone-in, broiled", short: "Pork chop", serving: "3 ounces", amount: 37 }
+
+evidence:
+  established: >-
+    Selenium is essential for selenoproteins and thyroid hormone metabolism [1]. Selenium supplements greatly
+    reduced Keshan disease where deficiency is endemic — by 86% in a 2018 meta-analysis [1].
+  notSupported: >-
+    Cancer prevention: in SELECT, 35,533 men aged 50 and older who took 200 mcg a day did not have less prostate
+    cancer, and a 2018 Cochrane review of 10 trials concluded that 200 mcg a day does not reduce the overall risk of
+    cancer or of any individual type [1]. Heart disease: a Cochrane review of 12 trials in 19,715 mostly male adults
+    found that supplements did not reduce cardiovascular events [1]. Cognitive decline: in 7,540 healthy men aged 60
+    and older, 200 mcg a day for 5.4 years did not reduce dementia [1].
+  mixed: >-
+    Thyroid: in chronic autoimmune thyroiditis, supplements lowered thyroid antibodies in some trials, but a
+    systematic review found no effect on thyroid function or quality of life, and the American Thyroid Association
+    recommends against selenium supplements for pregnant women with thyroid antibodies [1]. In SELECT, men with
+    higher selenium status at the start had more high-grade prostate cancer when supplemented, and the researchers
+    recommended that men over 55 not take more than the recommended amount from supplements [1]. Male fertility:
+    trials conflict [1].
+
+disagreements: >-
+  In 2023, the European Food Safety Authority set an upper limit for selenium of 255 mcg a day for all adults,
+  including women who are pregnant or breastfeeding, based on systematic reviews of hair loss [1]. The U.S. limit is
+  400 mcg [1].
+
+tooMuch: >-
+  Chronically high intakes cause selenosis: early signs are a garlic smell on the breath and a metallic taste, and
+  the most common are hair loss and brittle or lost nails, with skin rash, nausea, diarrhea, fatigue, irritability
+  and nervous system problems [1]. Brazil nuts contain 68 to 91 mcg per nut [1]. Acute toxicity has come from
+  wrongly formulated products — in 2008, 201 people had severe reactions to a liquid supplement with 200 times the
+  labelled amount — and can cause respiratory distress, heart attack, kidney and heart failure and, rarely, death
+  [1].
+
+interactions: >-
+  Cisplatin, a chemotherapy drug, can lower selenium levels, although whether that matters clinically is not known,
+  and a Cochrane review found too little evidence that selenium eases chemotherapy side effects [1]. If you take
+  cisplatin or other medicines regularly, talk to your doctor or pharmacist before taking a selenium supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Selenium, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Selenium-HealthProfessional/
+  lastModified: 2025-09-04
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Selenium — Fact Sheet for Health Professionals. Updated 4 September 2025."
+    url: https://ods.od.nih.gov/factsheets/Selenium-HealthProfessional/
+
+aiAssisted: true
