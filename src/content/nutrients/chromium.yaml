@@ -1,0 +1,114 @@
+# Chromium — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 2 Jun 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes (set in 2001) with a "51+ years" row, repeated in
+# 51–70 and >70. There is no upper limit. The sheet covers trivalent chromium
+# only, and says the food values "should only serve as a guide", because samples
+# are easily contaminated.
+# Checked by the maintainer 2026-10-18: brewer's yeast (fourth) is sold both as a food and as a supplement, like
+# wheat germ oil on the vitamin E page, which was kept; kept here for the same
+# reason. If left out, beef (2.0 mcg) becomes fifth.
+draft: false
+name: Chromium
+kind: mineral
+dek: A trace mineral that may enhance insulin's action. Its official intake dates from 2001, and whether it is essential at all is now disputed.
+unit: mcg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 35, female: 25, pregnancy: 30, lactation: 45 }
+    - { group: "51–70", male: 30, female: 20 }
+    - { group: ">70", male: 30, female: 20 }
+  note: These are Adequate Intakes, set in 2001 from usual intakes in healthy people; the Food and Nutrition Board has not evaluated chromium since. Food values are approximate, because chromium content varies widely with soil, water and processing, and samples are easily contaminated in testing.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 35 mcg a day for males and 24 mcg for females, 29 mcg in pregnancy and 44 mcg when breastfeeding. There is no upper limit at any age.
+
+ul:
+  note: No upper limit has been set for chromium, because no adverse effects have been linked to high intakes from food or supplements. The Food and Nutrition Board noted that the data are limited, that caution may be warranted, and that people with kidney or liver disease might be more susceptible.
+
+does: >-
+  Chromium might play a role in the metabolism of carbohydrates, fats and protein by enhancing the action of insulin,
+  though how is not established [1]. It might also have antioxidant effects [1]. This page covers trivalent
+  chromium, the form in food; hexavalent chromium is a different, toxic form [1].
+
+forms: >-
+  Most multivitamins contain chromium, typically 35 to 120 mcg, and chromium-only supplements commonly provide 200 to
+  500 mcg, some up to 1,000 mcg [1]. Forms include chromium picolinate, nicotinate, polynicotinate, chloride and
+  histidinate, and they are absorbed about equally [1].
+
+absorption: >-
+  The body absorbs only about 0.4% to 2.5% of the chromium in food [1]. Vitamin C and aspirin increase absorption,
+  while oxalate and antacids reduce it [1]. Some chromium passes into food from stainless steel equipment, pots and
+  pans [1].
+
+deficiency: >-
+  Chromium deficiency has not been reported in healthy people, and no definite deficiency symptoms have been
+  established [1]. Three case reports from the 1970s and 1980s, in patients on long-term intravenous feeding, were
+  presumed to show deficiency, but later evaluations concluded that they do not [1]. No validated method exists for
+  measuring chromium status [1].
+
+atRisk:
+  - "No groups are known to be at risk: chromium deficiency has not been reported in healthy people [1]"
+
+usIntake: >-
+  National surveys do not measure chromium intake, so U.S. data are limited [1]. A small study found average intakes
+  of about 29 mcg a day for women and 54 mcg for men, and well-balanced diets provided about 17 to 47 mcg per 2,000
+  calories, suggesting most people's intakes are similar to the Adequate Intakes [1].
+
+sources:
+  rule: The five foods with the most chromium per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Grape juice", serving: "1 cup", amount: 7.5 }
+    - { food: "Ham", serving: "3 ounces", amount: 3.6 }
+    - { food: "English muffin, whole wheat", short: "Whole-wheat English muffin", serving: "1 muffin", amount: 3.6 }
+    - { food: "Brewer's yeast", serving: "1 tablespoon", amount: 3.3 }
+    - { food: "Orange juice", serving: "1 cup", amount: 2.2 }
+
+evidence:
+  established: >-
+    In 2001 the Food and Nutrition Board considered chromium essential, based on its effects on insulin action, and
+    set Adequate Intakes from usual intakes [1].
+  notSupported: >-
+    Diabetes: the American Diabetes Association concluded that the evidence does not support routine chromium
+    supplements for blood sugar control, and a 2016 review found no reason to recommend them in type 2 diabetes and
+    no effect on blood sugar in healthy people [1]. Metabolic syndrome: limited research suggests no significant
+    benefit [1]. Weight: chromium picolinate reduces weight by a statistically significant but tiny amount — 0.75 kg
+    more than placebo in a 2019 meta-analysis — of little clinical significance [1].
+  mixed: >-
+    In people with diabetes, chromium added to other treatment lowered fasting blood sugar and HbA1c slightly in
+    reviews of 58 trials, but the clinical significance is unclear, and the FDA calls any link between chromium
+    picolinate and insulin resistance or type 2 diabetes "highly uncertain" [1]. Findings in polycystic ovary
+    syndrome and blood lipids are mixed [1].
+
+disagreements: >-
+  The U.S. Food and Nutrition Board considered chromium an essential nutrient in 2001 and has not re-evaluated it
+  since [1]. In 2014, the European Food Safety Authority concluded that there is no convincing evidence that chromium
+  is essential, and that setting intake recommendations would be inappropriate [1]. More recent research suggests it
+  may not be essential, because a lack of it causes no abnormality that chromium reverses [1].
+
+tooMuch: >-
+  No adverse effects have been linked to high chromium intakes from food or supplements, though the data are limited
+  [1]. Isolated case reports link chromium supplements to weight loss, anemia, low platelet counts, liver dysfunction,
+  kidney failure, muscle breakdown, dermatitis and low blood sugar [1].
+
+interactions: >-
+  Chromium might increase insulin sensitivity and lower blood sugar, so taking it with insulin, metformin or other
+  diabetes medicines could increase the risk of low blood sugar [1]. Taking chromium picolinate at the same time as
+  levothyroxine reduced levothyroxine absorption in a small study [1]. If you take any of these regularly, talk to
+  your doctor or pharmacist before taking a chromium supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Chromium, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Chromium-HealthProfessional/
+  lastModified: 2022-06-02
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Chromium — Fact Sheet for Health Professionals. Updated 2 June 2022."
+    url: https://ods.od.nih.gov/factsheets/Chromium-HealthProfessional/
+
+aiAssisted: true

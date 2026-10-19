@@ -1,0 +1,111 @@
+# Phosphorus — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 4 May 2023. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives one "19+ years" row, repeated in every adult bracket. Table 3
+# gives 19–50, 51–70 and "71+ years" rows, copied as they are; the limit is lower
+# in pregnancy (3,500 mg) and after 70 (3,000 mg). The text: "The ULs for
+# phosphorus from food and supplements" — so the limit is total.
+draft: false
+name: Phosphorus
+kind: mineral
+dek: A mineral in bones, teeth, DNA and ATP, the body's energy currency. Most Americans get more than they need, partly from phosphate additives in processed food.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 700, female: 700, pregnancy: 700, lactation: 700 }
+    - { group: "51–70", male: 700, female: 700 }
+    - { group: ">70", male: 700, female: 700 }
+  eighteenNote: People aged 18 fall in the official 14–18 group, which needs much more — 1,250 mg a day, including in pregnancy and when breastfeeding. Its upper limit is 4,000 mg, or 3,500 mg in pregnancy.
+
+ul:
+  rows:
+    - { group: "19–50", male: 4000, female: 4000, pregnancy: 3500, lactation: 4000 }
+    - { group: "51–70", male: 4000, female: 4000 }
+    - { group: ">70", male: 3000, female: 3000 }
+  appliesTo: total
+  note: The upper limit covers phosphorus from food and supplements combined, and is lower in pregnancy and after 70. It is the most that is unlikely to cause harm, not a target, and was based on intakes that keep blood phosphate normal. It does not apply to people taking phosphorus under medical supervision.
+
+does: >-
+  Phosphorus is part of bones, teeth, DNA and RNA, of cell membranes, and of ATP, the body's key energy source [1].
+  It helps regulate gene transcription, activate enzymes, keep the fluid outside cells at a normal pH and store
+  energy inside them [1]. About 85% of the body's phosphorus is in bones and teeth [1]. Its metabolism is linked
+  with calcium's, through vitamin D and parathyroid hormone [1].
+
+forms: >-
+  Food contains phosphorus mainly as phosphates; in seeds and unleavened bread it is phytic acid, much of which humans
+  cannot absorb [1]. Phosphate additives such as phosphoric acid and sodium phosphate are common in processed food
+  and may provide 300 to 1,000 mg a day — 10% to 50% of intake in Western countries — and their use is rising [1].
+  Supplements usually contain phosphate salts or phospholipids [1].
+
+absorption: >-
+  The body absorbs 40% to 70% of the phosphorus naturally in food, more from animal than plant sources, and about
+  70% from phosphate additives and supplement salts [1]. Calcium binds some phosphorus in food and prevents its
+  absorption [1].
+
+deficiency: >-
+  Phosphorus deficiency (hypophosphatemia) is rare in the United States and almost never caused by diet [1]. It can
+  cause loss of appetite, anemia, muscle weakness, bone pain, rickets and osteomalacia, more infections, tingling,
+  poor coordination and confusion [1]. It is usually caused by medical conditions such as hyperparathyroidism,
+  kidney tubule defects and diabetic ketoacidosis [1].
+
+atRisk:
+  - People with rare genetic disorders of phosphate regulation, such as X-linked hypophosphatemic rickets [1]
+  - People with severe malnutrition — from chronic disease, anorexia nervosa, heavy drinking or other causes — who can develop dangerously low phosphate (refeeding syndrome) when feeding restarts; phosphorus and thiamin given in advance can prevent it [1]
+
+usIntake: >-
+  Most Americans get more than the recommended amount: in 2015–2016, average intake from food was 1,596 mg a day for
+  men and 1,189 mg for women [1]. These surveys may underestimate true intake, because they do not capture phosphate
+  additives [1]. Dairy products provide about 20% of the phosphorus Americans eat, and bakery products 10% [1].
+
+sources:
+  rule: The five foods with the most phosphorus per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Yogurt, plain, low fat", short: "Yogurt, low fat", serving: "6-ounce container", amount: 245 }
+    - { food: "Milk, 2% milkfat", short: "Milk, 2%", serving: "1 cup", amount: 226 }
+    - { food: "Salmon, Atlantic, farmed, cooked", short: "Salmon, farmed", serving: "3 ounces", amount: 214 }
+    - { food: "Scallops, breaded and fried", short: "Scallops, fried", serving: "3 ounces", amount: 201 }
+    - { food: "Cheese, mozzarella, part skim", short: "Mozzarella", serving: "1.5 ounces", amount: 197 }
+
+evidence:
+  established: >-
+    Phosphorus is essential for bones, teeth, DNA and energy metabolism [1]. In chronic kidney disease the kidneys
+    cannot remove phosphate efficiently, blood levels rise, and in people on dialysis the highest phosphate levels
+    are linked to a 39% higher risk of death [1].
+  notSupported: >-
+    There is no evidence on whether restricting phosphorus prevents cardiovascular disease in healthy adults [1].
+    In people with milder chronic kidney disease, higher phosphorus intakes were not linked to higher mortality [1].
+  mixed: >-
+    Observational studies link higher blood phosphate with cardiovascular disease and death in healthy adults, but
+    not all agree [1]. In U.S. adults, intakes of 1,000 mg a day or more — twice the recommended amount but well
+    below the limit — were linked to higher death rates, which may reflect diets unhealthy in other ways [1]. For
+    severe kidney disease, a guideline group weakly recommends limiting dietary phosphorus [1].
+
+tooMuch: >-
+  High phosphorus intakes rarely harm healthy people [1]. Very large amounts over a short time — such as two 6,600 mg
+  doses of sodium phosphate in a day — can cause hyperphosphatemia, which disturbs the hormones that regulate calcium
+  and can calcify soft tissues, especially the kidneys [1].
+
+interactions: >-
+  Antacids containing aluminum hydroxide bind phosphorus and, used for 3 months or more, can cause low phosphate;
+  calcium carbonate antacids also reduce its absorption [1]. Laxatives containing sodium phosphate raise blood
+  phosphate, and after 13 reported deaths from a single dose above the label's, the FDA warned that they are
+  potentially dangerous above recommended doses, especially with kidney disease, heart disease or dehydration [1].
+  If you take any of these regularly, talk to your doctor or pharmacist.
+
+source:
+  name: NIH Office of Dietary Supplements — Phosphorus, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Phosphorus-HealthProfessional/
+  lastModified: 2023-05-04
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Phosphorus — Fact Sheet for Health Professionals. Updated 4 May 2023."
+    url: https://ods.od.nih.gov/factsheets/Phosphorus-HealthProfessional/
+
+aiAssisted: true

@@ -72,6 +72,11 @@ recommended amount — that is correct, because it only covers supplements.
   the top of the section. Vitamin K's summary says "None set", but changing intake is dangerous on
   warfarin; its warning says so where a reader looks first. Biotin has none either, but high doses make
   some blood tests read falsely. Use it sparingly — a bar on every page stops being read.
+- **Where the sheet does not say what a limit covers** (manganese, molybdenum), use `appliesTo: total` only if the
+  text supports it, leave a `# REVIEW:` comment, and say in `ul.note` that the sheet does not say.
+- **Copy food amounts at the sheet's precision.** The page prints up to two decimals (fluoride's 0.07 mg); a range
+  such as tea's "0.07 to 1.5" is `[0.07, 1.5]`. An upper bound such as "≤0.17" is not a measured amount — keep it
+  only with "up to" in the food's name.
 - **Adjustments the table states in a row of its own** — vitamin C's "people who smoke require 35 mg/day
   more" — go in `intake.note`, directly beneath the table.
 - **The limit table prints the plain unit** — vitamin A's limit is in mcg of preformed vitamin A, folate's in

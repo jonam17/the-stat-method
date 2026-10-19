@@ -1,0 +1,117 @@
+# Fluoride — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 11 Apr 2025. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes with one "19+ years" row, repeated in every adult
+# bracket. Table 4 (upper limits) prints "19–51 years" and "51+ years", both 10 mg
+# — copied as 19–50, 51–70 and >70. The text: "The FNB has established ULs for
+# fluoride from all sources" — so the limit is total.
+# Checked by the maintainer 2026-10-18: Table 2 lists bottled water with added fluoride as "≤0.17" mg per cup —
+# an upper bound, not a measured amount. It is fourth by its high end; its name
+# says "up to". Tea is a range (0.07 to 1.5 mg) and sorts by its high end. Fifth
+# place is a four-way tie at 0.08 mg (raisins, oatmeal, grapefruit juice,
+# potatoes); raisins are listed first. Fluoridated tap water, the main U.S.
+# source, is not in the food table.
+draft: false
+name: Fluoride
+kind: mineral
+dek: The form of fluorine that protects teeth against decay. Most Americans get it from fluoridated tap water, toothpaste and food and drinks made with that water.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 4, female: 3, pregnancy: 3, lactation: 3 }
+    - { group: "51–70", male: 4, female: 3 }
+    - { group: ">70", male: 4, female: 3 }
+  note: These are Adequate Intakes, set at the intakes that most reduce tooth decay without causing dental fluorosis. Fluoridated tap water, and food and drink made with it, provide about 60% of Americans' fluoride; the U.S. Public Health Service recommends 0.7 mg per litre in community water.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 3 mg a day, including in pregnancy and when breastfeeding. Its upper limit is the same as for adults, 10 mg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 10, female: 10, pregnancy: 10, lactation: 10 }
+    - { group: "51–70", male: 10, female: 10 }
+    - { group: ">70", male: 10, female: 10 }
+  appliesTo: total
+  note: The upper limit covers fluoride from all sources. It is the most that is unlikely to cause harm, not a target, and was based on the levels associated with dental and skeletal fluorosis.
+
+does: >-
+  Fluoride, the ionic form of fluorine, protects teeth against decay by inhibiting the loss of tooth mineral and the
+  activity of bacteria in dental plaque, and by helping teeth remineralise [1]. It also helps stimulate the formation
+  of new bone [1]. About 80% or more of the fluoride swallowed is absorbed; in adults about half is kept,
+  almost all of it in bones and teeth, and the rest is excreted in urine [1].
+
+forms: >-
+  Most fluoride comes from fluoridated water, food and drink made with it, and toothpaste and other dental products
+  [1]. Toothpaste usually contains 1,000 to 1,100 mg/L, about 1.3 mg in a quarter teaspoon, and adults swallow about
+  0.1 mg a day from it [1]. Few supplements contain fluoride, usually 0.25 mg [1]. The antifungal drug voriconazole
+  contains fluoride, and long-term use can raise blood fluoride [1].
+
+absorption: >-
+  Brewed tea contains more fluoride than most foods, because tea plants take it up from the soil — 0.07 to 1.5 mg a
+  cup [1]. Most foods not made with fluoridated water contain only traces [1]. Bottled water usually has no added
+  fluoride; when it does, the FDA caps the total at 0.7 mg/L [1]. Private wells vary [1].
+
+deficiency: >-
+  No criteria for adequate or low fluoride status have been established, and individual status is not usually
+  assessed [1]. Without enough fluoride, the risk of tooth decay rises; decay can cause pain, tooth loss and
+  infection [1].
+
+atRisk:
+  - People whose water supply contains little or no fluoride, such as some private wells — in 2020, 62.9% of Americans had fluoridated community water [1]
+
+usIntake: >-
+  Most Americans get enough fluoride from food, fluoridated water and food made with it [1]. The Environmental
+  Protection Agency estimates typical adult intake from food and drink, including fluoridated water, at 2.9 mg a day
+  [1].
+
+sources:
+  rule: The five foods with the most fluoride per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Tea, black, brewed (varies with the water used)", short: "Black tea, brewed", serving: "1 cup", amount: [0.07, 1.5] }
+    - { food: "Coffee, brewed (varies with the water used)", short: "Coffee, brewed", serving: "1 cup", amount: 0.22 }
+    - { food: "Shrimp, canned", short: "Shrimp, canned", serving: "3 ounces", amount: 0.17 }
+    - { food: "Bottled water with added fluoride (up to)", short: "Bottled water (fluoride)", serving: "1 cup", amount: 0.17, fortified: true }
+    - { food: "Raisins", serving: "¼ cup", amount: 0.08 }
+
+evidence:
+  established: >-
+    Water fluoridation prevents tooth decay: a 2015 Cochrane review of 20 studies found that children with fluoridated
+    water had 35% fewer decayed, missing or filled baby teeth and 26% fewer in their permanent teeth [1]. Studies in
+    Australian adults found 11% to 24% less decay with long exposure to fluoridated water [1]. Fluoride supplements
+    reduce decay in children without fluoridated water [1].
+  notSupported: >-
+    Fluoride supplements in pregnancy: a 2017 Cochrane review found no evidence that they prevent tooth decay in
+    children [1]. No studies have tested fluoride supplements against decay in adults [1].
+  mixed: >-
+    Bone fractures: observational studies of fluoridated water and fractures disagree, and trials of fluoride
+    supplements have had conflicting results [1].
+
+tooMuch: >-
+  Too much fluoride while teeth are forming, in infancy and childhood, causes dental fluorosis — usually faint white
+  lines or flecks, rarely brown stains or pitting [1]. Mild fluorosis does not harm oral health, moderate or severe
+  fluorosis affects 1.4% to 1.8% of children and adolescents, and there is no indication that the recommended level in
+  tap water causes severe fluorosis [1]. Chronic excess can cause skeletal fluorosis, from joint stiffness to
+  osteoporosis, but it is extremely rare in the United States [1]. A 2024 National Toxicology Program review concluded
+  with moderate confidence that water fluoride above 1.5 mg/L is associated with lower IQ in children; it did not
+  address the recommended 0.7 mg/L, and a 2023 meta-analysis found no link at U.S. fluoridation levels [1].
+
+interactions: >-
+  Fluoride has no known clinically relevant interactions with medicines [1]. Long-term use of the antifungal
+  voriconazole can raise blood fluoride; its prescribing information advises stopping it if skeletal fluorosis
+  develops [1].
+
+source:
+  name: NIH Office of Dietary Supplements — Fluoride, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Fluoride-HealthProfessional/
+  lastModified: 2025-04-11
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Fluoride — Fact Sheet for Health Professionals. Updated 11 April 2025."
+    url: https://ods.od.nih.gov/factsheets/Fluoride-HealthProfessional/
+
+aiAssisted: true

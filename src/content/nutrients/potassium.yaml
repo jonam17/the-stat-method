@@ -1,0 +1,119 @@
+# Potassium — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 2 Jun 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes (updated by the National Academies in 2019) with
+# a "51+ years" row, repeated in 51–70 and >70. Its footnote: "The AIs do not
+# apply to individuals with impaired potassium excretion because of medical
+# conditions (e.g., kidney disease) or the use of medications that impair
+# potassium excretion." There is no upper limit; the sheet says even intakes
+# below the AI can cause hyperkalemia in those people, so `ul.warning` carries it.
+draft: false
+name: Potassium
+kind: mineral
+dek: A mineral every cell needs for nerve signals, muscle contraction and kidney function, closely linked with sodium. Most Americans get less than recommended.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 3400, female: 2600, pregnancy: 2900, lactation: 2800 }
+    - { group: "51–70", male: 3400, female: 2600 }
+    - { group: ">70", male: 3400, female: 2600 }
+  note: These are Adequate Intakes, based on the highest median intakes in healthy people. They do not apply to people whose kidneys excrete potassium poorly, because of kidney disease or medicines. Food labels calculate % Daily Value from 4,700 mg, more than these amounts.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 3,000 mg a day for males and 2,300 mg for females, 2,600 mg in pregnancy and 2,500 mg when breastfeeding. There is no upper limit at any age.
+
+ul:
+  warning: No upper limit does not mean safe for everyone. If you have kidney disease, or take an ACE inhibitor or a potassium-sparing diuretic, even ordinary amounts — below the recommended intake — can raise blood potassium to dangerous levels, and angiotensin receptor blockers can raise it too. Talk to your doctor before taking a potassium supplement or using a salt substitute.
+  note: No upper limit has been set for potassium, because in healthy people with normal kidney function the kidneys remove the excess, and there is no evidence that high intakes cause harm. Case reports describe heart problems and death from very large doses of supplements, but the National Academies judged them insufficient to set a limit.
+
+does: >-
+  Potassium is present in every tissue and is needed for normal cell function, because it maintains the fluid
+  volume inside cells and the electrical gradient across their membranes [1]. That gradient is required for nerve
+  transmission, muscle contraction and kidney function [1]. Potassium is closely linked with sodium, the main
+  regulator of fluid outside cells [1].
+
+forms: >-
+  Fruits and vegetables contain potassium as phosphate, sulfate, citrate and other forms, but not as potassium
+  chloride, the form used in salt substitutes and many supplements [1]. Most supplements contain no more than 99
+  mg — about 2% of the Daily Value — because the FDA has linked some potassium chloride drugs above that amount to
+  small-bowel lesions [1]. Salt substitutes vary widely, from about 440 to 2,800 mg per teaspoon [1].
+
+absorption: >-
+  The body absorbs about 85% to 90% of the potassium in food [1]. Whole-wheat flour and brown rice contain much
+  more than white flour and white rice [1]. Milk, coffee, tea, other nonalcoholic drinks and potatoes are the top
+  sources for U.S. adults [1].
+
+deficiency: >-
+  Too little potassium can raise blood pressure, kidney stone risk, bone turnover, calcium loss in urine and salt
+  sensitivity [1]. Severe deficiency causes hypokalemia — rare in healthy people with normal kidney function, but
+  found in up to 21% of hospital patients, usually because of diuretics and other medicines [1]. Mild hypokalemia
+  causes constipation, fatigue, muscle weakness and malaise; severe hypokalemia can cause paralysis, poor breathing
+  and dangerous heart rhythms [1]. It rarely comes from diet alone, more often from diarrhea, vomiting, laxative
+  misuse, diuretics or heavy sweating, and magnesium depletion can contribute [1].
+
+atRisk:
+  - People with inflammatory bowel disease, such as Crohn's disease or ulcerative colitis [1]
+  - People taking certain diuretics, such as thiazides, or using large doses of laxatives or repeated enemas [1]
+  - People with pica who eat clay, which binds potassium in the gut [1]
+
+usIntake: >-
+  Americans consistently eat less potassium than recommended, and the Dietary Guidelines name it a nutrient of
+  public health concern [1]. In 2013–2014, average intake from food was 3,016 mg a day for men and 2,320 mg for women
+  [1]. About 12% of people take a supplement containing potassium, but it adds an average of only 87 mg a day [1].
+
+sources:
+  rule: The five foods with the most potassium per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Apricots, dried", serving: "½ cup", amount: 755 }
+    - { food: "Lentils, cooked", serving: "1 cup", amount: 731 }
+    - { food: "Squash, acorn, mashed", short: "Acorn squash", serving: "1 cup", amount: 644 }
+    - { food: "Prunes, dried", short: "Prunes", serving: "½ cup", amount: 635 }
+    - { food: "Raisins", serving: "½ cup", amount: 618 }
+
+evidence:
+  established: >-
+    Potassium is essential for nerve transmission, muscle contraction and kidney function [1]. The FDA allows the
+    health claim that diets containing foods that are good sources of potassium and low in sodium may reduce the
+    risk of high blood pressure and stroke [1].
+  notSupported: >-
+    In 2019, the National Academies found the evidence insufficient to set an intake of potassium for reducing the
+    risk of chronic disease [1]. A Cochrane review of the six highest-quality trials found no significant reduction
+    in blood pressure from potassium supplements [1].
+  mixed: >-
+    Blood pressure: other meta-analyses find that supplements, mostly potassium chloride, lower blood pressure —
+    most in people with high blood pressure, with no significant effect in those without it [1]. Some of the benefit
+    of potassium salt substitutes may come from the sodium they replace [1]. Stroke: in a meta-analysis of 11 cohort
+    studies in 247,510 adults, 1,640 mg a day more potassium was linked to a 21% lower risk of stroke, but a
+    government review found the observational evidence inconsistent [1]. Kidney stones: potassium citrate reduced
+    new stones in trials, though the effect is attributed to the citrate [1].
+
+tooMuch: >-
+  In healthy people with normal kidney function, high intakes from food are not a risk [1]. But in people whose
+  kidneys excrete potassium poorly — because of chronic kidney disease or medicines such as ACE inhibitors or
+  potassium-sparing diuretics — even intakes below the Adequate Intake can cause hyperkalemia, as can type 1
+  diabetes, heart failure, adrenal insufficiency or liver disease [1]. Severe hyperkalemia can cause muscle
+  weakness, paralysis, palpitations and life-threatening heart rhythms [1]. Very large amounts from supplements or
+  salt substitutes can cause it even in healthy people [1].
+
+interactions: >-
+  ACE inhibitors such as benazepril and angiotensin receptor blockers such as losartan reduce potassium loss in urine
+  and can cause hyperkalemia, as can potassium-sparing diuretics such as amiloride and spironolactone [1]. Loop
+  diuretics such as furosemide and thiazides increase potassium loss and can cause hypokalemia [1]. Experts recommend
+  monitoring potassium in people taking any of these [1]. If you take one regularly, talk to your doctor or pharmacist
+  before taking a potassium supplement or using a salt substitute.
+
+source:
+  name: NIH Office of Dietary Supplements — Potassium, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/
+  lastModified: 2022-06-02
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Potassium — Fact Sheet for Health Professionals. Updated 2 June 2022."
+    url: https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/
+
+aiAssisted: true

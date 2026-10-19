@@ -26,7 +26,9 @@ const kind = KINDS.find(k => k.key === d.kind);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 // "[1]" markers become links to the numbered reference below.
 const cite = s => esc(s).replace(/\[(\d+)\]/g, (_, i) => `<sup><a href="#ref-${i}" class="cite">[${i}]</a></sup>`);
-const num = v => (Number.isInteger(v) ? v.toLocaleString('en-US') : v.toFixed(1));
+// Up to two decimals, as the fact sheets print them: fluoride's foods run 0.07 to
+// 0.22 mg, which a one-decimal format would show as 0.1 and 0.2.
+const num = v => (Number.isInteger(v) ? v.toLocaleString('en-US') : String(Math.round(v * 100) / 100));
 // Each table carries its own unit label (src/data/units.js): vitamin A's
 // recommended amount is in mcg RAE, its upper limit in mcg of preformed vitamin A.
 const iUnit = intakeUnit(d), uUnit = ulUnit(d), fUnit = sourcesUnit(d);

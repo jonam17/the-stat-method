@@ -1,0 +1,110 @@
+# Manganese — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 29 Mar 2021. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives Adequate Intakes with a "51+ years" row, repeated in 51–70 and
+# >70. Table 3 gives one "19+ years" row, repeated in every adult bracket.
+# Checked by the maintainer 2026-10-18: the sheet says only that "The FNB established manganese ULs for healthy
+# individuals"; unlike most sheets, it never says whether the limit covers food
+# as well as supplements. `appliesTo: total` is the reading the text supports (the
+# UL is defined as maximum daily intake, and the text discusses food, water and
+# supplements together); `ul.note` says what the sheet does not.
+draft: false
+name: Manganese
+kind: mineral
+dek: A trace mineral many enzymes need, for metabolism, bone formation, reproduction and immune response. Whole grains, shellfish, nuts and tea are good sources.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 2.3, female: 1.8, pregnancy: 2.0, lactation: 2.6 }
+    - { group: "51–70", male: 2.3, female: 1.8 }
+    - { group: ">70", male: 2.3, female: 1.8 }
+  note: These are Adequate Intakes, set in 2001 from usual intakes in healthy people, because the data were insufficient to set a requirement.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 2.2 mg a day for males and 1.6 mg for females, 2.0 mg in pregnancy and 2.6 mg when breastfeeding. Its upper limit is 9 mg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 11, female: 11, pregnancy: 11, lactation: 11 }
+    - { group: "51–70", male: 11, female: 11 }
+    - { group: ">70", male: 11, female: 11 }
+  appliesTo: total
+  note: The upper limit is the most manganese a day that is unlikely to cause harm, not a target. It was based on blood manganese levels above the normal range and the risk of nerve damage. The fact sheet does not say whether it covers food as well as supplements, but no manganese toxicity has been shown from food. It does not apply to people taking manganese under medical supervision.
+
+does: >-
+  Manganese is a cofactor for many enzymes, including manganese superoxide dismutase [1]. Through them it is
+  involved in the metabolism of amino acids, cholesterol, glucose and carbohydrates; in clearing reactive oxygen
+  species; and in bone formation, reproduction and immune response [1]. With vitamin K, it plays a role in blood
+  clotting [1]. The body holds about 10 to 20 mg, 25% to 40% of it in bone [1].
+
+forms: >-
+  Supplements contain manganese as amino acid chelates, gluconate, picolinate, sulfate, citrate or chloride, and the
+  label states the amount of elemental manganese; no data compare how well they are absorbed [1]. Multivitamins that
+  contain it typically provide 1.0 to 4.5 mg, and manganese supplements mostly 5 to 20 mg [1].
+
+absorption: >-
+  The body absorbs only about 1% to 5% of the manganese in food, more when intake is low [1]. Iron and manganese seem to
+  share a transporter: people with more iron absorb less manganese, which may be why men absorb it less efficiently
+  than women [1]. Grain products, tea and vegetables are the main sources for U.S. adults [1].
+
+deficiency: >-
+  Manganese deficiency is very rare, and its signs have not been firmly established [1]. Very limited evidence
+  suggests it might cause skin rashes, loss of hair colour and lower cholesterol in men, and altered mood and more
+  premenstrual pain in women, and it might affect glucose tolerance [1].
+
+atRisk:
+  - No groups of people are known to be likely to have inadequate manganese intakes [1]
+
+usIntake: >-
+  Data are very limited — the national nutrition survey does not include manganese [1]. The most recent U.S. estimate,
+  from 1982–1989 data, found intakes of 2.64 to 2.81 mg a day for men and 2.14 to 2.23 mg for women, meeting or exceeding
+  the Adequate Intakes [1]. No data exist on intakes from supplements [1].
+
+# Third and fourth places tie at 1.1 mg (pecans, then brown rice, in the table's
+# order); both are in.
+sources:
+  rule: The five foods with the most manganese per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Mussels, blue, cooked", short: "Mussels", serving: "3 ounces", amount: 5.8 }
+    - { food: "Hazelnuts, dry roasted", short: "Hazelnuts", serving: "1 ounce", amount: 1.6 }
+    - { food: "Pecans, dry roasted", short: "Pecans", serving: "1 ounce", amount: 1.1 }
+    - { food: "Brown rice, medium grain, cooked", short: "Brown rice", serving: "½ cup", amount: 1.1 }
+    - { food: "Oysters, Pacific, cooked", short: "Oysters", serving: "3 ounces", amount: 1.0 }
+
+evidence:
+  established: >-
+    Manganese is essential as a cofactor for many enzymes, including those involved in bone formation and metabolism
+    [1].
+  notSupported: >-
+    No clinical trials have tested manganese supplements alone for bone health, and trials for diabetes are lacking
+    [1].
+  mixed: >-
+    Small studies disagree on whether blood manganese is linked to bone density or osteoporosis [1]. Studies of
+    diabetes have found both higher and lower blood manganese, and one large Chinese study a U-shaped link [1].
+
+tooMuch: >-
+  No manganese toxicity has been shown from food [1]. It has occurred in welders and miners who inhaled manganese dust,
+  and in people drinking water very high in manganese [1]. Toxicity mainly affects the nervous system, causing tremors,
+  muscle spasms, hearing problems, unsteadiness, mood changes and memory problems, which can progress to symptoms like
+  Parkinson's disease [1]. Iron deficiency increases manganese absorption and can worsen toxicity, and people with
+  chronic liver disease, who clear manganese poorly, are more susceptible [1].
+
+interactions: >-
+  Manganese is not known to have any clinically relevant interactions with medicines [1]. If you take medicines
+  regularly, your doctor or pharmacist can still tell you whether any supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Manganese, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Manganese-HealthProfessional/
+  lastModified: 2021-03-29
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Manganese — Fact Sheet for Health Professionals. Updated 29 March 2021."
+    url: https://ods.od.nih.gov/factsheets/Manganese-HealthProfessional/
+
+aiAssisted: true

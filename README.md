@@ -329,6 +329,22 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.31.0 — Library: the last six minerals
+
+- **Six minerals are live** at `/library/minerals/`: potassium, phosphorus, chromium, fluoride, manganese and
+  molybdenum, each from its NIH Office of Dietary Supplements Health Professional fact sheet alone and checked
+  against it by the maintainer on 2026-10-18. The Library now covers twenty-seven nutrients: every vitamin and
+  every mineral with an NIH fact sheet.
+- **Potassium has no upper limit, and its page says that does not mean safe for everyone.** A red bar warns that
+  with kidney disease, an ACE inhibitor or a potassium-sparing diuretic, even amounts below the recommended
+  intake can raise blood potassium dangerously.
+- **Chromium's page states the dispute over whether it is essential.** Its U.S. intake dates from 2001; the
+  European Food Safety Authority concluded in 2014 that there is no convincing evidence it is essential.
+- **Where a sheet does not say what its limit covers, the page says so.** The manganese and molybdenum sheets
+  never say whether food counts toward the upper limit.
+- **Amounts print with up to two decimals**, as the fact sheets do — the low end of tea's fluoride, 0.07 mg a
+  cup, had rounded to 0.1. Every previously published page renders exactly as before.
+
 ### v2.30.0 — Library: zinc, copper, iodine and selenium
 
 - **Four minerals are live** at `/library/minerals/`: zinc, copper, iodine and selenium, each from its NIH Office

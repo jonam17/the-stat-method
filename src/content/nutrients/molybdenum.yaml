@@ -1,0 +1,99 @@
+# Molybdenum — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 30 Mar 2021. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# Checked against the fact sheet by the maintainer on 2026-10-18.
+# DRAFT until a person has checked every value against the source.
+#
+# Tables 1 and 3 each give one "19+ years" row; its values are repeated in every
+# adult bracket.
+# Checked by the maintainer 2026-10-18: as for manganese, the sheet says only that the FNB "established ULs for
+# molybdenum for healthy individuals", based on animal studies, without saying
+# whether food counts; `appliesTo: total` is the reading the text supports, and
+# `ul.note` says what the sheet does not. Second and third places tie at 104 mcg
+# (beef liver, then lima beans, in the table's order); both are in.
+draft: false
+name: Molybdenum
+kind: mineral
+dek: A trace mineral four enzymes need to break down sulfur-containing amino acids, purines and some drugs and toxins. Legumes are the richest sources.
+unit: mcg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 45, female: 45, pregnancy: 50, lactation: 50 }
+    - { group: "51–70", male: 45, female: 45 }
+    - { group: ">70", male: 45, female: 45 }
+  note: The requirement rests on two carefully controlled studies in a total of eight young men.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 43 mcg a day, and 50 mcg in pregnancy and when breastfeeding. Its upper limit is 1,700 mcg.
+
+ul:
+  rows:
+    - { group: "19–50", male: 2000, female: 2000, pregnancy: 2000, lactation: 2000 }
+    - { group: "51–70", male: 2000, female: 2000 }
+    - { group: ">70", male: 2000, female: 2000 }
+  appliesTo: total
+  note: The upper limit is the most molybdenum a day that is unlikely to cause harm, not a target. With no human studies to go on, it was based on harm to reproduction and fetal development in rats and mice. The fact sheet does not say whether it covers food as well as supplements; in healthy people, a diet high in molybdenum usually poses no risk, because the excess is quickly excreted.
+
+does: >-
+  Molybdenum is part of molybdopterin, a cofactor for four enzymes that break down sulfur-containing amino acids and
+  compounds including purines and pyrimidines; three of them also help metabolise drugs and toxins [1]. Adults absorb
+  40% to 100% of the molybdenum in food, and the kidneys regulate how much the body keeps [1].
+
+forms: >-
+  Supplements contain molybdenum chloride, sodium molybdate, molybdenum glycinate or amino acid chelates, in amounts
+  from about 50 to 500 mcg; no studies have compared how well they are absorbed [1].
+
+absorption: >-
+  The molybdenum in food depends on the soil and irrigation water where it was grown [1]. Legumes, cereal grains, leafy
+  vegetables, beef liver and milk are the top sources in U.S. diets [1]. Food composition data are limited: the USDA
+  database does not list molybdenum [1].
+
+deficiency: >-
+  Molybdenum deficiency has not been reported, except in people with a rare genetic disorder that stops the body making
+  molybdopterin, which causes severe brain damage and usually death within days of birth [1]. One case of acquired
+  deficiency occurred in 1981 in a patient on intravenous feeding without molybdenum [1].
+
+atRisk:
+  - No groups of people are known to be likely to have inadequate molybdenum intakes [1]
+
+usIntake: >-
+  Most Americans appear to get enough molybdenum [1]. The FDA's 1984 Total Diet Study estimated average intakes from
+  food of 109 mcg a day for men and 76 mcg for women, and in 1988–1994 supplements added an average of 23 to 24 mcg [1].
+
+sources:
+  rule: The five foods with the most molybdenum per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Black-eyed peas, boiled", short: "Black-eyed peas", serving: "½ cup", amount: 288 }
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 104 }
+    - { food: "Lima beans, boiled", short: "Lima beans", serving: "½ cup", amount: 104 }
+    - { food: "Yogurt, plain, low-fat", short: "Yogurt, low fat", serving: "1 cup", amount: 26 }
+    - { food: "Milk, 2% milkfat", short: "Milk, 2%", serving: "1 cup", amount: 22 }
+
+evidence:
+  established: >-
+    Molybdenum is essential for four enzymes that metabolise sulfur-containing amino acids and other compounds [1].
+  notSupported: >-
+    Molybdenum is not a standard treatment for any disease or disorder [1].
+
+tooMuch: >-
+  In healthy people, a diet high in molybdenum usually poses no risk, because the excess is quickly excreted in urine
+  [1]. In an area of Armenia with very high soil molybdenum, people eating 10 to 15 mg a day had aching joints,
+  gout-like symptoms and high blood uric acid [1]. Acute toxicity is rare and comes from mining and metalworking
+  exposure [1].
+
+interactions: >-
+  Molybdenum has no known clinically relevant interactions with medicines [1]. If you take medicines regularly, your
+  doctor or pharmacist can still tell you whether any supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Molybdenum, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Molybdenum-HealthProfessional/
+  lastModified: 2021-03-30
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Molybdenum — Fact Sheet for Health Professionals. Updated 30 March 2021."
+    url: https://ods.od.nih.gov/factsheets/Molybdenum-HealthProfessional/
+
+aiAssisted: true

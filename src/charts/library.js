@@ -6,7 +6,7 @@
 import { YOUNG, youngAdultDaily } from '../data/brackets.js';
 import { intakeUnit } from '../data/units.js';
 
-const fmtN = v => (Number.isInteger(v) ? String(v) : v.toFixed(1));
+const fmtN = v => (Number.isInteger(v) ? String(v) : String(Math.round(v * 100) / 100));   // as the page prints it
 
 /** How far one serving of each listed food goes toward an adult's daily amount. */
 export function sourcesChart(n) {
