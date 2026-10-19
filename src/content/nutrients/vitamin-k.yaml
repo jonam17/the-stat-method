@@ -23,7 +23,8 @@ intake:
   eighteenNote: People aged 18 fall in the official 14–18 group — 75 mcg a day for males and females, including in pregnancy and when breastfeeding. There is no upper limit at any age.
 
 ul:
-  note: No upper limit has been set for vitamin K, because its potential for toxicity is low — no adverse effects from vitamin K in food or supplements have been reported in humans or animals. That does not make it safe for everyone to change how much they take. Vitamin K can interact seriously and dangerously with warfarin (Coumadin) and similar blood thinners; see Medicines that interact, below.
+  warning: No upper limit does not mean safe for everyone. If you take warfarin (Coumadin) or a similar blood thinner, a sudden change in how much vitamin K you eat or take — up or down — can change how well the drug works. Talk to your doctor before changing your intake or taking any supplement that contains vitamin K.
+  note: No upper limit has been set for vitamin K, because its potential for toxicity is low — no adverse effects from vitamin K in food or supplements have been reported in humans or animals. The interaction with blood thinners is described under Medicines that interact, below.
 
 does: >-
   Vitamin K is a family of compounds: phylloquinone (vitamin K1) and the menaquinones (vitamin K2), numbered

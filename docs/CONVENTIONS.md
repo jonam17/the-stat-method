@@ -381,6 +381,8 @@ defaults are chosen to produce a result.
 - **Say what an upper limit covers.** A supplement-only limit below the recommended amount is correct,
   not a typo. `ul.appliesTo` records which, so no one "fixes" a true value. For any limit that is not
   total, the words come from the file (`ul.scope`), never from the template — there is no default.
+- **File a nutrient under what its source calls it.** Choline is "an essential nutrient", not a vitamin,
+  so it has kind `other` ("Other nutrients"). A section appears only once something in it is published.
 - **Print each table in its own unit.** `intake.unitLabel` and `sources.unitLabel` (`src/data/units.js`)
   carry the fact sheet's label — mcg RAE, mcg DFE, mg NE — where the recommended amount, the food table and
   the upper limit are not the same measure. Plain "mcg" on both would invite a comparison the source does not make.

@@ -125,7 +125,7 @@ const nutrients = defineCollection({
   schema: z.object({
     draft: z.boolean().default(false),
     name: z.string(),
-    kind: z.enum(['vitamin', 'mineral']),
+    kind: z.enum(['vitamin', 'mineral', 'other']),   // keys of KINDS in src/data/nutrients.js
     dek: z.string().min(40).max(200),
     unit: z.enum(['mcg', 'mg', 'g']),
     // Some nutrients are also labelled in a second unit (vitamin D in IU).
@@ -153,6 +153,10 @@ const nutrients = defineCollection({
       // fortified foods" for folate. Required for any non-total limit, so the
       // page never fills the gap with a default that is wrong for the nutrient.
       scope: z.string().optional(),
+      // A risk the limit alone would hide, shown in the same red bar as a scope
+      // warning. Vitamin K has no limit, but changing intake is dangerous on
+      // warfarin; "None set" in the summary must not read as "safe for everyone".
+      warning: z.string().optional(),
       note: z.string(),
     }).superRefine((ul, ctx) => {
       if (ul.rows && !ul.appliesTo)

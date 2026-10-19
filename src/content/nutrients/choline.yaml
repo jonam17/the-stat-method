@@ -1,0 +1,122 @@
+# Choline — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 2 Jun 2022. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Choline is neither a vitamin nor a mineral — the sheet calls it "an essential
+# nutrient" — so it is the first file of kind `other` (decided 2026-10-18).
+# Table 1 gives Adequate Intakes with one "19+ years" row, and Table 3 one
+# "19+ years" row; their values are repeated in every adult bracket.
+draft: false
+name: Choline
+kind: other
+dek: An essential nutrient the body needs to build cell membranes and make acetylcholine, a neurotransmitter. The body makes some, but not enough, so the rest must come from food.
+unit: mg
+
+intake:
+  type: AI
+  rows:
+    - { group: "19–50", male: 550, female: 425, pregnancy: 450, lactation: 550 }
+    - { group: "51–70", male: 550, female: 425 }
+    - { group: ">70", male: 550, female: 425 }
+  note: These are Adequate Intakes, not Recommended Dietary Allowances — there was not enough evidence to set a requirement, so they are based on the amount that prevents liver damage. How much choline a person needs also depends on the methionine, betaine and folate in their diet, on sex, pregnancy and breastfeeding, and on genetic differences.
+  eighteenNote: People aged 18 fall in the official 14–18 group — 550 mg a day for males and 400 mg for females, 450 mg in pregnancy and 550 mg when breastfeeding. Its upper limit is lower, at 3,000 mg.
+
+# The text: "The FNB has established ULs for choline from food and supplements
+# based on the amounts of choline that are associated with hypotension and fishy
+# body odor"; they "apply to healthy children and adults but not to those taking
+# high doses of choline under medical supervision".
+ul:
+  rows:
+    - { group: "19–50", male: 3500, female: 3500, pregnancy: 3500, lactation: 3500 }
+    - { group: "51–70", male: 3500, female: 3500 }
+    - { group: ">70", male: 3500, female: 3500 }
+  appliesTo: total
+  note: The upper limit covers choline from food and supplements combined. It is the most that is unlikely to cause harm, not a target, and was set from the amounts linked with low blood pressure and a fishy body odour. It does not apply to people taking high doses under medical supervision.
+
+does: >-
+  Choline is an essential nutrient and a source of the methyl groups many steps of metabolism need [1]. The
+  body uses it to make phosphatidylcholine and sphingomyelin, two phospholipids vital for cell membranes, and
+  acetylcholine, a neurotransmitter for memory, mood, muscle control and other brain and nerve functions [1]. It
+  also plays roles in gene expression, cell signalling, fat transport and metabolism, and early brain development
+  [1]. The liver makes some choline, but not enough to meet human needs, so some must come from the diet [1].
+
+forms: >-
+  About half the choline Americans eat is phosphatidylcholine [1]. Lecithin, a substance rich in
+  phosphatidylcholine, is a common additive in processed foods such as gravies, salad dressings and margarine
+  [1]. Supplements contain choline bitartrate, phosphatidylcholine or lecithin, typically 10 to 250 mg, and no
+  studies have compared how well each form is absorbed [1]. Precise figures for how much of each dietary form is
+  absorbed are not available [1].
+
+deficiency: >-
+  Choline deficiency can cause muscle damage, liver damage and nonalcoholic fatty liver disease [1]. Although most
+  Americans eat less than the Adequate Intake, frank deficiency in healthy men and nonpregnant women is very rare,
+  possibly because the body makes some choline itself [1]. In a study of 57 adults fed a diet with less than 10% of
+  the Adequate Intake for up to 42 days, 37 developed liver dysfunction [1]. Choline status is not routinely
+  measured in healthy people [1].
+
+atRisk:
+  - Pregnant women — about 90% to 95% eat less than the Adequate Intake, and prenatal supplements typically contain little if any choline [1]
+  - People with genetic variants that raise their need for dietary choline, including one that blunts estrogen's effect on choline production in women [1]
+  - People who rely on total parenteral (intravenous) nutrition, because choline is not routinely added to the solutions [1]
+
+usIntake: >-
+  Most Americans eat less than the Adequate Intake: in national survey data from 2013–2014, average intake from
+  food and drink was 402 mg a day for men and 278 mg for women [1]. Supplements add very little to total intake
+  [1]. In 2007–2008 data, black males of all ages had lower average intakes than white and Hispanic males, while
+  intakes did not differ much among women [1].
+
+# Fifth place is a tie at 72 mg — "Chicken breast, roasted" and "Beef, ground, 93%
+# lean meat, broiled", both 3 ounces. Chicken is listed first, so it is taken.
+sources:
+  rule: The five foods with the most choline per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 356 }
+    - { food: "Egg, hard boiled", short: "Egg", serving: "1 large", amount: 147 }
+    - { food: "Beef top round, separable lean only, braised", short: "Beef top round", serving: "3 ounces", amount: 117 }
+    - { food: "Soybeans, roasted", serving: "½ cup", amount: 107 }
+    - { food: "Chicken breast, roasted", short: "Chicken breast", serving: "3 ounces", amount: 72 }
+
+evidence:
+  established: >-
+    Choline is needed for cell membranes and for moving fat out of the liver; without enough, fat builds up in
+    the liver [1]. The Adequate Intakes are set at the amount that prevents liver damage, and the fact sheet
+    states that adequate choline is needed for proper liver function and to prevent nonalcoholic fatty liver
+    disease [1].
+  notSupported: >-
+    Cognition: a 2015 systematic review of 13 studies found that choline supplements did not clearly improve
+    cognition in healthy adults, and a 2003 Cochrane review of 12 trials found no clear benefit of lecithin
+    supplements in treating Alzheimer's disease or Parkinsonian dementia [1]. Heart disease: several large
+    observational studies — including 72,348 women and 44,504 men in two U.S. cohorts — found no link between
+    choline intake and cardiovascular or peripheral artery disease [1].
+  mixed: >-
+    A later analysis of 80,978 women and 39,434 men in the same U.S. cohorts found higher mortality among those
+    eating the most choline; the authors suggested TMAO, a compound gut bacteria help make from choline and linked
+    to heart disease, but did not measure it [1]. Observational studies in adults link higher choline intake
+    or blood levels with better memory and cognition [1]. Fatty liver: a cross-sectional study of 56,195 Chinese
+    adults found that those eating the most choline had a lower risk of nonalcoholic fatty liver disease — 32%
+    lower in women and 25% lower in men — but only one large study supports the link, and more research is
+    needed [1]. Pregnancy: some studies link lower choline levels with neural tube defects, but others found no
+    relationship [1].
+
+tooMuch: >-
+  High intakes of choline are associated with a fishy body odour, vomiting, heavy sweating and salivation, low
+  blood pressure and liver toxicity [1]. Eating more choline also increases production of TMAO, which has been
+  linked to a higher risk of cardiovascular disease, in proportion to the dose [1].
+
+interactions: >-
+  Choline is not known to have any clinically relevant interactions with medicines [1]. If you take medicines
+  regularly, your doctor or pharmacist can still tell you whether any supplement suits you.
+
+source:
+  name: NIH Office of Dietary Supplements — Choline, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/Choline-HealthProfessional/
+  lastModified: 2022-06-02
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Choline — Fact Sheet for Health Professionals. Updated 2 June 2022."
+    url: https://ods.od.nih.gov/factsheets/Choline-HealthProfessional/
+
+aiAssisted: true

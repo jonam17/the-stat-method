@@ -53,7 +53,7 @@ export async function shareCards() {
     cards.push({
       path: ogPath.nutrient(kind.slug, n.id),
       card: {
-        kicker: `Library · ${n.data.kind}`, title: n.data.name, subtitle: n.data.dek,
+        kicker: `Library · ${kind.noun}`, title: n.data.name, subtitle: n.data.dek,
         footLeft: host(), footRight: 'Values from the NIH fact sheet', accent: PALETTE.nutrition,
       },
     });

@@ -24,6 +24,9 @@ AI session with no memory of how the library was built. **Read all of it before 
 
 ## Steps
 
+**0. Choose the kind.** `vitamin`, `mineral`, or `other` for an essential nutrient the fact sheet calls
+neither (choline). The kind sets the page's section and address — `/library/other-nutrients/choline/`.
+
 **1. Fetch the Health Professional fact sheet** and note its *Last modified* date — it goes in
 `source.lastModified`. Work from this one page.
 
@@ -65,6 +68,10 @@ recommended amount — that is correct, because it only covers supplements.
   leave a `# REVIEW:` comment explaining it, and keep `ul.note` from claiming more than the sheet does.
 - **If a nutrient has no upper limit**, leave out both `ul.rows` and `ul.appliesTo`, and say so in
   `ul.note` — a test checks that it does. Many B vitamins, vitamin K and chromium have none.
+- **If the limit, or its absence, would hide a risk**, write it in `ul.warning`, shown in the red bar at
+  the top of the section. Vitamin K's summary says "None set", but changing intake is dangerous on
+  warfarin; its warning says so where a reader looks first. Use it sparingly — a bar on every page stops
+  being read.
 - **The limit table prints the plain unit** — vitamin A's limit is in mcg of preformed vitamin A, folate's in
   mcg of folic acid, niacin's in mg — so once `intake.unitLabel` is set, the two tables read differently,
   as they should. Explain the difference in `ul.note` in the sheet's terms. A file with a `unitLabel` cannot

@@ -329,6 +329,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.28.0 — Library: vitamin E, vitamin B6 and choline; a warning where no limit is set
+
+- **Three nutrients are live**, each from its NIH Office of Dietary Supplements Health Professional fact
+  sheet alone and checked against it by the maintainer on 2026-10-18: vitamin E and vitamin B6 at
+  `/library/vitamins/`, and choline at `/library/other-nutrients/`. The Library now covers twelve nutrients.
+- **A third section, Other nutrients.** Choline's fact sheet calls it an essential nutrient, not a vitamin,
+  so it is filed under a kind of its own (`kind: other`) rather than a label its source does not give it. Like
+  the others, the section appears only once something in it is published.
+- **Vitamin K's page now warns where a reader looks first.** Its summary says the upper limit is "None set";
+  a new optional `ul.warning` puts a red bar at the top of the upper-limit section saying that this does not
+  make changing vitamin K intake safe for anyone taking warfarin or a similar blood thinner.
+- **Where official limits disagree, the page says so.** Vitamin B6's U.S. upper limit is 100 mg a day; its
+  fact sheet reports that the European Food Safety Authority set 12 mg in 2023, and the page shows both.
+
 ### v2.27.0 — Library: vitamin A, folate, niacin and vitamin K
 
 - **Four vitamins are live** at `/library/vitamins/`: vitamin A, folate, niacin and vitamin K, each drawn

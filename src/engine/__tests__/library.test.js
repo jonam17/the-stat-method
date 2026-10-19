@@ -47,6 +47,10 @@ describe('library files', () => {
         if (d.ul.appliesTo !== 'total') expect(d.ul.scope?.length, 'ul.scope').toBeGreaterThan(20);
       });
 
+      it('a limit warning, if any, is a sentence, not a stub', () => {
+        if (d.ul.warning != null) expect(d.ul.warning.length, 'ul.warning').toBeGreaterThan(40);
+      });
+
       it('a total-intake upper limit is never below the recommended amount', () => {
         // Supplement-only limits (magnesium, folate, niacin) can legitimately be
         // lower than total recommended intake, so they are not compared.

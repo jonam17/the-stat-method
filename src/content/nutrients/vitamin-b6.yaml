@@ -1,0 +1,139 @@
+# Vitamin B6 — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 16 Jun 2023. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives a "51+ years" row, repeated in 51–70 and >70. Table 3 gives one
+# "19+ years" row, repeated in every adult bracket. The table prints the
+# breastfeeding value as 2.0 mg; the page shows it as 2 mg (same value).
+draft: false
+name: Vitamin B6
+kind: vitamin
+dek: A water-soluble B vitamin involved in more than 100 enzyme reactions, mostly in protein metabolism. Fish, organ meats, potatoes and fortified cereals are rich sources.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 1.3, female: 1.3, pregnancy: 1.9, lactation: 2.0 }
+    - { group: "51–70", male: 1.7, female: 1.5 }
+    - { group: ">70", male: 1.7, female: 1.5 }
+  eighteenNote: People aged 18 fall in the official 14–18 group — 1.3 mg a day for males and 1.2 mg for females, 1.9 mg in pregnancy and 2.0 mg when breastfeeding. Its upper limit is lower, at 80 mg.
+
+# The text: "The FNB has established ULs for vitamin B6 that apply to both food
+# and supplement intakes", set by halving 200 mg/day, a dose at which studies
+# found no sensory neuropathy; "The ULs do not apply to individuals receiving
+# vitamin B6 for medical treatment". EFSA's 2023 limit of 12 mg is in
+# `disagreements`.
+ul:
+  rows:
+    - { group: "19–50", male: 100, female: 100, pregnancy: 100, lactation: 100 }
+    - { group: "51–70", male: 100, female: 100 }
+    - { group: ">70", male: 100, female: 100 }
+  appliesTo: total
+  note: The upper limit covers vitamin B6 from food and supplements combined. It is the most that is unlikely to cause harm, not a target. It was set to guard against nerve damage, at half the dose that studies over up to 5 years found no evidence of it. It does not apply to people taking vitamin B6 as medical treatment, who should be under a doctor's care. The European Food Safety Authority set a much lower limit in 2023 — see Where official guidance disagrees, below.
+
+does: >-
+  Vitamin B6 is the name for six related compounds, including pyridoxine; their active coenzyme forms are
+  pyridoxal 5'-phosphate (PLP) and pyridoxamine 5'-phosphate [1]. It takes part in more than 100 enzyme
+  reactions, mostly in protein metabolism, and is also involved in the metabolism of carbohydrates and fats
+  [1]. It helps make neurotransmitters, keeps blood homocysteine at normal levels, and is involved in making
+  glucose, immune function and forming hemoglobin [1].
+
+forms: >-
+  The most common form in supplements is pyridoxine hydrochloride, although some contain PLP [1].
+  Absorption from supplements is similar to absorption from food and does not differ much between forms;
+  the body absorbs large doses well but quickly excretes most of the excess in urine [1]. About 28% to 36% of
+  people take a supplement containing vitamin B6 [1].
+
+absorption: >-
+  About 75% of the vitamin B6 in a mixed diet is available to the body [1]. Much of the pyridoxine naturally
+  present in fruits, vegetables and grains is in forms that are less available [1].
+
+deficiency: >-
+  Isolated deficiency is uncommon; low vitamin B6 usually comes with low levels of other B vitamins, such as
+  vitamin B12 and folic acid [1]. Deficiency is associated with microcytic anemia, abnormal brain-wave
+  recordings, dermatitis with scaling on the lips and cracks at the corners of the mouth, a swollen tongue,
+  depression and confusion, and weakened immune function [1]. People with borderline status or mild deficiency
+  might have no signs for months or even years [1]. Kidney disease, malabsorption syndromes such as celiac
+  disease, Crohn's disease and ulcerative colitis, some genetic diseases and some medicines, such as
+  antiepileptic drugs, can cause deficiency [1].
+
+atRisk:
+  - People with poor kidney function, including those on dialysis or who have had a kidney transplant [1]
+  - People with autoimmune disorders, including rheumatoid arthritis, celiac disease and inflammatory bowel disease [1]
+  - People with alcohol dependence, in whom blood PLP tends to be very low [1]
+
+usIntake: >-
+  Most Americans get the recommended amount: average intake is about 2 mg a day for men and 1.5 mg for women
+  [1]. Even so, in 2003–2004 data, 24% of people who did not take a supplement containing vitamin B6, and 11% of
+  those who did, had low blood PLP (below 20 nmol/L) — some even at intakes of 2.0 to 2.9 mg a day, above the
+  recommended amount [1]. Levels were lower in women than men, in non-Hispanic black than non-Hispanic white
+  people, in current smokers and in people who were underweight; the authors concluded that the recommended
+  amounts might not guarantee adequate status in many groups [1].
+
+# Second and third places tie at 0.9 mg (beef liver, then tuna, in the table's
+# order); both are in.
+sources:
+  rule: The five foods with the most vitamin B6 per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Chickpeas, canned", short: "Chickpeas", serving: "1 cup", amount: 1.1 }
+    - { food: "Beef liver, pan fried", short: "Beef liver", serving: "3 ounces", amount: 0.9 }
+    - { food: "Tuna, yellowfin, fresh, cooked", short: "Tuna, yellowfin", serving: "3 ounces", amount: 0.9 }
+    - { food: "Salmon, sockeye, cooked", short: "Salmon (sockeye)", serving: "3 ounces", amount: 0.6 }
+    - { food: "Chicken breast, roasted", short: "Chicken breast", serving: "3 ounces", amount: 0.5 }
+
+evidence:
+  established: >-
+    Vitamin B6 is needed for more than 100 enzyme reactions, and too little causes anemia, skin and mouth
+    changes, depression and confusion [1]. The recommended amounts were calculated to keep blood PLP at 20
+    nmol/L or more [1].
+  notSupported: >-
+    Heart disease: B vitamins lower homocysteine, but most large trials have not found that they reduce
+    cardiovascular events [1]. In a combined analysis of two Norwegian trials in 6,837 patients with ischemic
+    heart disease, 40 mg of vitamin B6 a day, with or without folic acid and vitamin B12, had no benefit on major
+    cardiovascular events [1]. Cancer: the same Norwegian trials found no link between vitamin B6 supplements and
+    cancer or deaths [1]. Cognition: a systematic review of 14 trials found insufficient evidence that vitamin B6,
+    alone or with vitamin B12 or folic acid, affects cognitive function [1].
+  mixed: >-
+    Premenstrual syndrome: a meta-analysis of nine trials in almost 1,000 women found vitamin B6 more effective
+    than placebo, but most studies were small and several had weaknesses; in a later trial in 94 women, 80 mg a
+    day over three cycles reduced a broad range of symptoms [1]. Nausea in pregnancy: two trials found that 30 to
+    75 mg a day reduced nausea, but a Cochrane review could not draw firm conclusions; vitamin B6 combined with
+    the antihistamine doxylamine reduced nausea and vomiting by 70% in trials [1]. The American College of
+    Obstetricians and Gynecologists recommends vitamin B6 as a first treatment, and the fact sheet advises
+    pregnant women to consult a physician first, because the doses could approach the upper limit [1].
+
+disagreements: >-
+  In 2023, the European Food Safety Authority set an upper limit for vitamin B6 of 12 mg a day for all adults,
+  including women who are pregnant or breastfeeding, based on systematic reviews of vitamin B6 and nerve damage
+  [1]. That is about an eighth of the U.S. limit of 100 mg [1].
+
+tooMuch: >-
+  Vitamin B6 from food has not been reported to cause harm [1]. Taking 1 to 6 g of pyridoxine a day for 12 to 40
+  months can cause severe, progressive sensory neuropathy — nerve damage with loss of control of body movements
+  — which usually stops if the supplements are stopped as soon as symptoms appear [1]. Several reports describe
+  neuropathy at doses below 500 mg a day [1]. Excess vitamin B6 can also cause painful, disfiguring skin lesions,
+  sensitivity to light, nausea and heartburn [1].
+
+interactions: >-
+  Cycloserine (Seromycin), an antibiotic used for tuberculosis, increases the loss of vitamin B6 in urine, which
+  might worsen the drug's seizures and nerve toxicity; vitamin B6 supplements can help prevent this [1].
+  Antiepileptic drugs such as valproic acid, carbamazepine and phenytoin lower blood PLP and raise homocysteine,
+  and 200 mg a day of pyridoxine can lower blood levels of phenytoin and phenobarbital [1]. Theophylline, used for
+  asthma and other lung diseases, is often accompanied by low blood PLP, which could contribute to its side
+  effects, including seizures [1]. If you take any of these regularly, talk to your doctor or pharmacist before
+  taking a vitamin B6 supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin B6, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminB6-HealthProfessional/
+  lastModified: 2023-06-16
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin B6 — Fact Sheet for Health Professionals. Updated 16 June 2023."
+    url: https://ods.od.nih.gov/factsheets/VitaminB6-HealthProfessional/
+
+aiAssisted: true

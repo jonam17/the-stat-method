@@ -1,0 +1,153 @@
+# Vitamin E — every value from the NIH Office of Dietary Supplements Health
+# Professional fact sheet (reference 1), updated 26 Mar 2021. Read from the
+# full-page PDF supplied by the maintainer on 2026-10-18. Numbered markers [n]
+# refer to `references` below. Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Table 1 gives one "14+ years" row and Table 3 one "19+ years" row; their values
+# are repeated in every adult bracket. Both tables are in mg of alpha-tocopherol.
+# No altUnit: the sheet gives different IU factors for the natural and the
+# synthetic form (1 mg = 1.49 IU natural or 2.22 IU synthetic).
+draft: false
+name: Vitamin E
+kind: vitamin
+dek: A group of fat-soluble antioxidants. Only one form, alpha-tocopherol, meets the body's needs; nuts, seeds and vegetable oils are among the best sources.
+unit: mg
+
+intake:
+  type: RDA
+  rows:
+    - { group: "19–50", male: 15, female: 15, pregnancy: 15, lactation: 19 }
+    - { group: "51–70", male: 15, female: 15 }
+    - { group: ">70", male: 15, female: 15 }
+  note: Amounts are mg of alpha-tocopherol, the only form of vitamin E the recommendations count. 1 mg is 1 mg of the natural form (RRR-alpha-tocopherol, labelled d-alpha-tocopherol) or 2 mg of the synthetic form (all rac-alpha-tocopherol, labelled dl-alpha-tocopherol), which is half as active. Older labels used International Units — 1 mg equals 1.49 IU of the natural form or 2.22 IU of the synthetic form.
+  eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 15 mg a day, and 19 mg when breastfeeding. Its upper limit for supplemental vitamin E is lower, at 800 mg.
+
+# The text: "The ULs apply to all forms of supplemental alpha-tocopherol,
+# including the eight stereoisomers present in synthetic vitamin E", based on
+# "the potential for hemorrhagic effects"; "Research has not found any adverse
+# effects from consuming vitamin E in food." Like niacin's, the sheet does not
+# say whether vitamin E added to fortified foods counts, so `scope` does not
+# mention fortified foods.
+ul:
+  rows:
+    - { group: "19–50", male: 1000, female: 1000, pregnancy: 1000, lactation: 1000 }
+    - { group: "51–70", male: 1000, female: 1000 }
+    - { group: ">70", male: 1000, female: 1000 }
+  appliesTo: supplemental
+  scope: This limit applies only to supplemental alpha-tocopherol, natural or synthetic — not to vitamin E found naturally in food.
+  note: The limit is the most supplemental vitamin E a day that is unlikely to cause harm, not a target; it was set because high doses can cause bleeding. 1,000 mg is 1,500 IU of the natural form or 1,100 IU of the synthetic form. Two meta-analyses have linked vitamin E supplements to slightly higher death rates at doses below the limit, although what that means is unclear — see Too much, below.
+
+does: >-
+  Vitamin E is the name for a group of fat-soluble compounds with antioxidant activity: four tocopherols
+  and four tocotrienols [1]. Only alpha-tocopherol is recognised as meeting human requirements, because
+  the liver releases it into the blood and breaks down the other forms [1]. As an antioxidant, it stops
+  the production of reactive oxygen species that form when fat is oxidised [1]. It is also involved in
+  immune function and, mainly in studies of cells, in cell signalling and the regulation of gene expression
+  [1]. It helps the lining of blood vessels resist blood cells sticking to it, and helps dilate blood
+  vessels and inhibit the clumping of platelets [1].
+
+forms: >-
+  Natural vitamin E is RRR-alpha-tocopherol, usually labelled d-alpha-tocopherol; the synthetic form is all
+  rac-alpha-tocopherol, labelled dl-alpha-tocopherol, and is only half as active by weight [1]. Most vitamin
+  E in American diets is gamma-tocopherol from soybean, canola, corn and other vegetable oils, but the
+  recommendations count only alpha-tocopherol [1]. Supplements usually provide only alpha-tocopherol, often
+  as an ester (alpha-tocopheryl acetate or succinate), which the body absorbs as well as alpha-tocopherol
+  itself [1]. Most vitamin E-only supplements provide 67 mg (100 IU of the natural form) or more — far above
+  the recommended amount [1].
+
+absorption: >-
+  The digestive tract needs fat to absorb vitamin E, so people with fat-malabsorption disorders are more
+  likely to become deficient [1]. People with Crohn's disease, cystic fibrosis or an inability to secrete
+  bile sometimes need water-soluble forms of vitamin E [1].
+
+deficiency: >-
+  Frank deficiency is rare, and overt symptoms have not been found in healthy people who get little vitamin E
+  from their diets [1]. Deficiency is more likely in people with fat-malabsorption disorders, and its
+  symptoms include peripheral neuropathy (nerve damage), ataxia (loss of control of movement), muscle
+  weakness, damage to the retina and impaired immune response [1]. Two rare inherited disorders —
+  abetalipoproteinemia, which impairs fat absorption, and ataxia with vitamin E deficiency (AVED), in which
+  the liver's transfer protein is missing or defective — cause deficiency severe enough to damage nerves
+  unless very large doses of vitamin E are taken [1].
+
+atRisk:
+  - People with fat-malabsorption disorders, such as Crohn's disease or cystic fibrosis, or an inability to secrete bile — the gut needs fat to absorb vitamin E [1]
+  - People with the rare inherited disorders abetalipoproteinemia and ataxia with vitamin E deficiency (AVED) [1]
+
+usIntake: >-
+  Three national surveys have found that most Americans' diets provide less than the recommended amount of
+  vitamin E, but these estimates might be low, because the amounts and types of fat added in cooking are
+  often unknown [1]. The Food and Nutrition Board suggests that average intakes among healthy adults are
+  probably above the recommended amount, but cautions that low-fat diets might provide too little unless
+  food is chosen carefully, for example by eating more nuts, seeds, fruits and vegetables [1]. In 1999–2000,
+  11.3% of adults took vitamin E supplements containing at least 400 IU [1].
+
+# Wheat germ oil is kept in the top five (decided 2026-10-18): Table 2 lists it as
+# a tablespoon of oil, like the sunflower and safflower oils below it — it is
+# not left out as an oil "sold and used like supplements".
+sources:
+  rule: The five foods with the most vitamin E per serving in the NIH fact sheet's food table. Fortified foods are marked.
+  foods:
+    - { food: "Wheat germ oil", serving: "1 tablespoon", amount: 20.3 }
+    - { food: "Sunflower seeds, dry roasted", short: "Sunflower seeds", serving: "1 ounce", amount: 7.4 }
+    - { food: "Almonds, dry roasted", short: "Almonds", serving: "1 ounce", amount: 6.8 }
+    - { food: "Sunflower oil", serving: "1 tablespoon", amount: 5.6 }
+    - { food: "Safflower oil", serving: "1 tablespoon", amount: 4.6 }
+
+evidence:
+  established: >-
+    Vitamin E is an essential antioxidant, and deficiency damages nerves and muscles [1]. The recommended
+    amounts rest on blood levels that protect red blood cells in a laboratory test, and the Food and
+    Nutrition Board acknowledged great uncertainty in those data [1].
+  notSupported: >-
+    Heart disease: in HOPE, almost 10,000 patients at high risk of heart attack or stroke took 400 IU of
+    natural vitamin E (268 mg) a day or a placebo for 4.5 years with no fewer cardiovascular events; in the
+    HOPE-TOO extension, after 7 years, those on vitamin E were 13% more likely to develop heart failure [1].
+    In almost 15,000 male physicians aged 50 and older, 400 IU of synthetic vitamin E (180 mg) every other day
+    for a mean of 8 years did not prevent major cardiovascular events and was linked to more hemorrhagic
+    strokes [1]. Cancer: in SELECT, 35,533 healthy men aged 50 and older took 400 IU of synthetic vitamin E (180
+    mg) a day, with or without selenium; it did not prevent prostate cancer, and after further follow-up the men
+    who had taken vitamin E alone had 17% more prostate cancer [1]. The fact sheet concludes that the evidence
+    does not support taking vitamin E to prevent cancer [1]. Cognitive decline: most research does not support
+    vitamin E supplements to maintain cognitive performance in healthy or mildly impaired people [1].
+  mixed: >-
+    In the Women's Health Study, almost 40,000 healthy women aged 45 and older took 600 IU of natural vitamin E
+    (402 mg) every other day or a placebo for an average of 10 years: overall cardiovascular events did not
+    differ, but cardiovascular deaths were 24% lower [1]. Age-related macular degeneration: in AREDS, people at
+    high risk of advanced AMD who took a daily supplement containing vitamin E (180 mg), beta-carotene, vitamin
+    C, zinc and copper for 5 years had a 25% lower risk of advanced AMD, but two other trials of vitamin E
+    supplements found no protective effect, and AREDS found no effect on cataracts [1]. Alzheimer's disease: in 341 patients with
+    moderately severe disease, 2,000 IU of synthetic vitamin E a day for 2 years delayed functional decline, but
+    those taking it had more falls [1].
+
+tooMuch: >-
+  No adverse effects from vitamin E in food have been found [1]. High doses of supplemental alpha-tocopherol
+  can cause bleeding and interfere with blood clotting: two trials found more hemorrhagic strokes — one in
+  Finnish male smokers taking 50 mg a day for an average of 6 years, the other in U.S. male physicians taking 180
+  mg of synthetic vitamin E every other day for 8 years, most of whom were also taking aspirin [1]. Two
+  meta-analyses of trials linked vitamin E supplements to small but significant increases in deaths from any
+  cause, one starting at 150 IU a day; the fact sheet calls the implications unclear, because the participants
+  were typically middle-aged or older with chronic disease, and a review of trials in healthy people found no
+  convincing increase [1]. In SELECT, 400 IU (180 mg) of synthetic vitamin E a day increased the risk of
+  prostate cancer [1].
+
+interactions: >-
+  Vitamin E can inhibit platelet clumping and work against vitamin K-dependent clotting factors, so large doses
+  taken with anticoagulant or antiplatelet drugs such as warfarin (Coumadin) can increase the risk of bleeding,
+  especially with low vitamin K intake; the amount needed is unknown but probably above 400 IU a day [1].
+  Antioxidant combinations including vitamin E blunted the rise in HDL cholesterol in people taking simvastatin
+  (Zocor) with niacin [1]. Oncologists generally advise against antioxidant supplements during chemotherapy or
+  radiotherapy, because they might make the treatment less effective [1]. If you take any of these regularly,
+  talk to your doctor or pharmacist before taking a vitamin E supplement.
+
+source:
+  name: NIH Office of Dietary Supplements — Vitamin E, Health Professional Fact Sheet
+  url: https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/
+  lastModified: 2021-03-26
+  checked: 2026-10-18
+
+references:
+  - text: "NIH Office of Dietary Supplements. Vitamin E — Fact Sheet for Health Professionals. Updated 26 March 2021."
+    url: https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/
+
+aiAssisted: true

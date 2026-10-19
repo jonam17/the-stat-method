@@ -8,9 +8,13 @@
  */
 import { getCollection } from 'astro:content';
 
+// `noun` is the singular shown on share cards ("Library · vitamin"). Choline is
+// neither a vitamin nor a mineral — its fact sheet calls it "an essential
+// nutrient" — so it has a kind of its own rather than a label it does not carry.
 export const KINDS = [
-  { key: 'vitamin', slug: 'vitamins', label: 'Vitamins' },
-  { key: 'mineral', slug: 'minerals', label: 'Minerals' },
+  { key: 'vitamin', slug: 'vitamins', label: 'Vitamins', noun: 'vitamin' },
+  { key: 'mineral', slug: 'minerals', label: 'Minerals', noun: 'mineral' },
+  { key: 'other', slug: 'other-nutrients', label: 'Other nutrients', noun: 'nutrient' },
 ];
 
 export async function publishedNutrients() {

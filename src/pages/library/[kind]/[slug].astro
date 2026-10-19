@@ -78,6 +78,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
 
         <h2 id="upper-limit">Upper limit</h2>
+        {d.ul.warning && <p class="warnbar">{d.ul.warning}</p>}
         {d.ul.rows && <>
           {d.ul.appliesTo !== 'total' && <p class="warnbar">{d.ul.scope}</p>}
           <div class="lib-table-wrap"><table class="lib-table">
