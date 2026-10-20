@@ -8,8 +8,12 @@ export const bmi = (kg, cm) => (cm ? kg / (cm / 100) ** 2 : 0);
 /** Fat-Free Mass Index — normalises lean mass for height. */
 export const ffmi = (lbm, cm) => (cm && lbm != null ? lbm / (cm / 100) ** 2 : null);
 
-/** Waist-to-height ratio. Better cardiometabolic predictor than BMI. */
-export const waistToHeight = (waistCm, cm) => (cm ? waistCm / cm : 0);
+/**
+ * Waist-to-height ratio. Better cardiometabolic predictor than BMI.
+ * Null unless both measurements are present and positive: a missing waist is
+ * not a ratio of 0, and 0 would read as "Below range" (v2.32.1).
+ */
+export const waistToHeight = (waistCm, cm) => (waistCm > 0 && cm > 0 ? waistCm / cm : null);
 
 /** Deurenberg (1991) — BMI-based body fat estimate. Requires no measurement. */
 export function bodyFatDeurenberg({ kg, cm, age, sex }) {
@@ -179,4 +183,5 @@ export const WHTR_BANDS = [
   { max: 0.60, label: 'Increased risk', note: 'Consider waist reduction.' },
   { max: 99,   label: 'High risk',   note: 'Substantially elevated cardiometabolic risk.' },
 ];
-export const whtrBand = v => WHTR_BANDS.find(b => v < b.max) ?? WHTR_BANDS[3];
+/** Null when there is no ratio — no band without a measurement. */
+export const whtrBand = v => (v == null ? null : WHTR_BANDS.find(b => v < b.max) ?? WHTR_BANDS[3]);

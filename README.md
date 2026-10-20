@@ -42,6 +42,8 @@ One short form — sex, age, weight, height and activity — and every result th
 produce: energy needs, body composition, daily calorie and protein targets, and a timeline to a
 target weight. Body fat, a waist measurement, a goal and a target weight each unlock more.
 
+![The Stat Method Baseline](docs/previews/baseline.webp)
+
 **One calculation engine, many interfaces.** The Baseline does no arithmetic of its own. Each
 section calls the same engine function its standalone calculator uses, and a test asserts —
 across hundreds of combinations of inputs — that every section equals its standalone result.
@@ -175,6 +177,15 @@ Splits and Riegel race predictions flagged by how far the extrapolation stretche
 cycle-aligned bedtimes with an honest note on what cycle timing can and cannot do.
 
 <img src="docs/previews/running-pace.webp" width="49%"> <img src="docs/previews/sleep-calculator.webp" width="49%">
+
+#### Caffeine half-life
+
+How much of the day's caffeine is still on board at bedtime. Half-life varies about threefold
+between healthy adults — roughly 3 to 7 hours — so it returns a **range**, not one number, and
+smoking, oral contraceptives and pregnancy shift that range. There is no established amount of
+residual caffeine at which sleep stops being affected, and the tool says so.
+
+![Caffeine half-life](docs/previews/caffeine-half-life.webp)
 
 ---
 
@@ -328,6 +339,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.32.1 — No waist, no waist-to-height ratio
+
+- **Fixed: a waist-to-height ratio of 0.00 for a waist nobody entered.** With the waist field empty, the
+  Baseline showed "Waist-to-height 0.00", and Healthy Weight, once its waist was cleared, showed
+  "0.00 — Below range — Lower than the typical healthy band". The engine divided a missing measurement by
+  height, which JavaScript treats as 0. It now returns no ratio and no band unless both waist and height are
+  entered. Healthy Weight shows "—" and asks for a waist; the Baseline leaves the ratio out, as it was meant
+  to. Copy results and Save as PDF no longer carry the false figure.
+- **Tests:** engine tests across 324 combinations of people and missing values, for Healthy Weight and the
+  Baseline. The browser refusal check (`npm run qa:refusals`) now also clears the waist field on both tools
+  and confirms no ratio or band appears, and that one still does when a waist is entered. Both checks fail on
+  v2.32.0.
+- **README:** the Baseline section now shows its screenshot, retaken without the 0.00, and Caffeine Half-Life
+  has a section of its own. It was the one calculator the tour left out.
 
 ### v2.32.0 — Library: sodium and chloride; every vitamin and mineral is in
 

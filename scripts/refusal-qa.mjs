@@ -81,6 +81,38 @@ for (const c of CASES) {
   if (!pass) failures++;
   console.log(`  ${pass ? '✓' : '✗'} ${c.tool.padEnd(18)} ${c.why.padEnd(42)} expected ${c.expect.padEnd(8)} got ${got}${errs.length ? '  THREW: ' + errs[0].slice(0, 60) : ''}`);
 }
+// Missing measurements (v2.32.1). A blank waist once showed "0.00 — Below range":
+// a result for a measurement nobody entered. Like a refusal, it only shows when
+// someone actually clears the field, so it is checked here the same way.
+const BLANK = [
+  { tool: 'healthy-weight', why: 'waist cleared', clear: 'Waist', expect: 'none' },
+  { tool: 'healthy-weight', why: 'waist cleared, imperial', click: ['Imperial'], clear: 'Waist', expect: 'none' },
+  { tool: 'baseline',       why: 'waist left blank (default)', expect: 'none' },
+  { tool: 'healthy-weight', why: 'waist 85 cm still shows its ratio', fill: { Waist: '85' }, expect: 'ratio' },
+  { tool: 'baseline',       why: 'waist 85 cm still shows its ratio', fill: { Waist: '85' }, expect: 'ratio' },
+];
+for (const c of BLANK) {
+  const errs = []; const onErr = e => errs.push(e.message);
+  page.on('pageerror', onErr);
+  let got = '?';
+  try {
+    await page.goto(`http://localhost:${PORT}/tools/${c.tool}/`, { waitUntil: 'networkidle' });
+    for (const n of c.click ?? []) await btn(n).click();
+    if (c.clear) await fld(c.clear).fill('', { timeout: 5000 });
+    for (const [label, v] of Object.entries(c.fill ?? {})) await fld(label).fill(v, { timeout: 5000 });
+    await page.waitForTimeout(250);
+    const text = await page.locator('.results').first().innerText();
+    const ratio = /0\.\d\d/.test(text.split(/Waist[-:]?\s*(?:to-)?height/i).slice(1).join(' ').slice(0, 40));
+    const band = /Below range|Increased risk|High risk/.test(text);
+    got = ratio || band ? 'ratio' : 'none';
+    if (c.expect === 'none' && /\b0\.00\b/.test(text)) got = 'ratio';
+  } catch (e) { got = `error: ${e.message.split('\n')[0].slice(0, 80)}`; }
+  page.off('pageerror', onErr);
+  const pass = !errs.length && got === c.expect;
+  if (!pass) failures++;
+  console.log(`  ${pass ? '✓' : '✗'} ${c.tool.padEnd(18)} ${c.why.padEnd(42)} expected ${c.expect.padEnd(8)} got ${got}${errs.length ? '  THREW: ' + errs[0].slice(0, 60) : ''}`);
+}
+
 await browser.close(); server.close();
-console.log(`\nRefusal paths — ${CASES.length} checks, ${failures} failure(s)\n`);
+console.log(`\nRefusal paths and missing measurements — ${CASES.length + BLANK.length} checks, ${failures} failure(s)\n`);
 process.exit(failures ? 1 : 0);

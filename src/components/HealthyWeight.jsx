@@ -21,7 +21,8 @@ export default function HealthyWeight() {
 
   const kg = units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0;
   const cm = units === 'imperial' ? ftInToCm(+feet || 0, +inches || 0) : +height || 0;
-  const waistCm = units === 'imperial' ? (+waist || 0) * IN_TO_CM : +waist || 0;
+  // A blank waist stays blank: the engine returns no ratio and no band for it.
+  const waistCm = waist === '' ? null : (units === 'imperial' ? +waist * IN_TO_CM : +waist);
   const disp = v => (units === 'imperial' ? kgToLb(v) : v);
   const wTag = units === 'imperial' ? 'lb' : 'kg';
 
@@ -31,11 +32,11 @@ export default function HealthyWeight() {
       setWeight(String(Math.round(kgToLb(+weight || 0))));
       const { ft, in: i } = cmToFtIn(+height || 0);
       setFeet(String(ft)); setInches(String(i));
-      setWaist(String(Math.round((+waist || 0) / IN_TO_CM)));
+      if (waist !== '') setWaist(String(Math.round(+waist / IN_TO_CM)));
     } else {
       setWeight(String(Math.round(lbToKg(+weight || 0))));
       setHeight(String(Math.round(ftInToCm(+feet || 0, +inches || 0))));
-      setWaist(String(Math.round((+waist || 0) * IN_TO_CM)));
+      if (waist !== '') setWaist(String(Math.round(+waist * IN_TO_CM)));
     }
     setUnits(to);
   };
@@ -134,15 +135,17 @@ export default function HealthyWeight() {
                 <span className="fx-name">
                   Waist-to-height<em className="fx-tag">Better predictor</em>
                 </span>
-                <span className="fx-val">{r.w.toFixed(2)}</span>
+                <span className="fx-val">{r.w != null ? r.w.toFixed(2) : '—'}</span>
               </div>
-              <div className="fx-sub">{r.band.label} — {r.band.note}</div>
+              <div className="fx-sub">{r.band
+                ? <>{r.band.label} — {r.band.note}</>
+                : 'Enter your waist to see where it falls.'}</div>
             </div>
           </div>
 
           <StatStrip items={[
             { label: 'BMI', value: r.b.toFixed(1) },
-            { label: 'Waist:height', value: r.w.toFixed(2) },
+            { label: 'Waist:height', value: r.w != null ? r.w.toFixed(2) : '—' },
             { label: 'Range low', value: fmt(disp(r.bmiRange.lowKg)), unit: wTag },
             { label: 'Range high', value: fmt(disp(r.bmiRange.highKg)), unit: wTag },
           ]} />
