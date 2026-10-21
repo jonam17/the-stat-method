@@ -340,6 +340,35 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.33.0 — Red warning bars where a risk is easy to miss
+
+From an audit of every nutrient, article, exercise and calculator for risks a reader could miss. The bar
+stays rare: eight of twenty-nine nutrient pages now carry one, and two calculators.
+
+- **Four nutrient pages gain a red bar**, each repeating what the page already says from its NIH fact
+  sheet, at the top of the upper-limit section:
+  - **Iodine:** people with autoimmune thyroid disease may be harmed by amounts safe for others, and
+    high-dose iodine with antithyroid medicine can cause hypothyroidism.
+  - **Vitamin A:** above the limit, preformed vitamin A can cause birth defects; experts advise against
+    supplements over 3,000 mcg RAE a day in pregnancy or while breastfeeding, and one serving of beef liver
+    provides more than twice the limit.
+  - **Iron:** accidental overdose of iron supplements is a leading cause of fatal poisoning in children
+    under 6.
+  - **Vitamin E:** with warfarin or another blood thinner, large doses can raise the risk of bleeding, well
+    below the upper limit.
+- **Heart Rate Zones** now says that beta-blockers slow the heart, so zones from age may not fit, and a
+  doctor can help set a target heart rate (American Heart Association). The *heart rate zones* article
+  says the same, with the source added and checked.
+- **Protein Target** now says its range was not set for people with kidney disease: some need a moderate
+  amount, people on dialysis may need more, and the amount is one to set with a dietitian or doctor (NIDDK).
+  The *protein* article adds the same paragraph and source, and now says overshooting protein is fairly
+  harmless *in healthy adults*.
+- Both calculator bars sit inside the results, so a refused result shows neither the numbers nor the bar.
+  No new options were added to either form.
+- Considered and left without a bar, with the reasons in the audit: zinc, chromium, selenium and the other
+  nutrients; the creatine and caffeine articles, which already state their cautions in the text and Key
+  takeaways; and the exercise pages.
+
 ### v2.32.1 — No waist, no waist-to-height ratio
 
 - **Fixed: a waist-to-height ratio of 0.00 for a waist nobody entered.** With the waist field empty, the

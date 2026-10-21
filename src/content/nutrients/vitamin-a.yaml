@@ -37,6 +37,7 @@ intake:
 # foods "contain primarily preformed vitamin A". Approved in principle
 # 2026-10-17; check the wording.
 ul:
+  warning: "If you are or might be pregnant: preformed vitamin A above the upper limit can cause birth defects. Experts advise not taking supplements that provide more than 3,000 mcg RAE (10,000 IU) a day, during pregnancy or while breastfeeding. A single 3-ounce serving of beef liver provides more than twice the limit."
   rows:
     - { group: "19–50", male: 3000, female: 3000, pregnancy: 3000, lactation: 3000 }
     - { group: "51–70", male: 3000, female: 3000 }

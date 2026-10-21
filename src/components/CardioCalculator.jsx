@@ -109,6 +109,16 @@ export default function CardioCalculator({ mode = 'zones' }) {
                        ? <> · zones use the Karvonen reserve method</>
                        : <> · add a resting heart rate for more personal zones</>}.</>} />
 
+            {/* Fixed, not conditional: the tool does not ask about medicines (decided
+                2026-10-20, to keep rarely relevant options out of the form). Inside the
+                panel, so a refusal replaces it with the numbers. Source: American Heart
+                Association, "How do beta blocker drugs affect exercise?", reviewed 2024. */}
+            <div className="warnbar">
+              Taking a beta-blocker? These medicines slow your heart rate, so zones estimated
+              from your age may not fit you, and they affect everyone differently. Your doctor
+              can help set your target heart rate with a brief exercise stress test.
+            </div>
+
             <div className="zones">
               {r.zones.map(z => (
                 <div className={`zone z${z.zone}`} key={z.zone}>
@@ -159,7 +169,8 @@ export default function CardioCalculator({ mode = 'zones' }) {
               </p>
               <p className="refs">
                 Tanaka H et al., J Am Coll Cardiol 2001 · Karvonen MJ et al. 1957 ·
-                Gulati M et al., Circulation 2010 · Cooper KH, JAMA 1968
+                Gulati M et al., Circulation 2010 · Cooper KH, JAMA 1968 ·
+                American Heart Association, beta blockers and exercise, 2024
               </p>
             </Method>
           </Panel>

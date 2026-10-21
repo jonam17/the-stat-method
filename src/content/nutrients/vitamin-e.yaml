@@ -30,6 +30,7 @@ intake:
 # say whether vitamin E added to fortified foods counts, so `scope` does not
 # mention fortified foods.
 ul:
+  warning: "Below the limit is not safe for everyone. Large doses of vitamin E taken with warfarin or another blood thinner can increase the risk of bleeding, probably from above 400 IU a day, well under the upper limit. Talk to your doctor before taking vitamin E with a blood thinner."
   rows:
     - { group: "19–50", male: 1000, female: 1000, pregnancy: 1000, lactation: 1000 }
     - { group: "51–70", male: 1000, female: 1000 }

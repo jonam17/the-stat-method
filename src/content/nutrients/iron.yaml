@@ -21,6 +21,7 @@ intake:
 
 # The text says: "The FNB has established ULs for iron from food and supplements".
 ul:
+  warning: "Keep iron supplements out of children's reach. Accidental overdose of iron tablets and capsules is a leading cause of fatal poisoning in children under 6, which is why the FDA requires a warning on their labels."
   rows:
     - { group: "19–50", male: 45, female: 45, pregnancy: 45, lactation: 45 }
     - { group: "51–70", male: 45, female: 45 }

@@ -8,6 +8,7 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-24
+updated: 2026-10-20
 author: The Stat Method
 relatedTool: heart-rate-zones
 evidenceBased: true
@@ -36,6 +37,10 @@ references:
   - text: "Seiler S. What is best practice for training intensity and duration distribution in endurance athletes? Int J Sports Physiol Perform, 2010;5(3):276-291."
     url: "https://journals.humankinetics.com/view/journals/ijspp/5/3/article-p276.xml"
     verified: true
+  - text: "American Heart Association. How do beta blocker drugs affect exercise? Last reviewed 18 January 2024."
+    url: "https://www.heart.org/en/health-topics/consumer-healthcare/medication-information/how-do-beta-blocker-drugs-affect-exercise"
+    verified: true
+    verifiedDate: 2026-10-20
 ---
 
 Almost every treadmill, chest strap and fitness app builds its zones on the same equation:
@@ -82,6 +87,13 @@ subsequent work has found it can underestimate peak heart rate in older women.
 None of this makes the estimate precise. Individual variation in true maximum heart rate is
 substantial — roughly ten beats per minute in either direction is normal, and some people
 sit well outside that. Two people of the same age can genuinely differ by twenty beats.
+
+Some medicines change the picture altogether. Beta-blockers, prescribed after a heart attack
+and for abnormal heart rhythms, high blood pressure and other heart conditions, slow the
+heartbeat, so a target heart rate worked out from age may need adjusting for someone taking
+one. Because they affect everyone differently, the American Heart Association suggests asking
+a healthcare professional, who can help set a new target heart rate with a brief exercise
+stress test. [5]
 
 Maximum heart rate is also not a fitness measure. It does not meaningfully improve with
 training, and a higher one confers no advantage. It declines with age regardless of how fit

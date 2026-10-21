@@ -26,6 +26,7 @@ intake:
   eighteenNote: People aged 18 fall in the official 14–18 group, which has the same values — 150 mcg a day, 220 mcg in pregnancy and 290 mcg when breastfeeding. Its upper limit is 900 mcg.
 
 ul:
+  warning: "Safe for most people is not safe for everyone. People with autoimmune thyroid disease may be harmed by amounts of iodine that are safe for others, and high-dose iodine taken with antithyroid medicine such as methimazole can cause hypothyroidism. If you have a thyroid condition, talk to your doctor before taking an iodine supplement."
   rows:
     - { group: "19–50", male: 1100, female: 1100, pregnancy: 1100, lactation: 1100 }
     - { group: "51–70", male: 1100, female: 1100 }

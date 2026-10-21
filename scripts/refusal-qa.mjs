@@ -75,6 +75,9 @@ for (const c of CASES) {
     const n = await page.locator('.results .notice').count();
     const text = n ? await page.locator('.results .notice').first().innerText() : '';
     got = !n ? 'allowed' : text.includes(HELPLINE) ? 'helpline' : /built for adults/.test(text) ? 'underAge' : 'refused';
+    // A refusal must take every warning bar with it: a bar beside a refused result
+    // would be warning about numbers the tool declined to compute (CONVENTIONS §1).
+    if (n && await page.locator('.results .warnbar').count()) got += ' + warning bar';
   } catch (e) { got = `error: ${e.message.split('\n')[0].slice(0, 80)}`; }
   page.off('pageerror', onErr);
   const pass = !errs.length && (got === c.expect || (c.expect === 'refused' && ['refused', 'helpline', 'underAge'].includes(got)));
@@ -113,6 +116,23 @@ for (const c of BLANK) {
   console.log(`  ${pass ? '✓' : '✗'} ${c.tool.padEnd(18)} ${c.why.padEnd(42)} expected ${c.expect.padEnd(8)} got ${got}${errs.length ? '  THREW: ' + errs[0].slice(0, 60) : ''}`);
 }
 
+// Fixed warning bars (v2.33.0) appear with an ordinary result.
+const BARS = [
+  { tool: 'heart-rate-zones', text: 'beta-blocker' },
+  { tool: 'protein-target',   text: 'kidney disease' },
+];
+for (const c of BARS) {
+  let got = '?';
+  try {
+    await page.goto(`http://localhost:${PORT}/tools/${c.tool}/`, { waitUntil: 'networkidle' });
+    const bars = await page.locator('.results .warnbar').allInnerTexts();
+    got = bars.some(t => t.includes(c.text)) ? 'shown' : 'missing';
+  } catch (e) { got = `error: ${e.message.split('\n')[0].slice(0, 80)}`; }
+  const pass = got === 'shown';
+  if (!pass) failures++;
+  console.log(`  ${pass ? '✓' : '✗'} ${c.tool.padEnd(18)} ${('warning bar: ' + c.text).padEnd(42)} expected shown    got ${got}`);
+}
+
 await browser.close(); server.close();
-console.log(`\nRefusal paths and missing measurements — ${CASES.length + BLANK.length} checks, ${failures} failure(s)\n`);
+console.log(`\nRefusal paths, missing measurements and warning bars — ${CASES.length + BLANK.length + BARS.length} checks, ${failures} failure(s)\n`);
 process.exit(failures ? 1 : 0);

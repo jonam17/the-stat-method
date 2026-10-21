@@ -8,6 +8,7 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
+updated: 2026-10-20
 author: The Stat Method
 keyTakeaways:
   - "Work out protein from lean mass if you can. Two people at the same weight can differ by twenty kilos of fat, which needs almost no protein."
@@ -30,6 +31,10 @@ references:
   - text: "Institute of Medicine. Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. Washington, DC: The National Academies Press, 2005."
     url: "https://doi.org/10.17226/10490"
     verified: true
+  - text: "National Institute of Diabetes and Digestive and Kidney Diseases. Healthy Eating for Adults with Chronic Kidney Disease. Last reviewed January 2025."
+    url: "https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/healthy-eating-adults-chronic-kidney-disease"
+    verified: true
+    verifiedDate: 2026-10-20
 ---
 
 Ask three sources how much protein to eat and you'll get three answers that differ by a
@@ -44,7 +49,7 @@ fastest.
 
 All three are answering different questions. The first is the amount that prevents
 deficiency in a sedentary adult. The second is a bulking-era heuristic that survived
-because overshooting protein is fairly harmless. Neither is aimed at someone training
+because overshooting protein is fairly harmless in healthy adults. Neither is aimed at someone training
 hard and trying to keep muscle in a deficit.
 
 <h2 id="start-from-lean-mass-not-scale-weight">Start from lean mass, not scale weight</h2>
@@ -97,6 +102,12 @@ competitors driving toward stage-level leanness under sustained deficits. [2] Th
 to the most extreme case in the literature, and the authors note they had to write a
 narrative rather than systematic review because the evidence base was so thin. Useful as an
 upper bound for someone in a hard cut; not a target for someone training normally.
+
+Kidney disease is a different question. As the body uses protein, it produces waste that the
+kidneys remove, and some people with chronic kidney disease need a moderate amount of protein
+so that waste doesn't build up in the blood. People on dialysis may need more, because dialysis
+removes protein from the blood. Too little protein brings its own risk, malnutrition, so the
+right amount is one to work out with a dietitian or doctor rather than from these ranges. [4]
 
 <aside class="summary">
 <span class="summary-label">Summary</span>

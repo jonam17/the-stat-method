@@ -78,6 +78,17 @@ export default function ProteinTarget() {
                    note={<>Scaled from your <b>{r.basis}</b> at
                      {' '}{r.perKgLow.toFixed(1)}–{r.perKgHigh.toFixed(1)} g/kg.</>} />
 
+          {/* Fixed, not conditional: the tool does not ask about kidney disease (decided
+              2026-10-20, option b). Inside the panel, so a refusal replaces it with the
+              numbers. Source: NIDDK, "Healthy Eating for Adults with Chronic Kidney
+              Disease", reviewed January 2025. */}
+          <div className="warnbar">
+            Have kidney disease? This range was not set for you. Some people with chronic
+            kidney disease need a moderate amount of protein so waste doesn't build up in the
+            blood, while people on dialysis may need more. Work out the right amount with a
+            dietitian or doctor.
+          </div>
+
           <div className="bartop tight">
             <span className="t">Where to sit in the range</span>
           </div>
@@ -142,7 +153,8 @@ export default function ProteinTarget() {
             </p>
             <p className="refs">
               Morton RW et al., Br J Sports Med 2018 · Helms ER et al.,
-              Int J Sport Nutr Exerc Metab 2014 · Institute of Medicine DRI, 2005
+              Int J Sport Nutr Exerc Metab 2014 · Institute of Medicine DRI, 2005 ·
+              NIDDK, healthy eating with chronic kidney disease, 2025
             </p>
           </Method>
         </Panel>
