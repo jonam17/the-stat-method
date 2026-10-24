@@ -2,13 +2,17 @@
 
 **Copyright (C) 2026 The Stat Method. All rights reserved.**
 
-The source code in this repository is licensed separately and permissively —
-see `LICENSE` (AGPL-3.0).
+The source code in this repository is licensed separately, under the GNU
+Affero General Public License v3.0 — see `LICENSE`. That licence covers the
+code, not the writing described here.
 
 **This file covers the written content**, which is not open source:
 
 - Everything under `src/content/articles/` — all articles, their prose,
   reference lists and verification metadata
+- Everything under `src/content/nutrients/` and `src/content/exercises/` — the
+  Library's prose, notes, food-source selections, evidence summaries and
+  reference lists, and the selection and arrangement of that material
 - Site copy in `src/pages/` and `src/components/` — the mission statement,
   policy pages, methodology, tool guides, and all explanatory text
 - The wording of safety and eligibility messages in `src/engine/safety.js`
@@ -27,13 +31,23 @@ see `LICENSE` (AGPL-3.0).
 ## What requires permission
 
 - Republishing an article, in whole or substantial part
-- Using the content to train a model, or redistributing it as a dataset
+- Using the content to train an AI model, or including it in a dataset built
+  to train one
 - Any commercial use of the writing
 - Use of the name or wordmark in a way implying endorsement or affiliation
 
 Ask first: see the contact address on the site. Reasonable requests are
 usually granted, and requests from clinicians, educators and researchers
 almost always are.
+
+## Facts and official values
+
+The official intake values on Library pages — the recommended amounts and
+upper limits set by the National Academies and presented by the NIH — are
+facts, and anyone may use them. So are the findings of the studies we cite.
+This licence covers our own wording, and our selection and arrangement of that
+material; it claims no right over the facts themselves or over anyone else's
+work.
 
 ## On the citations themselves
 

@@ -36,8 +36,8 @@ under that licence's terms — including publishing your modifications if you ru
 version as a network service. Declining pull requests here does not restrict any of that. It
 only means changes to *this* repository come from its maintainer.
 
-**The written content is all rights reserved** — articles, site copy, safety messages, the name
-and the design. See [`LICENSE-CONTENT`](LICENSE-CONTENT). Quoting with attribution is fine and
+**The written content is all rights reserved** — articles, Library pages, site copy, safety
+messages, the name and the design. See [`LICENSE-CONTENT`](LICENSE-CONTENT). Quoting with attribution is fine and
 welcome; republishing and commercial reuse need permission.
 
 Maintainers: see [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).

@@ -340,6 +340,25 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.33.1 — Licensing statements made consistent
+
+- **`LICENSE-CONTENT` now names the Library.** Everything under `src/content/nutrients/` and
+  `src/content/exercises/` — prose, notes, food-source selections, evidence summaries, reference lists,
+  and their selection and arrangement — is covered alongside the articles. Until now only articles were
+  listed.
+- **Facts stay free.** A new section says the official intake values and the findings of cited studies are
+  facts anyone may use; the licence covers only our wording, selection and arrangement.
+- **Corrected:** `LICENSE-CONTENT` described the AGPL-3.0 as a "permissive" licence. It is copyleft; the
+  sentence now names the licence and says it covers the code, not the writing.
+- **AI training, stated plainly:** the restriction now reads "train an AI model, or include it in a dataset
+  built to train one". Its scope is unchanged; search and AI tools that quote and link to the site are not
+  restricted.
+- **Corrected:** the README's Licence section pointed to "the Licence section above", which does not
+  exist. It now states the split itself.
+- **Terms of use** now say the code (calculators, templates, build scripts) is AGPL-3.0, and the writing,
+  including the Library, is copyrighted and not covered by it. `CONTRIBUTING.md` lists Library pages among
+  the all-rights-reserved material. `LICENSE`, the About page and the trust block are unchanged.
+
 ### v2.33.0 — Red warning bars where a risk is easy to miss
 
 From an audit of every nutrient, article, exercise and calculator for risks a reader could miss. The bar
@@ -1243,7 +1262,10 @@ Corrections are logged publicly, and articles carry a visible last-updated date.
 
 ## Licence
 
-See the Licence section above: code is AGPL-3.0, written content is all rights reserved.
+The code — calculators, templates, build and test scripts — is licensed under AGPL-3.0
+(`LICENSE`). The written content, including the articles and the Library, is all rights reserved
+and covered separately by `LICENSE-CONTENT`; the code licence does not license it. Quoting with
+attribution is welcome; `LICENSE-CONTENT` says what needs permission.
 
 ## Production launch tooling
 
