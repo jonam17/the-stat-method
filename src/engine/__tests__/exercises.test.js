@@ -41,6 +41,12 @@ describe('exercise library', () => {
         for (const n of cited) expect(n, `marker [${n}]`).toBeLessThanOrEqual(d.references.length);
         d.references.forEach((_, i) => expect(cited.has(i + 1), `reference ${i + 1} never cited`).toBe(true));
       });
+      // v2.34.0: an exercise has no fact sheet, and every source on a published page was
+      // read and recorded in docs/citation-reviews/. "fact-sheet" cannot apply; "unchecked"
+      // would mean a page resting on a source nobody read, which the workflow forbids.
+      it('every reference was checked against what was read', () => {
+        for (const [i, r] of d.references.entries()) expect(r.status, `reference ${i + 1}`).toBe('checked');
+      });
       it('uses a group, equipment and progression class the site knows', () => {
         expect(GROUPS.map(g => g.key)).toContain(d.group);
         for (const k of d.equipment) expect(Object.keys(EQUIPMENT)).toContain(k);

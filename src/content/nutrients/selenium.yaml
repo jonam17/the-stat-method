@@ -120,5 +120,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Selenium — Fact Sheet for Health Professionals. Updated 4 September 2025."
     url: https://ods.od.nih.gov/factsheets/Selenium-HealthProfessional/
+    status: checked
 
 aiAssisted: true

@@ -120,6 +120,20 @@ const intakeRow = z.object({
 const rowsInOrder = z.array(intakeRow).refine(
   rows => BRACKETS.some(b => b.length === rows.length && b.every((g, i) => rows[i].group === g)),
   { message: 'Rows must be 19–50, 51–70, >70 — or 19–30, 31–50, 51–70, >70 where the source splits 19–50' });
+/**
+ * A Library reference says how far it was checked (v2.34.0). Required on every
+ * reference, never defaulted: a default would make a claim to readers by omission,
+ * the mistake CONVENTIONS §19 records for articles.
+ *   checked    — opened and read (in full, or its abstract where the page says no
+ *                more than the abstract), and the page checked against it
+ *   fact-sheet — cited by the nutrient's fact sheet, whose summary the page reports;
+ *                not opened by us
+ *   unchecked  — not yet checked; no record of where it came from or that it was read
+ */
+const libraryRef = z.object({
+  text: z.string(), url: z.string().url().optional(),
+  status: z.enum(['checked', 'fact-sheet', 'unchecked']),
+});
 const nutrients = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/nutrients' }),
   schema: z.object({
@@ -230,7 +244,7 @@ const nutrients = defineCollection({
       if (s.kind === 'report' && (s.year == null || !s.read || s.lastModified))
         ctx.addIssue({ code: 'custom', message: 'a report needs year and read, and no lastModified' });
     }),
-    references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
+    references: z.array(libraryRef).min(1),
     aiAssisted: z.boolean(),
   }).superRefine((d, ctx) => {
     for (const [path, label] of [['intake', d.intake.unitLabel], ['sources', d.sources.unitLabel]]) {
@@ -271,7 +285,7 @@ const exercises = defineCollection({
     howTo: z.array(z.string()).min(2),
     alternatives: z.array(z.string()).default([]),   // slugs of other exercise files
     checked: z.coerce.date(),                          // when the sources were last read
-    references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).min(1),
+    references: z.array(libraryRef).min(1),
     aiAssisted: z.boolean(),
   }),
 });

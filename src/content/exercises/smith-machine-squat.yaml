@@ -27,4 +27,5 @@ checked: 2026-10-06
 references:
   - text: "Schwanbeck SR, Cornish SM, Barss T, Chilibeck PD. Effects of training with free weights versus machines on muscle mass, strength, free testosterone, and free cortisol levels. J Strength Cond Res, 2020;34(7):1851-1859."
     url: "https://doi.org/10.1519/JSC.0000000000003349"
+    status: checked
 aiAssisted: true

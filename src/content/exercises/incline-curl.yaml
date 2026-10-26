@@ -28,4 +28,5 @@ checked: 2026-10-16
 references:
   - text: "Kassiano W, Costa B, Kunevaliki G, Lisboa F, Stavinski N, Prado A, Tricoli I, Francsuel J, Lima L, Nunes JP, Ribeiro AS, Cyrino ES. Distinct muscle growth and strength adaptations after preacher and incline biceps curls. Int J Sports Med, 2025;46(5):334-343."
     url: "https://doi.org/10.1055/a-2517-0509"
+    status: checked
 aiAssisted: true

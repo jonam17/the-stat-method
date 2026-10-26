@@ -108,5 +108,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Biotin — Fact Sheet for Health Professionals. Updated 10 January 2022."
     url: https://ods.od.nih.gov/factsheets/Biotin-HealthProfessional/
+    status: checked
 
 aiAssisted: true

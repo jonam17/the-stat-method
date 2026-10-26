@@ -150,5 +150,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin E — Fact Sheet for Health Professionals. Updated 26 March 2021."
     url: https://ods.od.nih.gov/factsheets/VitaminE-HealthProfessional/
+    status: checked
 
 aiAssisted: true

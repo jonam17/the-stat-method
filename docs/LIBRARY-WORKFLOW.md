@@ -131,6 +131,20 @@ large trials by who was studied and what they took. Never round a weak finding i
 the text** and its details were **visible on screen** — a test fails if any reference is never cited.
 Never write a PMID, DOI or volume from memory.
 
+Every reference states how far it was checked, in `status` — required, never defaulted; the page
+shows it beside the reference:
+
+| `status` | When | Shown as |
+|---|---|---|
+| `checked` | The source was opened and the page checked against it. Always reference 1 | ✓ Checked against the original (green) |
+| `fact-sheet` | A study the fact sheet cites, reported as the fact sheet summarises it; not opened by us | Cited by the fact sheet (grey) |
+| `unchecked` | Neither of the above can be shown — no record of where it came from or that it was read | Not yet checked (amber) |
+
+Mark `checked` only for a source actually opened. If a claim is corrected, set its reference back to
+`unchecked` until it is checked again. A page with a `report` source cannot use `fact-sheet` (a test
+enforces it). When a fact sheet's *Last modified* date moves, the staleness test already flags the page;
+reference 1 stays `checked` only once the page is rechecked (see *Refreshing a page*).
+
 **7. Check.** Every claim marker must be a single number in brackets — write `[1] … [6]`, never
 `[1, 6]`, which the citation check cannot read.
 

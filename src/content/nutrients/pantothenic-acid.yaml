@@ -95,5 +95,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Pantothenic Acid — Fact Sheet for Health Professionals. Updated 1 May 2026."
     url: https://ods.od.nih.gov/factsheets/PantothenicAcid-HealthProfessional/
+    status: checked
 
 aiAssisted: true

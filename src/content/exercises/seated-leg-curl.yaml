@@ -36,6 +36,8 @@ checked: 2026-10-15
 references:
   - text: "Maeo S, Huang M, Wu Y, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Greater hamstrings muscle hypertrophy but similar damage protection after training at long versus short muscle lengths. Med Sci Sports Exerc, 2021;53(4):825-837."
     url: "https://doi.org/10.1249/MSS.0000000000002523"
+    status: checked
   - text: "Maeo S, Balshaw TG, Nin DZ, Mc Dermott EJ, Osborne T, Cooper NB, Massey GJ, Kong PW, Pain MTG, Folland JP. Hamstrings hypertrophy is specific to the training exercise: Nordic hamstring versus lengthened state eccentric training. Med Sci Sports Exerc, 2024;56(10):1893-1905."
     url: "https://doi.org/10.1249/MSS.0000000000003490"
+    status: checked
 aiAssisted: true

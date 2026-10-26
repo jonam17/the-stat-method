@@ -65,7 +65,7 @@ carries the entry's main claim, the published abstract at least for anything els
 | `howTo` | Plain steps. A safety step needs no citation unless it claims an effect ("reduces injury") — then it needs one or goes |
 | `alternatives` | Slugs of other exercise files; links appear only for published ones |
 | `checked` | The date the sources were read |
-| `references` | Only works cited in the text, details as seen on screen |
+| `references` | Only works cited in the text, details as seen on screen. Each takes `status: checked` — every source on an exercise page must be read (full text, or the abstract where the entry says no more than the abstract) and recorded in `docs/citation-reviews/`. A test rejects any other status |
 
 **4. Check.** Every marker is a single number in brackets — `[1] [2]`, never `[1, 2]`.
 

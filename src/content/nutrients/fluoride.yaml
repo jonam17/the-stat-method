@@ -113,5 +113,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Fluoride — Fact Sheet for Health Professionals. Updated 11 April 2025."
     url: https://ods.od.nih.gov/factsheets/Fluoride-HealthProfessional/
+    status: checked
 
 aiAssisted: true

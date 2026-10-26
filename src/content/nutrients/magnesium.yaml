@@ -148,13 +148,18 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Magnesium — Fact Sheet for Health Professionals. Last modified 6 January 2026."
     url: https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/
+    status: checked
   - text: "Dickinson HO, Nicolson D, Campbell F, Cook JV, Beyer FR, Ford GA, Mason J. Magnesium supplementation for the management of primary hypertension in adults. Cochrane Database of Systematic Reviews 2006: CD004640."
     url: https://pubmed.ncbi.nlm.nih.gov/16856052/
+    status: fact-sheet
   - text: "Evert AB, Boucher JL, Cypress M, Dunbar SA, Franz MJ, Mayer-Davis EJ, Neumiller JJ, Nwankwo R, Verdi CL, Urbanski P, Yancy WS Jr. Nutrition therapy recommendations for the management of adults with diabetes. Diabetes Care 2013;36:3821-42."
     url: https://pubmed.ncbi.nlm.nih.gov/24107659/
+    status: fact-sheet
   - text: "Holland S, Silberstein SD, Freitag F, Dodick DW, Argoff C, Ashman E. Evidence-based guideline update: NSAIDs and other complementary treatments for episodic migraine prevention in adults. Neurology 2012;78:1346-53."
     url: https://pubmed.ncbi.nlm.nih.gov/22529203/
+    status: fact-sheet
   - text: "U.S. Food and Drug Administration. Proton Pump Inhibitor Drugs (PPIs): Drug Safety Communication — Low Magnesium Levels Can Be Associated With Long-Term Use. 2 March 2011."
     url: https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-low-magnesium-levels-can-be-associated-long-term-use-proton-pump
+    status: fact-sheet
 
 aiAssisted: true

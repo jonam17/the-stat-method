@@ -28,4 +28,5 @@ checked: 2026-10-06
 references:
   - text: "Speirs DE, Bennett MA, Finn CV, Turner AP. Unilateral vs. bilateral squat training for strength, sprints, and agility in academy rugby players. J Strength Cond Res, 2016;30(2):386-392."
     url: "https://doi.org/10.1519/JSC.0000000000001096"
+    status: checked
 aiAssisted: true

@@ -825,12 +825,15 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .cite-state i{font-size:.95rem}
 .cite-state.ok{color:#3F7A4E}
 .cite-state.pending{color:#8A6620}
-/* A prefers-color-scheme:dark block used to lighten these two colours here.
-   The site has no dark theme — BaseLayout declares color-scheme: light — so on
-   a dark-OS machine those values rendered on the bone background at 1.82:1
-   contrast, against the 4.5:1 AA threshold. Removed; the light values below
-   measure 4.82:1 and are correct in both schemes. Reinstate only alongside a
-   real dark theme. */
+.cite-state.via{color:#4A4A46}
+/* Dark theme (v2.34.0). An earlier prefers-color-scheme block was removed because the
+   site then had no dark theme; it has one now, and the light green measured 3.87:1 on
+   the dark background, under the 4.5:1 AA threshold. These are the palette's dark
+   values (CONVENTIONS §5), keyed to the theme the site actually sets. */
+:root[data-theme="dark"] .cite-state.ok{color:#7FC79A}
+:root[data-theme="dark"] .cite-state.pending{color:#E0B063}
+:root[data-theme="dark"] .cite-state.via{color:#B8B8B2}
+.refs-note{font-size:.9rem;color:var(--ink-mute);margin:0 0 .8rem}
 
 /* ================= HOMEPAGE / MODERN INSTRUMENT ================= */
 /* The homepage "instrument" layer previously reopened :root here and

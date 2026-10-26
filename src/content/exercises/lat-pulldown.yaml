@@ -37,6 +37,8 @@ checked: 2026-10-15
 references:
   - text: "Li Q, Yan J, Qiao M, Quan J, Chen Y, Gong M, Niu W, Wang L. Eight-week lat pull-down resistance training with joint instability leads to superior pull-up endurance performance and reduced antagonist coactivation in recreationally active male college students. Eur J Sport Sci, 2025;25(1):e12243."
     url: "https://doi.org/10.1002/ejsc.12243"
+    status: checked
   - text: "Paoli A, Pacelli QF, Cancellara P, Toniolo L, Moro T, Canato M, Miotti D, Neri M, Morra A, Quadrelli M, Reggiani C. Protein supplementation does not further increase latissimus dorsi muscle fiber hypertrophy after eight weeks of resistance training in novice subjects, but partially counteracts the fast-to-slow muscle fiber transition. Nutrients, 2016;8(6):331."
     url: "https://doi.org/10.3390/nu8060331"
+    status: checked
 aiAssisted: true

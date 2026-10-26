@@ -30,4 +30,5 @@ checked: 2026-10-16
 references:
   - text: "Larsen S, Wolf M, Schoenfeld BJ, Sandberg NØ, Fredriksen AB, Kristiansen BS, van den Tillaar R, Swinton PA, Falch HN. Dumbbell versus cable lateral raises for lateral deltoid hypertrophy: an experimental study. Front Physiol, 2025;16:1611468."
     url: "https://doi.org/10.3389/fphys.2025.1611468"
+    status: checked
 aiAssisted: true

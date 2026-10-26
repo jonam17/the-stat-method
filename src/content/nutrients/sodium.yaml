@@ -121,5 +121,6 @@ source:
 references:
   - text: "National Academies of Sciences, Engineering, and Medicine. Dietary Reference Intakes for Sodium and Potassium. Washington, DC: The National Academies Press; 2019."
     url: https://doi.org/10.17226/25353
+    status: checked
 
 aiAssisted: true

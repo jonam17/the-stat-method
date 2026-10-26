@@ -30,4 +30,5 @@ checked: 2026-10-06
 references:
   - text: "Gavanda S, Wischtukat D, Ruckdeschel M, Geisler S, Held S. Training with an elastic bench press device provides comparable adaptations to conventional resistance training in trained men. Biol Sport, 2026;43:839-846."
     url: "https://doi.org/10.5114/biolsport.2026.157993"
+    status: checked
 aiAssisted: true

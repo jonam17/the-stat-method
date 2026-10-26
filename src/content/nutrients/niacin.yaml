@@ -155,5 +155,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Niacin — Fact Sheet for Health Professionals. Updated 18 November 2022."
     url: https://ods.od.nih.gov/factsheets/Niacin-HealthProfessional/
+    status: checked
 
 aiAssisted: true

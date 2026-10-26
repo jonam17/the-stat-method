@@ -140,5 +140,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin C — Fact Sheet for Health Professionals. Updated 31 July 2025."
     url: https://ods.od.nih.gov/factsheets/VitaminC-HealthProfessional/
+    status: checked
 
 aiAssisted: true

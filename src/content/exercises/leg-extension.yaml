@@ -32,4 +32,5 @@ checked: 2026-10-06
 references:
   - text: "Pedrosa GF, Lima FV, Schoenfeld BJ, Lacerda LT, Simões MG, Pereira MR, Diniz RCR, Chagas MH. Partial range of motion training elicits favorable improvements in muscular adaptations when carried out at long muscle lengths. Eur J Sport Sci, 2022;22(8):1250-1260."
     url: "https://pubmed.ncbi.nlm.nih.gov/33977835/"
+    status: checked
 aiAssisted: true

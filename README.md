@@ -340,6 +340,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.34.0 — Library references say how far they were checked
+
+- **Every reference on a Library page now carries a label**, as articles' references do:
+  - **✓ Checked against the original** — the source was opened and the page checked against it. That is
+    each nutrient's fact sheet or National Academies report (the source of every value on the page),
+    chloride's second report, and every study on the exercise pages (61 references).
+  - **Cited by the fact sheet** — a study the NIH fact sheet cites, reported as the fact sheet summarises
+    it; we did not open it (20 references, on the calcium, iron, magnesium and vitamin B12 pages).
+  - **Not yet checked** — vitamin D's references 2 to 9: there is no record of where they came from or that
+    they were read. They stay marked until they are.
+- **Required, never defaulted.** The label comes from a `status` field every Library reference must set;
+  tests require reference 1 to be checked, every exercise source to be checked, and forbid "cited by the
+  fact sheet" on a page whose source is a report. `docs/LIBRARY-WORKFLOW.md` and
+  `docs/EXERCISE-WORKFLOW.md` say when to use each.
+- **Fixed: the articles' green "Checked against the original" was hard to read in dark mode** — 3.87:1
+  against the 4.5:1 minimum. Its dark colours had been removed when the site had no dark theme; they are
+  back, from the site's palette, for all three labels.
+
 ### v2.33.1 — Licensing statements made consistent
 
 - **`LICENSE-CONTENT` now names the Library.** Everything under `src/content/nutrients/` and

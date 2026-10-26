@@ -137,17 +137,24 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin B12 — Fact Sheet for Health Professionals. Last modified 2 July 2025."
     url: https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/
+    status: checked
   - text: "Martí-Carvajal AJ, Solà I, Lathyris D, Dayer M. Homocysteine-lowering interventions for preventing cardiovascular events. Cochrane Database Syst Rev 2017;8:CD006612."
     url: https://pubmed.ncbi.nlm.nih.gov/28816346/
+    status: fact-sheet
   - text: "van der Zwaluw NL, Dhonukshe-Rutten RA, van Wijngaarden JP, Brouwer-Brolsma EM, van de Rest O, In 't Veld PH, et al. Results of 2-year vitamin B treatment on cognitive performance: Secondary data from an RCT. Neurology 2014;83:2158-66."
     url: https://pubmed.ncbi.nlm.nih.gov/25391305/
+    status: fact-sheet
   - text: "Zhang S-L, Chen T-S, Ma C-Y, Meng Y-B, Zhang Y-F, Chen Y-W, et al. Effect of vitamin B supplementation on cancer incidence, death due to cancer, and total mortality: A PRISMA-compliant cumulative meta-analysis of randomized controlled trials. Medicine (Baltimore) 2016;95:e3485."
     url: https://pubmed.ncbi.nlm.nih.gov/27495015/
+    status: fact-sheet
   - text: "Oliai Araghi S, Kiefte-de Jong JC, van Dijk SC, Swart KMA, van Laarhoven HW, van Schoor NM, et al. Folic acid and vitamin B12 supplementation and the risk of cancer: Long-term follow-up of the B Vitamins for the Prevention of Osteoporotic Fractures (B-PROOF) trial. Cancer Epidemiol Biomarkers Prev 2019;28:275-82."
     url: https://pubmed.ncbi.nlm.nih.gov/30341095/
+    status: fact-sheet
   - text: "Bailey RL, Jun S, Murphy L, Green R, Gahche JJ, Dwyer JT, et al. High folic acid or folate combined with low vitamin B-12 status: Potential but inconsistent association with cognitive function in a nationally representative cross-sectional sample of US older adults participating in the NHANES. Am J Clin Nutr 2020;112:1547-57."
     url: https://pubmed.ncbi.nlm.nih.gov/32860400/
+    status: fact-sheet
   - text: "Wang H, Li L, Qin LL, Song Y, Vidal-Alaball J, Liu TH. Oral vitamin B(12) versus intramuscular vitamin B(12) for vitamin B(12) deficiency. Cochrane Database Syst Rev 2018;3:CD004655."
     url: https://pubmed.ncbi.nlm.nih.gov/29543316/
+    status: fact-sheet
 
 aiAssisted: true

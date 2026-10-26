@@ -119,7 +119,9 @@ source:
 references:
   - text: "Institute of Medicine. Dietary Reference Intakes for Water, Potassium, Sodium, Chloride, and Sulfate. Washington, DC: The National Academies Press; 2005."
     url: https://doi.org/10.17226/10925
+    status: checked
   - text: "National Academies of Sciences, Engineering, and Medicine. Dietary Reference Intakes for Sodium and Potassium. Washington, DC: The National Academies Press; 2019. Appendix J, Dietary Reference Intakes summary tables."
     url: https://doi.org/10.17226/25353
+    status: checked
 
 aiAssisted: true

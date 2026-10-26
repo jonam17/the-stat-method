@@ -29,4 +29,5 @@ checked: 2026-10-16
 references:
   - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. J Strength Cond Res, 2025;39(9):924-932."
     url: "https://doi.org/10.1519/JSC.0000000000005159"
+    status: checked
 aiAssisted: true

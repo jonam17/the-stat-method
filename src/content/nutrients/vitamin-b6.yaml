@@ -135,5 +135,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin B6 — Fact Sheet for Health Professionals. Updated 16 June 2023."
     url: https://ods.od.nih.gov/factsheets/VitaminB6-HealthProfessional/
+    status: checked
 
 aiAssisted: true

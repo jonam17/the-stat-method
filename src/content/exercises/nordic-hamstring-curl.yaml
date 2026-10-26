@@ -39,8 +39,11 @@ checked: 2026-10-16
 references:
   - text: "Maeo S, Balshaw TG, Nin DZ, Mc Dermott EJ, Osborne T, Cooper NB, Massey GJ, Kong PW, Pain MTG, Folland JP. Hamstrings hypertrophy is specific to the training exercise: Nordic hamstring versus lengthened state eccentric training. Med Sci Sports Exerc, 2024;56(10):1893-1905."
     url: "https://doi.org/10.1249/MSS.0000000000003490"
+    status: checked
   - text: "Bourne MN, Duhig SJ, Timmins RG, Williams MD, Opar DA, Al Najjar A, Kerr GK, Shield AJ. Impact of the Nordic hamstring and hip extension exercises on hamstring architecture and morphology: implications for injury prevention. Br J Sports Med, 2017;51(5):469-477."
     url: "https://doi.org/10.1136/bjsports-2016-096130"
+    status: checked
   - text: "Morin T, Doguet V, Nordez A, Caillet A, Lacourpaille L. Minimal role of hamstring hypertrophy in strength transfer between Nordic hamstring and stiff-leg deadlift: a blinded randomized controlled trial. J Strength Cond Res, 2025;39(9):924-932."
     url: "https://doi.org/10.1519/JSC.0000000000005159"
+    status: checked
 aiAssisted: true

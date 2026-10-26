@@ -163,14 +163,20 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Calcium — Fact Sheet for Health Professionals. Last modified 22 June 2026."
     url: https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/
+    status: checked
   - text: "Institute of Medicine. Dietary Reference Intakes for Calcium and Vitamin D. Washington, DC: The National Academies Press; 2011."
+    status: fact-sheet
   - text: "Thomson CA, Aragaki AK, Prentice RL, Stefanick ML, Manson JE, et al. Long-Term Effect of Randomization to Calcium and Vitamin D Supplementation on Health in Older Women: Postintervention Follow-up of a Randomized Clinical Trial. Ann Intern Med 2024;177(4):428-438."
     url: https://pubmed.ncbi.nlm.nih.gov/38467003/
+    status: fact-sheet
   - text: "U.S. Preventive Services Task Force, Grossman DC, Curry SJ, Owens DK, Barry MJ, Caughey AB, et al. Vitamin D, calcium, or combined supplementation for the primary prevention of fractures in community-dwelling adults: US Preventive Services Task Force Recommendation Statement. JAMA 2018;319:1592-9."
     url: https://pubmed.ncbi.nlm.nih.gov/29677309/
+    status: fact-sheet
   - text: "Booth AO, Huggins CE, Wattanapenpaiboon N, Nowson CA. Effect of increasing dietary calcium through supplements and dairy food on body weight and body composition: a meta-analysis of randomised controlled trials. Br J Nutr 2015;114:1013-25."
     url: https://pubmed.ncbi.nlm.nih.gov/26234296/
+    status: fact-sheet
   - text: "Kopecky SL, Bauer DC, Gulati M, Nieves JW, Singer AJ, Toth PP, et al. Lack of evidence linking calcium with or without vitamin D supplementation to cardiovascular disease in generally healthy adults: a clinical guideline from the National Osteoporosis Foundation and the American Society for Preventive Cardiology. Ann Intern Med 2016;165:867-8."
     url: https://pubmed.ncbi.nlm.nih.gov/27776362/
+    status: fact-sheet
 
 aiAssisted: true

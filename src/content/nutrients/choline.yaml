@@ -118,5 +118,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Choline — Fact Sheet for Health Professionals. Updated 2 June 2022."
     url: https://ods.od.nih.gov/factsheets/Choline-HealthProfessional/
+    status: checked
 
 aiAssisted: true

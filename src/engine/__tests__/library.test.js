@@ -123,6 +123,19 @@ describe('library files', () => {
         expect(d.references[0].url).toBe(d.source.url);
       });
 
+      // v2.34.0: each reference says how far it was checked. Required, never defaulted.
+      it('every reference states how far it was checked, and the source itself was checked', () => {
+        for (const [i, r] of d.references.entries())
+          expect(['checked', 'fact-sheet', 'unchecked'], `reference ${i + 1} status`).toContain(r.status);
+        expect(d.references[0].status, 'reference 1 is the source every value comes from').toBe('checked');
+      });
+
+      it('"cited by the fact sheet" is used only where there is a fact sheet', () => {
+        // A National Academies report is not a fact sheet; its page cannot claim that label.
+        if (d.source.kind === 'report')
+          for (const r of d.references) expect(r.status).not.toBe('fact-sheet');
+      });
+
       it('takes its values from the NIH Office of Dietary Supplements — or, where NIH has no fact sheet, from the National Academies report', () => {
         // A report is the exception, and only for a nutrient NIH has no sheet on:
         // REPORT_ONLY must be edited by hand, so the exception cannot spread quietly.

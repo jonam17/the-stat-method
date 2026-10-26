@@ -123,5 +123,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Iodine — Fact Sheet for Health Professionals. Updated 5 November 2024."
     url: https://ods.od.nih.gov/factsheets/Iodine-HealthProfessional/
+    status: checked
 
 aiAssisted: true

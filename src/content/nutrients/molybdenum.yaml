@@ -95,5 +95,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Molybdenum — Fact Sheet for Health Professionals. Updated 30 March 2021."
     url: https://ods.od.nih.gov/factsheets/Molybdenum-HealthProfessional/
+    status: checked
 
 aiAssisted: true

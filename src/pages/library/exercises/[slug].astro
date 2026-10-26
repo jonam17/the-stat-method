@@ -71,7 +71,12 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
       <section class="refs">
         <h2>References</h2>
         <ol>{d.references.map((r, i) => (
-          <li id={`ref-${i + 1}`}>{r.text}{r.url && <> <a href={r.url} rel="noopener">{new URL(r.url).hostname.replace(/^www\./, '')}</a></>}</li>))}
+          <li id={`ref-${i + 1}`}>{r.text}{r.url && <> <a href={r.url} rel="noopener">{new URL(r.url).hostname.replace(/^www\./, '')}</a></>}
+            {r.status === 'checked'
+            ? <span class="cite-state ok"><span aria-hidden="true">✓</span>Checked against the original</span>
+            : r.status === 'fact-sheet'
+            ? <span class="cite-state via">Cited by the fact sheet</span>
+            : <span class="cite-state pending">Not yet checked</span>}</li>))}
         </ol>
       </section>
 

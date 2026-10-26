@@ -145,20 +145,29 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin D — Fact Sheet for Health Professionals. Last modified 29 September 2026."
     url: https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/
+    status: checked
   - text: "Institute of Medicine, Food and Nutrition Board. Dietary Reference Intakes for Calcium and Vitamin D. Washington, DC: National Academy Press, 2010."
+    status: unchecked
   - text: "Scientific Advisory Committee on Nutrition. Vitamin D and Health. 2016."
     url: https://www.gov.uk/government/publications/sacn-vitamin-d-and-health-report
+    status: unchecked
   - text: "Demay MB, Pittas AG, Bikle DD, et al. Vitamin D for the Prevention of Disease: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab 2024;109(8):1907-1947."
     url: https://pubmed.ncbi.nlm.nih.gov/38828931/
+    status: unchecked
   - text: "A Statistical Error in the Estimation of the Recommended Dietary Allowance for Vitamin D. Nutrients."
     url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4210929/
+    status: unchecked
   - text: "NIH Office of Dietary Supplements. Vitamin D — Fact Sheet for Consumers."
     url: https://ods.od.nih.gov/factsheets/VitaminD-Consumer/
+    status: unchecked
   - text: "The Importance of Vitamin K and the Combination of Vitamins K and D for Calcium Metabolism and Bone Health: A Review."
     url: https://pmc.ncbi.nlm.nih.gov/articles/PMC11313760/
+    status: unchecked
   - text: "Calcium, vitamin D, vitamin K2, and magnesium supplementation and skeletal health."
     url: https://www.sciencedirect.com/science/article/abs/pii/S037851222030284X
+    status: unchecked
   - text: "NIH Office of Dietary Supplements. Vitamin K — Fact Sheet for Health Professionals."
     url: https://ods.od.nih.gov/factsheets/VitaminK-HealthProfessional/
+    status: unchecked
 
 aiAssisted: true

@@ -29,4 +29,5 @@ checked: 2026-10-06
 references:
   - text: "Saeterbakken AH, Andersen V, Behm DG, et al. Resistance-training exercises with different stability requirements: time course of task specificity. Eur J Appl Physiol, 2016;116:2247-2256."
     url: "https://doi.org/10.1007/s00421-016-3470-3"
+    status: checked
 aiAssisted: true

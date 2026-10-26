@@ -28,4 +28,5 @@ checked: 2026-10-16
 references:
   - text: "Maeo S, Wu Y, Huang M, Sakurai H, Kusagawa Y, Sugiyama T, Kanehisa H, Isaka T. Triceps brachii hypertrophy is substantially greater after elbow extension training performed in the overhead versus neutral arm position. Eur J Sport Sci, 2023;23(7):1240-1250."
     url: "https://doi.org/10.1080/17461391.2022.2100279"
+    status: checked
 aiAssisted: true

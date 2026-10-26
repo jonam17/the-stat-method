@@ -163,5 +163,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Vitamin A and Carotenoids — Fact Sheet for Health Professionals. Updated 10 March 2025."
     url: https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/
+    status: checked
 
 aiAssisted: true

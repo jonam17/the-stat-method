@@ -107,5 +107,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Phosphorus — Fact Sheet for Health Professionals. Updated 4 May 2023."
     url: https://ods.od.nih.gov/factsheets/Phosphorus-HealthProfessional/
+    status: checked
 
 aiAssisted: true

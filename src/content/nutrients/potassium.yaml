@@ -115,5 +115,6 @@ source:
 references:
   - text: "NIH Office of Dietary Supplements. Potassium — Fact Sheet for Health Professionals. Updated 2 June 2022."
     url: https://ods.od.nih.gov/factsheets/Potassium-HealthProfessional/
+    status: checked
 
 aiAssisted: true

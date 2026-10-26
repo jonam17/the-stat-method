@@ -34,6 +34,8 @@ checked: 2026-10-06
 references:
   - text: "Kikuchi N, Nakazato K. Low-load bench press and push-up induce similar muscle hypertrophy and strength gain. J Exerc Sci Fit, 2017;15(1):37-42."
     url: "https://pubmed.ncbi.nlm.nih.gov/29541130/"
+    status: checked
   - text: "Calatayud J, Borreani S, Colado JC, Martin F, Tella V, Andersen LL. Bench press and push-up at comparable levels of muscle activity results in similar strength gains. J Strength Cond Res, 2015;29(1):246-253."
     url: "https://doi.org/10.1519/JSC.0000000000000589"
+    status: checked
 aiAssisted: true
