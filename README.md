@@ -340,6 +340,31 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.35.0 — FFMI: where you fall among adults of your sex and age
+
+- **Every FFMI result now says where it sits** among adults of the same sex and age group, from Schutz et
+  al. 2002 (5,635 apparently healthy adults in Switzerland, Table 2): "between the 50th and 75th percentiles",
+  "above the 95th", and so on — the reported percentiles either side, never an interpolated one. Women are
+  read against women's values. A neutral scale marks the 5th, 25th, 50th, 75th and 95th percentiles. The line
+  says the sample is the general population, measured by bioelectrical impedance, not people who train.
+- **Plain FFMI, not height-adjusted**, is what the table describes, so that is the figure compared; a test
+  enforces it.
+- **An FFMI chart** for men and women by age group follows the calculator, and the *FFMI explained* article
+  shows the same two tables in place of the informal bands it used to describe. A test keeps the article's
+  numbers equal to the engine's.
+- **"How it's calculated"** under each result shows the arithmetic with the reader's own numbers, including
+  Kouri's 6.3 × (1.80 − height) adjustment.
+- **The page** now links *FFMI explained* under its introduction, and its description mentions men, women and
+  the percentiles.
+- **Engine:** the FFMI result is computed in `ffmiResult()` (CONVENTIONS §21), not the component; the table
+  lives in `src/engine/body.js` with its source, the paper's age-range inconsistency and the plain-FFMI note.
+  A second, separately typed copy in the tests must match it. Review record:
+  `docs/citation-reviews/ffmi-explained.md`.
+- **Corrected in the article:** "Three caveats" introduced two.
+- **Article tables** had no spacing of their own, so at 360px the numbers ran together. They now get padding
+  and rules like the Library tables, with the first column kept on one line. This also tidies the table in
+  *Training volume: how many sets do you actually need*.
+
 ### v2.34.2 — FFMI results no longer labelled from informal men's bands
 
 - **Fixed: the FFMI calculator labelled every result** "Below average", "Average", "Above average",

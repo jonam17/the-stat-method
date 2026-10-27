@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 import {
-  lbmFromBodyFat, ffmi, bmi, bodyFatCategory,
-  lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
+  bodyFatCategory, lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
+  FFMI_PCTS, FFMI_HEIGHT_COEFF,
 } from '../engine/index.js';
-import { ffmiNormalised } from '../engine/body.js';
+import { ffmiResult } from '../engine/results.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { RAIL_COPY, eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
@@ -35,13 +35,8 @@ export default function FfmiCalculator() {
     setUnits(to);
   };
 
-  const r = useMemo(() => {
-    const lbm = lbmFromBodyFat(kg, bf);
-    const v = ffmi(lbm, cm);
-    // Normalised FFMI adjusts to a 1.8 m reference height (Kouri et al.)
-    const norm = ffmiNormalised(v, cm);   // single source of truth (engine)
-    return { lbm, fatMass: kg - lbm, ffmi: v, norm, bmi: bmi(kg, cm) };
-  }, [kg, cm, bf]);
+  // Computed in the engine (src/engine/results.js), CONVENTIONS §21.
+  const r = useMemo(() => ffmiResult({ kg, cm, bf, sex, age }), [kg, cm, bf, sex, age]);
 
 
   // Refusal decided by the engine, the same way every other tool decides it.
@@ -99,9 +94,11 @@ export default function FfmiCalculator() {
                    note={<>Normalised to 1.8 m:{' '}
                      <b>{r.norm ? r.norm.toFixed(1) : '—'}</b></>} />
 
-          {/* v2.34.2: no category label and no banded scale. Both used informal men's
-              bands (18 / 20 / 22 / 23 / 25) with no traceable source, and showed them to women
-              too. A sourced, sex-specific reference comes with the Schutz 2002 percentiles. */}
+          {/* v2.35.0: position among the Schutz 2002 percentiles for this sex and age
+              group — the plain FFMI, which is what the table describes. No category words:
+              the informal bands removed in v2.34.2 had no source. */}
+          {r.position && <FfmiPosition pos={r.position} ffmi={r.ffmi} sex={sex} />}
+
           <StatStrip items={[
             { label: 'Lean mass', value: fmt(r.lbm), unit: 'kg' },
             { label: 'Fat mass', value: fmt(r.fatMass), unit: 'kg' },
@@ -115,6 +112,14 @@ export default function FfmiCalculator() {
             reads as "overweight" on BMI while having a perfectly ordinary FFMI.
           </p>
 
+          {r.ffmi > 0 && cm > 0 && (
+            <p className="foot-note ffmi-worked">
+              <b>How it's calculated:</b> {r.lbm.toFixed(1)} kg lean mass ÷ ({(cm / 100).toFixed(2)} m)² ={' '}
+              {r.ffmi.toFixed(1)}. Height-adjusted: {r.ffmi.toFixed(1)} + {FFMI_HEIGHT_COEFF} × (1.80 −{' '}
+              {(cm / 100).toFixed(2)}) = {r.norm.toFixed(1)}. Figures are rounded for display.
+            </p>
+          )}
+
           <p className="cat-caveat">{RAIL_COPY.categoryCaveat}</p>
 
           <Method>
@@ -125,11 +130,63 @@ export default function FfmiCalculator() {
               ceiling for men, but this comes from a small sample and should be read as a
               rough guide rather than a hard limit.
             </p>
+            <p>
+              Percentiles come from Schutz and colleagues (2002), Table 2: 5,635 apparently
+              healthy adults in Geneva and Lausanne, not randomly selected, whose fat-free mass
+              was measured by bioelectrical impedance. They describe plain FFMI, so your first
+              figure is compared with them, not the height-adjusted one. The paper's methods give
+              ages 24 to 98 while its tables start at 18; the tables' age groups are used here.
+            </p>
             <p className="refs">
-              Kouri EM, Pope HG, Katz DL, Oliva P, Clin J Sport Med 1995
+              Kouri EM, Pope HG, Katz DL, Oliva P, Clin J Sport Med 1995 ·
+              Schutz Y, Kyle UUG, Pichard C, Int J Obes 2002
             </p>
           </Method>
         </Panel>
+      </div>
+    </div>
+  );
+}
+
+const ORD = p => `${p}th`;
+
+/** One sentence and a scale: where this FFMI sits among people of the same sex and age. */
+function FfmiPosition({ pos, ffmi, sex }) {
+  const who = sex === 'female' ? 'women' : 'men';
+  const group = pos.group === '75+' ? '75 and over' : pos.group;
+  const v = ffmi.toFixed(1);
+  const where = pos.at
+    ? <>at the <b>{ORD(pos.at.p)} percentile</b></>
+    : !pos.lower
+      ? <><b>below the 5th percentile</b> ({pos.upper.value.toFixed(1)})</>
+      : !pos.upper
+        ? <><b>above the 95th percentile</b> ({pos.lower.value.toFixed(1)})</>
+        : <>between the <b>{ORD(pos.lower.p)} and {ORD(pos.upper.p)} percentiles</b>{' '}
+            ({pos.lower.value.toFixed(1)}–{pos.upper.value.toFixed(1)})</>;
+  // Scale: 5th to 95th percentile with a margin either side; the marker is clamped.
+  const lo = pos.values[0] - 1.5, hi = pos.values[pos.values.length - 1] + 1.5;
+  const at = x => Math.max(0, Math.min(100, ((x - lo) / (hi - lo)) * 100));
+  const ticks = [0, 2, 3, 4, 6];   // P5, P25, P50, P75, P95
+  const labelled = [0, 3, 6];      // only P5, P50, P95 carry labels: the inner ones collide at 360px
+  return (
+    <div className="ffmi-pos">
+      <p className="ffmi-pos-line">
+        Among {who} aged {group} in a large Swiss reference sample, an FFMI of {v} is {where}.
+        That sample was the general population, not people who train, so regular lifters
+        often land at the top of it.
+      </p>
+      <div className="ffmi-pct" aria-hidden="true">
+        <div className="ffmi-pct-track">
+          {ticks.map(k => <span key={k} className="ffmi-pct-tick" style={{ left: `${at(pos.values[k])}%` }} />)}
+          <span className="ffmi-pct-marker" style={{ left: `${at(ffmi)}%` }} />
+        </div>
+        <div className="ffmi-pct-labels">
+          {labelled.map(k => (
+            <span key={k} style={{ left: `${at(pos.values[k])}%` }}>
+              <small>{ORD(FFMI_PCTS[k])}</small>{pos.values[k].toFixed(1)}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

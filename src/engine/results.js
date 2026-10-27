@@ -12,7 +12,8 @@
  * inputs it makes the same decision with the same reason.
  */
 import { lbmFromBodyFat, bmi, idealWeightFormulas, healthyBmiRange,
-         waistToHeight, whtrBand, bmiCategory } from './body.js';
+         waistToHeight, whtrBand, bmiCategory,
+         ffmi, ffmiNormalised, ffmiPosition } from './body.js';
 import { allBmrFormulas, ACTIVITY, selectBmr, tdee, calorieTarget } from './energy.js';
 import { goalDelta, checkEnergyAvailability, eligibility, effectiveFloor, MAX_WEEKLY_LOSS_PCT } from './safety.js';
 import { intakeForTargetByDate, daysToTarget, simulate, staticSeries as staticRuleSeries } from './planner.js';
@@ -58,6 +59,21 @@ export function healthyWeightResult({ kg, cm, sex, waistCm }) {
     // anorexia caveat. Both interfaces render this list, so the rule and its
     // wording cannot drift between them.
     caveats: ['categoryCaveat', ...(bmiCategory(b) === 'Normal weight' ? ['normalLabelCaveat'] : [])],
+  };
+}
+
+/**
+ * FFMI calculator (v2.35.0 — moved from the component, CONVENTIONS §21). Raw FFMI is what
+ * the Schutz percentiles describe; the normalised figure is for comparing heights only.
+ */
+export function ffmiResult({ kg, cm, bf, sex, age }) {
+  const lbm = lbmFromBodyFat(kg, bf);
+  const v = ffmi(lbm, cm);
+  return {
+    lbm, fatMass: kg - lbm, ffmi: v,
+    norm: ffmiNormalised(v, cm),
+    bmi: bmi(kg, cm),
+    position: v ? ffmiPosition(v, sex, +age) : null,
   };
 }
 

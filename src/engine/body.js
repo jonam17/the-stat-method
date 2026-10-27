@@ -115,6 +115,63 @@ export const bodyFatCategory = (bf, sex) =>
 // reintroduce a category without a source that defines it, for each sex.
 
 /**
+ * FFMI percentiles — Schutz Y, Kyle UUG, Pichard C. Int J Obes Relat Metab Disord
+ * 2002;26(7):953-960, Table 2 (p. 955), copied value by value from the paper (v2.35.0).
+ * 5,635 apparently healthy Swiss adults (2,986 men, 2,649 women), not randomly selected,
+ * fat-free mass by bioelectrical impedance cross-validated against DXA.
+ *
+ * PLAIN FFMI — fat-free mass ÷ height² — not the 1.8 m normalised figure. Compare the
+ * calculator's raw FFMI against these, never ffmiNormalised().
+ *
+ * Age groups are the table's: 18–34, 35–54, 55–74, >75 (Table 1 labels the last 75–98).
+ * The paper's Methods say recruits were aged 24–98; its title and tables use 18. The
+ * tables' groups are used, and the page says so. Age 75 exactly falls between the
+ * table's labels (55–74, >75); it is placed in the oldest group.
+ */
+export const FFMI_PCTS = [5, 10, 25, 50, 75, 90, 95];
+export const FFMI_PERCENTILES = {
+  male: {
+    '18–34': [16.8, 17.2, 18.0, 18.9, 19.8, 20.5, 21.1],
+    '35–54': [17.2, 17.6, 18.3, 19.2, 20.1, 21.1, 21.7],
+    '55–74': [17.0, 17.6, 18.4, 19.4, 20.3, 21.1, 22.1],
+    '75+':   [16.6, 16.9, 17.6, 18.5, 19.4, 20.9, 21.2],
+  },
+  female: {
+    '18–34': [13.8, 14.1, 14.7, 15.4, 16.2, 17.1, 17.6],
+    '35–54': [14.4, 14.7, 15.3, 15.9, 16.7, 17.5, 18.0],
+    '55–74': [14.1, 14.6, 15.4, 16.2, 17.4, 18.4, 19.0],
+    '75+':   [12.9, 13.7, 14.7, 15.9, 17.0, 18.1, 18.7],
+  },
+};
+
+/** The Schutz age group for an adult age, or null below 18. */
+export const ffmiAgeGroup = age =>
+  !(age >= 18) ? null : age <= 34 ? '18–34' : age <= 54 ? '35–54' : age <= 74 ? '55–74' : '75+';
+
+/**
+ * Where a plain FFMI sits among the reference percentiles for its sex and age group.
+ * Returns the bracketing reported percentiles — never an interpolated percentile, which
+ * would claim more precision than seven published points support. The FFMI is compared
+ * at one decimal, as it is displayed.
+ *   { group, values, at }            — equals a reported percentile
+ *   { group, values, lower, upper }  — between two (lower or upper null beyond P5 / P95)
+ */
+export function ffmiPosition(rawFfmi, sex, age) {
+  const group = ffmiAgeGroup(age);
+  const values = FFMI_PERCENTILES[sex]?.[group];
+  if (!values || !(rawFfmi > 0)) return null;
+  const v = Math.round(rawFfmi * 10) / 10;
+  const i = values.findIndex(x => x === v);
+  if (i >= 0) return { group, values, at: { p: FFMI_PCTS[i], value: values[i] } };
+  let lower = null, upper = null;
+  values.forEach((x, k) => {
+    if (x < v) lower = { p: FFMI_PCTS[k], value: x };
+    else if (!upper) upper = { p: FFMI_PCTS[k], value: x };
+  });
+  return { group, values, lower, upper };
+}
+
+/**
  * Height-normalised FFMI, adjusted to Kouri's 1.8 m reference.
  *
  * COEFFICIENT CORRECTED 6.1 -> 6.3 (citation check, 2026-08-20). Kouri et al.

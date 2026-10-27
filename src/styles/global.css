@@ -532,16 +532,26 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .w-tlabel{font-family:var(--mono);font-size:9px;fill:var(--training)}
 
 /* FFMI scale */
-.ffmi-scale{margin:14px 0 4px}
-.fs-track{position:relative;display:flex;height:8px;border-radius:0;overflow:hidden;background:#0D0D0D}
-.fs-seg{flex:1;height:100%}
-.fs-seg.s1{background:#3A3A36}.fs-seg.s2{background:#B08A34}
-.fs-seg.s3{background:var(--training)}.fs-seg.s4{background:var(--nutrition)}
-.fs-marker{position:absolute;top:-4px;width:3px;height:16px;background:#F2F1EE;
-  border-radius:0;transform:translateX(-50%);box-shadow:0 0 0 2px rgba(10,10,10,.65);
-  transition:left .3s cubic-bezier(.4,0,.2,1)}
-.fs-labels{display:flex;justify-content:space-between;font-family:var(--mono);
-  font-size:9px;color:#6E6E68;margin-top:6px}
+/* v2.35.0: FFMI position among the Schutz 2002 percentiles. Neutral, not graded: the
+   scale shows where reported percentiles fall, with no colour implying good or bad. The
+   results panel is dark in both themes, so one set of colours serves both. */
+.ffmi-pos{margin:12px 0 6px}
+.ffmi-pos-line{font-size:14px;line-height:1.55;color:#E4E2DC;margin:0 0 14px}
+.ffmi-pos-line b{color:#F2F1EE}
+.ffmi-pct{position:relative;margin:0 14px 30px}
+.ffmi-pct-track{position:relative;height:6px;background:#3A3A36}
+.ffmi-pct-tick{position:absolute;top:-3px;width:1px;height:12px;background:#9A9A94}
+.ffmi-pct-marker{position:absolute;top:-6px;width:3px;height:18px;margin-left:-1px;background:#F2F1EE}
+.ffmi-pct-labels{position:relative;height:0}
+.ffmi-pct-labels span{position:absolute;top:8px;transform:translateX(-50%);font-family:var(--mono);
+  font-size:10.5px;line-height:1.25;color:#C9C7C0;text-align:center;white-space:nowrap}
+.ffmi-pct-labels small{display:block;font-size:9px;letter-spacing:.06em;color:#9A9A94}
+.ffmi-worked{font-variant-numeric:tabular-nums}
+.ffmi-chart{margin-top:8px}
+.ffmi-chart .lib-table td,.ffmi-chart .lib-table th{text-align:right;font-variant-numeric:tabular-nums}
+.ffmi-chart .lib-table td:first-child,.ffmi-chart .lib-table th:first-child{text-align:left}
+.ffmi-chart h3{margin:22px 0 4px}
+.tool-lead{margin-top:10px;font-size:15px}
 
 @media(max-width:520px){
   .row3{grid-template-columns:1fr}
@@ -1178,6 +1188,12 @@ button,input,select{touch-action:manipulation}
 
 /* Numerals inside prose read as data, not prose. */
 .prose td,.prose th{font-family:var(--mono);font-variant-numeric:tabular-nums}
+/* Markdown tables in articles: the same spacing and rules as Library tables. */
+.prose table{border-collapse:collapse;font-size:13px;margin:12px 0 20px}
+.prose th,.prose td{padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.prose th:first-child,.prose td:first-child{text-align:left;padding-left:0}
+.prose td:first-child{white-space:nowrap}
+.prose thead th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
 
 /* ---------- 4. Marginalia callouts ---------- */
 /* At wide viewports the pull-quote hangs into the left margin, the way a

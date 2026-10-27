@@ -1,7 +1,45 @@
 ---
 import ToolLayout from '../../layouts/ToolLayout.astro';
 import FfmiCalculator from '../../components/FfmiCalculator.jsx';
+import { FFMI_PERCENTILES, FFMI_PCTS } from '../../engine/body.js';
+
+// The chart shows five of the seven published percentiles so it fits a phone screen;
+// the result line uses all seven. Values come from the engine's copy of Schutz 2002
+// Table 2, so the chart and the calculator cannot disagree.
+const SHOWN = [5, 25, 50, 75, 95];
+const cols = SHOWN.map(p => FFMI_PCTS.indexOf(p));
+const groups = ['18–34', '35–54', '55–74', '75+'];
+const label = g => (g === '75+' ? '75 and over' : g);
 ---
-<ToolLayout slug="ffmi" title="Lean Mass & FFMI" intro="Fat-free mass index is BMI with the fat removed — it tells muscle from mass, which BMI cannot.">
-  <FfmiCalculator client:load  />
+<ToolLayout slug="ffmi" title="Lean Mass & FFMI" intro="Calculate your fat-free mass index — BMI with the fat removed — for men and women, with a height-adjusted figure and where you fall among adults of your sex and age.">
+  <p slot="lead" class="tool-lead">New to FFMI? Read <a href="/articles/ffmi-explained/">FFMI explained</a> first.</p>
+  <FfmiCalculator client:load />
+  <section slot="after" class="section ffmi-chart" aria-labelledby="ffmi-chart-h">
+    <span class="eyebrow">03 / REFERENCE</span>
+    <h2 id="ffmi-chart-h">FFMI chart: percentiles by age and sex</h2>
+    <p>
+      How fat-free mass index is distributed among 5,635 apparently healthy adults in Switzerland,
+      from Schutz and colleagues (2002). Half of each group sits below the 50th percentile, 5% below
+      the 5th, and 5% above the 95th. These are plain FFMI values, not height-adjusted, so compare
+      them with the first figure your result shows. The sample is the general population, measured
+      by bioelectrical impedance, not people who train.
+    </p>
+    {[['male', 'Men'], ['female', 'Women']].map(([sex, name]) => (
+      <>
+        <h3>{name}</h3>
+        <div class="lib-table-wrap"><table class="lib-table">
+          <thead><tr><th scope="col">Age</th>{SHOWN.map(p => <th scope="col">{p}th</th>)}</tr></thead>
+          <tbody>
+            {groups.map(g => (
+              <tr><th scope="row">{label(g)}</th>{cols.map(i => <td>{FFMI_PERCENTILES[sex][g][i].toFixed(1)}</td>)}</tr>
+            ))}
+          </tbody>
+        </table></div>
+      </>
+    ))}
+    <p class="refs">
+      Schutz Y, Kyle UUG, Pichard C. Fat-free mass index and fat mass index percentiles in Caucasians
+      aged 18–98 y. Int J Obes Relat Metab Disord, 2002;26(7):953-960, Table 2.
+    </p>
+  </section>
 </ToolLayout>

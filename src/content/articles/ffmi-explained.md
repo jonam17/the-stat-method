@@ -95,29 +95,46 @@ Only one of those is a training metric.
 
 <h2 id="interpreting">Interpreting your value</h2>
 
-Informal bands for men circulate widely: below 18 "below average", 18 to 20 "average", 20 to
-22 "above average", 22 to 23 "excellent", and above 23 the territory of serious long-term
-training. We could not trace them to a published source, so our calculator does not use them.
-They are men's figures; women's values run several points lower across the board, because
-typical lean mass differs between the sexes.
+The most widely used reference set covers 5,635 adults and shows how FFMI distributes across
+age and sex — more informative than the informal bands circulating in fitness communities. [2]
+Here are its percentiles for plain FFMI, not height-normalised: half of each group sits below the
+50th, 5% below the 5th, and 5% above the 95th. [2]
 
-Population percentile data exists and is worth knowing about — the most widely used
-reference set covers 5,635 adults and shows how FFMI distributes across age and sex, which
-is more informative than the informal bands circulating in fitness communities. [2]
+**Men**
+
+| Age | 5th | 25th | 50th | 75th | 95th |
+|---|---|---|---|---|---|
+| 18–34 | 16.8 | 18.0 | 18.9 | 19.8 | 21.1 |
+| 35–54 | 17.2 | 18.3 | 19.2 | 20.1 | 21.7 |
+| 55–74 | 17.0 | 18.4 | 19.4 | 20.3 | 22.1 |
+| 75 and over | 16.6 | 17.6 | 18.5 | 19.4 | 21.2 |
+
+**Women**
+
+| Age | 5th | 25th | 50th | 75th | 95th |
+|---|---|---|---|---|---|
+| 18–34 | 13.8 | 14.7 | 15.4 | 16.2 | 17.6 |
+| 35–54 | 14.4 | 15.3 | 15.9 | 16.7 | 18.0 |
+| 55–74 | 14.1 | 15.4 | 16.2 | 17.4 | 19.0 |
+| 75 and over | 12.9 | 14.7 | 15.9 | 17.0 | 18.7 |
+
+Women's medians are 2.6 to 3.5 points below men's, depending on age. The informal bands you will see
+elsewhere — "average" at 18 to 20 and so on — are men's figures we could not trace to a published
+source, so our calculator uses these percentiles instead.
 
 Know what that reference set is before leaning on it. The sample was Swiss and Caucasian,
 selected non-randomly, and body composition was measured by bioelectrical impedance rather
 than DXA — a method cross-validated against DXA in that study, but still an estimate built
 on an estimate. Percentiles from it describe that population, not necessarily yours. [2]
 
-Three caveats on the measure itself. FFMI does not distinguish muscle from other lean tissue such as bone, organs
+Two caveats on the measure itself. FFMI does not distinguish muscle from other lean tissue such as bone, organs
 and water, so it is a proxy rather than a direct muscle measurement. And it says nothing
 about strength, distribution or health — a high FFMI is not automatically a good thing, nor
 a low one automatically bad.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>FFMI has no official categories: the bands that circulate are informal and for men, and women's values run several points lower. It measures all lean tissue, not muscle specifically, and says nothing about strength or health.</p></div>
+<div class="summary-body"><p>FFMI has no official categories. A Swiss reference set gives percentiles by age and sex — a median of 18.9 for men and 15.4 for women aged 18–34 — while the bands that circulate are informal and for men. It measures all lean tissue, not muscle specifically, and says nothing about strength or health.</p></div>
 </aside>
 
 <h2 id="the-ceiling">The "natural limit" claim</h2>
