@@ -61,7 +61,8 @@ const isArticle = ogType === 'article';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': isArticle ? (clinicalClaims ? 'MedicalWebPage' : 'Article') : pageType,
-  name: title,
+  // The homepage's WebSite entry names the site itself; Google reads its site name from it.
+  name: pageType === 'WebSite' ? BRAND : title,
   headline: isArticle ? title : undefined,
   description,
   url: canonical,

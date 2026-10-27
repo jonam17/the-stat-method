@@ -4,7 +4,7 @@ dek: "BMI cannot distinguish a bodybuilder from someone carrying excess fat. Fat
 category: Health
 conclusion: "FFMI tells you what BMI cannot, and still cannot tell you what a mirror or a measuring tape will."
 published: 2026-08-08
-updated: 2026-08-20
+updated: 2026-10-26
 readMinutes: 7
 aiAssisted: true
 citationsVerified: full
@@ -95,10 +95,11 @@ Only one of those is a training metric.
 
 <h2 id="interpreting">Interpreting your value</h2>
 
-For men, rough bands look like this: below 18 is below average, 18 to 20 is average, 20 to
-22 is above average, 22 to 23 is excellent, and above 23 is well into the territory of
-serious long-term training. Women's values run several points lower across the board due to
-differences in typical lean mass.
+Informal bands for men circulate widely: below 18 "below average", 18 to 20 "average", 20 to
+22 "above average", 22 to 23 "excellent", and above 23 the territory of serious long-term
+training. We could not trace them to a published source, so our calculator does not use them.
+They are men's figures; women's values run several points lower across the board, because
+typical lean mass differs between the sexes.
 
 Population percentile data exists and is worth knowing about — the most widely used
 reference set covers 5,635 adults and shows how FFMI distributes across age and sex, which
@@ -116,7 +117,7 @@ a low one automatically bad.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Roughly, 20-22 is above average for men and above 23 reflects substantial training. It measures all lean tissue, not muscle specifically, and says nothing about strength or health.</p></div>
+<div class="summary-body"><p>FFMI has no official categories: the bands that circulate are informal and for men, and women's values run several points lower. It measures all lean tissue, not muscle specifically, and says nothing about strength or health.</p></div>
 </aside>
 
 <h2 id="the-ceiling">The "natural limit" claim</h2>

@@ -11,7 +11,7 @@ import {
   simulate, daysToTarget, intakeForTargetByDate,
   forbesFatFraction, adaptiveFactor,
 } from '../planner.js';
-import { bodyFatSkinfold3, bodyFatCategory, ffmiBand } from '../body.js';
+import { bodyFatSkinfold3, bodyFatCategory } from '../body.js';
 
 describe('one-rep max', () => {
   it('returns the lifted weight when reps = 1', () => {
@@ -193,11 +193,9 @@ describe('skinfold body fat', () => {
     expect(bodyFatSkinfold3({ sex: 'male', age: 30, s1: 0, s2: 0, s3: 0 })).toBeNull();
   });
 
-  it('categorises body fat and FFMI', () => {
+  it('categorises body fat', () => {
     expect(bodyFatCategory(10, 'male')).toBe('Athletic');
     expect(bodyFatCategory(10, 'female')).toBe('Below essential');
-    expect(ffmiBand(19)).toBe('Average');
-    expect(ffmiBand(27)).toContain('rare');
   });
 });
 

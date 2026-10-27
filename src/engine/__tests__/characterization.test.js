@@ -17,7 +17,8 @@ import {
   RECOMP_WEEKLY_LOSS_PCT, checkRate, ageAccuracyNote, BMI_UNDERWEIGHT, checkOlderAdultWeight,
 } from '../safety.js';
 import { cmToFtIn, kgToLb, lbToKg, fmt } from '../units.js';
-import { ffmi, ffmiBand, ffmiNormalised, FFMI_HEIGHT_COEFF } from '../body.js';
+import * as body from '../body.js';
+const { ffmi, ffmiNormalised, FFMI_HEIGHT_COEFF } = body;
 
 const female55 = { kg: 55, cm: 160, age: 30, sex: 'female' };
 const male70   = { kg: 70, cm: 175, age: 30, sex: 'male' };
@@ -91,14 +92,10 @@ describe('F-011 lb/kg round trip', () => {
 });
 
 describe('F-006 FFMI band variable', () => {
-  it('[CHANGES] raw and normalised FFMI can fall in different bands', () => {
-    const lbm = 53, cm = 165;
-    const raw = ffmi(lbm, cm);
-    const norm = raw + 6.1 * (1.8 - cm / 100);
-    expect(Math.abs(norm - raw)).toBeCloseTo(0.915, 2);
-    // 165cm / 53kg lean: raw 19.47 -> 'Average', normalised 20.38 -> 'Above average'
-    expect(ffmiBand(raw)).toBe('Average');
-    expect(ffmiBand(norm)).toBe('Above average');
+  // v2.34.2: the informal bands were removed — no source defined them, and they took no sex.
+  // This guards against their quiet return.
+  it('no FFMI category bands are exported', () => {
+    expect(body.ffmiBand).toBeUndefined();
   });
 });
 

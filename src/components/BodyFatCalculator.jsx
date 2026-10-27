@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
   bodyFatNavy, bodyFatDeurenberg, bodyFatSkinfold3, BODY_FAT_ERROR,
-  SKINFOLD_SITES, bodyFatCategory, ffmi, ffmiBand,
+  SKINFOLD_SITES, bodyFatCategory, ffmi,
   lbmFromBodyFat, bmi, waistToHeight,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
@@ -209,7 +209,7 @@ export default function BodyFatCalculator() {
               ]} />
 
               <p className="foot-note">
-                FFMI {r.ffmi ? r.ffmi.toFixed(1) : '—'} — {r.ffmi ? ffmiBand(r.ffmi) : '—'}.
+                FFMI {r.ffmi ? r.ffmi.toFixed(1) : '—'}.
                 Waist-to-height above 0.50 is the common risk threshold and predicts
                 cardiometabolic risk better than BMI.
               </p>

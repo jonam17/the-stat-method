@@ -108,15 +108,11 @@ export const BF_CATEGORIES = {
 export const bodyFatCategory = (bf, sex) =>
   (BF_CATEGORIES[sex] || BF_CATEGORIES.male).find(c => bf < c.max)?.label ?? '—';
 
-/**
- * FFMI interpretation bands (Kouri et al., 1995). ~25 is the approximate natural
- * ceiling. NOTE: Kouri defined these on HEIGHT-NORMALISED FFMI. Pass the
- * normalised value, not raw FFMI, or bands are wrong by ~1 unit for anyone far
- * from 1.8 m (audit F-006). Use ffmiNormalised() to obtain it.
- */
-export const ffmiBand = v =>
-  v < 18 ? 'Below average' : v < 20 ? 'Average' : v < 22 ? 'Above average'
-  : v < 23 ? 'Excellent' : v < 25 ? 'Superior' : 'Very high — rare without assistance';
+// FFMI interpretation bands were removed in v2.34.2. They were informal men's figures
+// (18 / 20 / 22 / 23 / 25) credited here to Kouri et al. 1995, which supports only the
+// observation that non-users in its sample of 157 male athletes reached "a well-defined
+// limit of 25.0". They took no sex, so women were read against men's figures. Do not
+// reintroduce a category without a source that defines it, for each sex.
 
 /**
  * Height-normalised FFMI, adjusted to Kouri's 1.8 m reference.

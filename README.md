@@ -340,6 +340,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.34.2 — FFMI results no longer labelled from informal men's bands
+
+- **Fixed: the FFMI calculator labelled every result** "Below average", "Average", "Above average",
+  "Excellent" or "Superior", from cut-offs at 18, 20, 22, 23 and 25 — informal figures for men that the site's
+  own *FFMI explained* article could not source, and which took no account of sex, so women were read against
+  men's figures. The label and the coloured scale built on the same bands are gone; the result shows FFMI, the
+  figure normalised to 1.8 m, lean and fat mass, as before. The Body Fat calculator's FFMI line loses the label
+  too (it also applied it to unnormalised FFMI). A sourced, sex-specific reference is planned next.
+- **Corrected:** the engine credited the bands to Kouri et al. 1995, which supports only its observation that
+  non-users among 157 male athletes reached "a well-defined limit of 25.0". A test now fails if a band function
+  returns.
+- **Said plainly:** the FFMI page's "What the number means" and the article's *Interpreting your value* and
+  summary now say the bands are informal and for men; the page adds the Schutz 2002 medians for adults aged
+  18–34 (18.9 men, 15.4 women).
+- **Homepage title** now leads with the name — "The Stat Method — Evidence-Based Fitness & Nutrition Tools" —
+  and the homepage's WebSite structured data names the site "The Stat Method", the name Google shows for it.
+
 ### v2.34.1 — Site search no longer leaks a fake link to crawlers
 
 - **Fixed:** the site search built its result list from an HTML template string inside the page's inline

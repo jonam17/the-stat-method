@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import {
-  lbmFromBodyFat, ffmi, ffmiBand, bmi, bodyFatCategory,
+  lbmFromBodyFat, ffmi, bmi, bodyFatCategory,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
 import { ffmiNormalised } from '../engine/body.js';
@@ -43,7 +43,6 @@ export default function FfmiCalculator() {
     return { lbm, fatMass: kg - lbm, ffmi: v, norm, bmi: bmi(kg, cm) };
   }, [kg, cm, bf]);
 
-  const scale = Math.max(0, Math.min(100, ((r.ffmi ?? 0) - 15) / 13 * 100));
 
   // Refusal decided by the engine, the same way every other tool decides it.
   const gate = eligibility({ age });
@@ -97,20 +96,12 @@ export default function FfmiCalculator() {
                incomplete={gate.incomplete || !(kg > 0 && cm > 0)}
                incompleteNote="Enter your weight, height and body fat to see your FFMI.">
           <BigStat value={r.ffmi ? r.ffmi.toFixed(1) : '—'} unit="FFMI"
-                   note={<>{r.norm ? ffmiBand(r.norm) : '—'} · normalised to 1.8 m:{' '}
+                   note={<>Normalised to 1.8 m:{' '}
                      <b>{r.norm ? r.norm.toFixed(1) : '—'}</b></>} />
 
-          <div className="ffmi-scale">
-            <div className="fs-track">
-              <span className="fs-seg s1" /><span className="fs-seg s2" />
-              <span className="fs-seg s3" /><span className="fs-seg s4" />
-              <span className="fs-marker" style={{ left: `${scale}%` }} />
-            </div>
-            <div className="fs-labels">
-              <span>15</span><span>19</span><span>22</span><span>25</span><span>28</span>
-            </div>
-          </div>
-
+          {/* v2.34.2: no category label and no banded scale. Both used informal men's
+              bands (18 / 20 / 22 / 23 / 25) with no traceable source, and showed them to women
+              too. A sourced, sex-specific reference comes with the Schutz 2002 percentiles. */}
           <StatStrip items={[
             { label: 'Lean mass', value: fmt(r.lbm), unit: 'kg' },
             { label: 'Fat mass', value: fmt(r.fatMass), unit: 'kg' },

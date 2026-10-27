@@ -111,7 +111,7 @@ export const GUIDES = {
     ],
     interpreting: [
       ['What the number means',
-       'Roughly: under 18 is below average for men, 18–20 average, 20–22 above average, and above 23 reflects substantial long-term training. Women run several points lower throughout. The value measures all lean tissue, not muscle specifically, so treat it as a proxy.'],
+       'FFMI has no official categories. The labels you may see elsewhere — under 18 \u201cbelow average\u201d, 18–20 \u201caverage\u201d and so on — are informal figures for men that we could not trace to a published source, so this calculator does not use them. For reference, in a large Swiss sample the median FFMI of adults aged 18 to 34 was 18.9 in men and 15.4 in women. The value measures all lean tissue, not muscle specifically, so treat it as a proxy.'],
       ['Why this beats BMI if you train',
        'Two people of identical height and weight, one at 12% body fat and one at 30%, produce the same BMI and very different FFMI. This is the concrete answer to BMI misclassifying athletes. BMI remains reasonable for population screening — it fails specifically at the muscular and sarcopenic extremes.'],
       ['On the "natural limit" of 25',
