@@ -340,6 +340,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.34.1 — Site search no longer leaks a fake link to crawlers
+
+- **Fixed:** the site search built its result list from an HTML template string inside the page's inline
+  script. Visitors never saw it, but crawlers read the script as text, took the template's link attribute for
+  a real address, and requested it under every page — about 20 of the 552 not-found errors in the Cloudflare
+  log of October, under 14 different pages. The results are now built with DOM methods; titles and
+  descriptions are set as text, so no hand-written escaping is needed. Search looks and works as before:
+  same results, arrow keys, Enter and the empty state, checked in a browser at 360px and 1280px in both themes.
+- **Prevented:** `npm run check:placeholders` (part of `qa:release`) now fails if any built page contains a
+  JavaScript template left in an attribute.
+- The rest of those errors were bots probing for software the site doesn't run (WordPress, `.env` files);
+  nothing to fix.
+
 ### v2.34.0 — Library references say how far they were checked
 
 - **Every reference on a Library page now carries a label**, as articles' references do:

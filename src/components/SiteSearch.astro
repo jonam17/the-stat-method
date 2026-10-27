@@ -100,14 +100,27 @@
         list.innerHTML = '<li class="search-empty">No matches. Try a shorter word.</li>';
         return;
       }
-      list.innerHTML = items.map((e, i) => `
-        <li>
-          <a href="${e.url}" role="option" aria-selected="${i === 0}" class="${i === 0 ? 'on' : ''}">
-            <span class="search-kind">${e.kind}</span>
-            <span class="search-title">${e.title.replace(/</g, '&lt;')}</span>
-            <span class="search-desc">${(e.desc || '').replace(/</g, '&lt;')}</span>
-          </a>
-        </li>`).join('');
+      // Built with DOM methods, not an HTML template string (v2.34.1). Crawlers read
+      // this inline script as text, took the link attribute in the old template for a
+      // real address and requested it under every page. textContent also escapes
+      // titles and descriptions without hand-written replacements.
+      const span = (cls, text) => {
+        const el = document.createElement('span');
+        el.className = cls;
+        el.textContent = text;
+        return el;
+      };
+      list.replaceChildren(...items.map((e, i) => {
+        const a = document.createElement('a');
+        a.href = e.url;
+        a.setAttribute('role', 'option');
+        a.setAttribute('aria-selected', String(i === 0));
+        if (i === 0) a.className = 'on';
+        a.append(span('search-kind', e.kind), span('search-title', e.title), span('search-desc', e.desc || ''));
+        const li = document.createElement('li');
+        li.append(a);
+        return li;
+      }));
     }
 
     function move(step) {

@@ -18,6 +18,9 @@ const PATTERNS = [
   { re: /\bTODO\b|\bFIXME\b/g,  why: 'unresolved marker in shipped output' },
   { re: /example\.com/g,        why: 'placeholder domain' },
   { re: /lorem ipsum/gi,        why: 'placeholder copy' },
+  // v2.34.1: an inline script built links as `<a href="${e.url}">`. Browsers never saw
+  // it, but crawlers read the script as text and requested /${e.url} under every page.
+  { re: /="\$\{[^"}]*\}"/g,     why: 'JavaScript template left in an attribute — crawlers request it as a URL' },
 ];
 
 const walk = d => readdirSync(d).flatMap(f => {
