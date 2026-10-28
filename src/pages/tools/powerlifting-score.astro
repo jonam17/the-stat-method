@@ -1,7 +1,66 @@
 ---
 import ToolLayout from '../../layouts/ToolLayout.astro';
-import PowerliftingScore from '../../components/PowerliftingScore.jsx';
+import PowerliftingScore, { longDate } from '../../components/PowerliftingScore.jsx';
+import { OPL_DATA, OPL_PCTS } from '../../engine/scoring.js';
+
+// The chart shows five of the eight percentiles; the result line uses all eight. One row per
+// percentile and one column per group, so the group names can wrap at 360px. Values come from
+// the engine's copy of the OpenPowerlifting figures (src/data/opl-percentiles.json), so the
+// chart and the calculator cannot disagree.
+const SHOWN = [5, 25, 50, 75, 95];
+const rows = [
+  ['men-classic', 'Men, classic'], ['men-equipped', 'Men, equipped'],
+  ['women-classic', 'Women, classic'], ['women-equipped', 'Women, equipped'],
+];
+const n = k => OPL_DATA.all[k].lifters.toLocaleString('en-US');
+// How far the drug-tested-only figures sit from these, computed rather than typed.
+const gap = k => Math.max(...OPL_PCTS.map(p => Math.abs(OPL_DATA.all[k].dots[p] - OPL_DATA.tested[k].dots[p])));
+const othersGap = Math.max(gap('men-classic'), gap('men-equipped'), gap('women-classic')).toFixed(1);
+const womenEqGap = gap('women-equipped').toFixed(1);
 ---
 <ToolLayout slug="powerlifting-score" title="DOTS, IPF GL & Wilks Score" intro="Calculate your DOTS and IPF GL Points for a powerlifting total, for men and women, classic or equipped. Wilks is shown for older records.">
+  <p slot="lead" class="tool-lead">New to the formulas? Read <a href="/articles/powerlifting-scoring-explained/">Wilks is obsolete: what replaced it and why</a>.</p>
   <PowerliftingScore client:load />
+  <section slot="after" class="section ffmi-chart score-chart" aria-labelledby="score-chart-h">
+    <span class="eyebrow">03 / REFERENCE</span>
+    <h2 id="score-chart-h">What is a good DOTS score? Percentiles among competition lifters</h2>
+    <p>
+      How DOTS and IPF GL Points are spread among people who competed in full-power meets in the
+      five years to {longDate(OPL_DATA.window.to)}, from OpenPowerlifting's public meet results.
+      Each lifter is counted once, at their best; classic means raw (bare knees or sleeves),
+      equipped means single-ply. Half of each group sits below the 50th percentile, 5% below the
+      5th, and 5% above the 95th. Everyone here entered a meet, so this describes competitors, not
+      everyone who lifts.
+    </p>
+    <h3>DOTS</h3>
+    <div class="lib-table-wrap"><table class="lib-table">
+      <thead><tr><th scope="col"><span class="sr-only">Percentile</span></th>{rows.map(([, name]) => <th scope="col">{name}</th>)}</tr></thead>
+      <tbody>
+        {SHOWN.map(p => (
+          <tr><th scope="row">{p}th</th>{rows.map(([k]) => <td>{OPL_DATA.all[k].dots[p].toFixed(1)}</td>)}</tr>
+        ))}
+      </tbody>
+    </table></div>
+    <h3>IPF GL Points</h3>
+    <div class="lib-table-wrap"><table class="lib-table">
+      <thead><tr><th scope="col"><span class="sr-only">Percentile</span></th>{rows.map(([, name]) => <th scope="col">{name}</th>)}</tr></thead>
+      <tbody>
+        {SHOWN.map(p => (
+          <tr><th scope="row">{p}th</th>{rows.map(([k]) => <td>{OPL_DATA.all[k].gl[p].toFixed(1)}</td>)}</tr>
+        ))}
+      </tbody>
+    </table></div>
+    <p>
+      Lifters per group: men classic {n('men-classic')}, men equipped {n('men-equipped')}, women
+      classic {n('women-classic')}, women equipped {n('women-equipped')}. Results from drug-tested
+      categories alone come within {othersGap} DOTS of these at every percentile, except for
+      equipped women, the smallest group, where they run higher at every percentile, by up to
+      {' '}{womenEqGap}.
+    </p>
+    <p class="refs">
+      OpenPowerlifting bulk data (public domain), openpowerlifting.gitlab.io/opl-csv,
+      file of {OPL_DATA.file.split('/')[0].replace('openpowerlifting-', '')}. Full-power meets,
+      numeric placings only; figures produced by scripts/opl-percentiles.mjs.
+    </p>
+  </section>
 </ToolLayout>

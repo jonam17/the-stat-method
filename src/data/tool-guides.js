@@ -212,7 +212,7 @@ export const GUIDES = {
   'powerlifting-score': {
     terms: [
       ['Total', 'Squat plus bench plus deadlift — best successful attempt at each.'],
-      ['DOTS', 'A 2019 scoring formula that adjusts a total for bodyweight. Current standard for many federations.'],
+      ['DOTS', 'A 2019 scoring formula that adjusts a total for bodyweight, built on results from drug-tested raw lifters.'],
       ['IPF GL', 'IPF Goodlift points — the official IPF system since May 2020.'],
       ['Wilks', 'The long-standing scoring formula, now largely superseded.'],
       ['Classic / raw', 'Lifted without supportive equipment beyond a belt and sleeves.'],
@@ -226,7 +226,9 @@ export const GUIDES = {
       ['The three scales are not comparable',
        'IPF GL points run to roughly 100 for an elite result, while DOTS and Wilks run in the hundreds. A GL of 72 and a DOTS of 352 can describe the same lifter. Never compare a number from one system against another.'],
       ['Why DOTS is the default here',
-       'Wilks was the global standard for about twenty-five years but has documented bias at very light and very heavy bodyweights. DOTS was built on modern competition data to correct that, and USPA, WRPF and others adopted it from 2020. Wilks is retained because many older records and personal benchmarks are still expressed in it — but if your federation has not specified, DOTS is the safer modern choice.'],
+       'Wilks was the global standard for about twenty-five years but has documented bias at very light and very heavy bodyweights. DOTS is the 2019 replacement, built on results from drug-tested raw lifters; USA Powerlifting’s rulebook uses it to break ties in team placings. Wilks is retained because many older records and personal benchmarks are still expressed in it — but if your federation has not specified, DOTS is the safer modern choice.'],
+      ['What is a good score',
+       'The chart below the calculator shows DOTS and IPF GL percentiles among people who competed in full-power meets over five years, split by sex and equipment. The median for men in classic meets is about 359 DOTS; for women, about 316. Your result line says where your own score falls.'],
     ],
   },
 

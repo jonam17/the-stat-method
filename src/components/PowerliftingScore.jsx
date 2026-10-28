@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { allScores, lbToKg, kgToLb, fmt } from '../engine/index.js';
+import { lbToKg, kgToLb, fmt, OPL_DATA } from '../engine/index.js';
+import { powerliftingResult } from '../engine/results.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 
 export default function PowerliftingScore() {
@@ -27,11 +28,9 @@ export default function PowerliftingScore() {
     setUnits(to);
   };
 
-  const r = useMemo(() => {
-    const scores = allScores({ totalKg, bodyweightKg: bwKg, sex, equipment, event });
-    const primary = scores.find(s => s.key === 'dots');
-    return { scores, primary, ratio: bwKg ? totalKg / bwKg : 0 };
-  }, [totalKg, bwKg, sex, equipment, event]);
+  const r = useMemo(
+    () => powerliftingResult({ totalKg, bodyweightKg: bwKg, sex, equipment, event }),
+    [totalKg, bwKg, sex, equipment, event]);
 
   return (
     <div className="calc">
@@ -79,7 +78,19 @@ export default function PowerliftingScore() {
           {r.primary ? (
             <>
               <BigStat value={r.primary.value.toFixed(1)} unit="DOTS"
-                       note="Used by USA Powerlifting, USPA, WRPF and others. The IPF scores on GL Points, below." />
+                       note="The IPF scores on GL Points instead, shown below." />
+
+              {r.dots.clamped && (
+                <p className="foot-note">
+                  DOTS is defined from {r.dots.min} to {r.dots.max} kg for {sex === 'female' ? 'women' : 'men'}.{' '}
+                  {r.dots.clamped === 'above' ? 'Above' : 'Below'} that it is scored as if you weighed{' '}
+                  {r.dots.bwUsed} kg — which is how OpenPowerlifting scores every such lifter.
+                </p>
+              )}
+
+              <ScorePosition pos={r.position} dots={r.primary.value}
+                             gl={r.scores.find(s => s.key === 'ipfgl')?.value} sex={sex}
+                             equipment={equipment} event={event} />
 
               <div className="bartop tight">
                 <span className="t">All three systems</span>
@@ -109,6 +120,18 @@ export default function PowerliftingScore() {
                   unit: event === 'bench' ? 'bench' : 'full' },
               ]} />
 
+              {r.dots.denom > 0 && (
+                <p className="foot-note score-worked">
+                  <b>How it's calculated</b> (in kg): DOTS = total × 500 ÷ (A·bw⁴ + B·bw³ + C·bw² + D·bw + E).
+                  At {fmt1(r.dots.bwUsed)} kg the bracket is {r.dots.denom.toFixed(2)}, so {fmt1(totalKg)} × 500 ÷{' '}
+                  {r.dots.denom.toFixed(2)} = {r.primary.value.toFixed(1)}.
+                  {r.gl && r.gl.value && <>{' '}IPF GL = total × 100 ÷ (A − B·e<sup>−C·bw</sup>) = {fmt1(totalKg)} × 100 ÷{' '}
+                    ({r.gl.A} − {r.gl.B} × e<sup>−{r.gl.C} × {fmt1(bwKg)}</sup>) = {fmt1(totalKg)} × 100 ÷{' '}
+                    {r.gl.denom.toFixed(2)} = {r.gl.value.toFixed(1)}.</>}
+                  {' '}Figures are rounded for display.
+                </p>
+              )}
+
               <p className="foot-note">
                 Note that IPF GL points are on a different scale entirely — roughly 100
                 represents an elite result, where DOTS and Wilks both run in the hundreds.
@@ -117,9 +140,12 @@ export default function PowerliftingScore() {
 
               <Method>
                 <p>
-                  <strong>DOTS</strong> (Konertz, 2019) was built on modern competition data
-                  to correct known biases in Wilks at very light and very heavy bodyweights.
-                  USPA, WRPF and others adopted it from 2020.
+                  <strong>DOTS</strong> was created in 2019 by Tim Konertz of the BVDK: an updated,
+                  simpler polynomial in the same form as Wilks, built on results from drug-tested
+                  raw lifters. USA Powerlifting's rulebook uses it to break ties in team placings at
+                  national championships, and keeps it until a better formula is approved. Outside
+                  40–210 kg (men) or 40–150 kg (women), bodyweight is set to the nearest limit, as
+                  OpenPowerlifting does.
                 </p>
                 <p>
                   <strong>IPF GL Points</strong> became the IPF's official system on
@@ -132,9 +158,18 @@ export default function PowerliftingScore() {
                   are still expressed in it. If your federation has not specified a system,
                   DOTS is the safer modern default.
                 </p>
+                <p>
+                  <strong>Percentiles</strong> come from OpenPowerlifting's public meet results:
+                  full-power meets in the five years to {longDate(OPL_DATA.window.to)}, classic (raw) or
+                  equipped (single-ply), placed lifters only, each lifter counted once at their best.
+                  Results from drug-tested categories alone differ little, except for equipped women
+                  (see the chart below).
+                </p>
                 <p className="refs">
-                  IPF GL coefficients, International Powerlifting Federation (2020) ·
-                  Konertz T, DOTS (2019) · Wilks R (1994)
+                  IPF GL coefficients, International Powerlifting Federation (2020) · DOTS: Konertz T,
+                  BVDK (2019), coefficients as given in the IPF's 2020 formula evaluation · USA Powerlifting
+                  Rulebook v2026.2, §1.9.5 · OpenPowerlifting bulk data (public domain), file of
+                  {' '}{OPL_DATA.file.split('/')[0].replace('openpowerlifting-', '')} · Wilks R (1994)
                 </p>
               </Method>
             </>
@@ -144,5 +179,37 @@ export default function PowerliftingScore() {
         </Panel>
       </div>
     </div>
+  );
+}
+
+const fmt1 = v => (Math.round(v * 10) / 10).toString();
+const ORD = p => `${p}th`;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+  'September', 'October', 'November', 'December'];
+export const longDate = iso => { const [y, m, d] = iso.split('-'); return `${+d} ${MONTHS[+m - 1]} ${y}`; };
+
+function where(pos, top) {
+  if (pos.at) return <>at the <b>{ORD(pos.at.p)} percentile</b></>;
+  if (!pos.lower) return <><b>below the 5th percentile</b> ({pos.upper.value.toFixed(1)})</>;
+  if (!pos.upper) return <><b>above the {ORD(top)} percentile</b> ({pos.lower.value.toFixed(1)})</>;
+  return <>between the <b>{ORD(pos.lower.p)} and {ORD(pos.upper.p)} percentiles</b>{' '}
+    ({pos.lower.value.toFixed(1)}–{pos.upper.value.toFixed(1)})</>;
+}
+
+/** Where the scores sit among competition lifters of the same sex and equipment. */
+function ScorePosition({ pos, dots, gl, sex, equipment, event }) {
+  if (event !== 'full') {
+    return <p className="score-pos-line">Percentiles cover full-power meets only, so none are shown for bench-only.</p>;
+  }
+  if (!pos.dots) return null;
+  const who = sex === 'female' ? 'women' : 'men';
+  return (
+    <p className="score-pos-line">
+      Among {who} who competed in {equipment === 'equipped' ? 'equipped' : 'classic'} full-power meets
+      in the five years to {longDate(OPL_DATA.window.to)} ({pos.dots.lifters.toLocaleString('en-US')} lifters
+      on OpenPowerlifting, each counted once at their best), a DOTS of {dots.toFixed(1)} is{' '}
+      {where(pos.dots, 99)}{pos.gl && gl ? <>, and an IPF GL of {gl.toFixed(1)} is {where(pos.gl, 99)}</> : null}.
+      Everyone here entered a meet, so this compares you with competitors, not with everyone who lifts.
+    </p>
   );
 }

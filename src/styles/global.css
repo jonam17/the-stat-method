@@ -536,8 +536,9 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
    scale shows where reported percentiles fall, with no colour implying good or bad. The
    results panel is dark in both themes, so one set of colours serves both. */
 .ffmi-pos{margin:12px 0 6px}
-.ffmi-pos-line{font-size:14px;line-height:1.55;color:#E4E2DC;margin:0 0 14px}
-.ffmi-pos-line b{color:#F2F1EE}
+.ffmi-pos-line,.score-pos-line{font-size:14px;line-height:1.55;color:#E4E2DC;margin:0 0 14px}
+.ffmi-pos-line b,.score-pos-line b{color:#F2F1EE}
+.score-pos-line{margin:12px 0 14px}
 .ffmi-pct{position:relative;margin:0 14px 30px}
 .ffmi-pct-track{position:relative;height:6px;background:#3A3A36}
 .ffmi-pct-tick{position:absolute;top:-3px;width:1px;height:12px;background:#9A9A94}
@@ -546,11 +547,13 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .ffmi-pct-labels span{position:absolute;top:8px;transform:translateX(-50%);font-family:var(--mono);
   font-size:10.5px;line-height:1.25;color:#C9C7C0;text-align:center;white-space:nowrap}
 .ffmi-pct-labels small{display:block;font-size:9px;letter-spacing:.06em;color:#9A9A94}
-.ffmi-worked{font-variant-numeric:tabular-nums}
+.ffmi-worked,.score-worked{font-variant-numeric:tabular-nums}
 .ffmi-chart{margin-top:8px}
 .ffmi-chart .lib-table td,.ffmi-chart .lib-table th{text-align:right;font-variant-numeric:tabular-nums}
 .ffmi-chart .lib-table td:first-child,.ffmi-chart .lib-table th:first-child{text-align:left}
 .ffmi-chart h3{margin:22px 0 4px}
+.score-chart .lib-table th,.score-chart .lib-table td{padding:9px 6px}
+.score-chart .lib-table thead th{vertical-align:bottom}
 .tool-lead{margin-top:10px;font-size:15px}
 
 @media(max-width:520px){

@@ -18,6 +18,7 @@ import { allBmrFormulas, ACTIVITY, selectBmr, tdee, calorieTarget } from './ener
 import { goalDelta, checkEnergyAvailability, eligibility, effectiveFloor, MAX_WEEKLY_LOSS_PCT } from './safety.js';
 import { intakeForTargetByDate, daysToTarget, simulate, staticSeries as staticRuleSeries } from './planner.js';
 import { recommendedGrams, recommendedPercent, resolveSplit } from './macros.js';
+import { allScores, dotsParts, ipfGlParts, scorePosition } from './scoring.js';
 
 /** TDEE & BMR Calculator. */
 export function tdeeResult({ kg, cm, age, sex, activity, bf }) {
@@ -78,6 +79,27 @@ export function ffmiResult({ kg, cm, bf, sex, age }) {
 }
 
 /** Macro Calculator. `split` and `mode` belong to its editor; defaults suit a summary. */
+/**
+ * Powerlifting scores with their working and where they sit among competition lifters.
+ * Positions are full power only (the OpenPowerlifting figures are SBD); null for bench-only.
+ */
+export function powerliftingResult({ totalKg, bodyweightKg, sex, equipment = 'classic', event = 'full' }) {
+  const scores = allScores({ totalKg, bodyweightKg, sex, equipment, event });
+  const primary = scores.find(s => s.key === 'dots') ?? null;
+  const gl = scores.find(s => s.key === 'ipfgl') ?? null;
+  const dp = dotsParts(totalKg, bodyweightKg, sex);
+  const gp = ipfGlParts(totalKg, bodyweightKg, sex, equipment, event);
+  const ctx = { sex, equipment, event };
+  return {
+    scores, primary, ratio: bodyweightKg ? totalKg / bodyweightKg : 0,
+    dots: dp, gl: gp,
+    position: {
+      dots: primary ? scorePosition(primary.value, 'dots', ctx) : null,
+      gl: gl ? scorePosition(gl.value, 'gl', ctx) : null,
+    },
+  };
+}
+
 export function macroResult({ kg, cm, age, sex, activity, goal, bf, formula = 'auto', split = null, mode = 'percent', lifeStage = 'none' }) {
   const lbm = lbmFromBodyFat(kg, bf);
   const input = { kg, cm, age: +age || 0, sex, lbm };

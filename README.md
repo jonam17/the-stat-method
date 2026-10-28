@@ -340,6 +340,29 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.36.0 — DOTS: what is a good score, and what USA Powerlifting actually says
+
+- **Where your score sits among competitors.** Each full-power result now says where its DOTS and IPF GL
+  fall among lifters of the same sex and equipment who competed in the five years to 18 October 2026 —
+  168,218 men and 81,382 women in classic meets, 21,735 and 5,559 equipped — from OpenPowerlifting's
+  public-domain meet results, each lifter counted once at their best. The line says plainly that these are
+  competitors, not everyone who lifts. Bench-only gets no line, since the data is full power.
+- **"What is a good DOTS score?"** A chart after the calculator gives the 5th to 95th percentiles of DOTS
+  and IPF GL for each group, with the counts and how little the drug-tested-only figures differ (except for
+  equipped women). The *Wilks is obsolete* article gains the same tables.
+- **How it's calculated:** the DOTS and GL arithmetic with the reader's own numbers.
+- **DOTS above 210 kg (men) or 150 kg (women)** is still scored at the limit — every one of OpenPowerlifting's
+  6,444 such published scores is computed that way — and the calculator now says so when it applies.
+- **Corrected against USA Powerlifting's rulebook (v2026.2):** it uses DOTS to break ties in team placings
+  at national championships, not to "score" lifters; masters divisions end at 109. The article's
+  age-coefficient figures, which cited documents never in its references, are cut to one paragraph. The
+  unsourced claim that USPA, WRPF and others adopted DOTS is removed everywhere, and a test keeps it out.
+- **Reproducible:** `scripts/opl-percentiles.mjs` produced `src/data/opl-percentiles.json` from the
+  OpenPowerlifting file; re-run it to refresh. Tests check the calculator, chart, guide and article against
+  that file. Review record: `docs/citation-reviews/powerlifting-scoring-explained.md`.
+- The page links the article under its introduction; the result is computed in `powerliftingResult()`
+  (CONVENTIONS §21).
+
 ### v2.35.1 — DOTS calculator: uncited bands and misleading bars removed
 
 - **No more DOTS bands.** Every result was labelled from Beginner (under 200) to World class (525 and
