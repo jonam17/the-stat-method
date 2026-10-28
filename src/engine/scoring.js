@@ -181,13 +181,10 @@ export function allScores({ totalKg, bodyweightKg, sex, equipment = 'classic', e
   ].filter(s => s.value != null);
 }
 
-/** Descriptive bands. Rough orientation only, not federation classifications. */
-export const DOTS_BANDS = [
-  { max: 200, label: 'Beginner' },
-  { max: 300, label: 'Novice' },
-  { max: 375, label: 'Intermediate' },
-  { max: 450, label: 'Advanced' },
-  { max: 525, label: 'Elite' },
-  { max: 9999, label: 'World class' },
-];
-export const dotsBand = v => DOTS_BANDS.find(b => v < b.max)?.label ?? '—';
+/*
+ * No descriptive bands. Until v2.35.1 this file labelled DOTS scores from Beginner (<200) to
+ * World class (>=525), the same cut-offs for men and women. No published source was found for
+ * them, and this comment already called them "not federation classifications", so they were
+ * removed (CONVENTIONS §12). A sourced alternative — percentiles of DOTS among competition
+ * lifters from OpenPowerlifting's public-domain data — is planned (PENDING item 40).
+ */

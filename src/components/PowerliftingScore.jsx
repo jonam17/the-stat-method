@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { allScores, dotsBand, lbToKg, kgToLb, fmt } from '../engine/index.js';
+import { allScores, lbToKg, kgToLb, fmt } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 
 export default function PowerliftingScore() {
@@ -33,8 +33,6 @@ export default function PowerliftingScore() {
     return { scores, primary, ratio: bwKg ? totalKg / bwKg : 0 };
   }, [totalKg, bwKg, sex, equipment, event]);
 
-  const max = Math.max(...r.scores.map(s => s.value));
-
   return (
     <div className="calc">
       <div className="calc-grid">
@@ -54,7 +52,7 @@ export default function PowerliftingScore() {
             </Select>
           </div>
           <Num label="Bodyweight" value={bw} onChange={setBw} tag={units}
-                 min={units === 'imperial' ? 50 : 25} max={units === 'imperial' ? 700 : 320} />
+                 min={units === 'lb' ? 55 : 25} max={units === 'lb' ? 705 : 320} />
 
           <div className="subhead">Competition lifts <span>best successful attempt</span></div>
           {event === 'bench' ? (
@@ -81,8 +79,7 @@ export default function PowerliftingScore() {
           {r.primary ? (
             <>
               <BigStat value={r.primary.value.toFixed(1)} unit="DOTS"
-                       note={<><b>{dotsBand(r.primary.value)}</b> range — DOTS is the current
-                         standard for most federations outside the IPF.</>} />
+                       note="Used by USA Powerlifting, USPA, WRPF and others. The IPF scores on GL Points, below." />
 
               <div className="bartop tight">
                 <span className="t">All three systems</span>
@@ -99,9 +96,6 @@ export default function PowerliftingScore() {
                       </span>
                       <span className="fx-val">{s.value.toFixed(1)}</span>
                     </div>
-                    <div className="fx-track">
-                      <i style={{ width: `${Math.min(100, (s.value / max) * 100)}%` }} />
-                    </div>
                     <div className="fx-sub">{s.note}</div>
                   </div>
                 ))}
@@ -111,7 +105,8 @@ export default function PowerliftingScore() {
                 { label: 'Total', value: fmt(units === 'lb' ? kgToLb(totalKg) : totalKg), unit: units },
                 { label: 'Bodyweight', value: bw, unit: units },
                 { label: '× bodyweight', value: r.ratio.toFixed(2) },
-                { label: 'Band', value: dotsBand(r.primary.value) },
+                { label: 'Category', value: equipment === 'classic' ? 'Classic' : 'Equipped',
+                  unit: event === 'bench' ? 'bench' : 'full' },
               ]} />
 
               <p className="foot-note">

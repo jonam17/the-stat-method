@@ -340,6 +340,26 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.35.1 — DOTS calculator: uncited bands and misleading bars removed
+
+- **No more DOTS bands.** Every result was labelled from Beginner (under 200) to World class (525 and
+  over), with the same cut-offs for men and women and no published source. The label, the "Band" figure and
+  the guide's note on bands are gone; `dotsBand()` and `DOTS_BANDS` are removed from the engine, and a test
+  keeps them out.
+- **No more cross-scale bars.** The bars drew DOTS, IPF GL and Wilks against one maximum, so a GL of 72
+  looked a fifth the size of a DOTS of 352 — exactly the comparison the page says never to make. Each score
+  keeps its number and note.
+- **Pound bodyweights over 320 accepted.** The DOTS and Strength Standards calculators set their bodyweight
+  limits by testing for an `'imperial'` unit they never offer (they use kg/lb), so pounds got the kilogram
+  limits and a 330 lb lifter was told he was out of range. Limits are now 55–705 lb (25–320 kg).
+  `qa:calculators` now fails any calculator that compares its units to one it does not offer.
+- **Title and description** lead with what people search for: "DOTS Calculator — IPF GL Points & Wilks
+  Score". The result's note now names who uses DOTS instead of "most federations". The figures under the
+  result show the category (classic or equipped, full power or bench) in the place the band used to be,
+  since IPF GL depends on it.
+- **Not changed yet:** DOTS outside its 40–210 kg (men) / 40–150 kg (women) range is still scored at the
+  nearest limit. Whether the formula's definition clamps or excludes those bodyweights needs a source first.
+
 ### v2.35.0 — FFMI: where you fall among adults of your sex and age
 
 - **Every FFMI result now says where it sits** among adults of the same sex and age group, from Schutz et

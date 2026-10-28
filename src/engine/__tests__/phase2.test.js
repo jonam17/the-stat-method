@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { dots, ipfGl, wilks, allScores, dotsBand } from '../scoring.js';
+import * as scoring from '../scoring.js';
+import { dots, ipfGl, wilks, allScores } from '../scoring.js';
 import { standardsFor, rateLift, ageFactor, LEVELS } from '../standards.js';
 import { toHandPortions, splitMeals, proteinTarget, HAND_UNITS } from '../portions.js';
 import {
@@ -70,10 +71,9 @@ describe('powerlifting scoring', () => {
     expect(s.find(x => x.key === 'dots').status).toBe('current');
   });
 
-  it('bands rise with score', () => {
-    expect(dotsBand(150)).toBe('Beginner');
-    expect(dotsBand(400)).toBe('Advanced');
-    expect(dotsBand(600)).toBe('World class');
+  it('labels no DOTS score with an uncited band (removed in v2.35.1)', () => {
+    expect(scoring.dotsBand).toBeUndefined();
+    expect(scoring.DOTS_BANDS).toBeUndefined();
   });
 });
 

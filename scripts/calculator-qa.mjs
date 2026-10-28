@@ -79,6 +79,17 @@ for (const file of [...new Set(jsxFiles)]) {
     }
   }
   if (uses.length) ok(`${rel}: ${uses.length} <Num> uses have bounds`);
+  // A comparison against a unit the calculator never offers is always false, so the
+  // bounds it guards silently fall back to the other unit's (v2.35.1: kg/lb tools
+  // tested for 'imperial', giving pounds a 320 maximum).
+  const offered = new Set([...text.matchAll(/\[\s*'([a-z]+)'\s*,\s*'[^']*'\s*\]/g)].map(m => m[1]));
+  const ownUnits = /useState\('(kg|lb|metric|imperial)'\)/.test(text);
+  if (ownUnits) {
+    const compared = new Set([...text.matchAll(/units === '([a-z]+)'/g)].map(m => m[1]));
+    const never = [...compared].filter(u => !offered.has(u));
+    if (never.length) bad(`${rel}: compares units to ${never.map(u => `'${u}'`).join(', ')}, which it never offers`);
+    else if (compared.size) ok(`${rel}: unit comparisons match the units offered`);
+  }
 
   // Native numeric inputs must remain bounded too.
   const numberInputs = [...text.matchAll(/<input\b([\s\S]*?)\btype=["']number["']([\s\S]*?)(?:\/>|>)/g)]

@@ -227,8 +227,6 @@ export const GUIDES = {
        'IPF GL points run to roughly 100 for an elite result, while DOTS and Wilks run in the hundreds. A GL of 72 and a DOTS of 352 can describe the same lifter. Never compare a number from one system against another.'],
       ['Why DOTS is the default here',
        'Wilks was the global standard for about twenty-five years but has documented bias at very light and very heavy bodyweights. DOTS was built on modern competition data to correct that, and USPA, WRPF and others adopted it from 2020. Wilks is retained because many older records and personal benchmarks are still expressed in it — but if your federation has not specified, DOTS is the safer modern choice.'],
-      ['What the bands mean',
-       'Roughly, under 200 DOTS is beginner territory, 300 novice, 375 intermediate, 450 advanced and 525 elite. These are orientation, not federation classifications, and they say nothing about how long you have trained or what your potential is.'],
     ],
   },
 

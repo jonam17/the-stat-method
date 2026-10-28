@@ -45,7 +45,7 @@ export default function StrengthStandards() {
             <Num label="Age" value={age} onChange={setAge} tag="yrs"
                  min={AGE_MIN} max={AGE_MAX} />
             <Num label="Bodyweight" value={bw} onChange={setBw} tag={units}
-                 min={units === 'imperial' ? 50 : 25} max={units === 'imperial' ? 700 : 320} />
+                 min={units === 'lb' ? 55 : 25} max={units === 'lb' ? 705 : 320} />
           </div>
           <Select label="Lift" value={lift} onChange={setLift}>
             {LIFTS.map(l => <option key={l.key} value={l.key}>{l.name}</option>)}
