@@ -35,7 +35,7 @@ export const TOOLS = [
     desc: 'Modern powerlifting scoring with Wilks shown as legacy, not as the default.',
     related: ['strength-standards', 'one-rep-max', 'rpe-converter'] },
   { slug: 'strength-standards', name: 'Strength Standards', category: 'Performance', live: true, phase: 2,
-    desc: 'Your lifts against bodyweight-relative levels, adjusted for age and sex.',
+    desc: 'Your squat, bench or deadlift against four published strength levels, for men and women.',
     related: ['one-rep-max', 'powerlifting-score', 'plate-loader'] },
   { slug: 'rpe-converter', name: 'RPE, RIR & %1RM Converter', category: 'Performance', live: true, phase: 2,
     desc: 'Prescribe working loads by reps in reserve instead of a fixed percentage.',

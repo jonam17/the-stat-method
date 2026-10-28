@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import * as scoring from '../scoring.js';
 import { dots, ipfGl, wilks, allScores } from '../scoring.js';
-import { standardsFor, rateLift, ageFactor, LEVELS } from '../standards.js';
+import { standardsFor, rateLift, LEVELS } from '../standards.js';
 import { toHandPortions, splitMeals, proteinTarget, HAND_UNITS } from '../portions.js';
 import {
   paceFromTime, timeFromPace, speedKmh, fmtTime, riegel,
@@ -79,7 +79,7 @@ describe('powerlifting scoring', () => {
 
 describe('strength standards', () => {
   it('levels ascend in weight', () => {
-    const rows = standardsFor('squat', 'male', 80, 30);
+    const rows = standardsFor('squat', 'male', 80);
     expect(rows).toHaveLength(LEVELS.length);
     for (let i = 1; i < rows.length; i++) {
       expect(rows[i].weightKg).toBeGreaterThan(rows[i - 1].weightKg);
@@ -87,42 +87,36 @@ describe('strength standards', () => {
   });
 
   it('men\u2019s standards exceed women\u2019s for the same lift and bodyweight', () => {
-    const m = standardsFor('bench', 'male', 70, 30);
-    const f = standardsFor('bench', 'female', 70, 30);
+    const m = standardsFor('bench', 'male', 70);
+    const f = standardsFor('bench', 'female', 70);
     expect(m[2].weightKg).toBeGreaterThan(f[2].weightKg);
   });
 
   it('deadlift standards exceed bench standards', () => {
-    const d = standardsFor('deadlift', 'male', 80, 30);
-    const b = standardsFor('bench', 'male', 80, 30);
+    const d = standardsFor('deadlift', 'male', 80);
+    const b = standardsFor('bench', 'male', 80);
     expect(d[2].weightKg).toBeGreaterThan(b[2].weightKg);
   });
 
-  it('age adjustment leaves the young unchanged and lowers older standards', () => {
-    expect(ageFactor(25)).toBe(1);
-    expect(ageFactor(30)).toBe(1);
-    expect(ageFactor(60)).toBeLessThan(1);
-    expect(ageFactor(60)).toBeGreaterThan(0.5);
-  });
-
   it('rates a lift and reports the gap to the next level', () => {
-    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, age: 30, oneRmKg: 140 });
-    expect(LEVELS).toContain(r.level);
-    expect(r.multiple).toBeCloseTo(1.75, 2);
-    expect(r.toNextKg).toBeGreaterThanOrEqual(0);
+    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, oneRmKg: 90 });
+    expect(r.level).toBe('Intermediate');            // 112.5% of bodyweight
+    expect(r.multiple).toBeCloseTo(1.125, 3);
+    expect(r.nextLevel).toBe('Advanced');
+    expect(r.toNextKg).toBeCloseTo(6, 6);            // advanced from 120% × 80 kg = 96 kg
     expect(r.progress).toBeGreaterThanOrEqual(0);
     expect(r.progress).toBeLessThanOrEqual(1);
   });
 
-  it('handles a lift below every standard', () => {
-    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, age: 30, oneRmKg: 20 });
-    expect(r.level).toBe('Below untrained');
-    expect(r.nextLevel).toBe('Untrained');
+  it('handles a lift below every cut-off', () => {
+    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, oneRmKg: 20 });
+    expect(r.level).toBe('Beginner');
+    expect(r.nextLevel).toBe('Intermediate');
   });
 
   it('caps progress at the top level', () => {
-    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, age: 30, oneRmKg: 400 });
-    expect(r.level).toBe('Elite');
+    const r = rateLift({ lift: 'squat', sex: 'male', bodyweightKg: 80, oneRmKg: 400 });
+    expect(r.level).toBe('Highly advanced');
     expect(r.nextLevel).toBeNull();
     expect(r.progress).toBe(1);
   });

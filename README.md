@@ -340,6 +340,25 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.37.0 — Strength Standards: levels from a published source
+
+- **The calculator now uses one published source.** Its levels come from Santos Junior and colleagues'
+  proposed training-status model (Strength Cond J, 2021, Table 1): beginner, intermediate, advanced and highly
+  advanced, as a percentage of bodyweight, separately for men and women, for the back squat, bench press and
+  deadlift. It replaces a five-level Untrained → Elite table with no source, which called a 1.5× bodyweight squat
+  "Novice" — the same squat the paper, and our own article, put at the men's top level.
+- **Said plainly on the page:** it is a proposed model, not a survey; it is meant for most people who train, not
+  athletes; and strength is one of the five things it uses to judge training status, so one lift gives a
+  strength level, not a training status.
+- **No age scaling.** The −0.8%-a-year factor after 30 had no source and the paper gives none; its authors'
+  caveat about older and heavier lifters is in the method note and the guide. Age is still asked, for the
+  under-18 refusal.
+- **Overhead press and barbell row removed** — the paper does not cover them.
+- **The article** is checked against the full paper: unsourced claims removed (most-cited framework, a
+  late-twenties peak, how long each level takes) and what the paper says added. Review record:
+  `docs/citation-reviews/strength-standards-explained.md`. A test keeps the engine's cut-offs equal to a
+  separately typed copy of Table 1.
+
 ### v2.36.0 — DOTS: what is a good score, and what USA Powerlifting actually says
 
 - **Where your score sits among competitors.** Each full-power result now says where its DOTS and IPF GL

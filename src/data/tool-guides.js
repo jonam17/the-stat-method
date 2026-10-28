@@ -235,21 +235,21 @@ export const GUIDES = {
   'strength-standards': {
     terms: [
       ['Bodyweight multiple', 'Your lift divided by your bodyweight — how strength is compared across sizes.'],
-      ['Untrained → Elite', 'Five descriptive bands, from no training history to competitive standard.'],
-      ['Age factor', 'A downward scaling applied past thirty, since strength declines gradually.'],
+      ['Beginner → Highly advanced', 'Four strength levels from a training-status model proposed by Santos Junior and colleagues in 2021, with separate cut-offs for men and women.'],
+      ['Strength level', 'One of the five things that model uses to judge training status; the others are training time, breaks, past experience and technique.'],
     ],
     howTo: [
       'Enter bodyweight, age and sex.',
-      'Pick a lift and enter your one-rep max, tested or estimated.',
+      'Pick the back squat, bench press or deadlift and enter your one-rep max, tested or estimated.',
       'The bar shows how far you are from the next level.',
     ],
     interpreting: [
-      ['These are orientation, not classification',
-       'Bodyweight-relative standards vary considerably between published sources and lifting datasets, and no single table is authoritative. Expect a different site to place you in a different band. Use these to see roughly where you sit and what the next milestone looks like, not to settle arguments.'],
+      ['A proposed model, not a survey',
+       'The cut-offs come from earlier studies and the authors\u2019 reasoning, not from measuring what people lift, and they are meant for most people who train rather than athletes. Other tables will place you differently. Use the level to see roughly where you sit and what the next milestone looks like, not to settle arguments.'],
       ['Why lighter lifters need less absolute weight',
-       'Standards are expressed as multiples of bodyweight, because absolute load favours larger lifters. A 2× bodyweight squat is a comparable achievement at 60 kg and at 100 kg, even though the plates differ substantially.'],
-      ['Progress is not linear across levels',
-       'Moving from untrained to novice can take months; from advanced to elite can take years, and many trainees never reach it. A slowing rate of progress is the expected shape of a training career, not evidence that something is wrong.'],
+       'Levels are set as multiples of bodyweight, because absolute load favours larger lifters. A 2× bodyweight squat is a comparable achievement at 60 kg and at 100 kg, even though the plates differ substantially.'],
+      ['Age and size',
+       'The model makes no adjustment for age, so neither does this calculator. Its authors note that older and heavier lifters are at a disadvantage on strength, so judge the result with that in mind.'],
     ],
   },
 

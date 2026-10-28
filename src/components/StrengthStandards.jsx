@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import {
-  LIFTS, LEVELS, standardsFor, rateLift, ageFactor,
+  LIFTS, rateLift,
   lbToKg, kgToLb, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
@@ -27,11 +27,12 @@ export default function StrengthStandards() {
   };
 
   const r = useMemo(
-    () => rateLift({ lift, sex, bodyweightKg: bwKg, age: +age || 30, oneRmKg: rmKg }),
-    [lift, sex, bwKg, age, rmKg]);
+    () => rateLift({ lift, sex, bodyweightKg: bwKg, oneRmKg: rmKg }),
+    [lift, sex, bwKg, rmKg]);
 
   const liftName = LIFTS.find(l => l.key === lift)?.name ?? lift;
-  const af = ageFactor(+age || 30);
+  const cur = r.rows.findIndex(row => row.level === r.level);
+  const kg = v => <>{fmt(disp(v))} {units}</>;
 
   return (
     <div className="calc">
@@ -53,20 +54,25 @@ export default function StrengthStandards() {
           <Num label="Your one-rep max" value={oneRm} onChange={setOneRm} tag={units}
                hint="Tested or estimated. Use the 1RM calculator if you have not tested."
                  min={units === 'lb' ? 2 : 1} max={units === 'lb' ? 1400 : 600} />
-          {af < 1 && (
-            <p className="hint">
-              Standards are scaled by {Math.round(af * 100)}% for age {age}, since strength
-              declines gradually after roughly thirty.
-            </p>
-          )}
         </Panel>
 
-        <Panel label={`${liftName} standard`} dark
+        <Panel label={`${liftName} strength level`} dark
                notice={eligibility({ age }).copy ?? null}>
           <BigStat value={r.level} unit={`${r.multiple.toFixed(2)}× bw`}
-                   note={r.nextLevel
-                     ? <>{fmt(disp(r.toNextKg))} {units} to reach <b>{r.nextLevel}</b>.</>
-                     : <>You are at the top of this scale.</>} />
+                   note={!r.nextLevel
+                     ? <>The top level in this model.</>
+                     : r.nextStrict
+                       ? <>More than {kg(r.nextKg)} reaches <b>{r.nextLevel}</b>
+                           {r.toNextKg > 0 ? <> — {kg(r.toNextKg)} to go</> : null}.</>
+                       : <>{kg(r.toNextKg)} to reach <b>{r.nextLevel}</b>.</>} />
+
+          <p className="score-pos-line">
+            This is the strength level in a training-status model proposed by Santos Junior and
+            colleagues (2021), meant for most people who train rather than athletes. The model
+            judges training status from five things — how long you have trained, breaks, past
+            experience, technique and strength — so one lift gives your strength level, not your
+            training status.
+          </p>
 
           {r.nextLevel && (
             <>
@@ -84,9 +90,9 @@ export default function StrengthStandards() {
             <span className="t">All levels</span>
           </div>
           <div className="fx-list compact">
-            {r.rows.map(row => {
-              const reached = rmKg >= row.weightKg;
-              const current = row.level === r.level;
+            {r.rows.map((row, k) => {
+              const reached = k <= cur;
+              const current = k === cur;
               return (
                 <div className={`fx ${current ? 'on' : ''} ${reached ? '' : 'off'}`} key={row.level}>
                   <div className="fx-top">
@@ -95,10 +101,13 @@ export default function StrengthStandards() {
                       {current && <em className="fx-tag">You</em>}
                     </span>
                     <span className="fx-val">
-                      {fmt(disp(row.weightKg))}<small>{units}</small>
+                      {k === 0 ? <small>below </small> : row.strict ? <small>over </small> : <small>from </small>}
+                      {fmt(disp(k === 0 ? r.rows[1].weightKg : row.weightKg))}<small>{units}</small>
                     </span>
                   </div>
-                  <div className="fx-sub">{row.multiple.toFixed(2)}× bodyweight</div>
+                  <div className="fx-sub">
+                    {k === 0 ? `Below ${r.rows[1].fromPct}%` : row.strict ? `More than ${row.fromPct}%` : `From ${row.fromPct}%`} of bodyweight
+                  </div>
                 </div>
               );
             })}
@@ -108,23 +117,28 @@ export default function StrengthStandards() {
             { label: 'Your 1RM', value: fmt(+oneRm), unit: units },
             { label: '× bodyweight', value: r.multiple.toFixed(2) },
             { label: 'Level', value: r.level },
-            { label: 'Age factor', value: `${Math.round(af * 100)}%` },
+            { label: 'Bodyweight', value: fmt(+bw), unit: units },
           ]} />
 
           <Method>
             <p>
-              These are <strong>orientation, not classification</strong>. Bodyweight-relative
-              standards vary considerably between published sources and lifting datasets,
-              and no single table is authoritative. Treat a level as a rough band rather than
-              a verdict, and expect a different site to place you differently.
+              These levels come from one published source: a model for classifying
+              resistance-training status, proposed by Santos Junior and colleagues in 2021. It is a
+              proposal, built from cut-offs used in earlier studies and the authors' reasoning — not
+              a survey of what people lift. Treat a level as a rough band, and expect other tables
+              to place you differently.
             </p>
             <p>
-              Standards are expressed as multiples of bodyweight, which is why a lighter
-              lifter needs less absolute weight to reach the same level. They are scaled
-              downward with age past thirty to keep comparisons fair.
+              The cut-offs are percentages of bodyweight, set separately for men and women, for the
+              back squat, bench press and deadlift; the list above shows where each level starts for
+              your lift. The authors say they are meant for most people who train, not athletes, and
+              that older and heavier lifters are at a disadvantage. The model makes no adjustment
+              for age, so neither does this calculator.
             </p>
             <p className="refs">
-              Compiled from commonly used coaching ranges and large public lifting datasets.
+              Santos Junior ERT, de Salles BF, Dias I, Ribeiro AS, Simão R, Willardson JM.
+              Classification and determination model of resistance training status. Strength Cond
+              J, 2021;43(5):77-86, Table 1.
             </p>
           </Method>
         </Panel>

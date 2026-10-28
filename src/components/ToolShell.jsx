@@ -253,9 +253,13 @@ export function LiveSummary({ text, delay = 600 }) {
   );
 }
 
+// A value made of words ("Highly advanced") may wrap; numbers never do. Without this, a
+// two-word level widened the result column past a 360px screen (v2.37.0).
+const isWords = v => typeof v === 'string' && /^[A-Za-z][A-Za-z ]*$/.test(v);
+
 export const BigStat = ({ value, unit, note }) => (
   <>
-    <div className="cal">
+    <div className={isWords(value) ? 'cal cal--words' : 'cal'}>
       <div className="num">{value}</div>
       {unit && <div className="u">{unit}</div>}
     </div>

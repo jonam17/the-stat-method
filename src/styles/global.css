@@ -652,6 +652,8 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .mt-k{color:#82827C!important;font-weight:400!important}
 /* keep long multi-part headline values on one line */
 .cal .num{white-space:nowrap}
+.cal--words{flex-wrap:wrap;row-gap:6px}
+.cal--words .num{white-space:normal}
 
 /* ================= TOOL GUIDES ================= */
 /* Brief how-to above the calculator. Deliberately compact — the tool is why
