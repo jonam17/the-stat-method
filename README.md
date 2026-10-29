@@ -340,6 +340,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.38.0 — VO2 max article; Heart Rate Zones stops guessing VO2 max
+
+- **New article, scheduled for 1 November:** *VO2 max: what it measures and how to raise it* — the cardio
+  hub. What limits oxygen uptake (Bassett & Howley), what the mortality research shows and cannot show
+  (Kodama's meta-analysis, the Cleveland Clinic cohort, the 2016 AHA statement), how far the common estimates
+  can be trusted (Cooper's 12-minute run, the heart-rate ratio, a meta-analysis of watch estimates), and what
+  raises it (the Helgerud 4×4 trial, Milanović's meta-analysis, HERITAGE, and the trial in which every
+  "non-responder" improved with more training). 11 references, all checked against the papers; review record
+  `docs/citation-reviews/vo2-max-what-it-measures-and-how-to-raise-it.md`. One chart, recreated from the
+  wearables meta-analysis's published limits of agreement.
+- **Heart Rate Zones no longer shows a VO2 max by default.** It estimated one for every visitor from the ratio
+  of maximum to resting heart rate (Uth et al. 2004). That method was developed in 46 well-trained men aged
+  21–51; with the age-predicted maximum the calculator uses, the paper's 95% limits for one person are about
+  ±15%, and the source was not named on the page. The estimate is removed. A VO2 max now appears only when a
+  12-minute run distance is entered, in mL/kg/min, with a line saying Cooper's equation came from 115 young
+  US Air Force men and was not tested in women. A test keeps the heart-rate-ratio estimate from returning.
+- *Heart rate zones explained* links to the new article from its Zone 5 line (plain text until 1 November).
+
 ### v2.37.0 — Strength Standards: levels from a published source
 
 - **The calculator now uses one published source.** Its levels come from Santos Junior and colleagues'

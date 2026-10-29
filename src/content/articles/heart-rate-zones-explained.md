@@ -143,6 +143,8 @@ be useful.
 clears.
 
 **Zone 5 — VO₂ max.** Maximal intervals, sustainable only in short efforts.
+Our guide to [VO2 max](/articles/vo2-max-what-it-measures-and-how-to-raise-it/) covers what it measures and the
+interval trial behind the "4×4" session.
 
 The pattern observed across trained endurance athletes is that a large majority of training
 volume sits at low intensity, with a small proportion at high intensity and relatively

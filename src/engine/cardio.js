@@ -124,10 +124,9 @@ export const findActivity = name => {
 };
 
 /**
- * VO2 max estimates.
- * Cooper 12-minute run test (Cooper KH, JAMA 1968), distance in metres.
+ * VO2 max estimate from the Cooper 12-minute run test (Cooper KH, JAMA 1968;203(3):135-138),
+ * distance in metres: the paper's regression (miles = 0.3138 + 0.0278 × VO2) rearranged.
+ * Derived in 115 US Air Force men, mostly under 25; no women were tested.
  */
 export const vo2maxCooper = metres => (metres - 504.9) / 44.73;
 
-/** Uth-Sørensen-Overgaard-Pedersen (2004): from resting and max HR. */
-export const vo2maxFromHr = (maxHr, restHr) => 15.3 * (maxHr / restHr);

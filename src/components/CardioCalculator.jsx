@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
   allMaxHr, heartRateZones, kcalFromMets, findActivity, ACTIVITIES,
-  vo2maxCooper, vo2maxFromHr, lbToKg, kgToLb, fmt,
+  vo2maxCooper, lbToKg, kgToLb, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
@@ -34,9 +34,11 @@ export default function CardioCalculator({ mode = 'zones' }) {
     const mins = +minutes || 0;
     const burned = act ? kcalFromMets(act.mets, kg, mins) : 0;
     const perHour = act ? kcalFromMets(act.mets, kg, 60) : 0;
-    const vo2 = cooper ? vo2maxCooper(+cooper) : (rest ? vo2maxFromHr(maxHr, rest) : null);
-    const vo2Source = cooper ? 'Cooper 12-minute test' : (rest ? 'Resting/max heart rate' : null);
-    return { formulas, maxHr, zones, act, burned, perHour, mins, vo2, vo2Source, rest };
+    // VO2 max only from a Cooper distance. The resting/max heart-rate ratio (Uth 2004) was
+    // removed: it was derived in 46 well-trained men, and with an age-predicted maximum its
+    // 95% limits for one person are about ±15% (see the VO2 max article's review record).
+    const vo2 = cooper ? vo2maxCooper(+cooper) : null;
+    return { formulas, maxHr, zones, act, burned, perHour, mins, vo2, rest };
   }, [age, sex, restHr, activity, minutes, kg, cooper]);
 
   return (
@@ -153,11 +155,15 @@ export default function CardioCalculator({ mode = 'zones' }) {
               { label: 'Max HR', value: fmt(r.maxHr), unit: 'bpm' },
               { label: 'Resting', value: r.rest ? fmt(r.rest) : '—', unit: r.rest ? 'bpm' : '' },
               { label: 'HR reserve', value: r.rest ? fmt(r.maxHr - r.rest) : '—', unit: r.rest ? 'bpm' : '' },
-              { label: 'VO₂ max', value: r.vo2 ? r.vo2.toFixed(1) : '—' },
+              { label: 'VO₂ max', value: r.vo2 ? r.vo2.toFixed(1) : '—', unit: r.vo2 ? 'mL/kg/min' : '' },
             ]} />
 
-            {r.vo2Source && (
-              <p className="foot-note">VO₂ max estimated via {r.vo2Source}.</p>
+            {r.vo2 && (
+              <p className="foot-note">
+                VO₂ max from your 12-minute distance, using Cooper's 1968 equation. It came from 115 US
+                Air Force men, most of them under 25, was not tested in women, and is only as good as
+                your effort on the run.
+              </p>
             )}
 
             <Method>

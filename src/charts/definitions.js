@@ -268,6 +268,28 @@ export const CHARTS = {
     ],
   }),
 
+  // Molina-Garcia et al. (2022), Sports Med 52:1577–1597, abstract and §3.2: pooled bias and
+  // 95% limits of agreement of wearable VO2 max estimates against laboratory tests, by method.
+  'vo2-wearable-agreement': () => {
+    const rows = [
+      { label: 'Estimated at rest',          low: -13.07, high: 17.41, point: 2.17 },
+      { label: 'Estimated during exercise',  low: -9.92,  high: 9.74,  point: -0.09 },
+    ];
+    const [rest, ex] = rows;
+    const span = r => (r.high - r.low).toFixed(1);
+    return {
+      type: 'interval', kind: 'paper', source: 'Molina-Garcia et al. (2022)',
+      title: 'How far a watch’s VO2 max can be from yours',
+      desc: 'Average error and 95% limits of agreement of consumer wearables’ VO2 max estimates against laboratory tests, pooled across 14 studies, for devices that estimate at rest and during exercise.',
+      caption: `Error is the watch estimate minus the laboratory value, in mL/kg/min. Devices estimating ` +
+        `at rest overestimated by ${rest.point.toFixed(2)} on average; devices estimating during exercise ` +
+        `were within ${Math.abs(ex.point).toFixed(2)} of zero. For one person, 95% of errors fell across a span ` +
+        `of ${span(rest)} and ${span(ex)} mL/kg/min respectively.`,
+      x: { label: 'Wearable minus laboratory VO2 max (mL/kg/min)', min: -20, max: 25, digits: 2 },
+      rows,
+    };
+  },
+
   // Schoenfeld et al. (2019), Med Sci Sports Exerc 51(1):94–103, Table 1: baseline-adjusted
   // change with 95% CI. Lower-body weekly sets were 9, 27 and 45 (1, 3 and 5 sets per exercise).
   // The two outcomes are separate charts because they are in different units (mm and kg).
