@@ -52,7 +52,7 @@ export const RESOURCES = [
         note: 'Research' },
       { name: 'Examine.com', url: 'https://examine.com',
         role: 'Supplement evidence summaries',
-        why: 'Independent, sells no supplements, and grades evidence strength honestly — including verdicts of "probably does nothing". The rare supplement resource with no incentive to overstate.',
+        why: 'Independent, sells no supplements, and takes no advertising or sponsors. Its supplement pages are free; the evidence grades are in its paid database. The rare supplement resource with no incentive to overstate.',
         note: 'Freemium' },
       { name: 'Stronger by Science', url: 'https://www.strongerbyscience.com',
         role: 'Research review & articles',

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 20 sourced articles · 444 unit tests · zero JavaScript on content pages**
+**20 calculators · 23 sourced articles · 1,085 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -22,8 +22,8 @@ The Stat Method is the opposite trade: every tool names its equations, every art
 its sources, and the math is open source with unit tests. You can read exactly what a
 calculator does before deciding whether to trust what it says.
 
-Every calculator ships with a cornerstone article explaining the topic in depth, and every
-article cites primary sources. Every tool page carries a plain-language glossary of its jargon, brief usage steps above
+Every calculator except the Baseline has a cornerstone article explaining the topic in depth (the
+Baseline draws on all of them), and every article cites primary sources. Every tool page carries a plain-language glossary of its jargon, brief usage steps above
 the calculator, and a "reading your results" section below it explaining what the numbers
 mean and what to do next.
 
@@ -137,8 +137,9 @@ that are practical conventions rather than research findings are labelled as suc
 
 #### Strength standards · Plate loader
 
-Bodyweight-relative levels scaled for age and sex, and a visual plate loader that reports
-the closest achievable load when a target cannot be made exactly.
+Bodyweight-relative strength levels for the squat, bench press and deadlift, by sex, from one
+published model, and a visual plate loader that reports the closest achievable load when a target
+cannot be made exactly.
 
 <img src="docs/previews/strength-standards.webp" width="49%"> <img src="docs/previews/plate-loader.webp" width="49%">
 
@@ -207,7 +208,7 @@ src/
 │   ├── pace.js                running pace, splits, Riegel prediction
 │   ├── sleep.js               sleep cycle timing
 │   ├── units.js               imperial ↔ metric
-│   └── __tests__/             444 unit tests
+│   └── __tests__/             unit tests
 ├── components/                UI islands (React syntax, run on Preact) — state and markup only, zero math
 ├── content/articles/          Markdown/MDX, schema-validated at build time
 ├── data/tools.js              tool registry (drives index, homepage, cross-links, previews)
@@ -228,13 +229,14 @@ the framework and the engine ports unchanged.
 | Interactivity | **Preact islands, written as React** | `preact/compat`; mounted with `client:load` / `client:visible` |
 | Content | **Content collections + MDX** | Build-time schema validation; calculators embeddable mid-article |
 | Math | **`src/engine/`** | Framework-agnostic, unit-tested |
-| Tests | **Vitest** | 489 tests |
+| Tests | **Vitest** | Engine, components, data and content |
 | Hosting | **Cloudflare Workers** | Static assets, custom domain |
 
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
 
-Content pages ship with **no JavaScript at all** — only pages containing a calculator load
-any, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands from React to Preact.
+Content pages load **no framework JavaScript** — only a few small inline scripts for the theme,
+search and contents list (about 8 KB uncompressed). Only pages containing a calculator load
+more, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands from React to Preact.
 
 ---
 
@@ -243,7 +245,7 @@ any, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands fr
 ```bash
 npm install
 npm run dev          # http://localhost:4321
-npm test             # 301 tests
+npm test             # unit tests
 npm run build        # static output to ./dist
 ```
 
@@ -317,7 +319,7 @@ formula.
 npm test
 ```
 
-301 tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
+The tests cover every formula, the publishing rule, and the placement of the save-results buttons. Several assert the *honesty properties* of the models rather
 than just their arithmetic:
 
 - the dynamic planner predicts **less** weight loss than the static 3,500-kcal rule
@@ -339,6 +341,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.1 — Cleanup: true counts, no empty cells, shorter Library descriptions
+
+- **README claims corrected.** The headline said 20 articles, 444 unit tests and zero JavaScript on content
+  pages; it now gives 23 articles and 1,085 tests, and says content pages load no framework JavaScript (they
+  carry small inline scripts for the theme, search and contents list). Four other test counts, all stale
+  (444, 489, 301 twice), are gone. Also corrected: the Baseline has no cornerstone article of its own, and
+  Strength Standards no longer scales for age (since v2.37.0).
+- **The headline counts are now checked.** `npm run qa:readme`, part of `qa:release`, fails when the README's
+  calculators, articles or tests no longer match the repository (CONVENTIONS §12).
+- **No more empty grey cell in result strips on phones.** When a strip holds an odd number of figures, the last
+  one now spans the row: two strips on the Baseline, and those on Caffeine Half-Life and Progressive Overload.
+- **Library descriptions shortened** to 165 characters or fewer, so search results show them whole: copper,
+  selenium, sodium, zinc, choline, biotin, riboflavin, vitamin B6 and the Library index. Words cut or tightened
+  only; nothing added.
+- **Resources: the Examine entry now says where its evidence grades are** — in its paid database. The free
+  supplement pages show none, and the quoted verdict the entry cited was not found on its pages.
+- Removed an unused import from the Running Pace calculator.
 
 ### v2.38.0 — VO2 max article; Heart Rate Zones stops guessing VO2 max
 

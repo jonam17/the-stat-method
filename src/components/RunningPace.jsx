@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
   paceFromTime, timeFromPace, speedKmh, fmtTime, riegel, riegelConfidence,
-  splits, DISTANCES, SEC_PER_MILE, vo2maxCooper,
+  splits, DISTANCES, SEC_PER_MILE,
 } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 

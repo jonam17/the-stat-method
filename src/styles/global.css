@@ -1377,6 +1377,9 @@ footer{border-top:1px solid var(--rule)}
 @media(max-width:560px){
   .strip{grid-auto-flow:row;grid-template-columns:repeat(2,1fr)}
   .stat .l{min-height:0}
+  /* An odd number of figures would leave an empty grey cell in the last row;
+     the last figure takes the whole row instead. */
+  .strip > .stat:last-child:nth-child(odd){grid-column:1 / -1}
 }
 
 /* Formula reference grid on /methodology/. Specificity note: `.pick h3` and

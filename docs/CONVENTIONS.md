@@ -210,6 +210,10 @@ ships, not true once something pending is finished.
 > things was overstating the one thing that matters most. Replaced with a claim that is true —
 > all 80 citations verified against their originals.
 
+**The README's headline counts are checked.** `npm run qa:readme` (part of `qa:release`) fails when
+"N calculators · N sourced articles · N unit tests" no longer matches the registry, the non-draft
+articles and the tests Vitest collects. Keep other counts out of the README; they go stale unchecked.
+
 Do not restore a review claim until a named clinician has signed off. The article schema only
 emits `reviewedBy` when `reviewStatus === 'reviewed'`; the marketing copy must be held to the
 same standard as the structured data.

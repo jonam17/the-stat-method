@@ -14,7 +14,7 @@
 draft: false
 name: Biotin
 kind: vitamin
-dek: A B vitamin the body needs to metabolise fats, glucose and amino acids. Deficiency is rare, but high-dose supplements can make some laboratory tests give false results.
+dek: A B vitamin needed to metabolise fats, glucose and amino acids. Deficiency is rare, but high-dose supplements can make some laboratory tests give false results.
 unit: mcg
 
 intake:

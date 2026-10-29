@@ -16,7 +16,7 @@ const fromWhom = reports.length ? 'the NIH or, where it has no fact sheet, the N
 ---
 <BaseLayout noindex={all.length === 0 && exercises.length === 0} title="Library — The Stat Method"
   description={exercises.length
-    ? `${Cap(nutrientWords)}, with every value from ${fromWhom}; and exercises for each muscle group, with the research behind each one.`
+    ? `${Cap(nutrientWords.replace('other essential', 'other'))}, every value from ${reports.length ? 'the NIH or the National Academies' : 'the NIH'}, and exercises for each muscle group with the research behind each.`
     : `${Cap(nutrientWords)}: how much you need, the best food sources, and what the evidence does and does not support — every value from ${fromWhom}.`}>
   <div class="wrap section">
     <p class="eyebrow">Reference</p>
