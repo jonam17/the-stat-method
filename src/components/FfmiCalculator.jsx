@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react';
 import {
-  bodyFatCategory, lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
+  lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
   FFMI_PCTS, FFMI_HEIGHT_COEFF,
 } from '../engine/index.js';
 import { ffmiResult } from '../engine/results.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { RAIL_COPY, eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
 /** Fat-free mass index — lean mass normalised for height. */
 export default function FfmiCalculator() {
@@ -107,7 +107,6 @@ export default function FfmiCalculator() {
           ]} />
 
           <p className="foot-note">
-            Body fat {bf}% sits in the <b>{bodyFatCategory(bf, sex)}</b> range for your sex.
             BMI cannot tell muscle from fat; FFMI can, which is why a muscular person often
             reads as "overweight" on BMI while having a perfectly ordinary FFMI.
           </p>
@@ -119,8 +118,6 @@ export default function FfmiCalculator() {
               {(cm / 100).toFixed(2)}) = {r.norm.toFixed(1)}. Figures are rounded for display.
             </p>
           )}
-
-          <p className="cat-caveat">{RAIL_COPY.categoryCaveat}</p>
 
           <Method>
             <p>

@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import {
   bodyFatNavy, bodyFatDeurenberg, bodyFatSkinfold3, BODY_FAT_ERROR,
-  SKINFOLD_SITES, bodyFatCategory, ffmi,
+  SKINFOLD_SITES, ffmi,
   lbmFromBodyFat, bmi, waistToHeight,
   lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
-import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
+import { eligibility, AGE_MIN, AGE_MAX } from '../engine/safety.js';
 
 const IN_TO_CM = 2.54;
 
@@ -162,8 +162,7 @@ export default function BodyFatCalculator() {
             <>
               <BigStat value={`${r.best.value.toFixed(1)}%`}
                        unit={`± ${r.best.err}`}
-                       note={<>Via <b>{r.best.name}</b> — {bodyFatCategory(r.best.value, sex)} range.</>} />
-            <p className="cat-caveat">{RAIL_COPY.categoryCaveat}</p>
+                       note={<>Via <b>{r.best.name}</b>.</>} />
 
               <div className="bartop tight">
                 <span className="t">Method comparison</span>
@@ -210,8 +209,8 @@ export default function BodyFatCalculator() {
 
               <p className="foot-note">
                 FFMI {r.ffmi ? r.ffmi.toFixed(1) : '—'}.
-                Waist-to-height above 0.50 is the common risk threshold and predicts
-                cardiometabolic risk better than BMI.
+                A waist-to-height ratio of 0.5 or more marks increased risk in Ashwell and
+                Gibson's bands, and it predicts cardiometabolic risk better than BMI.
               </p>
             </>
           ) : (

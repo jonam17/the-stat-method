@@ -56,7 +56,7 @@ export function computeBaseline({
   const energy = tdeeResult({ kg, cm, age, sex, activity, bf });
 
   // ---- Body — Healthy Weight, plus FFMI when body fat is known ----------
-  const body = healthyWeightResult({ kg, cm, sex, waistCm });
+  const body = healthyWeightResult({ kg, cm, sex, waistCm, age });
   const lbm = lbmFromBodyFat(kg, bf);
   const lean = lbm != null ? { lbm, ffmi: ffmi(lbm, cm) } : null;
 

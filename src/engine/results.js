@@ -12,7 +12,7 @@
  * inputs it makes the same decision with the same reason.
  */
 import { lbmFromBodyFat, bmi, idealWeightFormulas, healthyBmiRange,
-         waistToHeight, whtrBand, bmiCategory,
+         waistToHeight, whtrBand, bmiCategory, bmiBand,
          ffmi, ffmiNormalised, ffmiPosition } from './body.js';
 import { allBmrFormulas, ACTIVITY, selectBmr, tdee, calorieTarget } from './energy.js';
 import { goalDelta, checkEnergyAvailability, eligibility, effectiveFloor, MAX_WEEKLY_LOSS_PCT } from './safety.js';
@@ -42,7 +42,7 @@ export function tdeeResult({ kg, cm, age, sex, activity, bf }) {
 }
 
 /** Healthy Weight Calculator. */
-export function healthyWeightResult({ kg, cm, sex, waistCm }) {
+export function healthyWeightResult({ kg, cm, sex, waistCm, age }) {
   const formulas = idealWeightFormulas({ cm, sex });
   const bmiRange = healthyBmiRange(cm);
   const vals = formulas.map(f => f.value);
@@ -51,15 +51,16 @@ export function healthyWeightResult({ kg, cm, sex, waistCm }) {
   return {
     formulas, bmiRange, b, w,
     band: whtrBand(w),
-    category: bmiCategory(b),
+    category: bmiCategory(b, age),
     formulaLow: Math.min(...vals),
     formulaHigh: Math.max(...vals),
     inRange: kg >= bmiRange.lowKg && kg <= bmiRange.highKg,
-    // Safety wording decided here, not in a component: every BMI category
-    // carries the general caveat, and "Normal weight" adds the atypical
-    // anorexia caveat. Both interfaces render this list, so the rule and its
-    // wording cannot drift between them.
-    caveats: ['categoryCaveat', ...(bmiCategory(b) === 'Normal weight' ? ['normalLabelCaveat'] : [])],
+    // Safety wording decided here, not in a component: every result carries
+    // the general caveat, and a BMI in the healthy band adds the atypical
+    // anorexia caveat — keyed on the band, not its label, and regardless of
+    // age, because the healthy weight range is shown at every age. Both
+    // interfaces render this list, so the rule cannot drift between them.
+    caveats: ['categoryCaveat', ...(bmiBand(b)?.key === 'healthy' ? ['normalLabelCaveat'] : [])],
   };
 }
 

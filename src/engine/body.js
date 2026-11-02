@@ -84,30 +84,10 @@ export const SKINFOLD_SITES = {
   female: ['Triceps', 'Suprailiac', 'Thigh'],
 };
 
-/**
- * Descriptive body-fat categories (ACE). These are population descriptors,
- * not health targets.
- */
-export const BF_CATEGORIES = {
-  male: [
-    { max: 5,  label: 'Below essential' },
-    { max: 14, label: 'Athletic' },
-    { max: 18, label: 'Fitness' },
-    { max: 25, label: 'Average' },
-    { max: 100, label: 'Above average' },
-  ],
-  female: [
-    { max: 13, label: 'Below essential' },
-    { max: 21, label: 'Athletic' },
-    { max: 25, label: 'Fitness' },
-    { max: 32, label: 'Average' },
-    { max: 100, label: 'Above average' },
-  ],
-};
-
-export const bodyFatCategory = (bf, sex) =>
-  (BF_CATEGORIES[sex] || BF_CATEGORIES.male).find(c => bf < c.max)?.label ?? '—';
-
+// Body-fat category labels were removed in v2.38.3. They were credited to ACE in this
+// comment but cited nowhere on the site; the only ACE page reachable (a 2014 blog post) has no
+// chart, and it puts a woman at 36% "in the obesity category", where our top label read "Above
+// average". Do not reintroduce a category without a source that defines it, for each sex.
 // FFMI interpretation bands were removed in v2.34.2. They were informal men's figures
 // (18 / 20 / 22 / 23 / 25) credited here to Kouri et al. 1995, which supports only the
 // observation that non-users in its sample of 157 male athletes reached "a well-defined
@@ -218,23 +198,47 @@ export function healthyBmiRange(cm) {
   return { lowKg: 18.5 * m * m, highKg: 24.9 * m * m };
 }
 
-/** Standard BMI categories. Population screening tool, not an individual diagnosis. */
+/**
+ * Adult BMI categories — CDC, "Adult BMI Categories" (page dated 19 March 2024): Underweight below
+ * 18.5; Healthy Weight 18.5 to less than 25; Overweight 25 to less than 30; Obesity 30 or greater,
+ * as Class 1 (30 to <35), Class 2 (35 to <40) and Class 3 (40 or greater). The CDC applies these to
+ * adults 20 and older only; from 2 to 19 it uses BMI-for-age percentiles, so no category is given
+ * under 20 (BMI_CATEGORY_MIN_AGE). `key` is what code tests against — never the label's wording,
+ * which once changed from "Normal weight" to "Healthy weight" and silently switched off the
+ * atypical-anorexia caveat keyed to it.
+ *
+ * Why labels are shown at all, so this stays a decision and not a default: the AMA's 2023
+ * position is that BMI loses predictability for one person and should not be a sole measure; the
+ * harms literature links weight labels to stigma, avoidance of care and disordered eating; and a
+ * "healthy" label is the false reassurance that delays recognition of restrictive eating at
+ * normal weight. The labels therefore always carry categoryCaveat, and the healthy band adds
+ * normalLabelCaveat (safety.js). Pending clinical review (B5).
+ */
 export const BMI_CATEGORIES = [
-  { max: 18.5, label: 'Underweight' },
-  { max: 25,   label: 'Healthy weight' },
-  { max: 30,   label: 'Overweight' },
-  { max: 35,   label: 'Obesity class I' },
-  { max: 40,   label: 'Obesity class II' },
-  { max: 999,  label: 'Obesity class III' },
+  { max: 18.5, key: 'underweight', label: 'Underweight' },
+  { max: 25,   key: 'healthy',     label: 'Healthy weight' },
+  { max: 30,   key: 'overweight',  label: 'Overweight' },
+  { max: 35,   key: 'obesity1',    label: 'Class 1 obesity' },
+  { max: 40,   key: 'obesity2',    label: 'Class 2 obesity' },
+  { max: Infinity, key: 'obesity3', label: 'Class 3 obesity' },
 ];
-export const bmiCategory = v => BMI_CATEGORIES.find(c => v < c.max)?.label ?? '—';
+export const BMI_CATEGORY_MIN_AGE = 20;
+/** The category object for a BMI, or null when there is no usable BMI. Age-blind — see bmiLabel. */
+export const bmiBand = v => (v > 0 && Number.isFinite(v) ? BMI_CATEGORIES.find(c => v < c.max) : null);
+/** The label to show: null under 20, where the CDC's adult categories do not apply. */
+export const bmiCategory = (v, age) =>
+  (+age > 0 && +age < BMI_CATEGORY_MIN_AGE) ? null : (bmiBand(v)?.label ?? null);
 
-/** Waist-to-height risk bands (Ashwell & Gibson). */
+/**
+ * Waist-to-height bands — Ashwell & Gibson, BMJ Open 2016;6:e010159: "no increased risk" below 0.5,
+ * "increased risk" 0.5 to under 0.6, "very high risk" 0.6 and above (UK NDNS adults, n = 1,453).
+ * The paper has no lower band; the old "Below range" band under 0.40 and the three notes were not
+ * in it and were removed in v2.38.3.
+ */
 export const WHTR_BANDS = [
-  { max: 0.40, label: 'Below range', note: 'Lower than the typical healthy band.' },
-  { max: 0.50, label: 'Healthy',     note: 'Below 0.5 is the commonly cited threshold.' },
-  { max: 0.60, label: 'Increased risk', note: 'Consider waist reduction.' },
-  { max: 99,   label: 'High risk',   note: 'Substantially elevated cardiometabolic risk.' },
+  { max: 0.5,      label: 'No increased risk', note: 'below 0.5' },
+  { max: 0.6,      label: 'Increased risk',    note: '0.5 to under 0.6' },
+  { max: Infinity, label: 'Very high risk',    note: '0.6 and above' },
 ];
 /** Null when there is no ratio — no band without a measurement. */
-export const whtrBand = v => (v == null ? null : WHTR_BANDS.find(b => v < b.max) ?? WHTR_BANDS[3]);
+export const whtrBand = v => (v == null ? null : WHTR_BANDS.find(b => v < b.max));

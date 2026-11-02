@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
-  idealWeightFormulas, healthyBmiRange, bmi, bmiCategory,
-  waistToHeight, whtrBand, lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
+  idealWeightFormulas, healthyBmiRange, bmi,
+  waistToHeight, lbToKg, kgToLb, ftInToCm, cmToFtIn, fmt,
 } from '../engine/index.js';
 import { healthyWeightResult } from '../engine/results.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
@@ -43,7 +43,7 @@ export default function HealthyWeight() {
 
   // Computed in the engine (src/engine/results.js) — the same function The
   // Stat Method Baseline calls, so the two cannot disagree.
-  const r = useMemo(() => healthyWeightResult({ kg, cm, sex, waistCm }), [kg, cm, sex, waistCm]);
+  const r = useMemo(() => healthyWeightResult({ kg, cm, sex, waistCm, age }), [kg, cm, sex, waistCm, age]);
 
   // Refusal decided by the engine, the same way every other tool decides it.
   const gate = eligibility({ age });
@@ -127,7 +127,8 @@ export default function HealthyWeight() {
                 <span className="fx-name">BMI</span>
                 <span className="fx-val">{r.b.toFixed(1)}</span>
               </div>
-              <div className="fx-sub">{r.category}</div>
+              <div className="fx-sub">{r.category
+                ?? 'No category under 20: these adult categories apply from age 20, and under 20 BMI is read against age- and sex-specific percentiles.'}</div>
               {r.caveats.map(k => <p key={k} className="cat-caveat">{RAIL_COPY[k]}</p>)}
             </div>
             <div className="fx on">
@@ -168,11 +169,14 @@ export default function HealthyWeight() {
             <p>
               Waist-to-height ratio is the more useful indicator here. It needs one
               measurement, has no estimation error to speak of, and predicts cardiometabolic
-              risk better than BMI. Below 0.5 is the commonly cited threshold.
+              risk better than BMI. The bands are Ashwell and Gibson's, from UK adults: below
+              0.5, no increased risk; 0.5 to under 0.6, increased risk; 0.6 and above, very
+              high risk. BMI categories are the CDC's, for adults 20 and older.
             </p>
             <p className="refs">
               Devine BJ 1974 · Robinson JD et al. 1983 · Miller DR et al. 1983 ·
-              Hamwi GJ 1964 · Ashwell M &amp; Gibson S, BMJ Open 2016
+              Hamwi GJ 1964 · Ashwell M &amp; Gibson S, BMJ Open 2016 ·
+              CDC, Adult BMI Categories, 2024
             </p>
           </Method>
         </Panel>

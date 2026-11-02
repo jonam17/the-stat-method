@@ -299,7 +299,7 @@ describe('healthy weight range', () => {
   it('categorises BMI and waist-to-height', () => {
     expect(bmiCategory(22)).toBe('Healthy weight');
     expect(bmiCategory(27)).toBe('Overweight');
-    expect(whtrBand(0.45).label).toBe('Healthy');
+    expect(whtrBand(0.45).label).toBe('No increased risk');
     expect(whtrBand(0.55).label).toBe('Increased risk');
   });
 });

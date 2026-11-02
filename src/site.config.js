@@ -99,27 +99,6 @@ export const LEGAL = {
 };
 
 
-/**
- * How weight-category labels are displayed. Pending clinical review (B5).
- *
- *   'label'  — show the band ("Normal weight", "Obesity class I") with caveats.
- *              Current setting, chosen by the site owner before the evidence
- *              review below was available.
- *   'number' — show the BMI figure and no band.
- *   'paired' — show the band only alongside waist-to-height ratio, per the AMA's
- *              recommendation to use BMI in conjunction with another measure.
- *
- * WHAT THE EVIDENCE SAYS, so this is a decision and not a default:
- * The AMA's 2023 position is that BMI loses predictability at the individual
- * level and should not be a sole measure. The harms literature links categorical
- * weight labels to weight stigma, healthcare avoidance and disordered eating.
- * And labels cut BOTH ways — a "normal" band is the false reassurance that
- * delays recognition of restrictive eating disorders at normal weight.
- *
- * Changing this is one line. Pending clinical review.
- */
-export const CATEGORY_DISPLAY = 'label';
-
 export const MONETIZATION = {
   /**
    * Amazon storefront slug. Set to null to remove the affiliate block entirely

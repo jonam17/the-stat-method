@@ -150,9 +150,12 @@ export default function Baseline() {
             {/* At most four figures per row: six in one row truncated "Overweight". */}
             <StatStrip items={[
               { label: 'BMI', value: b.b.toFixed(1) },
-              { label: 'Category', value: b.category },
+              { label: 'Category', value: b.category ?? '—' },
               { label: 'Healthy range', value: `${fmt(w(b.bmiRange.lowKg))}–${fmt(w(b.bmiRange.highKg))}`, unit: ` ${wu}` },
             ]} />
+            {b.category == null && (
+              <p className="foot-note">No BMI category under 20: the CDC's adult categories apply from age 20.</p>
+            )}
             {(b.w != null || r.lean) && (
               <StatStrip items={[
                 ...(b.w != null ? [{ label: 'Waist-to-height', value: b.w.toFixed(2) }] : []),

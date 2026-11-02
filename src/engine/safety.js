@@ -270,7 +270,7 @@ export function checkEnergyAvailability({ intakeKcal, ffmKg, exerciseKcal = 0 })
  * because normal weight conceals the severity.
  *
  * Such a user passes this guard completely. Worse, the category label elsewhere
- * on the site tells them "Normal weight" — the exact false reassurance that
+ * on the site tells them "Healthy weight" — the exact false reassurance that
  * delays treatment, and a reason the label question (B5) is not merely about
  * stigma at the upper end.
  *

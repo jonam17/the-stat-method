@@ -30,7 +30,7 @@ describe('waistToHeight — a missing measurement is not a ratio', () => {
   it('whtrBand gives no band without a ratio', () => {
     expect(whtrBand(null)).toBeNull();
     expect(whtrBand(undefined)).toBeNull();
-    expect(whtrBand(0.45).label).toBe('Healthy');
+    expect(whtrBand(0.45).label).toBe('No increased risk');
   });
 });
 

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,085 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,092 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.3 — Body labels checked against their sources
+
+- **Body Fat and FFMI no longer label body fat** ("Athletic", "Fitness", "Average" and so on). The bands were
+  credited to ACE in the code but cited nowhere, and the only ACE page we could reach has no chart; its one
+  example puts a woman at 36% "in the obesity category", where our top label said "Above average".
+- **BMI categories now follow the CDC** and cite it: Underweight, Healthy weight, Overweight and Class 1 to 3
+  obesity, with the CDC's boundaries. The CDC applies them from age 20, so the Healthy Weight calculator and
+  the Baseline show no category for 18- and 19-year-olds, with a short note why.
+- **Waist-to-height uses Ashwell and Gibson's three bands**, in their words: no increased risk below 0.5,
+  increased risk from 0.5 to under 0.6, very high risk from 0.6. The "Below range" band under 0.40 and the
+  three notes were not in the paper and are gone.
+- **Fixed: the eating-disorder caveat had stopped showing.** Healthy Weight adds a caveat about restrictive
+  eating at normal weight when BMI is in the healthy band. It checked for the label "Normal weight", which had
+  been renamed "Healthy weight", so it never appeared. It now checks the band itself, and tests pin it.
+- Removed `CATEGORY_DISPLAY` from `site.config.js`; nothing read it. Its evidence note now sits beside the
+  BMI categories.
 
 ### v2.38.2 — Amino acids and protein quality article
 

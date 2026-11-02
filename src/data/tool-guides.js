@@ -366,7 +366,7 @@ export const GUIDES = {
   'healthy-weight': {
     terms: [
       ['BMI', 'Body mass index: weight divided by height squared. A population screening tool.'],
-      ['WHtR', 'Waist-to-height ratio. Below 0.5 is the commonly cited threshold.'],
+      ['WHtR', 'Waist-to-height ratio. Below 0.5 is the band with no increased risk in Ashwell and Gibson\u2019s bands, used here.'],
       ['Ideal weight formulas', 'Devine, Robinson, Miller and Hamwi — all derived for clinical drug dosing.'],
     ],
     howTo: [
