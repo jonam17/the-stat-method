@@ -342,6 +342,15 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.38.4 — Dependency updates
+
+- **Dependabot's three update PRs (#7, #8, #9), applied together** rather than merged one by one: Astro
+  7.3.3 → 7.4.4 with @astrojs/mdx 8.1.2, @astrojs/markdown-remark 7.3.5 and @astrojs/preact 6.1.1;
+  unist-util-visit 5.2.0; Vitest 4.1.12; Playwright 1.64.1. Minor and patch versions only. The Astro
+  packages move together, as `.github/dependabot.yml` asks, but the bot had split them across two PRs.
+- Checked on a clean copy: all tests and release checks pass, and the built pages' text is unchanged.
+  Only Astro's minified hydration script differs.
+
 ### v2.38.3 — Body labels checked against their sources
 
 - **Body Fat and FFMI no longer label body fat** ("Athletic", "Fitness", "Average" and so on). The bands were
