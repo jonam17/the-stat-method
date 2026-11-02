@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 23 sourced articles · 1,085 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,085 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,15 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.2 — Amino acids and protein quality article
+
+- **New article, scheduled for 8 November:** *Amino acids and protein quality* — which amino acids must come
+  from food, how PDCAAS and DIAAS score protein and what they don't measure, the leucine dose per meal, BCAAs,
+  and plant, animal and collagen proteins. Ten references, all read and checked; sponsor roles and design
+  limits are stated in the text. Links to the protein article for how much to eat. Record:
+  `docs/citation-reviews/amino-acids-and-protein-quality.md`.
+- README headline now counts 24 articles.
 
 ### v2.38.1 — Cleanup: true counts, no empty cells, shorter Library descriptions
 
