@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,092 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,098 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.5 — Caffeine figures checked against their sources
+
+- **Caffeine Half-Life now cites its sources** (EFSA 2015, ACOG Committee Opinion 462, the FDA and Mayo Clinic).
+  It cited none before, and several figures did not match them.
+- **Half-life 2 to 8 hours, middle 4** (EFSA), instead of 3 to 7 and 5.
+- **Smoking ×0.7 and oral contraceptives ×1.4**, from EFSA's figures for how fast each clears caffeine, instead
+  of ×0.6 and ×1.7.
+- **Pregnancy uses the measured 6 to 16 hours** instead of ×2.5, which was too long early in pregnancy and too
+  short at the end. The middle line is labelled as the middle of the range.
+- **Liver condition: no estimate.** The ×2.0 had no source and none gives a figure, so the calculator now
+  explains why it cannot estimate it instead of guessing. Added to `qa:refusals`.
+- **Drink amounts from Mayo Clinic.** Cola was understated by about a third (34 mg for a 355 ml can; Mayo gives
+  33 mg per 237 ml). Brewed coffee, black tea, green tea and energy drinks corrected slightly; dark chocolate
+  from ACOG's table. Cold brew and pre-workout removed: no source gives a figure. The custom amount stays.
+- **Healthy Weight and Baseline, ages 18 and 19:** the CDC's BMI categories are defined from 20, so v2.38.3 showed
+  none. They now use the age-20 categories, with a line saying so.
 
 ### v2.38.4 — Dependency updates
 

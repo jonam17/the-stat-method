@@ -59,8 +59,8 @@ describe('half-life modifiers', () => {
     expect(effectiveHalfLife('pregnancy').typical).toBeGreaterThan(HALF_LIFE.typical);
     expect(effectiveHalfLife('oc').typical).toBeGreaterThan(HALF_LIFE.typical);
   });
-  it('preserves low < typical < high ordering for every modifier', () => {
-    for (const k of ['none', 'smoker', 'oc', 'pregnancy', 'liver']) {
+  it('preserves low < typical < high ordering for every modifier that gives a figure', () => {
+    for (const k of ['none', 'smoker', 'oc', 'pregnancy']) {
       const e = effectiveHalfLife(k);
       expect(e.low).toBeLessThan(e.typical);
       expect(e.typical).toBeLessThan(e.high);
@@ -90,5 +90,32 @@ describe('source data integrity', () => {
   });
   it('source keys are unique', () => {
     expect(new Set(SOURCES.map(s => s.key)).size).toBe(SOURCES.length);
+  });
+});
+
+describe('v2.38.5 — figures from the cited sources (item 45, batch 2)', () => {
+  it('uses EFSA\u2019s half-life: about 4 h, range about 2 to 8 h', () => {
+    expect(HALF_LIFE).toEqual({ low: 2, typical: 4, high: 8 });
+  });
+  it('scales by 0.7 for smoking and 1.4 for oral contraceptives', () => {
+    expect(effectiveHalfLife('smoker').typical).toBeCloseTo(2.8, 9);
+    expect(effectiveHalfLife('oc').typical).toBeCloseTo(5.6, 9);
+  });
+  it('uses the measured 6 to 16 h range in pregnancy, not a multiplier', () => {
+    const p = effectiveHalfLife('pregnancy');
+    expect([p.low, p.typical, p.high]).toEqual([6, 11, 16]);
+  });
+  it('gives no estimate for a liver condition (refuse, don\u2019t warn)', () => {
+    const l = effectiveHalfLife('liver');
+    expect(l.refused).toBe(true);
+    expect(l.typical).toBeUndefined();
+  });
+  it('lists only drinks with a cited amount', () => {
+    const mg = Object.fromEntries(SOURCES.map(s => [s.key, s.mg]));
+    expect(mg).toEqual({ filter: 96, espresso: 63, instant: 62, blacktea: 48, greentea: 29,
+                         energy: 79, cola: 33, darkchoc: 30 });
+  });
+  it('keeps 400 mg a day, and 200 mg in pregnancy', () => {
+    expect(DAILY_LIMIT).toEqual({ general: 400, pregnancy: 200 });
   });
 });

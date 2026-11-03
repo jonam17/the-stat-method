@@ -127,8 +127,10 @@ export default function HealthyWeight() {
                 <span className="fx-name">BMI</span>
                 <span className="fx-val">{r.b.toFixed(1)}</span>
               </div>
-              <div className="fx-sub">{r.category
-                ?? 'No category under 20: these adult categories apply from age 20, and under 20 BMI is read against age- and sex-specific percentiles.'}</div>
+              <div className="fx-sub">{r.category}</div>
+              {r.categoryExtended && (
+                <div className="fx-sub">The CDC's adult categories start at 20 and it has none for 18 and 19, so the age-20 categories are used here.</div>
+              )}
               {r.caveats.map(k => <p key={k} className="cat-caveat">{RAIL_COPY[k]}</p>)}
             </div>
             <div className="fx on">
@@ -171,7 +173,8 @@ export default function HealthyWeight() {
               measurement, has no estimation error to speak of, and predicts cardiometabolic
               risk better than BMI. The bands are Ashwell and Gibson's, from UK adults: below
               0.5, no increased risk; 0.5 to under 0.6, increased risk; 0.6 and above, very
-              high risk. BMI categories are the CDC's, for adults 20 and older.
+              high risk. BMI categories are the CDC's, defined for adults 20 and older and
+              used here from 18.
             </p>
             <p className="refs">
               Devine BJ 1974 · Robinson JD et al. 1983 · Miller DR et al. 1983 ·

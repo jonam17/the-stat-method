@@ -385,7 +385,7 @@ export const GUIDES = {
 
   'caffeine-half-life': {
     terms: [
-      ['Half-life', 'The time for the caffeine in your system to fall by half. Around five hours in a typical healthy adult, but the usual range is three to seven.'],
+      ['Half-life', 'The time for the caffeine in your system to fall by half. About four hours on average in adults, with a range of about two to eight.'],
       ['First-order elimination', 'Clearance proportional to how much is present — so it halves repeatedly rather than draining at a fixed rate.'],
       ['CYP1A2', 'The liver enzyme that does most caffeine metabolism. Genetic variation in it is the main reason people differ so much.'],
     ],
@@ -397,13 +397,13 @@ export const GUIDES = {
     ],
     interpreting: [
       ['The range matters more than the number',
-       'Half-life varies roughly threefold between healthy adults, so the same afternoon coffee can leave anywhere from a trace to most of a cup on board at midnight. The shaded band on the chart is the honest answer; the line through it is a convenience.'],
+       'Half-life varies about fourfold between adults, so the same afternoon coffee can leave anywhere from a trace to most of a cup on board at midnight. The shaded band on the chart is the honest answer; the line through it is a convenience.'],
       ['There is no safe threshold for sleep',
        'No amount of residual caffeine is established as the point where sleep stops being affected. Some people sleep through a double espresso at nine and others lie awake after tea at four. Use the threshold line to compare your own nights against each other, not against a standard.'],
       ['Serving sizes are the loosest input here',
-       'A cup of filter coffee is listed at 95 mg, but real cups range from about 70 to 200 depending on beans, grind, brew time and how big the cup actually is. If your coffee is strong, the estimate is low.'],
+       'A cup of brewed coffee is listed at 96 mg, Mayo Clinic\u2019s figure for 237 ml. Real cups vary far more: the FDA puts a 12 fl oz (355 ml) brewed coffee at 113 to 247 mg, depending on beans, brewing and cup size. If your coffee is strong or your cup is big, the estimate is low.'],
       ['What the modifiers do',
-       'Smoking induces the enzyme that clears caffeine and roughly halves half-life. Oral contraceptives inhibit it and commonly double it. Pregnancy extends it substantially, especially later on, which is why intake guidance drops to around 200 mg a day. If a clinician has told you something different about your own clearance, follow them.'],
+       'Smoking speeds up the enzyme that clears caffeine, by about 1.2 to 1.7 times depending on how much you smoke. Oral contraceptives slow it, making half-life about 1.4 times longer. In pregnancy, half-life has been measured at 6 to 16 hours, longest near the end, and EFSA and ACOG treat intake below 200 mg a day as not a concern. Liver disease is left out because no figure for it is reliable. If a clinician has told you something different about your own clearance, follow them.'],
     ],
     pitfalls: [
       'Treating the middle estimate as a measurement of your own body.',

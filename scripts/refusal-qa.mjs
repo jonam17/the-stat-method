@@ -49,6 +49,7 @@ const CASES = [
   ...['tdee-calculator', 'baseline', 'protein-target'].map(tool => ({ tool, why: 'age 100', fill: { Age: '100' }, expect: 'refused' })),
   // Severe pain must compute nothing — and the milder answers must not refuse.
   { tool: 'progressive-overload', why: 'severe pain', click: ['Severe'], expect: 'refused' },
+  { tool: 'caffeine-half-life', why: 'liver condition', select: { 'Anything that changes how you clear caffeine?': 'liver' }, expect: 'refused' },
   { tool: 'progressive-overload', why: 'moderate pain holds, does not refuse', click: ['Moderate'], expect: 'allowed' },
 ];
 
@@ -70,6 +71,7 @@ for (const c of CASES) {
     for (const n of c.click ?? []) await btn(n).click();
     if (c.feet) { await page.locator('input[aria-label="Feet"]').fill(c.feet); await page.locator('input[aria-label="Inches"]').fill(c.inches); }
     for (const [label, v] of Object.entries(c.fill ?? {})) await fld(label).fill(v, { timeout: 5000 });
+    for (const [label, v] of Object.entries(c.select ?? {})) await page.locator(`xpath=(//label[normalize-space()="${label}"])[1]/following::select[1]`).selectOption(v);
     for (const n of c.then ?? []) await btn(n).click();
     await page.waitForTimeout(250);
     const n = await page.locator('.results .notice').count();
@@ -103,6 +105,7 @@ for (const c of BLANK) {
     for (const n of c.click ?? []) await btn(n).click();
     if (c.clear) await fld(c.clear).fill('', { timeout: 5000 });
     for (const [label, v] of Object.entries(c.fill ?? {})) await fld(label).fill(v, { timeout: 5000 });
+    for (const [label, v] of Object.entries(c.select ?? {})) await page.locator(`xpath=(//label[normalize-space()="${label}"])[1]/following::select[1]`).selectOption(v);
     await page.waitForTimeout(250);
     const text = await page.locator('.results').first().innerText();
     const ratio = /0\.\d\d/.test(text.split(/Waist[-:]?\s*(?:to-)?height/i).slice(1).join(' ').slice(0, 40));

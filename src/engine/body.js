@@ -202,8 +202,9 @@ export function healthyBmiRange(cm) {
  * Adult BMI categories — CDC, "Adult BMI Categories" (page dated 19 March 2024): Underweight below
  * 18.5; Healthy Weight 18.5 to less than 25; Overweight 25 to less than 30; Obesity 30 or greater,
  * as Class 1 (30 to <35), Class 2 (35 to <40) and Class 3 (40 or greater). The CDC applies these to
- * adults 20 and older only; from 2 to 19 it uses BMI-for-age percentiles, so no category is given
- * under 20 (BMI_CATEGORY_MIN_AGE). `key` is what code tests against — never the label's wording,
+ * adults 20 and older; from 2 to 19 it uses BMI-for-age percentiles. The site serves adults from 18,
+ * so for 18 and 19 the age-20 categories are used and the page says so (decided by the maintainer,
+ * 2026-11-02; v2.38.3 had shown no category under 20). `key` is what code tests against — never the label's wording,
  * which once changed from "Normal weight" to "Healthy weight" and silently switched off the
  * atypical-anorexia caveat keyed to it.
  *
@@ -225,9 +226,10 @@ export const BMI_CATEGORIES = [
 export const BMI_CATEGORY_MIN_AGE = 20;
 /** The category object for a BMI, or null when there is no usable BMI. Age-blind — see bmiLabel. */
 export const bmiBand = v => (v > 0 && Number.isFinite(v) ? BMI_CATEGORIES.find(c => v < c.max) : null);
-/** The label to show: null under 20, where the CDC's adult categories do not apply. */
-export const bmiCategory = (v, age) =>
-  (+age > 0 && +age < BMI_CATEGORY_MIN_AGE) ? null : (bmiBand(v)?.label ?? null);
+/** The label to show. Age-independent: 18 and 19 use the age-20 categories (see above). */
+export const bmiCategory = v => bmiBand(v)?.label ?? null;
+/** True when the CDC's adult categories are being extended below the age they are defined for. */
+export const bmiCategoryExtended = age => +age > 0 && +age < BMI_CATEGORY_MIN_AGE;
 
 /**
  * Waist-to-height bands — Ashwell & Gibson, BMJ Open 2016;6:e010159: "no increased risk" below 0.5,

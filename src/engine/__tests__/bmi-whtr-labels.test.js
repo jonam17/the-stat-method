@@ -4,26 +4,27 @@
  * on its label's wording (it silently stopped showing when "Normal weight" became "Healthy weight").
  */
 import { describe, it, expect } from 'vitest';
-import { bmiCategory, bmiBand, whtrBand, BMI_CATEGORY_MIN_AGE } from '../body.js';
+import { bmiCategory, bmiBand, whtrBand, BMI_CATEGORY_MIN_AGE, bmiCategoryExtended } from '../body.js';
 import { healthyWeightResult } from '../results.js';
 
 describe('BMI categories (CDC)', () => {
   it('uses the CDC boundaries, lower bound inclusive', () => {
-    expect(bmiCategory(18.49, 30)).toBe('Underweight');
-    expect(bmiCategory(18.5, 30)).toBe('Healthy weight');
-    expect(bmiCategory(24.99, 30)).toBe('Healthy weight');
-    expect(bmiCategory(25, 30)).toBe('Overweight');
-    expect(bmiCategory(30, 30)).toBe('Class 1 obesity');
-    expect(bmiCategory(35, 30)).toBe('Class 2 obesity');
-    expect(bmiCategory(40, 30)).toBe('Class 3 obesity');
-    expect(bmiCategory(65, 30)).toBe('Class 3 obesity');
+    expect(bmiCategory(18.49)).toBe('Underweight');
+    expect(bmiCategory(18.5)).toBe('Healthy weight');
+    expect(bmiCategory(24.99)).toBe('Healthy weight');
+    expect(bmiCategory(25)).toBe('Overweight');
+    expect(bmiCategory(30)).toBe('Class 1 obesity');
+    expect(bmiCategory(35)).toBe('Class 2 obesity');
+    expect(bmiCategory(40)).toBe('Class 3 obesity');
+    expect(bmiCategory(65)).toBe('Class 3 obesity');
   });
 
-  it('gives no category under 20, where the CDC uses percentiles', () => {
+  it('uses the age-20 categories for 18 and 19, and flags that it does', () => {
     expect(BMI_CATEGORY_MIN_AGE).toBe(20);
-    expect(bmiCategory(22, 18)).toBeNull();
-    expect(bmiCategory(22, 19)).toBeNull();
-    expect(bmiCategory(22, 20)).toBe('Healthy weight');
+    expect(bmiCategory(22)).toBe('Healthy weight');
+    expect(bmiCategoryExtended(18)).toBe(true);
+    expect(bmiCategoryExtended(19)).toBe(true);
+    expect(bmiCategoryExtended(20)).toBe(false);
   });
 
   it('has no band without a usable BMI', () => {
@@ -52,9 +53,10 @@ describe('Healthy Weight result', () => {
     expect(r.caveats).toContain('normalLabelCaveat');
   });
 
-  it('keeps that caveat under 20, because the healthy range is still shown', () => {
+  it('gives 18- and 19-year-olds the age-20 category, flagged, with the same caveats', () => {
     const r = healthyWeightResult({ ...base, age: 19 });
-    expect(r.category).toBeNull();
+    expect(r.category).toBe('Healthy weight');
+    expect(r.categoryExtended).toBe(true);
     expect(r.caveats).toContain('normalLabelCaveat');
   });
 

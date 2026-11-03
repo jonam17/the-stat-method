@@ -153,8 +153,8 @@ export default function Baseline() {
               { label: 'Category', value: b.category ?? '—' },
               { label: 'Healthy range', value: `${fmt(w(b.bmiRange.lowKg))}–${fmt(w(b.bmiRange.highKg))}`, unit: ` ${wu}` },
             ]} />
-            {b.category == null && (
-              <p className="foot-note">No BMI category under 20: the CDC's adult categories apply from age 20.</p>
+            {b.categoryExtended && (
+              <p className="foot-note">The CDC's adult BMI categories start at 20 and it has none for 18 and 19, so the age-20 categories are used here.</p>
             )}
             {(b.w != null || r.lean) && (
               <StatStrip items={[

@@ -7,56 +7,76 @@
  *   C(t) = C0 · (1/2)^(t / t½)
  *
  * HOW UNCERTAIN THIS IS
- * The half-life is the whole model, and it is not a constant. Commonly cited
- * population values run about 3–7 hours in healthy non-smoking adults, and the
- * modifiers below move it by more than most people expect. A single-number
- * answer here would imply precision the pharmacology does not support, which is
- * why every function returns a RANGE and the UI is expected to show it.
- *
- * Sources for the modifiers are population-level generalisations, not
- * personalised prediction. Someone on multiple interacting medications, or with
- * impaired liver function, is outside what this can model.
+ * The half-life is the whole model, and it is not a constant. Every figure below is from a named
+ * source (v2.38.5, item 45 batch 2); the page's sources line lists them:
+ *   EFSA NDA Panel, Scientific Opinion on the safety of caffeine. EFSA Journal 2015;13(5):4102 —
+ *     half-life, smoking, oral contraceptives, pregnancy, liver, and the 400 / 200 mg figures.
+ *   ACOG Committee Opinion No. 462, 2010 — 200 mg in pregnancy; dark chocolate (its Table 1, USDA).
+ *   FDA, "Spilling the Beans" (content current as of 28 Aug 2024) — 400 mg; how widely drinks vary.
+ *   Mayo Clinic, "Caffeine content for coffee, tea, soda and more" (6 Feb 2025) — drink amounts.
+ * Every function returns a RANGE and the UI is expected to show it. Someone on interacting
+ * medication is outside what this can model.
  */
 
-/** Population half-life range for a healthy non-smoking adult, in hours. */
-export const HALF_LIFE = { low: 3, typical: 5, high: 7 };
+/** EFSA §4.1.1: "a plasma half-life of about four hours with range of about two to eight hours". */
+export const HALF_LIFE = { low: 2, typical: 4, high: 8 };
 
 /**
- * Multipliers applied to half-life. Directional and approximate.
- * A multiplier > 1 means caffeine lingers LONGER.
+ * What changes clearance. A multiplier > 1 means caffeine lingers LONGER. `range` replaces the
+ * half-life outright; `refuse` means no estimate is given (refuse, don't warn).
  */
 export const HALF_LIFE_MODIFIERS = [
   { key: 'none', label: 'None of these', mult: 1,
     note: '' },
-  { key: 'smoker', label: 'I smoke', mult: 0.6,
-    note: 'Smoking induces CYP1A2 and roughly halves caffeine half-life.' },
-  { key: 'oc', label: 'Oral contraceptives', mult: 1.7,
-    note: 'Oral contraceptives inhibit caffeine metabolism, commonly doubling half-life.' },
-  { key: 'pregnancy', label: 'Pregnant', mult: 2.5,
-    note: 'Half-life rises substantially in pregnancy, particularly in the third trimester. '
-        + 'Guidance generally caps intake near 200 mg/day — check with your midwife or doctor.' },
-  { key: 'liver', label: 'Liver condition', mult: 2.0,
-    note: 'Impaired hepatic clearance extends half-life considerably. This estimate is '
-        + 'rough; your clinician\'s advice supersedes it.' },
+  // EFSA §4.1.1 (Tantcheva-Poor 1999, 786 people): clearance 1.22x, 1.47x, 1.66x and 1.72x for
+  // 1–5, 6–10, 11–20 and >20 cigarettes a day — half-life about 0.6 to 0.8 of a non-smoker's.
+  { key: 'smoker', label: 'I smoke', mult: 0.7,
+    note: 'Smokers clear caffeine faster: about 1.2 to 1.7 times as fast, depending on how much '
+        + 'they smoke. This uses 0.7 times the usual half-life, the middle of that spread.' },
+  // Same study: oral contraceptives reduced clearance to 0.72x — half-life about 1.4x.
+  { key: 'oc', label: 'Oral contraceptives', mult: 1.4,
+    note: 'Oral contraceptives slow caffeine clearance. In a study of 786 people, it ran at about '
+        + 'seven-tenths of the usual rate, so half-life is about 1.4 times longer.' },
+  // EFSA §4.1.2: 6–16 h in pregnancy (Knutti 1982), three to four times longer by the end. One
+  // multiplier misstates early and late pregnancy alike, so the measured range is used directly;
+  // 11 h is the middle of that range, not a typical value.
+  { key: 'pregnancy', label: 'Pregnant', range: { low: 6, typical: 11, high: 16 },
+    note: 'In pregnancy, caffeine half-life has been measured at 6 to 16 hours, longest near the '
+        + 'end. The middle line is the middle of that range, not a typical value. EFSA and the '
+        + 'American College of Obstetricians and Gynecologists put intake below 200 mg a day as '
+        + 'not a concern. Check with your midwife or doctor.' },
+  // EFSA §4.1.1: "severe liver disorders… have been reported to cause a significant inhibition of
+  // CYP1A2 activity" — no figure. The old 2.0x had no source.
+  { key: 'liver', label: 'Liver condition', refuse: true,
+    note: 'Liver disease can slow caffeine clearance a great deal, but by an amount that varies '
+        + 'too much for this calculator to estimate. Ask your doctor what applies to you.' },
 ];
 
-/** Common caffeine sources, mg per typical serving. Approximate — brewing varies widely. */
+/**
+ * Caffeine per serving, mg. Mayo Clinic's chart (servings of 8 fl oz / 237 ml, espresso 1 fl oz /
+ * 30 ml), except dark chocolate: ACOG Committee Opinion 462, Table 1 — 30 mg per 1.45 oz (41 g),
+ * from USDA data. Cold brew (155 mg) and pre-workout (200 mg) were removed in v2.38.5: no source.
+ * Real servings vary widely — the FDA puts a 12 fl oz brewed coffee at 113 to 247 mg.
+ */
 export const SOURCES = [
-  { key: 'filter',    label: 'Filter coffee',      mg: 95,  unit: '240 ml cup' },
-  { key: 'espresso',  label: 'Espresso',           mg: 63,  unit: 'single shot' },
-  { key: 'instant',   label: 'Instant coffee',     mg: 62,  unit: '240 ml cup' },
-  { key: 'coldbrew',  label: 'Cold brew',          mg: 155, unit: '340 ml' },
-  { key: 'blacktea',  label: 'Black tea',          mg: 47,  unit: '240 ml cup' },
-  { key: 'greentea',  label: 'Green tea',          mg: 28,  unit: '240 ml cup' },
-  { key: 'energy',    label: 'Energy drink',       mg: 80,  unit: '250 ml can' },
-  { key: 'cola',      label: 'Cola',               mg: 34,  unit: '355 ml can' },
-  { key: 'preworkout',label: 'Pre-workout',        mg: 200, unit: 'typical scoop' },
-  { key: 'darkchoc',  label: 'Dark chocolate',     mg: 23,  unit: '30 g' },
+  { key: 'filter',    label: 'Brewed coffee',      mg: 96, unit: '237 ml cup' },
+  { key: 'espresso',  label: 'Espresso',           mg: 63, unit: '30 ml shot' },
+  { key: 'instant',   label: 'Instant coffee',     mg: 62, unit: '237 ml cup' },
+  { key: 'blacktea',  label: 'Black tea',          mg: 48, unit: '237 ml cup' },
+  { key: 'greentea',  label: 'Green tea',          mg: 29, unit: '237 ml cup' },
+  { key: 'energy',    label: 'Energy drink',       mg: 79, unit: '237 ml' },
+  { key: 'cola',      label: 'Cola',               mg: 33, unit: '237 ml' },
+  { key: 'darkchoc',  label: 'Dark chocolate',     mg: 30, unit: '41 g' },
 ];
 
-/** Effective half-life in hours after applying a modifier. */
+/**
+ * Effective half-life in hours after applying a modifier. A refused modifier returns
+ * { refused: true } and no numbers.
+ */
 export const effectiveHalfLife = (modifierKey = 'none') => {
   const m = HALF_LIFE_MODIFIERS.find(x => x.key === modifierKey) ?? HALF_LIFE_MODIFIERS[0];
+  if (m.refuse) return { refused: true, modifier: m };
+  if (m.range) return { ...m.range, modifier: m };
   return {
     low: HALF_LIFE.low * m.mult,
     typical: HALF_LIFE.typical * m.mult,
@@ -109,10 +129,11 @@ export function decayCurve(doses, hl, hours = 24, step = 0.5) {
 /**
  * Daily intake guidance.
  *
- * 400 mg/day is the figure health authorities most commonly cite as not
- * generally associated with adverse effects in healthy adults; ~200 mg/day is
- * the usual figure during pregnancy. These are population guidance values, not
- * thresholds where something specific happens to an individual.
+ * 400 mg/day: the FDA cites it as "an amount not generally associated with negative effects" for
+ * most adults; EFSA found habitual intake up to 400 mg/day raised no safety concerns for
+ * non-pregnant adults. 200 mg/day in pregnancy: EFSA (no safety concerns for the fetus) and ACOG
+ * 462 ("less than 200 mg per day does not appear to be a major contributing factor in miscarriage
+ * or preterm birth"). Population guidance values, not thresholds for an individual.
  */
 export const DAILY_LIMIT = { general: 400, pregnancy: 200 };
 

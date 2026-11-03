@@ -12,7 +12,7 @@
  * inputs it makes the same decision with the same reason.
  */
 import { lbmFromBodyFat, bmi, idealWeightFormulas, healthyBmiRange,
-         waistToHeight, whtrBand, bmiCategory, bmiBand,
+         waistToHeight, whtrBand, bmiCategory, bmiBand, bmiCategoryExtended,
          ffmi, ffmiNormalised, ffmiPosition } from './body.js';
 import { allBmrFormulas, ACTIVITY, selectBmr, tdee, calorieTarget } from './energy.js';
 import { goalDelta, checkEnergyAvailability, eligibility, effectiveFloor, MAX_WEEKLY_LOSS_PCT } from './safety.js';
@@ -51,7 +51,8 @@ export function healthyWeightResult({ kg, cm, sex, waistCm, age }) {
   return {
     formulas, bmiRange, b, w,
     band: whtrBand(w),
-    category: bmiCategory(b, age),
+    category: bmiCategory(b),
+    categoryExtended: bmiCategoryExtended(age),
     formulaLow: Math.min(...vals),
     formulaHigh: Math.max(...vals),
     inRange: kg >= bmiRange.lowKg && kg <= bmiRange.highKg,

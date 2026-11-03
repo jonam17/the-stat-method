@@ -40,6 +40,7 @@ export default function CaffeineHalfLife() {
 
   const r = useMemo(() => {
     const hl = effectiveHalfLife(modifier);
+    if (hl.refused) return { refused: true, empty: false, hl };
     const bedMin = toMinutes(bedtime);
 
     // Express each drink as hours BEFORE bedtime (wrapping past midnight).
@@ -83,12 +84,13 @@ export default function CaffeineHalfLife() {
 
   // chart geometry
   const W = 560, H = 190, PAD = 34;
-  const maxMg = r.empty ? 1 : Math.max(...r.curve.map(p => p.low), 1);
+  const noChart = r.empty || r.refused;
+  const maxMg = noChart ? 1 : Math.max(...r.curve.map(p => p.low), 1);
   const x = h => PAD + (h / 24) * (W - PAD - 12);
   const y = mg => H - PAD - (mg / maxMg) * (H - PAD - 14);
-  const path = key => r.empty ? '' :
+  const path = key => noChart ? '' :
     r.curve.map((p, i) => `${i ? 'L' : 'M'}${x(p.h).toFixed(1)},${y(p[key]).toFixed(1)}`).join(' ');
-  const band = r.empty ? '' :
+  const band = noChart ? '' :
     r.curve.map((p, i) => `${i ? 'L' : 'M'}${x(p.h).toFixed(1)},${y(p.low).toFixed(1)}`).join(' ')
     + ' ' + r.curve.slice().reverse()
       .map(p => `L${x(p.h).toFixed(1)},${y(p.high).toFixed(1)}`).join(' ') + ' Z';
@@ -121,7 +123,7 @@ export default function CaffeineHalfLife() {
               {d.source === 'custom' && (
                 <Num label="Caffeine per serving" value={d.customMg ?? ''}
                      tag="mg" min={1} max={1000} placeholder="—"
-                     hint="Check the label. A pre-workout scoop is often 150–300 mg."
+                     hint="Check the label: amounts vary a lot between products."
                      onChange={v => update(d.id, { customMg: v })} />
               )}
 
@@ -136,7 +138,7 @@ export default function CaffeineHalfLife() {
 
           <Select label="Anything that changes how you clear caffeine?"
                   value={modifier} onChange={setModifier}
-                  hint="These shift the estimate substantially — smoking roughly halves half-life, pregnancy can more than double it.">
+                  hint="These shift the estimate a lot: smoking shortens half-life, while oral contraceptives and pregnancy lengthen it.">
             {HALF_LIFE_MODIFIERS.map(m => (
               <option key={m.key} value={m.key}>{m.label}</option>
             ))}
@@ -149,8 +151,9 @@ export default function CaffeineHalfLife() {
 
         <Panel label="At bedtime" dark
                incomplete={r.empty}
+               notice={r.refused ? r.hl.modifier.note : null}
                incompleteNote="Add a drink to see how much caffeine is still on board at bedtime.">
-          {!r.empty && <>
+          {!r.empty && !r.refused && <>
             <BigStat
               value={`${Math.round(r.atBedTypical)} mg`}
               unit="still in your system at bedtime"
@@ -170,8 +173,8 @@ export default function CaffeineHalfLife() {
             {r.daily.over && (
               <div className="warnbar">
                 That's {fmt(r.daily.total)} mg today, above the {r.daily.limit} mg
-                {r.daily.limit === 200 ? ' commonly advised during pregnancy' :
-                  ' most health authorities cite as not generally associated with adverse effects in healthy adults'}.
+                {r.daily.limit === 200 ? ' that EFSA and ACOG treat as not a concern in pregnancy' :
+                  ' that the FDA and EFSA cite as not generally associated with negative effects in adults'}.
               </div>
             )}
 
@@ -190,8 +193,8 @@ export default function CaffeineHalfLife() {
 
             <p className="cat-caveat">
               The shaded band is the honest part of this chart. Caffeine half-life
-              varies roughly three to seven hours between healthy adults, so the
-              same coffee can leave very different amounts on board at midnight.
+              runs from about two to eight hours in adults, so the same coffee can
+              leave very different amounts on board at midnight.
               Treat the line as a middle estimate, not a measurement.
             </p>
           </>}
@@ -205,21 +208,29 @@ export default function CaffeineHalfLife() {
           summed, each decaying from its own time.
         </p>
         <p>
-          A half-life of five hours is used as the middle estimate, with three and
-          seven hours as the range — the usual span reported in healthy non-smoking
-          adults. Modifiers scale that range: smoking shortens it markedly, while
-          oral contraceptives, pregnancy and impaired liver function extend it.
+          A half-life of four hours is used as the middle estimate, with two and
+          eight hours as the range, as reported by the European Food Safety Authority.
+          Smoking scales that range by 0.7 and oral contraceptives by 1.4. Pregnancy
+          uses the 6 to 16 hours measured in pregnant women instead. Liver disease
+          slows clearance by too variable an amount to estimate, so the calculator
+          gives no figure for it.
         </p>
         <p>
-          Serving amounts are typical values. Real caffeine content varies a great
-          deal with bean, grind, brew time and cup size — a strong filter coffee can
-          be double the figure used here.
+          Serving amounts are Mayo Clinic's averages; dark chocolate is from the
+          American College of Obstetricians and Gynecologists. Real caffeine content
+          varies a great deal: the FDA puts a 12 fl oz (355 ml) brewed coffee at
+          anywhere from 113 to 247 mg.
         </p>
         <p>
           <strong>No residual amount is established as safe for sleep.</strong>
           Sensitivity differs severalfold between individuals, and genetics
           (particularly CYP1A2) account for much of it. The threshold line is a
           reference point for comparing your own nights, not a clinical cutoff.
+        </p>
+        <p className="refs">
+          EFSA, Scientific Opinion on the safety of caffeine, 2015 · ACOG Committee
+          Opinion No. 462, 2010 · FDA, Spilling the Beans, 2024 · Mayo Clinic, Caffeine
+          content for coffee, tea, soda and more, 2025
         </p>
       </Method>
     </div>
