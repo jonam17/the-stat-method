@@ -29,7 +29,7 @@ export default function HandPortions() {
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
   const [inches, setInches] = useState('10');
-  const [activity, setActivity] = useState('moderate');
+  const [activity, setActivity] = useState('sedentary');
   const [goal, setGoal] = useState('maintain');   // F-028
 
   // Computed in the engine (CONVENTIONS §21), on the Macro Calculator's own calculation.
@@ -115,7 +115,7 @@ export default function HandPortions() {
                   </div>
                 </div>
               )}
-              <Select label="Activity" value={activity} onChange={setActivity}>
+              <Select label="Activity" value={activity} onChange={setActivity} hint={ACTIVITY[activity]?.hint}>
                 {Object.entries(ACTIVITY).map(([k, v]) => (
                   <option key={k} value={k}>{v.label}</option>
                 ))}

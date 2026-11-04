@@ -19,7 +19,7 @@ for (const age of ['16', '30', '105'])
     for (const cm of [160, 178, 193])
       for (const sex of ['male', 'female'])
         for (const lifeStage of ['none', 'pregnant', 'breastfeeding'])
-          PEOPLE.push({ age, kg, cm, sex, lifeStage, activity: 'moderate', bf: null });
+          PEOPLE.push({ age, kg, cm, sex, lifeStage, activity: 'active', bf: null });
 
 const plannerArgs = p => ({ ...p, targetKg: p.kg - 6, mode: 'date', weeks: '20', intake: '2000', nowMs: 0 });
 
@@ -61,7 +61,7 @@ describe('same person, same message, every tool', () => {
   });
 
   it('every tool shows an underweight minor the helpline', () => {
-    const p = { age: '16', kg: 46, cm: 178, sex: 'female', lifeStage: 'none', activity: 'moderate', bf: null };
+    const p = { age: '16', kg: 46, cm: 178, sex: 'female', lifeStage: 'none', activity: 'active', bf: null };
     expect(macroResult({ ...p, goal: 'cut' }).copy).toContain(HELPLINE);
     expect(deficitPlanResult(plannerArgs(p)).copy).toContain(HELPLINE);
     expect(computeBaseline({ ...p, goal: 'cut', targetKg: 40 }).gate.copy).toContain(HELPLINE);

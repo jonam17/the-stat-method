@@ -52,13 +52,13 @@ describe('Hand Portions on the engine matches its old calculation', () => {
   });
 
   it('a blank age is now incomplete, not a result for an assumed 30-year-old', () => {
-    const c = { sex: 'male', kg: 80, cm: 178, activity: 'moderate', goal: 'maintain' };
+    const c = { sex: 'male', kg: 80, cm: 178, activity: 'active', goal: 'maintain' };
     expect(oldHandPortions({ ...c, age: '' }).p).toBeGreaterThan(0);    // the old behaviour
     expect(handPortionsResult({ source: 'calculate', ...c, age: '' })).toEqual({ incomplete: true });
   });
 
   it('a blank weight or height is incomplete', () => {
-    const c = { sex: 'male', age: '30', activity: 'moderate', goal: 'maintain' };
+    const c = { sex: 'male', age: '30', activity: 'active', goal: 'maintain' };
     expect(handPortionsResult({ source: 'calculate', ...c, kg: 0, cm: 178 })).toEqual({ incomplete: true });
     expect(handPortionsResult({ source: 'calculate', ...c, kg: 80, cm: 0 })).toEqual({ incomplete: true });
   });

@@ -70,7 +70,7 @@ describe('formula selection', () => {
 
 describe('TDEE and targets', () => {
   it('multiplies BMR by the activity factor', () => {
-    expect(tdee(1767.5, ACTIVITY.moderate.factor)).toBeCloseTo(1767.5 * 1.55, 5);
+    expect(tdee(1767.5, ACTIVITY.active.factor)).toBeCloseTo(1767.5 * 1.76, 5);
   });
 
   it('applies a deficit or surplus', () => {
@@ -153,16 +153,16 @@ describe('body composition', () => {
 describe('macros', () => {
   const cals = 2740;
 
-  it('scales protein off lean mass when available', () => {
-    const withLbm = defaultMacros({ cals, kg: 80, lbm: 64 });
-    const noLbm = defaultMacros({ cals, kg: 80, lbm: null });
-    expect(withLbm.p).toBeCloseTo(2.2 * 64, 5);
-    expect(noLbm.p).toBeCloseTo(1.8 * 80, 5);
+  it('uses 1.8 g/kg bodyweight, and 2.3 g/kg lean mass only when cutting with body fat known', () => {
+    expect(defaultMacros({ cals, kg: 80, lbm: 64 }).p).toBeCloseTo(1.8 * 80, 5);
+    expect(defaultMacros({ cals, kg: 80, lbm: null, goal: 'cut' }).p).toBeCloseTo(1.8 * 80, 5);
+    expect(defaultMacros({ cals, kg: 80, lbm: 64, goal: 'cut' }).p).toBeCloseTo(2.3 * 64, 5);
   });
 
-  it('respects the fat floor of 0.8 g/kg', () => {
-    const m = defaultMacros({ cals: 1200, kg: 80, lbm: null });
-    expect(m.f).toBeGreaterThanOrEqual(0.8 * 80 - 0.001);
+  it('sets fat at 25% of calories, never below 20% (IOM AMDR)', () => {
+    expect(defaultMacros({ cals: 2400, kg: 80, lbm: null }).f).toBeCloseTo(2400 * 0.25 / 9, 5);
+    const tight = defaultMacros({ cals: 1200, kg: 120, lbm: null });
+    expect(tight.f * 9).toBeGreaterThanOrEqual(1200 * 0.20 - 0.001);
   });
 
   it('never returns negative carbs', () => {

@@ -64,26 +64,30 @@ export function splitMeals({ proteinG, carbsG, fatG, meals = 4, periIndex = null
 }
 
 /**
- * Protein target from lean mass (preferred) or bodyweight, adjusted for
- * deficit depth and training age.
- * Ranges follow Morton et al. (2018) and Helms et al. (2014).
+ * Protein target (v2.38.6, item 45 batch 3):
+ *   Default: 1.4–2.0 g/kg bodyweight — the ISSN position stand (Jäger et al., JISSN 2017).
+ *   In a calorie deficit with body fat known: 2.3–3.1 g/kg lean mass — Helms et al. (JISSN 2014),
+ *     who advise the higher end the harder the cut and the leaner the person.
+ * The old steps (+0.2/+0.4 for a deficit, −0.2 for novices, +0.2 from age 60) and the 1.6–2.4 g/kg
+ * lean-mass and 1.3–2.0 g/kg bodyweight bands appeared in no source and were removed. No age step:
+ * PROT-AGE (Bauer et al., JAMDA 2013) asks at least 1.0–1.2 g/kg after 65 (1.2 if active), which
+ * the default already exceeds, and Morton et al. (BJSM 2018) found extra protein helped less with age.
+ * `deficit` accepts 'none' or 'deficit' (and the retired 'moderate'/'aggressive', read as 'deficit').
  */
-/** Older adults' raised protein floor applies from this age. */
-export const OLDER_ADULT_PROTEIN_AGE = 60;
+export const PROTEIN_BANDS = {
+  bodyweight: { low: 1.4, high: 2.0 },
+  deficitLeanMass: { low: 2.3, high: 3.1 },
+};
 
-export function proteinTarget({ kg, lbm = null, deficit = 'none', trainingAge = 'intermediate', older = false, age = null }) {
-  // Decided here from age, so no interface can forget it. The Baseline once
-  // omitted the older flag and gave a 68-year-old the younger range.
-  if (age != null && age !== '') older = Number(age) >= OLDER_ADULT_PROTEIN_AGE;
-  const base = lbm != null ? lbm : kg;
-  const perKg = lbm != null ? { low: 1.6, high: 2.4 } : { low: 1.3, high: 2.0 };
-  let lo = perKg.low, hi = perKg.high;
-  if (deficit === 'moderate') { lo += 0.2; hi += 0.1; }
-  if (deficit === 'aggressive') { lo += 0.4; hi += 0.2; }
-  if (trainingAge === 'novice') { hi -= 0.2; }
-  if (older) { lo += 0.2; }
+export function proteinTarget({ kg, lbm = null, deficit = 'none' }) {
+  const inDeficit = deficit !== 'none' && deficit != null;
+  const useLean = inDeficit && lbm != null;
+  const base = useLean ? lbm : kg;
+  const band = useLean ? PROTEIN_BANDS.deficitLeanMass : PROTEIN_BANDS.bodyweight;
+  const lo = band.low, hi = band.high;
   return {
-    basis: lbm != null ? 'lean body mass' : 'bodyweight',
+    basis: useLean ? 'lean body mass' : 'bodyweight',
+    inDeficit, leanMassNeedsBodyFat: inDeficit && lbm == null,
     lowG: Math.round(base * lo),
     highG: Math.round(base * hi),
     midG: Math.round((base * lo + base * hi) / 2),

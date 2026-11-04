@@ -27,11 +27,11 @@ const t = (i) => tdee(selectBmr(i, 'auto'), ACTIVITY.sedentary.factor);
 describe('F-001 calorieTarget floor', () => {
   // [RESOLVED F-001] was: floored at 1000 for both sexes, no warning flag.
   it('floors at the sex-appropriate minimum and flags it', () => {
-    const f = calorieTarget(t(female55), -750, 'female');
+    const f = calorieTarget(t(female55), -1000, 'female');
     expect(f.intake).toBe(MIN_INTAKE.female);
     expect(f.belowFloor).toBe(true);
 
-    const m = calorieTarget(t(male70), -1000, 'male');
+    const m = calorieTarget(t(male70), -1300, 'male');
     expect(m.intake).toBe(MIN_INTAKE.male);
     expect(m.belowFloor).toBe(true);
   });

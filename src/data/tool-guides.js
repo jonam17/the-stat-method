@@ -27,7 +27,7 @@ export const GUIDES = {
       ['The calorie number is a starting point, not a prescription',
        'It comes from an equation fitted to population averages, and individual expenditure varies by several hundred calories a day at the same height and weight. Run this target for two to three weeks, track a weekly average bodyweight, then adjust by 100–200 kcal based on what actually happened.'],
       ['Protein first, then fat, then carbohydrate',
-       'Protein is set from lean mass when you supply body fat, because fat tissue contributes almost nothing to protein requirement. Fat is floored at 0.8 g/kg for hormonal health. Carbohydrate fills whatever calories remain, which is why it moves most when you change the split.'],
+       'Protein is 1.8 g per kg of bodyweight, or 2.3 g per kg of lean mass when you are cutting and supply body fat. Fat is 25% of calories and never below 20%, the low end of the Institute of Medicine\u2019s range. Carbohydrate fills whatever calories remain, which is why it moves most when you change the split.'],
       ['What to do if the totals turn red',
        'The calculation still runs — nothing breaks. Red means your split exceeds 100% (or your calorie target, in grams mode). Either reduce one macro or accept that you are planning to eat above your target, deliberately.'],
     ],
@@ -58,8 +58,8 @@ export const GUIDES = {
   'tdee-calculator': {
     terms: [
       ['BMR', 'Basal metabolic rate: energy used at complete rest, before any activity.'],
-      ['TDEE', 'Total daily energy expenditure: BMR multiplied by an activity factor.'],
-      ['Activity factor', 'A multiplier from 1.2 (sedentary) to 1.9 (very active).'],
+      ['TDEE', 'Total daily energy expenditure: BMR multiplied by an activity level.'],
+      ['Activity level', 'Daily energy use as a multiple of BMR: 1.53 for a sedentary or light lifestyle, 1.76 for an active one and 2.25 for a vigorous one (FAO/WHO/UNU).'],
       ['NEAT', 'Non-exercise activity: fidgeting, walking, standing. Varies enormously between people.'],
     ],
     howTo: [
@@ -344,20 +344,18 @@ export const GUIDES = {
   'protein-target': {
     terms: [
       ['g/kg', 'Grams of protein per kilogram of bodyweight or lean mass.'],
-      ['Lean body mass', 'Bodyweight minus fat mass. The better basis for a protein target.'],
-      ['Anabolic resistance', 'Reduced muscle response to protein with age, raising requirements.'],
-      ['Training age', 'How long you have trained consistently, not your years alive.'],
+      ['Lean body mass', 'Bodyweight minus fat mass. The basis for the deficit range.'],
     ],
     howTo: [
       'Enter bodyweight, and body fat if you know it.',
-      'Set how aggressive your current calorie deficit is.',
+      'Say whether you are in a calorie deficit.',
       'Note the range rather than fixating on a single number.',
     ],
     interpreting: [
       ['Where to sit in the range',
-       'The lower end is sufficient at maintenance or in a surplus. Push toward the upper end during an aggressive deficit, when protein does more work protecting lean mass, and if you are older, since anabolic resistance raises the floor rather than lowering it.'],
-      ['Why lean mass is the better basis',
-       'Two people at the same weight can differ by twenty kilograms of fat, which contributes almost nothing to protein requirement. Scaling from total bodyweight inflates the target for anyone carrying more fat — this is the most common error in protein recommendations.'],
+       'Outside a deficit the range is 1.4 to 2.0 g per kg of bodyweight, enough for most people who exercise. In a deficit, with body fat entered, it is 2.3 to 3.1 g per kg of lean mass; aim higher the harder the cut and the leaner you are.'],
+      ['Why lean mass is used in a deficit',
+       'Two people at the same weight can differ by twenty kilograms of fat, which needs almost no protein. The deficit range comes from a review that set it per kg of lean mass, so the calculator uses lean mass there. The everyday range was set per kg of bodyweight, so it uses bodyweight.'],
       ['The per-meal limit is a myth',
        'Your body handles larger single doses without difficulty; the daily total is what drives outcomes. Spreading intake across three or four meals is convenient and probably marginally better for muscle protein synthesis, but it is nowhere near the lever it is usually presented as. Hit the daily number first.'],
     ],

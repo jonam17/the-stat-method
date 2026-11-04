@@ -14,7 +14,7 @@
 import { lbmFromBodyFat, bmi, idealWeightFormulas, healthyBmiRange,
          waistToHeight, whtrBand, bmiCategory, bmiBand, bmiCategoryExtended,
          ffmi, ffmiNormalised, ffmiPosition } from './body.js';
-import { allBmrFormulas, ACTIVITY, selectBmr, tdee, calorieTarget } from './energy.js';
+import { allBmrFormulas, ACTIVITY, activityOf, selectBmr, tdee, calorieTarget } from './energy.js';
 import { goalDelta, checkEnergyAvailability, eligibility, effectiveFloor, MAX_WEEKLY_LOSS_PCT } from './safety.js';
 import { intakeForTargetByDate, daysToTarget, simulate, staticSeries as staticRuleSeries } from './planner.js';
 import { recommendedGrams, recommendedPercent, resolveSplit } from './macros.js';
@@ -24,7 +24,8 @@ import { allScores, dotsParts, ipfGlParts, scorePosition } from './scoring.js';
 export function tdeeResult({ kg, cm, age, sex, activity, bf }) {
   const lbm = lbmFromBodyFat(kg, bf);
   const input = { kg, cm, age: +age || 0, sex, lbm };
-  const factor = ACTIVITY[activity].factor;
+  const level = activityOf(activity);
+  const factor = level.factor;
   const formulas = allBmrFormulas(input)
     .filter(f => f.value != null)
     .map(f => ({ ...f, tdee: f.value * factor }));
@@ -35,6 +36,8 @@ export function tdeeResult({ kg, cm, age, sex, activity, bf }) {
   const preferred = formulas.find(f => f.key === preferredKey) || formulas[0];
   return {
     formulas, mean, meanTdee: mean * factor, preferred, lbm, factor,
+    // FAO's band for this lifestyle, applied to the preferred equation's BMR.
+    band: { low: preferred.value * level.range[0], high: preferred.value * level.range[1] },
     min: Math.min(...values), max: Math.max(...values),
     spread: Math.max(...values) - Math.min(...values),
     bmi: bmi(kg, cm),
@@ -106,7 +109,7 @@ export function macroResult({ kg, cm, age, sex, activity, goal, bf, formula = 'a
   const lbm = lbmFromBodyFat(kg, bf);
   const input = { kg, cm, age: +age || 0, sex, lbm };
   const bmr = selectBmr(input, formula) ?? selectBmr(input, 'mifflin');
-  const total = tdee(bmr, ACTIVITY[activity].factor);
+  const total = tdee(bmr, activityOf(activity).factor);
   // F-028: deficit/surplus scales with maintenance instead of a flat kcal figure.
   // Refuse a cutting target for someone already below a healthy weight — the
   // same rule as every other tool, decided in one place (safety.js eligibility).
@@ -117,13 +120,13 @@ export function macroResult({ kg, cm, age, sex, activity, goal, bf, formula = 'a
   const delta = goalDelta(goal, total);
   const target = calorieTarget(total, delta, sex, total, lifeStage);   // F-001/F-028; life-stage floor
   // F-029: energy availability, using the above-sedentary portion of TDEE as a
-  // rough proxy for training expenditure.
-  const exerciseKcal = Math.max(0, Math.round(bmr * (ACTIVITY[activity].factor - 1.2)));
+  // rough proxy for training expenditure (sedentary = FAO's 1.53 since v2.38.6).
+  const exerciseKcal = Math.max(0, Math.round(bmr * (activityOf(activity).factor - ACTIVITY.sedentary.factor)));
   const ea = checkEnergyAvailability({ intakeKcal: target.intake, ffmKg: lbm, exerciseKcal });
   const cals = target.intake;
   const recommended = mode === 'grams'
-    ? recommendedGrams({ cals, kg, lbm })
-    : recommendedPercent({ cals, kg, lbm });
+    ? recommendedGrams({ cals, kg, lbm, goal })
+    : recommendedPercent({ cals, kg, lbm, goal });
   const raw = split || recommended;
   const resolved = resolveSplit({ raw, cals, mode });
   const usingLeanMass = formula === 'katch' || formula === 'cunningham'
@@ -175,7 +178,7 @@ export function deficitPlanResult({ kg, cm, age, sex, bf, activity, targetKg, li
     if (!(targetKg > 0)) return { incomplete: true };
     const base = {
       kg, cm, age: +age || 0, sex, bodyFatPct: bf,
-      activityFactor: ACTIVITY[activity].factor,
+      activityFactor: activityOf(activity).factor,
     };
     const days = Math.max(7, (+weeks || 1) * 7);
     let dailyIntake, reachedDay, unreachable = false;

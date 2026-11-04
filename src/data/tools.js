@@ -47,7 +47,7 @@ export const TOOLS = [
     desc: 'Turns gram targets into palms, cupped hands and thumbs — no scale needed.',
     related: ['macro-calculator', 'protein-target', 'tdee-calculator'] },
   { slug: 'protein-target', name: 'Protein Target', category: 'Nutrition', live: true, phase: 2,
-    desc: 'From lean mass, adjusted for deficit depth, training age and older adults.',
+    desc: 'A daily range from bodyweight, or from lean mass when cutting.',
     related: ['macro-calculator', 'hand-portions', 'body-fat'] },
   { slug: 'healthy-weight', name: 'Healthy Weight Range', category: 'Body', live: true, phase: 2,
     desc: 'Four classical formulas, the healthy-BMI band, and waist-to-height risk.',

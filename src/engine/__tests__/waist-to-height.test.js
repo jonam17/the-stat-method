@@ -40,7 +40,7 @@ for (const sex of ['male', 'female'])
   for (const age of [22, 45, 68])
     for (const kg of [52, 68, 95])
       for (const cm of [158, 176, 190])
-        PEOPLE.push({ sex, age, kg, cm, activity: 'moderate' });
+        PEOPLE.push({ sex, age, kg, cm, activity: 'active' });
 
 describe('no tool result has a waist-to-height ratio without a waist', () => {
   it(`Healthy Weight (${PEOPLE.length * MISSING.length} cases)`, () => {

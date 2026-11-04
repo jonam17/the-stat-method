@@ -25,7 +25,7 @@ export default function Baseline() {
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
   const [inches, setInches] = useState('10');
-  const [activity, setActivity] = useState('moderate');
+  const [activity, setActivity] = useState('sedentary');
   const [bodyfat, setBodyfat] = useState('');
   const [waist, setWaist] = useState('');
   const [goal, setGoal] = useState('none');
@@ -102,7 +102,7 @@ export default function Baseline() {
           ) : (
             <Num label="Height" value={height} onChange={setHeight} tag="cm" min={120} max={230} />
           )}
-          <Select label="Activity level" value={activity} onChange={setActivity}>
+          <Select label="Activity level" value={activity} onChange={setActivity} hint={ACTIVITY[activity]?.hint}>
             {Object.entries(ACTIVITY).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
           </Select>
           {sex === 'female' && (

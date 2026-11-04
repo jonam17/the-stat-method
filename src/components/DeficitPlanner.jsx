@@ -27,7 +27,7 @@ export default function DeficitPlanner() {
   const [inches, setInches] = useState('10');
   const [bodyfat, setBodyfat] = useState('25');
   const [lifeStage, setLifeStage] = useState('none');
-  const [activity, setActivity] = useState('moderate');
+  const [activity, setActivity] = useState('sedentary');
   const [target, setTarget] = useState('80');
   const [mode, setMode] = useState('date');       // 'date' = solve intake, 'intake' = solve date
   const [weeks, setWeeks] = useState('24');
@@ -146,7 +146,7 @@ export default function DeficitPlanner() {
             <Num label="Height" value={height} onChange={setHeight} tag="cm"
                  min={120} max={230} />
           )}
-          <Select label="Activity level" value={activity} onChange={setActivity}>
+          <Select label="Activity level" value={activity} onChange={setActivity} hint={ACTIVITY[activity]?.hint}>
             {Object.entries(ACTIVITY).map(([k, v]) => (
               <option key={k} value={k}>{v.label}</option>
             ))}

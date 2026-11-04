@@ -22,7 +22,7 @@ for (const sex of ['male', 'female'])
   for (const age of [22, 45, 68])
     for (const kg of [52, 68, 95])
       for (const cm of [158, 176, 190])
-        for (const activity of ['sedentary', 'moderate', 'veryActive'])
+        for (const activity of ['sedentary', 'active', 'vigorous'])
           for (const bf of [null, 24])
             PEOPLE.push({ sex, age, kg, cm, activity, bf, waistCm: 88 });
 
@@ -160,15 +160,18 @@ describe('standalone tools run on the same engine functions', () => {
   });
 });
 
-describe('older adults get the older-adult protein range in the Baseline', () => {
-  // Equality with the standalone tool only proves agreement on the inputs
-  // passed. Both sides once omitted age, so they agreed on the wrong answer
-  // for anyone over 60. This checks the outcome directly.
-  it('a 68-year-old gets a higher protein floor than an otherwise identical 30-year-old', () => {
-    const p = { sex: 'male', kg: 80, cm: 178, activity: 'moderate', goal: 'maintain' };
+describe('protein in the Baseline (v2.38.6)', () => {
+  // The age step was removed: no source gives its size, and PROT-AGE's figure for over-65s
+  // (at least 1.0–1.2 g/kg) is below the everyday range.
+  it('gives a 68-year-old the same range as a 30-year-old', () => {
+    const p = { sex: 'male', kg: 80, cm: 178, activity: 'active', goal: 'maintain' };
     const young = computeBaseline({ ...p, age: 30 }).targets.protein;
     const older = computeBaseline({ ...p, age: 68 }).targets.protein;
-    expect(older.lowG).toBeGreaterThan(young.lowG);
+    expect(older).toEqual(young);
+  });
+  it('uses the lean-mass deficit range when cutting with body fat known', () => {
+    const p = { sex: 'male', kg: 80, cm: 178, age: 30, activity: 'active', goal: 'cut', bf: 20 };
+    expect(computeBaseline(p).targets.protein.basis).toBe('lean body mass');
   });
 });
 

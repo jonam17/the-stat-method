@@ -34,13 +34,27 @@ export function owen({ kg, sex }) {
   return sex === 'male' ? 879 + 10.2 * kg : 795 + 7.18 * kg;
 }
 
+/**
+ * Activity levels — FAO/WHO/UNU, Human energy requirements (2004), chapter 5. Energy need is BMR
+ * times the physical activity level (PAL). `factor` is FAO's own worked example for each lifestyle
+ * (Table 5.1); `range` is its band for that lifestyle (Table 5.3).
+ *
+ * v2.38.6 (item 45, batch 3) replaced five unsourced factors (1.2 / 1.375 / 1.55 / 1.725 / 1.9,
+ * labelled by sessions a week). FAO calls 1.21 the level of "totally inactive dependent people" and
+ * "too low"; its sedentary band starts at 1.40, and its sedentary office worker comes out at 1.53.
+ * FAO: about an hour a day of moderate to vigorous exercise raises PAL from 1.55 to 1.75.
+ */
 export const ACTIVITY = {
-  sedentary:  { factor: 1.2,   label: 'Sedentary — desk job, little exercise' },
-  light:      { factor: 1.375, label: 'Light — 1-3 sessions/week' },
-  moderate:   { factor: 1.55,  label: 'Moderate — 3-5 sessions/week' },
-  active:     { factor: 1.725, label: 'Active — 6-7 sessions/week' },
-  veryActive: { factor: 1.9,   label: 'Very active — hard training or physical job' },
+  sedentary: { factor: 1.53, range: [1.40, 1.69],
+    label: 'Sedentary or light', hint: 'Mostly sitting, no regular exercise.' },
+  active:    { factor: 1.76, range: [1.70, 1.99],
+    label: 'Active', hint: 'About an hour of exercise a day, or an active job.' },
+  vigorous:  { factor: 2.25, range: [2.00, 2.40],
+    label: 'Vigorous', hint: 'Hours of hard physical work or exercise a day.' },
 };
+export const DEFAULT_ACTIVITY = 'sedentary';
+/** The level for a key; an unknown or retired key (e.g. 'moderate') falls back to the default. */
+export const activityOf = key => ACTIVITY[key] ?? ACTIVITY[DEFAULT_ACTIVITY];
 
 /**
  * Run every applicable BMR formula so the spread is visible to the user.

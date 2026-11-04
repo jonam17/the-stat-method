@@ -164,9 +164,10 @@ describe('meal splitting', () => {
 });
 
 describe('protein target', () => {
-  it('uses lean mass when supplied and says so', () => {
-    const r = proteinTarget({ kg: 90, lbm: 70 });
+  it('uses lean mass in a deficit when supplied, and says so', () => {
+    const r = proteinTarget({ kg: 90, lbm: 70, deficit: 'deficit' });
     expect(r.basis).toBe('lean body mass');
+    expect([r.perKgLow, r.perKgHigh]).toEqual([2.3, 3.1]);
     expect(r.lowG).toBeGreaterThan(0);
     expect(r.highG).toBeGreaterThan(r.lowG);
   });
@@ -174,19 +175,21 @@ describe('protein target', () => {
   it('falls back to bodyweight with lower per-kg figures', () => {
     const r = proteinTarget({ kg: 90 });
     expect(r.basis).toBe('bodyweight');
-    expect(r.perKgLow).toBeLessThan(1.6);
+    expect([r.perKgLow, r.perKgHigh]).toEqual([1.4, 2.0]);
+    expect(proteinTarget({ kg: 90, lbm: 70 }).basis).toBe('bodyweight');
   });
 
   it('raises the target as the deficit deepens', () => {
     const none = proteinTarget({ kg: 80, lbm: 65, deficit: 'none' });
-    const agg = proteinTarget({ kg: 80, lbm: 65, deficit: 'aggressive' });
+    const agg = proteinTarget({ kg: 80, lbm: 65, deficit: 'deficit' });
     expect(agg.lowG).toBeGreaterThan(none.lowG);
   });
 
-  it('raises the floor for older trainees', () => {
-    const young = proteinTarget({ kg: 80, lbm: 65 });
-    const older = proteinTarget({ kg: 80, lbm: 65, older: true });
-    expect(older.lowG).toBeGreaterThan(young.lowG);
+  it('has no unsourced age step (v2.38.6)', () => {
+    expect(proteinTarget({ kg: 80, age: 68 })).toEqual(proteinTarget({ kg: 80, age: 30 }));
+  });
+  it('reads the retired deficit keys as a deficit', () => {
+    expect(proteinTarget({ kg: 80, lbm: 65, deficit: 'moderate' }).basis).toBe('lean body mass');
   });
 });
 

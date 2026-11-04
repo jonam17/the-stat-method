@@ -16,16 +16,16 @@
 import { eligibility, ageAccuracyNote } from './safety.js';
 import { tdeeResult, healthyWeightResult, macroResult } from './results.js';
 import { lbmFromBodyFat, ffmi } from './body.js';
-import { ACTIVITY } from './energy.js';
+import { activityOf } from './energy.js';
 import { proteinTarget, toHandPortions } from './portions.js';
 import { daysToTarget, simulate, weeklyRateCheck } from './planner.js';
 
 /**
  * The one mapping this file owns: the Protein tool asks for a deficit level;
  * the Baseline infers it from the goal. A cut uses the Macro Calculator's
- * moderate 20% deficit (GOALS in safety.js), so it maps to 'moderate'.
+ * 20% deficit (GOALS in safety.js), so it maps to 'deficit'.
  */
-export const GOAL_TO_PROTEIN_DEFICIT = { cut: 'moderate', maintain: 'none', gain: 'none' };
+export const GOAL_TO_PROTEIN_DEFICIT = { cut: 'deficit', maintain: 'none', gain: 'none' };
 
 /**
  * Wording for plan states the standalone tools do not have. Not safety rails,
@@ -82,7 +82,7 @@ export function computeBaseline({
     if (!agrees) {
       plan = { status: 'mismatch', targetKg, copy: BASELINE_COPY.planMismatch };
     } else {
-      const base = { kg, cm, age: +age || 0, sex, bodyFatPct: bf, activityFactor: ACTIVITY[activity].factor };
+      const base = { kg, cm, age: +age || 0, sex, bodyFatPct: bf, activityFactor: activityOf(activity).factor };
       const intakeKcal = targets.macro.cals;
       const reachedDay = daysToTarget({ ...base, intakeKcal, targetKg });
       const sim = simulate({ ...base, intakeKcal, days: Math.max(7, reachedDay ?? 84) });

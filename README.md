@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,098 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,106 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,25 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.6 — Activity levels and protein ranges checked against their sources
+
+- **Activity levels now FAO/WHO/UNU's three** (2004): sedentary or light 1.53, active 1.76, vigorous 2.25. The
+  five old factors (1.2 to 1.9) had no source. A sedentary estimate rises by about a quarter; the default level
+  moves from "moderate" (1.55) to "sedentary or light" (1.53), so default results barely change. Affects TDEE,
+  Macro Calculator, Deficit Planner, Hand Portions and Baseline.
+- **TDEE shows the range within the chosen level**, since FAO gives each one as a band.
+- **Protein Target:** 1.4 to 2.0 g per kg of bodyweight (ISSN, Jäger 2017); in a deficit with body fat entered,
+  2.3 to 3.1 g per kg of lean mass (Helms 2014). Lean mass was used whenever body fat was given, and the deficit
+  levels and training-age step had no source. The deficit choice is now yes or no and the training-age choice is
+  gone.
+- **Macro Calculator:** protein 1.8 g/kg bodyweight, or 2.3 g/kg lean mass when cutting with body fat entered;
+  fat 25% of calories with a 20% floor (Institute of Medicine). The 0.8 g/kg fat floor had no traceable source.
+- **Energy availability warning:** exercise is now estimated as the level's factor above 1.53 (it was above
+  1.2). For "active" that is about 0.23 × BMR instead of 0.35 for the old "moderate", so the warning shows for
+  fewer active people; for "vigorous" it is about the same.
+- **Articles corrected:** "Protein: how much" gave its range per kg of lean mass when the study set it per kg of
+  bodyweight; "How to set your macro split" described the old rules. Review records in `docs/citation-reviews/`.
 
 ### v2.38.5 — Caffeine figures checked against their sources
 

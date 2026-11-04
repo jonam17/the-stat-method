@@ -4,17 +4,17 @@ dek: "Calories decide whether you gain or lose. The split decides how well you f
 category: Nutrition
 conclusion: "Get protein and calories right first. The rest of the split is a comfort and adherence decision, not a metabolic one."
 published: 2026-08-14
-updated: 2026-08-20
+updated: 2026-11-03
 readMinutes: 9
 aiAssisted: true
 citationsVerified: full
-citationsVerifiedDate: 2026-08-25
+citationsVerifiedDate: 2026-11-03
 author: The Stat Method
 relatedTool: macro-calculator
 evidenceBased: true
 keyTakeaways:
   - "Total calories decide whether your weight changes. The split between carbohydrate and fat mostly decides how you feel and train."
-  - "Set protein first, then a floor for fat — about 0.8 g per kilogram of bodyweight — and let carbohydrate fill the rest."
+  - "Set protein first, then a floor for fat — 20% of calories, the bottom of the Institute of Medicine's range — and let carbohydrate fill the rest."
   - "There is no magic ratio. With calories and protein matched, a wide range of splits gives similar results."
   - "Going very low on either has a cost: very low carbohydrate shows up first in hard training, very low fat in food that stops satisfying and possible hormonal effects."
   - "The best split is the one you can still follow next month."
@@ -25,6 +25,9 @@ toc:
   - { id: "carbs", label: "Carbohydrate" }
   - { id: "bottom-line", label: "Bottom line" }
 changelog:
+  - date: 2026-11-03
+    note: >-
+      Corrected how the calculator sets protein and fat, which this article described. Protein is 1.8 g per kg of bodyweight, or 2.3 g per kg of lean mass when cutting with body fat known, instead of always using lean mass when body fat is given. The fat floor is 20% of calories, the low end of the Institute of Medicine's range, instead of 0.8 g per kg "for hormonal health", which we could not trace to a source.
   - date: 2026-08-20
     note: >-
       Corrected the minimum-calorie floor. The calculator previously allowed targets down to 1,000 kcal — below the 1,200 (women) / 1,500 (men) minimum stated elsewhere on this site. Aggressive deficits now stop at the correct floor and say so. If you used this tool before this date at a large deficit, your target was too low.
@@ -49,6 +52,12 @@ references:
     verified: true
   - text: "Helms ER, Aragon AA, Fitschen PJ. Evidence-based recommendations for natural bodybuilding contest preparation: nutrition and supplementation. J Int Soc Sports Nutr, 2014;11:20."
     url: "https://pubmed.ncbi.nlm.nih.gov/24864135/"
+    verified: true
+  - text: "Jäger R, Kerksick CM, Campbell BI, Cribb PJ, Wells SD, Skwiat TM, Purpura M, Ziegenfuss TN, Ferrando AA, Arent SM, Smith-Ryan AE, Stout JR, Arciero PJ, Ormsbee MJ, Taylor LW, Wilborn CD, Kalman DS, Kreider RB, Willoughby DS, Hoffman JR, Krzykowski JL, Antonio J. International Society of Sports Nutrition position stand: protein and exercise. J Int Soc Sports Nutr, 2017;14:20."
+    url: "https://doi.org/10.1186/s12970-017-0177-8"
+    verified: true
+  - text: "Institute of Medicine. Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. Washington, DC: The National Academies Press, 2005."
+    url: "https://doi.org/10.17226/10490"
     verified: true
 ---
 
@@ -86,10 +95,12 @@ Protein is the anchor because it is the only macro where falling short has conse
 cannot compensate for elsewhere. In a deficit, insufficient protein means a larger share of
 lost weight comes from lean tissue. In a surplus, it limits how much of the gain is muscle.
 
-Our calculator sets protein from lean body mass when you supply a body-fat figure, and from
-total bodyweight otherwise. This distinction matters: two people at ninety kilograms, one at
-twelve percent body fat and one at thirty-five, have very different amounts of metabolically
-relevant tissue, and scaling from total weight inflates the target for the second.
+Our calculator sets protein at 1.8 g per kilogram of bodyweight, inside the International
+Society of Sports Nutrition's range of 1.4 to 2.0 for people who exercise. [5] When you are
+cutting and supply a body-fat figure, it uses 2.3 g per kilogram of lean mass instead, the
+low end of the 2.3 to 3.1 recommended for lean athletes in a deficit. [4] That range is set
+per kilogram of lean mass, so two people at ninety kilograms, one at twelve percent body fat
+and one at thirty-five, get different targets from it.
 
 Protein also has the highest thermic effect of the three macros and tends to be the most
 satiating per calorie, which makes a deficit easier to sustain. That is a secondary benefit,
@@ -97,7 +108,7 @@ but it is a real one.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Protein is the only macro where a shortfall cannot be offset elsewhere. Set it first, from lean mass where you know it, and treat it as the fixed part of the plan.</p></div>
+<div class="summary-body"><p>Protein is the only macro where a shortfall cannot be offset elsewhere. Set it first, in the unit its range was set in, and treat it as the fixed part of the plan.</p></div>
 </aside>
 
 <h2 id="fat-floor">Then a fat floor, not a fat target</h2>
@@ -106,9 +117,12 @@ Dietary fat is necessary for hormone production and the absorption of fat-solubl
 The useful concept is a floor rather than a target — a level below which you should not go,
 with everything above that being preference.
 
-A common floor is around 0.8 grams per kilogram of bodyweight, and our calculator enforces
-it. Sustained intakes well below this have been associated with unfavourable hormonal
-changes, and the practical experience of very low-fat diets is that food becomes
+The Institute of Medicine's acceptable range for adults is 20 to 35% of calories from fat. [6]
+Our calculator uses 25% by default and never goes below 20%. You will often see a floor
+of 0.8 g per kilogram "for hormonal health"; we could not trace that figure to a source. In
+studies that cut fat from about 40% to 20% of calories, testosterone fell modestly, but for
+people dieting hard the size of the deficit and how lean they get appear to matter more than
+the share of fat. [4] The practical experience of very low-fat diets is that food becomes
 unsatisfying quickly.
 
 Above the floor, more fat is a legitimate choice. Some people find higher-fat meals more
@@ -120,7 +134,7 @@ Fat has a minimum you should respect. Beyond that, the ratio is preference, not 
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Treat fat as a floor of roughly 0.8 g/kg for hormonal health rather than a precise target. Above that line, how much you eat is a preference question.</p></div>
+<div class="summary-body"><p>Treat fat as a floor, 20% of calories, rather than a precise target. Above that line, how much you eat is a preference question.</p></div>
 </aside>
 
 <h2 id="carbs">Carbohydrate takes the remainder</h2>

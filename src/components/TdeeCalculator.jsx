@@ -19,7 +19,7 @@ export default function TdeeCalculator() {
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
   const [inches, setInches] = useState('10');
-  const [activity, setActivity] = useState('moderate');
+  const [activity, setActivity] = useState('sedentary');
   const [bodyfat, setBodyfat] = useState('');
 
   const kg = units === 'imperial' ? lbToKg(+weight || 0) : +weight || 0;
@@ -82,7 +82,7 @@ export default function TdeeCalculator() {
             <Num label="Height" value={height} onChange={setHeight} tag="cm"
                  min={120} max={230} />
           )}
-          <Select label="Activity level" value={activity} onChange={setActivity}>
+          <Select label="Activity level" value={activity} onChange={setActivity} hint={ACTIVITY[activity]?.hint}>
             {Object.entries(ACTIVITY).map(([k, v]) => (
               <option key={k} value={k}>{v.label}</option>
             ))}
@@ -101,6 +101,10 @@ export default function TdeeCalculator() {
                    note={<>Using <b>{r.preferred?.name}</b> — {r.lbm != null
                      ? 'lean-mass based, preferred when body fat is known'
                      : 'best validated when body fat is unknown'}.</>} />
+          <p className="foot-note">
+            Activity levels vary within each group. Across this one's range, the same equation
+            gives <b>{fmt(r.band.low)}–{fmt(r.band.high)} kcal</b>.
+          </p>
 
           <div className="bartop tight">
             <span className="t">Every formula, side by side</span>
@@ -145,9 +149,18 @@ export default function TdeeCalculator() {
                 ? ' Because you supplied body fat, the lean-mass equations (Katch-McArdle, Cunningham) are shown and generally track better.'
                 : ' Supplying a body-fat estimate unlocks two further equations that are usually more accurate.'}
             </p>
+            <p>
+              Maintenance is the equation's resting figure multiplied by an activity level, the
+              ratio of daily energy use to resting energy use. The three levels and their values
+              are from the FAO, WHO and UNU's report on human energy requirements: 1.53 for a
+              sedentary or light lifestyle (range 1.40 to 1.69), 1.76 for an active one (1.70 to
+              1.99) and 2.25 for a vigorous one (2.00 to 2.40). By its figures, an hour a day of
+              moderate to vigorous exercise moves a desk worker from about 1.55 to 1.75.
+            </p>
             <p className="refs">
               Mifflin MD et al., Am J Clin Nutr 1990 · Roza &amp; Shizgal 1984 ·
-              Katch &amp; McArdle · Cunningham JJ 1980 · Owen OE et al. 1986–87
+              Katch &amp; McArdle · Cunningham JJ 1980 · Owen OE et al. 1986–87 ·
+              FAO/WHO/UNU, Human energy requirements, 2004
             </p>
           </Method>
         </Panel>

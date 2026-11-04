@@ -24,7 +24,7 @@ export default function MacroCalculator({ compact = false }) {
   const [height, setHeight] = useState('178');
   const [feet, setFeet] = useState('5');
   const [inches, setInches] = useState('10');
-  const [activity, setActivity] = useState('moderate');
+  const [activity, setActivity] = useState('sedentary');
   const [goal, setGoal] = useState('maintain');   // F-028: proportional goals
   const [bodyfat, setBodyfat] = useState('');
   const [formula, setFormula] = useState('auto');
@@ -153,11 +153,13 @@ export default function MacroCalculator({ compact = false }) {
 
           <div className="field">
             <label htmlFor="activity">Activity level</label>
-            <select id="activity" value={activity} onChange={e => setActivity(e.target.value)}>
+            <select id="activity" value={activity} aria-describedby="activity-hint"
+                    onChange={e => setActivity(e.target.value)}>
               {Object.entries(ACTIVITY).map(([k, v]) => (
                 <option key={k} value={k}>{v.label}</option>
               ))}
             </select>
+            <p className="hint" id="activity-hint">{ACTIVITY[activity]?.hint}</p>
           </div>
 
           <Seg label="Goal" value={goal} onChange={setGoal} options={[
@@ -307,16 +309,19 @@ export default function MacroCalculator({ compact = false }) {
             <summary>Method &amp; sources</summary>
             <p>
               Energy uses the <strong>{FORMULA_NAMES[formula] ?? 'Mifflin-St Jeor'}</strong> equation
-              {r.usingLeanMass ? ' (lean-mass based)' : ''}, multiplied by an activity factor for
-              TDEE. Protein is set from {bf != null
-                ? 'lean body mass (≈2.2 g/kg)'
-                : 'body weight (≈1.8 g/kg)'}, fat is floored at 0.8 g/kg for hormonal health,
-              and carbohydrate fills the remainder.
+              {r.usingLeanMass ? ' (lean-mass based)' : ''}, multiplied by an activity level from
+              the FAO, WHO and UNU's report on energy requirements. Protein is 1.8 g per kg of
+              bodyweight, inside the International Society of Sports Nutrition's 1.4 to 2.0
+              {goal === 'cut' && bf != null
+                ? '. Because you are cutting and gave body fat, it is 2.3 g per kg of lean mass instead, the low end of a 2.3 to 3.1 range for dieting athletes'
+                : ''}. Fat is 25% of calories, and never below 20%, the low end of the Institute
+              of Medicine's 20 to 35% range. Carbohydrate fills the remainder.
             </p>
             <p className="refs">
               Mifflin MD et al., <em>Am J Clin Nutr</em> 1990 · Roza &amp; Shizgal 1984 ·
-              Katch &amp; McArdle · Cunningham 1980 · Helms ER et al.,
-              <em> The Muscle and Strength Pyramid</em>
+              Katch &amp; McArdle · Cunningham 1980 · FAO/WHO/UNU, Human energy requirements, 2004 ·
+              Jäger R et al., <em>J Int Soc Sports Nutr</em> 2017 · Helms ER et al.,
+              <em> J Int Soc Sports Nutr</em> 2014 · Institute of Medicine DRI, 2005
             </p>
           </details>
         </>}
