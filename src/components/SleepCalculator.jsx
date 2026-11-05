@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import {
-  bedtimesForWake, wakeTimesForBed, sleepNeedFor, CYCLE_MINUTES, FALL_ASLEEP_MINUTES,
+  bedtimesForWake, wakeTimesForBed, sleepNeedFor, CYCLE_MINUTES, FALL_ASLEEP_MINUTES, NSF_LABEL,
 } from '../engine/index.js';
 import { Seg, Num, Panel, BigStat, StatStrip, Method , TimePicker } from './ToolShell.jsx';
 import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
@@ -36,18 +36,19 @@ export default function SleepCalculator() {
 
   const r = useMemo(() => {
     const lat = Math.max(0, Math.min(60, +latency || 0));
+    const a = +age || 30;
     if (mode === 'wake') {
       const wake = parse(wakeTime);
       // Use the captured client time only after hydration; the deterministic
       // pre-hydration render must not depend on the server/client clock.
       if (nowMs != null && wake < new Date(nowMs)) wake.setDate(wake.getDate() + 1);
-      return { rows: bedtimesForWake(wake, [6, 5, 4, 3], lat), anchor: wake, lat };
+      return { rows: bedtimesForWake(wake, [6, 5, 4, 3], lat, a), anchor: wake, lat };
     }
     const bed = useNow === 'yes'
       ? (nowMs != null ? new Date(nowMs) : parse(bedTime))
       : parse(bedTime);
-    return { rows: wakeTimesForBed(bed, [6, 5, 4, 3], lat), anchor: bed, lat };
-  }, [mode, wakeTime, bedTime, latency, useNow, nowMs]);
+    return { rows: wakeTimesForBed(bed, [6, 5, 4, 3], lat, a), anchor: bed, lat };
+  }, [mode, wakeTime, bedTime, latency, useNow, nowMs, age]);
 
   const need = sleepNeedFor(+age || 30);
   const best = r.rows.find(x => x.cycles === 5) ?? r.rows[0];
@@ -73,16 +74,15 @@ export default function SleepCalculator() {
 
           <div className="row2">
             <Num label="Time to fall asleep" value={latency} onChange={setLatency} tag="min"
-                 hint="Fifteen minutes is typical."
+                 hint="Use your usual time; 15 minutes is only a starting value."
                  min={0} max={180} />
             <Num label="Age" value={age} onChange={setAge} tag="yrs"
                  min={AGE_MIN} max={AGE_MAX} />
           </div>
 
           <p className="hint">
-            Guidance for your age group is <strong>{need.hours} hours</strong> per night.
-            Total sleep and a consistent schedule both matter more than landing exactly on a
-            cycle boundary.
+            The National Sleep Foundation recommends <strong>{need.hours} hours</strong> a night
+            for your age.
           </p>
         </Panel>
 
@@ -103,13 +103,13 @@ export default function SleepCalculator() {
 
           <div className="fx-list">
             {r.rows.map(row => (
-              <div className={`fx ${row.cycles === 5 ? 'on' : ''} ${row.quality === 'very short' ? 'off' : ''}`}
+              <div className={`fx ${row.cycles === 5 ? 'on' : ''} ${row.quality === 'not' ? 'off' : ''}`}
                    key={row.cycles}>
                 <div className="fx-top">
                   <span className="fx-name">
                     {row.cycles} cycles
-                    {row.cycles === 5 && <em className="fx-tag">Recommended</em>}
-                    {row.quality === 'very short' && <em className="fx-tag warn-tag">Very short</em>}
+                    {row.quality === 'recommended' && <em className="fx-tag">{NSF_LABEL.recommended}</em>}
+                    {row.quality === 'not' && <em className="fx-tag warn-tag">{NSF_LABEL.not}</em>}
                   </span>
                   <span className="fx-val">
                     {fmtClock(mode === 'wake' ? row.bedtime : row.wakeAt)}
@@ -118,7 +118,9 @@ export default function SleepCalculator() {
                 <div className="fx-track">
                   <i style={{ width: `${(row.cycles / 6) * 100}%` }} />
                 </div>
-                <div className="fx-sub">{fmtDur(row.sleepMinutes)} of sleep</div>
+                <div className="fx-sub">
+                  {fmtDur(row.sleepMinutes)} of sleep{row.quality === 'may' && <> · {NSF_LABEL.may.toLowerCase()} for some people</>}
+                </div>
               </div>
             ))}
           </div>
@@ -132,21 +134,26 @@ export default function SleepCalculator() {
 
           <Method>
             <p>
-              The ninety-minute cycle is an <strong>average</strong>. Real cycles run
-              roughly seventy to a hundred and twenty minutes, vary within a single night,
-              and differ between people. Waking between cycles rather than mid-cycle tends
-              to feel easier, which is what these times aim at — but the effect is a nudge,
-              not a guarantee.
+              A sleep cycle runs through light, deep and REM sleep. Cycles average about ninety
+              minutes, a complete one taking roughly 90 to 110, and a night has four to six of
+              them. The times here use ninety, so treat them as approximate.
             </p>
             <p>
-              Two things matter more than cycle timing: getting enough total sleep, and going
-              to bed and waking at consistent times. A regular seven hours generally beats an
-              erratic nine, and no amount of cycle math compensates for a schedule that
-              moves around every night.
+              The aim is to avoid waking from deep sleep. People woken from it are groggy, a
+              state called sleep inertia, and in testing their mental performance was moderately
+              impaired for thirty minutes to an hour. Deep sleep comes mostly in the first half of the
+              night. The sources describe these stages; they do not test cycle-timed waking, so
+              treat the times as a nudge.
+            </p>
+            <p>
+              The labels are the National Sleep Foundation's for your age: recommended, may be
+              appropriate for some people, or not recommended. They count hours of sleep, not
+              time in bed, which is why the time to fall asleep is added separately.
             </p>
             <p className="refs">
-              Cycle structure per standard sleep physiology · duration guidance from the
-              National Sleep Foundation consensus recommendations
+              Patel AK et al., Physiology, Sleep Stages, StatPearls 2024 · National Institute of
+              Neurological Disorders and Stroke, Brain Basics: Understanding Sleep, 2017 ·
+              Hirshkowitz M et al., Sleep Health 2015
             </p>
           </Method>
         </Panel>

@@ -79,7 +79,7 @@ export default function RunningPace() {
                  ...(r?.splitRows ?? []).map(s => `${s.km}k: ${fmtTime(s.cumulative)}`),
                  '', 'Predicted times',
                  ...(r?.predictions ?? []).map(p =>
-                   `${p.name}: ${fmtTime(p.predicted)}${p.confidence?.level === 'poor' ? ' (rough — long extrapolation)' : ''}`),
+                   `${p.name}: ${fmtTime(p.predicted)}${p.confidence?.level === 'marathon' ? ' (probably too fast)' : ''}`),
                ]}>
           <BigStat value={paceLabel.split(' ')[0]}
                    unit={unitSystem === 'km' ? 'min / km' : 'min / mile'}
@@ -103,17 +103,17 @@ export default function RunningPace() {
           </div>
           <div className="fx-list compact">
             {r.predictions.map(p => (
-              <div className={`fx ${p.confidence.level === 'poor' ? 'off' : ''}`} key={p.name}>
+              <div className="fx" key={p.name}>
                 <div className="fx-top">
                   <span className="fx-name">
                     {p.name}
-                    {p.confidence.level === 'good' && <em className="fx-tag">Reliable</em>}
-                    {p.confidence.level === 'poor' && <em className="fx-tag warn-tag">Rough</em>}
+                    {p.confidence.level === 'marathon' && <em className="fx-tag warn-tag">Often too fast</em>}
                   </span>
                   <span className="fx-val">{fmtTime(p.predicted)}</span>
                 </div>
                 <div className="fx-sub">
-                  {fmtTime(paceFromTime(p.predicted, p.km))} /km · {p.confidence.note}
+                  {fmtTime(paceFromTime(p.predicted, p.km))} /km
+                  {p.confidence.note && <> · {p.confidence.note}</>}
                 </div>
               </div>
             ))}
@@ -134,13 +134,21 @@ export default function RunningPace() {
             </p>
             <p>
               Its central assumption is that you have trained appropriately for the target
-              distance. It cannot know whether you have done the long runs a marathon
-              requires, which is why extrapolating from a 5K to a marathon is optimistic and
-              flagged as rough here. Predictions between adjacent distances are considerably
-              more trustworthy.
+              distance. In a study of 2,303 recreational runners, Riegel was well calibrated
+              for races up to the half marathon, but its marathon times were at least ten
+              minutes too fast for half of the runners, so marathon predictions are flagged.
+              The study used 5K, 10K, half-marathon and marathon times, so predictions to or
+              from other distances, such as the mile, and predictions from a marathon time are
+              marked as not checked.
+            </p>
+            <p>
+              The same study reports Riegel's own exponents as 1.05 to 1.06 for recreational men
+              aged 40 to 70 and 1.08 for elite runners. We use 1.06. We have not been able to
+              read Riegel's paper itself.
             </p>
             <p className="refs">
-              Riegel PS, Athletic records and human endurance, American Scientist 1981
+              Riegel PS, Athletic records and human endurance, American Scientist 1981 ·
+              Vickers AJ, Vertosick EA, BMC Sports Sci Med Rehabil 2016
             </p>
           </Method>
         </Panel>

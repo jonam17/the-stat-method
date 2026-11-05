@@ -8,7 +8,7 @@ import {
   riegelConfidence, splits, DISTANCES,
 } from '../pace.js';
 import {
-  bedtimesForWake, wakeTimesForBed, sleepNeedFor, CYCLE_MINUTES,
+  bedtimesForWake, wakeTimesForBed, sleepNeedFor, nsfCategory, CYCLE_MINUTES,
 } from '../sleep.js';
 import {
   idealWeightFormulas, healthyBmiRange, bmiCategory, whtrBand,
@@ -219,9 +219,9 @@ describe('running pace', () => {
     expect(Math.abs(back - 1500)).toBeLessThan(1);
   });
 
-  it('flags confidence by extrapolation distance', () => {
-    expect(riegelConfidence(10, 21.0975).level).toBe('good');
-    expect(riegelConfidence(5, 42.195).level).toBe('poor');
+  it('flags marathon targets, not distance ratio', () => {
+    expect(riegelConfidence(10, 21.0975).level).toBe('ok');
+    expect(riegelConfidence(5, 42.195).level).toBe('marathon');
   });
 
   it('rejects invalid input', () => {
@@ -254,10 +254,15 @@ describe('sleep cycles', () => {
     expect(six.bedtime.getTime()).toBeLessThan(four.bedtime.getTime());
   });
 
-  it('labels short sleep durations', () => {
-    const b = bedtimesForWake(wake, [6, 3]);
-    expect(b[0].quality).toBe('recommended');
-    expect(b[1].quality).toBe('very short');
+  it('labels durations with the NSF categories for the age', () => {
+    // NSF Table 2: adults 7–9 recommended, 6 may be appropriate, under 6 not recommended
+    expect(bedtimesForWake(wake, [6, 5, 4, 3], 15, 30).map(x => x.quality))
+      .toEqual(['recommended', 'recommended', 'may', 'not']);
+    // 65 and over: 7–8 recommended, 5–6 and 9 may be appropriate, under 5 not recommended
+    expect(bedtimesForWake(wake, [6, 5, 4, 3], 15, 70).map(x => x.quality))
+      .toEqual(['may', 'recommended', 'may', 'not']);
+    expect(nsfCategory(10, 20)).toBe('may');   // 18–25: 10–11 may be appropriate
+    expect(nsfCategory(10.5, 40)).toBe('not'); // 26–64: over 10 not recommended
   });
 
   it('computes wake times from a bedtime', () => {

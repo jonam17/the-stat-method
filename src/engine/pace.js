@@ -44,44 +44,40 @@ export function riegel(knownSeconds, knownKm, targetKm, exponent = RIEGEL_EXPONE
 /** Marathon distance in km, for the calibration exception below. */
 export const MARATHON_KM = 42.195;
 
+/** The race distances Vickers & Vertosick (2016) studied, other than the marathon. */
+const STUDIED_KM = { min: 5, max: 21.0975 };
+
 /**
- * How much to trust a Riegel prediction.
+ * What the evidence says about one Riegel prediction.
  *
- * MARATHON EXCEPTION (citation check, 2026-08-20). This used to key on distance
- * ratio alone, which returned the HIGHEST confidence for half-marathon ->
- * marathon (ratio 2.0) — the exact case the cited evidence says is worst.
+ * Vickers & Vertosick 2016 (BMC Sports Sci Med Rehabil 8:26, N = 2,303 recreational runners)
+ * found Riegel "well-calibrated for races up to a half-marathon", but that it "dramatically
+ * underestimated marathon time, giving times at least 10 min too fast for half of runners".
+ * They studied 5K, 10K, half-marathon and marathon times only.
  *
- * Vickers & Vertosick 2016 (BMC Sports Sci Med Rehabil 8:26, N=2303) found
- * Riegel well-calibrated up to the half marathon, but that it underestimated
- * marathon time by at least 10 minutes for half of recreational runners
- * (MSE 380.7 vs 208.3 for a model using prior race times). The failure is not
- * about extrapolation distance; it is a systematic optimism at marathon
- * distance for anyone who is not a world-record holder.
- *
- * So marathon targets are capped at 'fair' regardless of how close the input
- * race is, and say why.
- *
- * Otherwise: how much to trust a Riegel prediction, based on the distance ratio.
- * A 10K-to-half-marathon extrapolation (ratio ~2.1) is a standard, reliable
- * prediction, so the "good" band extends to 2.5 rather than 2.
+ * v2.38.7 (item 45, batch 4) removed the distance-ratio bands (≤2.5 "good", ≤5 "fair", else
+ * "poor"): no source gives them. Now:
+ *   'marathon'  — a marathon target: the finding above, as a warning;
+ *   'untested'  — either distance outside 5K to the half marathon (the mile, a custom
+ *                 distance, or predicting from a marathon): the study did not cover it;
+ *   'ok'        — both between 5K and the half marathon: nothing to add.
  */
 export function riegelConfidence(knownKm, targetKm) {
-  const ratio = Math.max(targetKm / knownKm, knownKm / targetKm);
-
-  // Marathon targets: never 'good', whatever the ratio.
   if (Math.abs(targetKm - MARATHON_KM) < 0.5) {
     return {
-      level: ratio <= 2.5 ? 'fair' : 'poor',
-      note: 'Riegel is well calibrated up to the half marathon but runs optimistic '
-          + 'at the marathon — in one study of 2,303 recreational runners it was at '
-          + 'least 10 minutes too fast for half of them. Treat this as a floor on '
-          + 'your finish time, not a target.',
+      level: 'marathon',
+      note: 'Probably too fast. In a study of 2,303 recreational runners, Riegel\'s marathon '
+          + 'times were at least 10 minutes too fast for half of them.',
     };
   }
-
-  if (ratio <= 2.5) return { level: 'good', note: 'Distances are close; the prediction is reasonably reliable.' };
-  if (ratio <= 5) return { level: 'fair', note: 'A moderate extrapolation — treat as a target, not a guarantee.' };
-  return { level: 'poor', note: 'A large extrapolation. Endurance-specific training matters more than this formula can capture.' };
+  const inStudy = km => km >= STUDIED_KM.min - 0.01 && km <= STUDIED_KM.max + 0.01;
+  if (!inStudy(knownKm) || !inStudy(targetKm)) {
+    return {
+      level: 'untested',
+      note: 'Not checked by the study of Riegel\'s accuracy.',
+    };
+  }
+  return { level: 'ok', note: null };
 }
 
 /** Even splits for a target time. */

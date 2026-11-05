@@ -269,22 +269,28 @@ describe('FFMI height normalisation matches Kouri 1995', () => {
   });
 });
 
-describe('Riegel confidence reflects the evidence, not just distance ratio', () => {
-  it('never reports high confidence for a marathon target', () => {
-    // Vickers & Vertosick 2016: Riegel is >=10 min too fast for half of
-    // recreational runners at the marathon, even from a half-marathon input.
-    expect(riegelConfidence(21.0975, MARATHON_KM).level).not.toBe('good');
-    expect(riegelConfidence(32, MARATHON_KM).level).not.toBe('good');
+describe('Riegel notes follow Vickers & Vertosick 2016, not distance ratio', () => {
+  it('warns on every marathon target, from any input', () => {
+    for (const km of [5, 10, 21.0975, 32]) {
+      const c = riegelConfidence(km, MARATHON_KM);
+      expect(c.level).toBe('marathon');
+      expect(c.note).toMatch(/at least 10 minutes too fast/);
+    }
   });
-  it('degrades further for large extrapolations to the marathon', () => {
-    expect(riegelConfidence(10, MARATHON_KM).level).toBe('poor');
-    expect(riegelConfidence(5, MARATHON_KM).level).toBe('poor');
+  it('adds nothing between 5K and the half marathon, either direction', () => {
+    expect(riegelConfidence(10, 21.0975)).toEqual({ level: 'ok', note: null });
+    expect(riegelConfidence(21.0975, 5).level).toBe('ok');
+    expect(riegelConfidence(5, 10).level).toBe('ok');
   });
-  it('still reports good confidence for well-calibrated non-marathon pairs', () => {
-    expect(riegelConfidence(10, 21.0975).level).toBe('good');
+  it('says when a distance was outside the study', () => {
+    expect(riegelConfidence(5, 1.609344).level).toBe('untested');      // the mile
+    expect(riegelConfidence(1.609344, 10).level).toBe('untested');
+    expect(riegelConfidence(MARATHON_KM, 10).level).toBe('untested');  // from a marathon
+    expect(riegelConfidence(3, 5).level).toBe('untested');             // custom 3 km
   });
-  it('explains why, rather than just downgrading silently', () => {
-    expect(riegelConfidence(21.0975, MARATHON_KM).note).toMatch(/optimistic|too fast/i);
+  it('no longer has ratio bands', () => {
+    // 5K → half is a ratio of 4.2; it was 'fair' before v2.38.7.
+    expect(riegelConfidence(5, 21.0975).level).toBe('ok');
   });
 });
 

@@ -8,7 +8,7 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-24
-updated: 2026-10-20
+updated: 2026-11-04
 author: The Stat Method
 relatedTool: heart-rate-zones
 evidenceBased: true
@@ -18,11 +18,15 @@ keyTakeaways:
   - "Any maximum-heart-rate formula can be off by about ten beats a minute for you, either way — so every zone boundary is approximate."
   - "Adding your resting heart rate, measured on waking, makes the zones reflect your fitness, and can shift them a lot."
   - "Keep most of your training genuinely easy and a smaller part genuinely hard. The common mistake is too much in between."
+changelog:
+  - date: 2026-11-04
+    note: >-
+      Replaced the five named training zones (recovery to VO₂ max, 50–100% for both methods), which we could not trace to a source, with the American College of Sports Medicine's five intensity classes, which give separate percentages for heart-rate reserve and for maximum heart rate. The calculator changed the same way.
 toc:
   - { id: "the-formula-problem", label: "The formula problem" }
   - { id: "better-estimates", label: "Better estimates" }
   - { id: "karvonen", label: "The Karvonen method" }
-  - { id: "the-zones", label: "The zones" }
+  - { id: "the-zones", label: "The intensity bands" }
   - { id: "bottom-line", label: "Bottom line" }
 references:
   - text: "Tanaka H, Monahan KD, Seals DR. Age-predicted maximal heart rate revisited. J Am Coll Cardiol, 2001;37(1):153-156."
@@ -41,6 +45,10 @@ references:
     url: "https://www.heart.org/en/health-topics/consumer-healthcare/medication-information/how-do-beta-blocker-drugs-affect-exercise"
     verified: true
     verifiedDate: 2026-10-20
+  - text: "Garber CE, Blissmer B, Deschenes MR, Franklin BA, Lamonte MJ, Lee IM, Nieman DC, Swain DP. American College of Sports Medicine position stand. Quantity and quality of exercise for developing and maintaining cardiorespiratory, musculoskeletal, and neuromotor fitness in apparently healthy adults: guidance for prescribing exercise. Med Sci Sports Exerc, 2011;43(7):1334-1359."
+    url: "https://doi.org/10.1249/MSS.0b013e318213fefb"
+    verified: true
+    verifiedDate: 2026-11-04
 ---
 
 Almost every treadmill, chest strap and fitness app builds its zones on the same equation:
@@ -117,8 +125,8 @@ sets zones as percentages of that gap, added back onto resting. Because resting 
 falls as you get fitter, the zones adjust to your conditioning over time.
 
 <div class="pull">
-The practical effect is large. In our calculator, adding a resting heart rate can move zone
-one from 94–112 bpm to 124–136 bpm for the same person.
+The effect is real. In our calculator, a 30-year-old's moderate band is 120–144 bpm from
+maximum alone, 111–136 bpm with a resting heart rate of 60, and 102–130 bpm with 45.
 </div>
 
 Measure resting heart rate on waking, before getting up, ideally averaged over several
@@ -129,22 +137,33 @@ mornings. A single reading after coffee or a poor night's sleep is not represent
 <div class="summary-body"><p>Karvonen sets zones from the gap between resting and maximum heart rate, so they reflect conditioning. Measure resting heart rate on waking, averaged across several days.</p></div>
 </aside>
 
-<h2 id="the-zones">What the zones are for</h2>
+<h2 id="the-zones">The intensity bands</h2>
 
-**Zone 1 — recovery.** Warm-ups, cool-downs, easy movement between hard sessions.
+Our calculator uses the five intensity classes in the American College of Sports Medicine's
+2011 position stand. ACSM gives each as a share of heart-rate reserve and, separately, as a
+share of maximum heart rate, along with how hard it should feel. [6]
 
-**Zone 2 — aerobic base.** Conversational pace. This is where most endurance training
-should live, and it is the zone most recreational athletes skip because it feels too easy to
-be useful.
+**Very light.** Under 30% of reserve, or under 57% of maximum. Feels very light.
 
-**Zone 3 — tempo.** Comfortably hard, sustainable for thirty to sixty minutes.
+**Light.** 30–39% of reserve, or 57–63% of maximum. Very light to fairly light.
 
-**Zone 4 — threshold.** Hard, close to the point where lactate accumulates faster than it
-clears.
+**Moderate.** 40–59% of reserve, or 64–76% of maximum. Fairly light to somewhat hard.
 
-**Zone 5 — VO₂ max.** Maximal intervals, sustainable only in short efforts.
-Our guide to [VO2 max](/articles/vo2-max-what-it-measures-and-how-to-raise-it/) covers what it measures and the
-interval trial behind the "4×4" session.
+**Vigorous.** 60–89% of reserve, or 77–95% of maximum. Somewhat hard to very hard.
+
+**Near-maximal to maximal.** 90% of reserve and up, or 96% of maximum and up. Very hard or
+harder.
+
+The two sets of percentages are not interchangeable. ACSM says one method "cannot be
+assumed" to equal another, so the calculator uses the reserve figures when you give a
+resting heart rate and the maximum figures when you don't. ACSM also calls the classes
+approximate. For most adults it recommends moderate or vigorous exercise, or both, and light
+to moderate exercise for people starting out unfit. [6]
+
+Earlier versions of our calculator used five named training zones, from recovery to VO₂ max,
+at 50–100% for both methods. We could not find a source for those bands, so we replaced them.
+Our guide to [VO2 max](/articles/vo2-max-what-it-measures-and-how-to-raise-it/) covers what it
+measures and the interval trial behind the "4×4" session.
 
 The pattern observed across trained endurance athletes is that a large majority of training
 volume sits at low intensity, with a small proportion at high intensity and relatively
@@ -160,7 +179,7 @@ confident presentation often suggests.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Most endurance volume should be easy, with a smaller amount genuinely hard. The common mistake is spending too much time at moderate intensity, which accumulates fatigue without the benefits of either extreme.</p></div>
+<div class="summary-body"><p>The calculator uses ACSM's five intensity classes, with separate percentages for heart-rate reserve and for maximum. Most endurance volume should be easy, with a smaller amount genuinely hard; the common mistake is too much time in between.</p></div>
 </aside>
 
 <h2 id="bottom-line">The bottom line</h2>

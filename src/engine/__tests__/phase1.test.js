@@ -126,19 +126,26 @@ describe('heart rate', () => {
     expect(t).toBeCloseTo(151, 0);               // (190−60)×0.7+60
   });
 
-  it('produces five ascending zones', () => {
+  it('produces ACSM\'s five classes, ascending, from heart-rate reserve', () => {
     const z = heartRateZones(190, 60);
-    expect(z).toHaveLength(5);
-    for (let i = 1; i < z.length; i++) {
-      expect(z[i].lowBpm).toBeGreaterThan(z[i - 1].lowBpm);
-    }
-    expect(z[4].highBpm).toBeCloseTo(190, 0);
+    expect(z.map(x => x.name)).toEqual(['Very light', 'Light', 'Moderate', 'Vigorous', 'Near-maximal to maximal']);
+    expect(z[0].lowBpm).toBeNull();
+    for (let i = 2; i < z.length; i++) expect(z[i].lowBpm).toBeGreaterThan(z[i - 1].lowBpm);
+    // ACSM Table 5, %HRR: 30, 40, 60, 90
+    expect(z[1].lowBpm).toBeCloseTo(130 * 0.30 + 60, 5);
+    expect(z[2].lowBpm).toBeCloseTo(130 * 0.40 + 60, 5);
+    expect(z[3].lowBpm).toBeCloseTo(130 * 0.60 + 60, 5);
+    expect(z[4].lowBpm).toBeCloseTo(130 * 0.90 + 60, 5);
+    expect(z[4].highBpm).toBe(190);
+    expect(z[0].method).toContain('reserve');
   });
 
-  it('falls back to percent-of-max without a resting heart rate', () => {
-    const z = heartRateZones(190);
+  it('uses ACSM\'s separate %-of-max bands without a resting heart rate', () => {
+    const z = heartRateZones(200);
     expect(z[0].method).toContain('max');
-    expect(z[0].lowBpm).toBeCloseTo(95, 0);
+    // ACSM Table 5, %HRmax: 57, 64, 77, 96 — not the reserve figures
+    [114, 128, 154, 192].forEach((v, i) => expect(z[i + 1].lowBpm).toBeCloseTo(v, 5));
+    expect(z[0].highBpm).toBeCloseTo(114, 5);
   });
 });
 

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,106 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,114 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,23 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.7 — Heart rate, sleep and race-prediction labels checked against their sources
+
+- **Heart Rate Zones now shows ACSM's five intensity classes** (Garber 2011, Table 5): very light, light,
+  moderate, vigorous, near-maximal to maximal, with ACSM's effort ratings. ACSM gives different percentages for
+  heart-rate reserve (30, 40, 60, 90) and for maximum heart rate (57, 64, 77, 96); the calculator used the same
+  50–100% bands for both, and the zone names (Recovery to VO₂ max) had no source.
+- **Sleep Cycle Calculator labels are the National Sleep Foundation's for your age** (recommended, may be
+  appropriate, not recommended). "Recommended" was fixed on five cycles whatever the age, and "short" and "very
+  short" had no source. The 90-minute cycle is now cited (StatPearls); the unsourced "70 to 120 minutes" range
+  and "a regular seven hours beats an erratic nine" are gone. Fifteen minutes to fall asleep is now called a
+  starting value.
+- **Running Pace:** the "Reliable" and "Rough" tags are gone; their distance-ratio cut-offs had no source.
+  Marathon predictions are flagged as probably too fast (Vickers 2016, now on the sources line), and the mile,
+  custom distances and predictions from a marathon say the study did not check them.
+- **Articles corrected:** "Heart rate zones" (the zone list) and "Sleep and training" (the cycles section).
+  Review records in `docs/citation-reviews/`.
 
 ### v2.38.6 — Activity levels and protein ranges checked against their sources
 

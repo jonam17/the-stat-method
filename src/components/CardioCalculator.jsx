@@ -6,6 +6,15 @@ import {
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
+/** "under 114", "114–128" — ACSM's first class has no lower figure. */
+const zoneBpm = z => (z.lowBpm == null ? `under ${fmt(z.highBpm)}` : `${fmt(z.lowBpm)}–${fmt(z.highBpm)}`);
+/** ACSM's own wording of each band: "under 30%", "40–59%", "90% and up". */
+const zonePct = (z, reserve) => {
+  const lo = Math.round(z.lowPct * 100), hi = Math.round(z.highPct * 100);
+  const band = z.lowBpm == null ? `under ${hi}%` : hi >= 100 ? `${lo}% and up` : `${lo}–${hi - 1}%`;
+  return `${band} of ${reserve ? 'heart-rate reserve' : 'max'}`;
+};
+
 export default function CardioCalculator({ mode = 'zones' }) {
   const [tab, setTab] = useState(mode);
   const [units, setUnits] = useState('metric');
@@ -102,14 +111,13 @@ export default function CardioCalculator({ mode = 'zones' }) {
         </Panel>
 
         {tab === 'zones' ? (
-          <Panel label="Training zones" dark
-               copyExtra={(r?.zones ?? []).map(z =>
-                 `Zone ${z.zone} ${z.name}: ${fmt(z.lowBpm)}–${fmt(z.highBpm)} bpm`)}
+          <Panel label="Exercise intensity" dark
+               copyExtra={(r?.zones ?? []).map(z => `${z.name}: ${zoneBpm(z)} bpm`)}
                notice={eligibility({ age }).copy ?? null}>
             <BigStat value={fmt(r.maxHr)} unit="bpm max"
                      note={<>Estimated with <b>Tanaka</b>{r.rest
-                       ? <> · zones use the Karvonen reserve method</>
-                       : <> · add a resting heart rate for more personal zones</>}.</>} />
+                       ? <> · bands use your heart-rate reserve (Karvonen)</>
+                       : <> · add a resting heart rate to use your heart-rate reserve</>}.</>} />
 
             {/* Fixed, not conditional: the tool does not ask about medicines (decided
                 2026-10-20, to keep rarely relevant options out of the form). Inside the
@@ -123,14 +131,13 @@ export default function CardioCalculator({ mode = 'zones' }) {
 
             <div className="zones">
               {r.zones.map(z => (
-                <div className={`zone z${z.zone}`} key={z.zone}>
+                <div className={`zone z${z.zone}`} key={z.key}>
                   <div className="z-head">
-                    <span className="z-n">Zone {z.zone}</span>
                     <span className="z-name">{z.name}</span>
-                    <span className="z-bpm">{fmt(z.lowBpm)}–{fmt(z.highBpm)}<small>bpm</small></span>
+                    <span className="z-bpm">{zoneBpm(z)}<small>bpm</small></span>
                   </div>
                   <div className="z-bar"><i style={{ width: `${z.zone * 20}%` }} /></div>
-                  <div className="z-use">{z.use}</div>
+                  <div className="z-use">{z.effort} · {zonePct(z, !!r.rest)}</div>
                 </div>
               ))}
             </div>
@@ -173,7 +180,16 @@ export default function CardioCalculator({ mode = 'zones' }) {
                 age groups, so it is used here. Any max-HR formula carries roughly ±10 bpm
                 of individual variation — a real maximal test is the only precise answer.
               </p>
+              <p>
+                The five bands are the American College of Sports Medicine's intensity classes. ACSM
+                gives separate bands for heart-rate reserve and for percent of maximum, because the two
+                methods are not equivalent, so each is used only with its own method. ACSM calls the
+                bands approximate. RPE is how hard the effort feels on a scale from 6 to 20. For most
+                adults ACSM recommends moderate or vigorous exercise, or both, and light to moderate
+                exercise for people starting out unfit.
+              </p>
               <p className="refs">
+                Garber CE et al., ACSM position stand, Med Sci Sports Exerc 2011 ·
                 Tanaka H et al., J Am Coll Cardiol 2001 · Karvonen MJ et al. 1957 ·
                 Gulati M et al., Circulation 2010 · Cooper KH, JAMA 1968 ·
                 American Heart Association, beta blockers and exercise, 2024

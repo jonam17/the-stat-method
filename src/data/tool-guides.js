@@ -170,7 +170,8 @@ export const GUIDES = {
       ['Max HR', 'The highest heart rate you can reach during maximal effort.'],
       ['Resting HR', 'Your heart rate on waking, before getting up. Falls as fitness improves.'],
       ['HR reserve', 'The gap between resting and maximum heart rate.'],
-      ['Karvonen', 'A zone method using heart rate reserve, so zones reflect your conditioning.'],
+      ['Karvonen', 'Sets target heart rates as a share of your heart-rate reserve, added back onto resting heart rate.'],
+      ['RPE', 'Rating of perceived exertion: how hard an effort feels, on a scale from 6 to 20.'],
       ['VO₂ max', 'The maximum rate at which your body can use oxygen.'],
     ],
     howTo: [
@@ -179,12 +180,12 @@ export const GUIDES = {
       'Optionally add a Cooper test distance (12 minutes of maximal running) for a VO₂ max estimate.',
     ],
     interpreting: [
-      ['Why the zones move when you add resting heart rate',
-       'Without it, zones are a flat percentage of maximum, which ignores the bottom of your range. Karvonen sets them from the gap between resting and maximum instead, so two people with the same max but very different fitness get appropriately different zones. The shift can be twenty to thirty beats.'],
+      ['Why the bands change when you add resting heart rate',
+       'Without it, the bands are a percentage of maximum heart rate. With it, they are a percentage of your heart-rate reserve, the gap between resting and maximum, so two people with the same maximum but different fitness get different bands. The American College of Sports Medicine gives separate percentages for each method, because the two are not equivalent, so the calculator switches to the matching set.'],
       ['These boundaries carry about ten beats of uncertainty',
        'Any age-based max-HR estimate has substantial individual variation — two people the same age can genuinely differ by twenty beats. Tanaka is used here because it is better validated than "220 minus age", which overestimates in younger adults and underestimates in older ones. Only a real maximal test gives a precise figure.'],
-      ['The practical use is keeping easy days easy',
-       'Trained endurance athletes accumulate most volume at low intensity with a small amount genuinely hard. The common recreational error is the opposite — too much moderately hard work, which builds fatigue without delivering either the aerobic adaptation of easy volume or the stimulus of real intervals. Zone 2 is the one most people skip.'],
+      ['Which band to aim for',
+       'For most adults, ACSM recommends moderate or vigorous exercise, or a mix: at least 150 minutes a week of moderate exercise, or 75 of vigorous. For people starting out unfit, light to moderate exercise may help. How hard the effort feels (RPE) is a useful check on the heart-rate figures.'],
     ],
   },
 
@@ -411,20 +412,21 @@ export const GUIDES = {
   },
   'sleep-calculator': {
     terms: [
-      ['Sleep cycle', 'A roughly 90-minute progression through light, deep and REM sleep.'],
+      ['Sleep cycle', 'One pass through light, deep and REM sleep: about 90 minutes on average, four to six a night.'],
+      ['Sleep inertia', 'The grogginess after waking, worst when woken from deep sleep.'],
       ['Sleep latency', 'How long it takes you to fall asleep after getting into bed.'],
       ['Sleep debt', 'Accumulated shortfall against your actual requirement.'],
     ],
     howTo: [
       'Choose whether you are working backwards from a wake time or forwards from a bedtime.',
-      'Adjust the fall-asleep time if fifteen minutes is not typical for you.',
-      'Aim for five or six cycles on most nights.',
+      'Change the fall-asleep time to your usual one; fifteen minutes is only a starting value.',
+      'Enter your age: the labels are the National Sleep Foundation\u2019s for your age group.',
     ],
     interpreting: [
       ['The 90-minute cycle is an average, not a rule',
-       'Real cycles run roughly seventy to a hundred and twenty minutes, vary within a single night, and differ between people. Waking between cycles rather than mid-cycle tends to feel easier, which is what these times aim at — but the effect is a nudge, not a guarantee.'],
-      ['Two things matter more than cycle timing',
-       'Total sleep, and consistency of schedule. A regular seven hours generally beats an erratic nine, and no amount of cycle math compensates for a bedtime that moves around every night. If you have to choose between hitting a cycle boundary and keeping a consistent schedule, keep the schedule.'],
+       'A complete cycle takes roughly 90 to 110 minutes, so the times are approximate. They aim to avoid waking from deep sleep, which leaves people groggy: in testing, mental performance was moderately impaired for thirty minutes to an hour. Deep sleep comes mostly in the first half of the night. The sources describe the stages but do not test cycle-timed waking, so treat the times as a nudge.'],
+      ['What the labels mean',
+       'They are the National Sleep Foundation\u2019s categories for your age. For adults under 65, 7 to 9 hours is recommended, 6 may be appropriate for some people, and under 6 is not recommended. From 65, 7 to 8 is recommended, 5 to 6 and 9 may be appropriate, and under 5 is not recommended. The hours are of sleep, not time in bed.'],
       ['Why this matters if you are dieting',
        'Short sleep is reliably associated with reduced training performance, higher perceived exertion and poorer appetite regulation. The last of those matters enormously in a deficit — sleep loss makes adherence harder in a way no amount of willpower fully offsets.'],
     ],
@@ -440,11 +442,11 @@ export const GUIDES = {
     howTo: [
       'Pick a distance and enter your finish time as mm:ss or h:mm:ss.',
       'Use the splits table to plan pacing on race day.',
-      'Check the confidence flag on each prediction before trusting it.',
+      'Read the note under each prediction: marathon times are flagged as probably too fast.',
     ],
     interpreting: [
       ['Predictions assume you trained for the target distance',
-       'This is the formula\u2019s central and largest assumption. It cannot know whether you have done the long runs a marathon requires. Predicting a marathon from a 5K is therefore optimistic, and the tool flags such predictions as rough. Adjacent distances — 10K to half marathon — are considerably more trustworthy.'],
+       'This is the formula\u2019s central assumption, and it cannot know whether you have done the long runs a marathon requires. In a study of 2,303 recreational runners, Riegel was well calibrated up to the half marathon, but at the marathon it was at least ten minutes too fast for half of them. The mile and other distances outside that study are marked as not checked.'],
       ['Even splits are a plan, not a law',
        'Elite performances are frequently run with a slightly faster second half. Terrain, heat and wind all justify deviating. Use the splits as a pacing anchor for the early kilometres, where over-enthusiasm does the most damage.'],
       ['What a prediction does not account for',

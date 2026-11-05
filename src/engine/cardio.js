@@ -31,23 +31,45 @@ export function allMaxHr(age, sex) {
 export const karvonen = (maxHr, restHr, intensity) =>
   (maxHr - restHr) * intensity + restHr;
 
-/** Five-zone model. Percentages are of heart-rate reserve when restingHr is supplied. */
+/**
+ * Exercise intensity classes from ACSM's position stand (Garber et al., Med Sci Sports Exerc
+ * 2011, Table 5). The bands depend on the method: ACSM gives one set as % of heart-rate
+ * reserve and another as % of maximum heart rate, and says the methods "cannot be assumed"
+ * equivalent, so each is used only with its own method. ACSM calls the table approximate.
+ *
+ * v2.38.7 (item 45, batch 4) replaced five unsourced zones (50–100% for both methods, named
+ * Recovery … VO₂ max). `effort` is ACSM's perceived-exertion column (rated on a 6–20 scale).
+ * `hrr` and `max` are each class's lower bound; a class runs to the next class's lower bound,
+ * the first from rest (or zero) and the last to maximum.
+ */
 export const HR_ZONES = [
-  { zone: 1, name: 'Recovery',   low: 0.50, high: 0.60, use: 'Warm-up, cool-down, easy movement' },
-  { zone: 2, name: 'Aerobic base', low: 0.60, high: 0.70, use: 'Conversational pace; builds aerobic capacity' },
-  { zone: 3, name: 'Tempo',      low: 0.70, high: 0.80, use: 'Comfortably hard; sustainable 30–60 min' },
-  { zone: 4, name: 'Threshold',  low: 0.80, high: 0.90, use: 'Hard; near lactate threshold' },
-  { zone: 5, name: 'VO₂ max',    low: 0.90, high: 1.00, use: 'Maximal intervals, short efforts' },
+  { zone: 1, key: 'very-light', name: 'Very light', hrr: 0,    max: 0,    effort: 'Very light effort (RPE under 9)' },
+  { zone: 2, key: 'light',      name: 'Light',      hrr: 0.30, max: 0.57, effort: 'Very light to fairly light (RPE 9–11)' },
+  { zone: 3, key: 'moderate',   name: 'Moderate',   hrr: 0.40, max: 0.64, effort: 'Fairly light to somewhat hard (RPE 12–13)' },
+  { zone: 4, key: 'vigorous',   name: 'Vigorous',   hrr: 0.60, max: 0.77, effort: 'Somewhat hard to very hard (RPE 14–17)' },
+  { zone: 5, key: 'near-max',   name: 'Near-maximal to maximal', hrr: 0.90, max: 0.96, effort: 'Very hard or harder (RPE 18 and up)' },
 ];
 
-/** Compute all five zones. Uses Karvonen when restingHr is given, else % of max. */
+/**
+ * ACSM's classes in beats per minute. With a resting heart rate, the heart-rate-reserve bands
+ * (Karvonen); without one, the %-of-maximum bands. The first class has no lower figure
+ * (`lowBpm` null): it is everything below the second.
+ */
 export function heartRateZones(maxHr, restingHr = null) {
-  return HR_ZONES.map(z => ({
-    ...z,
-    lowBpm:  restingHr != null ? karvonen(maxHr, restingHr, z.low)  : maxHr * z.low,
-    highBpm: restingHr != null ? karvonen(maxHr, restingHr, z.high) : maxHr * z.high,
-    method: restingHr != null ? 'Karvonen (HR reserve)' : '% of max HR',
-  }));
+  const reserve = restingHr != null;
+  const at = f => (reserve ? karvonen(maxHr, restingHr, f) : maxHr * f);
+  return HR_ZONES.map((z, i) => {
+    const lowF = reserve ? z.hrr : z.max;
+    const next = HR_ZONES[i + 1];
+    return {
+      ...z,
+      lowPct: lowF,
+      highPct: next ? (reserve ? next.hrr : next.max) : 1,
+      lowBpm: i === 0 ? null : at(lowF),
+      highBpm: next ? at(reserve ? next.hrr : next.max) : maxHr,
+      method: reserve ? 'Karvonen (HR reserve)' : '% of max HR',
+    };
+  });
 }
 
 /**

@@ -12,12 +12,17 @@ author: The Stat Method
 relatedTool: sleep-calculator
 evidenceBased: true
 clinicalClaims: true
+updated: 2026-11-04
 keyTakeaways:
-  - "The 90-minute sleep cycle is an average; real cycles run about 70 to 120 minutes. Bedtime calculators are a nudge, not a schedule."
+  - "The 90-minute sleep cycle is an average; a complete cycle takes roughly 90 to 110 minutes. Bedtime calculators are a nudge, not a schedule."
   - "A regular seven hours beats an erratic nine. Going to bed and waking at similar times is the biggest win for most people."
   - "One bad night costs less than you fear — a single heavy lift holds up — but sessions feel harder, and several short nights add up."
   - "When you are dieting, short sleep makes hunger harder to manage. The studies are small, but they point the same way."
   - "Trackers estimate total sleep reasonably and sleep stages poorly. Read duration and consistency; ignore the nightly deep-sleep score."
+changelog:
+  - date: 2026-11-04
+    note: >-
+      Sourced the section on sleep cycles. A complete cycle takes roughly 90 to 110 minutes, not "70 to 120", which we could not trace; and the case for timing an alarm to a cycle now rests on what the sources say about waking from deep sleep, with the note that they do not test cycle-timed waking.
 toc:
   - { id: "cycles", label: "About those cycles" }
   - { id: "performance", label: "Training performance" }
@@ -40,6 +45,14 @@ references:
   - text: "Chinoy ED, Cuellar JA, Huwa KE, Jameson JT, Watson CH, Bessman SC, Hirsch DA, Cooper AD, Drummond SPA, Markwald RR. Performance of seven consumer sleep-tracking devices compared with polysomnography. Sleep, 2021;44(5):zsaa291."
     url: "https://pubmed.ncbi.nlm.nih.gov/33378539/"
     verified: true
+  - text: "Patel AK, Reddy V, Shumway KR, Araujo JF. Physiology, Sleep Stages. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; last updated 26 January 2024."
+    url: "https://www.ncbi.nlm.nih.gov/books/NBK526132/"
+    verified: true
+    verifiedDate: 2026-11-04
+  - text: "National Institute of Neurological Disorders and Stroke. Brain Basics: Understanding Sleep. NIH Publication No. 17-NS-3440-C, August 2017."
+    url: "https://webharvest.gov/congress115th/20181203185403/https://catalog.ninds.nih.gov/pubstatic//17-NS-3440-C/17-NS-3440-C.pdf"
+    verified: true
+    verifiedDate: 2026-11-04
 ---
 
 Training and nutrition get the attention because they are the parts you actively do. Sleep
@@ -51,19 +64,21 @@ the recovery variable people leave unmanaged.
 Sleep progresses through light sleep, deep slow-wave sleep and REM in a repeating cycle,
 and ninety minutes is the figure everyone quotes.
 
-It is an average, and a fairly loose one. Real cycles run roughly seventy to a hundred and
-twenty minutes, vary between people, and vary within a single night — early cycles contain
-proportionally more deep sleep, later cycles more REM.
+It is an average. A complete cycle takes roughly 90 to 110 minutes, and a night holds four to
+six of them. [6] Deep sleep comes mostly in the first half of the night, and REM periods grow
+longer toward morning. [7]
 
-This is why cycle-based bedtime calculators, including ours, should be treated as a nudge
-rather than a schedule. Waking between cycles rather than out of deep sleep does tend to
-feel easier, so aiming for a whole number of cycles is a reasonable heuristic. But the
+The case for timing your alarm is about deep sleep. People woken from it are groggy, a state
+called sleep inertia, and in testing their mental performance was moderately impaired for
+thirty minutes to an hour. [6] Aiming to wake at the end of a cycle is meant to avoid that.
+But these sources describe the stages; they do not test cycle-timed waking. So treat
+cycle-based bedtime calculators, including ours, as a nudge rather than a schedule. The
 precision implied by "go to bed at 11:15 exactly" is not something the underlying physiology
 supports.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>The 90-minute cycle is an average with substantial variation between and within nights. Aiming for whole cycles is a useful heuristic, not a precise schedule.</p></div>
+<div class="summary-body"><p>The 90-minute cycle is an average; a complete one takes about 90 to 110 minutes. Waking at the end of a cycle aims to avoid the grogginess of waking from deep sleep, but it is a nudge, not a precise schedule.</p></div>
 </aside>
 
 <h2 id="performance">What sleep loss does to training</h2>

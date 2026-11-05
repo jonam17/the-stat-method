@@ -508,7 +508,7 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .z-bpm small{font-family:var(--mono);font-size:9px;font-weight:400;color:#82827C;margin-left:3px}
 .z-bar{height:4px;background:#0D0D0D;border-radius:0;margin-top:8px;overflow:hidden}
 .z-bar i{display:block;height:100%;border-radius:0}
-.zone.z1 .z-bar i{background:#5B9E6B}   /* recovery reads as easy, not inactive */
+.zone.z1 .z-bar i{background:#5B9E6B}   /* very light reads as easy, not inactive */
 .zone.z2 .z-bar i{background:#B08A34}
 .zone.z3 .z-bar i{background:#D9862B}
 .zone.z4 .z-bar i{background:#E2551B}
