@@ -8,15 +8,20 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
+updated: 2026-11-05
 author: The Stat Method
 relatedTool: one-rep-max
 evidenceBased: true
 keyTakeaways:
   - "Most one-rep-max formulas began as coaches' loading charts rather than research, and they disagree by a few percent — so read your estimate as a range, not one number."
-  - "Estimate from a set of two to six reps taken close to failure. That is where the formulas are most reliable."
-  - "Past about twelve reps, fatigue and technique take over and the formulas drift apart; the answer is barely worth calculating."
+  - "Estimate from a set of about five reps taken close to failure. In one study, a five-rep max predicted the one-rep max best."
+  - "Keep to ten reps or fewer. Accuracy fell as reps rose, and the formulas' own authors advise staying under ten."
   - "Estimates tend to read low for the deadlift, so treat a deadlift figure as a floor."
   - "For everyday training, choosing loads by reps in reserve is often more practical than percentages, because it adjusts to how you feel that day."
+changelog:
+  - date: 2026-11-05
+    note: >-
+      "Two to six reps" and "beyond twelve" had no source; the advice now follows Reynolds et al. 2006 (best from about five reps, no more than ten). Removed the unsourced claims that Wathan tracks best and that Epley and Brzycki read high or low. The calculator’s headline is now the average of the formulas, and its RPE chart is the one published by Helms and colleagues.
 toc:
   - { id: "why-estimate", label: "Why estimate" }
   - { id: "the-formulas", label: "The formulas" }
@@ -45,6 +50,14 @@ references:
   - text: "Zourdos MC, Klemp A, Dolan C, Quiles JM, Schau KA, Jo E, Helms E, Esgro B, Duncan S, Garcia Merino S, Blanco R. Novel resistance training-specific rating of perceived exertion scale measuring repetitions in reserve. J Strength Cond Res, 2016;30(1):267-275."
     url: "https://pubmed.ncbi.nlm.nih.gov/26049792/"
     verified: true
+  - text: "Reynolds JM, Gordon TJ, Robergs RA. Prediction of one repetition maximum strength from multiple repetition maximum testing and anthropometry. J Strength Cond Res, 2006;20(3):584-592."
+    url: "https://www.unm.edu/~rrobergs/478RMStrengthPrediction.pdf"
+    verified: true
+    verifiedDate: 2026-11-05
+  - text: "Helms ER, Cronin J, Storey A, Zourdos MC. Application of the repetitions in reserve-based rating of perceived exertion scale for resistance training. Strength Cond J, 2016;38(4):42-49."
+    url: "https://openrepository.aut.ac.nz/items/92cefeac-7c32-44f1-bfbc-f48f4a5dd8cf/full"
+    verified: true
+    verifiedDate: 2026-11-05
 ---
 
 Testing a true one-rep max is disruptive. It requires a peaking period, a spotter, full
@@ -76,11 +89,15 @@ rather than studies, as the next section explains. That is why they disagree.
 
 <figure data-chart="one-rm-divergence"></figure>
 
-- **Epley** — the most widely used; tends to read high at low rep counts.
-- **Brzycki** — reads lower as reps climb; a linear inverse relationship.
-- **Lombardi** — a power-curve fit, behaving differently at the extremes.
-- **Wathan** — an exponential fit that tends to track well across the widest rep range.
+- **Epley** — the most widely used; its author's guidance is under ten reps. [9]
+- **Brzycki** — an inverse relationship with reps; also under ten reps. [9]
+- **Lombardi** — a power-curve fit.
+- **Wathan** — an exponential fit.
 - **O'Conner** — a simple linear approximation, useful mainly for mental math.
+
+One study checked four of these (all but Wathan) against a separate group of 20 adults,
+predicting from five-rep maxima on the chest press and leg press, and their errors came out
+close to one another. [9] Our calculator's headline figure is the average of all five.
 
 Feed the same set into all five and you typically get a spread of a few percent. That
 spread is not a defect to be resolved by picking a favourite. It is an honest depiction of
@@ -98,11 +115,10 @@ much confidence the number deserves.
 
 <h2 id="accuracy">Where the estimates break down</h2>
 
-**Rep count is the biggest factor.** Estimates from two to six reps are reasonably
-trustworthy. Beyond about ten, accuracy falls away quickly, and beyond twelve the formulas
-diverge enough that the answer is barely worth calculating. The reason is that high-rep
-sets are increasingly limited by fatigue, breathing and technique breakdown rather than by
-maximal force production — the thing a 1RM actually measures.
+**Rep count is the biggest factor.** In a study of 70 adults who tested their 1, 5, 10 and
+20-rep maxima on the chest press and leg press, the five-rep max predicted the one-rep max
+best, and accuracy got worse from ten and twenty reps. The authors concluded that no more
+than ten reps should be used in linear equations. [9] Our calculator warns you above ten.
 
 **Most of these formulas were never derived from research.** This is the part worth sitting
 with. Brzycki's appeared in a practitioner article that never states what data it was fitted
@@ -152,7 +168,7 @@ estimate that is simply wrong, and no formula can detect that from the numbers y
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
-<div class="summary-body"><p>Estimates are most reliable from two to six reps, taken close to failure. High-rep sets, novice lifters, and sets stopped well short of failure all degrade the result.</p></div>
+<div class="summary-body"><p>A set of about five reps taken close to failure gave the best estimate in one study; accuracy fell as reps rose. High-rep sets, novice lifters, and sets stopped well short of failure all degrade the result.</p></div>
 </aside>
 
 <h2 id="using-it">A more practical alternative</h2>
@@ -169,8 +185,11 @@ Reps-in-reserve inverts this. Instead of "five reps at 80 percent", the instruct
 performing. Research validating the RIR-based RPE scale found that experienced lifters
 estimate proximity to failure reasonably well, particularly within a few reps of it.
 
-Our calculator does both: it gives you the percentage table if you want it, and converts
-reps plus RIR into a working load if you would rather train that way.
+Our calculator does both: it gives you a percentage table if you want it, and converts
+reps plus RIR into a working load if you would rather train that way. Both come from a chart
+published by Helms and colleagues, covering one to eight reps at zero to three reps in
+reserve. It was built from trained lifters' back squats; only three of its values were
+measured, and the authors say it should not be treated as an exact conversion. [10]
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
@@ -179,7 +198,7 @@ reps plus RIR into a working load if you would rather train that way.
 
 <h2 id="bottom-line">The bottom line</h2>
 
-Estimate from a set of two to six reps taken close to failure, look at the range rather
+Estimate from a set of about five reps taken close to failure, look at the range rather
 than fixating on one formula's answer, and re-estimate every few weeks rather than trusting
 a number from three months ago.
 

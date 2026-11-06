@@ -1,8 +1,10 @@
 /**
  * Strength estimation. Pure functions.
  *
- * All 1RM equations are estimates fitted to population data and lose accuracy
- * above roughly 10 reps, where fatigue and technique dominate. We return every
+ * All 1RM equations are estimates. Reynolds et al. 2006 (J Strength Cond Res 20(3):584-92)
+ * found a 5RM predicted 1RM best, with accuracy worse from 10RM and 20RM, and that "no more than
+ * 10 repetitions should be used in linear equations"; per their Table 5, Epley's and Brzycki's
+ * own guidance is under 10 reps. We return every
  * formula so the spread is visible rather than hiding disagreement behind one number.
  *
  * VALIDATION CAVEATS (citation check, 2026-08-20). LeSuer et al. 1997
@@ -38,7 +40,7 @@
  * as independent methods reaching the same answer.
  */
 
-/** Epley (1985). Most widely used; tends to read high at low reps. */
+/** Epley (1985). */
 export const epley = (w, r) => (r === 1 ? w : w * (1 + r / 30));
 
 /**
@@ -47,7 +49,7 @@ export const epley = (w, r) => (r === 1 ? w : w * (1 + r / 30));
  * SINGULARITY (citation check, 2026-08-20). The denominator (37 - r) reaches
  * zero at 37 reps and goes negative beyond it, so the formula returned Infinity
  * at 37 and NEGATIVE 1RM estimates above. It is a linear model with no validity
- * anywhere near that range — accuracy is already poor past ~12 reps — so it now
+ * anywhere near that range — Brzycki's own guidance is under 10 reps — so it now
  * returns null rather than a number that cannot be right.
  *
  * PROVENANCE: Brzycki published the equation in a practitioner article (JOPERD
@@ -62,7 +64,7 @@ export const brzycki = (w, r) =>
 /** Lombardi (1989). Power-curve fit. */
 export const lombardi = (w, r) => w * Math.pow(r, 0.10);
 
-/** Wathan (1994). Exponential fit; often closest across a wide rep range. */
+/** Wathan (1994). Exponential fit. Not among the equations Reynolds et al. 2006 cross-validated. */
 export const wathan = (w, r) => (100 * w) / (48.8 + 53.2 * Math.exp(-0.075 * r));
 
 /** O'Conner (1989). Simple linear approximation. */
@@ -77,9 +79,12 @@ export const ONE_RM_FORMULAS = [
   { key: 'oconner',  name: "O'Conner", fn: oconner },
 ];
 
+/** Above this, the result is flagged (Reynolds et al. 2006; Epley's and Brzycki's guidance). */
+export const ONE_RM_MAX_REPS = 10;
+
 /**
- * Run every formula. Above ~12 reps the estimates diverge sharply, so the
- * caller should surface `lowConfidence`.
+ * Run every formula. `mean` is the headline figure (v2.38.8: it was Wathan's, which no source
+ * read supports as the best). Above ONE_RM_MAX_REPS the caller should surface `lowConfidence`.
  */
 export function allOneRepMax(weight, reps) {
   if (!(weight > 0) || !(reps >= 1)) return null;
@@ -96,46 +101,44 @@ export function allOneRepMax(weight, reps) {
     min: Math.min(...values),
     max: Math.max(...values),
     spread: Math.max(...values) - Math.min(...values),
-    lowConfidence: reps > 12,
+    lowConfidence: reps > ONE_RM_MAX_REPS,
     omitted: results.filter(r => !Number.isFinite(r.value)).map(r => r.name),
   };
 }
 
-/** Standard training percentages of 1RM with typical rep ranges. */
-export const RM_PERCENTAGES = [
-  { pct: 100, reps: 1 }, { pct: 95, reps: 2 }, { pct: 92, reps: 3 },
-  { pct: 89, reps: 4 },  { pct: 86, reps: 5 }, { pct: 83, reps: 6 },
-  { pct: 81, reps: 7 },  { pct: 78, reps: 8 }, { pct: 76, reps: 9 },
-  { pct: 74, reps: 10 }, { pct: 70, reps: 12 }, { pct: 65, reps: 15 },
-];
-
-export const percentageTable = oneRM =>
-  RM_PERCENTAGES.map(({ pct, reps }) => ({ pct, reps, weight: (oneRM * pct) / 100 }));
-
 /**
- * RPE / RIR to %1RM. Derived from the widely used RPE chart in
- * Helms et al., "The Muscle and Strength Pyramid".
- * Rows are reps, columns are reps-in-reserve (0-4).
+ * RPE / RIR to %1RM: Helms, Cronin, Storey & Zourdos, Strength Cond J 2016;38(4):42-49, Table 2,
+ * whole-number RPE rows (10, 9, 8, 7 = 0–3 reps in reserve, RPE = 10 − RIR per Zourdos et al.
+ * 2016). Built from trained lifters' back squats; only 1 rep at 100% and 90% and 8 reps at 70%
+ * were measured, the rest estimated by the authors, who say it "should not be viewed as an
+ * absolute conversion tool".
+ *
+ * v2.38.8 (item 45, batch 5) replaced a 12-rep × 0–4 RIR table credited to Helms' book, which
+ * matched none of the sources read, and the 12-row "training percentages" table (to 65% for 15
+ * reps), which had no source. Rows are reps 1–8; columns are 0–3 reps in reserve.
  */
 const RPE_TABLE = {
-  1:  [100.0, 95.5, 92.2, 89.2, 86.3],
-  2:  [95.5, 92.2, 89.2, 86.3, 83.7],
-  3:  [92.2, 89.2, 86.3, 83.7, 81.1],
-  4:  [89.2, 86.3, 83.7, 81.1, 78.6],
-  5:  [86.3, 83.7, 81.1, 78.6, 76.2],
-  6:  [83.7, 81.1, 78.6, 76.2, 73.9],
-  7:  [81.1, 78.6, 76.2, 73.9, 70.7],
-  8:  [78.6, 76.2, 73.9, 70.7, 68.0],
-  9:  [76.2, 73.9, 70.7, 68.0, 65.3],
-  10: [73.9, 70.7, 68.0, 65.3, 62.6],
-  11: [70.7, 68.0, 65.3, 62.6, 59.9],
-  12: [68.0, 65.3, 62.6, 59.9, 57.4],
+  1: [100, 95, 91, 87],
+  2: [95, 91, 87, 85],
+  3: [91, 87, 85, 83],
+  4: [87, 85, 83, 81],
+  5: [85, 83, 81, 79],
+  6: [83, 81, 79, 76],
+  7: [81, 79, 76, 73],
+  8: [79, 76, 73, 70],
 };
+export const RPE_MAX_REPS = 8;
+export const RPE_MAX_RIR = 3;
+
+/** Training percentages: the chart's RPE 10 (0 RIR) row — a set to failure at each rep count. */
+export const RM_PERCENTAGES = Object.entries(RPE_TABLE).map(([reps, row]) => ({ pct: row[0], reps: +reps }));
+export const percentageTable = oneRM =>
+  RM_PERCENTAGES.map(({ pct, reps }) => ({ pct, reps, weight: (oneRM * pct) / 100 }));
 
 /** Percent of 1RM for a given reps + reps-in-reserve. Returns null if out of range. */
 export function percentFromRIR(reps, rir) {
   const row = RPE_TABLE[reps];
-  if (!row || rir < 0 || rir > 4) return null;
+  if (!row || rir < 0 || rir > RPE_MAX_RIR) return null;
   return row[rir];
 }
 

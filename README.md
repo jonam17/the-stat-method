@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,114 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,125 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.8 — Hand portions, one-rep max, RPE and calorie figures checked against their sources
+
+- **Hand Portions:** grams per portion are now Precision Nutrition's figures for men (palm 24 g protein,
+  cupped hand 25 g carbs, thumb 9 g fat) and women (22, 22, 8 g); they were a flat 25, 25 and 10 g with no
+  source. The hand-size setting (×0.8 / ×1.2) is gone: Precision Nutrition's premise is that hands scale with the
+  person. Vegetables are one to two fists per meal. Baseline uses the same figures.
+- **One-Rep Max:** warns above 10 reps, not 12 (Reynolds 2006; Epley's and Brzycki's own guidance). The
+  headline is the average of the five formulas instead of Wathan, which no source showed to be best. The 8%
+  spread colour and the "Confidence" stat are gone. Progressive Overload's estimated max also stops at 10 reps.
+- **RPE chart** (One-Rep Max, RPE Converter, the RPE article's chart): now Helms et al. 2016's table, 1–8 reps at
+  RPE 7–10. The old 12-rep table matched no source read. The training-percentages table is its RPE 10 row, so
+  it stops at 8 reps.
+- **Calories Burned:** MET values from the 2024 Adult Compendium, each with its activity code; eleven changed
+  (rowing machine 7.0 → 5.0 is the largest) and kettlebell training, which has no code of its own, is gone.
+  Calories are MET × kg × hours, the Compendium's own conversion, about 5% below the ACSM equation used before.
+- **Articles corrected:** one-rep max, RPE guide, calorie burn, tracking without a scale, and the sleep
+  article's unsourced "seven hours beats an erratic nine". Review records in `docs/citation-reviews/`.
 
 ### v2.38.7 — Heart rate, sleep and race-prediction labels checked against their sources
 

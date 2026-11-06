@@ -150,15 +150,16 @@ describe('confidence', () => {
 
 describe('descriptive outputs', () => {
   it('volume load and Epley e1RM from the best set, matching the One-Rep Max tool', () => {
-    const r = run({ sets: [12, 12, 10] });
-    expect(r.performance.volumeLoad).toBe(185 * 34);
-    expect(r.e1rm).toBeCloseTo(epley(185, 12), 9);
+    const r = run({ sets: [10, 9, 8] });
+    expect(r.performance.volumeLoad).toBe(185 * 27);
+    expect(r.e1rm).toBeCloseTo(epley(185, 10), 9);
     expect(sessionStats([12, 12, 10], 185)).toMatchObject({ total: 34, minSet: 10, spread: 2 });
   });
-  it('no e1RM above 12 reps', () => {
+  it('no e1RM above 10 reps (Reynolds et al. 2006)', () => {
+    expect(run({ sets: [11, 11, 11] }).e1rm).toBeNull();
     const r = run({ cls: 'isolation', load: 40, repMin: 10, repMax: 15, sets: [15, 15, 15] });
     expect(r.e1rm).toBeNull();
-    expect(r.e1rmNote).toMatch(/12 reps/);
+    expect(r.e1rmNote).toMatch(/10 reps/);
   });
   it('an edited rep range is reported as the user\u2019s own', () => {
     expect(run().customRange).toBe(true);                       // 8–12 vs hypertrophy 6–15

@@ -173,15 +173,17 @@ export const CHARTS = {
   },
 
   'rpe-load': () => {
-    const reps = range(1, 12);
-    const rpes = [10, 9, 8, 7, 6];
+    // Helms et al. 2016 (Strength Cond J), Table 2: 1–8 reps, RPE 7–10 (v2.38.8).
+    const reps = range(1, 8);
+    const rpes = [10, 9, 8, 7];
     return {
       kind: 'engine',
       title: 'Load for each rep count, by RPE',
-      desc: 'Percentage of one-rep max for 1 to 12 reps at RPE 10 down to RPE 6.',
-      caption: 'Each line is an effort level. RPE 10 is a set taken to failure; RPE 6 leaves about ' +
-        `four reps in the tank. For three reps, that is the difference between ` +
-        `${percentFromRIR(3, 0).toFixed(0)}% and ${percentFromRIR(3, 4).toFixed(0)}% of your one-rep max.`,
+      desc: 'Percentage of one-rep max for 1 to 8 reps at RPE 10 down to RPE 7, from the chart of Helms and colleagues (2016).',
+      caption: 'Each line is an effort level. RPE 10 is a set taken to failure; RPE 7 leaves three ' +
+        `reps in the tank. For three reps, that is the difference between ` +
+        `${percentFromRIR(3, 0).toFixed(0)}% and ${percentFromRIR(3, 3).toFixed(0)}% of your one-rep max. ` +
+        'The chart is from trained lifters\u2019 back squats, and most of its values are the authors\u2019 estimates.',
       x: { label: 'Reps', values: reps },
       y: { label: 'Load (% of 1RM)' },
       series: rpes.map(rpe => ({

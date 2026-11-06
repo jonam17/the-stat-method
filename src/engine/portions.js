@@ -1,31 +1,37 @@
 /**
  * Hand-portion translation and meal splitting.
  *
- * The hand-portion approach maps macro targets onto body-scaled units, so it needs
- * no scale and travels with the person. Popularised by Precision Nutrition; the
- * gram equivalents below are the commonly used approximations, which vary with
- * hand size and are deliberately presented as ranges rather than exact figures.
+ * The hand-portion approach maps macro targets onto body-scaled units, so it needs no scale and
+ * travels with the person. Figures from Precision Nutrition (a coaching company): its "Hand-size
+ * portion guide" handout gives ~20–30 g protein per palm, ~20–30 g carbs per cupped hand and
+ * ~7–12 g fat per thumb, and its article "How to do hand portion math" (reviewed March 2026)
+ * gives approximate figures by sex — men 24 / 25 / 9 g, women 22 / 22 / 8 g — and 1–2 fists of
+ * vegetables at each meal. Each portion also carries some of the other macros (a man's palm of
+ * protein ~4.5 g fat, for instance); like PN's own "hand portion math", this conversion counts
+ * only the main one.
+ *
+ * v2.38.8 (item 45, batch 5): the flat 25 / 25 / 10 g and the small/large hand-size multiplier
+ * (×0.8 / ×1.2) were unsourced and are gone; PN's premise is that "hands scale with the
+ * individual".
  */
 
-/** Approximate grams of the target macro delivered per hand unit. */
+/** Grams of the main macro per hand portion, by sex (PN). */
 export const HAND_UNITS = {
-  protein: { unit: 'palm',        grams: 25, note: 'A palm-sized portion of meat, fish, tofu or Greek yoghurt.' },
-  carbs:   { unit: 'cupped hand', grams: 25, note: 'A cupped handful of rice, pasta, oats, potato or fruit.' },
-  fat:     { unit: 'thumb',       grams: 10, note: 'A thumb-sized portion of oil, nuts, nut butter or cheese.' },
-  veg:     { unit: 'fist',        grams: 0,  note: 'A fist of non-starchy vegetables. Aim for one per meal.' },
+  protein: { unit: 'palm',        grams: { male: 24, female: 22 }, note: 'A palm-sized portion of meat, fish, tofu, eggs or Greek yoghurt.' },
+  carbs:   { unit: 'cupped hand', grams: { male: 25, female: 22 }, note: 'A cupped handful of grains, legumes, fruit or potato.' },
+  fat:     { unit: 'thumb',       grams: { male: 9,  female: 8 },  note: 'A thumb-sized portion of oil, nuts, seeds, nut butter or cheese.' },
+  veg:     { unit: 'fist',        grams: null, note: 'A fist of non-starchy vegetables. Aim for one to two per meal.' },
 };
-
-/** Scale hand size: smaller hands deliver less per unit. */
-export const HAND_SIZE = { small: 0.8, average: 1.0, large: 1.2 };
 
 /**
  * Convert daily macro grams into hand portions.
  * Returns whole portions plus the remainder, so nothing silently disappears.
+ * `sex` picks PN's figures; anything other than 'female' uses the men's.
  */
-export function toHandPortions({ proteinG, carbsG, fatG, handSize = 'average' }) {
-  const s = HAND_SIZE[handSize] ?? 1;
+export function toHandPortions({ proteinG, carbsG, fatG, sex = 'male' }) {
+  const k = sex === 'female' ? 'female' : 'male';
   const conv = (grams, key) => {
-    const per = HAND_UNITS[key].grams * s;
+    const per = HAND_UNITS[key].grams[k];
     const exact = grams / per;
     return {
       key,

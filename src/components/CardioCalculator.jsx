@@ -6,6 +6,9 @@ import {
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 import { eligibility, AGE_MIN, AGE_MAX, RAIL_COPY } from '../engine/safety.js';
 
+/** Also the fallback for a name retired in v2.38.8. */
+const DEFAULT_ACTIVITY = 'Running, 9.7–10.1 km/h';
+
 /** "under 114", "114–128" — ACSM's first class has no lower figure. */
 const zoneBpm = z => (z.lowBpm == null ? `under ${fmt(z.highBpm)}` : `${fmt(z.lowBpm)}–${fmt(z.highBpm)}`);
 /** ACSM's own wording of each band: "under 30%", "40–59%", "90% and up". */
@@ -22,7 +25,7 @@ export default function CardioCalculator({ mode = 'zones' }) {
   const [age, setAge] = useState('30');
   const [weight, setWeight] = useState('80');
   const [restHr, setRestHr] = useState('60');
-  const [activity, setActivity] = useState('Running, 10 km/h');
+  const [activity, setActivity] = useState(DEFAULT_ACTIVITY);
   const [minutes, setMinutes] = useState('30');
   const [cooper, setCooper] = useState('');
 
@@ -39,7 +42,7 @@ export default function CardioCalculator({ mode = 'zones' }) {
     const formulas = allMaxHr(a, sex);
     const maxHr = formulas.find(f => f.preferred).value;
     const zones = heartRateZones(maxHr, rest);
-    const act = findActivity(activity);
+    const act = findActivity(activity) ?? findActivity(DEFAULT_ACTIVITY);
     const mins = +minutes || 0;
     const burned = act ? kcalFromMets(act.mets, kg, mins) : 0;
     const perHour = act ? kcalFromMets(act.mets, kg, 60) : 0;
@@ -103,8 +106,8 @@ export default function CardioCalculator({ mode = 'zones' }) {
               <Num label="Duration" value={minutes} onChange={setMinutes} tag="min"
                  min={1} max={600} />
               <p className="hint">
-                MET values come from the Compendium of Physical Activities. They are
-                population averages — actual cost varies with skill, terrain and intensity.
+                MET values come from the 2024 Adult Compendium of Physical Activities. They are
+                averages for adults aged 19 to 59, not a measurement of you.
               </p>
             </>
           )}
@@ -228,15 +231,20 @@ export default function CardioCalculator({ mode = 'zones' }) {
 
             <Method>
               <p>
-                Energy cost is calculated as METs × 3.5 × bodyweight (kg) ÷ 200 per minute,
-                the standard ACSM metabolic equation. This includes the calories you would
-                have burned at rest anyway, so the <em>additional</em> cost of exercise is
-                somewhat lower than the figure shown. Wearable estimates are typically
-                optimistic; treat all of these as approximations.
+                Energy cost is METs × bodyweight (kg) × hours, using the Compendium's
+                definition of one MET as about 1 kcal per kilogram per hour. A MET is a multiple
+                of a standard resting rate, so the figure includes the calories you would have
+                burned at rest anyway; the <em>additional</em> cost of exercise is lower.
+              </p>
+              <p>
+                The Compendium calls itself a starting point that "does not reflect precise
+                individual" energy use: resting rate differs with age, sex, height, weight and
+                body composition. Its values are for adults aged 19 to 59; there is a separate
+                list for older adults, which we do not use. Treat these figures as rough.
               </p>
               <p className="refs">
-                Ainsworth BE et al., Compendium of Physical Activities,
-                Med Sci Sports Exerc 2011 · ACSM Guidelines for Exercise Testing
+                Herrmann SD et al., 2024 Adult Compendium of Physical Activities,
+                J Sport Health Sci 2024
               </p>
             </Method>
           </Panel>

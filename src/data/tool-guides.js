@@ -152,14 +152,14 @@ export const GUIDES = {
     ],
     howTo: [
       'Enter a weight and the reps you completed with it, taken close to failure.',
-      'Sets of two to six reps give the most reliable estimate.',
+      'Keep to ten reps or fewer; around five gave the best estimate in one study.',
       'Use the RPE section to convert your max into a working load for a target set.',
     ],
     interpreting: [
       ['Read the range, not one number',
-       'All five formulas are curve fits to different population samples, so they disagree by a few percent. That spread is the genuine uncertainty in predicting a maximal effort from a submaximal one. Wathan is shown as default because it tends to track well across the widest rep range.'],
+       'All five formulas are curve fits to different population samples, so they disagree by a few percent. That spread is the genuine uncertainty in predicting a maximal effort from a submaximal one, so the headline is their average.'],
       ['Where estimates stop being trustworthy',
-       'Accuracy falls away above roughly ten reps and becomes poor beyond twelve, because high-rep sets are limited by fatigue and technique rather than by maximal force production. The tool warns you when you cross that line. Novice lifters also tend to read high, because they cannot yet express a true maximum.'],
+       'In a study of 70 adults, a five-rep max predicted the one-rep max best, and accuracy fell from ten and twenty reps. The authors say to use no more than ten reps, and Epley\u2019s and Brzycki\u2019s own guidance is under ten, so the tool warns you above ten.'],
       ['Prescribing by RPE is usually better than by percentage',
        'A fixed percentage ignores daily readiness — 80% after a bad night is a very different set from 80% when fresh. Prescribing "five reps with two in reserve" lets the load self-adjust. Research validating the scale found trained lifters judge proximity to failure reasonably well within a few reps of it.'],
     ],
@@ -192,7 +192,7 @@ export const GUIDES = {
   'calories-burned': {
     terms: [
       ['MET', 'Metabolic equivalent: how many times your resting energy use an activity costs. 8 METs is eight times resting.'],
-      ['Compendium', 'The published reference assigning MET values to hundreds of activities.'],
+      ['Compendium', 'The published reference assigning MET values to over a thousand activities; the 2024 edition is used here.'],
       ['Net vs gross', 'Gross is total energy during the session; net subtracts what you would have burned anyway.'],
     ],
     howTo: [
@@ -259,6 +259,7 @@ export const GUIDES = {
       ['RPE', 'Rate of perceived exertion on the 1–10 lifting scale. RPE 10 is a maximal effort.'],
       ['RIR', 'Reps in reserve. RPE = 10 − RIR, so RPE 8 means two reps left.'],
       ['%1RM', 'The proportion of your one-rep max a load represents.'],
+      ['RPE chart', 'The table linking reps, RPE and %1RM, from Helms and colleagues (2016): 1 to 8 reps, RPE 7 to 10, built from trained lifters\u2019 back squats.'],
       ['Autoregulation', 'Adjusting the day\u2019s load to how you are actually performing.'],
     ],
     howTo: [
@@ -321,22 +322,22 @@ export const GUIDES = {
 
   'hand-portions': {
     terms: [
-      ['Palm', 'A palm-sized portion of protein — roughly 25 g of protein.'],
-      ['Cupped hand', 'A cupped handful of carbohydrate — roughly 25 g of carbs.'],
-      ['Thumb', 'A thumb-sized portion of fat — roughly 10 g of fat.'],
-      ['Fist', 'A fist of non-starchy vegetables. Aim for about one per meal.'],
+      ['Palm', 'A palm-sized portion of protein: about 24 g of protein for men, 22 g for women.'],
+      ['Cupped hand', 'A cupped handful of carbohydrate: about 25 g of carbs for men, 22 g for women.'],
+      ['Thumb', 'A thumb-sized portion of fat: about 9 g of fat for men, 8 g for women.'],
+      ['Fist', 'A fist of non-starchy vegetables. Aim for one to two per meal.'],
       ['Peri-workout', 'The meal placed around training, often weighted slightly larger.'],
     ],
     howTo: [
       'Either enter macros you already know, or let the tool calculate them from your details.',
-      'Set your hand size honestly — portions scale with it.',
+      'If you enter macros directly, choose male or female: the grams per portion differ a little.',
       'Optionally choose which meal sits around training.',
     ],
     interpreting: [
       ['Why this works without a scale',
-       'Hand size scales roughly with body size, so the measure travels with you and adapts to the person using it. A larger person has larger hands and needs more food; the units adjust automatically in a way that fixed cup measures do not.'],
-      ['Expect ten to twenty percent error against weighed food',
-       'A palm of chicken breast and a palm of salmon differ in both protein and fat. Hands vary. This is less precise than a scale, and that is an acceptable trade — a method you use every day beats a more accurate one you abandon after a fortnight.'],
+       'Hands scale with the individual: bigger people tend to need more food and to have bigger hands, so the units adjust in a way that fixed cup measures do not. The gram figures are Precision Nutrition\u2019s approximations.'],
+      ['It is less precise than a scale',
+       'A palm of chicken breast and a palm of salmon differ in both protein and fat, and hands vary. Each portion also carries some of the other macros, which the conversion leaves out. That is the trade for a method that needs no equipment.'],
       ['When to switch to weighing',
        'If you stall for several weeks with consistent portions, or you are preparing for something where precision genuinely matters, weigh food for a couple of weeks to recalibrate. Then go back to hands.'],
     ],

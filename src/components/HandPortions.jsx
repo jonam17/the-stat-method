@@ -12,7 +12,6 @@ import { AGE_MIN, AGE_MAX, RAIL_COPY, GOALS } from '../engine/safety.js';
  */
 export default function HandPortions() {
   const [source, setSource] = useState('calculate');
-  const [handSize, setHandSize] = useState('average');
   const [meals, setMeals] = useState('4');
   const [peri, setPeri] = useState('none');
 
@@ -43,8 +42,8 @@ export default function HandPortions() {
   }), [source, pIn, cIn, fIn, units, sex, age, weight, height, feet, inches, activity, goal]);
 
   const portions = useMemo(
-    () => toHandPortions({ proteinG: macros.p, carbsG: macros.c, fatG: macros.f, handSize }),
-    [macros, handSize]);
+    () => toHandPortions({ proteinG: macros.p, carbsG: macros.c, fatG: macros.f, sex }),
+    [macros, sex]);
 
   const mealPlan = useMemo(() => splitMeals({
     proteinG: macros.p, carbsG: macros.c, fatG: macros.f,
@@ -126,12 +125,11 @@ export default function HandPortions() {
           )}
 
           <div className="subhead">Portioning <span>your hand, your scale</span></div>
-          <Select label="Hand size" value={handSize} onChange={setHandSize}
-                  hint="Portions scale with your own hand, which is roughly proportional to your body.">
-            <option value="small">Small</option>
-            <option value="average">Average</option>
-            <option value="large">Large</option>
-          </Select>
+          {source === 'direct' && (
+            <Seg label="Sex" value={sex} onChange={setSex}
+                 options={[['male', 'Male'], ['female', 'Female']]}
+                 hint="Portion sizes differ a little for men and women." />
+          )}
           <div className="row2">
             <Select label="Meals per day" value={meals} onChange={setMeals}>
               {[2, 3, 4, 5, 6].map(n => <option key={n} value={n}>{n} meals</option>)}
@@ -217,11 +215,18 @@ export default function HandPortions() {
 
           <Method>
             <p>
-              Hand portions work because hand size scales roughly with body size, so the
-              measure travels with you and needs no equipment. The trade-off is precision:
-              a palm of chicken and a palm of salmon differ in both protein and fat, and
-              individual hands vary. Expect an error of perhaps ten to twenty percent
-              against weighed food.
+              Hand portions work because, as Precision Nutrition puts it, hands scale with the
+              individual: bigger people tend to need more food and to have bigger hands. The
+              measure travels with you and needs no equipment. The trade-off is precision: a
+              palm of chicken and a palm of salmon differ in both protein and fat, and hands
+              vary.
+            </p>
+            <p>
+              The grams per portion are Precision Nutrition's approximate figures. For men: a
+              palm about 24 g protein, a cupped hand about 25 g carbs, a thumb about 9 g fat.
+              For women: 22 g, 22 g and 8 g. Each portion also carries some of the other
+              macros, which this conversion leaves out, as Precision Nutrition's own hand
+              portion math does. Add one to two fists of vegetables at each meal.
             </p>
             <p>
               That is usually an acceptable price. A method you will actually use every day
@@ -229,8 +234,8 @@ export default function HandPortions() {
               precision for a specific phase, weigh food then.
             </p>
             <p className="refs">
-              Hand-portion approach popularised by Precision Nutrition. Gram equivalents are
-              the commonly used approximations and are deliberately expressed as ranges.
+              Precision Nutrition, Hand-size portion guide (handout) · Precision Nutrition,
+              How to Do Hand Portion Math to Track Your Macros, reviewed 2026
             </p>
           </Method>
         </Panel>

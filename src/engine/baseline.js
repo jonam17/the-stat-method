@@ -70,7 +70,7 @@ export function computeBaseline({
     targets = {
       macro,
       protein: proteinTarget({ kg, lbm, age, deficit: GOAL_TO_PROTEIN_DEFICIT[goal] ?? 'none' }),
-      portions: toHandPortions({ proteinG: macro.grams.p, carbsG: macro.grams.c, fatG: macro.grams.f }),
+      portions: toHandPortions({ proteinG: macro.grams.p, carbsG: macro.grams.c, fatG: macro.grams.f, sex }),
     };
   }
 

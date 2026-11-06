@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import { percentFromRIR, rirToRpe, loadForRepsRIR, fmt } from '../engine/index.js';
+import { percentFromRIR, rirToRpe, loadForRepsRIR, fmt, RPE_MAX_REPS, RPE_MAX_RIR } from '../engine/index.js';
 import { Seg, Num, Select, Panel, BigStat, StatStrip, Method } from './ToolShell.jsx';
 
-const REPS = [1,2,3,4,5,6,7,8,9,10,11,12];
-const RIRS = [0,1,2,3,4];
+const REPS = Array.from({ length: RPE_MAX_REPS }, (_, i) => i + 1);
+const RIRS = Array.from({ length: RPE_MAX_RIR + 1 }, (_, i) => i);
 
 export default function RpeConverter() {
   const [units, setUnits] = useState('kg');
@@ -31,7 +31,12 @@ export default function RpeConverter() {
         closest = Math.abs(p - impliedPct); impliedRir = q;
       }
     }
-    return { pct, load, impliedPct, impliedRir };
+    // Lighter than the chart's lowest effort (RPE 7) by more than a point: say so rather
+    // than calling it RPE 7 (the chart stops at 3 reps in reserve, v2.38.8).
+    const floor = percentFromRIR(rp, RPE_MAX_RIR);
+    const below = floor != null && impliedPct > 0 && impliedPct < floor - 1;
+    if (below) impliedRir = null;
+    return { pct, load, impliedPct, impliedRir, below };
   }, [rm, rp, ri, weight]);
 
   return (
@@ -61,7 +66,14 @@ export default function RpeConverter() {
             <div className="prescribe">
               <span className="pl">Work at</span>
               <b>{fmt(round(r.load))} {units}</b>
-              <span className="ps">{rp} reps @ RPE {rirToRpe(ri)} · {r.pct.toFixed(1)}% of 1RM</span>
+              <span className="ps">{rp} reps @ RPE {rirToRpe(ri)} · {r.pct}% of 1RM</span>
+            </div>
+          )}
+          {mode === 'rpe' && r.below && (
+            <div className="prescribe">
+              <span className="pl">That set is</span>
+              <b>below RPE {rirToRpe(RPE_MAX_RIR)}</b>
+              <span className="ps">more than {RPE_MAX_RIR} reps in reserve · {r.impliedPct.toFixed(1)}% of 1RM</span>
             </div>
           )}
           {mode === 'rpe' && r.impliedRir != null && (
@@ -75,7 +87,8 @@ export default function RpeConverter() {
 
         <Panel label="RPE chart" dark>
           <BigStat
-            value={mode === 'load' ? fmt(round(r.load ?? 0)) : `RPE ${rirToRpe(r.impliedRir ?? 0)}`}
+            value={mode === 'load' ? fmt(round(r.load ?? 0))
+              : r.below ? `< RPE ${rirToRpe(RPE_MAX_RIR)}` : `RPE ${rirToRpe(r.impliedRir ?? 0)}`}
             unit={mode === 'load' ? units : 'estimated'}
             note={<>Percent of 1RM for {rp} reps across reps-in-reserve.</>} />
 
@@ -102,9 +115,9 @@ export default function RpeConverter() {
           </div>
 
           <StatStrip items={[
-            { label: 'RPE', value: rirToRpe(mode === 'load' ? ri : (r.impliedRir ?? 0)) },
+            { label: 'RPE', value: mode === 'load' ? rirToRpe(ri) : (r.impliedRir != null ? rirToRpe(r.impliedRir) : '—') },
             { label: 'RIR', value: mode === 'load' ? ri : (r.impliedRir ?? '—') },
-            { label: '% of 1RM', value: (mode === 'load' ? r.pct : r.impliedPct)?.toFixed(1) ?? '—' },
+            { label: '% of 1RM', value: (mode === 'load' ? r.pct : +r.impliedPct?.toFixed(1)) ?? '—' },
             { label: 'Reps', value: rp },
           ]} />
 
@@ -121,9 +134,16 @@ export default function RpeConverter() {
               lower in novices and at high rep counts, so treat the percentages as
               approximate rather than exact.
             </p>
+            <p>
+              The percentages are the chart from Helms and colleagues (2016), built from the
+              average ratings of trained lifters doing back squats. Only one rep at 100% and
+              90% and eight reps at 70% were measured; the authors estimated the rest and say
+              it should not be used as an exact conversion. Machine, single-joint and
+              upper-body lifts may differ. It covers 1 to 8 reps and RPE 7 to 10.
+            </p>
             <p className="refs">
               Zourdos MC et al., J Strength Cond Res 2016 · Helms ER et al.,
-              J Strength Cond Res 2017
+              J Strength Cond Res 2017 · Helms ER et al., Strength Cond J 2016
             </p>
           </Method>
         </Panel>

@@ -8,6 +8,7 @@ readMinutes: 8
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
+updated: 2026-11-05
 author: The Stat Method
 relatedTool: calories-burned
 evidenceBased: true
@@ -17,6 +18,10 @@ keyTakeaways:
   - "Every exercise calorie figure includes what you would have burned anyway — roughly 70 to 100 calories an hour for most adults, just sitting still."
   - "Activity-based estimates are averages from other people. They cannot see your fitness, your technique or how hard you actually worked."
   - "Do not eat exercise calories back at face value; if you eat some back, start with half. Your weekly average weight is the real check."
+changelog:
+  - date: 2026-11-05
+    note: >-
+      Our calculator now uses the 2024 Adult Compendium of Physical Activities instead of the 2011 edition; added how many of its values are measured.
 toc:
   - { id: "the-problem", label: "The problem" }
   - { id: "why-wrong", label: "Why they're wrong" }
@@ -36,6 +41,10 @@ references:
   - text: "Levine JA. Non-exercise activity thermogenesis (NEAT). Best Pract Res Clin Endocrinol Metab, 2002;16(4):679-702."
     url: "https://doi.org/10.1053/beem.2002.0227"
     verified: true
+  - text: "Herrmann SD, Willis EA, Ainsworth BE, Barreira TV, Hastert M, Kracht CL, Schuna JM Jr, Cai Z, Quan M, Tudor-Locke C, Whitt-Glover MC, Jacobs DR Jr. 2024 Adult Compendium of Physical Activities: a third update of the energy costs of human activities. J Sport Health Sci, 2024;13(1):6-12."
+    url: "https://doi.org/10.1016/j.jshs.2023.10.010"
+    verified: true
+    verifiedDate: 2026-11-05
 ---
 
 Your watch says the session burned 600 calories. It is one of the most confidently
@@ -138,8 +147,10 @@ intake, not to recalculate the burn estimate more precisely.
 
 **Understand what MET values are.** The Compendium of Physical Activities assigns each
 activity a metabolic equivalent, and it is worth knowing how those numbers were arrived at:
-roughly **two-thirds are measured** from published studies, and the remaining third are
-estimated by analogy with similar activities. [2] The Compendium was also built to make
+in the 2011 edition, roughly **two-thirds were measured** in published studies, and the
+rest were estimated by analogy with similar activities. [2] The 2024 update, which our
+calculator now uses, has measured values for 912 of its 1,114 activities. [5] The Compendium
+was also built to make
 self-reported activity comparable *between studies* — not to predict what one particular
 person burned on one particular afternoon.
 

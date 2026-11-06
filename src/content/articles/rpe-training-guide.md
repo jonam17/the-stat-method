@@ -8,6 +8,7 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-27
+updated: 2026-11-05
 author: The Stat Method
 relatedTool: rpe-converter
 evidenceBased: true
@@ -17,6 +18,10 @@ keyTakeaways:
   - "People judge their reps in reserve reasonably well, and better the closer they get to failure."
   - "Almost everyone underestimates what they have left, by about one rep — so “two in reserve” is usually closer to three. Whether experience fixes this is not settled."
   - "Do most of your sets at RPE 7–8 and save all-out sets for testing. Sets to failure tire you out of proportion to the extra benefit."
+changelog:
+  - date: 2026-11-05
+    note: >-
+      The chart now uses the RPE table published by Helms and colleagues (1 to 8 reps, RPE 7 to 10), replacing an unsourced 12-rep version, and says where the table comes from.
 toc:
   - { id: "the-scale", label: "The scale" }
   - { id: "why-percentages-fail", label: "Why percentages fail" }
@@ -34,6 +39,10 @@ references:
     verified: true
   - text: "Graham T, Cleather DJ. Autoregulation by repetitions in reserve leads to greater improvements in strength over a 12-week training program than fixed loading. J Strength Cond Res, 2021."
     verified: true
+  - text: "Helms ER, Cronin J, Storey A, Zourdos MC. Application of the repetitions in reserve-based rating of perceived exertion scale for resistance training. Strength Cond J, 2016;38(4):42-49."
+    url: "https://openrepository.aut.ac.nz/items/92cefeac-7c32-44f1-bfbc-f48f4a5dd8cf/full"
+    verified: true
+    verifiedDate: 2026-11-05
 ---
 
 Your programme says five sets of five at eighty percent. You slept four hours, you have had
@@ -49,6 +58,11 @@ The lifting version of RPE is not the ten-point exertion scale used in cardio. I
 by **reps in reserve** — how many more repetitions you could have completed.
 
 <figure data-chart="rpe-load"></figure>
+
+The chart uses the conversion table published by Helms and colleagues, which covers one to
+eight reps at RPE 7 to 10. It was built from the average ratings of trained lifters doing
+back squats; only three of its values were measured, and the authors say it should not be
+treated as an exact conversion. [5]
 
 RPE 10 means none left: a true maximal effort. RPE 9 means one left, RPE 8 means two, and so
 on. The two numbers are simply inverses of each other, and the conversion is

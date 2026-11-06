@@ -4,7 +4,7 @@ dek: "Weighing everything works until it doesn't. Hand portions trade a little p
 category: Nutrition
 conclusion: "Estimation is a skill, not a compromise. Weigh your food for a fortnight, then estimate — that is how you become good at it."
 published: 2026-08-09
-updated: 2026-08-20
+updated: 2026-11-05
 readMinutes: 8
 aiAssisted: true
 citationsVerified: full
@@ -25,6 +25,9 @@ toc:
   - { id: "in-practice", label: "In practice" }
   - { id: "bottom-line", label: "Bottom line" }
 changelog:
+  - date: 2026-11-05
+    note: >-
+      The hand-portion gram figures (25, 25 and 10 g) had no source; they are now Precision Nutrition's figures for men and women, and vegetables are one to two fists per meal.
   - date: 2026-08-20
     note: >-
       Corrected the minimum-calorie floor in the hand-portions tool. It previously allowed targets down to 1,000 kcal, below the stated minimum for either sex. Portions at aggressive deficits are now shown for the correct floor, with a note.
@@ -44,6 +47,10 @@ references:
   - text: "Byrd-Bredbenner C, Schwartz J. The effect of practical portion size measurement aids on the accuracy of portion size estimates made by young adults. J Hum Nutr Diet, 2004;17(4):351-357."
     url: "https://pubmed.ncbi.nlm.nih.gov/15250844/"
     verified: true
+  - text: "Precision Nutrition. How to do hand portion math to track your macros. Precision Nutrition, reviewed March 2026; and Hand-size portion guide (handout)."
+    url: "https://www.precisionnutrition.com/?p=144539"
+    verified: true
+    verifiedDate: 2026-11-05
 ---
 
 A food scale is the most accurate tool available to someone tracking intake, and
@@ -107,14 +114,22 @@ fortnight, then estimating, is not a compromise — it is how you become the sec
 
 The system maps each macronutrient onto a part of your hand:
 
-- **A palm** of protein — meat, fish, tofu, Greek yoghurt — delivers roughly 25 grams of protein.
-- **A cupped handful** of carbohydrate — rice, pasta, oats, potato, fruit — roughly 25 grams of carbs.
-- **A thumb** of fat — oil, nuts, nut butter, cheese — roughly 10 grams of fat.
-- **A fist** of non-starchy vegetables, aiming for about one per meal.
+- **A palm** of protein — meat, fish, tofu, eggs, Greek yoghurt — about 24 grams of protein
+  for men and 22 for women.
+- **A cupped handful** of carbohydrate — grains, legumes, fruit, potato — about 25 grams of
+  carbs for men and 22 for women.
+- **A thumb** of fat — oil, nuts, seeds, nut butter, cheese — about 9 grams of fat for men and
+  8 for women.
+- **A fist** of non-starchy vegetables, one to two per meal.
 
-The reason this works better than cups or spoons is that the reference scales with the
-person. A larger individual has larger hands and generally needs more food; the unit adjusts
-automatically. A cup is the same volume regardless of who is holding it.
+These are Precision Nutrition's approximate figures, from the coaching company that
+popularised the method; its handout gives roughly 20 to 30 grams for a palm or a handful and
+7 to 12 for a thumb. Each portion also carries some of the other macros. [4]
+
+The reason this works better than cups or spoons is that, in Precision Nutrition's words,
+hands scale with the individual. A larger person tends to have larger hands and to need more
+food; the unit adjusts automatically. A cup is the same volume regardless of who is holding
+it. [4]
 
 The measure also travels. It is available at a restaurant, at a buffet, in an airport, and
 in any situation where producing a scale would be socially peculiar.

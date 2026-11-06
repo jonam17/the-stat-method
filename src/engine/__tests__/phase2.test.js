@@ -125,16 +125,20 @@ describe('strength standards', () => {
 describe('hand portions', () => {
   it('converts grams to portions at the documented rates', () => {
     const p = toHandPortions({ proteinG: 150, carbsG: 250, fatG: 70 });
-    expect(p.protein.exact).toBeCloseTo(150 / HAND_UNITS.protein.grams, 5);
+    expect(p.protein.exact).toBeCloseTo(150 / HAND_UNITS.protein.grams.male, 5);
     expect(p.protein.unit).toBe('palm');
     expect(p.carbs.unit).toBe('cupped hand');
     expect(p.fat.unit).toBe('thumb');
   });
 
-  it('scales with hand size', () => {
-    const small = toHandPortions({ proteinG: 150, carbsG: 250, fatG: 70, handSize: 'small' });
-    const large = toHandPortions({ proteinG: 150, carbsG: 250, fatG: 70, handSize: 'large' });
-    expect(small.protein.exact).toBeGreaterThan(large.protein.exact);
+  it('uses Precision Nutrition\'s figures by sex', () => {
+    // PN "How to do hand portion math": men 24 / 25 / 9 g, women 22 / 22 / 8 g
+    const m = toHandPortions({ proteinG: 120, carbsG: 250, fatG: 72, sex: 'male' });
+    const f = toHandPortions({ proteinG: 120, carbsG: 250, fatG: 72, sex: 'female' });
+    expect([m.protein.gramsPerUnit, m.carbs.gramsPerUnit, m.fat.gramsPerUnit]).toEqual([24, 25, 9]);
+    expect([f.protein.gramsPerUnit, f.carbs.gramsPerUnit, f.fat.gramsPerUnit]).toEqual([22, 22, 8]);
+    expect(m.protein.exact).toBe(5);
+    expect(m.fat.exact).toBe(8);
   });
 
   it('rounds to the nearest half portion', () => {

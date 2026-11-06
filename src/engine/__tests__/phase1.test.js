@@ -42,9 +42,9 @@ describe('one-rep max', () => {
     expect(r.results).toHaveLength(5);
   });
 
-  it('flags low confidence above 12 reps', () => {
-    expect(allOneRepMax(100, 5).lowConfidence).toBe(false);
-    expect(allOneRepMax(100, 15).lowConfidence).toBe(true);
+  it('flags low confidence above 10 reps (Reynolds et al. 2006)', () => {
+    expect(allOneRepMax(100, 10).lowConfidence).toBe(false);
+    expect(allOneRepMax(100, 11).lowConfidence).toBe(true);
   });
 
   it('rejects invalid input', () => {
@@ -76,6 +76,8 @@ describe('RPE / RIR conversion', () => {
   it('returns null outside the table', () => {
     expect(percentFromRIR(50, 0)).toBeNull();
     expect(percentFromRIR(5, 9)).toBeNull();
+    expect(percentFromRIR(9, 0)).toBeNull();   // chart stops at 8 reps
+    expect(percentFromRIR(5, 4)).toBeNull();   // and at 3 in reserve
   });
 
   it('computes a working load from a known 1RM', () => {
@@ -152,7 +154,7 @@ describe('heart rate', () => {
 describe('activity energy cost', () => {
   it('matches the ACSM MET equation', () => {
     // 8 METs, 80 kg, 30 min => 8 × 3.5 × 80 / 200 × 30 = 336
-    expect(kcalFromMets(8, 80, 30)).toBeCloseTo(336, 0);
+    expect(kcalFromMets(8, 80, 30)).toBeCloseTo(320, 5); // 8 MET × 80 kg × 0.5 h (Compendium 2024)
   });
 
   it('scales with bodyweight and duration', () => {
@@ -161,7 +163,7 @@ describe('activity energy cost', () => {
   });
 
   it('finds activities by name', () => {
-    expect(findActivity('Hiking, general').mets).toBe(6.0);
+    expect(findActivity('Hiking, cross country').mets).toBe(6.0);
     expect(findActivity('nonexistent')).toBeNull();
   });
 

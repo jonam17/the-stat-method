@@ -73,67 +73,72 @@ export function heartRateZones(maxHr, restingHr = null) {
 }
 
 /**
- * Energy cost of activity from METs.
- * kcal/min = MET × 3.5 × kg / 200  (ACSM metabolic equation)
+ * Energy cost of activity from METs: kcal = MET × kg × hours.
  *
- * TWO LAYERS OF APPROXIMATION (citation check, 2026-08-20):
+ * The 2024 Adult Compendium (Herrmann et al., J Sport Health Sci 2024;13(1):6-12) defines 1 MET
+ * as 3.5 mL O2/kg/min, "or approximately 1.0 kcal/kg/h". v2.38.7 and earlier used the ACSM
+ * metabolic equation (MET × 3.5 × kg / 200 per minute, about 5% higher), cited to the ACSM
+ * Guidelines without an edition; v2.38.8 (item 45, batch 5) switched to the Compendium's own
+ * conversion.
  *
- * 1. The 3.5 is a convention — 1 MET defined as 3.5 mL O2/kg/min, derived from a
- *    reference adult. Actual resting metabolic rate varies with body mass,
- *    adiposity, age and sex, so this constant is systematically off for anyone
- *    far from that reference, and tends to overestimate for heavier people.
+ * TWO LAYERS OF APPROXIMATION:
  *
- * 2. The Compendium's own MET values are not all measured. Ainsworth et al. 2011
- *    (Med Sci Sports Exerc 43(8):1575-81, PMID 21681120) report roughly 68% of
- *    values derived from published measurement — meaning about a THIRD are
- *    estimates. The Compendium exists to make self-reported activity comparable
- *    ACROSS STUDIES, not to predict one person's energy expenditure.
+ * 1. The 3.5 is a standard resting rate from a reference adult. The Compendium "can serve as a
+ *    starting point for prescribing individual activities but does not reflect precise
+ *    individual EE values", because resting rate differs with age, sex, height, weight and
+ *    body composition.
+ *
+ * 2. Not every MET value is measured: of the 2024 list's 1,114 activities, 912 have measured
+ *    and 202 estimated values. The Compendium exists to make self-reported activity
+ *    comparable across studies, not to predict one person's energy expenditure.
  *
  * Present these outputs as rough magnitudes. Do not add decimal places.
  */
-export const kcalFromMets = (mets, kg, minutes) => (mets * 3.5 * kg / 200) * minutes;
+export const kcalFromMets = (mets, kg, minutes) => mets * kg * (minutes / 60);
 
 /**
- * MET values from the Compendium of Physical Activities
- * (Ainsworth BE et al., Med Sci Sports Exerc, 2011).
+ * MET values from the 2024 Adult Compendium of Physical Activities (full list, pacompendium.com,
+ * read 2026-11-05). `code` is the Compendium activity code. The list covers adults aged 19–59; a
+ * separate Older Adult Compendium is not used here. Speeds are the Compendium's mph bands
+ * converted to km/h. v2.38.8 updated eleven values from the 2011 Compendium and removed
+ * "Kettlebell training" (8.0), which has no code of its own.
  */
 export const ACTIVITIES = [
   { group: 'Walking & running', items: [
-    { name: 'Walking, slow (3 km/h)', mets: 2.0 },
-    { name: 'Walking, moderate (5 km/h)', mets: 3.5 },
-    { name: 'Walking, brisk (6.5 km/h)', mets: 5.0 },
-    { name: 'Hiking, general', mets: 6.0 },
-    { name: 'Running, 8 km/h', mets: 8.3 },
-    { name: 'Running, 10 km/h', mets: 9.8 },
-    { name: 'Running, 12 km/h', mets: 11.8 },
-    { name: 'Running, 16 km/h', mets: 14.5 },
+    { name: 'Walking, slow (under 3.2 km/h)', mets: 2.3, code: '17151' },
+    { name: 'Walking, moderate (4.5–5.5 km/h)', mets: 3.8, code: '17190' },
+    { name: 'Walking, brisk (6.4–7.0 km/h)', mets: 5.5, code: '17220' },
+    { name: 'Hiking, cross country', mets: 6.0, code: '17080' },
+    { name: 'Running, 8.0–8.4 km/h', mets: 8.5, code: '12030' },
+    { name: 'Running, 9.7–10.1 km/h', mets: 9.3, code: '12050' },
+    { name: 'Running, 12.1 km/h', mets: 11.8, code: '12080' },
+    { name: 'Running, 16.1 km/h', mets: 14.8, code: '12120' },
   ]},
   { group: 'Gym & strength', items: [
-    { name: 'Resistance training, moderate', mets: 3.5 },
-    { name: 'Resistance training, vigorous', mets: 6.0 },
-    { name: 'Circuit training', mets: 7.5 },
-    { name: 'Rowing machine, moderate', mets: 7.0 },
-    { name: 'Elliptical, moderate', mets: 5.0 },
-    { name: 'Stair climbing', mets: 8.8 },
-    { name: 'Kettlebell training', mets: 8.0 },
+    { name: 'Resistance training, moderate', mets: 3.5, code: '02054' },
+    { name: 'Resistance training, vigorous', mets: 6.0, code: '02050' },
+    { name: 'Circuit training, vigorous', mets: 7.5, code: '02040' },
+    { name: 'Rowing machine, moderate', mets: 5.0, code: '02071' },
+    { name: 'Elliptical, moderate', mets: 5.0, code: '02048' },
+    { name: 'Stair machine', mets: 9.3, code: '02065' },
   ]},
   { group: 'Cycling', items: [
-    { name: 'Cycling, leisure (<16 km/h)', mets: 4.0 },
-    { name: 'Cycling, moderate (19–22 km/h)', mets: 8.0 },
-    { name: 'Cycling, vigorous (25–30 km/h)', mets: 12.0 },
-    { name: 'Stationary bike, moderate', mets: 7.0 },
+    { name: 'Cycling, leisure (under 16 km/h)', mets: 4.0, code: '01010' },
+    { name: 'Cycling, moderate (19–22 km/h)', mets: 8.0, code: '01030' },
+    { name: 'Cycling, vigorous (26–31 km/h)', mets: 12.0, code: '01050' },
+    { name: 'Stationary bike, general', mets: 6.8, code: '01200' },
   ]},
   { group: 'Sport & other', items: [
-    { name: 'Swimming, moderate laps', mets: 5.8 },
-    { name: 'Swimming, vigorous laps', mets: 9.8 },
-    { name: 'Basketball, game', mets: 8.0 },
-    { name: 'Football (soccer), casual', mets: 7.0 },
-    { name: 'Tennis, singles', mets: 8.0 },
-    { name: 'Yoga, hatha', mets: 2.5 },
-    { name: 'Pilates', mets: 3.0 },
-    { name: 'Jump rope, moderate', mets: 11.8 },
-    { name: 'Boxing, bag work', mets: 5.5 },
-    { name: 'Rock climbing', mets: 8.0 },
+    { name: 'Swimming, moderate laps', mets: 5.8, code: '18240' },
+    { name: 'Swimming, vigorous laps', mets: 9.8, code: '18230' },
+    { name: 'Basketball, game', mets: 8.0, code: '15040' },
+    { name: 'Football (soccer), casual', mets: 7.0, code: '15610' },
+    { name: 'Tennis, singles', mets: 8.0, code: '15690' },
+    { name: 'Yoga, hatha', mets: 2.3, code: '02150' },
+    { name: 'Pilates', mets: 2.8, code: '02105' },
+    { name: 'Jump rope, moderate', mets: 11.8, code: '15551' },
+    { name: 'Boxing, bag work', mets: 5.8, code: '15110' },
+    { name: 'Rock climbing', mets: 8.0, code: '15533' },
   ]},
 ];
 

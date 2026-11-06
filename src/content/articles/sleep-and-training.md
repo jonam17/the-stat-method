@@ -12,14 +12,17 @@ author: The Stat Method
 relatedTool: sleep-calculator
 evidenceBased: true
 clinicalClaims: true
-updated: 2026-11-04
+updated: 2026-11-05
 keyTakeaways:
   - "The 90-minute sleep cycle is an average; a complete cycle takes roughly 90 to 110 minutes. Bedtime calculators are a nudge, not a schedule."
-  - "A regular seven hours beats an erratic nine. Going to bed and waking at similar times is the biggest win for most people."
+  - "The recommendation for adults is 7 to 9 hours of sleep a night (7 to 8 from 65); under 6 is not recommended before 65."
   - "One bad night costs less than you fear — a single heavy lift holds up — but sessions feel harder, and several short nights add up."
   - "When you are dieting, short sleep makes hunger harder to manage. The studies are small, but they point the same way."
   - "Trackers estimate total sleep reasonably and sleep stages poorly. Read duration and consistency; ignore the nightly deep-sleep score."
 changelog:
+  - date: 2026-11-05
+    note: >-
+      Replaced "a regular seven hours beats an erratic nine" and the claim that consistency is the single highest-return change, which none of our sources supports, with the National Sleep Foundation's recommended hours.
   - date: 2026-11-04
     note: >-
       Sourced the section on sleep cycles. A complete cycle takes roughly 90 to 110 minutes, not "70 to 120", which we could not trace; and the case for timing an alarm to a cycle now rests on what the sources say about waking from deep sleep, with the note that they do not test cycle-timed waking.
@@ -183,7 +186,6 @@ thing from a measured result. The range exists because individual
 requirement genuinely varies. Find where in it you function well rather than treating a
 number as pass or fail.
 
-Then prioritise **consistency** over cycle math. A regular seven hours beats an erratic
-nine, and going to bed and waking at similar times is the single highest-return change most
-people can make. Use the calculator to pick a bedtime, then keep it — the keeping is the part
-that works.
+Then prioritise **total sleep** over cycle math. The same panel rates less than six hours as
+not recommended for adults under 65, [4] while cycle timing is a nudge rather than a schedule.
+[6] Use the calculator to pick a bedtime that leaves room for the hours you need.

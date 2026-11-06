@@ -29,7 +29,7 @@
  *
  * Deterministic: same input, same output. No randomness, no external calls.
  */
-import { epley } from './strength.js';
+import { epley, ONE_RM_MAX_REPS } from './strength.js';
 
 export const OVERLOAD_ALGORITHM_VERSION = '1.0.0';
 
@@ -210,8 +210,8 @@ export function progressionResult(input) {
     unit: u, currentLoad: i.load, className: klass.name, band: klass.band,
     repRange: [i.repMin, i.repMax], customRange: custom,
     performance: now,
-    e1rm: now.maxSet >= 1 && now.maxSet <= 12 ? epley(i.load, now.maxSet) : null,
-    e1rmNote: now.maxSet > 12 ? 'Not estimated above 12 reps, where one-rep-max formulas diverge sharply.'
+    e1rm: now.maxSet >= 1 && now.maxSet <= ONE_RM_MAX_REPS ? epley(i.load, now.maxSet) : null,
+    e1rmNote: now.maxSet > ONE_RM_MAX_REPS ? `Not estimated above ${ONE_RM_MAX_REPS} reps, where one-rep-max formulas lose accuracy.`
       : now.maxSet < 1 ? 'Not estimated — no completed reps.' : null,
   };
   const work = [

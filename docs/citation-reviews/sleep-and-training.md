@@ -48,3 +48,12 @@ public-information booklet. No commercial interest.
 erratic nine … the single highest-return change") cite nothing; none of [1]–[7] says it. Left unchanged in
 this release; removed from the calculator. The calculator's 15 minutes to fall asleep is now called a starting
 value: Ohayon et al. 2004 (Sleep 27(7):1255–73; full text searched for every latency passage, figures checked) give no single figure in the text, only graphs.
+
+---
+
+## Follow-up of 2026-11-05 (v2.38.8)
+
+The maintainer asked for "whatever is best" on the flagged consistency claim. Takeaway 2 and the bottom line's
+"A regular seven hours beats an erratic nine … the single highest-return change" are replaced with [4]'s
+recommendation, already verified above: 7–9 hours for adults (7–8 from 65), and under 6 hours "not
+recommended" for adults under 65 (Table 2). The bottom line also points to [6] for cycle timing being a nudge.

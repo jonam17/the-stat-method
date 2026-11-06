@@ -176,7 +176,7 @@ export default function ProgressiveOverload() {
               step inside the band, the 5–10% reduction and the confidence grades are
               practical rules informed by that research, not individually validated
               equations. The estimated 1RM uses the Epley formula, as the One-Rep Max
-              calculator does, and is not shown above 12 reps.
+              calculator does, and is not shown above 10 reps.
             </p>
             <p>
               This tool is for training planning. It does not predict injury risk, cannot
