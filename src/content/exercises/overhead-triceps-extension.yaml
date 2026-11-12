@@ -5,6 +5,7 @@ group: arms
 dek: Straightens the elbow with the arm overhead. In a twelve-week MRI trial it grew the triceps about 1.4 times as much as the arm-at-side version.
 primary: [Triceps]
 equipment: [cable]
+joints: [elbow]
 progressionClass: isolation
 whyHere: >-
   With the arm raised overhead, the long head of the triceps — the part that also crosses the shoulder —

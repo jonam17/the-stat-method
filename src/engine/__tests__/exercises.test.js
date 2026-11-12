@@ -69,3 +69,13 @@ describe('exercise library', () => {
     });
   }
 });
+
+// v2.38.11 (roadmap item 6): the "Joints that move" fact.
+import { jointsText as jt } from '../../data/exercise-meta.js';
+describe('joints that move', () => {
+  it('reads as a list with single- or multi-joint', () => {
+    expect(jt(['elbow'])).toBe('Elbow · single-joint');
+    expect(jt(['hip', 'knee', 'ankle'])).toBe('Hip, knee and ankle · multi-joint');
+    expect(jt(['shoulder', 'elbow'])).toBe('Shoulder and elbow · multi-joint');
+  });
+});

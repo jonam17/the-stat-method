@@ -6,6 +6,7 @@ dek: Heavy quadriceps work with nothing to balance, so sets can go close to fail
 primary: [Quadriceps]
 secondary: [Glutes]
 equipment: [machine]
+joints: [hip, knee, ankle]
 progressionClass: large_compound
 whyHere: >-
   The leg press loads the quadriceps heavily without a bar to balance, which makes it easier to take

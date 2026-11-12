@@ -5,6 +5,7 @@ group: hamstrings-glutes
 dek: Curls the knee with the hips bent, which stretches the hamstrings further. In the same people, it grew them more than the lying curl did.
 primary: [Hamstrings]
 equipment: [machine]
+joints: [knee]
 progressionClass: isolation
 whyHere: >-
   Most hamstring muscles cross both the hip and the knee, so sitting with the hips bent holds them at a

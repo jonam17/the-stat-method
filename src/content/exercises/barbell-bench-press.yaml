@@ -6,6 +6,7 @@ dek: The standard upper-body press. In men who had benched for at least a year, 
 primary: [Chest]
 secondary: [Triceps, Front of the shoulders]
 equipment: [barbell]
+joints: [shoulder, elbow]
 progressionClass: large_compound
 whyHere: >-
   The bench press trains the chest, triceps and front of the shoulders together, with a load that can

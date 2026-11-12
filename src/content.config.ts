@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content';
-import { GROUPS, EVIDENCE_KINDS, EQUIPMENT } from './data/exercise-meta.js';
+import { GROUPS, EVIDENCE_KINDS, EQUIPMENT, JOINTS } from './data/exercise-meta.js';
 import { PROGRESSION_CLASSES } from './engine/overload.js';
 import { glob } from 'astro/loaders';
 
@@ -274,6 +274,7 @@ const exercises = defineCollection({
     primary: z.array(z.string()).min(1),
     secondary: z.array(z.string()).default([]),
     equipment: z.array(z.enum(Object.keys(EQUIPMENT))).min(1),
+    joints: z.array(z.enum(Object.keys(JOINTS))).min(1),
     // Links each exercise to the Progressive Overload Calculator's classes, so the
     // page can say which weight-step band applies.
     progressionClass: z.enum(Object.keys(PROGRESSION_CLASSES)),

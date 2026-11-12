@@ -6,6 +6,7 @@ dek: A machine fly that works the chest on its own. In a twelve-week trial in un
 primary: [Chest]
 secondary: [Front of the shoulders]
 equipment: [machine]
+joints: [shoulder]
 progressionClass: isolation
 whyHere: >-
   The pec deck brings the arms together in front of the chest with the elbows held nearly still, so the

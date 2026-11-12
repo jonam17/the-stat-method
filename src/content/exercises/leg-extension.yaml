@@ -5,6 +5,7 @@ group: quadriceps
 dek: Isolates the quadriceps. The knee-bent half of the movement is the part a trial found grew them most.
 primary: [Quadriceps]
 equipment: [machine]
+joints: [knee]
 progressionClass: isolation
 whyHere: >-
   The leg extension works the quadriceps on their own, with nothing else limiting the set. How you use

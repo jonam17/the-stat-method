@@ -6,6 +6,7 @@ dek: A squat with the bar on a fixed track. Machine training built muscle and st
 primary: [Quadriceps]
 secondary: [Glutes]
 equipment: [machine]
+joints: [hip, knee, ankle]
 progressionClass: large_compound
 whyHere: >-
   The Smith machine guides the bar along a fixed track, so there is less to balance and safety stops

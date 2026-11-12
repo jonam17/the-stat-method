@@ -6,6 +6,7 @@ dek: Isolates the side of the shoulder. In experienced lifters, dumbbells and ca
 primary: [Side of the shoulders (lateral deltoid)]
 secondary: [Upper trapezius]
 equipment: [dumbbell, cable]
+joints: [shoulder]
 progressionClass: small_isolation
 whyHere: >-
   The lateral raise lifts the arm out to the side, the side deltoid's main job, with little help from

@@ -5,6 +5,7 @@ group: arms
 dek: Straightens the elbow with the arm at your side. It grew the triceps by about 14% in twelve weeks, though the overhead version grew them more.
 primary: [Triceps]
 equipment: [cable]
+joints: [elbow]
 progressionClass: isolation
 whyHere: >-
   The pushdown trains the triceps with the arm at your side, and lets you handle more weight than the

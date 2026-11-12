@@ -59,6 +59,7 @@ carries the entry's main claim, the published abstract at least for anything els
 | `name`, `group`, `dek` | The `dek` (40–200 characters) is the one-line reason it's here |
 | `primary`, `secondary` | Muscles, in plain words |
 | `equipment` | One or more of the keys in `src/data/exercise-meta.js` |
+| `joints` | The joints that move, as the page's "How to do it" describes them (shoulder, elbow, hip, knee, ankle). The page shows them with "single-joint" or "multi-joint". Set by hand, not derived from `progressionClass`: the hip thrust and stiff-leg deadlift use the large-compound weight steps but move only the hip |
 | `progressionClass` | The Progressive Overload Calculator's class — large compound, moderate compound, isolation, small isolation. The page shows its weight-step band and links to the calculator |
 | `whyHere` | Two to four sentences, each claim cited `[n]` |
 | `evidence` | One item per finding, each with its `kind` and a citation. Population and limits inside the claim |

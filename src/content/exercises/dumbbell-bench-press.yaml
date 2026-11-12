@@ -6,6 +6,7 @@ dek: A bench press with a dumbbell in each hand. In trained men it built pressin
 primary: [Chest]
 secondary: [Triceps, Front of the shoulders]
 equipment: [dumbbell]
+joints: [shoulder, elbow]
 progressionClass: moderate_compound
 whyHere: >-
   Dumbbells let each arm press on its own and need nothing more than a bench and a pair of weights. In a

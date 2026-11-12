@@ -6,6 +6,7 @@ dek: A press on a bench tilted to about 45°. In a trial on a Smith machine, it 
 primary: [Chest]
 secondary: [Front of the shoulders, Triceps]
 equipment: [machine]
+joints: [shoulder, elbow]
 progressionClass: moderate_compound
 whyHere: >-
   Tilting the bench moves the press toward the top of the chest. In an eight-week trial in untrained

@@ -5,6 +5,7 @@ group: hamstrings-glutes
 dek: The most common hamstring machine. It grew the hamstrings by about 9% in twelve weeks, though the seated version grew them more.
 primary: [Hamstrings]
 equipment: [machine]
+joints: [knee]
 progressionClass: isolation
 whyHere: >-
   The lying leg curl isolates the hamstrings face down, and many gyms have it when they have no seated

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,125 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,126 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.11 — Exercise pages show the joints that move
+
+- Every exercise page has a new fact, **Joints that move**, such as "Hip, knee and ankle · multi-joint" or
+  "Elbow · single-joint", from a new `joints` field set from each page's "How to do it" steps. It is not taken
+  from the Progressive Overload class, because the hip thrust and stiff-leg deadlift use the heavy
+  "large compound" weight steps but move only the hip (roadmap item 6, phase 1).
 
 ### v2.38.10 — Funding wording matches today; search data kept out of Google
 

@@ -6,6 +6,7 @@ dek: A supported row that trains the middle of the back. Paired with the pulldow
 primary: [Lats (latissimus dorsi), Middle trapezius and rhomboids]
 secondary: [Biceps, Rear of the shoulders]
 equipment: [cable]
+joints: [shoulder, elbow]
 progressionClass: moderate_compound
 whyHere: >-
   The seated cable row pulls horizontally, toward the body, where the pulldown pulls from overhead, and
