@@ -342,6 +342,15 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.38.10 — Funding wording matches today; search data kept out of Google
+
+- **About, editorial policy, advertising disclosure and privacy** described display ads and affiliate links as
+  current. Neither exists yet; donations are the only income. The pages now say so, and keep the rules that
+  will apply if ads or affiliate links start.
+- **`/search-index.json`** (the site-search data) gets an `X-Robots-Tag: noindex` header. Search Console had
+  listed it as "Crawled – currently not indexed".
+- **Calories Burned** said "thirty-plus activities"; it has 28.
+
 ### v2.38.9 — Last unsourced lines from the label audit; methodology page completed
 
 - **Methodology page** now lists the formulas behind every calculator: body measurements, weight change, heart

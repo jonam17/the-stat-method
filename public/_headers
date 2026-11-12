@@ -15,3 +15,7 @@
 # Enable after the custom domain is live on HTTPS and you are comfortable with
 # browser-enforced HSTS for the site and subdomains.
 # Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+# The site-search data file (built by src/pages/search-index.json.js) is not a page; keep it out of
+# search results (Search Console listed it as "Crawled – currently not indexed", 2026-11).
+/search-index.json
+  X-Robots-Tag: noindex

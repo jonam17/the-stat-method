@@ -28,7 +28,7 @@ export const TOOLS = [
     desc: 'ACSM intensity bands from heart-rate reserve, using Tanaka rather than \u201c220 minus age\u201d.',
     related: ['calories-burned', 'tdee-calculator'] },
   { slug: 'calories-burned', name: 'Calories Burned by Activity', category: 'Cardio', live: true, phase: 1,
-    desc: 'METs-based estimates across 30+ activities from the Compendium.',
+    desc: 'MET-based estimates across 28 activities from the 2024 Compendium.',
     related: ['heart-rate-zones', 'tdee-calculator', 'macro-calculator'] },
   // ---- Phase 2 ----
   { slug: 'powerlifting-score', name: 'DOTS, IPF GL & Wilks Score', category: 'Performance', live: true, phase: 2,
