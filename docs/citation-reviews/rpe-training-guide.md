@@ -20,3 +20,15 @@ review column. **Interests:** "The authors report no conflicts of interest and n
 | ★ Built from trained lifters' back squats; only three values measured | "based on the mean RIR-based RPE scores reported by the experienced squatters for the single repetition sets at 90 and 100% 1RM, and the 8 repetition set at 70% 1RM … Values for percentage 1RM repetition combinations besides [those] are estimations"; "this chart is based on the barbell back squat" |
 | ★ Not an exact conversion; other lifts may differ | "should not be viewed as an absolute conversion tool"; "this relationship may change with machine-based, single-joint, or upper-body exercises" |
 | RPE = 10 − RIR | Zourdos et al. 2016, Figure 1: "10 Maximum effort … 9 1 repetition remaining … 8 2 repetitions remaining … 7 3 repetitions remaining" |
+
+---
+
+## Follow-up of 2026-11-11 (v2.38.9) — RPE Converter guide
+
+The guide's "A common approach is to work at RPE 7–8 … Accumulating too many sets at RPE 10 builds fatigue faster
+than it builds capacity" had no source. It now reports Helms 2016 (above): hypertrophy "primarily (but not
+exclusively) using repetitions in the range of 6–12, with an RIR-based RPE of 8–10 (RIR 0–2)", failure "limited
+to the final set performed for a given body part", "for main movements … RPE range of 6–8 (i.e., 2–4 RIR) may be
+an appropriate strategy to avoid excessive muscle damage"; strength "1–6RM", "some training at an RPE 10", and
+"caution is advised when training to failure regularly". Its accuracy note now uses Halperin 2022 and Zourdos
+2016 (see `estimating-your-one-rep-max.md`).

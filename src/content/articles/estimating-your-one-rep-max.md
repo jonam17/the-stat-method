@@ -8,7 +8,7 @@ readMinutes: 9
 aiAssisted: true
 citationsVerified: full
 citationsVerifiedDate: 2026-08-25
-updated: 2026-11-05
+updated: 2026-11-11
 author: The Stat Method
 relatedTool: one-rep-max
 evidenceBased: true
@@ -19,6 +19,9 @@ keyTakeaways:
   - "Estimates tend to read low for the deadlift, so treat a deadlift figure as a floor."
   - "For everyday training, choosing loads by reps in reserve is often more practical than percentages, because it adjusts to how you feel that day."
 changelog:
+  - date: 2026-11-11
+    note: >-
+      Cited the meta-analysis on predicting reps to failure (Halperin 2022). Replaced an unsourced claim about novices with what the reps-in-reserve study found, and moved the details of the deadlift study to the paragraph about it.
   - date: 2026-11-05
     note: >-
       "Two to six reps" and "beyond twelve" had no source; the advice now follows Reynolds et al. 2006 (best from about five reps, no more than ten). Removed the unsourced claims that Wathan tracks best and that Epley and Brzycki read high or low. The calculator’s headline is now the average of the formulas, and its RPE chart is the one published by Helms and colleagues.
@@ -58,6 +61,10 @@ references:
     url: "https://openrepository.aut.ac.nz/items/92cefeac-7c32-44f1-bfbc-f48f4a5dd8cf/full"
     verified: true
     verifiedDate: 2026-11-05
+  - text: "Halperin I, Malleron T, Har-Nir I, Androulakis-Korakakis P, Wolf M, Fisher J, Steele J. Accuracy in predicting repetitions to task failure in resistance exercise: a scoping review and exploratory meta-analysis. Sports Med, 2022;52(2):377-390."
+    url: "https://doi.org/10.1007/s40279-021-01559-x"
+    verified: true
+    verifiedDate: 2026-11-11
 ---
 
 Testing a true one-rep max is disruptive. It requires a peaking period, a spotter, full
@@ -134,10 +141,10 @@ they correlate well. But it does mean the precision they project is borrowed. A 
 carried to one decimal place, from an equation reverse-engineered out of a 1985 wall chart,
 is not a measurement.
 
-**The lift matters too.** Estimates tend to be more accurate for movements with a longer
-range of motion and a clear failure point. The most-cited comparison of these equations
-tested seven of them across the bench press, squat and deadlift, and found that **every
-single one underestimated the deadlift**. [5] The correlations were high across the board —
+**The lift matters too.** The most-cited comparison of these equations tested seven of them
+on 67 untrained college students, across the bench press, squat and deadlift. The formulas
+were most accurate for the bench press, then the squat, and **every single one
+underestimated the deadlift**. [5] The correlations were high across the board —
 above 0.95 — which is exactly the kind of number that hides a consistent absolute error. If
 you are estimating a deadlift max from reps, expect the figure to read low.
 
@@ -149,18 +156,17 @@ reps-in-reserve scale compared experienced and novice squatters directly and fou
 experienced lifters better at judging how close to failure they were. [8]
 
 The picture is not settled, though, and it is worth saying so. A later meta-analysis pooling
-twelve studies and 414 participants found **no overall effect of training experience** on how
-accurately people predict reps to failure. It did find something more consistent: across the
-board, people **under-predict** — they typically have about one more repetition in them than
-they think. So if you stop at what feels like two reps in reserve, you were probably closer
-to three.
+twelve studies and 414 participants found **no effect of training status** on how accurately
+people predict reps to failure. [11] It did find something more consistent: on average, people
+**under-predict** — they had about one more repetition in them than they thought. So if you
+stop at what feels like two reps in reserve, you were probably nearer three. Predictions were
+a little more accurate closer to failure, in sets of twelve reps or fewer, and in later sets.
+[11]
 
- That same validation study used 67
-untrained college students, so the equations most people rely on were checked against
-beginners rather than experienced lifters. [5] Novice lifters often cannot express a true
-maximum because they lack the neural efficiency and confidence to do so. Their estimates
-commonly read
-higher than what they could actually lift.
+The deadlift comparison above was run on untrained students, so the equations most people
+rely on were checked against beginners rather than experienced lifters. [5] And novices may
+not reach a true maximum when they test one: in the reps-in-reserve study, only 14% of the
+novices rated their one-rep max attempt a 10, against 67% of the experienced lifters. [8]
 
 **Proximity to failure matters most of all.** Every one of these formulas assumes the set
 was taken to, or very near, failure. A set with four reps left in the tank produces an

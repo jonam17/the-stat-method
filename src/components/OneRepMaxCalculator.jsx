@@ -143,6 +143,13 @@ export default function OneRepMaxCalculator() {
                   same people, came out close to each other; Wathan's was not tested.
                 </p>
                 <p>
+                  An earlier comparison of seven equations, in 67 untrained college students
+                  with sets of ten or fewer reps, found Wathan's (with Mayhew's) closest for the
+                  bench press and Wathan's the only one close for the squat. Every equation
+                  underestimated the deadlift, by 9 to 14%, so treat a deadlift estimate as a
+                  floor.
+                </p>
+                <p>
                   The percentages and the working-set loads come from the RPE chart of Helms
                   and colleagues, built from trained lifters' back squats. Only three of its
                   values were measured; the authors estimated the rest and say it should not
@@ -150,7 +157,8 @@ export default function OneRepMaxCalculator() {
                 </p>
                 <p className="refs">
                   Epley B 1985 · Brzycki M 1993 · Lombardi VP 1989 · Wathan D 1994 ·
-                  O'Conner B et al. 1989 · Reynolds JM et al., J Strength Cond Res 2006 ·
+                  O'Conner B et al. 1989 · LeSuer DA et al., J Strength Cond Res 1997 ·
+                  Reynolds JM et al., J Strength Cond Res 2006 ·
                   Helms ER et al., Strength Cond J 2016
                 </p>
               </Method>

@@ -14,13 +14,50 @@ const formulas = [
     { name: 'U.S. Navy circumference', use: 'Tape-measure body fat, ±3.5%', src: 'Hodgdon JA, Beckett MB, 1984' },
     { name: 'Deurenberg', use: 'BMI-based body fat, ±5%', src: 'Deurenberg P, et al. 1991' },
     { name: 'FFMI', use: 'Lean mass normalised for height', src: 'Kouri EM, et al. 1995' },
-    { name: 'Waist-to-height ratio', use: 'Cardiometabolic risk; outperforms BMI', src: 'Ashwell M, Gibson S, 2016' },
+    { name: 'Waist-to-height ratio', use: 'Cardiometabolic risk screening: under 0.5, 0.5 to under 0.6, 0.6 and over', src: 'Ashwell M, Gibson S, BMJ Open 2016' },
   ]},
   { group: 'Macronutrients', items: [
     { name: 'Protein', use: '1.8 g/kg bodyweight; 2.3 g/kg lean mass when cutting with body fat known', src: 'Jäger R, et al. J Int Soc Sports Nutr, 2017; Morton RW, et al. Br J Sports Med, 2018; Helms ER, et al. J Int Soc Sports Nutr, 2014' },
     { name: 'Protein Target', use: '1.4–2.0 g/kg bodyweight; 2.3–3.1 g/kg lean mass in a deficit', src: 'Jäger R, et al. 2017; Helms ER, et al. 2014' },
     { name: 'Fat', use: '25% of calories, never below 20%', src: 'Institute of Medicine, Dietary Reference Intakes, 2005' },
     { name: 'Carbohydrate', use: 'Fills the remaining calorie budget', src: 'Derived' },
+    { name: 'Hand portions', use: 'Grams per palm, cupped hand and thumb, by sex', src: 'Precision Nutrition, hand-portion guide and hand portion math, 2026' },
+  ]},
+  { group: 'Body measurements', items: [
+    { name: 'Jackson-Pollock 3-site', use: 'Skinfold body density', src: 'Jackson AS, Pollock ML, Br J Nutr, 1978' },
+    { name: 'Siri', use: 'Body density to body fat', src: 'Siri WE, 1961' },
+    { name: 'BMI categories', use: 'CDC adult categories; the age-20 categories for 18 and 19', src: 'CDC, Adult BMI Categories, 2024' },
+    { name: 'Ideal-weight formulas', use: 'Devine, Robinson, Miller and Hamwi, for comparison', src: 'Devine BJ 1974; Robinson JD et al. 1983; Miller DR et al. 1983; Hamwi GJ 1964' },
+    { name: 'FFMI reference values', use: 'Percentiles by sex and age', src: 'Schutz Y, Kyle UUG, Pichard C, Int J Obes, 2002' },
+  ]},
+  { group: 'Weight change', items: [
+    { name: 'Dynamic energy balance', use: 'Deficit Planner projections, in the spirit of Hall\u2019s model', src: 'Hall KD, et al. Lancet, 2011' },
+    { name: 'Forbes relationship', use: 'Share of weight change from lean tissue', src: 'Forbes GB, 1987' },
+  ]},
+  { group: 'Heart rate and cardio', items: [
+    { name: 'Tanaka', use: 'Maximum heart rate: 208 \u2212 0.7 \u00d7 age (default)', src: 'Tanaka H, et al. J Am Coll Cardiol, 2001' },
+    { name: 'Gulati', use: 'Maximum heart rate for women: 206 \u2212 0.88 \u00d7 age', src: 'Gulati M, et al. Circulation, 2010' },
+    { name: 'Karvonen', use: 'Target heart rate from heart-rate reserve', src: 'Karvonen MJ, et al. 1957' },
+    { name: 'Intensity classes', use: 'Five bands, separate for heart-rate reserve and % of maximum', src: 'Garber CE, et al. ACSM position stand, Med Sci Sports Exerc, 2011' },
+    { name: 'Cooper test', use: 'VO2 max from a 12-minute run', src: 'Cooper KH, JAMA, 1968' },
+    { name: 'METs', use: 'Calories burned = MET \u00d7 kg \u00d7 hours', src: 'Herrmann SD, et al. 2024 Adult Compendium of Physical Activities, J Sport Health Sci, 2024' },
+  ]},
+  { group: 'Running', items: [
+    { name: 'Riegel', use: 'Race-time prediction, exponent 1.06', src: 'Riegel PS, American Scientist, 1981' },
+    { name: 'Marathon caveat', use: 'Flags marathon predictions as often too fast', src: 'Vickers AJ, Vertosick EA, BMC Sports Sci Med Rehabil, 2016' },
+  ]},
+  { group: 'Sleep and caffeine', items: [
+    { name: 'Sleep cycles', use: '90-minute average cycle', src: 'Patel AK, et al. Physiology, Sleep Stages, StatPearls, 2024' },
+    { name: 'Sleep duration', use: 'Recommended, may be appropriate, not recommended, by age', src: 'Hirshkowitz M, et al. Sleep Health, 2015' },
+    { name: 'Caffeine half-life', use: 'Typical 4 hours (2 to 8), with modifiers', src: 'EFSA, Scientific Opinion on the safety of caffeine, 2015' },
+  ]},
+  { group: 'Strength', items: [
+    { name: 'One-rep max', use: 'Average of Epley, Brzycki, Lombardi, Wathan and O\u2019Conner; flagged above 10 reps', src: 'Epley 1985; Brzycki 1993; Lombardi 1989; Wathan 1994; O\u2019Conner et al. 1989; Reynolds JM, et al. J Strength Cond Res, 2006' },
+    { name: 'RPE chart', use: '%1RM for 1 to 8 reps at RPE 7 to 10', src: 'Helms ER, et al. Strength Cond J, 2016; Zourdos MC, et al. J Strength Cond Res, 2016' },
+    { name: 'IPF GL points', use: 'Powerlifting score; the IPF\u2019s official system since 2020', src: 'International Powerlifting Federation, 2020' },
+    { name: 'DOTS', use: 'Powerlifting score; the default when no federation is specified', src: 'Konertz T, BVDK, 2019, as given in the IPF\u2019s 2020 formula evaluation' },
+    { name: 'Wilks', use: 'Legacy powerlifting score, for older records', src: 'Wilks R, 1994' },
+    { name: 'Strength standards', use: 'Training-status levels by lift and bodyweight', src: 'Santos Junior ERT, et al. Strength Cond J, 2021, Table 1' },
   ]},
 ];
 ---

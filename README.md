@@ -342,6 +342,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.38.9 — Last unsourced lines from the label audit; methodology page completed
+
+- **Methodology page** now lists the formulas behind every calculator: body measurements, weight change, heart
+  rate and cardio, running, sleep and caffeine, and strength, with the sources each calculator already shows. It
+  said it listed "every formula" but covered only energy, body composition and macros. Waist-to-height now shows
+  its three bands instead of "outperforms BMI".
+- **One-rep max article:** the meta-analysis on predicting reps to failure is now cited (Halperin 2022); an
+  unsourced claim about novices is replaced with the reps-in-reserve study's finding; the deadlift study's
+  details sit with it. The calculator's method text adds LeSuer 1997 (Wathan closest for bench and squat in
+  untrained students; every equation underestimated the deadlift by 9–14%). The headline stays the average.
+- **RPE Converter guide:** programming advice and accuracy notes now follow Helms 2016, Halperin 2022 and
+  Zourdos 2016. **Running Pace guide:** an unsourced line about elite pacing removed.
+
 ### v2.38.8 — Hand portions, one-rep max, RPE and calorie figures checked against their sources
 
 - **Hand Portions:** grams per portion are now Precision Nutrition's figures for men (palm 24 g protein,
