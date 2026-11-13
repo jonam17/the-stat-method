@@ -154,7 +154,26 @@ const nutrients = defineCollection({
       // Anything the table alone would mislead about — iron's higher requirement
       // for vegetarians, for example. Shown directly beneath the table.
       note: z.string().optional(),
-    }),
+    }).optional(),
+    /**
+     * Per-kilogram values, in place of `intake` (v2.38.12). The essential amino acids
+     * have no age-bracket table: the National Academies set one amount per kilogram of
+     * body weight for every adult, man or woman, for each of nine items. The page
+     * shows the official per-kg figure and works out the per-pound and example-weight
+     * columns from it (src/engine/units.js); the file holds only what the source says.
+     * `ear` is kept so a test can check each RDA against the report's own rule
+     * (RDA = 1.24 × EAR, rounded) and catch a mistyped value.
+     */
+    perKg: z.object({
+      type: z.literal('RDA'),
+      items: z.array(z.object({
+        name: z.string(),
+        ear: amount, rda: amount,
+        pregnancy: amount, lactation: amount,
+      })).min(1),
+      note: z.string().optional(),
+      eighteenNote: z.string(),
+    }).optional(),
     ul: z.object({
       rows: rowsInOrder.optional(),      // some nutrients have no UL
       // What the limit covers. For magnesium, folate and niacin it applies only to
@@ -244,10 +263,22 @@ const nutrients = defineCollection({
       if (s.kind === 'report' && (s.year == null || !s.read || s.lastModified))
         ctx.addIssue({ code: 'custom', message: 'a report needs year and read, and no lastModified' });
     }),
+    // A related article, linked beneath the evidence: where a page leaves a question
+    // to research its source does not cover (trials of leucine or BCAA supplements).
+    // The build fails if the article does not exist.
+    related: z.object({ slug: z.string(), lead: z.string() }).optional(),
     references: z.array(libraryRef).min(1),
     aiAssisted: z.boolean(),
   }).superRefine((d, ctx) => {
-    for (const [path, label] of [['intake', d.intake.unitLabel], ['sources', d.sources.unitLabel]]) {
+    if (!d.intake === !d.perKg)
+      ctx.addIssue({ code: 'custom', path: ['intake'], message: 'give intake or perKg, not both' });
+    if (d.perKg) {
+      // Per-kg values have no bracket table to set a limit or a food chart against.
+      if (d.ul.rows || d.ul.cdrr) ctx.addIssue({ code: 'custom', path: ['ul'], message: 'perKg files have no limit table' });
+      if (d.sources.foods) ctx.addIssue({ code: 'custom', path: ['sources'], message: 'perKg files give sources as text' });
+      if (d.altUnit) ctx.addIssue({ code: 'custom', path: ['altUnit'], message: 'perKg files have no second unit' });
+    }
+    for (const [path, label] of [['intake', d.intake?.unitLabel], ['sources', d.sources.unitLabel]]) {
       if (label != null && !label.startsWith(d.unit))
         ctx.addIssue({ code: 'custom', path: [path, 'unitLabel'], message: `${path}.unitLabel must begin with the unit (${d.unit})` });
     }

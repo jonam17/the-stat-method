@@ -1,0 +1,164 @@
+# Essential amino acids — every value from the Institute of Medicine (National
+# Academies) report Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat,
+# Fatty Acids, Cholesterol, Protein, and Amino Acids (2002/2005; reference 1). The
+# NIH Office of Dietary Supplements has no fact sheet on amino acids: its list of
+# all fact sheets (checked 2026-11-12) only cross-refers BCAAs, leucine and others
+# to its exercise-supplements sheet. Read from the PDF supplied by the maintainer
+# on 2026-11-12: chapter 10, Protein and Amino Acids (pp. 589–737), in full except
+# its reference list, and the Summary Tables (pp. 1319–1332), which give no
+# amino acid values. Numbered markers [n] refer to `references` below.
+# Follow docs/LIBRARY-WORKFLOW.md.
+# DRAFT until a person has checked every value against the source.
+#
+# Values, mg per kg of body weight per day (pp. 679–682):
+#   EAR adults 19+ (p. 679): 11, 15, 34, 31, 15, 27, 16, 4, 19
+#   RDA adults 19+ (p. 680): 14, 19, 42, 38, 19, 33, 20, 5, 24 (RDA = 1.24 × EAR, rounded)
+#   RDA pregnancy (p. 681): 18, 25, 56, 51, 25, 44, 26, 7, 31
+#   RDA lactation (p. 682): 19, 30, 62, 52, 26, 51, 30, 9, 35
+# in the order histidine, isoleucine, leucine, lysine, methionine + cysteine,
+# phenylalanine + tyrosine, threonine, tryptophan, valine. The same for men and
+# women and for all adults; the report could not set them separately (p. 679).
+# 14–18 years, RDA (Table 10-21, pp. 674–675): boys 15, 21, 47, 43, 21, 38, 22, 6, 27;
+# girls 14, 19, 44, 40, 19, 35, 21, 5, 24.
+#
+# Reference 2 is the WHO/FAO/UNU 2007 report the amino acids article uses; it is
+# cited only in `disagreements`, to compare its average requirements (Table 23,
+# p. 150) with the National Academies' EARs. Approved by the maintainer
+# 2026-11-12 as a second source for that section only.
+draft: true
+name: Essential amino acids
+kind: other
+dek: The nine amino acids your body cannot make. How much of each adults need per pound and per kilogram, where they come from, and why no upper limit has been set.
+unit: mg
+
+perKg:
+  type: RDA
+  items:
+    - { name: Histidine, ear: 11, rda: 14, pregnancy: 18, lactation: 19 }
+    - { name: Isoleucine, ear: 15, rda: 19, pregnancy: 25, lactation: 30 }
+    - { name: Leucine, ear: 34, rda: 42, pregnancy: 56, lactation: 62 }
+    - { name: Lysine, ear: 31, rda: 38, pregnancy: 51, lactation: 52 }
+    - { name: Methionine + cysteine, ear: 15, rda: 19, pregnancy: 25, lactation: 26 }
+    - { name: Phenylalanine + tyrosine, ear: 27, rda: 33, pregnancy: 44, lactation: 51 }
+    - { name: Threonine, ear: 16, rda: 20, pregnancy: 26, lactation: 30 }
+    - { name: Tryptophan, ear: 4, rda: 5, pregnancy: 7, lactation: 9 }
+    - { name: Valine, ear: 19, rda: 24, pregnancy: 31, lactation: 35 }
+  note: The report gives one amount per kilogram for all adults, men and women alike, because there were too few studies to set them separately by sex or age. The report gives methionine one value together with cysteine, and phenylalanine together with tyrosine; the body can make cysteine from methionine, and tyrosine from phenylalanine. Histidine and isoleucine have never been measured directly in adults; their values were estimated from the others.
+  eighteenNote: People aged 18 fall in the official 14–18 group, where the amounts are a little higher. For boys they are histidine 15, isoleucine 21, leucine 47, lysine 43, methionine plus cysteine 21, phenylalanine plus tyrosine 38, threonine 22, tryptophan 6 and valine 27 mg per kg. For girls, leucine is 44, lysine 40, phenylalanine plus tyrosine 35 and threonine 21 mg per kg, and the rest are the same as for adults.
+
+ul:
+  warning: No upper limit has been set because the data were too thin, not because high doses are known to be safe. The report advises caution with any single amino acid taken well above the amounts found in food.
+  note: The National Academies did not set an upper limit for total protein or for any amino acid, because the studies did not show at what intake harm begins.
+
+does: >-
+  Protein is built from amino acids, and nine of them, called essential or indispensable, have carbon skeletons the
+  body cannot make, so they must come from food: histidine, isoleucine, leucine, lysine, methionine, phenylalanine,
+  threonine, tryptophan and valine [1]. Six others, including cysteine, tyrosine, arginine and glutamine, are
+  conditionally indispensable: the body usually makes enough, but not always, for example in premature infants or in
+  severe illness [1]. Besides building protein, amino acids are the raw material for other molecules: tryptophan for
+  serotonin and niacin, tyrosine for thyroid hormones and catecholamines, and lysine for carnitine [1]. Leucine also
+  helps regulate the step in which new protein is assembled [1]. Histidine is unusual: removing it from the diet does
+  not make the body lose protein for weeks, because the body holds large stores of it, but over a longer period
+  hemoglobin falls [1].
+
+absorption: >-
+  Most common proteins are digested well: studies with labelled proteins found that casein, whey, wheat and legume
+  proteins, eaten as isolates, concentrates or flours, were more than 90% digested [1]. Plant proteins are generally
+  less digestible than animal proteins, though processing and preparation can change that [1]. Not everything
+  absorbed reaches the rest of the body: the gut uses a share of some amino acids first, threonine especially [1].
+
+sources:
+  text: >-
+    Meat, poultry, fish, eggs, milk, cheese and yogurt provide all nine essential amino acids, which is why they are
+    called complete proteins; proteins from legumes, grains, nuts, seeds and vegetables tend to be short of one or more
+    [1]. The report's comparison shows the gaps: per gram of protein, whole wheat flour has 26 mg of lysine against 79 mg
+    in milk and 70 mg in eggs, and navy beans have 19 mg of methionine plus cysteine against 56 mg in eggs [1]. Mixing
+    sources closes them: in the report's example, wheat and chickpea proteins each fall short on their own, but a mix
+    of wheat, chickpea and milk powder reaches the top score [1]. As a guide to protein itself, 3 ounces of lean meat or
+    poultry has about 25 g, 3 ounces of fish or a cup of soybeans about 20 g, a cup of legumes about 15 g, a cup of
+    milk or yogurt about 8 g, and an egg or an ounce of cheese about 6 g [1].
+
+usIntake: >-
+  In the 1988–1994 national survey, median lysine intake was 4.65 to 7.50 g a day for men, depending on age, and 3.59
+  to 4.56 g for women; threonine was 2.74 to 4.21 g for men and 2.10 to 2.59 g for women; and tryptophan 0.84 to 1.26
+  g and 0.65 to 0.78 g [1]. Those are well above the recommended amounts: lysine's, for example, comes to about 2.7 g
+  a day for a 154 lb (70 kg) adult. In the 1994–1996 and 1998 surveys, median protein intake was 71 to 101 g a day for men and
+  55 to 62 g for women, about 15% of calories [1]. The report has no survey data more recent than 1998.
+
+atRisk:
+  - People who eat only plant foods without variety. Lysine, the sulfur amino acids and threonine are sometimes lower in plant proteins, although complementary mixtures of plant proteins can match animal protein [1]
+  - People whose protein comes mostly from cereals, in which lysine is the most likely to fall short. Modest amounts of legumes, animal protein or lysine-fortified flour remove the risk [1]
+  - People eating too little protein overall. In industrialized countries, protein-energy malnutrition is seen mostly in hospitals and often in older adults [1]
+
+deficiency: >-
+  When a diet is short of protein, or of one essential amino acid relative to the others, the body makes less of some
+  proteins while it keeps breaking them down, freeing the amino acids it lacks [1]. The scarcest essential amino acid,
+  called the limiting one, caps how well the rest of the protein can be used, even when total protein is adequate [1].
+  Prolonged protein shortage harms every organ: the immune system and the gut lining weaken, the skin thins, and hair
+  stops growing or falls out [1]. Without histidine, red blood cell production slows and hemoglobin falls, which
+  reverses when histidine is restored [1].
+
+evidence:
+  established: >-
+    The adult values rest mainly on studies that track how the body burns a labelled amino acid as intake rises,
+    which the report judged more reliable than the older nitrogen balance method; that method gave values that were too
+    low [1]. Lysine is the best studied, with six estimates ranging from 26.6 to 36.9 mg per kg [1]. The recommended
+    amounts are the average requirements plus 24%, on the assumption that people vary as much in their amino acid needs
+    as in their protein needs, because there are too few data on the amino acids themselves [1]. The weakest value is
+    phenylalanine plus tyrosine, whose estimates ranged from 15.1 to 39 mg per kg [1].
+  notSupported: >-
+    In the studies it reviewed, the report found no compelling evidence that healthy adults who do resistance or
+    endurance exercise need more protein, and it set no extra allowance for them [1]. Endurance exercise does raise the
+    burning of leucine, but measured over a whole day the rise was only 4% to 7% of the daily total [1].
+  mixed: >-
+    In the report's pooled analysis, adults needed the same amount of protein to stay in balance whether it came mostly
+    from animal or from plant sources, but almost all the plant diets in it combined complementary proteins [1].
+    Head-to-head studies found well-processed soy protein used as well as animal protein, and wheat protein used less
+    efficiently than beef [1].
+
+related:
+  slug: amino-acids-and-protein-quality
+  lead: "Newer trials of leucine, BCAA and plant protein for muscle, and how protein quality is scored, are covered in our article"
+
+disagreements: >-
+  The 2007 report of the World Health Organization, the Food and Agriculture Organization and the United Nations
+  University gives different average requirements for some amino acids, in mg per kg a day: isoleucine 20, leucine 39
+  and valine 26, against the National Academies' 15, 34 and 19; histidine 10, lysine 30, phenylalanine plus tyrosine 25
+  and threonine 15, against 11, 31, 27 and 16 [2] [1]. Methionine plus cysteine (15) and tryptophan (4) are the same in
+  both [2] [1]. These are average requirements, not the recommended amounts in the table above; both reports set their
+  recommended or safe level 24% higher than the average [1] [2]. The WHO report's total for all nine is 184 mg per kg [2].
+
+tooMuch: >-
+  There is no evidence that amino acids from food, even in high-protein diets, carry any risk; the concern is single
+  amino acids taken as supplements, which can raise blood levels much more than food does [1]. For the essential
+  amino acids, the report found the following. Tryptophan taken for days or weeks caused nausea, drowsiness and less
+  appetite, and its possible role in a rare connective-tissue disease, eosinophilic fasciitis, remains uncertain [1].
+  For histidine, 4 to 4.5 g a day on top of the diet caused no harm in the studies the report found, a conclusion it
+  calls tentative; in one study, though, people reported headaches, weakness, drowsiness and nausea, and high intakes
+  can disturb zinc and copper [1]. Methionine at about 100 mg per kg raised blood homocysteine [1]. Lysine at 3 g a day
+  for six months upset the stomach in 3 of 27 people, against 1 of 25 controls [1]. Single infused doses of
+  branched-chain amino acids up to 9.75 g caused no reported harm in healthy people, but those studies were too short
+  and too narrow to show safety [1].
+
+interactions: >-
+  The report does not review interactions between amino acids and medicines. The one condition it singles out is
+  phenylketonuria (PKU), in which phenylalanine builds up: people with it must restrict phenylalanine throughout life
+  [1]. If you take a medicine regularly, ask your doctor or pharmacist before taking an amino acid supplement.
+
+source:
+  kind: report
+  name: Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids
+  url: https://doi.org/10.17226/10490
+  year: 2005
+  read: We read its chapter on protein and amino acids in full, apart from the reference list, and its summary tables, which list protein but not the individual amino acids.
+  checked: 2026-11-12
+
+references:
+  - text: "Institute of Medicine. Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids. Washington, DC: The National Academies Press; 2005. Chapter 10, Protein and Amino Acids."
+    url: https://doi.org/10.17226/10490
+    status: checked
+  - text: "World Health Organization, Food and Agriculture Organization of the United Nations, United Nations University. Protein and amino acid requirements in human nutrition: report of a joint WHO/FAO/UNU expert consultation. WHO Technical Report Series 935. Geneva: World Health Organization, 2007. Table 23."
+    url: https://iris.who.int/handle/10665/43411
+    status: checked
+
+aiAssisted: true

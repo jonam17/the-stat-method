@@ -183,3 +183,22 @@ A report differs from a fact sheet in three ways the template handles:
   "None set" in the summary cannot read as "no risk".
 - **Length.** Read the summary and every chapter on the nutrient in full, reference lists excepted;
   say in `source.read` exactly what was read, and in the file's header comment which pages.
+
+## When the values are per kilogram (amino acids)
+
+The National Academies set the essential amino acids per kilogram of body weight, one value for every
+adult, with no age brackets and no split by sex. `essential-amino-acids.yaml` is the example. Such a file
+uses `perKg` instead of `intake`:
+
+- `perKg.items`: one row per item in the report's order, each with `ear` (the Estimated Average
+  Requirement), `rda`, `pregnancy` and `lactation`, all in the file's `unit` per kg per day. The EAR is not
+  shown on the page; it is there so a test can check every RDA against the report's rule (RDA = 1.24 ×
+  EAR, rounded). Pregnancy and breastfeeding must both be higher than the adult RDA.
+- `perKg.note` and `perKg.eighteenNote` work as `intake.note` and `intake.eighteenNote` do.
+- The page works out the per-pound column (`perKgToPerLb` in `src/engine/units.js`, one decimal) and an
+  example for the report's 70 kg (154 lb) reference adult, and says that it did. Never type a converted
+  value into the file.
+- A per-kg file has no limit table and no food chart: `ul.rows` and `sources.foods` are refused by the schema.
+  Where no limit was set but high intakes carry a risk, say so in `ul.warning`.
+- `related` (optional, any file) links one article beneath the evidence, for questions the source does not
+  cover. The build fails if the article does not exist.

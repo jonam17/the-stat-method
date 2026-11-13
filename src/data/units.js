@@ -15,6 +15,6 @@
  * `sources.unitLabel`. Every upper-limit table on the sheets read so far prints
  * the plain unit, so the limit always uses `unit`.
  */
-export const intakeUnit = d => d.intake.unitLabel ?? d.unit;
+export const intakeUnit = d => d.intake?.unitLabel ?? d.unit;
 export const sourcesUnit = d => d.sources.unitLabel ?? intakeUnit(d);
 export const ulUnit = d => d.unit;

@@ -9,6 +9,7 @@ import yaml from 'js-yaml';
 import { BRACKETS, YOUNG, matchingRow } from '../../data/brackets.js';
 import { intakeUnit, sourcesUnit } from '../../data/units.js';
 import { sourcesChart } from '../../charts/library.js';
+import { perKgToPerLb } from '../units.js';
 
 const DIR = 'src/content/nutrients';
 const files = readdirSync(DIR).filter(f => f.endsWith('.yaml'));
@@ -18,7 +19,9 @@ const prose = d => [d.does, d.forms ?? '', d.absorption ?? '', d.pairing?.text ?
 const hi = a => (Array.isArray(a) ? a[1] : a);
 // Nutrients with no NIH Office of Dietary Supplements fact sheet, confirmed by the
 // maintainer on 2026-10-18. Only these may take their values from a report.
-const REPORT_ONLY = ['Sodium', 'Chloride'];
+// Essential amino acids added 2026-11-12 (v2.38.12): the ODS list of all fact sheets
+// has none on amino acids, only cross-references to its exercise-supplements sheet.
+const REPORT_ONLY = ['Sodium', 'Chloride', 'Essential amino acids'];
 
 describe('library files', () => {
   it('at least one nutrient exists', () => expect(files.length).toBeGreaterThan(0));
@@ -27,6 +30,7 @@ describe('library files', () => {
     const d = load(f);
     describe(d.name, () => {
       it('has the adult brackets in order, with pregnancy and breastfeeding on every bracket up to 50', () => {
+        if (!d.intake) return;   // per-kg files have no brackets (tested below)
         const groups = d.intake.rows.map(r => r.group);
         // 19–50 as one row — or split into 19–30 and 31–50 where the source splits it.
         expect(BRACKETS.some(b => JSON.stringify(b) === JSON.stringify(groups)), groups.join(', ')).toBe(true);
@@ -58,7 +62,7 @@ describe('library files', () => {
         // Sodium's CDRR: "reduce if above". Setting it below the intake would tell
         // readers to cut back to less than they need. The report itself says the
         // adequacy values sit at or below it.
-        if (!d.ul.cdrr) return;
+        if (!d.ul.cdrr || !d.intake) return;
         const groups = d.ul.cdrr.rows.map(r => r.group);
         expect(BRACKETS.some(b => JSON.stringify(b) === JSON.stringify(groups)), groups.join(', ')).toBe(true);
         expect(d.ul.cdrr.note.length, 'ul.cdrr.note').toBeGreaterThan(40);
@@ -73,7 +77,7 @@ describe('library files', () => {
       it('a total-intake upper limit is never below the recommended amount', () => {
         // Supplement-only limits (magnesium, folate, niacin) can legitimately be
         // lower than total recommended intake, so they are not compared.
-        if (!d.ul.rows || d.ul.appliesTo !== 'total') return;
+        if (!d.ul.rows || d.ul.appliesTo !== 'total' || !d.intake) return;
         for (const i of d.intake.rows) {
           const u = matchingRow(d.ul.rows, i.group);
           expect(u, `upper-limit row for ${i.group}`).toBeDefined();
@@ -89,6 +93,24 @@ describe('library files', () => {
         expect(sourcesUnit(d).startsWith(d.unit), sourcesUnit(d)).toBe(true);
         // One IU factor cannot convert two different measures.
         if (d.altUnit) expect(d.intake.unitLabel ?? d.sources.unitLabel, 'altUnit with a unitLabel').toBeUndefined();
+      });
+
+      // v2.38.12: per-kg files (the essential amino acids) in place of bracket tables.
+      it('gives either bracket rows or per-kg values, never both', () => {
+        expect(!d.intake !== !d.perKg, 'intake xor perKg').toBe(true);
+      });
+
+      it('per-kg values follow the report\'s own rules, so a mistyped number fails', () => {
+        if (!d.perKg) return;
+        expect(d.ul.rows, 'no limit table').toBeUndefined();
+        expect(d.sources.text, 'sources as cited prose').toBeDefined();
+        for (const r of d.perKg.items) {
+          // RDA = 1.24 × EAR, rounded to the nearest whole number (IOM 2005, p. 679).
+          expect(r.rda, `${r.name} RDA`).toBe(Math.round(r.ear * 1.24));
+          // Pregnancy and breastfeeding both add to the adult amount.
+          expect(r.pregnancy, `${r.name} pregnancy`).toBeGreaterThan(r.rda);
+          expect(r.lactation, `${r.name} breastfeeding`).toBeGreaterThan(r.rda);
+        }
       });
 
       it('gives food sources as a table or as cited prose, never both', () => {
@@ -155,4 +177,20 @@ describe('library files', () => {
       });
     });
   }
+});
+
+describe('essential amino acids', () => {
+  const d = load('essential-amino-acids.yaml');
+  it('lists the nine, in the report\'s order, with its adult RDAs', () => {
+    // IOM 2005, p. 680, mg per kg per day.
+    expect(d.perKg.items.map(r => [r.name, r.rda])).toEqual([
+      ['Histidine', 14], ['Isoleucine', 19], ['Leucine', 42], ['Lysine', 38], ['Methionine + cysteine', 19],
+      ['Phenylalanine + tyrosine', 33], ['Threonine', 20], ['Tryptophan', 5], ['Valine', 24],
+    ]);
+  });
+  it('restates per-kg amounts per pound to one decimal', () => {
+    expect(perKgToPerLb(42)).toBe(19.1);
+    expect(perKgToPerLb(14)).toBe(6.4);
+    expect(perKgToPerLb(5)).toBe(2.3);
+  });
 });

@@ -12,6 +12,8 @@ import { sourcesChart } from '../../../charts/library.js';
 import { renderChart } from '../../../charts/render.js';
 import { bands, adultRange, groupLabel } from '../../../data/brackets.js';
 import { intakeUnit, sourcesUnit, ulUnit } from '../../../data/units.js';
+import { perKgToPerLb, kgToLb } from '../../../engine/units.js';
+import { getEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   return (await publishedNutrients()).map(n => ({
@@ -37,13 +39,26 @@ const amtIn = unit => v => v == null ? '—'
 const amt = amtIn(iUnit), ulAmt = amtIn(uUnit);
 const food = f => Array.isArray(f.amount)
   ? `${num(f.amount[0])}–${num(f.amount[1])} ${fUnit}` : `${num(f.amount)} ${fUnit}`;
-const typeName = d.intake.type === 'RDA' ? 'Recommended Dietary Allowance' : 'Adequate Intake';
+const typeName = (d.intake ?? d.perKg).type === 'RDA' ? 'Recommended Dietary Allowance' : 'Adequate Intake';
 // Summary boxes: one per run of brackets with identical values, so a value is
 // never shown under a label that covers a bracket it does not apply to. Where
 // men and women differ, both are shown.
 const bandValue = b => b.male === b.female ? amt(b.male)
   : `${amt(b.male)} <small>men</small><br>${amt(b.female)} <small>women</small>`;
-const factBands = bands(d.intake.rows);
+const factBands = d.intake ? bands(d.intake.rows) : [];
+// Per-kg files (the essential amino acids): one amount per kilogram for every adult.
+// The per-pound and example columns are worked out from it; the report's reference
+// adult weighs 70 kg (154 lb).
+const pk = d.perKg;
+const REF_KG = 70, refLb = Math.round(kgToLb(REF_KG));
+const perKgAmt = v => `${num(v)} ${d.unit}/kg`;
+const perLbAmt = v => `${perKgToPerLb(v).toFixed(1)} ${d.unit}/lb`;
+// In the tables the unit sits in the column heading, so the cells are bare numbers.
+const lbNum = v => perKgToPerLb(v).toFixed(1);
+const top = pk && pk.items.reduce((a, b) => (b.rda > a.rda ? b : a));
+// A related article, if the file names one; a missing slug fails the build.
+const related = d.related && await getEntry('articles', d.related.slug);
+if (d.related && !related) throw new Error(`${n.id}: related article "${d.related.slug}" not found`);
 // The upper limit as a range across adult brackets, labelled by what it covers.
 const ulRange = d.ul.rows && adultRange(d.ul.rows);
 const ulValue = ulRange && (ulRange[0] === ulRange[1] ? ulAmt(ulRange[0]) : `${num(ulRange[0])}–${ulAmt(ulRange[1])}`);
@@ -70,6 +85,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
 
       <div class="lib-facts">
         {factBands.map(b => <div><span>{b.label}</span><b set:html={bandValue(b)} /></div>)}
+        {top && <div><span>Most needed: {top.name}</span><b set:html={`${perKgAmt(top.rda)} <small>(${perLbAmt(top.rda)})</small>`} /></div>}
         {ulValue ? <div><span>{ulLabel}</span><b set:html={ulValue} /></div>
           : <div><span>Upper limit</span><b>None set</b></div>}
         {cdrrValue && <div><span>Cut back if above</span><b set:html={cdrrValue} /></div>}
@@ -77,15 +93,37 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
 
       <div class="prose">
         <h2 id="how-much">How much you need</h2>
-        <p>The official {typeName} for adults, per day:</p>
-        <div class="lib-table-wrap"><table class="lib-table">
-          <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
-          <tbody>{d.intake.rows.map(r => (
-            <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
-              <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
-          </tbody></table></div>
-        {d.intake.note && <p class="lib-small">{d.intake.note}</p>}
-        <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
+        {pk ? <>
+          <p>The official {typeName} for adults 19 and over, the same for men and women, per day:</p>
+          <div class="lib-table-wrap"><table class="lib-table">
+            <thead><tr><th>Amino acid</th><th>{d.unit} per kg</th><th>{d.unit} per lb</th><th>{d.unit}, {refLb} lb adult</th></tr></thead>
+            <tbody>{pk.items.map(r => (
+              <tr><th scope="row">{r.name}</th><td>{num(r.rda)}</td><td>{lbNum(r.rda)}</td><td>{num(r.rda * REF_KG)}</td></tr>))}
+            </tbody></table></div>
+          <p class="lib-small">Per kg and per lb mean per kilogram or pound of body weight. The per-kilogram
+            amounts are the official ones; we worked out the per-pound and {refLb} lb columns from them, and
+            {' '}{REF_KG} kg ({refLb} lb) is the reference adult the report uses.</p>
+          {pk.note && <p class="lib-small">{pk.note}</p>}
+          <h3 id="pregnancy">Pregnancy and breastfeeding</h3>
+          <div class="lib-table-wrap"><table class="lib-table">
+            <thead><tr><th rowspan="2">Amino acid</th><th colspan="2">Pregnancy</th><th colspan="2">Breastfeeding</th></tr>
+              <tr><th>{d.unit} per kg</th><th>{d.unit} per lb</th><th>{d.unit} per kg</th><th>{d.unit} per lb</th></tr></thead>
+            <tbody>{pk.items.map(r => (
+              <tr><th scope="row">{r.name}</th><td>{num(r.pregnancy)}</td><td>{lbNum(r.pregnancy)}</td>
+                <td>{num(r.lactation)}</td><td>{lbNum(r.lactation)}</td></tr>))}
+            </tbody></table></div>
+          <p class="lib-small">{pk.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
+        </> : <>
+          <p>The official {typeName} for adults, per day:</p>
+          <div class="lib-table-wrap"><table class="lib-table">
+            <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
+            <tbody>{d.intake.rows.map(r => (
+              <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
+                <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
+            </tbody></table></div>
+          {d.intake.note && <p class="lib-small">{d.intake.note}</p>}
+          <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
+        </>}
 
         <h2 id="upper-limit">Upper limit</h2>
         {d.ul.warning && <p class="warnbar">{d.ul.warning}</p>}
@@ -130,7 +168,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         </> : <>
           <p set:html={cite(d.sources.text)} />
           <p class="lib-small">The source gives no per-serving food table, so this page has no top-five list or
-            chart; the paragraph above is what it says about where {d.name.toLowerCase()} comes from.</p>
+            chart; the paragraph above is what it says about food sources.</p>
         </>}
 
         {d.absorption && <>
@@ -156,6 +194,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <p><b>Established.</b> <span set:html={cite(d.evidence.established)} /></p>
         <p><b>Not supported by trials.</b> <span set:html={cite(d.evidence.notSupported)} /></p>
         {d.evidence.mixed && <p><b>Mixed.</b> <span set:html={cite(d.evidence.mixed)} /></p>}
+        {related && <p>{d.related.lead} <a href={`/articles/${related.id}/`}>{related.data.title}</a>.</p>}
 
         {d.disagreements && <>
           <h2 id="disagreements">Where official guidance disagrees</h2>

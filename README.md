@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,126 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,205 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -341,6 +341,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.38.12 — Library: essential amino acids (draft)
+
+- **New Library page, Essential amino acids**, as a draft (`draft: true`) for the maintainer to check. Every
+  value comes from the National Academies' 2005 report on protein and amino acids; its chapter 10 was read in
+  full. It gives the official amount of each of the nine per kilogram of body weight for adults, with the
+  amounts per pound and for a 154 lb (70 kg) adult worked out from it, plus pregnancy and breastfeeding. The
+  WHO 2007 figures the amino acids article uses appear under "Where official guidance disagrees" (roadmap
+  item 47).
+- **Nutrient pages can now hold per-kilogram values** (`perKg`) in place of the age-bracket table. A test checks
+  each recommended amount against the report's own rule (1.24 × the average requirement), so a mistyped value
+  fails. A page can also link to a related article beneath its evidence.
+- Sodium and chloride pages: the line under their food-sources paragraph now reads "what it says about food
+  sources", which also fits a plural name.
 
 ### v2.38.11 — Exercise pages show the joints that move
 
