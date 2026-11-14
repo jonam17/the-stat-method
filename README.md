@@ -342,6 +342,12 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.39.1 — Library: the Exercises card shows exercises in the search
+
+- The Exercises card on the Library page now works like the Nutrients card: it selects Exercises in the search
+  and lists all of them, with the muscle group and equipment filters, instead of opening the older exercises
+  page. Without JavaScript it still opens that page, which stays live.
+
 ### v2.39.0 — New Library page; essential amino acids published
 
 - **The Library page is redesigned** around a search (roadmap item 52). One box searches every nutrient and
