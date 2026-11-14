@@ -1,11 +1,30 @@
 ---
-import { publishedArticles } from '../../data/articles.js';
+/**
+ * The Articles landing page (roadmap item 52, v2.40.0), in the style of the Library
+ * page (v2.39.0).
+ *
+ * Unlike the Library, the list is the page: every article is rendered on the server,
+ * newest first, and is visible without JavaScript. A small inline script adds search,
+ * the category buttons and the calculator filter by showing or hiding rows.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import { publishedArticles } from '../../data/articles.js';
 import { CATEGORIES } from '../../data/categories.js';
+import { TOOLS } from '../../data/tools.js';
 
-const articles = (await publishedArticles())
-  .sort((a, b) => b.data.published - a.data.published);
+const articles = await publishedArticles();
+const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const toolName = slug => TOOLS.find(t => t.slug === slug)?.name;
+const cats = CATEGORIES.map(c => ({ ...c, n: articles.filter(a => a.data.category === c.name).length })).filter(c => c.n);
+const tools = TOOLS.filter(t => articles.some(a => a.data.relatedTool === t.slug))
+  .map(t => ({ ...t, n: articles.filter(a => a.data.relatedTool === t.slug).length }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+const rows = articles.map(a => ({
+  url: `/articles/${a.id}/`, title: a.data.title, dek: a.data.dek, cat: a.data.category,
+  tool: a.data.relatedTool || '', toolName: toolName(a.data.relatedTool),
+  meta: [fmt(a.data.published), `${a.data.readMinutes} min read`, `${a.data.references.length} references`].join(' · '),
+  text: [a.data.title, a.data.dek, a.data.category, toolName(a.data.relatedTool) || '', ...a.data.keyTakeaways].join(' ').toLowerCase(),
+}));
 
 const articleListSchema = {
   '@context': 'https://schema.org',
@@ -22,18 +41,202 @@ const articleListSchema = {
 ---
 <BaseLayout title="Evidence-Based Fitness & Nutrition Articles — The Stat Method" pageType="CollectionPage" extraJsonLd={[articleListSchema]}
   description="Health, nutrition and training articles built from primary research, with every claim sourced and every calculator linked.">
-  <div class="wrap section">
-    <div class="section-head">
-      <h1>Articles</h1>
-      <span class="eyebrow">{articles.length} posts</span>
-    </div>
-    <nav class="cat-filter" aria-label="Article categories">
-      <a href="/articles/" aria-current="page">All</a>
-      {CATEGORIES.map(c => (
-        <a href={`/articles/${c.slug}/`} data-cat={c.name}>{c.name}</a>
-      ))}
-    </nav>
+  <div class="wrap lh">
+    <header class="lh-hero">
+      <div>
+        <span class="eyebrow">02 / Articles</span>
+        <h1>The research, explained.</h1>
+      </div>
+      <p>Articles on training, nutrition, health and recovery, built from primary research. Every claim is cited, and each article ends with the calculator that puts it to use.</p>
+    </header>
 
-    <div class="cards">{articles.map(a => <ArticleCard article={a} />)}</div>
+    <section class="lh-search" aria-labelledby="lh-search-h">
+      <h2 id="lh-search-h" class="lh-vh">Find an article</h2>
+      <div data-lh-controls hidden>
+        <label for="lh-q" class="lh-label">Search the articles</label>
+        <div class="lh-field">
+          <span aria-hidden="true" class="lh-ico">⌕</span>
+          <input id="lh-q" type="search" autocomplete="off" spellcheck="false"
+            placeholder="Search by topic, question or calculator…" data-lh-q />
+        </div>
+        <div class="lh-controls">
+          <div class="lh-seg" role="group" aria-label="Category">
+            <button type="button" aria-pressed="true" data-lh-cat="">All <em>{articles.length}</em></button>
+            {cats.map(c => <button type="button" aria-pressed="false" data-lh-cat={c.name}>{c.name} <em>{c.n}</em></button>)}
+          </div>
+          <div class="lh-filters">
+            <label>Calculator
+              <select data-lh-tool>
+                <option value="">Any calculator</option>
+                {tools.map(t => <option value={t.slug}>{t.name} ({t.n})</option>)}
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="lh-status">
+          <p aria-live="polite" data-lh-count>{articles.length} articles, newest first.</p>
+          <button type="button" class="lh-clear" data-lh-clear hidden>Clear search and filters</button>
+        </div>
+      </div>
+      <noscript><p class="lh-nojs">{articles.length} articles, newest first. By category: {cats.map((c, i) => <>{i > 0 && ' · '}<a href={`/articles/${c.slug}/`}>{c.name}</a></>)}</p></noscript>
+
+      <ul class="lh-results" data-lh-results>
+        {rows.map(r => (
+          <li data-cat={r.cat} data-tool={r.tool} data-text={r.text}>
+            <a href={r.url}>
+              <span class="lh-tag"><span class="lh-dot" data-c={r.cat} aria-hidden="true"></span>{r.cat}{r.toolName && <> · {r.toolName}</>}</span>
+              <strong>{r.title}</strong>
+              <span class="lh-dek">{r.dek}</span>
+              <span class="lh-meta">{r.meta}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="lh-empty" data-lh-empty hidden>
+        <p><b>Nothing matches.</b> Try a shorter word, or clear the filters.</p>
+        <button type="button" class="lh-clear" data-lh-clear>Clear search and filters</button>
+      </div>
+    </section>
+
+    <section class="lh-trust" aria-labelledby="lh-trust-h">
+      <div class="lh-trust-head">
+        <span class="eyebrow">How they are written</span>
+        <h2 id="lh-trust-h" class="lh-h2">Check every claim yourself.</h2>
+        <p>Each article shows its sources and says how far they were checked.</p>
+      </div>
+      <ol class="lh-points">
+        <li><span><b>Cited where the claim is made.</b> Each claim links to the study or official source behind it, listed in full at the end.</span></li>
+        <li><span><b>Every reference is marked.</b> Checked against the original, or not yet checked, and each article says how far its citations have been checked as a whole.</span></li>
+        <li><span><b>Open about how it was made.</b> Each article says whether it was drafted with AI assistance, and that a person edited and fact-checked it.</span></li>
+      </ol>
+      <p class="lh-more"><a href="/editorial-policy/">Editorial policy</a> · <a href="/methodology/">How we work</a> · <a href="/report/">Report a problem</a></p>
+    </section>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const ctl = document.querySelector('[data-lh-controls]');
+    if (!ctl) return;
+    ctl.hidden = false;
+    const q = ctl.querySelector('[data-lh-q]');
+    const segs = [...ctl.querySelectorAll('[data-lh-cat]')];
+    const tool = ctl.querySelector('[data-lh-tool]');
+    const list = document.querySelector('[data-lh-results]');
+    const items = [...list.children];
+    const count = ctl.querySelector('[data-lh-count]');
+    const empty = document.querySelector('[data-lh-empty]');
+    const clears = [...document.querySelectorAll('[data-lh-clear]')];
+    let cat = '';
+    function update() {
+      const terms = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      const active = terms.length > 0 || cat || tool.value;
+      let n = 0;
+      for (const li of items) {
+        const ok = (!cat || li.dataset.cat === cat) && (!tool.value || li.dataset.tool === tool.value)
+          && terms.every(t => li.dataset.text.includes(t));
+        li.hidden = !ok; if (ok) n++;
+      }
+      list.hidden = n === 0;
+      empty.hidden = n > 0;
+      clears[0].hidden = !active || n === 0;
+      count.textContent = active ? `${n} ${n === 1 ? 'article' : 'articles'}` : `${items.length} articles, newest first.`;
+    }
+    function setCat(c) { cat = c; segs.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lhCat === c))); update(); }
+    segs.forEach(b => b.addEventListener('click', () => setCat(b.dataset.lhCat)));
+    tool.addEventListener('change', update);
+    q.addEventListener('input', update);
+    q.addEventListener('keydown', e => { if (e.key === 'Escape' && q.value) { e.stopPropagation(); q.value = ''; update(); } });
+    clears.forEach(b => b.addEventListener('click', () => { q.value = ''; tool.value = ''; setCat(''); q.focus(); }));
+    update();
+  })();
+</script>
+
+<style>
+  .lh [hidden]{display:none !important}
+  .lh{padding-top:clamp(28px,5vw,56px);padding-bottom:80px}
+  .lh-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .lh-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:end;
+    padding-bottom:28px;border-bottom:1.5px solid var(--rule)}
+  .lh-hero h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.4vw,76px);line-height:.95;
+    letter-spacing:-.05em;margin:12px 0 0}
+  .lh-hero p{margin:0;color:var(--ink-soft);font-size:16px;max-width:46ch}
+
+  /* Search */
+  .lh-search{padding:24px 0 8px}
+  .lh-results{margin-top:6px}
+  .lh-nojs{margin:18px 0 0;font-size:14px;color:var(--ink-soft)}
+  .lh-trust{margin-top:clamp(52px,7vw,80px)}
+  .lh-label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);margin-bottom:8px}
+  .lh-field{display:flex;align-items:center;gap:10px;border:1.5px solid var(--rule);background:var(--card);padding:0 14px}
+  .lh-field:focus-within{outline:2px solid var(--signal);outline-offset:2px}
+  .lh-ico{color:var(--signal);font-size:20px}
+  .lh-field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:17px;
+    padding:15px 0;outline:none}
+  .lh-controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end;margin-top:14px}
+  .lh-seg{display:flex;border:1px solid var(--line-strong)}
+  .lh-seg button{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    background:transparent;color:var(--ink-soft);border:0;border-right:1px solid var(--line-strong);
+    padding:0 14px;min-height:44px;cursor:pointer;display:flex;gap:8px;align-items:center}
+  .lh-seg button:last-child{border-right:0}
+  .lh-seg button em{font-style:normal;color:var(--ink-mute)}
+  .lh-seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);box-shadow:inset 0 -3px 0 var(--signal)}
+  .lh-seg button[aria-pressed="true"] em{color:var(--paper)}
+  .lh-seg button[aria-pressed="true"]::before{content:"✓";}
+  .lh-filters{display:flex;flex-wrap:wrap;gap:12px}
+  .lh-filters label{display:grid;gap:4px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-mute)}
+  .lh-filters select{font:inherit;font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none;
+    color:var(--ink);background:var(--card);border:1px solid var(--line-strong);min-height:44px;padding:0 10px}
+  .lh-status{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:14px 0 6px}
+  .lh-status p{margin:0;font-size:13px;color:var(--ink-mute)}
+  .lh-clear{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
+    color:var(--ink);border:1px solid var(--line-strong);min-height:40px;padding:0 12px;cursor:pointer}
+  .lh-clear:hover{border-color:var(--ink)}
+  .lh-results{list-style:none;padding:0;margin:0;border-top:1.5px solid var(--rule);
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+  .lh-results li{border-bottom:1px solid var(--line)}
+  .lh-results a{display:grid;gap:4px;padding:14px 0;text-decoration:none;color:inherit}
+  .lh-results a:hover strong{text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+  .lh-results strong{font-family:var(--display);font-size:17px;letter-spacing:-.01em}
+  .lh-dek{font-size:13.5px;color:var(--ink-soft)}
+  .lh-meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+  .lh-tag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-mute)}
+  .lh-dot{width:12px;height:2px;background:var(--ink-mute)}
+  .lh-dot[data-c="Nutrition"]{background:var(--nutrition)}
+  .lh-dot[data-c="Exercise"]{background:var(--exercise)}
+  .lh-dot[data-c="Health"]{background:var(--health)}
+  .lh-dot[data-c="Recovery"]{background:var(--recovery)}
+  .lh-empty{border:1px solid var(--line);padding:18px;display:grid;gap:12px;justify-items:start}
+  .lh-empty p{margin:0;color:var(--ink-soft)}
+
+  .lh-h2{font-family:var(--display);font-size:clamp(22px,2.6vw,28px);letter-spacing:-.02em;margin:0}
+  .lh-search{scroll-margin-top:80px}
+
+  /* Trust */
+  .lh-trust{margin-top:clamp(44px,6vw,68px);display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;
+    border-top:1px solid var(--line);padding-top:24px}
+  .lh-trust-head h2{margin-top:8px}
+  .lh-trust-head p{color:var(--ink-soft);font-size:14.5px;margin:10px 0 0;max-width:36ch}
+  .lh-points{margin:0;padding:0;list-style:none;counter-reset:p;display:grid;gap:16px}
+  .lh-points li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;font-size:14.5px;color:var(--ink-soft)}
+  .lh-points li::before{content:"0" counter(p);font-family:var(--mono);font-size:10px;color:var(--signal);padding-top:4px}
+  .lh-points b{color:var(--ink)}
+  .lh-more{grid-column:2;margin:0;font-size:14px}
+
+  @media (max-width:860px){
+    .lh-hero,.lh-trust{grid-template-columns:1fr}
+    .lh-more{grid-column:1}
+  }
+  @media (max-width:640px){
+    .lh-results{grid-template-columns:1fr}
+    .lh-seg{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-right:0;border-bottom:0}
+    .lh-seg button{justify-content:center;padding:0 6px;border-bottom:1px solid var(--line-strong)}
+    .lh-seg button:last-child{border-right:1px solid var(--line-strong)}
+    .lh-filters,.lh-filters label{width:100%}
+    .lh-filters select{width:100%}
+  }
+</style>

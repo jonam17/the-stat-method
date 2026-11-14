@@ -235,7 +235,7 @@ the framework and the engine ports unchanged.
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
 
 Content pages load **no framework JavaScript** — only a few small inline scripts for the theme,
-search and contents list (about 8 KB uncompressed; the Library's filter adds about 3 KB there). Only pages containing a calculator load
+search and contents list (about 8 KB uncompressed; the Library and Articles filters add about 3 KB each on their pages). Only pages containing a calculator load
 more, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands from React to Preact.
 
 ---
@@ -341,6 +341,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.40.0 — New Articles page
+
+- **The Articles page is redesigned** in the style of the Library page (roadmap item 52). All articles are
+  listed newest first, each with its category, calculator, date, reading time and number of references. A
+  search box looks through titles, summaries, key takeaways and calculator names; category buttons (All,
+  Nutrition, Exercise, Health, Recovery) and a calculator filter narrow the list. A short section at the end
+  says how the articles are sourced and checked, linking the editorial policy.
+- The rows are rendered on the server; a small inline script only shows or hides them. Without JavaScript the
+  full list still shows, with links to the four category pages, which are unchanged.
 
 ### v2.39.1 — Library: the Exercises card shows exercises in the search
 
