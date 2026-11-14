@@ -8,7 +8,7 @@
 # its reference list, and the Summary Tables (pp. 1319–1332), which give no
 # amino acid values. Numbered markers [n] refer to `references` below.
 # Follow docs/LIBRARY-WORKFLOW.md.
-# DRAFT until a person has checked every value against the source.
+# Checked by the maintainer and published 2026-11-13 (v2.39.0).
 #
 # Values, mg per kg of body weight per day (pp. 679–682):
 #   EAR adults 19+ (p. 679): 11, 15, 34, 31, 15, 27, 16, 4, 19
@@ -25,7 +25,6 @@
 # cited only in `disagreements`, to compare its average requirements (Table 23,
 # p. 150) with the National Academies' EARs. Approved by the maintainer
 # 2026-11-12 as a second source for that section only.
-draft: true
 name: Essential amino acids
 kind: other
 dek: The nine amino acids your body cannot make. How much of each adults need per pound and per kilogram, where they come from, and why no upper limit has been set.

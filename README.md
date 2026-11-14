@@ -235,7 +235,7 @@ the framework and the engine ports unchanged.
 Requires **Node 22+** (Astro 7 dropped 18.x and 20.x).
 
 Content pages load **no framework JavaScript** — only a few small inline scripts for the theme,
-search and contents list (about 8 KB uncompressed). Only pages containing a calculator load
+search and contents list (about 8 KB uncompressed; the Library's filter adds about 3 KB there). Only pages containing a calculator load
 more, about 51–56 KB (22–24 KB compressed) since v2.22.0 moved the islands from React to Preact.
 
 ---
@@ -341,6 +341,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.39.0 — New Library page; essential amino acids published
+
+- **The Library page is redesigned** around a search (roadmap item 52). One box searches every nutrient and
+  exercise by name, other name, muscle, equipment or type; All / Nutrients / Exercises narrows it, with a
+  type filter for nutrients and muscle group and equipment filters for exercises. Results show what each entry
+  is and when its page was checked against its source. Two cards lead to nutrients and exercises, a short
+  section says where the values come from, and three articles are suggested for further reading.
+- The rows are built from the same content files as every Library page, and a small inline script (no
+  framework, nothing downloaded) only shows or hides them. Without JavaScript, the search is hidden and a plain
+  list of the Library's sections is shown instead.
+- No "recently reviewed" list: most nutrient pages share one checked date, so it would be arbitrary. Nutrients
+  are not filtered by function or food, which the files do not hold as data.
+- **Essential amino acids is published** (checked by the maintainer; draft since v2.38.12). The Library now
+  holds 30 nutrients.
 
 ### v2.38.12 — Library: essential amino acids (draft)
 

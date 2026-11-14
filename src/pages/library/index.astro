@@ -1,54 +1,359 @@
 ---
+/**
+ * The Library landing page (roadmap item 52, v2.39.0). Every entry, count, date and
+ * link is read from the content collections at build time; nothing here is a second
+ * copy of the Library.
+ *
+ * Search and filters are progressive: the result rows are rendered on the server and a
+ * small inline script (no framework, no download) shows or hides them. Without
+ * JavaScript the search panel stays hidden and a plain list of the sections is shown
+ * instead, so every page stays one link away.
+ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
-import { publishedExercises, GROUPS } from '../../data/exercises.js';
-const all = await publishedNutrients();
+import { publishedExercises, GROUPS, EQUIPMENT, equipmentText, jointsText } from '../../data/exercises.js';
+import { publishedArticles } from '../../data/articles.js';
+
+const nutrients = await publishedNutrients();
 const exercises = await publishedExercises();
-const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key));
 const kinds = await kindsWithEntries();
-// Name what is actually in the Library: choline is neither a vitamin nor a mineral.
-const nutrientWords = kinds.some(k => k.key === 'other') ? 'vitamins, minerals and other essential nutrients' : 'vitamins and minerals';
-const Cap = s => s[0].toUpperCase() + s.slice(1);
-// Sodium and chloride have no NIH fact sheet; their values come from the National
-// Academies reports that set them. Say so wherever the Library names its source.
-const reports = all.filter(n => n.data.source.kind === 'report').map(n => n.data.name.toLowerCase());
-const fromWhom = reports.length ? 'the NIH or, where it has no fact sheet, the National Academies' : 'the NIH';
+const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key));
+const usedEquipment = Object.keys(EQUIPMENT).filter(k => exercises.some(e => e.data.equipment.includes(k)));
+
+const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const kindOf = key => kinds.find(k => k.key === key);
+const singular = { vitamin: 'Vitamin', mineral: 'Mineral', other: 'Other nutrient' };
+
+const rows = [
+  ...nutrients.map(n => {
+    const k = kindOf(n.data.kind);
+    return {
+      domain: 'nutrient', name: n.data.name, dek: n.data.dek,
+      url: `/library/${k.slug}/${n.id}/`,
+      tag: singular[n.data.kind], facet: n.data.kind,
+      meta: `${n.data.intake ? n.data.intake.type : n.data.perKg.type} · checked ${fmt(n.data.source.checked)}`,
+      text: [n.data.name, n.data.dek, k.label, singular[n.data.kind], ...(n.data.perKg ? n.data.perKg.items.map(i => i.name) : [])].join(' '),
+    };
+  }),
+  ...exercises.map(e => {
+    const g = GROUPS.find(x => x.key === e.data.group);
+    return {
+      domain: 'exercise', name: e.data.name, dek: e.data.dek,
+      url: `/library/exercises/${e.id}/`,
+      tag: g.label, facet: e.data.group, equipment: e.data.equipment.join(' '),
+      meta: `${equipmentText(e.data.equipment)} · ${jointsText(e.data.joints)}`,
+      text: [e.data.name, e.data.dek, g.label, ...e.data.primary, ...e.data.secondary,
+        ...e.data.equipment.map(k => EQUIPMENT[k]), jointsText(e.data.joints)].join(' '),
+    };
+  }),
+].sort((a, b) => a.name.localeCompare(b.name));
+
+// Further reading: three live articles on the Library's two subjects, chosen by hand
+// (approved by the maintainer 2026-11-13); any that is not published is skipped.
+const reading = (await publishedArticles())
+  .filter(a => ['protein-how-much', 'amino-acids-and-protein-quality', 'training-volume-how-many-sets-do-you-actually-need'].includes(a.id));
 ---
-<BaseLayout noindex={all.length === 0 && exercises.length === 0} title="Library — The Stat Method"
-  description={exercises.length
-    ? `${Cap(nutrientWords.replace('other essential', 'other'))}, every value from ${reports.length ? 'the NIH or the National Academies' : 'the NIH'}, and exercises for each muscle group with the research behind each.`
-    : `${Cap(nutrientWords)}: how much you need, the best food sources, and what the evidence does and does not support — every value from ${fromWhom}.`}>
-  <div class="wrap section">
-    <p class="eyebrow">Reference</p>
-    <h1>Library</h1>
-    <p class="dek">How much of each of the {nutrientWords} you need, where to get it, and what the evidence
-      really supports. Every value comes from the NIH Office of Dietary Supplements, which presents the
-      official U.S. intake recommendations{reports.length > 0 && <> (or, for {reports.join(' and ')}, which have no
-      NIH fact sheet, from the National Academies reports that set their values)</>}, and each page is checked
-      against its source.</p>
-    {exercises.length > 0 && <p class="dek">Exercises for each muscle group have no official source to
-      copy, so every claim on those pages is cited to a study we read and labelled with the kind of
-      evidence it is.</p>}
-    {kinds.map(k => (
-      <section class="lib-kind">
-        <h2><a href={`/library/${k.slug}/`}>{k.label}</a></h2>
-        <ul class="lib-list">
-          {all.filter(n => n.data.kind === k.key).map(n => (
-            <li><a href={`/library/${k.slug}/${n.id}/`}>{n.data.name}</a><span>{n.data.dek}</span></li>
-          ))}
+<BaseLayout noindex={nutrients.length === 0 && exercises.length === 0} title="Library — The Stat Method"
+  description={'How much of each nutrient you need and where to get it, and exercises for each muscle group with the studies behind them. Every value has a named source.'}>
+  <div class="wrap lh">
+    <header class="lh-hero">
+      <div>
+        <span class="eyebrow">01 / Knowledge base</span>
+        <h1>The science, organized.</h1>
+      </div>
+      <p>Evidence-based references for nutrition and exercise. Find a nutrient or an exercise, see the numbers, and trace each one back to its source.</p>
+    </header>
+
+    <section class="lh-search" id="library-search" aria-labelledby="lh-search-h" data-lh hidden>
+      <h2 id="lh-search-h" class="lh-vh">Search the Library</h2>
+      <div class="lh-search-row">
+        <label for="lh-q" class="lh-label">Search the Library</label>
+        <div class="lh-field">
+          <span aria-hidden="true" class="lh-ico">⌕</span>
+          <input id="lh-q" type="search" autocomplete="off" spellcheck="false"
+            placeholder="Search nutrients, exercises, muscles or equipment…" data-lh-q />
+        </div>
+      </div>
+
+      <div class="lh-controls">
+        <div class="lh-seg" role="group" aria-label="Show">
+          <button type="button" aria-pressed="true" data-lh-domain="all">All <em>{rows.length}</em></button>
+          <button type="button" aria-pressed="false" data-lh-domain="nutrient">Nutrients <em>{nutrients.length}</em></button>
+          <button type="button" aria-pressed="false" data-lh-domain="exercise">Exercises <em>{exercises.length}</em></button>
+        </div>
+        <div class="lh-filters" data-lh-filters="nutrient" hidden>
+          <label>Type
+            <select data-lh-facet>
+              <option value="">All types</option>
+              {kinds.map(k => <option value={k.key}>{k.label}</option>)}
+            </select>
+          </label>
+        </div>
+        <div class="lh-filters" data-lh-filters="exercise" hidden>
+          <label>Muscle group
+            <select data-lh-facet>
+              <option value="">All groups</option>
+              {exGroups.map(g => <option value={g.key}>{g.label}</option>)}
+            </select>
+          </label>
+          <label>Equipment
+            <select data-lh-equip>
+              <option value="">Any equipment</option>
+              {usedEquipment.map(k => <option value={k}>{EQUIPMENT[k]}</option>)}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="lh-status">
+        <p aria-live="polite" data-lh-count></p>
+        <button type="button" class="lh-clear" data-lh-clear hidden>Clear search and filters</button>
+      </div>
+
+      <ul class="lh-results" data-lh-results hidden>
+        {rows.map(r => (
+          <li data-domain={r.domain} data-facet={r.facet} data-equip={r.equipment} data-text={r.text.toLowerCase()}>
+            <a href={r.url}>
+              <span class="lh-tag"><span class="lh-dot" data-d={r.domain} aria-hidden="true"></span>{r.tag}</span>
+              <strong>{r.name}</strong>
+              <span class="lh-dek">{r.dek}</span>
+              <span class="lh-meta">{r.meta}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="lh-empty" data-lh-empty hidden>
+        <p><b>Nothing matches.</b> Try a shorter word, or a nutrient's other name (for example "B3" for niacin).</p>
+        <button type="button" class="lh-clear" data-lh-clear>Clear search and filters</button>
+      </div>
+    </section>
+
+    <section class="lh-domains" aria-label="Library sections">
+      <a class="lh-domain" href="#library-search" data-lh-show="nutrient">
+        <span class="eyebrow">A / Nutrition reference</span>
+        <h2>Nutrients</h2>
+        <p>Vitamins, minerals and other nutrients: how much you need, upper limits, food sources and what the evidence supports.</p>
+        <span class="lh-count">{nutrients.length} nutrients · {kinds.length} types</span>
+        <span class="lh-go">Show all nutrients ↑</span>
+      </a>
+      <a class="lh-domain" href="/library/exercises/">
+        <span class="eyebrow">B / Exercise science</span>
+        <h2>Exercises</h2>
+        <p>Exercises by muscle group: equipment, the joints that move, how to do each one, and the studies behind it.</p>
+        <span class="lh-count">{exercises.length} exercises · {exGroups.length} muscle groups</span>
+        <span class="lh-go">All exercises →</span>
+      </a>
+    </section>
+
+    <noscript>
+      <section class="lh-nojs" aria-label="Library sections">
+        <ul>
+          {kinds.map(k => <li><a href={`/library/${k.slug}/`}>{k.label}</a></li>)}
+          {exGroups.map(g => <li><a href={`/library/exercises/#${g.key}`}>{g.label}</a></li>)}
         </ul>
       </section>
-    ))}
-    {exercises.length > 0 && (
-      <section class="lib-kind">
-        <h2><a href="/library/exercises/">Exercises</a></h2>
-        <ul class="lib-list">
-          {exGroups.map(g => (
-            <li><a href={`/library/exercises/#${g.key}`}>{g.label}</a><span>{exercises.filter(e => e.data.group === g.key).map(e => e.data.name).join(' · ')}</span></li>
+    </noscript>
+
+    <section class="lh-trust" aria-labelledby="lh-trust-h">
+      <div class="lh-trust-head">
+        <span class="eyebrow">Sources</span>
+        <h2 id="lh-trust-h" class="lh-h2">Don't just take our word for it.</h2>
+        <p>Every page names where its values come from, so you can check them yourself.</p>
+      </div>
+      <ol class="lh-points">
+        <li><span><b>One named source per nutrient.</b> Values come from the NIH Office of Dietary Supplements fact
+          sheet or, where there is none, the National Academies report that set them. Each page gives the
+          source and the date we checked the page against it.</span></li>
+        <li><span><b>Exercises need a training study.</b> An exercise is listed only if a training study or a review
+          supports it. Each claim says what kind of study it rests on; muscle-activity (EMG) studies add detail
+          but never qualify an exercise on their own.</span></li>
+        <li><span><b>Every reference says how far we checked it.</b> Read in full, cited by the fact sheet, or not
+          yet checked. Limits are shown with who they apply to, such as supplements only.</span></li>
+      </ol>
+      <p class="lh-more"><a href="/methodology/">How we work</a> · <a href="/editorial-policy/">Editorial policy</a></p>
+    </section>
+
+    {reading.length > 0 && (
+      <section class="lh-reading" aria-labelledby="lh-read-h">
+        <h2 id="lh-read-h" class="lh-h2">Further reading</h2>
+        <ul>
+          {reading.map(a => (
+            <li><a href={`/articles/${a.id}/`}><span class="lh-tag">{a.data.category}</span><strong>{a.data.title}</strong></a></li>
           ))}
         </ul>
       </section>
     )}
-    <p class="lib-note">More {exercises.length ? 'nutrients and muscle groups are' : 'nutrients are'} added as each is checked against its sources.</p>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-lh]');
+    if (!root) return;
+    root.hidden = false;
+    const q = root.querySelector('[data-lh-q]');
+    const segs = [...root.querySelectorAll('[data-lh-domain]')];
+    const panels = [...root.querySelectorAll('[data-lh-filters]')];
+    const list = root.querySelector('[data-lh-results]');
+    const items = [...list.children];
+    const count = root.querySelector('[data-lh-count]');
+    const empty = root.querySelector('[data-lh-empty]');
+    const clears = [...root.querySelectorAll('[data-lh-clear]')];
+    let domain = 'all';
+
+    const panel = () => panels.find(p => p.dataset.lhFilters === domain);
+    function update() {
+      const terms = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      const p = panel();
+      const facet = p ? p.querySelector('[data-lh-facet]').value : '';
+      const equipSel = p && p.querySelector('[data-lh-equip]');
+      const equip = equipSel ? equipSel.value : '';
+      const active = terms.length > 0 || domain !== 'all' || facet || equip;
+      let n = 0;
+      for (const li of items) {
+        const ok = (domain === 'all' || li.dataset.domain === domain)
+          && (!facet || li.dataset.facet === facet)
+          && (!equip || (li.dataset.equip || '').split(' ').includes(equip))
+          && terms.every(t => li.dataset.text.includes(t));
+        li.hidden = !(active && ok);
+        if (active && ok) n++;
+      }
+      list.hidden = !active || n === 0;
+      empty.hidden = !active || n > 0;
+      clears[0].hidden = !active || n === 0;
+      count.textContent = active
+        ? `${n} ${n === 1 ? 'result' : 'results'}`
+        : `${items.length} references. Type to search, or choose Nutrients or Exercises.`;
+    }
+    function setDomain(d) {
+      domain = d;
+      segs.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lhDomain === d)));
+      panels.forEach(p => {
+        p.hidden = p.dataset.lhFilters !== d;
+        if (p.hidden) p.querySelectorAll('select').forEach(s => { s.value = ''; });
+      });
+      update();
+    }
+    segs.forEach(b => b.addEventListener('click', () => setDomain(b.dataset.lhDomain)));
+    panels.forEach(p => p.addEventListener('change', update));
+    q.addEventListener('input', update);
+    q.addEventListener('keydown', e => { if (e.key === 'Escape' && q.value) { e.stopPropagation(); q.value = ''; update(); } });
+    document.querySelectorAll('[data-lh-show]').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      setDomain(a.dataset.lhShow);
+      root.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      q.focus({ preventScroll: true });
+    }));
+    clears.forEach(b => b.addEventListener('click', () => { q.value = ''; setDomain('all'); q.focus(); }));
+    update();
+  })();
+</script>
+
+<style>
+  .lh [hidden]{display:none !important}
+  .lh{padding-top:clamp(28px,5vw,56px);padding-bottom:80px}
+  .lh-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .lh-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:end;
+    padding-bottom:28px;border-bottom:1.5px solid var(--rule)}
+  .lh-hero h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.4vw,76px);line-height:.95;
+    letter-spacing:-.05em;margin:12px 0 0}
+  .lh-hero p{margin:0;color:var(--ink-soft);font-size:16px;max-width:46ch}
+
+  /* Search */
+  .lh-search{padding:24px 0 8px}
+  .lh-label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-mute);margin-bottom:8px}
+  .lh-field{display:flex;align-items:center;gap:10px;border:1.5px solid var(--rule);background:var(--card);padding:0 14px}
+  .lh-field:focus-within{outline:2px solid var(--signal);outline-offset:2px}
+  .lh-ico{color:var(--signal);font-size:20px}
+  .lh-field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:17px;
+    padding:15px 0;outline:none}
+  .lh-controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end;margin-top:14px}
+  .lh-seg{display:flex;border:1px solid var(--line-strong)}
+  .lh-seg button{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    background:transparent;color:var(--ink-soft);border:0;border-right:1px solid var(--line-strong);
+    padding:0 14px;min-height:44px;cursor:pointer;display:flex;gap:8px;align-items:center}
+  .lh-seg button:last-child{border-right:0}
+  .lh-seg button em{font-style:normal;color:var(--ink-mute)}
+  .lh-seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);box-shadow:inset 0 -3px 0 var(--signal)}
+  .lh-seg button[aria-pressed="true"] em{color:var(--paper)}
+  .lh-seg button[aria-pressed="true"]::before{content:"✓";}
+  .lh-filters{display:flex;flex-wrap:wrap;gap:12px}
+  .lh-filters label{display:grid;gap:4px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-mute)}
+  .lh-filters select{font:inherit;font-family:var(--sans);font-size:14px;letter-spacing:0;text-transform:none;
+    color:var(--ink);background:var(--card);border:1px solid var(--line-strong);min-height:44px;padding:0 10px}
+  .lh-status{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:14px 0 6px}
+  .lh-status p{margin:0;font-size:13px;color:var(--ink-mute)}
+  .lh-clear{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;
+    color:var(--ink);border:1px solid var(--line-strong);min-height:40px;padding:0 12px;cursor:pointer}
+  .lh-clear:hover{border-color:var(--ink)}
+  .lh-results{list-style:none;padding:0;margin:0;border-top:1.5px solid var(--rule);
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+  .lh-results li{border-bottom:1px solid var(--line)}
+  .lh-results a{display:grid;gap:4px;padding:14px 0;text-decoration:none;color:inherit}
+  .lh-results a:hover strong{text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+  .lh-results strong{font-family:var(--display);font-size:17px;letter-spacing:-.01em}
+  .lh-dek{font-size:13.5px;color:var(--ink-soft)}
+  .lh-meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+  .lh-tag{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--ink-mute)}
+  .lh-dot{width:12px;height:2px;background:var(--ink-mute)}
+  .lh-dot[data-d="nutrient"]{background:var(--nutrition)}
+  .lh-dot[data-d="exercise"]{background:var(--training)}
+  .lh-empty{border:1px solid var(--line);padding:18px;display:grid;gap:12px;justify-items:start}
+  .lh-empty p{margin:0;color:var(--ink-soft)}
+
+  /* Domains */
+  .lh-domains{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+  .lh-domain{display:grid;gap:10px;align-content:start;background:var(--card);border:1px solid var(--line);
+    border-top:3px solid var(--ink);padding:22px;text-decoration:none;color:inherit;transition:border-color .15s}
+  .lh-domain:hover{border-color:var(--line-strong);border-top-color:var(--signal)}
+  .lh-domain h2{font-family:var(--display);font-size:clamp(28px,3.6vw,40px);letter-spacing:-.04em;line-height:1;margin:2px 0 0}
+  .lh-domain p{margin:0;color:var(--ink-soft);font-size:14.5px;max-width:44ch}
+  .lh-count{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+  .lh-go{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-top:6px}
+
+  .lh-h2{font-family:var(--display);font-size:clamp(22px,2.6vw,28px);letter-spacing:-.02em;margin:0}
+  .lh-search{scroll-margin-top:80px}
+  .lh-nojs ul{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+  .lh-nojs a{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border:1px solid var(--line-strong);text-decoration:none;color:var(--ink)}
+
+  /* Trust */
+  .lh-trust{margin-top:clamp(44px,6vw,68px);display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;
+    border-top:1px solid var(--line);padding-top:24px}
+  .lh-trust-head h2{margin-top:8px}
+  .lh-trust-head p{color:var(--ink-soft);font-size:14.5px;margin:10px 0 0;max-width:36ch}
+  .lh-points{margin:0;padding:0;list-style:none;counter-reset:p;display:grid;gap:16px}
+  .lh-points li{counter-increment:p;display:grid;grid-template-columns:34px 1fr;font-size:14.5px;color:var(--ink-soft)}
+  .lh-points li::before{content:"0" counter(p);font-family:var(--mono);font-size:10px;color:var(--signal);padding-top:4px}
+  .lh-points b{color:var(--ink)}
+  .lh-more{grid-column:2;margin:0;font-size:14px}
+
+  /* Reading */
+  .lh-reading{margin-top:clamp(44px,6vw,68px)}
+  .lh-reading ul{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+    border-top:1.5px solid var(--rule)}
+  .lh-reading li{border-bottom:1px solid var(--line)}
+  .lh-reading li + li{border-left:1px solid var(--line)}
+  .lh-reading a{display:grid;gap:6px;padding:14px 16px 16px;text-decoration:none;color:inherit;height:100%}
+  .lh-reading li:first-child a{padding-left:0}
+  .lh-reading strong{font-family:var(--display);font-size:16px;line-height:1.3}
+
+  @media (max-width:860px){
+    .lh-hero,.lh-trust{grid-template-columns:1fr}
+    .lh-more{grid-column:1}
+    .lh-reading ul{grid-template-columns:1fr}
+    .lh-reading li + li{border-left:0}
+    .lh-reading a,.lh-reading li:first-child a{padding:14px 0}
+  }
+  @media (max-width:640px){
+    .lh-domains,.lh-results{grid-template-columns:1fr}
+    .lh-seg{width:100%}
+    .lh-seg button{flex:1;justify-content:center;padding:0 8px}
+    .lh-filters,.lh-filters label{width:100%}
+    .lh-filters select{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){.lh-domain{transition:none}}
+</style>
