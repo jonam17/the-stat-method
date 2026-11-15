@@ -432,17 +432,6 @@ details.method .refs{font-size:11px;color:#82827C;margin-top:8px}
 .updated{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--ink-mute)}
 
-/* ================= HOMEPAGE TRUST BLOCK ================= */
-.trust{margin:0;padding:clamp(28px,4vw,40px) 0 0}
-.trust-head{border-bottom:1.5px solid var(--ink);padding-bottom:12px;margin-bottom:24px}
-.trust-head h2{font-family:var(--display);font-weight:600;font-size:clamp(20px,3vw,25px);
-  margin:6px 0 0;letter-spacing:-.015em}
-.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}
-.trust-item{border-top:2px solid var(--line-strong);padding-top:13px}
-.trust-num{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-mute)}
-.trust-item h3{font-family:var(--display);font-weight:600;font-size:15.5px;margin:7px 0 6px}
-.trust-item p{font-size:13.5px;color:var(--ink-soft);margin:0}
-
 /* ================= SHARED TOOL UI ================= */
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
 .subhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;
@@ -874,12 +863,9 @@ body{background:var(--paper)}
 .hero-kicker span:last-child{text-align:right}
 .hero-copy>.eyebrow{color:var(--ink-soft);font-size:10px}
 .hero-modern h1{font-family:var(--display);font-size:clamp(58px,7.9vw,98px);line-height:.9;letter-spacing:-.055em;font-weight:600;margin:14px 0 26px;max-width:8.5ch}
-.hero-modern h1 span{position:relative;white-space:nowrap}
-.hero-modern h1 span::after{content:"";position:absolute;left:0;right:0;bottom:.03em;height:.08em;background:var(--signal);z-index:-1}
-/* Two columns: "Show the work." cannot wrap (nowrap keeps the underline whole), so at 98px it ran
-   115px into the calculator preview at every desktop width. Size it to its own column instead —
-   14.6cqi ends the line where the kicker rule above it ends. Below 981px the columns stack and the
-   breakpoint sizes further down apply. */
+/* Two columns: the second headline line does not wrap, so at 98px it ran into the preview
+   image. Size the headline to its own column instead (cqi). Below 981px the columns stack and
+   the breakpoint sizes further down apply. */
 @media(min-width:981px){
   .hero-copy{container-type:inline-size}
   .hero-modern h1{font-size:min(clamp(58px,7.9vw,98px),14.6cqi)}
@@ -890,19 +876,9 @@ body{background:var(--paper)}
 .hero-btn:hover{background:#1C1C1C;opacity:1}
 .btn-text{padding:10px 0;border-bottom:1px solid var(--ink);border-radius:0;color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .btn-text:hover{color:var(--ink-soft);border-color:var(--ink-soft)}
-.hero-proof{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;border-top:1px solid var(--line);margin-top:30px;padding-top:13px;max-width:630px}
-.hero-proof span{font-family:var(--mono);font-size:8.5px;line-height:1.35;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
-.hero-proof b{display:block;font-size:9px;color:var(--ink);margin-bottom:4px}
 .hero-visual{min-width:0;position:relative;z-index:1;align-self:center}
 .preview-frame{position:relative;overflow:visible}
 .preview-frame img{display:block;width:100%;max-width:100%;height:auto;border:0;margin:0;border-radius:0;}
-.preview-caption{display:none}
-.preview-caption span:last-child{color:var(--ink);font-weight:700}
-.signal-band{background:#E4E1DA;color:var(--ink);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
-.signal-band-in{display:grid;grid-template-columns:1.1fr 2fr auto;gap:24px;align-items:center;padding-top:15px;padding-bottom:15px}
-.signal-band strong{font-family:var(--display);font-size:16px;letter-spacing:-.02em}
-.signal-band span{font-size:12px;line-height:1.35}
-.signal-band a{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .instruments-section{padding-top:clamp(58px,7vw,88px)}
 .section-head-wide{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:end}
 .section-head-wide h2{font-size:clamp(30px,4.3vw,54px);line-height:.98;letter-spacing:-.045em;margin-top:8px}
@@ -915,8 +891,6 @@ body{background:var(--paper)}
 .instrument-desc{font-size:12px;color:var(--ink-soft)}
 .instrument-arrow{text-align:right;color:var(--ink)}
 .section-more{display:inline-flex;gap:8px;margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px}
-.field-section{padding-top:clamp(60px,8vw,100px)}
-.field-section .section-head h2{font-size:clamp(30px,4vw,48px);line-height:.98;letter-spacing:-.04em;max-width:12ch}
 
 @media(max-width:980px){
   .hero-modern-grid{grid-template-columns:1fr;min-height:0;gap:38px}
@@ -926,17 +900,12 @@ body{background:var(--paper)}
   .hero-modern .lede{max-width:58ch}
   .hero-visual{max-width:900px;margin:0 auto;width:100%;}
   .preview-frame img{width:100%;margin:0}
-  .signal-band-in{grid-template-columns:1fr 1.7fr auto}
 }
 @media(max-width:760px){
   .hero-modern{padding-top:16px}
   .hero-kicker{font-size:8px;margin-bottom:34px}
   .hero-modern h1{font-size:clamp(48px,14vw,74px);line-height:.9}
   .hero-modern .lede{font-size:15px}
-  .hero-proof{grid-template-columns:repeat(2,1fr)}
-  .preview-caption{font-size:7.5px}
-  .signal-band-in{grid-template-columns:1fr;gap:7px}
-  .signal-band a{justify-self:start}
   .section-head-wide{grid-template-columns:1fr;gap:14px}
   .instrument-row{grid-template-columns:34px minmax(0,1fr) 20px;gap:12px}
   .instrument-desc{grid-column:2 / -1;margin-top:-8px;padding-right:18px}
@@ -944,7 +913,7 @@ body{background:var(--paper)}
 }
 @media(max-width:520px){
   .hero-kicker span:last-child{display:none}
-  .hero-modern h1{font-size:clamp(45px,13.5vw,66px)}  /* 14vw put "Show the work." (nowrap) into the right gutter */
+  .hero-modern h1{font-size:clamp(45px,13.5vw,66px)}  /* 14vw put the nowrap second line into the right gutter */
   .hero-actions{gap:12px}
   .instrument-row{padding:13px 0}
 }
@@ -1444,7 +1413,6 @@ footer{border-top:1px solid var(--rule)}
 :root[data-theme="dark"] .adslot{background:#141414;border-color:#2E2E2C}
 :root[data-theme="dark"] .picks-disc,
 :root[data-theme="dark"] .res-caveat{background:#1A1A1A}
-:root[data-theme="dark"] .signal-band{background:#1A1A18}
 
 /* Hover grounds were all light tints. */
 :root[data-theme="dark"] .instrument-row:hover,
@@ -1898,9 +1866,9 @@ footer{border-top:1px solid var(--rule)}
   .aside .box a,.toc a,.cat-filter a,.lib-list a,.tool-index-nav a{
     min-height:44px;display:flex;align-items:center;box-sizing:border-box}
   /* Text-style controls and "→" links keep their look; the hit area grows. */
-  .reset,.section-more,.bl-link,.section-head a,.signal-band-in>a,.island-top a,.tool-crumb a{position:relative}
+  .reset,.section-more,.bl-link,.section-head a,.hp-trust-head a,.island-top a,.tool-crumb a{position:relative}
   .reset::after,.section-more::after,.bl-link::after,.section-head a::after,
-  .signal-band-in>a::after,.island-top a::after,.tool-crumb a::after{
+  .hp-trust-head a::after,.island-top a::after,.tool-crumb a::after{
     content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 }
 

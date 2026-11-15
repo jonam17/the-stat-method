@@ -157,60 +157,60 @@ async function main() {
       (errors.length ? `  errors=${errors.join('; ')}` : ''));
   }
 
-  // ── Dark-theme hero ──────────────────────────────────────────────────────
-  // The homepage hero is a static image, so it does not follow the theme
-  // toggle on its own — in dark mode a light screenshot sat on a dark page.
-  // Capture the same calculator again with the theme forced dark.
+  // ── Homepage hero ────────────────────────────────────────────────────────
+  // The homepage shows a static image of the flagship tool, The Stat Method
+  // Baseline, one per theme (the swap is CSS on [data-theme], so the image
+  // follows the manual toggle). Both are written to public/.
+  //
+  // Sample inputs, not the tool's defaults: the defaults give a BMI category of
+  // "Overweight", an odd first thing to show on the home page. The page caption
+  // says "sample inputs". The full result is far taller than a hero image, so
+  // only the top is kept: the form, the energy result and the body row.
+  //
   // localStorage is seeded via an init script so the theme is set before the
   // page's own no-flash script runs; setting it after load would capture the
   // light paint.
-  const darkPage = await browser.newPage({
-    viewport: { width: 1240, height: 1200 },
-    deviceScaleFactor: 2,
-    colorScheme: 'dark',
-  });
-  await darkPage.addInitScript(() => {
-    try { localStorage.setItem('theme', 'dark'); } catch {}
-  });
-  await darkPage.goto(`http://localhost:${PORT}/tools/macro-calculator/`, { waitUntil: 'networkidle' });
-  await darkPage.waitForTimeout(800);
+  const HERO = { width: 1200, height: 910 };   // must match width/height in src/pages/index.astro
+  for (const theme of ['light', 'dark']) {
+    const label = `homepage hero (${theme})`;
+    const heroPage = await browser.newPage({
+      viewport: { width: 1240, height: 2600 },
+      deviceScaleFactor: 2,
+      colorScheme: theme,
+    });
+    await heroPage.addInitScript(t => {
+      try { localStorage.setItem('theme', t); } catch {}
+    }, theme);
+    try {
+      await heroPage.goto(`http://localhost:${PORT}/tools/baseline/`, { waitUntil: 'networkidle' });
+      await heroPage.waitForTimeout(800);
+      const calc = heroPage.locator('.calc');
+      await calc.getByLabel('Weight', { exact: true }).fill('72');
+      await calc.getByLabel('Activity level').selectOption('active');
+      await calc.getByRole('button', { name: 'Maintain', exact: true }).click();
+      await heroPage.waitForTimeout(500);
 
-  const appliedTheme = await darkPage.evaluate(() => document.documentElement.dataset.theme);
-  const darkEl = await darkPage.$('.calc');
-  let darkOk = false;
-  if (appliedTheme !== 'dark') {
-    console.error(`  FAIL dark hero — theme resolved to "${appliedTheme}", expected "dark"`);
-    failed += 1;
-  } else if (!darkEl) {
-    console.error('  FAIL dark hero — no .calc element found');
-    failed += 1;
-  } else {
-    const darkPng = await darkEl.screenshot();
-    const darkOut = join(ROOT, 'public', `statmethod-calculator-preview-dark.${ext}`);
-    if (sharp) {
-      await sharp(darkPng).resize({ width: 1200, withoutEnlargement: true })
-        .webp({ quality: 82 }).toFile(darkOut);
-    } else {
-      await writeFile(darkOut, darkPng);
+      const applied = await heroPage.evaluate(() => document.documentElement.dataset.theme);
+      if (applied !== theme) throw new Error(`theme resolved to "${applied}", expected "${theme}"`);
+      if (!sharp) throw new Error('sharp is unavailable, and the hero must be cropped to a fixed size');
+
+      const png = await calc.screenshot();
+      const resized = await sharp(png).resize({ width: HERO.width }).toBuffer();
+      const { height } = await sharp(resized).metadata();
+      if (height < HERO.height) throw new Error(`capture is only ${height}px tall, need ${HERO.height}`);
+      const suffix = theme === 'dark' ? '-dark' : '';
+      await sharp(resized).extract({ left: 0, top: 0, width: HERO.width, height: HERO.height })
+        .webp({ quality: 82 }).toFile(join(ROOT, 'public', `statmethod-baseline-preview${suffix}.webp`));
+      console.log(`  ok   ${label}`);
+    } catch (err) {
+      console.error(`  FAIL ${label} — ${String(err.message ?? err).split('\n')[0]}`);
+      failed += 1;
     }
-    darkOk = true;
-    console.log('  ok   dark homepage hero');
+    await heroPage.close();
   }
 
   await browser.close();
   server.close();
-
-  // Keep the homepage preview in lockstep with the real Macro Calculator UI.
-  // The homepage intentionally uses a static image, so visitors see the same
-  // interface they'll get after clicking Run a calculation.
-  const macroPreview = join(OUT, `macro-calculator.${ext}`);
-  const homepagePreview = join(ROOT, 'public', `statmethod-calculator-preview.${ext}`);
-  if (existsSync(macroPreview)) {
-    await writeFile(homepagePreview, await readFile(macroPreview));
-  }
-  if (!darkOk) {
-    console.error('  Dark hero not written — the homepage will fall back to the light image.');
-  }
 
   const files = (await readdir(OUT)).filter(f => /\.(png|webp)$/.test(f));
   console.log(`\n${files.length} preview(s) in docs/previews/` +

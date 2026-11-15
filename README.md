@@ -342,6 +342,26 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.41.0 — New home page
+
+- **The home page is redesigned** in the style of the Tools, Library and Articles pages (roadmap item 58).
+  The headline is now "Stop guessing. Start measuring.", with the last word in the site's orange. The hero
+  image shows The Stat Method Baseline, in light and dark, with sample inputs, and links to the tool. The
+  four-item strip under the buttons and the "Not another wellness dashboard" bar are gone.
+- **"Why you can trust these numbers" sits directly under the hero**, in a compact row of four (two by two on
+  phones), with the link to the About page.
+- **The page now runs:** hero, trust, the first ten tools, a new Library section (Nutrients and Exercises
+  cards), and the latest three articles in the Articles page's row style.
+- **The citation count can no longer go stale.** The old block said "All 80 citations"; the line is now
+  counted from the published articles at build time (139 today, all marked checked). If a published reference
+  is ever left unmarked, it reads "N of M … checked so far" instead of "All".
+- **The Library cards open the Library search with that kind chosen:** `/library/#nutrients` and
+  `/library/#exercises` select Nutrients or Exercises and list them. Without JavaScript the links open the
+  Library page as usual.
+- `npm run previews` now writes the two Baseline hero images (`public/statmethod-baseline-preview*.webp`).
+  The old macro calculator hero images, the `TrustBlock` component and the home-only styles they used are
+  removed.
+
 ### v2.40.0 — New Articles page
 
 - **The Articles page is redesigned** in the style of the Library page (roadmap item 52). All articles are

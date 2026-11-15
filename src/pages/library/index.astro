@@ -246,6 +246,18 @@ const reading = (await publishedArticles())
     }));
     clears.forEach(b => b.addEventListener('click', () => { q.value = ''; setDomain('all'); q.focus(); }));
     update();
+    // /library/#nutrients and /library/#exercises (the home page cards) open the
+    // search with that kind already chosen. No focus here: on a phone that would
+    // open the keyboard over the results the visitor came to see.
+    const HASH = { '#nutrients': 'nutrient', '#exercises': 'exercise' };
+    function fromHash() {
+      const d = HASH[location.hash];
+      if (!d) return;
+      setDomain(d);
+      root.scrollIntoView({ block: 'start' });
+    }
+    addEventListener('hashchange', fromHash);
+    fromHash();
   })();
 </script>
 
