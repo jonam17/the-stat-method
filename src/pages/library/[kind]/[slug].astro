@@ -161,7 +161,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <h2 id="sources">Where it comes from</h2>
         {d.sources.foods ? <>
           <ol class="lib-foods">{d.sources.foods.map(f => (
-            <li><span>{f.food}{f.form && <em class="lib-tag">{f.form}</em>}{f.fortified && <em class="lib-tag">fortified</em>}</span><span class="lib-serv">{f.serving}</span><b>{food(f)}</b></li>))}
+            <li><span>{f.food}{f.form && <em class="lib-tag lib-tag--form">{f.form}</em>}{f.fortified && <em class="lib-tag">fortified</em>}</span><span class="lib-serv">{f.serving}</span><b>{food(f)}</b></li>))}
           </ol>
           <p class="lib-small">How these five were chosen: {d.sources.rule}</p>
           <Fragment set:html={chart} />
@@ -178,7 +178,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
 
         {d.pairing && <>
           <h2 id="pairing">{d.pairing.heading}</h2>
-          <p set:html={cite(d.pairing.text)} />
+          <p class="lib-pair" set:html={cite(d.pairing.text)} />
         </>}
 
         <h2 id="united-states">In the United States</h2>
@@ -191,9 +191,14 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <p set:html={cite(d.deficiency)} />
 
         <h2 id="evidence">What the evidence supports, and what it doesn't</h2>
-        <p><b>Established.</b> <span set:html={cite(d.evidence.established)} /></p>
-        <p><b>Not supported by trials.</b> <span set:html={cite(d.evidence.notSupported)} /></p>
-        {d.evidence.mixed && <p><b>Mixed.</b> <span set:html={cite(d.evidence.mixed)} /></p>}
+        {/* One block per verdict, each with its own colour (CONVENTIONS §5): green for
+            established, amber for mixed, grey for not supported. The label carries the
+            meaning in words; the colour only repeats it. */}
+        <div class="lib-ev">
+          <div class="lib-ev-item" data-ev="established"><b class="lib-ev-label">Established</b><p set:html={cite(d.evidence.established)} /></div>
+          <div class="lib-ev-item" data-ev="not-supported"><b class="lib-ev-label">Not supported by trials</b><p set:html={cite(d.evidence.notSupported)} /></div>
+          {d.evidence.mixed && <div class="lib-ev-item" data-ev="mixed"><b class="lib-ev-label">Mixed</b><p set:html={cite(d.evidence.mixed)} /></div>}
+        </div>
         {related && <p>{d.related.lead} <a href={`/articles/${related.id}/`}>{related.data.title}</a>.</p>}
 
         {d.disagreements && <>

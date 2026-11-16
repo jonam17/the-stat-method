@@ -1752,6 +1752,30 @@ footer{border-top:1px solid var(--rule)}
 .ex-kind{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
   border:1px solid var(--rule,#ccc);padding:2px 7px;margin-right:6px;vertical-align:1px}
 
+/* ---- Library content accents (roadmap item 23, v2.43.0) ----
+   A few colours tied to fields the data already has. They use the state palette of
+   CONVENTIONS §5 (green, blue, amber, grey), never --signal and never the warning bar's
+   red, so the red bar stays the strongest thing on a Library page. Every label says its
+   meaning in words; colour only repeats it. Contrast is measured in both themes
+   (README, v2.43.0). */
+.lib-page{--ev-green:#2F6B43;--ev-blue:#2A6070;--ev-amber:#8A5A12;--ev-grey:#4A4A46}
+:root[data-theme="dark"] .lib-page{--ev-green:#7FC79A;--ev-blue:#7FBBD0;--ev-amber:#E0B063;--ev-grey:#B8B8B2}
+.lib-ev{display:grid;gap:14px;margin:0 0 20px}
+.lib-ev-item{--c:var(--ev-grey);border-left:3px solid var(--c);padding:2px 0 2px 16px}
+.lib-ev-item[data-ev="established"]{--c:var(--ev-green)}
+.lib-ev-item[data-ev="mixed"]{--c:var(--ev-amber)}
+.lib-ev-label{display:block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.prose .lib-ev-item p{margin:0}
+/* A tag never breaks across two lines: with a tint, a split tag reads as two tags. */
+.lib-tag{white-space:nowrap;display:inline-block}
+.lib-tag--form{color:var(--ev-blue);border-color:color-mix(in srgb,var(--ev-blue) 45%,transparent);
+  background:color-mix(in srgb,var(--ev-blue) 8%,transparent)}
+.prose .lib-pair{border-left:3px solid var(--ev-blue);padding:2px 0 2px 16px}
+.ex-kind{color:var(--ev-grey);border-color:color-mix(in srgb,var(--ev-grey) 45%,transparent)}
+.ex-kind[data-kind="training"],.ex-kind[data-kind="review"]{color:var(--ev-green);
+  border-color:color-mix(in srgb,var(--ev-green) 45%,transparent);background:color-mix(in srgb,var(--ev-green) 8%,transparent)}
+
 /* ---- Local preview banner (npm run dev only; never rendered in a build) ---- */
 .preview-banner{font-family:var(--mono);font-size:12px;letter-spacing:.04em;line-height:1.5;
   background:#FFF4D6;color:#5C4400;border:1px solid #E0C068;padding:10px 14px;margin:0 0 18px}

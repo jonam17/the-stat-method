@@ -342,6 +342,21 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.43.0 — Library pages: colour accents for evidence, forms and pairing
+
+- **Evidence verdicts stand apart** (roadmap item 23). On every nutrient page, "Established", "Not supported
+  by trials" and "Mixed" are now three blocks, each with a small label and a line down the left: green, grey
+  and amber. The wording and order are unchanged.
+- **Food form tags are tinted blue** (D3, heme, K1 and so on) in "Where it comes from"; "fortified" stays
+  grey. A tag no longer splits across two lines on a phone.
+- **The pairing paragraph** (calcium, vitamin B12 and vitamin D) has a blue line down the left.
+- **Exercise evidence labels:** "Training study" and "Review" are green, the two kinds that qualify an
+  exercise for the Library; "Muscle-length study" and "EMG study" are grey.
+- The colours are the existing state palette (CONVENTIONS §5), scoped to Library pages. No orange and no red,
+  so the warning bar stays the strongest thing on a page; every label says its meaning in words. Measured
+  contrast of the coloured text and lines: 5.0–8.4:1 on the light page, 8.1–9.7:1 on the dark one (AA is
+  4.5:1 for text).
+
 ### v2.42.0 — New Resources page; Articles category pages in the row style
 
 - **The Resources page is redesigned** in the style of the Tools page (roadmap item 58). A short hero with the

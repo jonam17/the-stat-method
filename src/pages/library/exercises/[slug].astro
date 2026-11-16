@@ -50,7 +50,7 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
 
         <h2 id="evidence">The evidence</h2>
         <ul class="ex-evidence">
-          {d.evidence.map(x => (<li><span class="ex-kind">{EVIDENCE_KINDS[x.kind]}</span> <span set:html={cite(x.claim)} /></li>))}
+          {d.evidence.map(x => (<li><span class="ex-kind" data-kind={x.kind}>{EVIDENCE_KINDS[x.kind]}</span> <span set:html={cite(x.claim)} /></li>))}
         </ul>
 
         <h2 id="how">How to do it</h2>
