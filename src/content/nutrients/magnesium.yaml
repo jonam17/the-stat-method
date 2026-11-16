@@ -158,8 +158,10 @@ references:
   - text: "Holland S, Silberstein SD, Freitag F, Dodick DW, Argoff C, Ashman E. Evidence-based guideline update: NSAIDs and other complementary treatments for episodic migraine prevention in adults. Neurology 2012;78:1346-53."
     url: https://pubmed.ncbi.nlm.nih.gov/22529203/
     status: fact-sheet
-  - text: "U.S. Food and Drug Administration. Proton Pump Inhibitor Drugs (PPIs): Drug Safety Communication — Low Magnesium Levels Can Be Associated With Long-Term Use. 2 March 2011."
-    url: https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-low-magnesium-levels-can-be-associated-long-term-use-proton-pump
+  # The FDA page was removed (404 found by the weekly link check, 2026-11-16; the older
+  # ucm245011.htm address is gone too, confirmed by the maintainer). The NIH fact sheet [1],
+  # which still cites it as its reference 64, carries every detail the page uses.
+  - text: "U.S. Food and Drug Administration. Proton Pump Inhibitor Drugs (PPIs): Drug Safety Communication — Low Magnesium Levels Can Be Associated With Long-Term Use. 2 March 2011. No longer online at fda.gov; its findings are summarised in the NIH fact sheet [1]."
     status: fact-sheet
 
 aiAssisted: true

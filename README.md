@@ -357,6 +357,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.44.1 — First link check: one dead FDA link fixed
+
+- The first weekly link check (2026-11-16) found 227 links: 211 OK, 15 refused by their sites (publishers and
+  apps blocking automated requests, as expected), and **1 broken**: the FDA's 2011 safety notice on heartburn
+  drugs (PPIs) and low magnesium, cited on the Magnesium page. FDA has removed the page, at both its current and
+  its older address; the NIH fact sheet still links the dead one.
+- The reference keeps the FDA notice as the original source, without the dead link, and says its findings are
+  summarised in the NIH fact sheet (reference 1), which carries every detail the page states: the example drugs,
+  "typically more than a year", the quarter of cases where supplements did not correct it, and the advice to
+  check magnesium. The sentence on the page is unchanged.
+
 ### v2.44.0 — Weekly check of external links
 
 - **New: `npm run links`** and a weekly GitHub workflow (`.github/workflows/links.yml`, Mondays, plus a
