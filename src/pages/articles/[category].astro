@@ -9,7 +9,7 @@ import { publishedArticles } from '../../data/articles.js';
  * static pages cost nothing, work without JavaScript, and are indexable.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
+import { TOOLS } from '../../data/tools.js';
 import { CATEGORIES } from '../../data/categories.js';
 
 export async function getStaticPaths() {
@@ -26,6 +26,8 @@ export async function getStaticPaths() {
 }
 
 const { category, articles } = Astro.props;
+const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const toolName = slug => TOOLS.find(t => t.slug === slug)?.name;
 
 const schema = {
   '@context': 'https://schema.org',
@@ -46,16 +48,18 @@ const schema = {
   pageType="CollectionPage"
   extraJsonLd={[schema]}
   breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: category.name, href: `/articles/${category.slug}/` }]}>
-  <div class="wrap section">
+  <div class="wrap ac">
     <div class="crumb"><a href="/articles/">Articles</a> / {category.name}</div>
 
-    <div class="section-head">
-      <h1>{category.name}</h1>
-      <span class="eyebrow">{articles.length} {articles.length === 1 ? 'post' : 'posts'}</span>
-    </div>
-    <p class="cat-intro">{category.description}</p>
+    <header class="ac-hero">
+      <div>
+        <span class="eyebrow"><span class="ac-dot" data-c={category.name} aria-hidden="true"></span>{articles.length} {articles.length === 1 ? 'article' : 'articles'}</span>
+        <h1>{category.name}</h1>
+      </div>
+      <p>{category.description}</p>
+    </header>
 
-    <nav class="cat-filter" aria-label="Article categories">
+    <nav class="cat-filter ac-filter" aria-label="Article categories">
       <a href="/articles/">All</a>
       {CATEGORIES.map(c => (
         <a href={`/articles/${c.slug}/`} data-cat={c.name}
@@ -63,6 +67,46 @@ const schema = {
       ))}
     </nav>
 
-    <div class="cards">{articles.map(a => <ArticleCard article={a} />)}</div>
+    <ul class="ac-rows">
+      {articles.map(a => (
+        <li>
+          <a href={`/articles/${a.id}/`}>
+            <span class="ac-tag"><span class="ac-dot" data-c={a.data.category} aria-hidden="true"></span>{a.data.category}{toolName(a.data.relatedTool) && <> · {toolName(a.data.relatedTool)}</>}</span>
+            <strong>{a.data.title}</strong>
+            <span class="ac-dek">{a.data.dek}</span>
+            <span class="ac-meta">{fmt(a.data.published)} · {a.data.readMinutes} min read · {a.data.references.length} references</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a class="section-more" href="/articles/">Search all articles <span aria-hidden="true">→</span></a>
   </div>
 </BaseLayout>
+
+<style>
+  /* Same rows as the Articles page (v2.40.0); these pages stay static, with no script. */
+  .ac{padding-top:clamp(20px,4vw,40px);padding-bottom:80px}
+  .ac-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,5vw,64px);align-items:end;
+    padding:14px 0 26px;border-bottom:1.5px solid var(--rule);margin-bottom:22px}
+  .ac-hero .eyebrow{display:flex;align-items:center;gap:8px}
+  .ac-hero h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.4vw,76px);line-height:.95;
+    letter-spacing:-.05em;margin:12px 0 0}
+  .ac-hero p{margin:0;color:var(--ink-soft);font-size:16px;max-width:46ch}
+  .ac-filter{margin-bottom:18px}
+  .ac-rows{list-style:none;padding:0;margin:0 0 6px;border-top:1.5px solid var(--rule);
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+  .ac-rows li{border-bottom:1px solid var(--line)}
+  .ac-rows a{display:grid;gap:4px;padding:14px 0;text-decoration:none;color:inherit}
+  .ac-rows a:hover strong{text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+  .ac-rows strong{font-family:var(--display);font-size:17px;letter-spacing:-.01em}
+  .ac-dek{font-size:13.5px;color:var(--ink-soft)}
+  .ac-meta,.ac-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+  .ac-tag{display:flex;align-items:center;gap:7px;letter-spacing:.1em}
+  .ac-dot{width:12px;height:2px;background:var(--ink-mute);flex:none;display:inline-block}
+  .ac-dot[data-c="Nutrition"]{background:var(--nutrition)}
+  .ac-dot[data-c="Exercise"]{background:var(--exercise)}
+  .ac-dot[data-c="Health"]{background:var(--health)}
+  .ac-dot[data-c="Recovery"]{background:var(--recovery)}
+  @media (max-width:860px){ .ac-hero{grid-template-columns:1fr} }
+  @media (max-width:640px){ .ac-rows{grid-template-columns:1fr} }
+</style>

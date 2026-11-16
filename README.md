@@ -342,6 +342,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.42.0 — New Resources page; Articles category pages in the row style
+
+- **The Resources page is redesigned** in the style of the Tools page (roadmap item 58). A short hero with the
+  counts (resources, groups, how many carry a caveat), the three inclusion rules as a row of three, a sticky
+  jump bar to the seven groups with their counts, then one numbered section per group with its intro and
+  compact rows: name and link, what it is, the cost label, the description and any "Read critically" note.
+  The content is the same 39 entries; no search or filters.
+- **Fixed a doubled label:** the Huberman note began with "Read critically." and the page adds that label, so
+  it read "Read critically: Read critically."
+- **The four Articles category pages** (Nutrition, Exercise, Health, Recovery) now use the Articles page's row
+  style, with the category buttons kept as links. They stay static, with no script.
+- **The footer's middle column is now "Read":** Articles, Library (shown when the Library is live) and
+  Resources. Its old Nutrition, Training and Recovery links all went to `/articles/`.
+- The Library and Articles hero labels lose their "01 /" and "02 /" numbers; numbers now only count sections
+  inside a page.
+- The Sleep Cycle Calculator's description is shortened to 158 characters (search results cut at about 165).
+- Removed: the `ArticleCard` component (no longer used) and the old Resources card styles.
+
 ### v2.41.0 — New home page
 
 - **The home page is redesigned** in the style of the Tools, Library and Articles pages (roadmap item 58).

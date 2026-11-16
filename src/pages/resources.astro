@@ -1,21 +1,34 @@
 ---
+/**
+ * The Resources page (roadmap item 58, v2.42.0), in the style of the Tools page:
+ * hero, the three inclusion rules, a sticky jump bar, then one numbered section
+ * per group with compact rows. Content comes from src/data/resources.js.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { RESOURCES } from '../data/resources.js';
+
+const slug = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const total = RESOURCES.reduce((n, g) => n + g.items.length, 0);
+const withCaveats = RESOURCES.reduce((n, g) => n + g.items.filter(i => i.caveat).length, 0);
+const num = n => String(n).padStart(2, '0');
 ---
 <BaseLayout title="Resources — The Stat Method"
   description="Trackers, primary sources, and people worth following — with honest notes on where each is strong and where to read critically.">
-  <div class="wrap section">
-    <div class="section-head">
-      <h1>Resources</h1>
-      <span class="eyebrow">Curated · caveats included</span>
-    </div>
+  <div class="wrap tools-hub rs">
+    <header class="tools-hero">
+      <div>
+        <div class="eyebrow">Curated · caveats included</div>
+        <h1>Worth reading,<br />with caveats.</h1>
+      </div>
+      <div class="tools-hero-copy">
+        <p>Things worth your attention if you use the calculators here. Where a source is widely followed but has drawn credible pushback, the note sits right next to it.</p>
+        <div class="tools-proof"><span>{total} RESOURCES</span><span>{RESOURCES.length} GROUPS</span><span>{withCaveats} WITH CAVEATS</span></div>
+      </div>
+    </header>
 
-    <div class="res-intro">
-      <p>
-        Things worth your attention if you use the calculators here. Three rules govern
-        what appears on this page:
-      </p>
-      <ul>
+    <section class="rs-rules" aria-labelledby="rs-rules-h">
+      <h2 id="rs-rules-h" class="eyebrow">Three rules govern what appears on this page</h2>
+      <ol>
         <li><strong>Useful, not merely popular.</strong> Audience size is not a criterion.</li>
         <li><strong>Criticism is stated, not hidden.</strong> Where a source is widely
           followed but has drawn credible pushback for outrunning its evidence, that note
@@ -23,45 +36,99 @@ import { RESOURCES } from '../data/resources.js';
           reputations by omission.</li>
         <li><strong>Affiliate links are labelled inline</strong> — on the item itself, not
           in a footer. Nothing on this page is required to use any calculator here.</li>
-      </ul>
+      </ol>
+    </section>
+
+    <nav class="tool-index-nav" aria-label="Resource groups">
+      {RESOURCES.map((g, i) => (
+        <a href={`#${slug(g.group)}`}><span>{num(i + 1)}</span>{g.group}<em>{g.items.length}</em></a>
+      ))}
+    </nav>
+
+    <div class="tool-groups">
+      {RESOURCES.map((g, gi) => (
+        <section class="tool-group rs-group" id={slug(g.group)} aria-labelledby={`${slug(g.group)}-h`}>
+          <div class="tool-group-head">
+            <div>
+              <span class="eyebrow">{num(gi + 1)} / {g.items.length} {g.items.length === 1 ? 'resource' : 'resources'}</span>
+              <h2 id={`${slug(g.group)}-h`}>{g.group}</h2>
+            </div>
+            <p>{g.blurb}{g.affiliate && <> <span class="res-aff">Contains affiliate links</span></>}</p>
+          </div>
+          <ul class="rs-list">
+            {g.items.map((i, ii) => (
+              <li class="rs-row">
+                <span class="rs-num">{num(ii + 1)}</span>
+                <div class="rs-main">
+                  <h3>
+                    {i.url
+                      ? <a href={i.url} rel={i.note === 'Affiliate' ? 'nofollow sponsored noopener' : 'noopener'} target="_blank">{i.name}<span aria-hidden="true"> ↗</span></a>
+                      : i.name}
+                  </h3>
+                  <span class="rs-role">{i.role}</span>
+                </div>
+                {i.note && <span class="rs-cost"><span class={`res-note n-${i.note.toLowerCase().replace(/\s+/g, '-')}`}>{i.note}</span></span>}
+                <div class="rs-body">
+                  <p>{i.why}</p>
+                  {i.caveat && <p class="res-caveat"><strong>Read critically:</strong> {i.caveat}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
 
-    {RESOURCES.map(group => (
-      <section class="res-group">
-        <div class="res-head">
-          <h2 class="res-group-h">{group.group}</h2>
-          {group.affiliate && <span class="res-aff">Contains affiliate links</span>}
-        </div>
-        <p class="res-blurb">{group.blurb}</p>
-        <div class="res-grid">
-          {group.items.map(i => (
-            <div class={`res-card ${i.caveat ? 'has-caveat' : ''}`}>
-              <div class="res-top">
-                <span class="res-role">{i.role}</span>
-                {i.note && <span class={`res-note n-${i.note.toLowerCase().replace(/\s+/g, '-')}`}>{i.note}</span>}
-              </div>
-              <h3>
-                {i.url
-                  ? <a href={i.url} rel={i.note === 'Affiliate'
-                      ? 'nofollow sponsored noopener' : 'noopener'} target="_blank">{i.name}</a>
-                  : i.name}
-              </h3>
-              <p>{i.why}</p>
-              {i.caveat && (
-                <p class="res-caveat"><strong>Read critically:</strong> {i.caveat}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-    ))}
-
-    <section class="res-group">
-      <div class="res-head"><h3>Suggest a resource</h3></div>
-      <p class="res-blurb">
-        If something belongs here, or something listed no longer deserves to be, open an
-        issue on GitHub. Removals are as welcome as additions.
-      </p>
+    <section class="rs-suggest">
+      <div>
+        <span class="eyebrow">Suggest a resource</span>
+        <h2>Something missing, or no longer earning its place?</h2>
+      </div>
+      <p>If something belongs here, or something listed no longer deserves to be, open an
+        issue on GitHub. Removals are as welcome as additions.</p>
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  .rs-rules{padding:26px 0 34px}
+  .rs-rules h2{margin:0 0 14px}
+  .rs-rules ol{list-style:none;counter-reset:r;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .rs-rules li{counter-increment:r;border-top:2px solid var(--line-strong);padding-top:11px;font-size:13.5px;line-height:1.55;color:var(--ink-soft)}
+  .rs-rules li::before{content:counter(r,decimal-leading-zero);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--signal);margin-bottom:6px}
+  .rs-rules strong{color:var(--ink);font-weight:600}
+
+  .rs-group{scroll-margin-top:124px}
+  .rs-group .tool-group-head p{max-width:54ch}
+  .rs-group .res-aff{margin-left:6px;vertical-align:middle}
+  .rs-list{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+  .rs-row{display:grid;grid-template-columns:54px minmax(170px,.9fr) minmax(0,2fr) 92px;
+    grid-template-areas:"num main body cost";gap:8px 22px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}
+  .rs-row:hover{background:#EFEDE8}
+  .rs-num{grid-area:num;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);padding-top:4px}
+  .rs-main{grid-area:main;display:grid;gap:4px;align-content:start;min-width:0}
+  .rs-main h3{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:0;overflow-wrap:anywhere}
+  .rs-main h3 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line-strong)}
+  .rs-main h3 a:hover{border-color:var(--signal)}
+  .rs-role{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+  .rs-body{grid-area:body;min-width:0}
+  .rs-body p{margin:0;font-size:13px;line-height:1.55;color:var(--ink-soft)}
+  .rs-cost{grid-area:cost;justify-self:end;padding-top:2px}
+
+  .rs-suggest{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-top:clamp(52px,7vw,82px);
+    padding-top:26px;border-top:1.5px solid var(--ink)}
+  .rs-suggest h2{font-family:var(--display);font-size:clamp(22px,3vw,30px);letter-spacing:-.03em;line-height:1.1;margin:8px 0 0}
+  .rs-suggest p{margin:0;color:var(--ink-soft);font-size:14px;max-width:46ch}
+
+  @media (max-width:980px){
+    .rs-rules ol{grid-template-columns:1fr;gap:16px}
+    .rs-suggest{grid-template-columns:1fr;gap:12px}
+  }
+  @media (max-width:760px){
+    .rs-group{scroll-margin-top:112px}
+    .rs-row{grid-template-columns:32px minmax(0,1fr);
+      grid-template-areas:"num main" "num cost" "num body";gap:8px 12px}
+    .rs-cost{justify-self:start;padding-top:0}
+  }
+  :global(:root[data-theme="dark"]) .rs-row:hover{background:#171717}
+</style>

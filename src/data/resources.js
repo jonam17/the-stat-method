@@ -115,7 +115,7 @@ export const RESOURCES = [
         role: 'Neuroscience & protocols',
         why: 'Stanford neuroscientist with an enormous audience and genuinely useful episodes on sleep, light exposure and circadian rhythm.',
         note: 'Free',
-        caveat: 'Read critically. Huberman has drawn substantive criticism from other scientists for presenting preliminary or mechanistic findings as settled protocols, and for supplement recommendations that outrun the human evidence. Useful as a starting point for topics, not as a final citation — check the underlying studies before acting on a protocol.' },
+        caveat: 'Huberman has drawn substantive criticism from other scientists for presenting preliminary or mechanistic findings as settled protocols, and for supplement recommendations that outrun the human evidence. Useful as a starting point for topics, not as a final citation — check the underlying studies before acting on a protocol.' },
       { name: 'Dr. Peter Attia', url: 'https://peterattiamd.com',
         role: 'Longevity & metabolic health',
         why: 'Physician focused on healthspan, lipidology and metabolic disease. Detailed and clinically grounded.',
