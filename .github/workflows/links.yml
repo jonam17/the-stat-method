@@ -1,0 +1,35 @@
+name: Link check
+
+# Weekly check of every external link on the built site: article references,
+# Library sources, the Resources page (roadmap item 24). Separate from CI and
+# from deploys, so it can never block a release.
+#
+# The run fails (red, and GitHub emails you) only when a link is broken: the
+# page is gone (404/410) or the domain no longer exists. Links whose site
+# refused or ignored an automated request are listed as "couldn't check" in the
+# run summary and never fail the run. Open the run's Summary page for the report.
+#
+# Mondays 11:17 UTC. GitHub disables scheduled workflows on public repositories
+# after 60 days without activity, and emails the owner; any commit re-enables it.
+
+on:
+  schedule:
+    - cron: '17 11 * * 1'
+  workflow_dispatch:        # "Run workflow" button
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run links

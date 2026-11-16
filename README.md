@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,205 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,218 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -332,6 +332,21 @@ A test caught a real calibration error during development: the Riegel confidence
 was flagging a 10K → half-marathon prediction as unreliable when it is a standard,
 trustworthy extrapolation. The engine was fixed rather than the test.
 
+### External links (weekly)
+
+```bash
+npm run build && npm run links
+```
+
+Checks every external link on the built site — article references, Library sources, the Resources
+page — and sorts each into **OK**, **broken** (the page is gone, 404/410, or the domain no longer
+exists after a second try) or **couldn't check** (the site refused or ignored an automated request,
+which publishers often do; never counted as broken). DOIs are checked at doi.org, not at the
+publisher. It runs every Monday on GitHub (`.github/workflows/links.yml`, also a **Run workflow**
+button), apart from CI and deploys, so it can never block a release. The run fails, and GitHub emails
+you, only when a link is broken; the report is on the run's **Summary** page. If the runner cannot
+reach the internet at all it says so and checks nothing, rather than calling every link broken.
+
 ---
 
 ## Writing articles
@@ -341,6 +356,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.44.0 — Weekly check of external links
+
+- **New: `npm run links`** and a weekly GitHub workflow (`.github/workflows/links.yml`, Mondays, plus a
+  **Run workflow** button) that check every external link on the built site: 227 links on 118 pages today,
+  mostly article and Library references (roadmap item 24). See *Testing → External links*.
+- Three outcomes: OK; **broken** (404/410, or no such domain on two tries); **couldn't check** (refused,
+  rate-limited, server error or timeout — common with publishers, never counted as broken). DOIs are checked
+  at doi.org's handle API, which says whether the DOI exists without depending on the publisher.
+- Polite by design: one request at a time per site with a pause between them, a light HEAD request first,
+  and a named user agent.
+- The run goes red only for broken links; it never runs in CI or on deploy. A runner with no network says
+  so and checks nothing (found while testing: without that, a network outage reported every link broken).
+- 13 new tests (fake responses plus a local test server); 1,218 in total.
 
 ### v2.43.0 — Library pages: colour accents for evidence, forms and pairing
 
