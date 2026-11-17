@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { TOOLS } from '../../data/tools.js';
 import { SEO_PRIORITY_TOOLS } from '../../data/seo-priority.js';
+import { toolExample } from '../../data/tool-examples.js';
 
 const live = TOOLS.filter(t => t.live && t.slug);
 const planned = TOOLS.filter(t => !t.live);
@@ -82,16 +83,24 @@ const categoryIntro = {
               <p>{categoryIntro[group]}</p>
             </div>
             <div class="instrument-library">
-              {items.map((t, index) => (
-                <a class="library-row" href={`/tools/${t.slug}/`}>
-                  <span class="library-num">{String(index + 1).padStart(2, '0')}</span>
-                  <span class="library-main">
-                    <strong>{t.name}</strong>
-                    <span>{t.desc}</span>
-                  </span>
-                  <span class="library-status"><span class="pill-live">LIVE</span></span>
-                </a>
-              ))}
+              {items.map((t, index) => {
+                const e = toolExample(t.slug);
+                return (
+                  <a class="tp-row" href={`/tools/${t.slug}/`}>
+                    <span class="tp-num">{String(index + 1).padStart(2, '0')}</span>
+                    <span class="tp-main">
+                      <span class="tp-name"><strong>{t.name}</strong><span class="pill-live">LIVE</span></span>
+                      <span class="tp-desc">{t.desc}</span>
+                      <span class="tp-io"><b>You enter</b><span>{e.enter}</span><b>You get</b><span>{e.get}</span></span>
+                    </span>
+                    <span class="tp-ex">
+                      <b>Example</b>
+                      <span class="tp-in">{e.inputs}</span>
+                      <span class="tp-out"><span aria-hidden="true">→ </span>{e.result}</span>
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           </section>
         );
@@ -113,3 +122,27 @@ const categoryIntro = {
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  /* Calculator rows with "You enter / You get" and a worked example (roadmap item 11, v2.45.0).
+     Examples come from src/data/tool-examples.js, computed at build time. */
+  .tp-row{display:grid;grid-template-columns:54px minmax(0,1.35fr) minmax(220px,1fr);gap:22px;padding:18px 0;
+    border-bottom:1px solid var(--line);text-decoration:none;color:inherit;align-items:start;transition:background .15s}
+  .tp-row:hover{background:#EFEDE8}
+  .tp-num{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--ink-mute);padding-top:4px}
+  .tp-main{display:grid;gap:5px;min-width:0}
+  .tp-name{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px}
+  .tp-main strong{font-family:var(--display);font-size:16px;letter-spacing:-.01em}
+  .tp-row:hover .tp-main strong{text-decoration:underline;text-decoration-color:var(--signal);text-underline-offset:3px}
+  .tp-desc{font-size:13px;color:var(--ink-soft);line-height:1.5}
+  .tp-io{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 10px;margin-top:4px;font-size:12px;line-height:1.45;color:var(--ink-soft)}
+  .tp-io b,.tp-ex>b{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);padding-top:2px;white-space:nowrap}
+  .tp-ex{display:grid;gap:4px;align-content:start;border-left:2px solid var(--line-strong);padding:2px 0 2px 14px;min-width:0}
+  .tp-in{font-size:12px;color:var(--ink-soft);line-height:1.45}
+  .tp-out{font-family:var(--display);font-size:14px;font-weight:600;line-height:1.35;color:var(--ink);font-variant-numeric:tabular-nums}
+  @media (max-width:860px){
+    .tp-row{grid-template-columns:32px minmax(0,1fr);gap:10px 12px}
+    .tp-ex{grid-column:2}
+  }
+  :global(:root[data-theme="dark"]) .tp-row:hover{background:#171717}
+</style>

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,218 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,240 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.45.0 — Tools page: what each calculator needs, gives, and an example
+
+- **Every calculator on the Tools page now says what you enter and what you get** (roadmap item 11), with the
+  age range where one applies ("adults 18–99", from the shared limit in `src/engine/safety.js`).
+- **Each has a worked example**, e.g. the TDEE Calculator: man, 30, 80 kg, 178 cm, sedentary or light →
+  2,704 kcal/day. Examples use the calculator's own starting values, so opening the tool shows the same result.
+  They are computed at build time by the same engine functions the calculators call
+  (`src/data/tool-examples.js`), never typed; each was checked against the calculator's own result, including
+  its rounding (2.5 kg steps for the strength tools).
+- The LIVE pill now sits beside each name. The home page list and the tool pages' "Continue the calculation"
+  lists are unchanged.
+- 22 new tests (`tool-examples.test.js`): every live calculator has an entry, nothing else does, every example
+  produces real numbers, and four spot checks against what the tools show; 1,240 in total.
 
 ### v2.44.1 — First link check: one dead FDA link fixed
 
