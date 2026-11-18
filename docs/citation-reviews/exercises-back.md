@@ -120,3 +120,17 @@ that no trial testing the seated row alone was found.
 PubMed searches and Europe PMC were not reachable from this session (bot check; rate limit). A future pass
 with PubMed access should re-search the barbell row, dumbbell row and inverted row before the group is
 treated as settled.
+
+## 2026-11-17 — PubMed re-search for rows
+
+The maintainer ran the search on 2026-11-15:
+`("bent-over row" OR "barbell row" OR "dumbbell row" OR "inverted row" OR "seated row") AND (hypertrophy OR "muscle thickness" OR strength) AND training`
+(117 records, exported as abstracts). Every record describing a multi-week training study was read as an abstract.
+No study measured back muscle size after training rows.
+
+| Source | Read | Why it does not qualify a row |
+|---|---|---|
+| Hernández-Belmonte A, Martínez-Cava A, Buendía-Romero Á, Franco-López F, Pallarés JG. Med Sci Sports Exerc 2023;55(12):2316-2327. https://doi.org/10.1249/MSS.0000000000003271 | Full-text PDF (maintainer), every page | 36 trained men completed 8 weeks of squat, bench press, prone bench pull (chest-supported row) and shoulder press, free weights vs machines. Prone-bench-pull 1RM rose in both groups, but within a four-exercise program; size was measured only in the quadriceps, chest and rectus abdominis. No funding; no competing interests |
+| Mannarino P, et al. J Strength Cond Res 2021;35(10):2677-2681 | Abstract only (full text not obtainable) | One-arm dumbbell row vs biceps curl, 10 untrained men, 8 weeks: measured the elbow flexors (about 5% growth with rows), not the back |
+
+Decision: no row added. Re-search when a trial measures back muscle size after rows.

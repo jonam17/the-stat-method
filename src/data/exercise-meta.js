@@ -10,6 +10,7 @@ export const GROUPS = [
   { key: 'shoulders', label: 'Shoulders' },
   { key: 'arms', label: 'Arms' },
   { key: 'core', label: 'Core' },
+  { key: 'calves', label: 'Calves' },
 ];
 export const MAX_PER_GROUP = 5;
 

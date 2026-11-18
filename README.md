@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,240 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,264 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,22 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.46.0 — Library: a Calves group with three exercises
+
+- **New muscle group, Calves** (roadmap item 6), with three exercises, each resting on full-text training studies
+  read for this release (review record: `docs/citation-reviews/exercises-calves.md`):
+  - **Standing calf raise** — two ten-week trials in untrained men (Larsen 2025; Goli 2026): ordinary sets to
+    failure grew the gastrocnemius by about 7–8%.
+  - **Leg-press calf raise** — an eight-week trial in untrained women (Kassiano 2023): full range grew the
+    gastrocnemius about 7%, the heels-down half about 15%, the top half least.
+  - **Body-weight heel raise** — sedentary young men (Nakamura 2025): only the leg that lowered slowly on its own
+    grew (about 9%); women aged 60–79 doing 100 a day (Fujiwara 2010), a study with no comparison group, which the
+    page says.
+- **Not added, on purpose:** the seated calf raise, whose only trial on its own (trained lifters, six weeks) found
+  no growth; core exercises, whose trials each tested a whole program rather than one exercise; and rows and the
+  overhead press, for which no trial measured back or shoulder muscle size. Reasons are in the review records.
+- 24 new tests (the per-exercise checks run on the three entries); 1,264 in total.
 
 ### v2.45.0 — Tools page: what each calculator needs, gives, and an example
 

@@ -49,3 +49,17 @@ around −0.25 mm). No interval is used on the page; the conclusion rests on the
 | ResearchGate: "Different shoulder exercises affect the activation of deltoid portions in resistance-trained individuals" | EMG only |
 | "Muscle hypertrophy response across four muscles involved in the bench press exercise" (10-week RCT, 2024) | A bench press trial; belongs to the chest group if anywhere, and only its title was seen |
 | SportRxiv preprints 611 and 660 | Not reachable (robots-blocked) |
+
+## 2026-11-17 — PubMed re-search for the overhead press
+
+The maintainer ran the search on 2026-11-15:
+`("overhead press" OR "shoulder press" OR "military press") AND (hypertrophy OR "muscle thickness" OR "muscle size" OR strength) AND (training OR trial)`
+(190 records, exported as abstracts). Every record describing a multi-week training study was read as an abstract.
+No study measured deltoid size after training the overhead press; the press appears only inside whole-body
+programs.
+
+| Source | Read | Why it does not qualify |
+|---|---|---|
+| Hernández-Belmonte A, et al. Med Sci Sports Exerc 2023;55(12):2316-2327. https://doi.org/10.1249/MSS.0000000000003271 | Full-text PDF (maintainer), every page | Seated shoulder press was one of four exercises trained together for 8 weeks by 36 trained men; press 1RM rose, but shoulder size was not measured (see `exercises-back.md`) |
+
+Decision: overhead press not added.

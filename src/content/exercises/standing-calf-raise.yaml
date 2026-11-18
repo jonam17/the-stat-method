@@ -1,0 +1,48 @@
+# Calves · Standing calf raise. Sources read 2026-11-16 — see
+# docs/citation-reviews/exercises-calves.md.
+name: Standing calf raise
+group: calves
+dek: Trains the calves with the knees straight. In two ten-week trials, ordinary sets to failure grew the gastrocnemius by about 7–8%.
+primary: [Calves (gastrocnemius)]
+secondary: [Soleus]
+equipment: [machine]
+joints: [ankle]
+progressionClass: isolation
+whyHere: >-
+  The standing calf raise lifts your body weight plus the load onto the balls of your feet with the knees
+  straight. In two ten-week trials in untrained men, each person trained one leg with ordinary full-range
+  sets to failure, and that leg's gastrocnemius thickened by about 7–8% [1] [2]. Both trials also tested
+  carrying on past failure with short reps in the heel-down position: one found it added a little more
+  growth [1], the other that it matched the ordinary sets with half as many sets [2].
+evidence:
+  - kind: training
+    claim: >-
+      Twenty-three untrained men trained the standing calf raise on a Smith machine, one leg at a time,
+      twice a week for ten weeks, three to four sets of 10–20 reps to failure. The leg trained with
+      ordinary sets grew 6.7% in medial gastrocnemius thickness; the other leg, which carried on after
+      failure with short reps near the heel-down position, grew 9.6%, and the analysis favoured it.
+      Only the medial gastrocnemius was measured, there was no group that did not train, and the authors
+      note the results may not apply to women or trained lifters [1].
+  - kind: training
+    claim: >-
+      Sixteen untrained men trained the standing calf raise on a plate-loaded calf machine, one leg at a
+      time, twice a week for ten weeks. One leg did four to six sets of 10–14 reps to failure; the other
+      did half as many sets, each carried on after failure with short reps between the heel-down position
+      and a flat foot. Both legs' medial and lateral gastrocnemius thickened by about 7–8%, and the
+      authors judged the two equivalent. The soleus was not measured and there was no group that did
+      not train [2].
+howTo:
+  - Stand in a standing calf-raise machine [2] or under a Smith-machine bar [1] with your knees straight [1], the balls of your feet on a step so your heels can drop below them.
+  - Lower your heels as far as they comfortably go, then rise onto your toes as high as you can [2].
+  - Move steadily. One trial used about one second up and two seconds down [2].
+  - Both trials trained one leg at a time [1] [2].
+alternatives: [leg-press-calf-raise, body-weight-heel-raise]
+checked: 2026-11-17
+references:
+  - text: "Larsen S, Swinton PA, Sandberg NØ, Kristiansen BS, Fredriksen AB, Falch HN, van den Tillaar R, Wolf M. Resistance training beyond momentary failure: the effects of past-failure partials on muscle hypertrophy in the gastrocnemius. Front Psychol, 2025;16:1494323."
+    url: "https://doi.org/10.3389/fpsyg.2025.1494323"
+    status: checked
+  - text: "Goli A, Attarieh P, Nunes JP, Khani S, Negahdar S, Fashi M, Ahmadizad S. Does performing partial repetitions beyond momentary failure enhance muscle hypertrophy in volume-load-equated calf-raise resistance training? Int J Exerc Sci, 2026;19(4):4003."
+    url: "https://doi.org/10.70252/IJES2026403"
+    status: checked
+aiAssisted: true

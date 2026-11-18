@@ -1,0 +1,45 @@
+# Calves · Leg-press calf raise. Sources read 2026-11-17 — see
+# docs/citation-reviews/exercises-calves.md.
+name: Leg-press calf raise
+group: calves
+dek: Calf raises on a leg press with the knees straight. In one eight-week trial, the heels-down half of the movement grew the gastrocnemius most.
+primary: [Calves (gastrocnemius)]
+secondary: [Soleus]
+equipment: [machine]
+joints: [ankle]
+progressionClass: isolation
+whyHere: >-
+  The leg-press calf raise pushes the platform away with the balls of your feet while your knees stay
+  straight. In an eight-week trial in untrained women, full-range sets grew the gastrocnemius by about 7%,
+  training only the heels-down half of the movement grew it about twice as much, and training only the
+  top half grew it least [1].
+evidence:
+  - kind: training
+    claim: >-
+      Forty-two untrained women aged 18–35 trained the calf raise on a horizontal leg-press machine with
+      their knees straight, three times a week for eight weeks, three sets of 15–20 reps to failure, in one
+      of three ranges. Full range grew the medial and lateral gastrocnemius by 6.7% and 7.3%. The heels-down
+      half, from full stretch to a flat foot, grew them by 15.2% and 14.9%, more than full range for the
+      medial head. The top half grew them by 3.4% (not a significant change) and 6.2%. Only the
+      gastrocnemius was measured, there was no group that did not train, and diet was not recorded [1].
+  - kind: training
+    claim: >-
+      Twenty-one untrained men did the straight-leg calf raise on a leg press and the seated calf raise in
+      the same sessions, twice a week for eight weeks, four sets of each to failure. Their calf muscles
+      grew, but because the two exercises were always done together, the trial cannot say how much came
+      from either one [2].
+howTo:
+  - Sit in the leg press with the balls of your feet on the bottom edge of the platform and your knees straight [1].
+  - Let the platform bring your heels back as far as they comfortably go, then push it away onto your toes as far as you can [1].
+  - Move steadily. The trial used about one second to push and two to return [1].
+  - To train only the heels-down half, as the group that grew most did, stop each rep once your feet are flat, at right angles to your shins [1].
+alternatives: [standing-calf-raise, body-weight-heel-raise]
+checked: 2026-11-17
+references:
+  - text: "Kassiano W, Costa B, Kunevaliki G, Soares D, Zacarias G, Manske I, Takaki Y, Ruggiero MF, Stavinski N, Francsuel J, Tricoli I, Carneiro MAS, Cyrino ES. Greater gastrocnemius muscle hypertrophy after partial range of motion training performed at long muscle lengths. J Strength Cond Res, 2023;37(9):1746-1753."
+    url: "https://doi.org/10.1519/JSC.0000000000004460"
+    status: checked
+  - text: "Van Every DW, Coleman M, Rosa A, Zambrano H, Plotkin D, Torres X, Mercado M, De Souza EO, Alto A, Oberlin DJ, Vigotsky AD, Schoenfeld BJ. Loaded inter-set stretch may selectively enhance muscular adaptations of the plantar flexors. PLoS One, 2022;17(9):e0273451."
+    url: "https://doi.org/10.1371/journal.pone.0273451"
+    status: checked
+aiAssisted: true

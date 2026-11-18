@@ -1,0 +1,47 @@
+# Calves · Body-weight heel raise. Sources read 2026-11-17 — see
+# docs/citation-reviews/exercises-calves.md.
+name: Body-weight heel raise
+group: calves
+dek: Calf raises with nothing but a step. In one trial, lowering slowly on one leg grew the calves; raising alone did not.
+primary: [Calves (gastrocnemius)]
+secondary: [Soleus]
+equipment: [bodyweight]
+joints: [ankle]
+progressionClass: isolation
+whyHere: >-
+  The heel raise needs only a step and your own weight. In an eight-week trial in sedentary young men, the
+  leg that lowered the heel slowly on its own grew about 9% in calf muscle thickness and got stronger,
+  while the leg that only helped lift did not change [1]. In a two-month study, women aged 60 to 79 who did
+  100 heel raises a day, mostly at home, thickened their calf muscles and got stronger, though that study
+  had no group that did not train [2].
+evidence:
+  - kind: training
+    claim: >-
+      Fifteen sedentary men aged 20–21 stood on a 20-cm box, rose onto both toes in about one second, then
+      lowered one heel in about three seconds, twice a week for eight weeks, building from one set of 5 to
+      seven sets of 10. The lowering leg's medial and lateral gastrocnemius and soleus thickened by 9.0%,
+      14.4% and 5.5%, and its isometric strength rose 33%. The leg that only helped lift, and a group of
+      ten men who did not train, did not change. Measurements were not blinded [1].
+  - kind: training
+    claim: >-
+      Forty-nine women aged 60–79 who did no regular exercise did 100 two-footed heel raises a day, on at
+      least 40 days over two months, rising only as high as they could manage for all 100. Soleus thickness
+      rose 12.7%, medial gastrocnemius 6.6% and calf strength 25.8%, and no one reported an injury. There
+      was no group that did not train, so the study cannot separate the exercise's effect from anything
+      else that changed [2].
+howTo:
+  - Stand on a step or box with the balls of your feet on the edge so your heels can drop below them [1]. Hold a wall or rail for balance.
+  - Rise onto your toes with both feet, taking about one second [1].
+  - Shift your weight onto one foot and lower that heel slowly, over about three seconds, as far as it goes [1].
+  - The trial used the same leg for the lowering throughout [1]; to train both calves, give each leg its turn.
+  - A gentler start, as in the older women's study, is both feet flat on the floor, rising slowly and pausing about a second at the top [2].
+alternatives: [standing-calf-raise, leg-press-calf-raise]
+checked: 2026-11-17
+references:
+  - text: "Nakamura M, Kamazawa T, Sato S, Yosida R, Nosaka K. Comparison between concentric–eccentric and concentric-only plantar flexor exercise training with body weight for changes in muscle strength, range of motion, and muscle architecture. Eur J Appl Physiol, 2025;125(9):2625-2635."
+    url: "https://doi.org/10.1007/s00421-025-05782-6"
+    status: checked
+  - text: "Fujiwara K, Toyama H, Asai H, Maeda K, Yaguchi C. Regular heel-raise training focused on the soleus for the elderly: evaluation of muscle thickness by ultrasound. J Physiol Anthropol, 2010;29(1):23-28."
+    url: "https://doi.org/10.2114/jpa2.29.23"
+    status: checked
+aiAssisted: true
