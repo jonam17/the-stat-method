@@ -357,6 +357,14 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.46.1 — Library: how to add weight to body-weight exercises
+
+- **"Making it harder over time"** on exercises whose only equipment is body weight (optionally a band) now
+  ends with one more sentence: with body weight alone, adding weight means holding a dumbbell or wearing a
+  weighted vest or belt, and until then the calculator adds reps. It shows on the push-up, pull-up, Nordic
+  hamstring curl and body-weight heel raise; exercises that already use a load are unchanged.
+- No new tests; 1,264 in total.
+
 ### v2.46.0 — Library: a Calves group with three exercises
 
 - **New muscle group, Calves** (roadmap item 6), with three exercises, each resting on full-text training studies

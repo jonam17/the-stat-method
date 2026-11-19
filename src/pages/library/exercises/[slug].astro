@@ -16,6 +16,9 @@ const { e, all } = Astro.props;
 const d = e.data;
 const group = GROUPS.find(g => g.key === d.group);
 const klass = PROGRESSION_CLASSES[d.progressionClass];
+// Body weight with no external load (a band is assistance or light resistance, not a load to add to).
+// On these pages "adds weight" needs a word on how (v2.46.1).
+const bodyweightOnly = d.equipment.includes('bodyweight') && d.equipment.every(k => k === 'bodyweight' || k === 'band');
 const pct = x => `${(x * 100).toFixed(x * 100 % 1 ? 1 : 0)}%`;
 // Only alternatives that are themselves published become links.
 // The group's count, said plainly: up to five, fewer where the research supports fewer.
@@ -61,7 +64,8 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <h2 id="progress">Making it harder over time</h2>
         <p>This is a <b>{klass.name.toLowerCase()}</b> exercise in the <a href="/tools/progressive-overload/">Progressive Overload Calculator</a>, which adds weight in
           steps of {pct(klass.band[0])}–{pct(klass.band[1])} once every set reaches the top of your rep
-          range, and adds reps until then.</p>
+          range, and adds reps until then.{bodyweightOnly && <> With body weight alone, adding weight means
+          holding a dumbbell or wearing a weighted vest or belt; until then, the calculator adds reps.</>}</p>
 
         {alts.length > 0 && <>
           <h2 id="alternatives">Alternatives</h2>
