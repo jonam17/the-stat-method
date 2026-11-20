@@ -357,6 +357,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.46.2 — Resources review record for six candidates
+
+- **Documentation only.** `docs/resources-review.md` gains a 2026-11-19 section on six candidates for
+  *People worth following* (roadmap item 30): what was checked, the competing interests found, and why
+  none was added. The Resources page itself is unchanged.
+- No new tests; 1,264 in total.
+
 ### v2.46.1 — Library: how to add weight to body-weight exercises
 
 - **"Making it harder over time"** on exercises whose only equipment is body weight (optionally a band) now

@@ -6,6 +6,36 @@ relying on a figure in it.
 
 ---
 
+## 2026-11-19 — v2.46.2
+
+Six candidates reviewed for **People worth following**. **None was added.** This release records the
+reasons; `src/data/resources.js` is unchanged.
+
+| Candidate | Checked against | What was found | Decision |
+|---|---|---|---|
+| Chris Bumstead | Business Wire release, April 2025, "RAW Nutrition Joins Forces with The Quality Group"; Fitt Insider copy of the same release; BarBend news item on his Gymshark ownership announcement | Co-owner of the supplement brand RAW Nutrition. With RAW's CEO he also became co-owner of The Quality Group (release). BarBend reports a part-ownership stake in Gymshark. | Excluded. Owns a supplement company. |
+| More Plates More Dates (Derek) | Startup Fortune interview (page dated 22 Jul 2026); a sponsored piece on jpost.com; the Chartable listing for a Modern Wisdom episode | In the interview he describes his work as the More Plates More Dates brand, his supplement company Gorilla Mind and his hormone-therapy clinic Marek Health. The other two sources call him a founder of Gorilla Mind. | Excluded. Owns a supplement company and a clinic. |
+| Jeremy Ethier | builtwithscience.com (home page, About page, blog index); two blog posts read in full: "3 Days vs 6 Days Split" and "Train a Muscle Every Day" | Describes himself as a kinesiologist with NASM and FMS certification. The site sells an app, coaching, a cookbook, resistance bands, custom plans and a whey protein isolate. The two posts have no reference list: one links to a single preprint, the other cites no study by author, year or journal and links only to the site's own pages. | Left out for now. Rigour not shown (below). |
+| Matt Ogus | mattogus.teachable.com (two course pages); TrainHeroic marketplace listings | Sells training programs, including a monthly subscription. His own course page describes his approach as the middle point between what is most "scientifically optimal" and what is practical. No source found in which he cites studies. A claim that he sells supplements appears only on fan sites and is not repeated. | Left out. Rigour not shown (below). |
+| Steak and Butter Gal | not researched | Excluded on the maintainer's first view recorded in the backlog: the site's evidence does not support a carnivore-only message. | Excluded. |
+| Gorilla Mind | not researched | A supplement brand. Brands appear only through the scorecard method (backlog item 12). | Excluded. |
+
+**What "left out" means for Ethier and Ogus.** The Resources page says entries are reasonably
+rigorous. For these two, that could not be shown from what was readable: for Ethier, two of the
+eight posts on his blog index were read, and neither had a reference list; his videos were not
+checked, because they cannot be read here; for Ogus, no source was found. It is not a finding that
+their advice is wrong. Either can be reconsidered if a reviewer reads their cited sources (for
+Ethier, the references shown in his videos).
+
+**Competing interests found.** Ethier and Ogus sell programs; Ethier's site also sells a whey protein
+and equipment. Bumstead and Derek own supplement companies, so any entry would have to state that.
+
+**Deliberately left out.** Follower and subscriber counts: the figures found disagree between
+sources and are the creators' own marketing. Net-worth and biography pages: low-quality sources that
+contradict each other.
+
+---
+
 ## 2026-10-14 — v2.21.0
 
 Added under **Tracking & data**: Hevy, Strava. Under **Testing & clinical services**: BodySpec,
