@@ -357,6 +357,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.47.0 — "On this page" list on Resources and Tools
+
+- **The sticky jump bar is replaced** on Resources and Tools by an "On this page" list (new
+  `src/components/PageIndex.astro`): a labelled, numbered list of every group with its count, placed
+  directly under the page intro, two columns on wide screens and one on phones. It is not sticky, so it
+  can't be mistaken for the site navigation; each group now ends with a "↑ On this page" link back to it.
+  Follows Nielsen Norman Group's table-of-contents guidance and the Canada.ca in-page table of contents
+  pattern (roadmap item 64).
+- On Tools the list now sits above "Start here", so it stays near the top on phones.
+- Old `.tool-index-nav` styles and the Resources-only scroll offsets removed; every jump lands just
+  below the site header.
+- No new tests; 1,264 in total.
+
 ### v2.46.2 — Resources review record for six candidates
 
 - **Documentation only.** `docs/resources-review.md` gains a 2026-11-19 section on six candidates for

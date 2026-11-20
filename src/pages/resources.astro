@@ -5,6 +5,7 @@
  * per group with compact rows. Content comes from src/data/resources.js.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIndex from '../components/PageIndex.astro';
 import { RESOURCES } from '../data/resources.js';
 
 const slug = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -26,6 +27,8 @@ const num = n => String(n).padStart(2, '0');
       </div>
     </header>
 
+    <PageIndex heading="On this page" unit="resources" items={RESOURCES.map(g => ({ href: `#${slug(g.group)}`, name: g.group, count: g.items.length }))} />
+
     <section class="rs-rules" aria-labelledby="rs-rules-h">
       <h2 id="rs-rules-h" class="eyebrow">Three rules govern what appears on this page</h2>
       <ol>
@@ -38,12 +41,6 @@ const num = n => String(n).padStart(2, '0');
           in a footer. Nothing on this page is required to use any calculator here.</li>
       </ol>
     </section>
-
-    <nav class="tool-index-nav" aria-label="Resource groups">
-      {RESOURCES.map((g, i) => (
-        <a href={`#${slug(g.group)}`}><span>{num(i + 1)}</span>{g.group}<em>{g.items.length}</em></a>
-      ))}
-    </nav>
 
     <div class="tool-groups">
       {RESOURCES.map((g, gi) => (
@@ -75,6 +72,7 @@ const num = n => String(n).padStart(2, '0');
               </li>
             ))}
           </ul>
+          <a class="to-index" href="#on-this-page">↑ On this page</a>
         </section>
       ))}
     </div>
@@ -98,7 +96,6 @@ const num = n => String(n).padStart(2, '0');
   .rs-rules li::before{content:counter(r,decimal-leading-zero);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--signal);margin-bottom:6px}
   .rs-rules strong{color:var(--ink);font-weight:600}
 
-  .rs-group{scroll-margin-top:124px}
   .rs-group .tool-group-head p{max-width:54ch}
   .rs-group .res-aff{margin-left:6px;vertical-align:middle}
   .rs-list{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
@@ -125,7 +122,6 @@ const num = n => String(n).padStart(2, '0');
     .rs-suggest{grid-template-columns:1fr;gap:12px}
   }
   @media (max-width:760px){
-    .rs-group{scroll-margin-top:112px}
     .rs-row{grid-template-columns:32px minmax(0,1fr);
       grid-template-areas:"num main" "num cost" "num body";gap:8px 12px}
     .rs-cost{justify-self:start;padding-top:0}

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIndex from '../../components/PageIndex.astro';
 import { TOOLS } from '../../data/tools.js';
 import { SEO_PRIORITY_TOOLS } from '../../data/seo-priority.js';
 import { toolExample } from '../../data/tool-examples.js';
@@ -42,6 +43,9 @@ const categoryIntro = {
       </div>
     </header>
 
+    <PageIndex heading="On this page" unit="tools"
+      items={groups.filter(g => live.some(t => t.category === g)).map(g => ({ href: `#${g.toLowerCase()}`, name: g, count: live.filter(t => t.category === g).length }))} />
+
     <section class="tools-start" aria-labelledby="start-here">
       <div class="tools-start-head">
         <div>
@@ -62,12 +66,6 @@ const categoryIntro = {
       </div>
     </section>
 
-    <nav class="tool-index-nav" aria-label="Calculator categories">
-      {groups.map((group, i) => {
-        const count = live.filter(t => t.category === group).length;
-        return <a href={`#${group.toLowerCase()}`}><span>{String(i + 1).padStart(2, '0')}</span>{group}<em>{count}</em></a>;
-      })}
-    </nav>
 
     <div class="tool-groups">
       {groups.map((group, i) => {
@@ -102,6 +100,7 @@ const categoryIntro = {
                 );
               })}
             </div>
+            <a class="to-index" href="#on-this-page">↑ On this page</a>
           </section>
         );
       })}

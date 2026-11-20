@@ -1,0 +1,28 @@
+---
+/**
+ * "On this page" list for long hub pages (Resources, Tools). Roadmap item 64, v2.47.0.
+ *
+ * Replaces the sticky horizontal jump bar. Follows Nielsen Norman Group's table-of-contents guidance
+ * and the Canada.ca in-page table of contents pattern: a visible "On this page" heading so the links
+ * read as in-page, placed near the top below the intro, not sticky (a sticky bar under the site
+ * header reads as global navigation), every heading shown, in columns when there are many. Each
+ * section ends with a "back to the list" link (see .to-index) in place of a sticky bar.
+ */
+const { items, unit = 'items', heading = 'On this page', label = heading } = Astro.props;
+// items: [{ href: '#id', name: 'Group name', count: 6 }]
+const num = n => String(n).padStart(2, '0');
+---
+<nav class="page-index" id="on-this-page" aria-labelledby="on-this-page-h">
+  <h2 id="on-this-page-h">{heading}</h2>
+  <ol>
+    {items.map((it, i) => (
+      <li>
+        <a href={it.href}>
+          <b>{num(i + 1)}</b>
+          <span>{it.name}</span>
+          <i>{it.count}<span class="sr-only"> {it.count === 1 ? unit.replace(/s$/, '') : unit}</span></i>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

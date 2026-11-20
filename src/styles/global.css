@@ -903,11 +903,18 @@ body{background:var(--paper)}
 .tools-hero h1{font-family:var(--display);font-size:clamp(46px,7vw,84px);line-height:.92;letter-spacing:-.055em;margin:12px 0 0;font-weight:600}
 .tools-hero-copy p{max-width:50ch;color:var(--ink-soft);font-size:16px;margin:0 0 18px}
 .tools-proof{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--ink-mute)}
-.tool-index-nav{display:flex;gap:0;overflow:auto;border-bottom:1px solid var(--line);position:sticky;top:64px;background:var(--paper);z-index:20}
-.tool-index-nav a{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:13px 16px;text-decoration:none;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;border-right:1px solid var(--line);color:var(--ink-soft)}
-.tool-index-nav a:hover{background:#EFEDE8;color:var(--ink)}
-.tool-index-nav a span,.tool-index-nav a em{font-style:normal;color:var(--ink-mute)}
-.tool-index-nav a em{margin-left:2px}
+/* "On this page" list (PageIndex.astro). Not sticky on purpose: see the component's header. */
+.page-index{margin:32px 0 0;padding:18px 22px 8px;border:1px solid var(--line-strong);background:var(--card);scroll-margin-top:calc(var(--nav-h) + 8px)}
+.page-index h2{font-family:var(--display);font-size:18px;letter-spacing:-.02em;margin:0 0 10px;font-weight:600}
+.page-index ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+.page-index li{border-top:1px solid var(--line)}
+.page-index a{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:baseline;padding:11px 0;text-decoration:none;color:var(--ink);font-size:15px}
+.page-index a span:not(.sr-only){text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
+.page-index a:hover span:not(.sr-only){text-decoration-color:var(--signal);color:var(--signal-dim)}
+.page-index b,.page-index i{font-family:var(--mono);font-weight:400;font-style:normal;font-size:10px;letter-spacing:.08em;color:var(--ink-mute)}
+.to-index{display:block;width:max-content;margin:18px 0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none}
+.to-index:hover{color:var(--ink);text-decoration:underline}
+.tool-group{scroll-margin-top:var(--nav-h)}
 .tool-group{padding:clamp(52px,7vw,82px) 0 0}
 .tool-group-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-bottom:18px}
 .tool-group-head h2{font-family:var(--display);font-size:clamp(32px,5vw,52px);letter-spacing:-.04em;line-height:1;margin:8px 0 0}
@@ -1004,7 +1011,9 @@ body{background:var(--paper)}
   .tb-terms{border-left:0;border-top:1px solid var(--line);padding:12px 0 0}
 }
 @media(max-width:650px){
-  .tool-index-nav{top:56px}
+  .tool-group,.page-index{scroll-margin-top:var(--nav-h-sm)}
+  .page-index{padding:16px 16px 4px}
+  .page-index ol{grid-template-columns:1fr}
   .library-row{grid-template-columns:32px minmax(0,1fr);gap:12px}
   .library-status{display:none}
   .library-main{grid-template-columns:1fr;gap:4px}
@@ -1395,7 +1404,6 @@ footer{border-top:1px solid var(--rule)}
 
 /* Hover grounds were all light tints. */
 :root[data-theme="dark"] .instrument-row:hover,
-:root[data-theme="dark"] .tool-index-nav a:hover,
 :root[data-theme="dark"] .library-row:hover,
 :root[data-theme="dark"] .mobile-nav-panel a:hover,
 :root[data-theme="dark"] .mobile-nav-panel a.on,
@@ -1866,7 +1874,7 @@ footer{border-top:1px solid var(--rule)}
   details.method summary,.tb-terms summary{display:flex;align-items:center;min-height:44px}
   input:not([type=checkbox]):not([type=radio]):not([type=range]),select{min-height:44px}
   /* Lists of links become 44px rows. */
-  .aside .box a,.toc a,.cat-filter a,.lib-list a,.tool-index-nav a{
+  .aside .box a,.toc a,.cat-filter a,.lib-list a,.page-index a,.to-index{
     min-height:44px;display:flex;align-items:center;box-sizing:border-box}
   /* Text-style controls and "→" links keep their look; the hit area grows. */
   .reset,.section-more,.bl-link,.section-head a,.hp-trust-head a,.island-top a,.tool-crumb a{position:relative}
