@@ -6,7 +6,7 @@
 # the page, with the same figures; they appear once here, under Sides.
 # "Breakfast Breads" is a group heading on the page; its first row, Buttery Biscuit,
 # is used (same serving and figures).
-draft: true
+draft: false
 name: Chick-fil-A
 source:
   title: Chick-fil-A Nutrition & Allergens

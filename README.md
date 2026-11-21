@@ -357,6 +357,14 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.48.1 — Chick-fil-A published
+
+- `src/content/fast-food/chick-fil-a.yaml`: `draft: false` after the maintainer checked every row against
+  Chick-fil-A's Nutrition & Allergens page (2026-11-21). The Fast food section, its list of chains and the
+  "C / Eating out" card on the Library landing are now live, and the pages join the sitemap and the weekly
+  link check.
+- No new tests; 1,272 in total.
+
 ### v2.48.0 — Fast food in the Library (Chick-fil-A, draft)
 
 - **New Library section: Fast food** (roadmap item 59). One page per chain at `/library/fast-food/<chain>/`,
