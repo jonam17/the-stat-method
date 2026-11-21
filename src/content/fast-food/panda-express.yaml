@@ -1,0 +1,35 @@
+# Figures copied from Panda Express's Nutrition & Allergen Information page, saved by the maintainer and read in
+# full on 2026-11-21. Serving sizes are in ounces, as Panda gives them.
+draft: true
+name: "Panda Express"
+source:
+  title: "Panda Express Nutrition & Allergen Information"
+  url: https://www.pandaexpress.com/nutrition
+  checked: 2026-11-21
+sections:
+  - { key: chicken, label: "Chicken" }
+  - { key: beef, label: "Beef" }
+  - { key: seafood, label: "Seafood" }
+  - { key: vegetables, label: "Vegetables" }
+  - { key: sides, label: "Sides" }
+  - { key: appetizers, label: "Appetizers" }
+note: "Each entrée and side is one serving as Panda lists it; a plate is one side and two entrées. Regional and limited-time items, Cub Meals, sauces, soup, cookies and drinks are left out."
+items:
+  - { name: "Chow Mein", section: sides, servingOz: 12, kcal: 520, protein: 14, carbs: 89, fat: 12 }
+  - { name: "Fried Rice", section: sides, servingOz: 12, kcal: 610, protein: 15, carbs: 109, fat: 13 }
+  - { name: "White Steamed Rice", section: sides, servingOz: 12, kcal: 570, protein: 11, carbs: 129, fat: 0 }
+  - { name: "Super Greens (side)", section: sides, servingOz: 10, kcal: 180, protein: 8, carbs: 17, fat: 9 }
+  - { name: "Super Greens (entrée)", section: vegetables, servingOz: 3.5, kcal: 45, protein: 3, carbs: 5, fat: 2 }
+  - { name: "Kung Pao Chicken", section: chicken, servingOz: 6.7, kcal: 270, protein: 20, carbs: 16, fat: 14 }
+  - { name: "Grilled Teriyaki Chicken", section: chicken, servingOz: 6.1, kcal: 280, protein: 38, carbs: 13, fat: 9 }
+  - { name: "Mushroom Chicken", section: chicken, servingOz: 5.7, kcal: 180, protein: 13, carbs: 12, fat: 9 }
+  - { name: "The Original Orange Chicken", section: chicken, servingOz: 6.2, kcal: 560, protein: 19, carbs: 63, fat: 25 }
+  - { name: "Honey Sesame Chicken Breast", section: chicken, servingOz: 6.2, kcal: 420, protein: 16, carbs: 44, fat: 20 }
+  - { name: "String Bean Chicken Breast", section: chicken, servingOz: 5.6, kcal: 210, protein: 15, carbs: 15, fat: 10 }
+  - { name: "Beijing Beef", section: beef, servingOz: 5.6, kcal: 480, protein: 14, carbs: 46, fat: 27 }
+  - { name: "Broccoli Beef", section: beef, servingOz: 6.3, kcal: 190, protein: 17, carbs: 14, fat: 7 }
+  - { name: "Black Pepper Sirloin Steak", section: beef, servingOz: 5.9, kcal: 200, protein: 17, carbs: 15, fat: 8 }
+  - { name: "Honey Walnut Shrimp", section: seafood, servingOz: 4.4, kcal: 340, protein: 13, carbs: 28, fat: 20 }
+  - { name: "Chicken Egg Roll (1)", section: appetizers, servingOz: 2.75, kcal: 200, protein: 6, carbs: 20, fat: 10 }
+  - { name: "Cream Cheese Rangoon (3)", section: appetizers, servingOz: 2.4, kcal: 190, protein: 5, carbs: 24, fat: 8 }
+  - { name: "Vegetable Spring Rolls (2)", section: appetizers, servingOz: 3.5, kcal: 240, protein: 4, carbs: 24, fat: 14 }

@@ -3,15 +3,6 @@
  * import them (the same split as exercise-meta.js).
  */
 
-// Sections in the order the chains' menus use them. Drinks, treats, sauces and
-// dressings are left out of every chain (stated on each page).
-export const SECTIONS = [
-  { key: 'breakfast', label: 'Breakfast' },
-  { key: 'entrees', label: 'Entrées' },
-  { key: 'salads', label: 'Salads' },
-  { key: 'sides', label: 'Sides' },
-];
-
 /** Grams of protein per 100 kcal, to one decimal. */
 export const proteinPer100 = i => Math.round((i.protein / i.kcal) * 1000) / 10;
 
@@ -22,3 +13,6 @@ export const ranked = items => items
 
 /** Lowest-calorie item; ties go to the higher protein. */
 export const lowestCalories = items => [...items].sort((a, b) => a.kcal - b.kcal || b.protein - a.protein)[0];
+
+/** The serving as the chain gives it: "55 g", or "6.2 oz" when it gives only ounces. */
+export const servingText = i => i.servingG ? `${i.servingG} g` : `${i.servingOz} oz`;

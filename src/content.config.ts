@@ -328,23 +328,29 @@ const exercises = defineCollection({
  * with the date it was read in full. Protein per 100 kcal is never stored: it is
  * worked out from these figures (src/data/fast-food.js), so it cannot disagree.
  */
-const FAST_FOOD_SECTIONS = ['breakfast', 'entrees', 'salads', 'sides'];
 const fastFood = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/fast-food' }),
   schema: z.object({
     draft: z.boolean().default(false),
     name: z.string(),
-    source: z.object({ title: z.string(), url: z.string().url(), checked: z.coerce.date() }),
+    // `edition` is the date or code printed on the chain's own document, when it has one.
+    source: z.object({ title: z.string(), url: z.string().url(), checked: z.coerce.date(), edition: z.string().optional() }),
+    // Each chain names its own menu sections (v2.50.0), in menu order.
+    sections: z.array(z.object({ key: z.string(), label: z.string() })).min(1),
+    // What this chain's page includes and leaves out, in one or two sentences.
+    note: z.string().min(20),
     items: z.array(z.object({
       name: z.string(),
-      section: z.enum(FAST_FOOD_SECTIONS),
-      servingG: z.number().positive(),
+      section: z.string(),
+      // The serving as the chain gives it: grams, or ounces when it gives only ounces.
+      servingG: z.number().positive().optional(),
+      servingOz: z.number().positive().optional(),
       kcal: z.number().positive(),
       protein: z.number().min(0),
       carbs: z.number().min(0),
       fat: z.number().min(0),
-    })).min(1),
-  }),
+    }).refine(i => i.servingG || i.servingOz, 'servingG or servingOz')).min(1),
+  }).refine(c => c.items.every(i => c.sections.some(s => s.key === i.section)), 'every item section must be listed in sections'),
 });
 
 /**

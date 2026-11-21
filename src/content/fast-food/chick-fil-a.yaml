@@ -12,6 +12,12 @@ source:
   title: Chick-fil-A Nutrition & Allergens
   url: https://www.chick-fil-a.com/nutrition-allergens
   checked: 2026-11-21
+sections:
+  - { key: breakfast, label: "Breakfast" }
+  - { key: entrees, label: "Entrées" }
+  - { key: salads, label: "Salads" }
+  - { key: sides, label: "Sides" }
+note: "The page does not say whether a salad's figures include its dressing. Kids' meals, treats, drinks, dipping sauces and dressings are left out."
 items:
   - { name: "Chick-fil-A Chick-n-Minis", section: breakfast, servingG: 127, kcal: 360, protein: 20, carbs: 41, fat: 13 }
   - { name: "Hash Brown Scramble Burrito", section: breakfast, servingG: 304, kcal: 700, protein: 34, carbs: 51, fat: 40 }

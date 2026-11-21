@@ -1,0 +1,19 @@
+# Figures copied from Raising Cane's Allergen & Nutritional Information (August 2026, WEB edition), a PDF
+# supplied by the maintainer on 2026-11-21 and read in full. Open before publishing: a direct link to the PDF.
+draft: true
+name: "Raising Cane's"
+source:
+  title: "Raising Cane's Allergen & Nutritional Information"
+  edition: "August 2026"
+  url: https://www.raisingcanes.com/
+  checked: 2026-11-21
+sections:
+  - { key: chicken, label: "Chicken" }
+  - { key: sides, label: "Sides" }
+note: "Combos are left out: build yours from the items. Cane's Sauce, other sauces and drinks are listed separately in the guide and are not added here."
+items:
+  - { name: "Chicken Finger (1)", section: chicken, servingG: 55, kcal: 130, protein: 12, carbs: 5, fat: 6 }
+  - { name: "Chicken Sandwich", section: chicken, servingG: 297, kcal: 810, protein: 45, carbs: 68, fat: 40 }
+  - { name: "Crinkle-Cut Fries", section: sides, servingG: 144, kcal: 420, protein: 5, carbs: 53, fat: 21 }
+  - { name: "Texas Toast", section: sides, servingG: 47, kcal: 150, protein: 4, carbs: 23, fat: 4.5 }
+  - { name: "Coleslaw", section: sides, servingG: 87, kcal: 90, protein: 1, carbs: 10, fat: 6 }

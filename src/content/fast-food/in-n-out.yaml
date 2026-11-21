@@ -1,0 +1,22 @@
+# Figures copied from In-N-Out's Nutrition Info page, read in full on 2026-11-21 (two separate reads agreed).
+draft: true
+name: "In-N-Out Burger"
+source:
+  title: "In-N-Out Burger Nutrition Info"
+  url: https://www.in-n-out.com/nutrition
+  checked: 2026-11-21
+sections:
+  - { key: burgers, label: "Burgers" }
+  - { key: fries, label: "Fries" }
+note: "Burgers are with onion, as In-N-Out lists them. Shakes, drinks, condiments, add-ons and cookout-truck items are left out."
+items:
+  - { name: "Double-Double", section: burgers, servingG: 287, kcal: 610, protein: 34, carbs: 42, fat: 34 }
+  - { name: "Double-Double, mustard & ketchup instead of spread", section: burgers, servingG: 280, kcal: 550, protein: 34, carbs: 41, fat: 27 }
+  - { name: "Double-Double, Protein Style", section: burgers, servingG: 289, kcal: 460, protein: 30, carbs: 12, fat: 32 }
+  - { name: "Cheeseburger", section: burgers, servingG: 229, kcal: 430, protein: 20, carbs: 40, fat: 21 }
+  - { name: "Cheeseburger, mustard & ketchup instead of spread", section: burgers, servingG: 222, kcal: 380, protein: 20, carbs: 39, fat: 15 }
+  - { name: "Cheeseburger, Protein Style", section: burgers, servingG: 231, kcal: 280, protein: 16, carbs: 11, fat: 19 }
+  - { name: "Hamburger", section: burgers, servingG: 209, kcal: 360, protein: 16, carbs: 38, fat: 16 }
+  - { name: "Hamburger, mustard & ketchup instead of spread", section: burgers, servingG: 202, kcal: 300, protein: 16, carbs: 38, fat: 10 }
+  - { name: "Hamburger, Protein Style", section: burgers, servingG: 211, kcal: 210, protein: 12, carbs: 9, fat: 14 }
+  - { name: "French Fries", section: fries, servingG: 125, kcal: 360, protein: 6, carbs: 49, fat: 15 }

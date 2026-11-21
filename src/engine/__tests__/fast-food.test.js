@@ -6,7 +6,7 @@
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync } from 'node:fs';
 import yaml from 'js-yaml';
-import { proteinPer100, ranked, lowestCalories, SECTIONS } from '../../data/fast-food-rank.js';
+import { proteinPer100, ranked, lowestCalories } from '../../data/fast-food-rank.js';
 
 const DIR = 'src/content/fast-food';
 const files = readdirSync(DIR).filter(f => f.endsWith('.yaml'));
@@ -26,8 +26,11 @@ describe('fast-food files', () => {
         const names = d.items.map(i => i.name);
         expect(new Set(names).size).toBe(names.length);
       });
-      it('uses only known sections', () => {
-        const keys = SECTIONS.map(s => s.key);
+      it('has a serving for every item', () => {
+        for (const i of d.items) expect(i.servingG || i.servingOz, i.name).toBeTruthy();
+      });
+      it('uses only its own listed sections', () => {
+        const keys = d.sections.map(s => s.key);
         for (const i of d.items) expect(keys, i.name).toContain(i.section);
       });
       // Calories should be close to 4 kcal/g protein and carbs and 9 kcal/g fat.

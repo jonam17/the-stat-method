@@ -1,0 +1,59 @@
+# Figures copied from El Pollo Loco's Nutrition Guide (M5 2026), read in full on 2026-11-21. Serving sizes are
+# in ounces, as the guide gives them.
+draft: true
+name: "El Pollo Loco"
+source:
+  title: "El Pollo Loco Nutrition Guide"
+  edition: "M5 2026"
+  url: https://www.elpolloloco.com/content/pdfs/epl_web_nutrition_guide_mod_5_2026_hr-2.pdf
+  checked: 2026-11-21
+sections:
+  - { key: chicken, label: "Fire-grilled chicken" }
+  - { key: bowls, label: "Bowls" }
+  - { key: salads, label: "Tostadas & salads" }
+  - { key: tacos, label: "Tacos" }
+  - { key: burritos, label: "Burritos" }
+  - { key: quesadillas, label: "Quesadillas & nachos" }
+  - { key: sides, label: "Sides" }
+note: "Sides are the small size. Tostadas and salads are without dressing, as El Pollo Loco lists them. Limited-time and Texas- or Louisiana-only items, kids' meals, dressings, sauces, salsas, chips, sweets and drinks are left out."
+items:
+  - { name: "Chicken Breast (1 piece)", section: chicken, servingOz: 4.3, kcal: 200, protein: 34, carbs: 0, fat: 8 }
+  - { name: "Chicken Thigh (1 piece)", section: chicken, servingOz: 3.1, kcal: 200, protein: 21, carbs: 2, fat: 12 }
+  - { name: "Chicken Leg (1 piece)", section: chicken, servingOz: 1.6, kcal: 110, protein: 11, carbs: 0, fat: 7 }
+  - { name: "Chicken Wing (1 piece)", section: chicken, servingOz: 1.3, kcal: 70, protein: 10, carbs: 0, fat: 3 }
+  - { name: "Chopped Breast Side", section: chicken, servingOz: 2.8, kcal: 120, protein: 23, carbs: 0, fat: 3 }
+  - { name: "2 pc Breast & Wing Meal, corn tortillas, pinto beans & rice", section: chicken, servingOz: 17.9, kcal: 660, protein: 58, carbs: 77, fat: 14 }
+  - { name: "2 pc Breast & Wing Meal, flour tortillas, pinto beans & rice", section: chicken, servingOz: 18.1, kcal: 740, protein: 59, carbs: 85, fat: 18 }
+  - { name: "Original Pollo Bowl", section: bowls, servingOz: 18.2, kcal: 580, protein: 41, carbs: 83, fat: 10 }
+  - { name: "Double Chicken Bowl", section: bowls, servingOz: 24.2, kcal: 930, protein: 74, carbs: 87, fat: 33 }
+  - { name: "Grande Avocado Chicken Bowl", section: bowls, servingOz: 22.2, kcal: 790, protein: 49, carbs: 90, fat: 26 }
+  - { name: "Queso Crunch Double Chicken Burrito Bowl", section: bowls, servingOz: 25.8, kcal: 1080, protein: 78, carbs: 96, fat: 43 }
+  - { name: "Street Corn Double Chicken Burrito Bowl", section: bowls, servingOz: 25.8, kcal: 1080, protein: 75, carbs: 95, fat: 46 }
+  - { name: "Classic Chicken Tostada (no dressing)", section: salads, servingOz: 17.4, kcal: 820, protein: 42, carbs: 80, fat: 38 }
+  - { name: "Double Chicken Tostada (no dressing)", section: salads, servingOz: 21.2, kcal: 990, protein: 65, carbs: 82, fat: 45 }
+  - { name: "Street Corn Salad (no dressing)", section: salads, servingOz: 14.3, kcal: 390, protein: 52, carbs: 17, fat: 14 }
+  - { name: "Mexican Caesar Salad (no dressing)", section: salads, servingOz: 13.4, kcal: 420, protein: 52, carbs: 18, fat: 17 }
+  - { name: "Taco al Carbón (1)", section: tacos, servingOz: 3.2, kcal: 170, protein: 15, carbs: 17, fat: 5 }
+  - { name: "Tacos al Carbón (3)", section: tacos, servingOz: 9.5, kcal: 510, protein: 46, carbs: 50, fat: 15 }
+  - { name: "Chicken Avocado Taco", section: tacos, servingOz: 6.3, kcal: 330, protein: 24, carbs: 17, fat: 19 }
+  - { name: "Shredded Chicken Crunchy Taco", section: tacos, servingOz: 4.2, kcal: 210, protein: 14, carbs: 22, fat: 8 }
+  - { name: "Guacamole Chicken Burrito", section: burritos, servingOz: 15.9, kcal: 920, protein: 59, carbs: 65, fat: 48 }
+  - { name: "Chipotle Guacamole Chicken Burrito", section: burritos, servingOz: 17.3, kcal: 1010, protein: 60, carbs: 81, fat: 50 }
+  - { name: "Queso Guacamole Chicken Burrito", section: burritos, servingOz: 18.7, kcal: 780, protein: 40, carbs: 88, fat: 30 }
+  - { name: "Classic Chicken Burrito", section: burritos, servingOz: 10.4, kcal: 480, protein: 25, carbs: 66, fat: 13 }
+  - { name: "Original BRC Burrito", section: burritos, servingOz: 7.6, kcal: 410, protein: 13, carbs: 63, fat: 11 }
+  - { name: "Chipotle Chicken Quesadilla", section: quesadillas, servingOz: 11.6, kcal: 930, protein: 51, carbs: 53, fat: 57 }
+  - { name: "Salsa Verde Chicken Quesadilla", section: quesadillas, servingOz: 11.6, kcal: 810, protein: 51, carbs: 53, fat: 44 }
+  - { name: "Shredded Chicken Nachos", section: quesadillas, servingOz: 17, kcal: 940, protein: 33, carbs: 86, fat: 52 }
+  - { name: "Pinto Beans (small)", section: sides, servingOz: 6, kcal: 140, protein: 9, carbs: 25, fat: 0.5 }
+  - { name: "BBQ Black Beans (small)", section: sides, servingOz: 6, kcal: 120, protein: 8, carbs: 34, fat: 0 }
+  - { name: "Rice (small)", section: sides, servingOz: 4.5, kcal: 160, protein: 3, carbs: 33, fat: 1.5 }
+  - { name: "Mashed Potatoes with Gravy (small)", section: sides, servingOz: 6, kcal: 100, protein: 3, carbs: 20, fat: 1.5 }
+  - { name: "Macaroni & Cheese (small)", section: sides, servingOz: 6, kcal: 310, protein: 9, carbs: 24, fat: 19 }
+  - { name: "Loco Side Salad (small)", section: sides, servingOz: 4.2, kcal: 180, protein: 3, carbs: 8, fat: 15 }
+  - { name: "Coleslaw (small)", section: sides, servingOz: 4, kcal: 120, protein: 1, carbs: 9, fat: 10 }
+  - { name: "Corn (small)", section: sides, servingOz: 5, kcal: 140, protein: 3, carbs: 27, fat: 4.5 }
+  - { name: "Broccoli (small)", section: sides, servingOz: 3, kcal: 30, protein: 2, carbs: 6, fat: 0 }
+  - { name: "Chicken Tortilla Soup", section: sides, servingOz: 13.7, kcal: 240, protein: 23, carbs: 19, fat: 9 }
+  - { name: "Corn Tortillas (2)", section: sides, servingOz: 1.7, kcal: 90, protein: 2, carbs: 19, fat: 1 }
+  - { name: "Flour Tortillas (2)", section: sides, servingOz: 2, kcal: 170, protein: 4, carbs: 27, fat: 5 }

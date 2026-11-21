@@ -7,7 +7,7 @@
  * inline script, and without JavaScript the full ranked table still shows.
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { publishedChains, ranked, lowestCalories, SECTIONS } from '../../../data/fast-food.js';
+import { publishedChains, ranked, lowestCalories, servingText } from '../../../data/fast-food.js';
 
 export async function getStaticPaths() {
   return (await publishedChains()).map(c => ({ params: { slug: c.id }, props: { c } }));
@@ -15,8 +15,8 @@ export async function getStaticPaths() {
 const { c } = Astro.props;
 const d = c.data;
 const rows = ranked(d.items);
-const sections = SECTIONS.filter(s => rows.some(r => r.section === s.key));
-const label = key => SECTIONS.find(s => s.key === key).label;
+const sections = d.sections.filter(s => rows.some(r => r.section === s.key));
+const label = key => d.sections.find(s => s.key === key).label;
 const top = rows[0];
 const lowest = lowestCalories(d.items);
 const num = v => v.toLocaleString('en-US');
@@ -53,16 +53,16 @@ const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long',
           <thead><tr><th>Item</th><th>Protein per 100 kcal</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr></thead>
           <tbody data-ff-body>{rows.map((r, i) => (
             <tr data-cat={r.section} data-rank={i} data-kcal={r.kcal} data-protein={r.protein}>
-              <th scope="row">{r.name}<small class="ff-cat">{label(r.section)} · {r.servingG} g</small></th>
+              <th scope="row">{r.name}<small class="ff-cat">{label(r.section)} · {servingText(r)}</small></th>
               <td><b>{r.per100.toFixed(1)} g</b></td><td>{num(r.kcal)}</td><td>{r.protein} g</td><td>{r.carbs} g</td><td>{r.fat} g</td>
             </tr>))}
           </tbody></table></div>
-        <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition page; the weight under each name is its serving. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. Dipping sauces and dressings are listed separately there and are not added here, and the page does not say whether a salad's figures include its dressing. Kids' meals, treats and drinks are left out.</p>
+        <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition page; the weight under each name is its serving. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. {d.note}</p>
         <h2 id="how">How the ranking works</h2>
         <p>Protein per 100 calories is protein (g) ÷ calories × 100, worked out by us from {d.name}'s figures. A higher number means more protein for the same calories. Items with the same number are listed lowest-calorie first. It does not account for sodium, fiber or how filling an item is.</p>
         <p class="lib-small">Not sure what you need? The <a href="/tools/protein-target/">protein target</a> and <a href="/tools/macro-calculator/">macro calculator</a> work out your numbers.</p>
         <h2 id="source">Source</h2>
-        <p><a href={d.source.url} rel="noopener">{d.source.title}</a> ({d.name}'s official US nutrition page), read in full on {fmt(d.source.checked)}. {d.name} notes that figures can vary with preparation, suppliers, region and season. We re-check every three months; menus and recipes change between checks. See a figure that no longer matches? <a href="/report/">Report it</a>.</p>
+        <p><a href={d.source.url} rel="noopener">{d.source.title}</a>{d.source.edition && ` (${d.source.edition})`}, {d.name}'s own US nutrition information, read in full on {fmt(d.source.checked)}. {d.name} notes that figures can vary with preparation, suppliers, region and season. We re-check every three months; menus and recipes change between checks. See a figure that no longer matches? <a href="/report/">Report it</a>.</p>
       </div>
     </article>
   </div>
