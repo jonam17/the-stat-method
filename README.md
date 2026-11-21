@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,264 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,272 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,25 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.48.0 — Fast food in the Library (Chick-fil-A, draft)
+
+- **New Library section: Fast food** (roadmap item 59). One page per chain at `/library/fast-food/<chain>/`,
+  plus a list of chains at `/library/fast-food/`. Each chain page ranks every menu item by protein per
+  100 calories, with calories, protein, carbs and fat; filter buttons by section (Breakfast, Entrées,
+  Salads, Sides) and a "Lowest calories" sort, both a small inline script — without JavaScript the full
+  ranked table still shows. On phones the ranking column comes first and the item name stays pinned.
+- **Data:** new `fast-food` content collection (`src/content/fast-food/*.yaml`); figures are copied from
+  the chain's own US nutrition page, named on the page with the date it was read in full. Protein per
+  100 kcal is never stored — `src/data/fast-food-rank.js` works it out. `publishedChains()` in
+  `src/data/fast-food.js` is the only way to list chains, with the same draft rule as the nutrients.
+- **First chain: Chick-fil-A**, 38 items (the default row of each item group on its Nutrition & Allergens
+  page, read 2026-11-21), `draft: true` until checked.
+- **Library landing:** a third card, "C / Eating out", and a fast-food line in the no-JavaScript list, both
+  shown only once a chain is published; the cards become three columns on wide screens and one column
+  below 860px. Fast-food items are not added to the Library search.
+- 8 new tests (`fast-food.test.js`: source and check date, unique names, known sections, calories within
+  60 kcal of 4/4/9 × protein/carbs/fat, the ranking and its tie rule); 1,272 in total.
 
 ### v2.47.0 — "On this page" list on Resources and Tools
 

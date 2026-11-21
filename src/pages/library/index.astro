@@ -13,10 +13,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
 import { publishedExercises, GROUPS, EQUIPMENT, equipmentText, jointsText } from '../../data/exercises.js';
 import { publishedArticles } from '../../data/articles.js';
+import { publishedChains } from '../../data/fast-food.js';
 
 const nutrients = await publishedNutrients();
 const exercises = await publishedExercises();
 const kinds = await kindsWithEntries();
+// Fast food (v2.48.0): a card of its own, shown once a chain is published. Its items
+// are not in the Library search — each chain's page has its own filter and sort.
+const chains = await publishedChains();
+const chainItems = chains.reduce((n, c) => n + c.data.items.length, 0);
 const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key));
 const usedEquipment = Object.keys(EQUIPMENT).filter(k => exercises.some(e => e.data.equipment.includes(k)));
 
@@ -53,7 +58,7 @@ const rows = [
 const reading = (await publishedArticles())
   .filter(a => ['protein-how-much', 'amino-acids-and-protein-quality', 'training-volume-how-many-sets-do-you-actually-need'].includes(a.id));
 ---
-<BaseLayout noindex={nutrients.length === 0 && exercises.length === 0} title="Library — The Stat Method"
+<BaseLayout noindex={nutrients.length === 0 && exercises.length === 0 && chains.length === 0} title="Library — The Stat Method"
   description={'How much of each nutrient you need and where to get it, and exercises for each muscle group with the studies behind them. Every value has a named source.'}>
   <div class="wrap lh">
     <header class="lh-hero">
@@ -61,7 +66,9 @@ const reading = (await publishedArticles())
         <span class="eyebrow">Knowledge base</span>
         <h1>The science, organized.</h1>
       </div>
-      <p>Evidence-based references for nutrition and exercise. Find a nutrient or an exercise, see the numbers, and trace each one back to its source.</p>
+      <p>{chains.length > 0
+        ? 'Evidence-based references for nutrition, exercise and fast food. Find a nutrient, an exercise or a chain, see the numbers, and trace each one back to its source.'
+        : 'Evidence-based references for nutrition and exercise. Find a nutrient or an exercise, see the numbers, and trace each one back to its source.'}</p>
     </header>
 
     <section class="lh-search" id="library-search" aria-labelledby="lh-search-h" data-lh hidden>
@@ -128,7 +135,7 @@ const reading = (await publishedArticles())
       </div>
     </section>
 
-    <section class="lh-domains" aria-label="Library sections">
+    <section class={`lh-domains${chains.length > 0 ? ' lh-three' : ''}`} aria-label="Library sections">
       <a class="lh-domain" href="#library-search" data-lh-show="nutrient">
         <span class="eyebrow">A / Nutrition reference</span>
         <h2>Nutrients</h2>
@@ -143,6 +150,15 @@ const reading = (await publishedArticles())
         <span class="lh-count">{exercises.length} exercises · {exGroups.length} muscle groups</span>
         <span class="lh-go">Show all exercises ↑</span>
       </a>
+      {chains.length > 0 && (
+        <a class="lh-domain" href="/library/fast-food/">
+          <span class="eyebrow">C / Eating out</span>
+          <h2>Fast food</h2>
+          <p>The biggest US chains' menus ranked by protein per calorie, with calories, protein, carbs and fat from each chain's own figures.</p>
+          <span class="lh-count">{chains.length} {chains.length === 1 ? 'chain' : 'chains'} · {chainItems} items</span>
+          <span class="lh-go">See the chains →</span>
+        </a>
+      )}
     </section>
 
     <noscript>
@@ -150,6 +166,7 @@ const reading = (await publishedArticles())
         <ul>
           {kinds.map(k => <li><a href={`/library/${k.slug}/`}>{k.label}</a></li>)}
           {exGroups.map(g => <li><a href={`/library/exercises/#${g.key}`}>{g.label}</a></li>)}
+          {chains.length > 0 && <li><a href="/library/fast-food/">Fast food</a></li>}
         </ul>
       </section>
     </noscript>
@@ -319,6 +336,7 @@ const reading = (await publishedArticles())
 
   /* Domains */
   .lh-domains{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:32px}
+  .lh-domains.lh-three{grid-template-columns:repeat(3,1fr)}
   .lh-domain{display:grid;gap:10px;align-content:start;background:var(--card);border:1px solid var(--line);
     border-top:3px solid var(--ink);padding:22px;text-decoration:none;color:inherit;transition:border-color .15s}
   .lh-domain:hover{border-color:var(--line-strong);border-top-color:var(--signal)}
@@ -359,9 +377,10 @@ const reading = (await publishedArticles())
     .lh-reading ul{grid-template-columns:1fr}
     .lh-reading li + li{border-left:0}
     .lh-reading a,.lh-reading li:first-child a{padding:14px 0}
+    .lh-domains.lh-three{grid-template-columns:1fr}
   }
   @media (max-width:640px){
-    .lh-domains,.lh-results{grid-template-columns:1fr}
+    .lh-domains,.lh-domains.lh-three,.lh-results{grid-template-columns:1fr}
     .lh-seg{width:100%}
     .lh-seg button{flex:1;justify-content:center;padding:0 8px}
     .lh-filters,.lh-filters label{width:100%}

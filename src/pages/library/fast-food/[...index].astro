@@ -1,0 +1,54 @@
+---
+/**
+ * /library/fast-food/ — built only when at least one chain is published, so the
+ * live site never shows an empty section. (A rest parameter with no value is the
+ * section's own URL.)
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedChains, ranked } from '../../../data/fast-food.js';
+
+export async function getStaticPaths() {
+  const all = await publishedChains();
+  return all.length ? [{ params: { index: undefined }, props: { all } }] : [];
+}
+const { all } = Astro.props;
+const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout title="Fast food — Library — The Stat Method"
+  description="Menu items at the biggest US fast-food chains ranked by protein per 100 calories, with calories, protein, carbs and fat from each chain's own figures."
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / Fast food</div>
+    <article class="article lib-page">
+      <h1>Fast food</h1>
+      <p class="dek">The most protein for the calories at the biggest US chains, from each chain's own published nutrition figures.</p>
+      <div class="prose">
+        <h2 id="chains">Chains</h2>
+        <ul class="ff-chains">
+          {all.map(c => {
+            const top = ranked(c.data.items)[0];
+            return (
+              <li><a href={`/library/fast-food/${c.id}/`}>
+                <strong>{c.data.name}</strong>
+                <span>{c.data.items.length} items · checked {fmt(c.data.source.checked)}{c.data.draft && ' · draft'}</span>
+                <span>Most protein per calorie: {top.name} ({top.per100.toFixed(1)} g per 100 kcal)</span>
+              </a></li>
+            );
+          })}
+        </ul>
+        <p class="lib-small">Chains are added one at a time, once every figure has been checked against the chain's own nutrition page. Menus change, so each page shows the date it was last checked.</p>
+        <h2 id="how">How the ranking works</h2>
+        <p>Each item is ranked by grams of protein per 100 calories: protein divided by calories, times 100. It shows which items give you the most protein for the energy they cost. It says nothing about sodium, fiber or how filling an item is, so use it alongside your own targets.</p>
+        <p class="lib-small">Not sure what you need? The <a href="/tools/protein-target/">protein target</a> and <a href="/tools/macro-calculator/">macro calculator</a> work out your numbers.</p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+<style>
+  .ff-chains{list-style:none;padding:0;margin:12px 0;display:grid;gap:10px}
+  .ff-chains a{display:grid;gap:4px;border:1px solid var(--line-strong);padding:14px 16px;text-decoration:none;color:var(--ink);min-height:44px}
+  .ff-chains a:hover{border-color:var(--ink)}
+  .ff-chains strong{font-size:18px}
+  .ff-chains span{font-size:13.5px;color:var(--ink-soft)}
+  .ff-chains span:first-of-type{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+</style>

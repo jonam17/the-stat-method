@@ -1,0 +1,53 @@
+# Chick-fil-A, US menu. Every figure copied from the chain's own nutrition page
+# (source.url), read in full on source.checked. One row per menu item: the first
+# (default) row of each item group on that page. Size, cheese and protein swaps are
+# left out; so are kids' meals, treats, drinks, coffee, dipping sauces, dressings and
+# catering. Fruit Cup and Berry Parfait are listed under both Breakfast and Sides on
+# the page, with the same figures; they appear once here, under Sides.
+# "Breakfast Breads" is a group heading on the page; its first row, Buttery Biscuit,
+# is used (same serving and figures).
+draft: true
+name: Chick-fil-A
+source:
+  title: Chick-fil-A Nutrition & Allergens
+  url: https://www.chick-fil-a.com/nutrition-allergens
+  checked: 2026-11-21
+items:
+  - { name: "Chick-fil-A Chick-n-Minis", section: breakfast, servingG: 127, kcal: 360, protein: 20, carbs: 41, fat: 13 }
+  - { name: "Hash Brown Scramble Burrito", section: breakfast, servingG: 304, kcal: 700, protein: 34, carbs: 51, fat: 40 }
+  - { name: "Hash Brown Scramble Bowl", section: breakfast, servingG: 233, kcal: 470, protein: 29, carbs: 19, fat: 30 }
+  - { name: "Hash Browns", section: breakfast, servingG: 77, kcal: 270, protein: 3, carbs: 23, fat: 18 }
+  - { name: "Buttery Biscuit", section: breakfast, servingG: 81, kcal: 350, protein: 4, carbs: 53, fat: 15 }
+  - { name: "Chick-fil-A Chicken Biscuit", section: breakfast, servingG: 153, kcal: 460, protein: 19, carbs: 45, fat: 23 }
+  - { name: "Spicy Chicken Biscuit", section: breakfast, servingG: 153, kcal: 450, protein: 19, carbs: 44, fat: 22 }
+  - { name: "Sausage, Egg & Cheese Muffin", section: breakfast, servingG: 173, kcal: 490, protein: 23, carbs: 29, fat: 32 }
+  - { name: "Bacon, Egg & Cheese Muffin", section: breakfast, servingG: 126, kcal: 300, protein: 16, carbs: 28, fat: 13 }
+  - { name: "Chicken, Egg & Cheese Muffin", section: breakfast, servingG: 187, kcal: 410, protein: 27, carbs: 36, fat: 18 }
+  - { name: "Sausage, Egg & Cheese Biscuit", section: breakfast, servingG: 192, kcal: 620, protein: 22, carbs: 38, fat: 42 }
+  - { name: "Bacon, Egg & Cheese Biscuit", section: breakfast, servingG: 145, kcal: 420, protein: 15, carbs: 38, fat: 23 }
+  - { name: "Chicken, Egg & Cheese Biscuit", section: breakfast, servingG: 211, kcal: 550, protein: 27, carbs: 48, fat: 28 }
+  - { name: "Egg White Grill", section: breakfast, servingG: 172, kcal: 300, protein: 27, carbs: 29, fat: 8 }
+  - { name: "Chick-fil-A Deluxe Sandwich", section: entrees, servingG: 247, kcal: 490, protein: 32, carbs: 43, fat: 21 }
+  - { name: "Spicy Deluxe Sandwich", section: entrees, servingG: 259, kcal: 540, protein: 34, carbs: 46, fat: 24 }
+  - { name: "Chick-fil-A Grilled Chicken Club Sandwich", section: entrees, servingG: 237, kcal: 520, protein: 37, carbs: 45, fat: 22 }
+  - { name: "Chick-fil-A Nuggets", section: entrees, servingG: 113, kcal: 250, protein: 27, carbs: 11, fat: 11 }
+  - { name: "Grilled Nuggets", section: entrees, servingG: 95, kcal: 130, protein: 25, carbs: 1, fat: 3 }
+  - { name: "Chick-fil-A Chick-n-Strips", section: entrees, servingG: 136, kcal: 310, protein: 29, carbs: 16, fat: 14 }
+  - { name: "Chick-fil-A Chicken Sandwich", section: entrees, servingG: 183, kcal: 420, protein: 29, carbs: 41, fat: 16 }
+  - { name: "Spicy Chicken Sandwich", section: entrees, servingG: 188, kcal: 450, protein: 28, carbs: 44, fat: 18 }
+  - { name: "Chick-fil-A Cool Wrap", section: entrees, servingG: 231, kcal: 660, protein: 43, carbs: 32, fat: 45 }
+  - { name: "Grilled Chicken Sandwich", section: entrees, servingG: 206, kcal: 390, protein: 28, carbs: 45, fat: 11 }
+  - { name: "Cobb Salad", section: salads, servingG: 411, kcal: 830, protein: 41, carbs: 31, fat: 60 }
+  - { name: "Spicy Southwest Salad", section: salads, servingG: 424, kcal: 680, protein: 33, carbs: 27, fat: 49 }
+  - { name: "Market Salad", section: salads, servingG: 326, kcal: 550, protein: 28, carbs: 42, fat: 31 }
+  - { name: "Chick-fil-A Waffle Potato Fries", section: sides, servingG: 125, kcal: 420, protein: 5, carbs: 45, fat: 24 }
+  - { name: "Fruit Cup", section: sides, servingG: 125, kcal: 70, protein: 1, carbs: 16, fat: 0 }
+  - { name: "Mac & Cheese", section: sides, servingG: 227, kcal: 450, protein: 20, carbs: 28, fat: 29 }
+  - { name: "Chicken Noodle Soup", section: sides, servingG: 252, kcal: 190, protein: 11, carbs: 27, fat: 4.5 }
+  - { name: "Chicken Tortilla Soup", section: sides, servingG: 265, kcal: 350, protein: 25, carbs: 39, fat: 11 }
+  - { name: "Kale Crunch Side", section: sides, servingG: 112, kcal: 170, protein: 4, carbs: 13, fat: 12 }
+  - { name: "Berry Parfait", section: sides, servingG: 206, kcal: 270, protein: 13, carbs: 35, fat: 9 }
+  - { name: "Side Salad", section: sides, servingG: 166, kcal: 470, protein: 6, carbs: 14, fat: 42 }
+  - { name: "Original Flavor Waffle Potato Chips", section: sides, servingG: 43, kcal: 220, protein: 3, carbs: 25, fat: 13 }
+  - { name: "Chick-fil-A Sauce Flavored Waffle Potato Chips", section: sides, servingG: 43, kcal: 210, protein: 3, carbs: 26, fat: 12 }
+  - { name: "Buddy Fruits Apple Sauce", section: sides, servingG: 90, kcal: 45, protein: 0, carbs: 12, fat: 0 }

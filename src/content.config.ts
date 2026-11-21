@@ -322,4 +322,29 @@ const exercises = defineCollection({
   }),
 });
 
-export const collections = { articles, nutrients, exercises };
+/**
+ * Fast-food chains (Library section, roadmap item 59, v2.48.0). One file per chain;
+ * every figure is copied from the chain's own US nutrition page, named in `source`,
+ * with the date it was read in full. Protein per 100 kcal is never stored: it is
+ * worked out from these figures (src/data/fast-food.js), so it cannot disagree.
+ */
+const FAST_FOOD_SECTIONS = ['breakfast', 'entrees', 'salads', 'sides'];
+const fastFood = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/fast-food' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    name: z.string(),
+    source: z.object({ title: z.string(), url: z.string().url(), checked: z.coerce.date() }),
+    items: z.array(z.object({
+      name: z.string(),
+      section: z.enum(FAST_FOOD_SECTIONS),
+      servingG: z.number().positive(),
+      kcal: z.number().positive(),
+      protein: z.number().min(0),
+      carbs: z.number().min(0),
+      fat: z.number().min(0),
+    })).min(1),
+  }),
+});
+
+export const collections = { articles, nutrients, exercises, 'fast-food': fastFood };

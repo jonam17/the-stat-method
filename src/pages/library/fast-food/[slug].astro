@@ -1,0 +1,108 @@
+---
+/**
+ * One fast-food chain. Every figure is read from its data file in
+ * src/content/fast-food/ — nothing is typed into this template — and protein per
+ * 100 kcal is worked out from the same figures (src/data/fast-food.js).
+ * The table is ranked on the server; the filter and sort buttons are a small
+ * inline script, and without JavaScript the full ranked table still shows.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedChains, ranked, lowestCalories, SECTIONS } from '../../../data/fast-food.js';
+
+export async function getStaticPaths() {
+  return (await publishedChains()).map(c => ({ params: { slug: c.id }, props: { c } }));
+}
+const { c } = Astro.props;
+const d = c.data;
+const rows = ranked(d.items);
+const sections = SECTIONS.filter(s => rows.some(r => r.section === s.key));
+const label = key => SECTIONS.find(s => s.key === key).label;
+const top = rows[0];
+const lowest = lowestCalories(d.items);
+const num = v => v.toLocaleString('en-US');
+const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout title={`${d.name} — Fast food — Library — The Stat Method`}
+  description={`${d.name} menu items ranked by protein per 100 calories, with calories, protein, carbs and fat from ${d.name}'s own nutrition figures.`}
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Fast food', href: '/library/fast-food/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / <a href="/library/fast-food/">Fast food</a></div>
+    <article class="article lib-page">
+      {d.draft && <p class="warnbar">Draft — visible only in local development until checked against the source.</p>}
+      <h1>{d.name}</h1>
+      <p class="dek">Every menu item ranked by protein per 100 calories, with calories, protein, carbs and fat as {d.name} publishes them.</p>
+      <div class="lib-facts">
+        <div><span>Most protein per calorie</span><b>{top.name} <small>{top.per100.toFixed(1)} g / 100 kcal</small></b></div>
+        <div><span>Lowest calories</span><b>{lowest.name} <small>{num(lowest.kcal)} kcal</small></b></div>
+        <div><span>Checked against source</span><b>{fmt(d.source.checked)}</b></div>
+      </div>
+      <div class="prose">
+        <h2 id="ranked">Ranked by protein per 100 calories</h2>
+        <div class="ff-controls" data-ff hidden>
+          <div class="ff-seg" role="group" aria-label="Show">
+            <button type="button" aria-pressed="true" data-cat="all">All</button>
+            {sections.map(s => <button type="button" aria-pressed="false" data-cat={s.key}>{s.label}</button>)}
+          </div>
+          <div class="ff-seg" role="group" aria-label="Sort by">
+            <button type="button" aria-pressed="true" data-sort="p">Protein per calorie</button>
+            <button type="button" aria-pressed="false" data-sort="kcal">Lowest calories</button>
+          </div>
+        </div>
+        <p class="ff-status lib-small" data-ff-status aria-live="polite"></p>
+        <div class="lib-table-wrap"><table class="lib-table ff-table">
+          <thead><tr><th>Item</th><th>Protein per 100 kcal</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr></thead>
+          <tbody data-ff-body>{rows.map((r, i) => (
+            <tr data-cat={r.section} data-rank={i} data-kcal={r.kcal} data-protein={r.protein}>
+              <th scope="row">{r.name}<small class="ff-cat">{label(r.section)} · {r.servingG} g</small></th>
+              <td><b>{r.per100.toFixed(1)} g</b></td><td>{num(r.kcal)}</td><td>{r.protein} g</td><td>{r.carbs} g</td><td>{r.fat} g</td>
+            </tr>))}
+          </tbody></table></div>
+        <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition page; the weight under each name is its serving. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. Dipping sauces and dressings are listed separately there and are not added here, and the page does not say whether a salad's figures include its dressing. Kids' meals, treats and drinks are left out.</p>
+        <h2 id="how">How the ranking works</h2>
+        <p>Protein per 100 calories is protein (g) ÷ calories × 100, worked out by us from {d.name}'s figures. A higher number means more protein for the same calories. Items with the same number are listed lowest-calorie first. It does not account for sodium, fiber or how filling an item is.</p>
+        <p class="lib-small">Not sure what you need? The <a href="/tools/protein-target/">protein target</a> and <a href="/tools/macro-calculator/">macro calculator</a> work out your numbers.</p>
+        <h2 id="source">Source</h2>
+        <p><a href={d.source.url} rel="noopener">{d.source.title}</a> ({d.name}'s official US nutrition page), read in full on {fmt(d.source.checked)}. {d.name} notes that figures can vary with preparation, suppliers, region and season. We re-check every three months; menus and recipes change between checks. See a figure that no longer matches? <a href="/report/">Report it</a>.</p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+<script>
+  const box = document.querySelector('[data-ff]');
+  const body = document.querySelector('[data-ff-body]');
+  const status = document.querySelector('[data-ff-status]');
+  if (box && body) {
+    box.hidden = false;
+    let cat = 'all', sort = 'p';
+    const apply = () => {
+      const trs = [...body.querySelectorAll('tr')];
+      trs.sort((a, b) => sort === 'p' ? a.dataset.rank - b.dataset.rank
+        : (a.dataset.kcal - b.dataset.kcal) || (b.dataset.protein - a.dataset.protein)).forEach(tr => body.append(tr));
+      let shown = 0;
+      trs.forEach(tr => { tr.hidden = cat !== 'all' && tr.dataset.cat !== cat; if (!tr.hidden) shown++; });
+      if (status) status.textContent = `${shown} items, sorted by ${sort === 'p' ? 'protein per calorie' : 'lowest calories'}.`;
+    };
+    box.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      if (b.dataset.cat !== undefined) cat = b.dataset.cat; else sort = b.dataset.sort;
+      apply();
+    });
+  }
+</script>
+<style>
+  .ff-controls{display:flex;flex-wrap:wrap;gap:10px 18px;margin:10px 0 6px}
+  .ff-seg{display:flex;flex-wrap:wrap;gap:6px}
+  .ff-seg button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    min-height:44px;padding:0 12px;border:1px solid var(--line-strong);background:transparent;color:var(--ink-soft);cursor:pointer}
+  .ff-seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .ff-status{margin:4px 0 0;min-height:1em}
+  .ff-table td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .ff-table thead th:not(:first-child){text-align:right;vertical-align:bottom}
+  .ff-table thead th:nth-child(2){max-width:80px;white-space:normal}
+  .ff-table th[scope="row"]{min-width:150px}
+  .ff-cat{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:2px}
+  @media (max-width:650px){
+    .ff-table th[scope="row"]{position:sticky;left:0;background:var(--paper);z-index:1;min-width:130px}
+  }
+</style>
