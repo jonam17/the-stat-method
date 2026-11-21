@@ -1,0 +1,108 @@
+# Figures copied by script from Subway's U.S. Nutrition Information (October 2026), a PDF supplied by the
+# maintainer on 2026-11-21, read in full and cross-checked line by line.
+draft: true
+name: "Subway"
+source:
+  title: "Subway U.S. Nutrition Information"
+  edition: "October 2026"
+  url: https://www.subway.com/en-us/menunutrition/nutrition
+  checked: 2026-11-21
+sections:
+  - { key: subs, label: "6-inch subs" }
+  - { key: freshfit, label: "Fresh Fit 6-inch" }
+  - { key: wraps, label: "Wraps" }
+  - { key: pockets, label: "Protein Pockets" }
+  - { key: salads, label: "Salads" }
+  - { key: bowls, label: "Protein bowls" }
+note: "Subs are 6-inch, as Subway lists them; a footlong is double. Fresh Fit subs are on multigrain bread with all the vegetables. Wraps and protein bowls use a footlong portion of meat; salads exclude dressing and protein bowls exclude dressing and cheese unless named. Items at participating locations only, kids' subs, breakfast, pizza, sliders, sides, desserts and drinks are left out."
+items:
+  - { name: "Steak Philly (6-inch sub)", section: subs, servingG: 192, kcal: 510, protein: 28, carbs: 43, fat: 25 }
+  - { name: "Chipotle Philly (6-inch sub)", section: subs, servingG: 198, kcal: 490, protein: 30, carbs: 44, fat: 22 }
+  - { name: "Steak & Bacon (6-inch sub)", section: subs, servingG: 213, kcal: 590, protein: 36, carbs: 44, fat: 30 }
+  - { name: "Grilled Chicken (6-inch sub)", section: subs, servingG: 247, kcal: 510, protein: 31, carbs: 43, fat: 24 }
+  - { name: "Chicken & Bacon Ranch (6-inch sub)", section: subs, servingG: 262, kcal: 580, protein: 35, carbs: 44, fat: 29 }
+  - { name: "Honey Mustard Chicken (6-inch sub)", section: subs, servingG: 259, kcal: 480, protein: 30, carbs: 47, fat: 20 }
+  - { name: "Sweet Onion Chicken Teriyaki (6-inch sub)", section: subs, servingG: 256, kcal: 430, protein: 29, carbs: 55, fat: 11 }
+  - { name: "B.M.T. (6-inch sub)", section: subs, servingG: 237, kcal: 590, protein: 26, carbs: 44, fat: 35 }
+  - { name: "Spicy Italian (6-inch sub)", section: subs, servingG: 236, kcal: 660, protein: 26, carbs: 44, fat: 43 }
+  - { name: "5 Meat Italian (6-inch sub)", section: subs, servingG: 300, kcal: 660, protein: 39, carbs: 46, fat: 36 }
+  - { name: "Meatball Marinara (6-inch sub)", section: subs, servingG: 233, kcal: 550, protein: 26, carbs: 52, fat: 27 }
+  - { name: "Meatball Pepperoni (6-inch sub)", section: subs, servingG: 262, kcal: 670, protein: 32, carbs: 56, fat: 37 }
+  - { name: "Oven-Roasted Turkey (6-inch sub)", section: subs, servingG: 229, kcal: 470, protein: 25, carbs: 42, fat: 22 }
+  - { name: "Black Forest Ham (6-inch sub)", section: subs, servingG: 229, kcal: 480, protein: 25, carbs: 44, fat: 22 }
+  - { name: "Roast Beef (6-inch sub)", section: subs, servingG: 244, kcal: 490, protein: 30, carbs: 44, fat: 22 }
+  - { name: "Cold Cut Combo (6-inch sub)", section: subs, servingG: 237, kcal: 520, protein: 24, carbs: 43, fat: 28 }
+  - { name: "Tuna (6-inch sub)", section: subs, servingG: 233, kcal: 560, protein: 27, carbs: 42, fat: 32 }
+  - { name: "Veggie Delite (6-inch sub)", section: subs, servingG: 188, kcal: 310, protein: 16, carbs: 40, fat: 10 }
+  - { name: "All American Club (6-inch sub)", section: subs, servingG: 242, kcal: 540, protein: 28, carbs: 45, fat: 28 }
+  - { name: "Subway Club (6-inch sub)", section: subs, servingG: 263, kcal: 500, protein: 31, carbs: 43, fat: 23 }
+  - { name: "Black Forest Ham (Fresh Fit 6-inch)", section: freshfit, servingG: 219, kcal: 280, protein: 19, carbs: 42, fat: 5 }
+  - { name: "Grilled Chicken (Fresh Fit 6-inch)", section: freshfit, servingG: 233, kcal: 300, protein: 26, carbs: 40, fat: 5 }
+  - { name: "Oven Roasted Turkey (Fresh Fit 6-inch)", section: freshfit, servingG: 219, kcal: 270, protein: 20, carbs: 40, fat: 4 }
+  - { name: "Roast Beef (Fresh Fit 6-inch)", section: freshfit, servingG: 233, kcal: 300, protein: 25, carbs: 42, fat: 4 }
+  - { name: "Rotisserie-Style Chicken (Fresh Fit 6-inch)", section: freshfit, servingG: 233, kcal: 310, protein: 24, carbs: 40, fat: 6 }
+  - { name: "Veggie Delite (Fresh Fit 6-inch)", section: freshfit, servingG: 162, kcal: 220, protein: 10, carbs: 40, fat: 3 }
+  - { name: "Veggie Patty (Fresh Fit 6-inch)", section: freshfit, servingG: 247, kcal: 390, protein: 16, carbs: 57, fat: 12 }
+  - { name: "Steak Philly (wrap)", section: wraps, servingG: 295, kcal: 710, protein: 46, carbs: 56, fat: 35 }
+  - { name: "Chipotle Philly (wrap)", section: wraps, servingG: 300, kcal: 700, protein: 47, carbs: 56, fat: 32 }
+  - { name: "Steak & Bacon (wrap)", section: wraps, servingG: 330, kcal: 880, protein: 58, carbs: 58, fat: 46 }
+  - { name: "Grilled Chicken (wrap)", section: wraps, servingG: 349, kcal: 680, protein: 48, carbs: 55, fat: 31 }
+  - { name: "Chicken & Bacon Ranch (wrap)", section: wraps, servingG: 379, kcal: 840, protein: 55, carbs: 57, fat: 45 }
+  - { name: "Honey Mustard Chicken (wrap)", section: wraps, servingG: 361, kcal: 670, protein: 45, carbs: 58, fat: 29 }
+  - { name: "Sweet Onion Chicken Teriyaki (wrap)", section: wraps, servingG: 372, kcal: 630, protein: 44, carbs: 77, fat: 18 }
+  - { name: "B.M.T. (wrap)", section: wraps, servingG: 332, kcal: 870, protein: 38, carbs: 58, fat: 54 }
+  - { name: "Spicy Italian (wrap)", section: wraps, servingG: 326, kcal: 1010, protein: 37, carbs: 58, fat: 70 }
+  - { name: "5 Meat Italian (wrap)", section: wraps, servingG: 459, kcal: 1000, protein: 65, carbs: 61, fat: 56 }
+  - { name: "Meatball Marinara (wrap)", section: wraps, servingG: 401, kcal: 890, protein: 39, carbs: 76, fat: 50 }
+  - { name: "Meatball Pepperoni (wrap)", section: wraps, servingG: 436, kcal: 1050, protein: 45, carbs: 77, fat: 64 }
+  - { name: "Oven-Roasted Turkey (wrap)", section: wraps, servingG: 318, kcal: 610, protein: 37, carbs: 54, fat: 28 }
+  - { name: "Black Forest Ham (wrap)", section: wraps, servingG: 318, kcal: 630, protein: 35, carbs: 58, fat: 30 }
+  - { name: "Roast Beef (wrap)", section: wraps, servingG: 346, kcal: 670, protein: 46, carbs: 58, fat: 29 }
+  - { name: "Cold Cut Combo (wrap)", section: wraps, servingG: 332, kcal: 720, protein: 33, carbs: 55, fat: 42 }
+  - { name: "Tuna (wrap)", section: wraps, servingG: 339, kcal: 910, protein: 39, carbs: 53, fat: 61 }
+  - { name: "Veggie Delite (wrap)", section: wraps, servingG: 219, kcal: 400, protein: 15, carbs: 54, fat: 15 }
+  - { name: "All American Club (wrap)", section: wraps, servingG: 345, kcal: 770, protein: 43, carbs: 58, fat: 41 }
+  - { name: "Subway Club (wrap)", section: wraps, servingG: 386, kcal: 700, protein: 48, carbs: 59, fat: 31 }
+  - { name: "Baja Chicken (Protein Pocket)", section: pockets, servingG: 184, kcal: 330, protein: 24, carbs: 30, fat: 13 }
+  - { name: "Italian Trio (Protein Pocket)", section: pockets, servingG: 192, kcal: 480, protein: 22, carbs: 32, fat: 29 }
+  - { name: "Peppercorn Ranch Chicken (Protein Pocket)", section: pockets, servingG: 190, kcal: 330, protein: 24, carbs: 30, fat: 13 }
+  - { name: "Turkey & Ham (Protein Pocket)", section: pockets, servingG: 193, kcal: 320, protein: 21, carbs: 32, fat: 11 }
+  - { name: "Steak Philly (salad)", section: salads, servingG: 409, kcal: 450, protein: 24, carbs: 13, fat: 35 }
+  - { name: "Chipotle Philly (salad)", section: salads, servingG: 415, kcal: 400, protein: 25, carbs: 14, fat: 29 }
+  - { name: "Steak & Bacon (salad)", section: salads, servingG: 430, kcal: 510, protein: 32, carbs: 15, fat: 37 }
+  - { name: "Grilled Chicken (salad)", section: salads, servingG: 415, kcal: 450, protein: 26, carbs: 12, fat: 34 }
+  - { name: "Chicken & Bacon Ranch (salad)", section: salads, servingG: 430, kcal: 490, protein: 30, carbs: 14, fat: 36 }
+  - { name: "Honey Mustard Chicken (salad)", section: salads, servingG: 426, kcal: 370, protein: 25, carbs: 18, fat: 24 }
+  - { name: "Sweet Onion Chicken Teriyaki (salad)", section: salads, servingG: 423, kcal: 300, protein: 23, carbs: 33, fat: 10 }
+  - { name: "B.M.T. (salad)", section: salads, servingG: 404, kcal: 530, protein: 21, carbs: 13, fat: 45 }
+  - { name: "Spicy Italian (salad)", section: salads, servingG: 404, kcal: 600, protein: 21, carbs: 13, fat: 53 }
+  - { name: "5 Meat Italian (salad)", section: salads, servingG: 468, kcal: 600, protein: 34, carbs: 14, fat: 46 }
+  - { name: "Meatball Marinara, with MVP Parmesan Vinaigrette (salad)", section: salads, servingG: 478, kcal: 520, protein: 22, carbs: 25, fat: 38 }
+  - { name: "Meatball Pepperoni, with MVP Parmesan Vinaigrette (salad)", section: salads, servingG: 496, kcal: 600, protein: 25, carbs: 25, fat: 46 }
+  - { name: "Oven-Roasted Turkey (salad)", section: salads, servingG: 397, kcal: 400, protein: 20, carbs: 11, fat: 32 }
+  - { name: "Black Forest Ham (salad)", section: salads, servingG: 397, kcal: 410, protein: 20, carbs: 13, fat: 33 }
+  - { name: "Roast Beef (salad)", section: salads, servingG: 411, kcal: 430, protein: 25, carbs: 13, fat: 32 }
+  - { name: "Cold Cut Combo (salad)", section: salads, servingG: 404, kcal: 460, protein: 19, carbs: 11, fat: 38 }
+  - { name: "Tuna (salad)", section: salads, servingG: 387, kcal: 400, protein: 21, carbs: 10, fat: 31 }
+  - { name: "Veggie Delite (salad)", section: salads, servingG: 313, kcal: 140, protein: 9, carbs: 10, fat: 8 }
+  - { name: "All American Club (salad)", section: salads, servingG: 410, kcal: 470, protein: 23, carbs: 13, fat: 38 }
+  - { name: "Subway Club (salad)", section: salads, servingG: 430, kcal: 440, protein: 25, carbs: 14, fat: 33 }
+  - { name: "Steak Philly (protein bowl)", section: bowls, servingG: 403, kcal: 630, protein: 43, carbs: 14, fat: 47 }
+  - { name: "Chipotle Philly (protein bowl)", section: bowls, servingG: 415, kcal: 600, protein: 46, carbs: 15, fat: 41 }
+  - { name: "Steak & Bacon (protein bowl)", section: bowls, servingG: 430, kcal: 720, protein: 54, carbs: 16, fat: 50 }
+  - { name: "Grilled Chicken (protein bowl)", section: bowls, servingG: 415, kcal: 620, protein: 48, carbs: 11, fat: 44 }
+  - { name: "Chicken & Bacon Ranch (protein bowl)", section: bowls, servingG: 445, kcal: 760, protein: 55, carbs: 14, fat: 55 }
+  - { name: "Honey Mustard Chicken (protein bowl)", section: bowls, servingG: 438, kcal: 570, protein: 45, carbs: 18, fat: 36 }
+  - { name: "Sweet Onion Chicken Teriyaki (protein bowl)", section: bowls, servingG: 432, kcal: 470, protein: 42, carbs: 40, fat: 18 }
+  - { name: "B.M.T. (protein bowl)", section: bowls, servingG: 394, kcal: 800, protein: 38, carbs: 14, fat: 66 }
+  - { name: "Spicy Italian (protein bowl)", section: bowls, servingG: 389, kcal: 930, protein: 37, carbs: 13, fat: 82 }
+  - { name: "5 Meat Italian (protein bowl)", section: bowls, servingG: 521, kcal: 930, protein: 65, carbs: 17, fat: 68 }
+  - { name: "Meatball Marinara, with MVP Parmesan Vinaigrette (protein bowl)", section: bowls, servingG: 541, kcal: 850, protein: 40, carbs: 36, fat: 63 }
+  - { name: "Meatball Pepperoni, with MVP Parmesan Vinaigrette (protein bowl)", section: bowls, servingG: 577, kcal: 1010, protein: 46, carbs: 38, fat: 77 }
+  - { name: "Oven-Roasted Turkey (protein bowl)", section: bowls, servingG: 380, kcal: 540, protein: 37, carbs: 10, fat: 40 }
+  - { name: "Black Forest Ham (protein bowl)", section: bowls, servingG: 380, kcal: 560, protein: 35, carbs: 13, fat: 41 }
+  - { name: "Roast Beef (protein bowl)", section: bowls, servingG: 408, kcal: 590, protein: 46, carbs: 14, fat: 40 }
+  - { name: "Cold Cut Combo (protein bowl)", section: bowls, servingG: 394, kcal: 650, protein: 33, carbs: 11, fat: 53 }
+  - { name: "Tuna (protein bowl)", section: bowls, servingG: 387, kcal: 730, protein: 39, carbs: 9, fat: 61 }
+  - { name: "All American Club (protein bowl)", section: bowls, servingG: 405, kcal: 680, protein: 41, carbs: 15, fat: 52 }
+  - { name: "Subway Club (protein bowl)", section: bowls, servingG: 418, kcal: 410, protein: 45, carbs: 16, fat: 20 }

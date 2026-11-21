@@ -1,0 +1,29 @@
+# Figures copied by script from Cava's Nutrition and Allergen Guide (PDF supplied by the maintainer on
+# 2026-11-21; no date printed, file created September 2026), read in full and cross-checked line by line.
+# Open before publishing: a direct link to the guide.
+draft: true
+name: "Cava"
+source:
+  title: "Cava Nutrition and Allergen Guide"
+  url: https://cava.com/menu
+  checked: 2026-11-21
+sections:
+  - { key: bowls, label: "Curated bowls" }
+  - { key: pitas, label: "Curated pitas" }
+note: "Cava's curated bowls and pitas as Cava builds them; its guide gives no serving weights. Bowls you build yourself, kids' meals, sides, desserts and drinks are not listed here."
+# Falafel Crunch Bowl: Cava lists 860 kcal, about 90 kcal more than 4/4/9 gives from its protein, carbs and fat
+# (it has 18 g of fiber). The figures match the guide; atwaterGap marks it so the typo check skips it.
+items:
+  - { name: "Greek Goddess Steak Salad", section: bowls, kcal: 470, protein: 34, carbs: 22, fat: 29 }
+  - { name: "Greek Goddess Salmon Bowl", section: bowls, kcal: 700, protein: 34, carbs: 57, fat: 40 }
+  - { name: "Spicy Lamb + Avocado Bowl", section: bowls, kcal: 800, protein: 43, carbs: 49, fat: 52 }
+  - { name: "Steak + Harissa Bowl", section: bowls, kcal: 620, protein: 37, carbs: 39, fat: 35 }
+  - { name: "Harissa Avocado Bowl", section: bowls, kcal: 830, protein: 41, carbs: 62, fat: 49 }
+  - { name: "Chicken + Rice Bowl", section: bowls, kcal: 700, protein: 40, carbs: 44, fat: 42 }
+  - { name: "Greek Salad Bowl", section: bowls, kcal: 580, protein: 37, carbs: 19, fat: 40 }
+  - { name: "Falafel Crunch Bowl", section: bowls, kcal: 860, protein: 24, carbs: 88, fat: 56, atwaterGap: true }
+  - { name: "Salmon + Yogurt Dill Bowl", section: bowls, kcal: 710, protein: 35, carbs: 49, fat: 43 }
+  - { name: "Pomegranate Glazed Salmon Bowl", section: bowls, kcal: 1040, protein: 36, carbs: 80, fat: 65 }
+  - { name: "Spicy Chicken + Avocado Pita", section: pitas, kcal: 930, protein: 48, carbs: 80, fat: 48 }
+  - { name: "Steak + Feta Pita", section: pitas, kcal: 820, protein: 44, carbs: 68, fat: 42 }
+  - { name: "Greek Chicken Pita", section: pitas, kcal: 720, protein: 48, carbs: 64, fat: 30 }

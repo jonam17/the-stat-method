@@ -342,14 +342,17 @@ const fastFood = defineCollection({
     items: z.array(z.object({
       name: z.string(),
       section: z.string(),
-      // The serving as the chain gives it: grams, or ounces when it gives only ounces.
+      // The serving as the chain gives it: grams, or ounces when it gives only ounces;
+      // neither when the chain gives none (Cava).
       servingG: z.number().positive().optional(),
       servingOz: z.number().positive().optional(),
       kcal: z.number().positive(),
       protein: z.number().min(0),
       carbs: z.number().min(0),
       fat: z.number().min(0),
-    }).refine(i => i.servingG || i.servingOz, 'servingG or servingOz')).min(1),
+      // Set only where the chain's own calories sit far from 4/4/9 and the figure was re-read and matches.
+      atwaterGap: z.boolean().optional(),
+    })).min(1),
   }).refine(c => c.items.every(i => c.sections.some(s => s.key === i.section)), 'every item section must be listed in sections'),
 });
 

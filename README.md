@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,404 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,414 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -357,11 +357,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
-### v2.50.0 — Four more fast-food chains (draft) and per-chain menu sections
+### v2.50.0 — Six more fast-food chains (draft) and per-chain menu sections
 
 - **New chains, `draft: true`:** El Pollo Loco (40 items, Nutrition Guide M5 2026), Panda Express (18, its Nutrition
   & Allergen page), Raising Cane's (5, Allergen & Nutritional Information, August 2026) and In-N-Out Burger (10, its
-  Nutrition Info page). Every figure was taken from the text of the chain's own document by script, not retyped,
+  Nutrition Info page), Subway (90, U.S. Nutrition Information, October 2026: 6-inch subs, Fresh Fit, wraps,
+  Protein Pockets, salads and protein bowls) and Cava (13 curated bowls and pitas; its guide gives no serving
+  weights, so none are shown). Every figure was taken from the text of the chain's own document by script, not retyped,
   and cross-checked line by line against it; In-N-Out's page was read twice and the reads agreed.
 - **Per-chain sections:** each chain file now lists its own menu sections (`sections`), so the filter buttons
   follow that chain's menu (Fire-grilled chicken, Bowls, Burgers and so on). Chick-fil-A keeps its four.
@@ -370,9 +372,12 @@ Every release is tagged. Newest first.
 - **Servings in ounces:** chains that give only ounces (El Pollo Loco, Panda Express) show "17 oz"; the schema takes
   `servingG` or `servingOz`.
 - **Source line** shows the edition printed on the chain's document when there is one ("August 2026", "M5 2026").
-- Raising Cane's links to its home page for now; a direct link to the PDF is needed before it is published.
-- 21 new tests (every item has a serving, every section is listed by its chain; the existing checks now cover the
-  new chains); 1,404 in total.
+- Raising Cane's and Cava link to their home or menu page for now; a direct link to each PDF is needed before
+  they are published.
+- `atwaterGap` marks a figure that sits far from 4/4/9 but matches the chain's document on re-reading (Cava's
+  Falafel Crunch Bowl); the typo check skips only those.
+- 31 new tests (servings given for all of a chain's items or none, every section is listed by its chain; the
+  existing checks now cover the new chains); 1,414 in total.
 
 ### v2.49.1 — Foods published
 

@@ -15,4 +15,4 @@ export const ranked = items => items
 export const lowestCalories = items => [...items].sort((a, b) => a.kcal - b.kcal || b.protein - a.protein)[0];
 
 /** The serving as the chain gives it: "55 g", or "6.2 oz" when it gives only ounces. */
-export const servingText = i => i.servingG ? `${i.servingG} g` : `${i.servingOz} oz`;
+export const servingText = i => i.servingG ? `${i.servingG} g` : i.servingOz ? `${i.servingOz} oz` : '';

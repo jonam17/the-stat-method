@@ -26,8 +26,9 @@ describe('fast-food files', () => {
         const names = d.items.map(i => i.name);
         expect(new Set(names).size).toBe(names.length);
       });
-      it('has a serving for every item', () => {
-        for (const i of d.items) expect(i.servingG || i.servingOz, i.name).toBeTruthy();
+      it('gives servings for all items or none', () => {
+        const withServing = d.items.filter(i => i.servingG || i.servingOz).length;
+        expect([0, d.items.length]).toContain(withServing);
       });
       it('uses only its own listed sections', () => {
         const keys = d.sections.map(s => s.key);
@@ -37,7 +38,7 @@ describe('fast-food files', () => {
       // Chains round to 10 kcal and to whole grams, and fiber counts for less than
       // 4 kcal/g, so a gap up to 60 kcal is allowed; a bigger one means a typo.
       it('calories agree with protein, carbs and fat (within 60 kcal)', () => {
-        for (const i of d.items) {
+        for (const i of d.items.filter(i => !i.atwaterGap)) {
           const atwater = 4 * i.protein + 4 * i.carbs + 9 * i.fat;
           expect(Math.abs(atwater - i.kcal), `${i.name}: ${i.kcal} kcal vs ${atwater}`).toBeLessThanOrEqual(60);
         }
