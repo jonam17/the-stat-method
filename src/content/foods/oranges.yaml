@@ -1,6 +1,6 @@
 # Oranges. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Oranges
 group: fruits
 dek: "Calories, protein, carbs, fat and fiber in a raw orange, and the nutrients it gives you the most of."

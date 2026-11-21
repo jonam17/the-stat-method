@@ -1,6 +1,6 @@
 # Ground beef. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Ground beef
 group: meat
 dek: "Calories, protein, carbs, fat and fiber in 90% and 80% lean ground beef, raw and broiled, and the nutrients it gives you the most of."

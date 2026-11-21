@@ -1,6 +1,6 @@
 # Eggs. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Eggs
 group: eggs-dairy
 dek: "Calories, protein, carbs, fat and fiber in eggs raw, hard-boiled, scrambled and fried, and the nutrients they give you the most of."

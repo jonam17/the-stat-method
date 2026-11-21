@@ -1,6 +1,6 @@
 # Salmon. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Salmon
 group: fish
 dek: "Calories, protein, carbs, fat and fiber in farmed Atlantic and sockeye salmon, raw and cooked, and the nutrients they give you the most of."

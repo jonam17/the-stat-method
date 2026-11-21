@@ -357,6 +357,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.49.1 — Foods published
+
+- `src/content/foods/*.yaml`: `draft: false` for all 10 foods after the maintainer checked them against USDA
+  FoodData Central (2026-11-21). The Foods section, its card on the Library landing and the foods in the Library
+  search are now live, and the pages join the sitemap and the weekly link check.
+- No new tests; 1,383 in total.
+
 ### v2.49.0 — Foods in the Library (10 foods, draft) and a portion calculator
 
 - **New Library section: Foods** (roadmap item 67). `/library/foods/` lists foods by group (Fruits, Vegetables,

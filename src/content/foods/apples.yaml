@@ -1,6 +1,6 @@
 # Apples. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Apples
 group: fruits
 dek: "Calories, protein, carbs, fat and fiber in apples with and without the skin, and the nutrients they give you the most of."

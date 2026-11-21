@@ -1,6 +1,6 @@
 # Milk. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Milk
 group: eggs-dairy
 dek: "Calories, protein, carbs, fat and fiber in whole, 2%, 1% and nonfat milk, and the nutrients it gives you the most of."
