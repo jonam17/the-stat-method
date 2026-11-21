@@ -347,4 +347,31 @@ const fastFood = defineCollection({
   }),
 });
 
-export const collections = { articles, nutrients, exercises, 'fast-food': fastFood };
+/**
+ * Everyday foods (Library section, roadmap item 67, v2.49.0). One file per food,
+ * one entry per form; every value is copied from USDA FoodData Central SR Legacy,
+ * per 100 g, with the FDC ID it came from. Keys in `micros` are Daily Value keys
+ * (src/data/daily-values.js), checked by the tests.
+ */
+const per100 = z.object({ kcal: z.number().min(0), protein: z.number().min(0), carbs: z.number().min(0),
+  fat: z.number().min(0), fiber: z.number().min(0) });
+const foods = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/foods' }),
+  schema: z.object({
+    draft: z.boolean().default(false),
+    name: z.string(),
+    group: z.enum(['fruits', 'vegetables', 'meat', 'fish', 'eggs-dairy']),   // FOOD_GROUPS
+    dek: z.string().min(40).max(200),
+    checked: z.coerce.date(),
+    forms: z.array(z.object({
+      name: z.string(),
+      usda: z.string(),
+      fdcId: z.number().int().positive(),
+      serving: z.object({ label: z.string(), g: z.number().positive() }).optional(),
+      per100,
+      micros: z.record(z.string(), z.number().min(0)),
+    })).min(1),
+  }),
+});
+
+export const collections = { articles, nutrients, exercises, 'fast-food': fastFood, foods };

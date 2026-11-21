@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,272 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,383 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,32 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.49.0 — Foods in the Library (10 foods, draft) and a portion calculator
+
+- **New Library section: Foods** (roadmap item 67). `/library/foods/` lists foods by group (Fruits, Vegetables,
+  Meat and poultry, Fish, Eggs and dairy); each food has a page at `/library/foods/<food>/`.
+- **Data:** new `foods` content collection (`src/content/foods/*.yaml`). Every value is copied from USDA FoodData
+  Central, SR Legacy (April 2018, the final release), per 100 g, with the FDC ID of the entry; each form's serving
+  shortcut is a serving weight USDA lists for that entry. SR Legacy is used for every form of a food so the forms
+  compare fairly (Foundation Foods lacks most cooked forms, and many of its entries have no calorie or fiber
+  value or no vitamins). 728 values checked against the USDA file, 0 differences.
+- **First 10 foods, `draft: true`:** apples, oranges, bananas, kale, chicken breast, ground beef, salmon, eggs, milk,
+  cheddar cheese — 26 forms.
+- **Top 3 nutrients:** the vitamins and minerals with the highest share of their Daily Value, from the 22 with a
+  Daily Value and a Library page; sodium left out. Daily Values (`src/data/daily-values.js`) are the adult
+  Reference Daily Intakes in 21 CFR 101.9(c)(8)(iv), CFR revised as of 1 April 2025. Each nutrient links to its
+  Library page.
+- **Portion calculator** on every food page, in one panel: form, "How much I'm eating" or "Amount for a protein
+  target", g / oz, and the amount with serving and 100 g shortcuts. Both modes show calories, protein, carbs, fat,
+  fiber and the top 3 with % Daily Value. A protein target that would need more than 500 g is answered "Not a
+  practical protein source". The maths is `src/engine/portion.js`, imported by the page script and the tests.
+  Without JavaScript each form's figures show as a static block.
+- **Library landing:** a fourth card, "D / Everyday foods" (cards 2 x 2), Foods in the search with a Group filter
+  and `/library/#foods`, and the intro sentence names what the Library holds — all shown only once a food is
+  published. On phones the search's four choices sit two by two.
+- 111 new tests (`foods.test.js`: Daily Value and Library page for every nutrient, calories within 10 kcal of
+  4/4/9 per 100 g, unique FDC IDs and form names, and the portion maths); 1,383 in total.
 
 ### v2.48.1 — Chick-fil-A published
 

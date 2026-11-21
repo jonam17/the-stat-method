@@ -1,0 +1,20 @@
+# Kale. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Kale
+group: vegetables
+dek: "Calories, protein, carbs, fat and fiber in raw and boiled kale, and the nutrients it gives you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Raw"
+    usda: "Kale, raw"
+    fdcId: 168421
+    serving: { label: "1 cup", g: 21 }
+    per100: { kcal: 35, protein: 2.92, carbs: 4.42, fat: 1.49, fiber: 4.1 }
+    micros: { vitamin-a: 241, vitamin-c: 93.4, vitamin-d: 0, vitamin-e: 0.66, vitamin-k: 390, thiamin: 0.113, riboflavin: 0.347, niacin: 1.18, vitamin-b6: 0.147, folate: 62, vitamin-b12: 0, pantothenic-acid: 0.37, choline: 0.5, calcium: 254, iron: 1.6, magnesium: 33, phosphorus: 55, potassium: 348, zinc: 0.39, copper: 0.053, manganese: 0.92, selenium: 0.9 }
+  - name: "Boiled, drained, no salt"
+    usda: "Kale, cooked, boiled, drained, without salt"
+    fdcId: 169238
+    serving: { label: "1 cup", g: 118 }
+    per100: { kcal: 36, protein: 2.94, carbs: 5.3, fat: 1.21, fiber: 4 }
+    micros: { vitamin-a: 146, vitamin-c: 17.8, vitamin-d: 0, vitamin-e: 1.61, vitamin-k: 418, thiamin: 0.063, riboflavin: 0.14, niacin: 0.457, vitamin-b6: 0.063, folate: 65, vitamin-b12: 0, pantothenic-acid: 0.17, choline: 0.4, calcium: 150, iron: 0.84, magnesium: 25, phosphorus: 42, potassium: 144, zinc: 0.27, copper: 0.067, manganese: 0.542, selenium: 0.9 }

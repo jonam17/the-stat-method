@@ -1,0 +1,32 @@
+# Ground beef. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Ground beef
+group: meat
+dek: "Calories, protein, carbs, fat and fiber in 90% and 80% lean ground beef, raw and broiled, and the nutrients it gives you the most of."
+checked: 2026-11-21
+forms:
+  - name: "90% lean, raw"
+    usda: "Beef, ground, 90% lean meat / 10% fat, raw"
+    fdcId: 174030
+    serving: { label: "4 oz", g: 113 }
+    per100: { kcal: 176, protein: 20, carbs: 0, fat: 10, fiber: 0 }
+    micros: { vitamin-a: 4, vitamin-c: 0, vitamin-d: 0.1, vitamin-e: 0.17, vitamin-k: 0.8, thiamin: 0.042, riboflavin: 0.151, niacin: 5.07, vitamin-b6: 0.369, folate: 6, vitamin-b12: 2.21, pantothenic-acid: 0.601, choline: 66.1, calcium: 12, iron: 2.24, magnesium: 20, phosphorus: 184, potassium: 321, zinc: 4.79, copper: 0.072, manganese: 0.01, selenium: 16.6 }
+  - name: "90% lean, patty, broiled"
+    usda: "Beef, ground, 90% lean meat / 10% fat, patty, cooked, broiled"
+    fdcId: 174031
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 217, protein: 26.1, carbs: 0, fat: 11.8, fiber: 0 }
+    micros: { vitamin-a: 3, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.12, vitamin-k: 1.1, thiamin: 0.044, riboflavin: 0.176, niacin: 5.66, vitamin-b6: 0.397, folate: 8, vitamin-b12: 2.56, pantothenic-acid: 0.658, choline: 83.9, calcium: 13, iron: 2.71, magnesium: 22, phosphorus: 202, potassium: 333, zinc: 6.37, copper: 0.09, manganese: 0.013, selenium: 21.5 }
+  - name: "80% lean, raw"
+    usda: "Beef, ground, 80% lean meat / 20% fat, raw"
+    fdcId: 174036
+    serving: { label: "4 oz", g: 113 }
+    per100: { kcal: 254, protein: 17.2, carbs: 0, fat: 20, fiber: 0 }
+    micros: { vitamin-a: 4, vitamin-c: 0, vitamin-d: 0.1, vitamin-e: 0.17, vitamin-k: 1.8, thiamin: 0.043, riboflavin: 0.151, niacin: 4.23, vitamin-b6: 0.323, folate: 7, vitamin-b12: 2.14, pantothenic-acid: 0.498, choline: 56.4, calcium: 18, iron: 1.94, magnesium: 17, phosphorus: 158, potassium: 270, zinc: 4.18, copper: 0.061, manganese: 0.01, selenium: 15 }
+  - name: "80% lean, patty, broiled"
+    usda: "Beef, ground, 80% lean meat / 20% fat, patty, cooked, broiled"
+    fdcId: 171797
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 270, protein: 25.8, carbs: 0, fat: 17.8, fiber: 0 }
+    micros: { vitamin-a: 3, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.12, vitamin-k: 1.6, thiamin: 0.047, riboflavin: 0.176, niacin: 5.1, vitamin-b6: 0.366, folate: 10, vitamin-b12: 2.73, pantothenic-acid: 0.658, choline: 80.8, calcium: 24, iron: 2.48, magnesium: 20, phosphorus: 194, potassium: 304, zinc: 6.25, copper: 0.08, manganese: 0.011, selenium: 21.5 }

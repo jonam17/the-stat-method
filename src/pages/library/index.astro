@@ -14,6 +14,7 @@ import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
 import { publishedExercises, GROUPS, EQUIPMENT, equipmentText, jointsText } from '../../data/exercises.js';
 import { publishedArticles } from '../../data/articles.js';
 import { publishedChains } from '../../data/fast-food.js';
+import { publishedFoods, FOOD_GROUPS } from '../../data/foods.js';
 
 const nutrients = await publishedNutrients();
 const exercises = await publishedExercises();
@@ -22,6 +23,16 @@ const kinds = await kindsWithEntries();
 // are not in the Library search — each chain's page has its own filter and sort.
 const chains = await publishedChains();
 const chainItems = chains.reduce((n, c) => n + c.data.items.length, 0);
+// Foods (v2.49.0): a card of their own and a place in the search, once one is published.
+const foods = await publishedFoods();
+const foodGroups = FOOD_GROUPS.filter(g => foods.some(f => f.data.group === g.key));
+const cardCount = 2 + (chains.length > 0 ? 1 : 0) + (foods.length > 0 ? 1 : 0);
+// The hero sentence names what the Library holds.
+const subjects = ['nutrition', 'exercise', ...(chains.length ? ['fast food'] : []), ...(foods.length ? ['everyday foods'] : [])];
+const finds = ['a nutrient', 'an exercise', ...(chains.length ? ['a chain'] : []), ...(foods.length ? ['a food'] : [])];
+const list = a => a.length > 2 ? `${a.slice(0, -1).join(', ')} and ${a.at(-1)}` : a.join(' and ');
+const listOr = a => a.length > 2 ? `${a.slice(0, -1).join(', ')} or ${a.at(-1)}` : a.join(' or ');
+const domains = ['Nutrients', 'Exercises', ...(foods.length ? ['Foods'] : [])];
 const exGroups = GROUPS.filter(g => exercises.some(e => e.data.group === g.key));
 const usedEquipment = Object.keys(EQUIPMENT).filter(k => exercises.some(e => e.data.equipment.includes(k)));
 
@@ -40,6 +51,13 @@ const rows = [
       text: [n.data.name, n.data.dek, k.label, singular[n.data.kind], ...(n.data.perKg ? n.data.perKg.items.map(i => i.name) : [])].join(' '),
     };
   }),
+  ...foods.map(f => ({
+    domain: 'food', name: f.data.name, dek: f.data.dek,
+    url: `/library/foods/${f.id}/`,
+    tag: FOOD_GROUPS.find(g => g.key === f.data.group).label, facet: f.data.group,
+    meta: `${f.data.forms.length} ${f.data.forms.length === 1 ? 'form' : 'forms'} · USDA FoodData Central`,
+    text: [f.data.name, f.data.dek, ...f.data.forms.map(v => v.name), ...f.data.forms.map(v => v.usda)].join(' '),
+  })),
   ...exercises.map(e => {
     const g = GROUPS.find(x => x.key === e.data.group);
     return {
@@ -58,7 +76,7 @@ const rows = [
 const reading = (await publishedArticles())
   .filter(a => ['protein-how-much', 'amino-acids-and-protein-quality', 'training-volume-how-many-sets-do-you-actually-need'].includes(a.id));
 ---
-<BaseLayout noindex={nutrients.length === 0 && exercises.length === 0 && chains.length === 0} title="Library — The Stat Method"
+<BaseLayout noindex={nutrients.length === 0 && exercises.length === 0 && chains.length === 0 && foods.length === 0} title="Library — The Stat Method"
   description={'How much of each nutrient you need and where to get it, and exercises for each muscle group with the studies behind them. Every value has a named source.'}>
   <div class="wrap lh">
     <header class="lh-hero">
@@ -66,19 +84,17 @@ const reading = (await publishedArticles())
         <span class="eyebrow">Knowledge base</span>
         <h1>The science, organized.</h1>
       </div>
-      <p>{chains.length > 0
-        ? 'Evidence-based references for nutrition, exercise and fast food. Find a nutrient, an exercise or a chain, see the numbers, and trace each one back to its source.'
-        : 'Evidence-based references for nutrition and exercise. Find a nutrient or an exercise, see the numbers, and trace each one back to its source.'}</p>
+      <p>Evidence-based references for {list(subjects)}. Find {listOr(finds)}, see the numbers, and trace each one back to its source.</p>
     </header>
 
-    <section class="lh-search" id="library-search" aria-labelledby="lh-search-h" data-lh hidden>
+    <section class="lh-search" id="library-search" aria-labelledby="lh-search-h" data-lh data-lh-domains={listOr(domains)} hidden>
       <h2 id="lh-search-h" class="lh-vh">Search the Library</h2>
       <div class="lh-search-row">
         <label for="lh-q" class="lh-label">Search the Library</label>
         <div class="lh-field">
           <span aria-hidden="true" class="lh-ico">⌕</span>
           <input id="lh-q" type="search" autocomplete="off" spellcheck="false"
-            placeholder="Search nutrients, exercises, muscles or equipment…" data-lh-q />
+            placeholder={foods.length ? "Search nutrients, exercises, foods, muscles or equipment…" : "Search nutrients, exercises, muscles or equipment…"} data-lh-q />
         </div>
       </div>
 
@@ -87,6 +103,7 @@ const reading = (await publishedArticles())
           <button type="button" aria-pressed="true" data-lh-domain="all">All <em>{rows.length}</em></button>
           <button type="button" aria-pressed="false" data-lh-domain="nutrient">Nutrients <em>{nutrients.length}</em></button>
           <button type="button" aria-pressed="false" data-lh-domain="exercise">Exercises <em>{exercises.length}</em></button>
+          {foods.length > 0 && <button type="button" aria-pressed="false" data-lh-domain="food">Foods <em>{foods.length}</em></button>}
         </div>
         <div class="lh-filters" data-lh-filters="nutrient" hidden>
           <label>Type
@@ -96,6 +113,16 @@ const reading = (await publishedArticles())
             </select>
           </label>
         </div>
+        {foods.length > 0 && (
+          <div class="lh-filters" data-lh-filters="food" hidden>
+            <label>Group
+              <select data-lh-facet>
+                <option value="">All groups</option>
+                {foodGroups.map(g => <option value={g.key}>{g.label}</option>)}
+              </select>
+            </label>
+          </div>
+        )}
         <div class="lh-filters" data-lh-filters="exercise" hidden>
           <label>Muscle group
             <select data-lh-facet>
@@ -135,7 +162,7 @@ const reading = (await publishedArticles())
       </div>
     </section>
 
-    <section class={`lh-domains${chains.length > 0 ? ' lh-three' : ''}`} aria-label="Library sections">
+    <section class={`lh-domains${cardCount === 3 ? ' lh-three' : ''}`} aria-label="Library sections">
       <a class="lh-domain" href="#library-search" data-lh-show="nutrient">
         <span class="eyebrow">A / Nutrition reference</span>
         <h2>Nutrients</h2>
@@ -159,6 +186,15 @@ const reading = (await publishedArticles())
           <span class="lh-go">See the chains →</span>
         </a>
       )}
+      {foods.length > 0 && (
+        <a class="lh-domain" href="/library/foods/">
+          <span class="eyebrow">{chains.length > 0 ? 'D' : 'C'} / Everyday foods</span>
+          <h2>Foods</h2>
+          <p>Everyday foods and their common forms: calories, protein, carbs, fat and fiber, and the three nutrients each gives you the most of.</p>
+          <span class="lh-count">{foods.length} {foods.length === 1 ? 'food' : 'foods'} · {foods.reduce((n, f) => n + f.data.forms.length, 0)} forms</span>
+          <span class="lh-go">See the foods →</span>
+        </a>
+      )}
     </section>
 
     <noscript>
@@ -167,6 +203,7 @@ const reading = (await publishedArticles())
           {kinds.map(k => <li><a href={`/library/${k.slug}/`}>{k.label}</a></li>)}
           {exGroups.map(g => <li><a href={`/library/exercises/#${g.key}`}>{g.label}</a></li>)}
           {chains.length > 0 && <li><a href="/library/fast-food/">Fast food</a></li>}
+          {foods.length > 0 && <li><a href="/library/foods/">Foods</a></li>}
         </ul>
       </section>
     </noscript>
@@ -240,7 +277,7 @@ const reading = (await publishedArticles())
       clears[0].hidden = !active || n === 0;
       count.textContent = active
         ? `${n} ${n === 1 ? 'result' : 'results'}`
-        : `${items.length} references. Type to search, or choose Nutrients or Exercises.`;
+        : `${items.length} references. Type to search, or choose ${root.dataset.lhDomains}.`;
     }
     function setDomain(d) {
       domain = d;
@@ -266,7 +303,7 @@ const reading = (await publishedArticles())
     // /library/#nutrients and /library/#exercises (the home page cards) open the
     // search with that kind already chosen. No focus here: on a phone that would
     // open the keyboard over the results the visitor came to see.
-    const HASH = { '#nutrients': 'nutrient', '#exercises': 'exercise' };
+    const HASH = { '#nutrients': 'nutrient', '#exercises': 'exercise', '#foods': 'food' };
     function fromHash() {
       const d = HASH[location.hash];
       if (!d) return;
@@ -331,6 +368,7 @@ const reading = (await publishedArticles())
   .lh-dot{width:12px;height:2px;background:var(--ink-mute)}
   .lh-dot[data-d="nutrient"]{background:var(--nutrition)}
   .lh-dot[data-d="exercise"]{background:var(--training)}
+  .lh-dot[data-d="food"]{background:var(--signal)}
   .lh-empty{border:1px solid var(--line);padding:18px;display:grid;gap:12px;justify-items:start}
   .lh-empty p{margin:0;color:var(--ink-soft)}
 
@@ -383,6 +421,10 @@ const reading = (await publishedArticles())
     .lh-domains,.lh-domains.lh-three,.lh-results{grid-template-columns:1fr}
     .lh-seg{width:100%}
     .lh-seg button{flex:1;justify-content:center;padding:0 8px}
+    /* Four choices (with Foods) go two by two on phones. */
+    .lh-seg:has(> :nth-child(4)){display:grid;grid-template-columns:1fr 1fr}
+    .lh-seg:has(> :nth-child(4)) button:nth-child(2){border-right:0}
+    .lh-seg:has(> :nth-child(4)) button:nth-child(-n+2){border-bottom:1px solid var(--line-strong)}
     .lh-filters,.lh-filters label{width:100%}
     .lh-filters select{width:100%}
   }

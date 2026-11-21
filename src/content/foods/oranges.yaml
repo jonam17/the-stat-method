@@ -1,0 +1,14 @@
+# Oranges. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Oranges
+group: fruits
+dek: "Calories, protein, carbs, fat and fiber in a raw orange, and the nutrients it gives you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Raw"
+    usda: "Oranges, raw, all commercial varieties"
+    fdcId: 169097
+    serving: { label: "1 orange", g: 131 }
+    per100: { kcal: 47, protein: 0.94, carbs: 11.8, fat: 0.12, fiber: 2.4 }
+    micros: { vitamin-a: 11, vitamin-c: 53.2, vitamin-d: 0, vitamin-e: 0.18, vitamin-k: 0, thiamin: 0.087, riboflavin: 0.04, niacin: 0.282, vitamin-b6: 0.06, folate: 30, vitamin-b12: 0, pantothenic-acid: 0.25, choline: 8.4, calcium: 40, iron: 0.1, magnesium: 10, phosphorus: 14, potassium: 181, zinc: 0.07, copper: 0.045, manganese: 0.025, selenium: 0.5 }

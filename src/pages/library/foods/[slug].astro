@@ -1,0 +1,257 @@
+---
+/**
+ * One food. Every value is read from its data file in src/content/foods/ (USDA
+ * FoodData Central, SR Legacy, per 100 g); the calculator's maths is
+ * src/engine/portion.js, the same code the tests run.
+ *
+ * One panel holds every control: form, mode, units and amount. Without JavaScript
+ * the panel stays hidden and a static block per form (per serving, or per 100 g)
+ * shows instead.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedFoods, FOOD_GROUPS, FOODS_SOURCE } from '../../../data/foods.js';
+import { publishedNutrients, KINDS } from '../../../data/nutrients.js';
+import { DAILY_VALUES, DV_SOURCE } from '../../../data/daily-values.js';
+import { topNutrients, scaleMacros, pctDV } from '../../../engine/portion.js';
+
+export async function getStaticPaths() {
+  return (await publishedFoods()).map(f => ({ params: { slug: f.id }, props: { f } }));
+}
+const { f } = Astro.props;
+const d = f.data;
+// A nutrient links to its Library page only when that page is published.
+const nutrientPages = Object.fromEntries((await publishedNutrients())
+  .map(n => [n.id, `/library/${KINDS.find(k => k.key === n.data.kind).slug}/${n.id}/`]));
+const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const n1 = x => (Math.round(x * 10) / 10).toLocaleString('en-US');
+const amountOf = v => v.serving ? v.serving.g : 100;
+const amountLabel = v => v.serving ? `${v.serving.label} (${v.serving.g} g)` : '100 g';
+const tops = v => topNutrients(v.micros, DAILY_VALUES).map(t => ({ ...t, ...DAILY_VALUES[t.key], href: nutrientPages[t.key] ?? null }));
+const calcData = JSON.stringify({ name: d.name, variants: d.forms.map(v => ({ name: v.name, per100: v.per100, serving: v.serving ?? null,
+  top: tops(v).map(t => ({ name: t.name, per100: t.per100, unit: t.unit, dv: t.dv, href: t.href })) })) });
+const group = FOOD_GROUPS.find(g => g.key === d.group).label;
+const MACROS = [['kcal', 'Calories', ''], ['protein', 'Protein', ' g'], ['carbs', 'Carbs', ' g'], ['fat', 'Fat', ' g'], ['fiber', 'Fiber', ' g']];
+---
+<BaseLayout title={`${d.name} — Foods — Library — The Stat Method`} description={d.dek}
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Foods', href: '/library/foods/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / <a href="/library/foods/">Foods</a></div>
+    <article class="article lib-page">
+      {d.draft && <p class="warnbar">Draft — visible only in local development until checked against the source.</p>}
+      <h1>{d.name}</h1>
+      <p class="dek">{d.dek}</p>
+
+      <section class="pc" aria-labelledby="pc-h" data-pc={calcData} hidden>
+        <h2 id="pc-h" class="pc-vh">Nutrition calculator</h2>
+        <div class="pc-grid">
+          <div class="pc-ctl" hidden={d.forms.length === 1}>
+            <label for="pc-form" class="pc-lab">Form</label>
+            <select id="pc-form" data-form-select>
+              {d.forms.map((v, i) => <option value={i}>{v.name}</option>)}
+            </select>
+          </div>
+          <div class="pc-ctl">
+            <span class="pc-lab" id="pc-mode-l">Calculate</span>
+            <div class="pc-seg" role="group" aria-labelledby="pc-mode-l">
+              <button type="button" aria-pressed="true" data-m="eat">How much I'm eating</button>
+              <button type="button" aria-pressed="false" data-m="protein">Amount for a protein target</button>
+            </div>
+          </div>
+          <div class="pc-ctl">
+            <span class="pc-lab" id="pc-unit-l">Units</span>
+            <div class="pc-seg" role="group" aria-labelledby="pc-unit-l">
+              <button type="button" aria-pressed="true" data-u="g">g</button>
+              <button type="button" aria-pressed="false" data-u="oz">oz</button>
+            </div>
+          </div>
+        </div>
+        <div class="pc-row" data-show="eat">
+          <label for="pc-amt" class="pc-lab">Amount</label>
+          <div class="pc-field"><input id="pc-amt" type="number" inputmode="decimal" min="0" step="any" /></div>
+          <div class="pc-quick" data-quick></div>
+        </div>
+        <div class="pc-row" data-show="protein" hidden>
+          <label for="pc-prot" class="pc-lab">Protein you want from this food</label>
+          <div class="pc-field"><input id="pc-prot" type="number" inputmode="decimal" min="0" step="any" value="30" /><span>g protein</span></div>
+        </div>
+        {d.forms.length > 1 && <p class="pc-weigh lib-small">Weigh it the same way: <b data-form-name></b>. Cooking changes the weight, so a raw weight with cooked figures (or the reverse) gives the wrong answer.</p>}
+        <div class="pc-out" aria-live="polite" data-out></div>
+      </section>
+
+      <div data-static>
+        {d.forms.map((v, i) => {
+          const m = scaleMacros(v.per100, amountOf(v));
+          return (
+            <section class="fd-variant" aria-labelledby={`v${i}`}>
+              <h2 id={`v${i}`} class="fd-vname">{v.name} <small>per {amountLabel(v)}</small></h2>
+              <div class="lib-facts fd-facts">
+                {MACROS.map(([k, label, u]) => <div><span>{label}</span><b>{k === 'kcal' ? m[k] : n1(m[k])}{u}</b></div>)}
+              </div>
+              <ol class="fd-top">
+                {tops(v).map(t => {
+                  const amt = t.per100 * amountOf(v) / 100;
+                  return <li>{t.href ? <a href={t.href}>{t.name}</a> : t.name} {n1(amt)} {t.unit} · <b>{pctDV(amt, t.dv)}% DV</b></li>;
+                })}
+              </ol>
+            </section>
+          );
+        })}
+      </div>
+
+      <div class="prose">
+        {d.forms.length > 1 && <>
+          <h2 id="compare">Compare the forms</h2>
+          <div class="lib-table-wrap"><table class="lib-table fd-table">
+            <thead><tr><th>Per 100 g</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th></tr></thead>
+            <tbody>{d.forms.map(v => (
+              <tr><th scope="row">{v.name}</th><td>{v.per100.kcal}</td><td>{v.per100.protein} g</td><td>{v.per100.carbs} g</td><td>{v.per100.fat} g</td><td>{v.per100.fiber} g</td></tr>
+            ))}</tbody>
+          </table></div>
+        </>}
+
+        <h2 id="how">How the top 3 are picked</h2>
+        <p>For each form we take the 22 vitamins and minerals USDA lists that have a Daily Value — the amounts food labels use for adults and children 4 and older — and divide each by its Daily Value. The three highest percentages are shown; the order is the same whatever amount you enter. Sodium is left out: its Daily Value is a limit, not a target. Niacin counts the niacin USDA lists, without the extra the body makes from protein, so its share can be understated.</p>
+        <p>The serving shortcut is a serving weight USDA gives for that form. For the protein target, an amount over 500 g is not shown: at that point the food is not a practical protein source on its own.</p>
+
+        <h2 id="source">Source</h2>
+        <ul class="fd-src">{d.forms.map(v => (
+          <li>{v.name}: <a href={`https://fdc.nal.usda.gov/food-details/${v.fdcId}/nutrients`} rel="noopener">{v.usda}</a> (FDC ID {v.fdcId})</li>
+        ))}</ul>
+        <p class="lib-small">{FOODS_SOURCE.title}, {FOODS_SOURCE.release}; values per 100 g as published, read in full on {fmt(d.checked)}. They are averages of the samples USDA analyzed, so the food on your plate will differ a little. Daily Values: <a href={DV_SOURCE.url} rel="noopener">21 CFR 101.9(c)(8)(iv)</a> ({DV_SOURCE.edition}). See a figure that does not match? <a href="/report/">Report it</a>.</p>
+        <p class="lib-small">More in <a href={`/library/foods/#${d.group}`}>{group}</a>.</p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+<script>
+  import { G_PER_OZ, AMOUNT_G, MAX_PROTEIN_SOURCE_G, scaleMacros, pctDV, gramsForProtein, amountOk } from '../../../engine/portion.js';
+  const box = document.querySelector<HTMLElement>('[data-pc]');
+  if (box) {
+    const d = JSON.parse(box.dataset.pc!);
+    let v = 0, mode = 'eat', unit = 'g';
+    const $ = (s: string) => box.querySelector(s) as HTMLElement;
+    const amt = $('#pc-amt') as HTMLInputElement, prot = $('#pc-prot') as HTMLInputElement;
+    const out = $('[data-out]'), sel = $('[data-form-select]') as HTMLSelectElement, quick = $('[data-quick]');
+    const r1 = (x: number) => Math.round(x * 10) / 10;
+    // Lower-case only the first letter, so names like "Atlantic" keep their capital.
+    const lc = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+    const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as Record<string, string>)[c]);
+    const show = (g: number) => unit === 'g' ? `${Math.round(g).toLocaleString('en-US')} g` : `${r1(g / G_PER_OZ)} oz`;
+    const setGrams = (g: number) => { amt.value = String(unit === 'g' ? Math.round(g) : r1(g / G_PER_OZ)); };
+    const grams = () => { const x = parseFloat(amt.value); return unit === 'g' ? x : x * G_PER_OZ; };
+    const startAmount = () => setGrams(d.variants[v].serving ? d.variants[v].serving.g : 100);
+    const drawQuick = () => {
+      const f = d.variants[v];
+      quick.innerHTML = (f.serving ? `<button type="button" data-g="${f.serving.g}">${esc(f.serving.label)} (${f.serving.g} g)</button>` : '')
+        + '<button type="button" data-g="100">100 g</button>';
+    };
+    const facts = (f: any, g: number, lead: string) => {
+      const m = scaleMacros(f.per100, g), k = g / 100;
+      return `${lead}
+        <div class="lib-facts pc-facts">
+          <div><span>Calories</span><b>${m.kcal}</b></div>
+          <div><span>Protein</span><b>${m.protein} g</b></div>
+          <div><span>Carbs</span><b>${m.carbs} g</b></div>
+          <div><span>Fat</span><b>${m.fat} g</b></div>
+          <div><span>Fiber</span><b>${m.fiber} g</b></div>
+        </div>
+        <h3 class="pc-h3">Top 3 nutrients</h3>
+        <ol class="pc-top">${f.top.map((t: any) => {
+          const a = t.per100 * k, pct = pctDV(a, t.dv);
+          const name = t.href ? `<a href="${t.href}">${esc(t.name)}</a>` : `<span>${esc(t.name)}</span>`;
+          return `<li>${name}<span class="pc-amt">${r1(a)} ${t.unit} · <b>${pct}% DV</b></span>
+            <span class="pc-bar" aria-hidden="true"><span style="width:${Math.min(pct, 100)}%"></span></span></li>`;
+        }).join('')}</ol>`;
+    };
+    const render = () => {
+      const f = d.variants[v];
+      const name = esc(d.variants.length > 1 ? `${lc(d.name)} (${lc(f.name)})` : lc(d.name));
+      const formName = box.querySelector('[data-form-name]');
+      if (formName) formName.textContent = lc(f.name);
+      box.querySelectorAll<HTMLElement>('[data-show]').forEach(e => { e.hidden = e.dataset.show !== mode; });
+      if (mode === 'eat') {
+        const g = grams();
+        if (!amountOk(g)) { out.innerHTML = `<p class="pc-msg">Enter an amount between ${AMOUNT_G.min} g and ${AMOUNT_G.max.toLocaleString('en-US')} g (${r1(AMOUNT_G.max / G_PER_OZ)} oz).</p>`; return; }
+        out.innerHTML = facts(f, g, `<p class="pc-lead">${show(g)} of ${name}:</p>`);
+      } else {
+        const want = parseFloat(prot.value);
+        const res = gramsForProtein(want, f.per100.protein);
+        if (!res.ok && res.reason === 'range') { out.innerHTML = '<p class="pc-msg">Enter a protein amount between 1 g and 300 g.</p>'; return; }
+        if (!res.ok) {
+          out.innerHTML = `<p class="pc-msg"><b>Not a practical protein source.</b> ${want} g of protein would take more than ${show(MAX_PROTEIN_SOURCE_G)} of ${name}, at ${f.per100.protein} g of protein per 100 g. Pair it with a higher-protein food.</p>`;
+          return;
+        }
+        out.innerHTML = facts(f, res.g, `<p class="pc-big"><b>${show(res.g)}</b> of ${name}</p>
+          <p class="pc-lead">gives ${want} g of protein, from this food alone. That amount has:</p>`);
+      }
+    };
+    box.hidden = false;
+    (document.querySelector('[data-static]') as HTMLElement).hidden = true;
+    drawQuick(); startAmount(); render();
+    sel.addEventListener('change', () => { v = +sel.value; drawQuick(); startAmount(); render(); });
+    box.addEventListener('click', e => {
+      const b = (e.target as HTMLElement).closest('button'); if (!b) return;
+      if (b.dataset.g) { setGrams(+b.dataset.g); render(); return; }
+      b.parentElement!.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      if (b.dataset.m) mode = b.dataset.m;
+      if (b.dataset.u && b.dataset.u !== unit) { const g = grams(); unit = b.dataset.u; if (g > 0) setGrams(g); }
+      render();
+    });
+    box.addEventListener('input', render);
+  }
+</script>
+<style is:global>
+  .pc{margin:22px 0 36px;border:1px solid var(--line-strong);border-top:3px solid var(--ink);padding:18px 18px 10px;background:var(--card)}
+  .pc-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .pc-grid{display:grid;grid-template-columns:minmax(200px,280px) auto auto;justify-content:start;gap:14px 20px;margin-bottom:14px}
+  .pc-ctl,.pc-row{display:grid;gap:6px;align-content:start}
+  .pc-ctl[hidden]{display:none}
+  .pc-row[hidden],.pc[hidden]{display:none}
+  .pc-lab{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+  .pc select,.pc-field input{min-height:44px;font-size:16px;padding:0 10px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink)}
+  .pc select{width:100%}
+  .pc-field{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pc-field input{width:130px;font-size:18px}
+  .pc-field span{color:var(--ink-soft)}
+  .pc-seg,.pc-quick{display:flex;flex-wrap:wrap;gap:6px}
+  .pc-seg button,.pc-quick button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;min-height:44px;padding:0 12px;
+    border:1px solid var(--line-strong);background:transparent;color:var(--ink-soft);cursor:pointer}
+  .pc-seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .pc-quick{margin-top:2px}
+  .pc-quick button{text-transform:none;letter-spacing:0;font-size:12px}
+  .pc-quick button:hover,.pc-seg button:hover{border-color:var(--ink)}
+  .pc-weigh{margin:12px 0 0}
+  .pc-lead{margin:12px 0 0}
+  .pc-big{margin:12px 0 0}
+  .pc-big b{font-family:var(--display);font-size:32px;letter-spacing:-.02em}
+  .pc .pc-facts{grid-template-columns:repeat(5,1fr);margin-top:10px}
+  .pc-h3{font-size:16px;margin:16px 0 8px}
+  .pc-top{list-style:none;padding:0;margin:0 0 8px;display:grid;gap:8px;counter-reset:t}
+  .pc-top li{counter-increment:t;display:grid;grid-template-columns:2em 1fr auto;gap:4px 10px;align-items:baseline;border:1px solid var(--line);padding:10px 12px}
+  .pc-top li::before{content:"0" counter(t);font-family:var(--mono);font-size:11px;color:var(--ink-mute)}
+  .pc-top a,.pc-top li > span:first-of-type{font-weight:600}
+  .pc-top a,.fd-top a{display:inline-flex;align-items:center;min-height:44px}
+  .pc-top li{padding-top:2px;padding-bottom:8px}
+  .pc-amt{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-align:right;font-weight:400 !important}
+  .pc-amt b{color:var(--ink)}
+  .pc-bar{grid-column:2 / -1;height:6px;background:var(--line)}
+  .pc-bar span{display:block;height:100%;background:var(--signal)}
+  .pc-msg{margin:12px 0;padding:10px 12px;border-left:3px solid var(--signal)}
+  .fd-variant{margin-top:22px}
+  .fd-vname{font-size:20px;margin:0}
+  .fd-vname small{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);font-weight:400}
+  .lib-page .fd-facts{grid-template-columns:repeat(5,1fr);margin-top:10px}
+  .fd-top{padding-left:20px;margin:8px 0 0;font-size:14px}
+  .fd-table td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .fd-table thead th:not(:first-child){text-align:right}
+  .fd-table th[scope="row"]{min-width:140px}
+  .fd-src{padding-left:18px}
+  @media (max-width:650px){
+    .pc{padding:14px 12px 8px}
+    .pc-grid{grid-template-columns:1fr}
+    .pc .pc-facts,.lib-page .fd-facts{grid-template-columns:repeat(3,1fr)}
+    .pc-top li{grid-template-columns:2em 1fr}
+    .pc-amt{grid-column:2;text-align:left}
+    .fd-table th[scope="row"]{position:sticky;left:0;background:var(--paper);z-index:1;min-width:120px}
+  }
+</style>

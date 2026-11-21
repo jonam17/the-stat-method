@@ -1,0 +1,32 @@
+# Salmon. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Salmon
+group: fish
+dek: "Calories, protein, carbs, fat and fiber in farmed Atlantic and sockeye salmon, raw and cooked, and the nutrients they give you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Atlantic, farmed, raw"
+    usda: "Fish, salmon, Atlantic, farmed, raw"
+    fdcId: 175167
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 208, protein: 20.4, carbs: 0, fat: 13.4, fiber: 0 }
+    micros: { vitamin-a: 58, vitamin-c: 3.9, vitamin-d: 11, vitamin-e: 3.55, vitamin-k: 0.5, thiamin: 0.207, riboflavin: 0.155, niacin: 8.67, vitamin-b6: 0.636, folate: 26, vitamin-b12: 3.23, pantothenic-acid: 1.55, choline: 78.5, calcium: 9, iron: 0.34, magnesium: 27, phosphorus: 240, potassium: 363, zinc: 0.36, copper: 0.045, manganese: 0.011, selenium: 24 }
+  - name: "Atlantic, farmed, cooked"
+    usda: "Fish, salmon, Atlantic, farmed, cooked, dry heat"
+    fdcId: 175168
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 206, protein: 22.1, carbs: 0, fat: 12.4, fiber: 0 }
+    micros: { vitamin-a: 69, vitamin-c: 3.7, vitamin-d: 13.1, vitamin-e: 1.14, vitamin-k: 0.1, thiamin: 0.34, riboflavin: 0.135, niacin: 8.04, vitamin-b6: 0.647, folate: 34, vitamin-b12: 2.8, pantothenic-acid: 1.48, choline: 90.5, calcium: 15, iron: 0.34, magnesium: 30, phosphorus: 252, potassium: 384, zinc: 0.43, copper: 0.049, manganese: 0.016, selenium: 41.4 }
+  - name: "Sockeye, raw"
+    usda: "Fish, salmon, sockeye, raw"
+    fdcId: 173691
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 131, protein: 22.2, carbs: 0, fat: 4.69, fiber: 0 }
+    micros: { vitamin-a: 49, vitamin-c: 0, vitamin-d: 14.1, vitamin-e: 0.83, vitamin-k: 0.1, thiamin: 0.132, riboflavin: 0.207, niacin: 8.51, vitamin-b6: 0.731, folate: 6, vitamin-b12: 4.69, pantothenic-acid: 1.07, choline: 94.6, calcium: 9, iron: 0.43, magnesium: 30, phosphorus: 257, potassium: 367, zinc: 0.46, copper: 0.064, manganese: 0.011, selenium: 29.8 }
+  - name: "Sockeye, cooked"
+    usda: "Fish, salmon, sockeye, cooked, dry heat"
+    fdcId: 173692
+    serving: { label: "3 oz", g: 85 }
+    per100: { kcal: 156, protein: 26.5, carbs: 0, fat: 5.57, fiber: 0 }
+    micros: { vitamin-a: 58, vitamin-c: 0, vitamin-d: 16.7, vitamin-e: 0.99, vitamin-k: 0.1, thiamin: 0.157, riboflavin: 0.246, niacin: 10.1, vitamin-b6: 0.827, folate: 7, vitamin-b12: 4.47, pantothenic-acid: 1.27, choline: 113, calcium: 11, iron: 0.52, magnesium: 36, phosphorus: 305, potassium: 436, zinc: 0.55, copper: 0.076, manganese: 0.013, selenium: 35.5 }

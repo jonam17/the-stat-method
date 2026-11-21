@@ -1,0 +1,20 @@
+# Apples. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Apples
+group: fruits
+dek: "Calories, protein, carbs, fat and fiber in apples with and without the skin, and the nutrients they give you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Raw, with skin"
+    usda: "Apples, raw, with skin (Includes foods for USDA's Food Distribution Program)"
+    fdcId: 171688
+    serving: { label: "1 medium apple", g: 182 }
+    per100: { kcal: 52, protein: 0.26, carbs: 13.8, fat: 0.17, fiber: 2.4 }
+    micros: { vitamin-a: 3, vitamin-c: 4.6, vitamin-d: 0, vitamin-e: 0.18, vitamin-k: 2.2, thiamin: 0.017, riboflavin: 0.026, niacin: 0.091, vitamin-b6: 0.041, folate: 3, vitamin-b12: 0, pantothenic-acid: 0.061, choline: 3.4, calcium: 6, iron: 0.12, magnesium: 5, phosphorus: 11, potassium: 107, zinc: 0.04, copper: 0.027, manganese: 0.035, selenium: 0 }
+  - name: "Raw, without skin"
+    usda: "Apples, raw, without skin"
+    fdcId: 171689
+    serving: { label: "1 medium apple", g: 161 }
+    per100: { kcal: 48, protein: 0.27, carbs: 12.8, fat: 0.13, fiber: 1.3 }
+    micros: { vitamin-a: 2, vitamin-c: 4, vitamin-d: 0, vitamin-e: 0.05, vitamin-k: 0.6, thiamin: 0.019, riboflavin: 0.028, niacin: 0.091, vitamin-b6: 0.037, folate: 0, vitamin-b12: 0, pantothenic-acid: 0.071, choline: 3.4, calcium: 5, iron: 0.07, magnesium: 4, phosphorus: 11, potassium: 90, zinc: 0.05, copper: 0.031, manganese: 0.038, selenium: 0 }

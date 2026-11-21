@@ -1,0 +1,14 @@
+# Cheddar cheese. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Cheddar cheese
+group: eggs-dairy
+dek: "Calories, protein, carbs, fat and fiber in cheddar cheese, and the nutrients it gives you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Cheddar"
+    usda: "Cheese, cheddar (Includes foods for USDA's Food Distribution Program)"
+    fdcId: 173414
+    serving: { label: "1 slice (1 oz)", g: 28 }
+    per100: { kcal: 403, protein: 22.9, carbs: 3.37, fat: 33.3, fiber: 0 }
+    micros: { vitamin-a: 337, vitamin-c: 0, vitamin-d: 0.6, vitamin-e: 0.71, vitamin-k: 2.4, thiamin: 0.029, riboflavin: 0.428, niacin: 0.059, vitamin-b6: 0.066, folate: 27, vitamin-b12: 1.1, pantothenic-acid: 0.41, choline: 16.5, calcium: 710, iron: 0.14, magnesium: 27, phosphorus: 455, potassium: 76, zinc: 3.64, copper: 0.03, manganese: 0.027, selenium: 28.5 }

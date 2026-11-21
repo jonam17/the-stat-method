@@ -1,0 +1,32 @@
+# Eggs. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Eggs
+group: eggs-dairy
+dek: "Calories, protein, carbs, fat and fiber in eggs raw, hard-boiled, scrambled and fried, and the nutrients they give you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Raw"
+    usda: "Egg, whole, raw, fresh"
+    fdcId: 171287
+    serving: { label: "1 large egg", g: 50 }
+    per100: { kcal: 143, protein: 12.6, carbs: 0.72, fat: 9.51, fiber: 0 }
+    micros: { vitamin-a: 160, vitamin-c: 0, vitamin-d: 2, vitamin-e: 1.05, vitamin-k: 0.3, thiamin: 0.04, riboflavin: 0.457, niacin: 0.075, vitamin-b6: 0.17, folate: 47, vitamin-b12: 0.89, pantothenic-acid: 1.53, choline: 294, calcium: 56, iron: 1.75, magnesium: 12, phosphorus: 198, potassium: 138, zinc: 1.29, copper: 0.072, manganese: 0.028, selenium: 30.7 }
+  - name: "Hard-boiled"
+    usda: "Egg, whole, cooked, hard-boiled"
+    fdcId: 173424
+    serving: { label: "1 large egg", g: 50 }
+    per100: { kcal: 155, protein: 12.6, carbs: 1.12, fat: 10.6, fiber: 0 }
+    micros: { vitamin-a: 149, vitamin-c: 0, vitamin-d: 2.2, vitamin-e: 1.03, vitamin-k: 0.3, thiamin: 0.066, riboflavin: 0.513, niacin: 0.064, vitamin-b6: 0.121, folate: 44, vitamin-b12: 1.11, pantothenic-acid: 1.4, choline: 294, calcium: 50, iron: 1.19, magnesium: 10, phosphorus: 172, potassium: 126, zinc: 1.05, copper: 0.013, manganese: 0.026, selenium: 30.8 }
+  - name: "Scrambled"
+    usda: "Egg, whole, cooked, scrambled"
+    fdcId: 172187
+    serving: { label: "1 large egg", g: 61 }
+    per100: { kcal: 149, protein: 9.99, carbs: 1.61, fat: 11, fiber: 0 }
+    micros: { vitamin-a: 161, vitamin-c: 0, vitamin-d: 1.8, vitamin-e: 1.15, vitamin-k: 4, thiamin: 0.04, riboflavin: 0.376, niacin: 0.076, vitamin-b6: 0.134, folate: 36, vitamin-b12: 0.76, pantothenic-acid: 1.22, choline: 221, calcium: 66, iron: 1.31, magnesium: 11, phosphorus: 165, potassium: 132, zinc: 1.04, copper: 0.059, manganese: 0.022, selenium: 23.5 }
+  - name: "Fried"
+    usda: "Egg, whole, cooked, fried"
+    fdcId: 173423
+    serving: { label: "1 large egg", g: 46 }
+    per100: { kcal: 196, protein: 13.6, carbs: 0.83, fat: 14.8, fiber: 0 }
+    micros: { vitamin-a: 219, vitamin-c: 0, vitamin-d: 2.2, vitamin-e: 1.31, vitamin-k: 5.6, thiamin: 0.044, riboflavin: 0.495, niacin: 0.082, vitamin-b6: 0.184, folate: 51, vitamin-b12: 0.97, pantothenic-acid: 1.66, choline: 317, calcium: 62, iron: 1.89, magnesium: 13, phosphorus: 215, potassium: 152, zinc: 1.39, copper: 0.078, manganese: 0.03, selenium: 33.1 }

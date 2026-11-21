@@ -1,0 +1,60 @@
+---
+/**
+ * /library/foods/ — built only when at least one food is published, so the live
+ * site never shows an empty section.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { publishedFoods, FOOD_GROUPS, FOODS_SOURCE } from '../../../data/foods.js';
+import { DAILY_VALUES } from '../../../data/daily-values.js';
+import { topNutrients } from '../../../engine/portion.js';
+
+export async function getStaticPaths() {
+  const all = await publishedFoods();
+  return all.length ? [{ params: { index: undefined }, props: { all } }] : [];
+}
+const { all } = Astro.props;
+const groups = FOOD_GROUPS.filter(g => all.some(f => f.data.group === g.key));
+---
+<BaseLayout title="Foods — Library — The Stat Method"
+  description="Everyday foods and their common forms: calories, protein, carbs, fat and fiber, and the nutrients each gives you the most of, from USDA FoodData Central."
+  breadcrumbItems={[{ name: 'Library', href: '/library/' }]}>
+  <div class="wrap section">
+    <div class="crumb"><a href="/library/">Library</a> / Foods</div>
+    <article class="article lib-page">
+      <h1>Foods</h1>
+      <p class="dek">Everyday foods and their common forms: calories, protein, carbs, fat and fiber, and the three nutrients each gives you the most of. Every value from {FOODS_SOURCE.title}.</p>
+      <div class="prose">
+        {groups.map(g => (
+          <section>
+            <h2 id={g.key}>{g.label}</h2>
+            <ul class="fdi">
+              {all.filter(f => f.data.group === g.key).map(f => {
+                const v = f.data.forms[0];
+                return (
+                  <li><a href={`/library/foods/${f.id}/`}>
+                    <strong>{f.data.name}</strong>
+                    <span>{f.data.forms.length} {f.data.forms.length === 1 ? 'form' : 'forms'}{f.data.draft && ' · draft'}</span>
+                    <span>{v.name}: {v.per100.kcal} kcal and {v.per100.protein} g protein per 100 g</span>
+                    <span>Top nutrients: {topNutrients(v.micros, DAILY_VALUES).map(t => DAILY_VALUES[t.key].name).join(', ')}</span>
+                  </a></li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+        <h2 id="how">How these pages work</h2>
+        <p>Figures are USDA's averages per 100 g, with a calculator on each page for any amount, or for how much you need to reach a protein target. The top 3 nutrients are the vitamins and minerals with the highest share of their Daily Value.</p>
+        <p class="lib-small">Not sure what you need? The <a href="/tools/protein-target/">protein target</a> and <a href="/tools/macro-calculator/">macro calculator</a> work out your numbers.</p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+<style>
+  .fdi{list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .fdi a{display:grid;gap:4px;align-content:start;border:1px solid var(--line-strong);padding:14px 16px;text-decoration:none;color:var(--ink);min-height:44px;height:100%;box-sizing:border-box}
+  .fdi a:hover{border-color:var(--ink)}
+  .fdi strong{font-size:18px}
+  .fdi span{font-size:13.5px;color:var(--ink-soft)}
+  .fdi span:first-of-type{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute)}
+  @media (max-width:650px){.fdi{grid-template-columns:1fr}}
+</style>

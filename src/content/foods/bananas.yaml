@@ -1,0 +1,14 @@
+# Bananas. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Bananas
+group: fruits
+dek: "Calories, protein, carbs, fat and fiber in a raw banana, and the nutrients it gives you the most of."
+checked: 2026-11-21
+forms:
+  - name: "Raw"
+    usda: "Bananas, raw"
+    fdcId: 173944
+    serving: { label: "1 medium banana", g: 118 }
+    per100: { kcal: 89, protein: 1.09, carbs: 22.8, fat: 0.33, fiber: 2.6 }
+    micros: { vitamin-a: 3, vitamin-c: 8.7, vitamin-d: 0, vitamin-e: 0.1, vitamin-k: 0.5, thiamin: 0.031, riboflavin: 0.073, niacin: 0.665, vitamin-b6: 0.367, folate: 20, vitamin-b12: 0, pantothenic-acid: 0.334, choline: 9.8, calcium: 5, iron: 0.26, magnesium: 27, phosphorus: 22, potassium: 358, zinc: 0.15, copper: 0.078, manganese: 0.27, selenium: 1 }
