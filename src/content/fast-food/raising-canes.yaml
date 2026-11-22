@@ -1,11 +1,12 @@
 # Figures copied from Raising Cane's Allergen & Nutritional Information (August 2026, WEB edition), a PDF
-# supplied by the maintainer on 2026-11-21 and read in full. Open before publishing: a direct link to the PDF.
+# supplied by the maintainer on 2026-11-21 and read in full; the link is the PDF on Raising Cane's own CDN, which its
+# allergens page (raisingcanes.com/allergens/) points to.
 draft: true
 name: "Raising Cane's"
 source:
   title: "Raising Cane's Allergen & Nutritional Information"
   edition: "August 2026"
-  url: https://www.raisingcanes.com/
+  url: https://raisingcanes.cdn.prismic.io/raisingcanes/IxTKraMRo_HyNWx2_Allergen%26NutritionalInformation_ALL_DIGITAL_8.26.pdf
   checked: 2026-11-21
 sections:
   - { key: chicken, label: "Chicken" }

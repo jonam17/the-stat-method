@@ -1,11 +1,11 @@
 # Figures copied by script from Cava's Nutrition and Allergen Guide (PDF supplied by the maintainer on
 # 2026-11-21; no date printed, file created September 2026), read in full and cross-checked line by line.
-# Open before publishing: a direct link to the guide.
+# The link is the guide as cava.com/nutrition serves it (its rows match the supplied file).
 draft: true
 name: "Cava"
 source:
   title: "Cava Nutrition and Allergen Guide"
-  url: https://cava.com/menu
+  url: https://assets.ctfassets.net/kugm9fp9ib18/Ki4gri5pvT2rtPcjBQPjR/c78bed9be8448e2ab700f440f6faa83e/KT6_26_AN_ANGUIDE_RETAIL_T_MKTAN11724.pdf
   checked: 2026-11-21
 sections:
   - { key: bowls, label: "Curated bowls" }
