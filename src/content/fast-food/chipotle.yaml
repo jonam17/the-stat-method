@@ -2,7 +2,7 @@
 # file "US-Nutrition-Facts-Paper-Menu-3-2025", pages coded OCT-2024; no newer U.S. guide found on 2026-11-21),
 # read in full and cross-checked line by line. Chipotle lists ingredients, not finished meals, so this page is
 # a builder. The Bowl choice adds nothing; taco choices are three of the listed single tortillas (count: 3).
-draft: true
+draft: false
 name: "Chipotle"
 source:
   title: "Chipotle U.S. Nutrition Facts"

@@ -357,6 +357,12 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.52.1 — Chipotle and Five Guys published
+
+- `draft: false` for Chipotle and Five Guys after the maintainer checked them against each chain's guide
+  (2026-11-21). The Fast food section now lists nine chains; the new pages join the sitemap and the weekly link check.
+- No new tests; 1,432 in total.
+
 ### v2.52.0 — Chipotle and Five Guys (draft) with a build-your-order builder
 
 - **New chains, `draft: true`:** Chipotle (U.S. Nutrition Facts, March 2025, the newest U.S. guide found; 24

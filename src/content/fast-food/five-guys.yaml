@@ -6,7 +6,7 @@
 # The figures match the guide; atwaterGap marks them so the typo check skips them.
 # Left out: the second "Mini Five Guys Style" fries row (its label does not say which size it is), half slices,
 # single bacon pieces, shakes, mix-ins and drinks.
-draft: true
+draft: false
 name: "Five Guys"
 source:
   title: "Five Guys US Nutrition & Allergen Guide"
