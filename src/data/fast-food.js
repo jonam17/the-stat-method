@@ -6,7 +6,7 @@
  */
 import { getCollection } from 'astro:content';
 
-export { proteinPer100, ranked, lowestCalories, servingText } from './fast-food-rank.js';
+export { proteinPer100, ranked, lowestCalories, servingText, val, choice, rowsOf, startTotals, sectionsOf } from './fast-food-rank.js';
 
 export async function publishedChains() {
   const showDrafts = import.meta.env.DEV;

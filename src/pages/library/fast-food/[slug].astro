@@ -7,38 +7,79 @@
  * inline script, and without JavaScript the full ranked table still shows.
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { publishedChains, ranked, lowestCalories, servingText } from '../../../data/fast-food.js';
+import { publishedChains, ranked, lowestCalories, servingText, choice, rowsOf, startTotals, sectionsOf } from '../../../data/fast-food.js';
 
 export async function getStaticPaths() {
   return (await publishedChains()).map(c => ({ params: { slug: c.id }, props: { c } }));
 }
 const { c } = Astro.props;
 const d = c.data;
-const rows = ranked(d.items);
-const sections = d.sections.filter(s => rows.some(r => r.section === s.key));
-const label = key => d.sections.find(s => s.key === key).label;
+// Builder chains (v2.52.0) list ingredients: the table ranks every choice with calories
+// and the builder above it sums the ones you pick.
+const B = d.builder;
+const rows = ranked(rowsOf(d));
+const all = sectionsOf(d);
+const sections = all.filter(s => rows.some(r => r.section === s.key));
+const label = key => all.find(s => s.key === key).label;
 const top = rows[0];
-const lowest = lowestCalories(d.items);
+const lowest = B ? null : lowestCalories(d.items);
+const start = B ? startTotals(d) : null;
+const startNames = B ? B.groups.flatMap(g => g.items.filter(i => i.start).map(i => (i.start === 2 ? `${i.name} ×2` : i.name))) : [];
 const num = v => v.toLocaleString('en-US');
+const g = v => `${v} g`;
+const boData = B ? JSON.stringify(B.groups) : '';
 const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 <BaseLayout title={`${d.name} — Fast food — Library — The Stat Method`}
-  description={`${d.name} menu items ranked by protein per 100 calories, with calories, protein, carbs and fat from ${d.name}'s own nutrition figures.`}
+  description={B ? `Build a ${d.name} order and see its calories, protein, carbs and fat, with every ingredient ranked by protein per 100 calories from ${d.name}'s own figures.` : `${d.name} menu items ranked by protein per 100 calories, with calories, protein, carbs and fat from ${d.name}'s own nutrition figures.`}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Fast food', href: '/library/fast-food/' }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / <a href="/library/fast-food/">Fast food</a></div>
     <article class="article lib-page">
       {d.draft && <p class="warnbar">Draft — visible only in local development until checked against the source.</p>}
       <h1>{d.name}</h1>
-      <p class="dek">Every menu item ranked by protein per 100 calories, with calories, protein, carbs and fat as {d.name} publishes them.</p>
+      {B
+        ? <p class="dek">{d.name} lists each ingredient, not finished meals. Build your order to see its calories, protein, carbs and fat, then compare the ingredients below.</p>
+        : <p class="dek">Every menu item ranked by protein per 100 calories, with calories, protein, carbs and fat as {d.name} publishes them.</p>}
       <div class="lib-facts">
-        <div><span>Most protein per calorie</span><b>{top.name} <small>{top.per100.toFixed(1)} g / 100 kcal</small></b></div>
-        <div><span>Lowest calories</span><b>{lowest.name} <small>{num(lowest.kcal)} kcal</small></b></div>
+        <div><span>{B ? 'Most protein per calorie (ingredient)' : 'Most protein per calorie'}</span><b>{top.name} <small>{top.per100.toFixed(1)} g / 100 kcal</small></b></div>
+        {B
+          ? <div><span>Starting order</span><b>{num(start.kcal)} kcal · {start.protein} g protein <small>{startNames.join(' · ')}</small></b></div>
+          : <div><span>Lowest calories</span><b>{lowest.name} <small>{num(lowest.kcal)} kcal</small></b></div>}
         <div><span>Checked against source</span><b>{fmt(d.source.checked)}</b></div>
       </div>
+      {B && (
+      <section class="bo" data-bo={boData} aria-labelledby="bo-h" hidden>
+        <div class="bo-head">
+          <h2 id="bo-h">Build your order</h2>
+          <button type="button" class="bo-clear" data-clear>Start over</button>
+        </div>
+        {B.groups.map(gr => (
+          <fieldset class="bo-group">
+            <legend>{gr.label}{gr.pick === 'one' ? ' (choose one)' : ''}</legend>
+            <ul>
+              {gr.items.map((i, n) => {
+                const c = choice(i);
+                return (
+                <li>
+                  <span class="bo-name">{i.name}<small>{[c.portion, `${num(c.kcal)} kcal`, `${c.protein} g protein`].filter(Boolean).join(' · ')}</small></span>
+                  <span class="bo-qty" role="group" aria-label={i.name}>
+                    {gr.pick === 'one'
+                      ? <button type="button" data-g={gr.key} data-i={n} data-q="1" aria-pressed="false">Choose</button>
+                      : [0, 1, 2].map(q => <button type="button" data-g={gr.key} data-i={n} data-q={q} aria-pressed="false">{q === 0 ? 'None' : q === 1 ? '1×' : 'Double'}</button>)}
+                  </span>
+                </li>);
+              })}
+            </ul>
+          </fieldset>
+        ))}
+        <div class="bo-total" aria-live="polite" data-total></div>
+      </section>
+      )}
       <div class="prose">
-        <h2 id="ranked">Ranked by protein per 100 calories</h2>
-        <div class="ff-controls" data-ff hidden>
+        {B && <noscript><p class="lib-small">The order builder needs JavaScript. Every ingredient's figures are in the table below.</p></noscript>}
+        <h2 id="ranked">{B ? 'Ingredients ranked by protein per 100 calories' : 'Ranked by protein per 100 calories'}</h2>
+        <div class="ff-controls" data-ff data-noun={B ? 'ingredients' : 'items'} hidden>
           <div class="ff-seg" role="group" aria-label="Show">
             <button type="button" aria-pressed="true" data-cat="all">All</button>
             {sections.map(s => <button type="button" aria-pressed="false" data-cat={s.key}>{s.label}</button>)}
@@ -50,15 +91,18 @@ const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long',
         </div>
         <p class="ff-status lib-small" data-ff-status aria-live="polite"></p>
         <div class="lib-table-wrap"><table class="lib-table ff-table">
-          <thead><tr><th>Item</th><th>Protein per 100 kcal</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr></thead>
+          <thead><tr><th>{B ? 'Ingredient' : 'Item'}</th><th>Protein per 100 kcal</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr></thead>
           <tbody data-ff-body>{rows.map((r, i) => (
-            <tr data-cat={r.section} data-rank={i} data-kcal={r.kcal} data-protein={r.protein}>
+            <tr data-cat={r.section} data-rank={i} data-kcal={r.kcal} data-protein={r.protein === '<1' ? 0 : r.protein}>
               <th scope="row">{r.name}<small class="ff-cat">{label(r.section)}{servingText(r) && ` · ${servingText(r)}`}</small></th>
-              <td><b>{r.per100.toFixed(1)} g</b></td><td>{num(r.kcal)}</td><td>{r.protein} g</td><td>{r.carbs} g</td><td>{r.fat} g</td>
+              <td><b>{r.per100.toFixed(1)} g</b></td><td>{num(r.kcal)}</td><td>{g(r.protein)}</td><td>{g(r.carbs)}</td><td>{g(r.fat)}</td>
             </tr>))}
           </tbody></table></div>
-        <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition information{d.items[0].servingG || d.items[0].servingOz ? '; the weight under each name is its serving' : ''}. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. {d.note}</p>
-        <h2 id="how">How the ranking works</h2>
+        {B
+          ? <p class="lib-small">Each row is one portion as {d.name} lists it (the weight or size under each name); in the builder, "Double" counts two. "&lt;1 g" is how {d.name} prints amounts under 1 g; totals count them as 0. Restaurants portion by hand, so a real order can differ. {d.note}</p>
+          : <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition information{d.items[0].servingG || d.items[0].servingOz ? '; the weight under each name is its serving' : ''}. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. {d.note}</p>}
+        <h2 id="how">{B ? 'How the totals and ranking work' : 'How the ranking works'}</h2>
+        {B && <p>Your order's total is the sum of {d.name}'s own figures for each ingredient you choose, worked out by us.</p>}
         <p>Protein per 100 calories is protein (g) ÷ calories × 100, worked out by us from {d.name}'s figures. A higher number means more protein for the same calories. Items with the same number are listed lowest-calorie first. It does not account for sodium, fiber or how filling an item is.</p>
         <p class="lib-small">Not sure what you need? The <a href="/tools/protein-target/">protein target</a> and <a href="/tools/macro-calculator/">macro calculator</a> work out your numbers.</p>
         <h2 id="source">Source</h2>
@@ -80,7 +124,7 @@ const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long',
         : (a.dataset.kcal - b.dataset.kcal) || (b.dataset.protein - a.dataset.protein)).forEach(tr => body.append(tr));
       let shown = 0;
       trs.forEach(tr => { tr.hidden = cat !== 'all' && tr.dataset.cat !== cat; if (!tr.hidden) shown++; });
-      if (status) status.textContent = `${shown} items, sorted by ${sort === 'p' ? 'protein per calorie' : 'lowest calories'}.`;
+      if (status) status.textContent = `${shown} ${box.dataset.noun}, sorted by ${sort === 'p' ? 'protein per calorie' : 'lowest calories'}.`;
     };
     box.addEventListener('click', e => {
       const b = e.target.closest('button'); if (!b) return;
@@ -90,6 +134,82 @@ const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long',
     });
   }
 </script>
+<script>
+  // Build your order (builder chains only).
+  const box = document.querySelector<HTMLElement>('[data-bo]');
+  if (box) {
+    const G = JSON.parse(box.dataset.bo!);
+    // "<1" (under 1 g) counts as 0; `count` is how many of the listed portion one choice adds.
+    const v = (x: number | string) => (x === '<1' ? 0 : +x);
+    const q: Record<string, number[]> = {};
+    const reset = () => G.forEach((g: any) => { q[g.key] = g.items.map((i: any) => i.start ?? 0); });
+    const r1 = (x: number) => Math.round(x * 10) / 10;
+    const draw = () => {
+      box.querySelectorAll<HTMLButtonElement>('button[data-g]').forEach(b => {
+        b.setAttribute('aria-pressed', String(q[b.dataset.g!][+b.dataset.i!] === +b.dataset.q!));
+      });
+      let t = { kcal: 0, protein: 0, carbs: 0, fat: 0 }, picks: string[] = [];
+      G.forEach((g: any) => g.items.forEach((i: any, n: number) => {
+        const k = q[g.key][n] * (i.count ?? 1); if (!k) return;
+        t.kcal += i.kcal * k; t.protein += v(i.protein) * k; t.carbs += v(i.carbs) * k; t.fat += v(i.fat) * k;
+        picks.push(q[g.key][n] === 2 ? `${i.name} ×2` : i.name);
+      }));
+      const p100 = t.kcal ? (t.protein / t.kcal * 100).toFixed(1) : '—';
+      (box.querySelector('[data-total]') as HTMLElement).innerHTML = `
+        <p class="bo-label">Your order</p>
+        <div class="bo-nums">
+          <div><span>Calories</span><b>${Math.round(t.kcal).toLocaleString('en-US')}</b></div>
+          <div><span>Protein</span><b>${r1(t.protein)} g</b></div>
+          <div><span>Carbs</span><b>${r1(t.carbs)} g</b></div>
+          <div><span>Fat</span><b>${r1(t.fat)} g</b></div>
+          <div><span>Protein / 100 kcal</span><b>${p100}${t.kcal ? ' g' : ''}</b></div>
+        </div>
+        <p class="bo-picks">${picks.length ? picks.join(' · ') : 'Nothing chosen yet.'}</p>`;
+    };
+    box.addEventListener('click', e => {
+      const b = (e.target as HTMLElement).closest('button'); if (!b) return;
+      if (b.dataset.clear !== undefined) { G.forEach((g: any) => { q[g.key] = g.items.map(() => 0); }); draw(); return; }
+      const g = G.find((x: any) => x.key === b.dataset.g); if (!g) return;
+      const n = +b.dataset.i!, v = +b.dataset.q!;
+      if (g.pick === 'one') q[g.key] = g.items.map((_: any, k: number) => (k === n ? 1 : 0));
+      else q[g.key][n] = v;
+      draw();
+    });
+    reset(); box.hidden = false; draw();
+  }
+</script>
+<style is:global>
+  .bo{margin:22px 0 36px;border:1px solid var(--line-strong);border-top:3px solid var(--ink);background:var(--card)}
+  .bo[hidden]{display:none}
+  .bo-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px 4px}
+  .bo-head h2{margin:0;font-size:22px}
+  .bo-clear,.bo-qty button{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;min-height:44px;padding:0 10px;
+    border:1px solid var(--line-strong);background:transparent;color:var(--ink-soft);cursor:pointer}
+  .bo-qty button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .bo-group{border:0;margin:0;padding:8px 16px}
+  .bo-group legend{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);padding:8px 0 4px}
+  .bo-group ul{list-style:none;margin:0;padding:0}
+  .bo-group li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--line)}
+  .bo-name{display:grid;font-weight:600}
+  .bo-name small{font-family:var(--mono);font-size:11px;font-weight:400;color:var(--ink-mute)}
+  .bo-qty{display:flex;gap:4px;flex-shrink:0}
+  .bo-total{position:sticky;bottom:0;background:var(--paper);border-top:2px solid var(--ink);padding:10px 16px 12px;z-index:2}
+  .bo-label{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute)}
+  .bo-nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:4px}
+  .bo-nums span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute)}
+  .bo-nums b{font-family:var(--display);font-size:22px}
+  .bo-picks{margin:6px 0 0;font-size:13px;color:var(--ink-soft)}
+  @media (max-width:650px){
+    .bo-head,.bo-group{padding-left:12px;padding-right:12px}
+    .bo-group li{flex-wrap:wrap}
+    .bo-qty{width:100%}
+    .bo-qty button{flex:1}
+    .bo-nums{grid-template-columns:repeat(4,1fr);gap:4px}
+    .bo-nums div:nth-child(5){display:none}
+    .bo-nums b{font-size:17px}
+    .bo-picks{display:none}
+    }
+</style>
 <style>
   .ff-controls{display:flex;flex-wrap:wrap;gap:10px 18px;margin:10px 0 6px}
   .ff-seg{display:flex;flex-wrap:wrap;gap:6px}

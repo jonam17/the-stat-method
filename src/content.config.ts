@@ -328,6 +328,8 @@ const exercises = defineCollection({
  * with the date it was read in full. Protein per 100 kcal is never stored: it is
  * worked out from these figures (src/data/fast-food.js), so it cannot disagree.
  */
+// A figure as printed: a number, or "<1" where the chain prints under 1 g.
+const gram = z.union([z.number().min(0), z.literal('<1')]);
 const fastFood = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/fast-food' }),
   schema: z.object({
@@ -335,8 +337,8 @@ const fastFood = defineCollection({
     name: z.string(),
     // `edition` is the date or code printed on the chain's own document, when it has one.
     source: z.object({ title: z.string(), url: z.string().url(), checked: z.coerce.date(), edition: z.string().optional() }),
-    // Each chain names its own menu sections (v2.50.0), in menu order.
-    sections: z.array(z.object({ key: z.string(), label: z.string() })).min(1),
+    // List chains: each names its own menu sections (v2.50.0), in menu order, and its items.
+    sections: z.array(z.object({ key: z.string(), label: z.string() })).min(1).optional(),
     // What this chain's page includes and leaves out, in one or two sentences.
     note: z.string().min(20),
     items: z.array(z.object({
@@ -352,8 +354,31 @@ const fastFood = defineCollection({
       fat: z.number().min(0),
       // Set only where the chain's own calories sit far from 4/4/9 and the figure was re-read and matches.
       atwaterGap: z.boolean().optional(),
-    })).min(1),
-  }).refine(c => c.items.every(i => c.sections.some(s => s.key === i.section)), 'every item section must be listed in sections'),
+    })).min(1).optional(),
+    // Build-your-own chains (v2.52.0): ingredient groups. `pick: one` is a single choice
+    // (a base, a bun); `many` lets each ingredient be none, one or double. `start` is the
+    // amount in the starting order; `count` is how many of the listed portion one choice adds
+    // (3 taco tortillas).
+    builder: z.object({
+      groups: z.array(z.object({
+        key: z.string(),
+        label: z.string(),
+        pick: z.enum(['one', 'many']),
+        items: z.array(z.object({
+          name: z.string(),
+          portion: z.string(),
+          kcal: z.number().min(0),
+          protein: gram,
+          carbs: gram,
+          fat: gram,
+          start: z.number().int().min(0).max(2).optional(),
+          count: z.number().int().positive().optional(),
+          atwaterGap: z.boolean().optional(),
+        })).min(1),
+      })).min(1),
+    }).optional(),
+  }).refine(c => (c.items && c.sections) || c.builder, 'a chain needs items with sections, or a builder')
+    .refine(c => !c.items || c.items.every(i => c.sections.some(s => s.key === i.section)), 'every item section must be listed in sections'),
 });
 
 /**

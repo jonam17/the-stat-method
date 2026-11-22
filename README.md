@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,414 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,432 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,22 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.52.0 — Chipotle and Five Guys (draft) with a build-your-order builder
+
+- **New chains, `draft: true`:** Chipotle (U.S. Nutrition Facts, March 2025, the newest U.S. guide found; 24
+  ingredients) and Five Guys (US Nutrition & Allergen Guide, September 2026; 31 ingredients). Both list ingredients
+  rather than meals, so their pages open with **Build your order**: pick a base or bun, then none, 1× or double of
+  each ingredient, and a sticky bar adds up calories, protein, carbs and fat. Each starts on a typical order (a
+  chicken bowl; a hamburger with two patties). Below it, every ingredient is ranked by protein per 100 calories
+  with the same filters as the other chains. Taken from the text of each document by script and cross-checked line by line.
+- **Schema:** a chain has `items` with `sections`, or a `builder` of ingredient groups (`pick: one | many`, a
+  `start` amount, and a `count` for choices made of several listed portions, such as three taco tortillas).
+  Figures printed as "<1" are kept as printed and counted as 0 in totals and rankings, which the page says.
+- Five Guys lists two suppliers for some ingredients; both are shown, labelled. Its patty calories (302 and 163
+  kcal) sit far from 4/4/9 but match the guide, so `atwaterGap` marks them.
+- The Fast food index, the Library card's count and the chain cards read ingredients for builder chains.
+- 18 new tests (builder checks for both chains, totals, counts and "<1"); 1,432 in total.
 
 ### v2.51.1 — Six fast-food chains published
 

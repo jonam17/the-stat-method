@@ -1,0 +1,75 @@
+# Figures copied by script from the Five Guys US Nutrition & Allergen Guide (English, September 2026; PDF supplied
+# by the maintainer, matching the link below), read in full and cross-checked line by line. Five Guys lists
+# ingredients, so this page is a builder. A Five Guys hamburger is two patties; a little hamburger is one.
+# Where Five Guys lists two suppliers for one ingredient, both are shown, labelled as Five Guys labels them.
+# Patties: Five Guys lists 302 kcal (hamburger) and 163 kcal (mini), well above 4/4/9 from their protein and fat.
+# The figures match the guide; atwaterGap marks them so the typo check skips them.
+# Left out: the second "Mini Five Guys Style" fries row (its label does not say which size it is), half slices,
+# single bacon pieces, shakes, mix-ins and drinks.
+draft: true
+name: "Five Guys"
+source:
+  title: "Five Guys US Nutrition & Allergen Guide"
+  url: https://www.fiveguys.com/wp-content/uploads/2025/07/five-guys-us-nutrition-allergen-guide-english-1-final.pdf
+  checked: 2026-11-21
+  edition: "September 2026"
+note: "Five Guys gives figures per ingredient, so the order builder adds up the ones you choose; the totals are our sums of Five Guys' figures. Where Five Guys lists two suppliers, both are shown. Shakes and drinks are not listed here."
+builder:
+  groups:
+    - key: meat
+      label: "Patties, hot dogs and bacon"
+      pick: many
+      items:
+        - { name: "Hamburger patty", portion: "65 g", kcal: 302, protein: 16, carbs: 0, fat: 17, start: 2, atwaterGap: true }
+        - { name: "Mini patty", portion: "35 g", kcal: 163, protein: 9, carbs: 0, fat: 9, atwaterGap: true }
+        - { name: "Hot dog (supplier H)", portion: "90 g", kcal: 280, protein: 11, carbs: 1, fat: 26 }
+        - { name: "Hot dog (supplier K)", portion: "90 g", kcal: 260, protein: 11, carbs: 1, fat: 24 }
+        - { name: "Bacon, 2 pieces (supplier S)", portion: "14 g", kcal: 70, protein: 5, carbs: 0, fat: 6 }
+        - { name: "Bacon, 2 pieces (supplier D)", portion: "14 g", kcal: 73, protein: 6, carbs: 0, fat: 5 }
+    - key: bun
+      label: "Bun"
+      pick: one
+      items:
+        - { name: "Hamburger bun", portion: "77 g", kcal: 240, protein: 7, carbs: 35, fat: 8, start: 1 }
+        - { name: "Hot dog bun", portion: "71 g", kcal: 220, protein: 6, carbs: 33, fat: 7 }
+        - { name: "Mini bun", portion: "37 g", kcal: 120, protein: 3, carbs: 20, fat: 3 }
+        - { name: "No bun (bowl)", portion: "", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+    - key: cheese
+      label: "Cheese"
+      pick: many
+      items:
+        - { name: "Cheese, 1 slice (supplier K)", portion: "19 g", kcal: 70, protein: 4, carbs: "<1", fat: 6 }
+        - { name: "Cheese, 1 slice (supplier S)", portion: "19 g", kcal: 70, protein: 3, carbs: 1, fat: 6 }
+    - key: toppings
+      label: "Toppings and sauces"
+      pick: many
+      items:
+        - { name: "Lettuce", portion: "30 g", kcal: 3, protein: 0, carbs: 1, fat: 0 }
+        - { name: "Tomatoes", portion: "52 g", kcal: 8, protein: "<1", carbs: 2, fat: 0 }
+        - { name: "Pickles (supplier M)", portion: "28 g", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+        - { name: "Pickles (supplier B)", portion: "28 g", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+        - { name: "Onions or grilled onions", portion: "26 g", kcal: 11, protein: 0, carbs: 2, fat: 0 }
+        - { name: "Grilled mushrooms", portion: "21 g", kcal: 6, protein: 0, carbs: 1, fat: 0 }
+        - { name: "Green peppers", portion: "25 g", kcal: 3, protein: 0, carbs: 1, fat: 0 }
+        - { name: "Jalapeño peppers", portion: "11 g", kcal: 3, protein: 0, carbs: "<1", fat: 0 }
+        - { name: "Relish", portion: "15 g", kcal: 16, protein: 0, carbs: 4, fat: 0 }
+        - { name: "Ketchup", portion: "17 g", kcal: 30, protein: 0, carbs: 5, fat: 0 }
+        - { name: "Mustard", portion: "5 g", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+        - { name: "Mayonnaise (supplier K)", portion: "14 g", kcal: 111, protein: 0, carbs: 0, fat: 11 }
+        - { name: "Mayonnaise (supplier S)", portion: "14 g", kcal: 103, protein: 0, carbs: 0, fat: 11 }
+        - { name: "Hot sauce", portion: "5 g", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+        - { name: "BBQ sauce", portion: "28 g", kcal: 49, protein: "<1", carbs: 15, fat: 0 }
+        - { name: "A.1. Sauce", portion: "17 g", kcal: 15, protein: 0, carbs: 3, fat: 0 }
+        - { name: "Five Guys Sauce", portion: "35 g", kcal: 169, protein: "<1", carbs: 4, fat: 15 }
+    - key: fries
+      label: "Fries"
+      pick: one
+      items:
+        - { name: "No fries", portion: "", kcal: 0, protein: 0, carbs: 0, fat: 0, start: 1 }
+        - { name: "Fries, Five Guys style, mini", portion: "175 g", kcal: 405, protein: 6, carbs: 55, fat: 17 }
+        - { name: "Fries, Five Guys style, little", portion: "227 g", kcal: 526, protein: 8, carbs: 72, fat: 23 }
+        - { name: "Fries, Five Guys style, regular", portion: "411 g", kcal: 953, protein: 15, carbs: 131, fat: 41 }
+        - { name: "Fries, Five Guys style, large", portion: "567 g", kcal: 1314, protein: 20, carbs: 181, fat: 57 }
+        - { name: "Fries, Cajun style, little", portion: "232 g", kcal: 540, protein: 8, carbs: 75, fat: 28 }
+        - { name: "Fries, Cajun style, regular", portion: "416 g", kcal: 967, protein: 15, carbs: 134, fat: 41 }
+        - { name: "Fries, Cajun style, large", portion: "572 g", kcal: 1328, protein: 20, carbs: 184, fat: 57 }

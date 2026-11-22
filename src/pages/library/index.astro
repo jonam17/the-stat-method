@@ -13,7 +13,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { publishedNutrients, kindsWithEntries } from '../../data/nutrients.js';
 import { publishedExercises, GROUPS, EQUIPMENT, equipmentText, jointsText } from '../../data/exercises.js';
 import { publishedArticles } from '../../data/articles.js';
-import { publishedChains } from '../../data/fast-food.js';
+import { rowsOf, publishedChains } from '../../data/fast-food.js';
 import { publishedFoods, FOOD_GROUPS } from '../../data/foods.js';
 
 const nutrients = await publishedNutrients();
@@ -22,7 +22,7 @@ const kinds = await kindsWithEntries();
 // Fast food (v2.48.0): a card of its own, shown once a chain is published. Its items
 // are not in the Library search — each chain's page has its own filter and sort.
 const chains = await publishedChains();
-const chainItems = chains.reduce((n, c) => n + c.data.items.length, 0);
+const chainItems = chains.reduce((n, c) => n + rowsOf(c.data).length, 0);
 // Foods (v2.49.0): a card of their own and a place in the search, once one is published.
 const foods = await publishedFoods();
 const foodGroups = FOOD_GROUPS.filter(g => foods.some(f => f.data.group === g.key));

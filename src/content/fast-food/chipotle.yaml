@@ -1,0 +1,59 @@
+# Figures copied by script from Chipotle's U.S. Nutrition Facts paper menu (PDF supplied by the maintainer,
+# file "US-Nutrition-Facts-Paper-Menu-3-2025", pages coded OCT-2024; no newer U.S. guide found on 2026-11-21),
+# read in full and cross-checked line by line. Chipotle lists ingredients, not finished meals, so this page is
+# a builder. The Bowl choice adds nothing; taco choices are three of the listed single tortillas (count: 3).
+draft: true
+name: "Chipotle"
+source:
+  title: "Chipotle U.S. Nutrition Facts"
+  url: https://www.chipotle.com/nutrition-calculator
+  checked: 2026-11-21
+  edition: "March 2025"
+note: "Chipotle gives figures per ingredient, so the order builder adds up the ones you choose; the totals are our sums of Chipotle's figures. Chips, sides, kids' meals and drinks are not listed here."
+builder:
+  groups:
+    - key: base
+      label: "Base"
+      pick: one
+      items:
+        - { name: "Bowl (no tortilla)", portion: "", kcal: 0, protein: 0, carbs: 0, fat: 0, start: 1 }
+        - { name: "Burrito: flour tortilla", portion: "1 ea", kcal: 320, protein: 8, carbs: 50, fat: 9 }
+        - { name: "Salad: Supergreens salad mix", portion: "3 oz", kcal: 15, protein: 1, carbs: 3, fat: 0 }
+        - { name: "Tacos: 3 crispy corn tortillas", portion: "1 ea", kcal: 70, protein: 1, carbs: 10, fat: 3, count: 3 }
+        - { name: "Tacos: 3 soft flour tortillas", portion: "1 ea", kcal: 80, protein: 2, carbs: 13, fat: 2.5, count: 3 }
+    - key: rice
+      label: "Rice"
+      pick: many
+      items:
+        - { name: "Cilantro-Lime White Rice", portion: "4 oz", kcal: 210, protein: 4, carbs: 40, fat: 4, start: 1 }
+        - { name: "Cilantro-Lime Brown Rice", portion: "4 oz", kcal: 210, protein: 4, carbs: 36, fat: 6 }
+    - key: beans
+      label: "Beans"
+      pick: many
+      items:
+        - { name: "Black Beans", portion: "4 oz", kcal: 130, protein: 8, carbs: 22, fat: 1.5, start: 1 }
+        - { name: "Pinto Beans", portion: "4 oz", kcal: 130, protein: 8, carbs: 21, fat: 1.5 }
+    - key: protein
+      label: "Protein"
+      pick: many
+      items:
+        - { name: "Chicken", portion: "4 oz", kcal: 180, protein: 32, carbs: 0, fat: 7, start: 1 }
+        - { name: "Steak", portion: "4 oz", kcal: 150, protein: 21, carbs: 1, fat: 6 }
+        - { name: "Barbacoa", portion: "4 oz", kcal: 170, protein: 24, carbs: 2, fat: 7 }
+        - { name: "Carnitas", portion: "4 oz", kcal: 210, protein: 23, carbs: 0, fat: 12 }
+        - { name: "Sofritas", portion: "4 oz", kcal: 150, protein: 8, carbs: 9, fat: 10 }
+    - key: toppings
+      label: "Salsas and toppings"
+      pick: many
+      items:
+        - { name: "Fajita Vegetables", portion: "2 oz", kcal: 20, protein: 1, carbs: 5, fat: 0 }
+        - { name: "Fresh Tomato Salsa", portion: "4 oz", kcal: 25, protein: 0, carbs: 4, fat: 0, start: 1 }
+        - { name: "Roasted Chili-Corn Salsa", portion: "4 oz", kcal: 80, protein: 3, carbs: 16, fat: 1.5 }
+        - { name: "Tomatillo-Green Chili Salsa", portion: "2 fl oz", kcal: 15, protein: 0, carbs: 4, fat: 0 }
+        - { name: "Tomatillo-Red Chili Salsa", portion: "2 fl oz", kcal: 30, protein: 0, carbs: 4, fat: 0 }
+        - { name: "Cheese", portion: "1 oz", kcal: 110, protein: 6, carbs: 1, fat: 8 }
+        - { name: "Sour Cream", portion: "2 oz", kcal: 110, protein: 2, carbs: 2, fat: 9 }
+        - { name: "Guacamole", portion: "4 oz", kcal: 230, protein: 2, carbs: 8, fat: 22 }
+        - { name: "Queso Blanco", portion: "2 oz", kcal: 120, protein: 5, carbs: 4, fat: 9 }
+        - { name: "Romaine lettuce", portion: "1 oz", kcal: 5, protein: 0, carbs: 1, fat: 0 }
+        - { name: "Chipotle-Honey Vinaigrette", portion: "2 fl oz", kcal: 220, protein: 1, carbs: 18, fat: 16 }
