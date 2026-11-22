@@ -1,6 +1,6 @@
 # Figures copied from Panda Express's Nutrition & Allergen Information page, saved by the maintainer and read in
 # full on 2026-11-21. Serving sizes are in ounces, as Panda gives them.
-draft: true
+draft: false
 name: "Panda Express"
 source:
   title: "Panda Express Nutrition & Allergen Information"

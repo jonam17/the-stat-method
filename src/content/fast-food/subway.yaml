@@ -1,6 +1,6 @@
 # Figures copied by script from Subway's U.S. Nutrition Information (October 2026), a PDF supplied by the
 # maintainer on 2026-11-21, read in full and cross-checked line by line.
-draft: true
+draft: false
 name: "Subway"
 source:
   title: "Subway U.S. Nutrition Information"

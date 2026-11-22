@@ -1,6 +1,6 @@
 # Figures copied from El Pollo Loco's Nutrition Guide (M5 2026), read in full on 2026-11-21. Serving sizes are
 # in ounces, as the guide gives them.
-draft: true
+draft: false
 name: "El Pollo Loco"
 source:
   title: "El Pollo Loco Nutrition Guide"

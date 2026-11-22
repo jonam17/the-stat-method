@@ -1,7 +1,7 @@
 # Figures copied by script from Cava's Nutrition and Allergen Guide (PDF supplied by the maintainer on
 # 2026-11-21; no date printed, file created September 2026), read in full and cross-checked line by line.
 # The link is the guide as cava.com/nutrition serves it (its rows match the supplied file).
-draft: true
+draft: false
 name: "Cava"
 source:
   title: "Cava Nutrition and Allergen Guide"

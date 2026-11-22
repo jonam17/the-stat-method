@@ -357,6 +357,13 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.51.1 — Six fast-food chains published
+
+- `draft: false` for El Pollo Loco, Panda Express, Raising Cane's, In-N-Out Burger, Subway and Cava after the
+  maintainer checked them against each chain's document (2026-11-21). The Fast food section now lists seven
+  chains; the new pages join the sitemap and the weekly link check.
+- No new tests; 1,414 in total.
+
 ### v2.51.0 — Subway and Cava (draft), direct source links
 
 - **New chains, `draft: true`:** Subway (90 items, U.S. Nutrition Information, October 2026: 6-inch subs, Fresh Fit,

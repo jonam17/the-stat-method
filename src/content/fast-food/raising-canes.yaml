@@ -1,7 +1,7 @@
 # Figures copied from Raising Cane's Allergen & Nutritional Information (August 2026, WEB edition), a PDF
 # supplied by the maintainer on 2026-11-21 and read in full; the link is the PDF on Raising Cane's own CDN, which its
 # allergens page (raisingcanes.com/allergens/) points to.
-draft: true
+draft: false
 name: "Raising Cane's"
 source:
   title: "Raising Cane's Allergen & Nutritional Information"
