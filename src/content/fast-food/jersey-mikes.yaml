@@ -5,7 +5,7 @@
 # Tub (no bread). Left out: Mini and Giant, other breads and wraps, gluten-free, #31 California Chicken Cheese Steak
 # (not available in all locations, per the menu), the limited-time Grilled Italian, kids' meals, breakfast and desserts.
 # The report gives no serving weights, so none are shown.
-draft: true
+draft: false
 name: "Jersey Mike's"
 source:
   title: "Jersey Mike's Master Menu Label Report"

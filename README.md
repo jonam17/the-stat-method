@@ -357,6 +357,12 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.53.1 — Jersey Mike's published
+
+- `draft: false` for Jersey Mike's after the maintainer checked it against the report (2026-11-21). The Fast food
+  section now lists ten chains; the new page joins the sitemap and the weekly link check.
+- No new tests; 1,437 in total.
+
 ### v2.53.0 — Jersey Mike's (draft)
 
 - **New chain, `draft: true`:** Jersey Mike's (44 items, Master Menu Label Report, November 2026 file): the 14
