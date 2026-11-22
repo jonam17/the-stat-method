@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,432 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,437 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,16 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.53.0 — Jersey Mike's (draft)
+
+- **New chain, `draft: true`:** Jersey Mike's (44 items, Master Menu Label Report, November 2026 file): the 14
+  cold and 8 hot subs in Regular size on white bread, and each again as a Sub in a Tub (no bread), filtered as cold,
+  cold in a tub, hot and hot in a tub. Sub names come from jerseymikes.com's menu pages, since the report names cold
+  subs by number only. Taken from the text of the report by script and cross-checked against a second extraction.
+- Left out: Mini and Giant, other breads and wraps, gluten-free, #31 (not at all locations), the limited-time
+  Grilled Italian, kids' meals, breakfast and desserts. The report gives no weights, so none are shown.
+- 5 new tests (the existing checks now cover Jersey Mike's); 1,437 in total.
 
 ### v2.52.1 — Chipotle and Five Guys published
 

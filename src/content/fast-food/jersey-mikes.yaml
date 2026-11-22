@@ -1,0 +1,64 @@
+# Figures copied by script from Jersey Mike's Master Menu Label Report (PDF supplied by the maintainer on
+# 2026-11-21; no date printed, file created November 2026), read in full and cross-checked line by line against a
+# second text extraction. Sub names are from the maintainer's saves of jerseymikes.com's Cold Subs and Hot Subs pages
+# (the report names cold subs by number only). Listed: Regular size on white bread, and the same subs as a Sub in a
+# Tub (no bread). Left out: Mini and Giant, other breads and wraps, gluten-free, #31 California Chicken Cheese Steak
+# (not available in all locations, per the menu), the limited-time Grilled Italian, kids' meals, breakfast and desserts.
+# The report gives no serving weights, so none are shown.
+draft: true
+name: "Jersey Mike's"
+source:
+  title: "Jersey Mike's Master Menu Label Report"
+  url: https://subs.jerseymikes.com/nutrition
+  checked: 2026-11-21
+sections:
+  - { key: cold, label: "Cold subs" }
+  - { key: coldtub, label: "Cold, Sub in a Tub" }
+  - { key: hot, label: "Hot subs" }
+  - { key: hottub, label: "Hot, Sub in a Tub" }
+note: "Regular-size subs on white bread, as Jersey Mike's lists them; cold subs come Mike's Way (onions, lettuce, tomato, red wine vinegar, oil and spices) except the BLT. A Sub in a Tub is the same sub without bread. Its guide gives no serving weights. Mini and Giant sizes, other breads and wraps, gluten-free bread, subs not at all locations, limited-time subs, kids' meals, breakfast and desserts are left out."
+items:
+  - { name: "#1 BLT", section: cold, kcal: 790, protein: 29, carbs: 64, fat: 48 }
+  - { name: "#2 Jersey Shore's Favorite", section: cold, kcal: 820, protein: 39, carbs: 68, fat: 44 }
+  - { name: "#3 Ham and Provolone", section: cold, kcal: 820, protein: 38, carbs: 67, fat: 44 }
+  - { name: "#4 The Number Four", section: cold, kcal: 800, protein: 37, carbs: 69, fat: 43 }
+  - { name: "#5 The Super Sub", section: cold, kcal: 830, protein: 41, carbs: 69, fat: 44 }
+  - { name: "#6 Roast Beef and Provolone", section: cold, kcal: 910, protein: 57, carbs: 65, fat: 46 }
+  - { name: "#7 Turkey and Provolone", section: cold, kcal: 820, protein: 45, carbs: 66, fat: 41 }
+  - { name: "#8 Club Sub", section: cold, kcal: 1160, protein: 50, carbs: 68, fat: 78 }
+  - { name: "#9 Club Supreme", section: cold, kcal: 1190, protein: 59, carbs: 66, fat: 77 }
+  - { name: "#10 Tuna Fish", section: cold, kcal: 1060, protein: 33, carbs: 66, fat: 75 }
+  - { name: "#11 Stickball Special", section: cold, kcal: 890, protein: 39, carbs: 68, fat: 51 }
+  - { name: "#12 Cancro Special", section: cold, kcal: 970, protein: 59, carbs: 66, fat: 51 }
+  - { name: "#13 The Original Italian", section: cold, kcal: 950, protein: 46, carbs: 70, fat: 54 }
+  - { name: "#14 The Veggie", section: cold, kcal: 950, protein: 39, carbs: 68, fat: 59 }
+  - { name: "#1 BLT, Sub in a Tub", section: coldtub, kcal: 480, protein: 17, carbs: 6, fat: 45 }
+  - { name: "#2 Jersey Shore's Favorite, Sub in a Tub", section: coldtub, kcal: 510, protein: 27, carbs: 9, fat: 41 }
+  - { name: "#3 Ham and Provolone, Sub in a Tub", section: coldtub, kcal: 510, protein: 27, carbs: 9, fat: 41 }
+  - { name: "#4 The Number Four, Sub in a Tub", section: coldtub, kcal: 490, protein: 25, carbs: 11, fat: 40 }
+  - { name: "#5 The Super Sub, Sub in a Tub", section: coldtub, kcal: 530, protein: 30, carbs: 11, fat: 41 }
+  - { name: "#6 Roast Beef and Provolone, Sub in a Tub", section: coldtub, kcal: 600, protein: 45, carbs: 7, fat: 43 }
+  - { name: "#7 Turkey and Provolone, Sub in a Tub", section: coldtub, kcal: 510, protein: 34, carbs: 7, fat: 38 }
+  - { name: "#8 Club Sub, Sub in a Tub", section: coldtub, kcal: 850, protein: 39, carbs: 9, fat: 75 }
+  - { name: "#9 Club Supreme, Sub in a Tub", section: coldtub, kcal: 880, protein: 48, carbs: 8, fat: 74 }
+  - { name: "#10 Tuna Fish, Sub in a Tub", section: coldtub, kcal: 750, protein: 21, carbs: 8, fat: 72 }
+  - { name: "#11 Stickball Special, Sub in a Tub", section: coldtub, kcal: 580, protein: 28, carbs: 9, fat: 48 }
+  - { name: "#12 Cancro Special, Sub in a Tub", section: coldtub, kcal: 660, protein: 47, carbs: 7, fat: 48 }
+  - { name: "#13 The Original Italian, Sub in a Tub", section: coldtub, kcal: 640, protein: 35, carbs: 12, fat: 52 }
+  - { name: "#14 The Veggie, Sub in a Tub", section: coldtub, kcal: 640, protein: 28, carbs: 9, fat: 56 }
+  - { name: "#16 Mike's Chicken Philly", section: hot, kcal: 680, protein: 48, carbs: 73, fat: 22 }
+  - { name: "#17 Mike's Famous Philly", section: hot, kcal: 750, protein: 46, carbs: 74, fat: 30 }
+  - { name: "#26 Bacon Ranch Chicken Cheese Steak", section: hot, kcal: 920, protein: 55, carbs: 71, fat: 47 }
+  - { name: "#42 Chipotle Chicken Cheese Steak", section: hot, kcal: 970, protein: 49, carbs: 75, fat: 53 }
+  - { name: "#43 Chipotle Cheese Steak", section: hot, kcal: 1040, protein: 46, carbs: 76, fat: 62 }
+  - { name: "#44 Buffalo Chicken Cheese Steak", section: hot, kcal: 890, protein: 50, carbs: 73, fat: 44 }
+  - { name: "#55 Big Kahuna Chicken Cheese Steak", section: hot, kcal: 740, protein: 51, carbs: 75, fat: 26 }
+  - { name: "#56 Big Kahuna Cheese Steak", section: hot, kcal: 800, protein: 49, carbs: 76, fat: 35 }
+  - { name: "#16 Mike's Chicken Philly, Sub in a Tub", section: hottub, kcal: 380, protein: 37, carbs: 14, fat: 19 }
+  - { name: "#17 Mike's Famous Philly, Sub in a Tub", section: hottub, kcal: 440, protein: 34, carbs: 15, fat: 27 }
+  - { name: "#26 Bacon Ranch Chicken Cheese Steak, Sub in a Tub", section: hottub, kcal: 620, protein: 43, carbs: 13, fat: 44 }
+  - { name: "#42 Chipotle Chicken Cheese Steak, Sub in a Tub", section: hottub, kcal: 660, protein: 37, carbs: 16, fat: 50 }
+  - { name: "#43 Chipotle Cheese Steak, Sub in a Tub", section: hottub, kcal: 730, protein: 35, carbs: 17, fat: 59 }
+  - { name: "#44 Buffalo Chicken Cheese Steak, Sub in a Tub", section: hottub, kcal: 590, protein: 39, carbs: 14, fat: 42 }
+  - { name: "#55 Big Kahuna Chicken Cheese Steak, Sub in a Tub", section: hottub, kcal: 430, protein: 39, carbs: 16, fat: 23 }
+  - { name: "#56 Big Kahuna Cheese Steak, Sub in a Tub", section: hottub, kcal: 490, protein: 37, carbs: 17, fat: 32 }
