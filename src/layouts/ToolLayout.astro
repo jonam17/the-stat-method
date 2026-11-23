@@ -6,6 +6,8 @@ import AdSlot from '../components/AdSlot.astro';
 import { TOOLS, findTool } from '../data/tools.js';
 import { guideFor } from '../data/tool-guides.js';
 import { ogPath } from '../og/pages.js';
+import { embedFor, snippet } from '../data/embeds.js';
+import { SITE } from '../site.config.js';
 
 const { slug, title, intro } = Astro.props;
 const tool = findTool(slug);
@@ -37,6 +39,8 @@ const seoTitles = {
   'caffeine-half-life': 'Caffeine Half-Life Calculator — Sleep Timing',
 };
 const seoTitle = seoTitles[slug] || title;
+// Embeddable calculators (item 60): a copy-ready iframe snippet, for the tools that have an embed page.
+const embed = embedFor(slug) && tool ? snippet(slug, tool.name, SITE.url) : null;
 const liveIndex = TOOLS.filter(t => t.live && t.slug).findIndex(t => t.slug === slug) + 1;
 const toolSchema = tool?.live ? {
   '@context': 'https://schema.org',
@@ -146,6 +150,30 @@ const toolSchema = tool?.live ? {
       Result look wrong? <a href="/report/">Report it</a> — corrections are made publicly.
     </p>
 
+    {embed && (
+      <dialog id="embed-dialog" class="embed-dialog" aria-labelledby="embed-dialog-h">
+        <div class="ed-head">
+          <h2 id="embed-dialog-h">Put this calculator on your website</h2>
+          <button type="button" class="ed-close" data-embed-close aria-label="Close">✕</button>
+        </div>
+        <ol class="ed-steps">
+          <li>Copy the code below.</li>
+          <li>Paste it into your page where the calculator should go. In most site builders that is a
+            "Custom HTML" or "Embed code" block.</li>
+          <li>Publish. The calculator runs in your visitors' browsers, stores nothing and links back here.</li>
+        </ol>
+        <label class="te-label" for="embed-code">Embed code</label>
+        <textarea id="embed-code" class="te-code" readonly rows="5" spellcheck="false">{embed}</textarea>
+        <div class="ed-actions">
+          <button type="button" class="te-copy" data-embed-copy>Copy code</button>
+          <span class="te-status" role="status" data-embed-status></span>
+        </div>
+        <p class="ed-note">Colours follow each visitor's light or dark setting. To fix them, add{' '}
+          <code>?theme=light</code> or <code>?theme=dark</code> to the end of the address inside the code.</p>
+        <p class="ed-note"><a href={`/embed/${slug}/`} target="_blank" rel="noopener">See how it looks on its own ↗</a></p>
+      </dialog>
+    )}
+
     <section class="tool-support">
       <div><span class="eyebrow">KEEP THE TOOLS OPEN</span><p><b>Free, no account, nothing stored.</b> A one-off tip helps cover hosting and keeps the site ad-light.</p></div>
       <a class="btn-donate" href={supportUrl()} rel="noopener">♦ Support The Stat Method</a>
@@ -154,3 +182,18 @@ const toolSchema = tool?.live ? {
     <AdSlot size="leaderboard" note="below the tool, never beside results" />
   </div>
 </BaseLayout>
+<script>
+  // Embed dialog: close on its button or a click on the backdrop (Esc is built in).
+  const dlg = document.querySelector<HTMLDialogElement>('#embed-dialog');
+  dlg?.querySelector('[data-embed-close]')?.addEventListener('click', () => dlg.close());
+  dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  // Embed snippet: copy to the clipboard, or select it where the clipboard is not available.
+  const btn = document.querySelector<HTMLButtonElement>('[data-embed-copy]');
+  const code = document.querySelector<HTMLTextAreaElement>('#embed-code');
+  const status = document.querySelector('[data-embed-status]');
+  btn?.addEventListener('click', async () => {
+    if (!code || !status) return;
+    try { await navigator.clipboard.writeText(code.value); status.textContent = 'Copied.'; }
+    catch { code.focus(); code.select(); status.textContent = 'Selected: press Ctrl+C or ⌘C to copy.'; }
+  });
+</script>

@@ -1634,6 +1634,26 @@ footer{border-top:1px solid var(--rule)}
 /* Report a problem */
 .tool-report{font-size:13.5px;color:var(--ink-soft);margin:26px 0 14px}
 .tool-report a{color:var(--ink);font-weight:600}
+/* Embeddable calculators (item 60): the "on your website" button in the result row, and its dialog. */
+.result-actions .ra-embed{background:transparent;color:#C6C4BE;border:1px solid transparent;font-weight:500;
+  font-size:12.5px;padding:10px 6px;text-decoration:underline;text-underline-offset:3px}
+.result-actions .ra-embed:hover{color:#F2F1EE}
+.embed-dialog{width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);box-sizing:border-box;padding:20px;
+  border:1px solid var(--line-strong);background:var(--card);color:var(--ink)}
+.embed-dialog::backdrop{background:rgba(10,10,10,.6)}
+.ed-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.ed-head h2{font-size:19px;margin:6px 0 0;line-height:1.3}
+.ed-close{min-width:44px;min-height:44px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font-size:16px}
+.ed-steps{margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.ed-steps li{margin:4px 0}
+.ed-actions{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px}
+.ed-note{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:12px 0 0}
+.ed-note code{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.ed-note a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;min-height:44px}
+.te-label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:6px}
+.te-code{width:100%;box-sizing:border-box;font-family:var(--mono);font-size:12px;line-height:1.5;padding:10px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);resize:vertical}
+.te-copy{margin:10px 0 0;min-height:44px;padding:0 18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-weight:600;cursor:pointer}
+.te-status{font-size:13px;color:var(--ink-soft);margin-top:10px}
 .report-kinds{display:grid;gap:12px;margin:26px 0 30px}
 .report-kind{border:1px solid var(--line-strong);padding:16px 18px}
 .report-kind h2{font-size:16px;margin:0 0 6px}
@@ -1662,7 +1682,7 @@ footer{border-top:1px solid var(--rule)}
    The results panel is dark on screen; print it light, since most PDFs are
    printed or read on white and a black block wastes ink and reads poorly. */
 @media print{
-  header, footer, nav, .nav, .search-dialog, .theme-toggle, .tool-support, .tool-report, .adslot, .result-actions, .crumb, .btn-donate, .cta-card{display:none !important}
+  header, footer, nav, .nav, .search-dialog, .theme-toggle, .tool-support, .tool-report, .embed-dialog, .adslot, .result-actions, .crumb, .btn-donate, .cta-card{display:none !important}
 
   :root, html, body{background:#fff !important;color:#000 !important}
   .panel{break-inside:avoid;border:1px solid #999 !important;
@@ -1870,7 +1890,7 @@ footer{border-top:1px solid var(--rule)}
   .brand{min-height:44px}
   .foot a{padding:12px 0}
   .seg button{min-height:44px}
-  .ra-copy,.ra-pdf,.btn,.btn-donate,.brief-cta{min-height:44px}
+  .ra-copy,.ra-pdf,.ra-embed,.btn,.btn-donate,.brief-cta{min-height:44px}
   details.method summary,.tb-terms summary{display:flex;align-items:center;min-height:44px}
   input:not([type=checkbox]):not([type=radio]):not([type=range]),select{min-height:44px}
   /* Lists of links become 44px rows. */

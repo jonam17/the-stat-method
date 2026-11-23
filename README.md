@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,437 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,451 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.54.0 — Embeddable calculators
+
+- **New `/embed/<tool>/` pages** for TDEE & BMR, Macro & Calorie, Body Fat, One-Rep Max and Protein Target: the
+  calculator alone, for other sites to put in an iframe, with "Calculator by The Stat Method" linking back to the
+  full tool page, and a line that the results are estimates and where the method and sources are. Same components
+  and engine as `/tools/`; no header, menu, footer, storage or tracking; links open in a new tab. Theme follows the
+  visitor's system setting, or `?theme=light|dark` from the embedding site.
+- Embed pages are `noindex` (meta tag and `X-Robots-Tag`), point their canonical at the tool page and stay out of
+  the sitemap.
+- **Framing:** `public/_headers` keeps `frame-ancestors 'none'` for the whole site and, for `/embed/*` only,
+  detaches that policy and sets the same one with `frame-ancestors *`. A test keeps the two policies identical
+  apart from that directive.
+- On those five tool pages, the results' button row (Copy results, Save as PDF) gains a smaller "Want this
+  calculator on your website?" button. It opens a dialog with three steps, the iframe code and a Copy button.
+  Embed pages have no dialog, so the button does not appear inside an embed.
+- Embed pages drop the tool page's label rail, which squeezed the calculator into a narrow column from 1024 px.
+- 14 new tests; 1,451 in total.
 
 ### v2.53.1 — Jersey Mike's published
 

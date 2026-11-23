@@ -190,6 +190,10 @@ function readResults(panel) {
 
 export function ResultActions({ extra = [] }) {
   const [copied, setCopied] = useState(false);
+  // Embeddable calculators (item 60): tool pages with an embed render #embed-dialog (ToolLayout); only
+  // there does this row offer the embed code. Embed pages themselves have no dialog, so no button.
+  const [embed, setEmbed] = useState(false);
+  useEffect(() => { setEmbed(!!document.getElementById('embed-dialog')); }, []);
 
   const build = (btn) => {
     const panel = btn.closest('.results');
@@ -230,6 +234,12 @@ export function ResultActions({ extra = [] }) {
       <button type="button" className="ra-pdf" onClick={() => window.print()}>
         Save as PDF
       </button>
+      {embed && (
+        <button type="button" className="ra-embed" aria-haspopup="dialog"
+          onClick={() => document.getElementById('embed-dialog')?.showModal()}>
+          Want this calculator on your website?
+        </button>
+      )}
       <span className="sr-only" role="status" aria-live="polite">
         {copied ? 'Results copied to clipboard' : ''}
       </span>

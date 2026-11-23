@@ -29,6 +29,7 @@ export default defineConfig({
     // The library index is left out of the sitemap until at least one nutrient
     // or exercise is published — read from the files themselves, so publishing one is all
     // it takes. (An environment variable here would silently go stale.)
-    filter: page => !page.endsWith('/library/') || LIBRARY_LIVE,
+    // Embed pages (item 60) are noindex copies of tool pages for other sites' iframes.
+    filter: page => !page.includes('/embed/') && (!page.endsWith('/library/') || LIBRARY_LIVE),
   })],
 });

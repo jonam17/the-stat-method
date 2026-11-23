@@ -1,0 +1,84 @@
+---
+// Embeddable calculators (item 60). The calculator alone, for other sites' iframes: no header, menu, footer,
+// search or theme toggle; no storage; links open in a new tab. Same components and engine as /tools/.
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/space-mono/400.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '../../styles/global.css';
+import { EMBEDS, CREDIT } from '../../data/embeds.js';
+import { findTool } from '../../data/tools.js';
+import { abs } from '../../site.config.js';
+import TdeeCalculator from '../../components/TdeeCalculator.jsx';
+import MacroCalculator from '../../components/MacroCalculator.jsx';
+import BodyFatCalculator from '../../components/BodyFatCalculator.jsx';
+import OneRepMaxCalculator from '../../components/OneRepMaxCalculator.jsx';
+import ProteinTarget from '../../components/ProteinTarget.jsx';
+
+// Astro hydrates a component only where it is written out by name, so each one is rendered explicitly below.
+const COMPONENTS = ['tdee-calculator', 'macro-calculator', 'body-fat', 'one-rep-max', 'protein-target'];
+
+export function getStaticPaths() {
+  return EMBEDS.map(e => ({ params: { tool: e.slug } }));
+}
+
+const { tool: slug } = Astro.params;
+const tool = findTool(slug);
+if (!tool || !COMPONENTS.includes(slug)) throw new Error(`embed page for ${slug} has no tool or component`);
+const full = abs(`/tools/${slug}/`);
+---
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{tool.name} — {CREDIT}</title>
+  <meta name="description" content={tool.desc} />
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href={full} />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <script is:inline>
+    /* Theme: ?theme=light|dark from the embedding site, otherwise the visitor's system setting.
+       No storage: a framed page may not have any, and nothing here needs it. */
+    try {
+      const q = new URLSearchParams(location.search).get('theme');
+      document.documentElement.dataset.theme = q === 'dark' || q === 'light' ? q
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } catch { document.documentElement.dataset.theme = 'light'; }
+  </script>
+</head>
+<body class="embed">
+  <main class="embed-main">
+    <div class="embed-head">
+      <h1>{tool.name}</h1>
+      <a href={full} target="_blank" rel="noopener">{CREDIT} ↗</a>
+    </div>
+    <section class="tool-instrument embed-instrument" aria-label={tool.name}>
+      {slug === 'tdee-calculator' && <TdeeCalculator client:load />}
+      {slug === 'macro-calculator' && <MacroCalculator client:load />}
+      {slug === 'body-fat' && <BodyFatCalculator client:load />}
+      {slug === 'one-rep-max' && <OneRepMaxCalculator client:load />}
+      {slug === 'protein-target' && <ProteinTarget client:load />}
+    </section>
+    <p class="embed-foot">
+      Estimates from published equations, not medical advice. The method, sources and limits are on the
+      <a href={full} target="_blank" rel="noopener">full {tool.name} page</a>.
+    </p>
+  </main>
+</body>
+</html>
+<style is:global>
+  body.embed{margin:0;background:var(--paper)}
+  .embed-main{padding:16px;max-width:760px;margin:0 auto}
+  .embed-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+  .embed-head h1{font-size:20px;margin:0;line-height:1.25}
+  .embed-head a,.embed-foot a{color:var(--ink);font-weight:600;display:inline-flex;align-items:center;min-height:44px}
+  .embed-head a{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .embed-foot{font-size:13px;color:var(--ink-soft);margin:16px 0 0;line-height:1.5}
+  /* Tool pages put a label rail beside the calculator from 1024 px; embeds have no rail. */
+  .tool-instrument.embed-instrument{margin:0;padding:0;display:block}
+</style>
