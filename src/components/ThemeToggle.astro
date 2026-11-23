@@ -45,15 +45,25 @@
         e.setAttribute('aria-label', `Colour theme: ${LBL[pref]}. Click to change.`));
     }
 
-    let pref = localStorage.getItem('theme') || 'auto';
+    // Storage can be blocked (site data off, some embeds); the toggle still works for this page, it just
+    // isn't remembered (v2.54.1).
+    const load = () => { try { return localStorage.getItem('theme') || 'auto'; } catch { return 'auto'; } };
+    const save = v => { try { localStorage.setItem('theme', v); } catch {} };
+
+    let pref = load();
     apply(pref);
 
     document.querySelectorAll('[data-theme-toggle]').forEach(btn =>
       btn.addEventListener('click', () => {
         pref = ORDER[(ORDER.indexOf(pref) + 1) % ORDER.length];
-        localStorage.setItem('theme', pref);
+        save(pref);
         apply(pref);
       }));
+
+    // A change in another tab applies here too.
+    window.addEventListener('storage', e => {
+      if (e.key === 'theme') { pref = e.newValue || 'auto'; apply(pref); }
+    });
 
     // Follow the OS live while in auto.
     window.matchMedia('(prefers-color-scheme: dark)')

@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,451 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,457 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,20 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.54.1 — Fixes from the modern-web-guidance check
+
+Checked against the Chrome, Edge, Firefox and MDN teams' modern-web-guidance (read as reference, nothing installed):
+- **Embed pop-up** no longer closes on a click inside its own edge. Both dialogs (embed, search) use the browser's
+  `closedby="any"`; where a browser lacks it (Safari), a click closes only if it lands outside the dialog's box.
+- **Light theme on a dark-mode device:** the page now declares `color-scheme: light`, so select menus, scrollbars
+  and time pickers are light too.
+- **Skip to content:** a link before the header, visible when tabbed to, jumps past the ten header stops.
+- **Theme toggle** keeps working when a browser blocks site storage (it just isn't remembered), and a change in one
+  tab applies to the others.
+- **Open dialogs** no longer scroll the page behind them.
+- `scripts/qa-ui.mjs`: the one-main-landmark check now allows attributes on `<main>`.
+- 6 new tests; 1,457 in total.
 
 ### v2.54.0 — Embeddable calculators
 

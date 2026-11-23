@@ -151,7 +151,7 @@ const toolSchema = tool?.live ? {
     </p>
 
     {embed && (
-      <dialog id="embed-dialog" class="embed-dialog" aria-labelledby="embed-dialog-h">
+      <dialog id="embed-dialog" class="embed-dialog" aria-labelledby="embed-dialog-h" closedby="any">
         <div class="ed-head">
           <h2 id="embed-dialog-h">Put this calculator on your website</h2>
           <button type="button" class="ed-close" data-embed-close aria-label="Close">✕</button>
@@ -183,10 +183,19 @@ const toolSchema = tool?.live ? {
   </div>
 </BaseLayout>
 <script>
-  // Embed dialog: close on its button or a click on the backdrop (Esc is built in).
+  // Embed dialog: close on its button; Esc and a click outside are the browser's (closedby="any").
+  // Safari has no closedby yet: there, a click counts as outside only if it lands beyond the dialog's box,
+  // so clicks on the dialog's own padding no longer close it (v2.54.1).
   const dlg = document.querySelector<HTMLDialogElement>('#embed-dialog');
   dlg?.querySelector('[data-embed-close]')?.addEventListener('click', () => dlg.close());
-  dlg?.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  if (dlg && !('closedBy' in HTMLDialogElement.prototype)) {
+    dlg.addEventListener('click', e => {
+      if (e.target !== dlg) return;
+      const r = dlg.getBoundingClientRect();
+      const inside = r.top <= e.clientY && e.clientY <= r.bottom && r.left <= e.clientX && e.clientX <= r.right;
+      if (!inside) dlg.close();
+    });
+  }
   // Embed snippet: copy to the clipboard, or select it where the clipboard is not available.
   const btn = document.querySelector<HTMLButtonElement>('[data-embed-copy]');
   const code = document.querySelector<HTMLTextAreaElement>('#embed-code');

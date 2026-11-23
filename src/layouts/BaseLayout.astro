@@ -172,6 +172,8 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
   </script>
 </head>
 <body>
+  <!-- Skip link (v2.54.1, modern-web-guidance check): the header has about ten tab stops. -->
+  <a class="skip-link" href="#content">Skip to content</a>
   <nav class="nav">
     <div class="nav-in">
       <a class="brand" href="/">
@@ -207,7 +209,7 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
     </div>
   </nav>
 
-  <main><slot /></main>
+  <main id="content" tabindex="-1"><slot /></main>
 
   <footer>
     <div class="wrap">

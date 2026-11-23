@@ -12,7 +12,7 @@
   <kbd class="search-trigger-key" aria-hidden="true">/</kbd>
 </button>
 
-<dialog class="search-dialog" aria-label="Search the site">
+<dialog class="search-dialog" aria-label="Search the site" closedby="any">
   <!-- Deliberately not a <form>. Enter inside a form triggers implicit
        submission, which closed the dialog before the keyboard handler could
        navigate to the highlighted result. -->
@@ -175,7 +175,13 @@
 
     dlg.querySelector('[data-search-close]')?.addEventListener('click', () => dlg.close());
 
-    // Clicking the backdrop closes.
-    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    // Clicking outside closes: native with closedby="any"; the box check covers Safari (v2.54.1).
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      dlg.addEventListener('click', e => {
+        if (e.target !== dlg) return;
+        const r = dlg.getBoundingClientRect();
+        if (e.clientY < r.top || e.clientY > r.bottom || e.clientX < r.left || e.clientX > r.right) dlg.close();
+      });
+    }
   })();
 </script>

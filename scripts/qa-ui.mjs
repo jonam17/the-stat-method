@@ -21,7 +21,7 @@ function check(cond,msg){ if(!cond) failures.push(msg); }
 
 const base = text.get(path.join(src,'layouts','BaseLayout.astro')) || '';
 check(base.includes('<html lang="en">'),'BaseLayout must declare document language.');
-check(base.includes('<main><slot /></main>'),'BaseLayout must provide one document main landmark.');
+check((base.match(/<main[ >]/g) || []).length === 1 && base.includes('<slot /></main>'),'BaseLayout must provide one document main landmark.');
 check(base.includes('class="mobile-nav"'),'Mobile navigation must exist.');
 check(base.includes('aria-label="Open navigation"'),'Mobile navigation control needs an accessible label.');
 check(/<a class="brand" href="\/">/.test(base),'Brand link should exist in global navigation.');
