@@ -52,13 +52,16 @@
 
     let pref = load();
     apply(pref);
-
-    document.querySelectorAll('[data-theme-toggle]').forEach(btn =>
-      btn.addEventListener('click', () => {
-        pref = ORDER[(ORDER.indexOf(pref) + 1) % ORDER.length];
-        save(pref);
-        apply(pref);
-      }));
+    // This script runs where the header's toggle sits, before the mobile menu's toggle exists, so clicks
+    // are caught on the document and labels are set again once the page is parsed (v2.54.3: the menu's
+    // toggle did nothing before).
+    document.addEventListener('DOMContentLoaded', () => apply(pref));
+    document.addEventListener('click', e => {
+      if (!(e.target instanceof Element) || !e.target.closest('[data-theme-toggle]')) return;
+      pref = ORDER[(ORDER.indexOf(pref) + 1) % ORDER.length];
+      save(pref);
+      apply(pref);
+    });
 
     // A change in another tab applies here too.
     window.addEventListener('storage', e => {

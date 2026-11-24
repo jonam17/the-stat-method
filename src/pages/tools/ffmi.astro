@@ -2,6 +2,7 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 import FfmiCalculator from '../../components/FfmiCalculator.jsx';
 import { FFMI_PERCENTILES, FFMI_PCTS } from '../../engine/body.js';
+import TableWrap from '../../components/TableWrap.astro';
 
 // The chart shows five of the seven published percentiles so it fits a phone screen;
 // the result line uses all seven. Values come from the engine's copy of Schutz 2002
@@ -27,14 +28,14 @@ const label = g => (g === '75+' ? '75 and over' : g);
     {[['male', 'Men'], ['female', 'Women']].map(([sex, name]) => (
       <>
         <h3>{name}</h3>
-        <div class="lib-table-wrap"><table class="lib-table">
+        <TableWrap label={`FFMI percentiles, ${name.toLowerCase()}`}><table class="lib-table">
           <thead><tr><th scope="col">Age</th>{SHOWN.map(p => <th scope="col">{p}th</th>)}</tr></thead>
           <tbody>
             {groups.map(g => (
               <tr><th scope="row">{label(g)}</th>{cols.map(i => <td>{FFMI_PERCENTILES[sex][g][i].toFixed(1)}</td>)}</tr>
             ))}
           </tbody>
-        </table></div>
+        </table></TableWrap>
       </>
     ))}
     <p class="refs">

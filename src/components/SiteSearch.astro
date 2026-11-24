@@ -143,8 +143,11 @@
       await load();
     }
 
-    document.querySelectorAll('[data-search-open]').forEach(b =>
-      b.addEventListener('click', open));
+    // Caught on the document: this script runs before the mobile menu's Search button exists, so
+    // binding each button missed that one (v2.54.3: it did nothing before).
+    document.addEventListener('click', e => {
+      if (e.target instanceof Element && e.target.closest('[data-search-open]')) open();
+    });
 
     input.addEventListener('input', () => render(input.value));
 

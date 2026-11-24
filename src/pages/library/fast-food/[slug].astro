@@ -8,6 +8,7 @@
  */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { publishedChains, ranked, lowestCalories, servingText, choice, rowsOf, startTotals, sectionsOf } from '../../../data/fast-food.js';
+import TableWrap from '../../../components/TableWrap.astro';
 
 export async function getStaticPaths() {
   return (await publishedChains()).map(c => ({ params: { slug: c.id }, props: { c } }));
@@ -90,14 +91,14 @@ const fmt = x => x.toLocaleDateString('en-US', { year: 'numeric', month: 'long',
           </div>
         </div>
         <p class="ff-status lib-small" data-ff-status aria-live="polite"></p>
-        <div class="lib-table-wrap"><table class="lib-table ff-table">
+        <TableWrap label={`${d.name}, ranked`}><table class="lib-table ff-table">
           <thead><tr><th>{B ? 'Ingredient' : 'Item'}</th><th>Protein per 100 kcal</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr></thead>
           <tbody data-ff-body>{rows.map((r, i) => (
             <tr data-cat={r.section} data-rank={i} data-kcal={r.kcal} data-protein={r.protein === '<1' ? 0 : r.protein}>
               <th scope="row">{r.name}<small class="ff-cat">{label(r.section)}{servingText(r) && ` · ${servingText(r)}`}</small></th>
               <td><b>{r.per100.toFixed(1)} g</b></td><td>{num(r.kcal)}</td><td>{g(r.protein)}</td><td>{g(r.carbs)}</td><td>{g(r.fat)}</td>
             </tr>))}
-          </tbody></table></div>
+          </tbody></table></TableWrap>
         {B
           ? <p class="lib-small">Each row is one portion as {d.name} lists it (the weight or size under each name); in the builder, "Double" counts two. "&lt;1 g" is how {d.name} prints amounts under 1 g; totals count them as 0. Restaurants portion by hand, so a real order can differ. {d.note}</p>
           : <p class="lib-small">Figures are per item as served in {d.name}'s standard build, from its own nutrition information{d.items[0].servingG || d.items[0].servingOz ? '; the weight under each name is its serving' : ''}. Changing the size, cheese, sauce or protein changes them — {d.name}'s page lists each option. {d.note}</p>}

@@ -1,0 +1,17 @@
+---
+// A sideways-scrolling table container (v2.54.3, modern-web-guidance check item 8). It is a named region
+// so screen readers announce what scrolls, and it becomes focusable only while its table is wider than
+// the screen, so keyboard users can scroll it with the arrow keys (Safari does not focus scroll
+// containers on its own) without adding a tab stop where nothing scrolls.
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<div class="lib-table-wrap" role="region" aria-label={label} data-table-wrap><slot /></div>
+<script>
+  const fit = (el: HTMLElement) => {
+    if (el.scrollWidth > el.clientWidth + 1) el.setAttribute('tabindex', '0');
+    else el.removeAttribute('tabindex');
+  };
+  const ro = new ResizeObserver(entries => entries.forEach(e => fit(e.target as HTMLElement)));
+  document.querySelectorAll<HTMLElement>('[data-table-wrap]').forEach(el => { fit(el); ro.observe(el); });
+</script>

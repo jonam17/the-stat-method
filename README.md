@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,467 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,470 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,19 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.54.3 — Mobile menu, menu buttons and scrolling tables
+
+The two items held back from the modern-web-guidance check, plus a bug found while testing them:
+- **Menu buttons fixed:** on phones and tablets, Search and Theme inside the menu did nothing. Both scripts
+  looked for their buttons before the menu was on the page; they now listen on the document.
+- **Mobile menu** is a button with a popover instead of `<details>`/`<summary>`, which screen readers announce
+  inconsistently. It looks the same; it now also closes with Esc or a tap outside, and returns focus to the
+  button. Browsers without popover support get a plain show/hide.
+- **Scrolling tables** (Library, Foods, Fast food, Powerlifting Score, FFMI) are named regions and become
+  focusable only while they are wider than the screen, so keyboard users can scroll them (`TableWrap.astro`).
+- QA scripts: `qa-ui.mjs` lets the menu button be named by its visible text; `smoke-qa.mjs` finds the new menu and checks that it opens.
+- 3 new tests; 1,470 in total.
 
 ### v2.54.2 — SEO audit fixes
 

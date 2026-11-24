@@ -142,9 +142,14 @@ try {
   await mobile.goto(origin + '/', { waitUntil: 'networkidle' });
   const mobileOverflow = await mobile.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   mobileOverflow ? fail('homepage has horizontal overflow at 390px') : pass('homepage has no horizontal overflow at 390px');
-  const menu = mobile.locator('details[data-mobile-nav], details').first();
-  if (await menu.count()) pass('mobile navigation structure is present');
-  else fail('mobile navigation structure is missing');
+  // v2.54.3: the menu is a button + popover. Check it exists and actually opens.
+  const menu = mobile.locator('.mobile-nav-btn');
+  if (await menu.count()) {
+    pass('mobile navigation structure is present');
+    await menu.click();
+    (await mobile.locator('#mobile-nav-panel a[href="/tools/"]').isVisible())
+      ? pass('mobile navigation opens') : fail('mobile navigation does not open');
+  } else fail('mobile navigation structure is missing');
 
   consoleErrors.length ? fail(`browser console errors: ${consoleErrors.join(' | ')}`) : pass('no browser console errors on smoke routes');
   pageErrors.length ? fail(`uncaught page errors: ${pageErrors.join(' | ')}`) : pass('no uncaught page errors on smoke routes');

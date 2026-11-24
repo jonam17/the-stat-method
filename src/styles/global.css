@@ -1036,18 +1036,21 @@ body{background:var(--paper)}
    to overflow on narrow phones. It stays native HTML via <details> so it works
    without a client-side router or hydration. */
 .mobile-nav{display:none;position:relative}
-.mobile-nav summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;
+.mobile-nav-btn{cursor:pointer;display:flex;align-items:center;gap:9px;background:transparent;
   border:1px solid var(--line-strong);padding:8px 10px;font-family:var(--mono);font-size:9px;
-  letter-spacing:.12em;color:var(--ink);user-select:none}
-.mobile-nav summary::-webkit-details-marker{display:none}
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);user-select:none}
 .mobile-nav-label{font-size:9px}
 .mobile-nav-icon{display:grid;gap:3px}
 .mobile-nav-icon i{display:block;width:14px;height:1px;background:var(--ink);transition:transform .15s}
-.mobile-nav[open] .mobile-nav-icon i:first-child{transform:translateY(2px) rotate(45deg)}
-.mobile-nav[open] .mobile-nav-icon i:last-child{transform:translateY(-2px) rotate(-45deg)}
-.mobile-nav-panel{position:absolute;right:0;top:calc(100% + 8px);width:min(250px,calc(100vw - 32px));
-  background:var(--card);border:1px solid var(--line-strong);box-shadow:none;
-  display:grid;padding:6px;z-index:80}
+.mobile-nav-btn[aria-expanded="true"] .mobile-nav-icon i:first-child{transform:translateY(2px) rotate(45deg)}
+.mobile-nav-btn[aria-expanded="true"] .mobile-nav-icon i:last-child{transform:translateY(-2px) rotate(-45deg)}
+/* A popover in the top layer: fixed, placed under the button by script on open (top/right). */
+.mobile-nav-panel{position:fixed;inset:auto;margin:0;right:16px;top:64px;width:min(250px,calc(100vw - 32px));
+  max-height:calc(100vh - 80px);overflow:auto;overscroll-behavior:contain;color:var(--ink);
+  background:var(--card);border:1px solid var(--line-strong);box-shadow:none;padding:6px;z-index:80}
+/* Separate rules: a browser that does not know :popover-open drops the whole rule it appears in. */
+.mobile-nav-panel.is-open{display:grid}
+.mobile-nav-panel:popover-open{display:grid}
 .mobile-nav-panel a{text-decoration:none;padding:12px 11px;border-bottom:1px solid var(--line);
   font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
 .mobile-nav-panel a:last-child{border-bottom:0}
@@ -1897,7 +1900,7 @@ footer{border-top:1px solid var(--rule)}
    text are exempt, as WCAG allows. */
 @media(pointer:coarse){
   .search-trigger,.theme-toggle{min-height:44px;min-width:44px;justify-content:center}
-  .mobile-nav summary{min-height:44px}
+  .mobile-nav-btn{min-height:44px}
   .mobile-nav-panel a{min-height:44px;display:flex;align-items:center;box-sizing:border-box}
   .brand{min-height:44px}
   .foot a{padding:12px 0}

@@ -38,3 +38,32 @@ describe('modern-web-guidance fixes (v2.54.1)', () => {
     expect(css).toContain('dialog::backdrop{overflow:hidden;overscroll-behavior:contain}');
   });
 });
+
+describe('v2.54.3: mobile menu, menu buttons and scrolling tables', () => {
+  const base = read('src/layouts/BaseLayout.astro');
+  it('the mobile menu is a button and a popover, not details/summary', () => {
+    expect(base).not.toMatch(/<details class="mobile-nav"/);
+    expect(base).toMatch(/<button class="mobile-nav-btn" type="button" popovertarget="mobile-nav-panel"/);
+    expect(base).toMatch(/id="mobile-nav-panel" popover="auto"/);
+    expect(base).toContain("'popover' in HTMLElement.prototype"); // fallback for older browsers
+  });
+  it('the menu buttons work: Search and Theme listen on the document, not on buttons bound too early', () => {
+    const search = read('src/components/SiteSearch.astro');
+    const theme = read('src/components/ThemeToggle.astro');
+    expect(search).toContain("e.target.closest('[data-search-open]')");
+    expect(search).not.toContain("querySelectorAll('[data-search-open]').forEach");
+    expect(theme).toContain("e.target.closest('[data-theme-toggle]')");
+    expect(theme).toContain("addEventListener('DOMContentLoaded', () => apply(pref))");
+  });
+  it('every scrolling table is a named region, focusable only while it overflows', () => {
+    const wrap = read('src/components/TableWrap.astro');
+    expect(wrap).toContain('role="region" aria-label={label}');
+    expect(wrap).toContain("el.setAttribute('tabindex', '0')");
+    for (const f of ['src/pages/library/[kind]/[slug].astro', 'src/pages/library/foods/[slug].astro',
+      'src/pages/library/fast-food/[slug].astro', 'src/pages/tools/powerlifting-score.astro', 'src/pages/tools/ffmi.astro']) {
+      const s = read(f);
+      expect(s, f).not.toContain('<div class="lib-table-wrap">');
+      expect(s, f).toContain('<TableWrap label=');
+    }
+  });
+});

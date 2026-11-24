@@ -14,6 +14,7 @@ import { bands, adultRange, groupLabel } from '../../../data/brackets.js';
 import { intakeUnit, sourcesUnit, ulUnit } from '../../../data/units.js';
 import { perKgToPerLb, kgToLb } from '../../../engine/units.js';
 import { getEntry } from 'astro:content';
+import TableWrap from '../../../components/TableWrap.astro';
 
 export async function getStaticPaths() {
   return (await publishedNutrients()).map(n => ({
@@ -95,32 +96,32 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         <h2 id="how-much">How much you need</h2>
         {pk ? <>
           <p>The official {typeName} for adults 19 and over, the same for men and women, per day:</p>
-          <div class="lib-table-wrap"><table class="lib-table">
+          <TableWrap label="Amounts by body weight"><table class="lib-table">
             <thead><tr><th>Amino acid</th><th>{d.unit} per kg</th><th>{d.unit} per lb</th><th>{d.unit}, {refLb} lb adult</th></tr></thead>
             <tbody>{pk.items.map(r => (
               <tr><th scope="row">{r.name}</th><td>{num(r.rda)}</td><td>{lbNum(r.rda)}</td><td>{num(r.rda * REF_KG)}</td></tr>))}
-            </tbody></table></div>
+            </tbody></table></TableWrap>
           <p class="lib-small">Per kg and per lb mean per kilogram or pound of body weight. The per-kilogram
             amounts are the official ones; we worked out the per-pound and {refLb} lb columns from them, and
             {' '}{REF_KG} kg ({refLb} lb) is the reference adult the report uses.</p>
           {pk.note && <p class="lib-small">{pk.note}</p>}
           <h3 id="pregnancy">Pregnancy and breastfeeding</h3>
-          <div class="lib-table-wrap"><table class="lib-table">
+          <TableWrap label="Pregnancy and breastfeeding amounts"><table class="lib-table">
             <thead><tr><th rowspan="2">Amino acid</th><th colspan="2">Pregnancy</th><th colspan="2">Breastfeeding</th></tr>
               <tr><th>{d.unit} per kg</th><th>{d.unit} per lb</th><th>{d.unit} per kg</th><th>{d.unit} per lb</th></tr></thead>
             <tbody>{pk.items.map(r => (
               <tr><th scope="row">{r.name}</th><td>{num(r.pregnancy)}</td><td>{lbNum(r.pregnancy)}</td>
                 <td>{num(r.lactation)}</td><td>{lbNum(r.lactation)}</td></tr>))}
-            </tbody></table></div>
+            </tbody></table></TableWrap>
           <p class="lib-small">{pk.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
         </> : <>
           <p>The official {typeName} for adults, per day:</p>
-          <div class="lib-table-wrap"><table class="lib-table">
+          <TableWrap label="Recommended daily amounts"><table class="lib-table">
             <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
             <tbody>{d.intake.rows.map(r => (
               <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={amt(r.male)} /><td set:html={amt(r.female)} />
                 <td set:html={amt(r.pregnancy)} /><td set:html={amt(r.lactation)} /></tr>))}
-            </tbody></table></div>
+            </tbody></table></TableWrap>
           {d.intake.note && <p class="lib-small">{d.intake.note}</p>}
           <p class="lib-small">{d.intake.eighteenNote} Pregnancy and breastfeeding change what you need — confirm yours with your midwife, obstetrician or doctor.</p>
         </>}
@@ -129,24 +130,24 @@ const fmtDate = x => new Date(x).toLocaleDateString('en-US', { year: 'numeric', 
         {d.ul.warning && <p class="warnbar">{d.ul.warning}</p>}
         {d.ul.rows && <>
           {d.ul.appliesTo !== 'total' && <p class="warnbar">{d.ul.scope}</p>}
-          <div class="lib-table-wrap"><table class="lib-table">
+          <TableWrap label="Upper limits"><table class="lib-table">
             <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
             <tbody>{d.ul.rows.map(r => (
               <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={ulAmt(r.male)} /><td set:html={ulAmt(r.female)} />
                 <td set:html={ulAmt(r.pregnancy)} /><td set:html={ulAmt(r.lactation)} /></tr>))}
-            </tbody></table></div>
+            </tbody></table></TableWrap>
         </>}
         <p class="lib-small">{d.ul.note}</p>
         {d.ul.cdrr && <>
           <h3 id="cdrr">Chronic Disease Risk Reduction Intake</h3>
           <p>Not a safety limit: the daily intake above which eating less is expected to lower the risk of
             chronic disease. For adults:</p>
-          <div class="lib-table-wrap"><table class="lib-table">
+          <TableWrap label="Chronic Disease Risk Reduction Intake"><table class="lib-table">
             <thead><tr><th>Age</th><th>Men</th><th>Women</th><th>Pregnancy</th><th>Breastfeeding</th></tr></thead>
             <tbody>{d.ul.cdrr.rows.map(r => (
               <tr><th scope="row">{groupLabel(r.group)}</th><td set:html={above(r.male)} /><td set:html={above(r.female)} />
                 <td set:html={above(r.pregnancy)} /><td set:html={above(r.lactation)} /></tr>))}
-            </tbody></table></div>
+            </tbody></table></TableWrap>
           <p class="lib-small">{d.ul.cdrr.note}</p>
         </>}
 

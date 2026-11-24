@@ -2,6 +2,7 @@
 import ToolLayout from '../../layouts/ToolLayout.astro';
 import PowerliftingScore, { longDate } from '../../components/PowerliftingScore.jsx';
 import { OPL_DATA, OPL_PCTS } from '../../engine/scoring.js';
+import TableWrap from '../../components/TableWrap.astro';
 
 // The chart shows five of the eight percentiles; the result line uses all eight. One row per
 // percentile and one column per group, so the group names can wrap at 360px. Values come from
@@ -33,23 +34,23 @@ const womenEqGap = gap('women-equipped').toFixed(1);
       everyone who lifts.
     </p>
     <h3>DOTS</h3>
-    <div class="lib-table-wrap"><table class="lib-table">
+    <TableWrap label="DOTS percentiles"><table class="lib-table">
       <thead><tr><th scope="col"><span class="sr-only">Percentile</span></th>{rows.map(([, name]) => <th scope="col">{name}</th>)}</tr></thead>
       <tbody>
         {SHOWN.map(p => (
           <tr><th scope="row">{p}th</th>{rows.map(([k]) => <td>{OPL_DATA.all[k].dots[p].toFixed(1)}</td>)}</tr>
         ))}
       </tbody>
-    </table></div>
+    </table></TableWrap>
     <h3>IPF GL Points</h3>
-    <div class="lib-table-wrap"><table class="lib-table">
+    <TableWrap label="IPF GL Points percentiles"><table class="lib-table">
       <thead><tr><th scope="col"><span class="sr-only">Percentile</span></th>{rows.map(([, name]) => <th scope="col">{name}</th>)}</tr></thead>
       <tbody>
         {SHOWN.map(p => (
           <tr><th scope="row">{p}th</th>{rows.map(([k]) => <td>{OPL_DATA.all[k].gl[p].toFixed(1)}</td>)}</tr>
         ))}
       </tbody>
-    </table></div>
+    </table></TableWrap>
     <p>
       Lifters per group: men classic {n('men-classic')}, men equipped {n('men-equipped')}, women
       classic {n('women-classic')}, women equipped {n('women-equipped')}. Results from drug-tested

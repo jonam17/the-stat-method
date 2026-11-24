@@ -14,6 +14,7 @@ import { publishedNutrients, KINDS } from '../../../data/nutrients.js';
 import { DAILY_VALUES, DV_SOURCE } from '../../../data/daily-values.js';
 import { topNutrients, scaleMacros, pctDV } from '../../../engine/portion.js';
 import { metaDescription, FOOD_META_TAIL } from '../../../data/meta.js';
+import TableWrap from '../../../components/TableWrap.astro';
 
 export async function getStaticPaths() {
   return (await publishedFoods()).map(f => ({ params: { slug: f.id }, props: { f } }));
@@ -102,12 +103,12 @@ const MACROS = [['kcal', 'Calories', ''], ['protein', 'Protein', ' g'], ['carbs'
       <div class="prose">
         {d.forms.length > 1 && <>
           <h2 id="compare">Compare the forms</h2>
-          <div class="lib-table-wrap"><table class="lib-table fd-table">
+          <TableWrap label="Forms compared"><table class="lib-table fd-table">
             <thead><tr><th>Per 100 g</th><th>Calories</th><th>Protein</th><th>Carbs</th><th>Fat</th><th>Fiber</th></tr></thead>
             <tbody>{d.forms.map(v => (
               <tr><th scope="row">{v.name}</th><td>{v.per100.kcal}</td><td>{v.per100.protein} g</td><td>{v.per100.carbs} g</td><td>{v.per100.fat} g</td><td>{v.per100.fiber} g</td></tr>
             ))}</tbody>
-          </table></div>
+          </table></TableWrap>
         </>}
 
         <h2 id="how">How the top 3 are picked</h2>

@@ -203,9 +203,11 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
         <a class="btn-donate nav-donate" href={supportUrl()}
            rel="noopener">♦ Support</a>
       </div>
-      <details class="mobile-nav">
-        <summary aria-label="Open navigation"><span class="mobile-nav-label">MENU</span><span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="mobile-nav-panel">
+      {/* A button + popover, not <details>/<summary>: screen readers announce summary inconsistently
+          (v2.54.3, modern-web-guidance check item 7). The popover gives Esc and tap-outside to close. */}
+      <div class="mobile-nav">
+        <button class="mobile-nav-btn" type="button" popovertarget="mobile-nav-panel" aria-controls="mobile-nav-panel"><span class="mobile-nav-label">Menu</span><span class="mobile-nav-icon" aria-hidden="true"><i></i><i></i></span></button>
+        <div class="mobile-nav-panel" id="mobile-nav-panel" popover="auto">
           {nav.map(n => <a href={n.href} class={isOn(n.href) ? 'on' : ''}>{n.label}</a>)}
           <div class="mobile-nav-utils">
             <button class="search-trigger" type="button" data-search-open aria-haspopup="dialog">
@@ -219,11 +221,35 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
           </div>
           <a href={supportUrl()} rel="noopener">♦ Support</a>
         </div>
-      </details>
+      </div>
     </div>
   </nav>
 
   <main id="content" tabindex="-1"><slot /></main>
+  <script>
+    // Mobile menu (v2.54.3): the popover sits in the top layer, so place it under its button each time it
+    // opens. Browsers without popover (before 2024) get a plain show/hide toggle instead.
+    const btn = document.querySelector<HTMLButtonElement>('.mobile-nav-btn');
+    const panel = document.getElementById('mobile-nav-panel');
+    if (btn && panel) {
+      const place = () => {
+        const r = btn.getBoundingClientRect();
+        panel.style.top = `${Math.round(r.bottom + 8)}px`;
+        panel.style.right = `${Math.round(document.documentElement.clientWidth - r.right)}px`;
+      };
+      const sync = (open: boolean) => { btn.setAttribute('aria-expanded', String(open)); panel.classList.toggle('is-open', open); };
+      if ('popover' in HTMLElement.prototype) {
+        panel.addEventListener('beforetoggle', e => { if ((e as ToggleEvent).newState === 'open') place(); });
+        panel.addEventListener('toggle', e => sync((e as ToggleEvent).newState === 'open'));
+        addEventListener('resize', () => { if (panel.matches(':popover-open')) place(); });
+      } else {
+        panel.removeAttribute('popover');
+        panel.hidden = true;
+        btn.addEventListener('click', () => { panel.hidden = !panel.hidden; if (!panel.hidden) place(); sync(!panel.hidden); });
+      }
+      sync(false);
+    }
+  </script>
 
   <footer>
     <div class="wrap">
