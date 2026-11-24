@@ -37,7 +37,19 @@ const seoTitles = {
   'sleep-calculator': 'Sleep Calculator — Bedtimes & Wake Times',
   'running-pace': 'Running Pace Calculator — Splits & Race Predictor',
   'caffeine-half-life': 'Caffeine Half-Life Calculator — Sleep Timing',
+  'baseline': 'Baseline Calculator — Calories, Body Fat & Daily Targets',
 };
+// Meta descriptions for tools whose on-page intro is too short for search results (SEO audit,
+// v2.54.2). The intro on the page is unchanged; these fill the 120-160 characters a snippet shows.
+const seoDescriptions = {
+  'protein-target': 'Find your daily protein target in grams: a range from bodyweight, or from lean body mass when you are cutting, with guidance on where to sit in it.',
+  'hand-portions': 'Turn calorie and macro targets into palms, cupped hands and thumbs per meal, so you can track protein, carbs and fat without weighing your food.',
+  'calories-burned': 'Estimate calories burned for 28 activities, from walking to running, using MET values from the 2024 Adult Compendium of Physical Activities.',
+  'one-rep-max': 'Estimate your one-rep max with five formulas, then get a full percentage table and an RPE converter for setting working weights. Free, no sign-up.',
+  'caffeine-half-life': 'See how much caffeine from coffee, tea or energy drinks is left at bedtime, shown as a range because its half-life varies widely between people.',
+  'deficit-planner': 'Plan a calorie deficit and a goal date with a model that accounts for metabolic slowing, so the projection flattens the way real weight loss does.',
+};
+const metaDescription = seoDescriptions[slug] || intro;
 const seoTitle = seoTitles[slug] || title;
 // Embeddable calculators (item 60): a copy-ready iframe snippet, for the tools that have an embed page.
 const embed = embedFor(slug) && tool ? snippet(slug, tool.name, SITE.url) : null;
@@ -54,7 +66,7 @@ const toolSchema = tool?.live ? {
   provider: { '@type': 'Organization', name: 'The Stat Method', url: Astro.site?.href || undefined },
 } : null;
 ---
-<BaseLayout title={seoTitle} description={intro} pageType="WebPage"
+<BaseLayout title={seoTitle} description={metaDescription} pageType="WebPage"
   ogImage={tool?.live ? ogPath.tool(slug) : undefined} ogImageAlt={tool ? `${tool.name} — The Stat Method` : undefined}
   breadcrumbItems={[{ name: 'Calculators', href: '/tools/' }, { name: category, href: `/tools/#${category.toLowerCase()}` }]}
   extraJsonLd={toolSchema ? [toolSchema] : []}>

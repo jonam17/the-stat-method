@@ -10,12 +10,15 @@ import preact from '@astrojs/preact';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
+import { lastmodMap } from './src/data/lastmod.mjs';
 
 // The Library is live once any nutrient or exercise is published.
 const published = dir => existsSync(dir) && readdirSync(dir)
   .filter(f => f.endsWith('.yaml'))
   .some(f => !/^draft:\s*true\s*$/m.test(readFileSync(`${dir}/${f}`, 'utf8')));
 const LIBRARY_LIVE = published('./src/content/nutrients') || published('./src/content/exercises');
+// Sitemap dates for pages with a real content date (SEO audit, v2.54.2; src/data/lastmod.mjs).
+const LASTMOD = lastmodMap();
 
 export default defineConfig({
   // Update to the real domain before launch — sitemap URLs depend on it.
@@ -31,5 +34,9 @@ export default defineConfig({
     // it takes. (An environment variable here would silently go stale.)
     // Embed pages (item 60) are noindex copies of tool pages for other sites' iframes.
     filter: page => !page.includes('/embed/') && (!page.endsWith('/library/') || LIBRARY_LIVE),
+    serialize: item => {
+      const when = LASTMOD[new URL(item.url).pathname];
+      return when ? { ...item, lastmod: when } : item;
+    },
   })],
 });

@@ -13,6 +13,7 @@ import { publishedFoods, FOOD_GROUPS, FOODS_SOURCE } from '../../../data/foods.j
 import { publishedNutrients, KINDS } from '../../../data/nutrients.js';
 import { DAILY_VALUES, DV_SOURCE } from '../../../data/daily-values.js';
 import { topNutrients, scaleMacros, pctDV } from '../../../engine/portion.js';
+import { metaDescription, FOOD_META_TAIL } from '../../../data/meta.js';
 
 export async function getStaticPaths() {
   return (await publishedFoods()).map(f => ({ params: { slug: f.id }, props: { f } }));
@@ -32,7 +33,7 @@ const calcData = JSON.stringify({ name: d.name, variants: d.forms.map(v => ({ na
 const group = FOOD_GROUPS.find(g => g.key === d.group).label;
 const MACROS = [['kcal', 'Calories', ''], ['protein', 'Protein', ' g'], ['carbs', 'Carbs', ' g'], ['fat', 'Fat', ' g'], ['fiber', 'Fiber', ' g']];
 ---
-<BaseLayout title={`${d.name} — Foods — Library — The Stat Method`} description={d.dek}
+<BaseLayout title={`${d.name} — Foods — Library — The Stat Method`} description={metaDescription(d.dek, FOOD_META_TAIL)}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }, { name: 'Foods', href: '/library/foods/' }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / <a href="/library/foods/">Foods</a></div>

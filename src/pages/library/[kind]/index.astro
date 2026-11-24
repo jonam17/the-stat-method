@@ -9,11 +9,12 @@ const { k } = Astro.props;
 const items = (await publishedNutrients()).filter(n => n.data.kind === k.key);
 ---
 <BaseLayout title={`${k.label} — Library — The Stat Method`}
-  description={`${k.label}: how much you need, the best food sources, and what the evidence supports.`}
+  description={k.meta}
   breadcrumbItems={[{ name: 'Library', href: '/library/' }]}>
   <div class="wrap section">
     <div class="crumb"><a href="/library/">Library</a> / {k.label}</div>
     <h1>{k.label}</h1>
+    {k.intro && k.intro.map(p => <p class="lib-intro">{p}</p>)}
     <ul class="lib-list">
       {items.map(n => (<li><a href={`/library/${k.slug}/${n.id}/`}>{n.data.name}</a><span>{n.data.dek}</span></li>))}
     </ul>

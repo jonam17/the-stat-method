@@ -44,7 +44,7 @@ const schema = {
 ---
 <BaseLayout
   title={`${category.name} Articles — The Stat Method`}
-  description={category.description}
+  description={category.meta}
   pageType="CollectionPage"
   extraJsonLd={[schema]}
   breadcrumbItems={[{ name: 'Articles', href: '/articles/' }, { name: category.name, href: `/articles/${category.slug}/` }]}>
@@ -79,6 +79,17 @@ const schema = {
         </li>
       ))}
     </ul>
+    {category.intro && (
+      <section class="ac-intro" aria-labelledby="ac-intro-h">
+        <h2 id="ac-intro-h">About this section</h2>
+        {category.intro.map(p => <p>{p}</p>)}
+        {category.tools && (
+          <ul class="ac-tools">
+            {category.tools.map(slug => <li><a href={`/tools/${slug}/`}>{toolName(slug)} <span aria-hidden="true">→</span></a></li>)}
+          </ul>
+        )}
+      </section>
+    )}
     <a class="section-more" href="/articles/">Search all articles <span aria-hidden="true">→</span></a>
   </div>
 </BaseLayout>
@@ -93,6 +104,11 @@ const schema = {
     letter-spacing:-.05em;margin:12px 0 0}
   .ac-hero p{margin:0;color:var(--ink-soft);font-size:16px;max-width:46ch}
   .ac-filter{margin-bottom:18px}
+  .ac-intro{margin:28px 0 8px;max-width:68ch}
+  .ac-intro h2{font-size:18px;margin:0 0 8px}
+  .ac-intro p{color:var(--ink-soft);font-size:15px;line-height:1.6;margin:0 0 10px}
+  .ac-tools{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-wrap:wrap;gap:0 20px}
+  .ac-tools a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:600}
   .ac-rows{list-style:none;padding:0;margin:0 0 6px;border-top:1.5px solid var(--rule);
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
   .ac-rows li{border-bottom:1px solid var(--line)}

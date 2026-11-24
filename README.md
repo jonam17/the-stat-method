@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,457 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,467 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,24 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.54.2 — SEO audit fixes
+
+From a read-only SEO audit of the built site (claude-seo v2.6.2 checklists, read as reference; report in the
+private folder). Titles, canonicals, sitemap coverage, links and structured data already passed.
+- **Search descriptions:** 26 pages under 120 characters now have 120-160: the policy pages, Tools, Report, six
+  tools (`seoDescriptions` in ToolLayout; the on-page intro is unchanged), the four article categories and three
+  Library sections (`meta` fields), and the Exercises index. Short food and exercise leads get a fixed tail in
+  the meta description only (`src/data/meta.js`); Milk's lead stays as it is because the tail would not fit.
+- **Thin sections:** Health, Recovery and Other nutrients get a short written introduction ("About this
+  section", with their calculators linked on the two article categories).
+- **Sitemap `<lastmod>`** for the 100 pages with a real content date: articles (updated, else published) and
+  Library entries (date last checked). Tools, hubs and policy pages carry none (`src/data/lastmod.mjs`).
+- **Organization** structured data on the homepage (no logo until item 61; no sameAs until the site has
+  accounts); the WebSite entry names it as publisher.
+- **Baseline's title** now says what it does: "Baseline Calculator — Calories, Body Fat & Daily Targets".
+- `KINDS` moved to `src/data/nutrients-kinds.js` (re-exported from nutrients.js) so tests can read it.
+- 10 new tests; 1,467 in total.
 
 ### v2.54.1 — Fixes from the modern-web-guidance check
 

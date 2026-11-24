@@ -67,6 +67,7 @@ const jsonLd = {
   description,
   url: canonical,
   inLanguage: 'en',
+  ...(pageType === 'WebSite' && { publisher: { '@id': abs('/#organization') } }),
   ...(isArticle && {
     author: AUTHOR.type === 'organization'
       ? { '@type': 'Organization', name: AUTHOR.name, url: abs('/') }
@@ -104,6 +105,18 @@ const breadcrumb = {
     }] : []),
   ],
 };
+// Organization (SEO audit, v2.54.2): on the homepage only, says who publishes the site. No logo until
+// the logo is decided (PENDING item 61); sameAs lists only the site's own accounts (SOCIAL), none yet.
+const sameAs = Object.entries(SOCIAL).filter(([, h]) => h).map(([k, h]) => k === 'x' ? `https://x.com/${h}` : null).filter(Boolean);
+const organization = pageType === 'WebSite' ? {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': abs('/#organization'),
+  name: SITE.name,
+  url: abs('/'),
+  description: 'Free health, fitness and nutrition calculators and articles with named equations and cited sources.',
+  ...(sameAs.length && { sameAs }),
+} : null;
 const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
 ---
 <!DOCTYPE html>
@@ -144,6 +157,7 @@ const isOn = (href) => href === '/' ? path === '/' : path.startsWith(href);
   <!-- F-025: structured data -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  {organization && <script type="application/ld+json" set:html={JSON.stringify(organization)} />}
   {extraJsonLd.map(item => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
 
   <link rel="sitemap" href="/sitemap-index.xml" />
