@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,470 unit tests · no framework JavaScript on content pages**
+**20 calculators · 24 sourced articles · 1,472 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.55.0 — Every calculator embeddable
+
+- **The other 15 calculators get `/embed/<tool>/` pages** (PENDING item 71): Baseline, FFMI, Deficit Planner,
+  Heart Rate Zones, Calories Burned, Powerlifting Score, Strength Standards, RPE Converter, Plate Loader,
+  Hand Portions, Healthy Weight, Sleep, Running Pace, Caffeine Half-Life and Progressive Overload. All 20 live
+  tools are now embeddable, each with the "Want this calculator on your website?" button and its own code.
+- Each was checked framed at 360, 720 and 1450 px with site storage blocked (as it often is in another site's
+  iframe): no errors, no overflow. Iframe heights are each page's height at 720 px plus room.
+- Links inside an embedded calculator (the Baseline's links to other tools) open in a new tab instead of
+  inside the frame. The Cardio pages pass their mode (zones, burn) as on the tool pages.
+- A test now requires every live tool to have an embed. 2 new tests; 1,472 in total.
 
 ### v2.54.3 — Mobile menu, menu buttons and scrolling tables
 

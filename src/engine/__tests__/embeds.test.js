@@ -4,9 +4,12 @@ import { EMBEDS, CREDIT, embedFor, snippet } from '../../data/embeds.js';
 import { TOOLS } from '../../data/tools.js';
 
 describe('embeddable calculators (item 60)', () => {
-  it('lists the five approved tools, each live, once', () => {
-    expect(EMBEDS.map(e => e.slug)).toEqual(['tdee-calculator', 'macro-calculator', 'body-fat', 'one-rep-max', 'protein-target']);
+  it('starts with the five from the Home row, then covers every other live tool, once each', () => {
+    expect(EMBEDS.slice(0, 5).map(e => e.slug)).toEqual(['tdee-calculator', 'macro-calculator', 'body-fat', 'one-rep-max', 'protein-target']);
+    expect(new Set(EMBEDS.map(e => e.slug)).size).toBe(EMBEDS.length);
     for (const e of EMBEDS) expect(TOOLS.find(t => t.slug === e.slug)?.live, e.slug).toBe(true);
+    // v2.55.0 (item 71): every live tool is embeddable.
+    expect(EMBEDS.map(e => e.slug).sort()).toEqual(TOOLS.filter(t => t.live).map(t => t.slug).sort());
   });
   it('gives each embed a sensible iframe height', () => {
     for (const e of EMBEDS) expect(e.height, e.slug).toBeGreaterThanOrEqual(600);
@@ -18,9 +21,9 @@ describe('embeddable calculators (item 60)', () => {
   it('escapes the tool name inside the title attribute', () => {
     expect(snippet('tdee-calculator', 'TDEE & BMR "Calculator"', 'https://x.test')).toContain('title="TDEE &amp; BMR &quot;Calculator&quot; (');
   });
-  it('has no embed for other tools', () => {
-    expect(embedFor('ffmi')).toBeUndefined();
-    expect(() => snippet('ffmi', 'FFMI', 'https://x.test')).toThrow();
+  it('has no embed for anything that is not a live tool', () => {
+    expect(embedFor('not-a-tool')).toBeUndefined();
+    expect(() => snippet('not-a-tool', 'X', 'https://x.test')).toThrow();
   });
   it('credit wording is the approved one', () => expect(CREDIT).toBe('Calculator by The Stat Method'));
 
@@ -49,6 +52,13 @@ describe('embed page', () => {
   const page = readFileSync('src/pages/embed/[tool].astro', 'utf8');
   it('renders a calculator for every listed embed', () => {
     for (const e of EMBEDS) expect(page, e.slug).toContain(`slug === '${e.slug}' && <`);
+  });
+  it('passes each Cardio page its mode', () => {
+    expect(page).toContain(`slug === 'heart-rate-zones' && <CardioCalculator client:load mode="zones" />`);
+    expect(page).toContain(`slug === 'calories-burned' && <CardioCalculator client:load mode="burn" />`);
+  });
+  it('opens links inside a calculator in a new tab, never inside the frame', () => {
+    expect(page).toContain("a.target = '_blank'; a.rel = 'noopener';");
   });
 });
 

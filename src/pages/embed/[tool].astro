@@ -17,9 +17,23 @@ import MacroCalculator from '../../components/MacroCalculator.jsx';
 import BodyFatCalculator from '../../components/BodyFatCalculator.jsx';
 import OneRepMaxCalculator from '../../components/OneRepMaxCalculator.jsx';
 import ProteinTarget from '../../components/ProteinTarget.jsx';
+import Baseline from '../../components/Baseline.jsx';
+import CaffeineHalfLife from '../../components/CaffeineHalfLife.jsx';
+import CardioCalculator from '../../components/CardioCalculator.jsx';
+import DeficitPlanner from '../../components/DeficitPlanner.jsx';
+import FfmiCalculator from '../../components/FfmiCalculator.jsx';
+import HandPortions from '../../components/HandPortions.jsx';
+import HealthyWeight from '../../components/HealthyWeight.jsx';
+import PlateLoader from '../../components/PlateLoader.jsx';
+import PowerliftingScore from '../../components/PowerliftingScore.jsx';
+import ProgressiveOverload from '../../components/ProgressiveOverload.jsx';
+import RpeConverter from '../../components/RpeConverter.jsx';
+import RunningPace from '../../components/RunningPace.jsx';
+import SleepCalculator from '../../components/SleepCalculator.jsx';
+import StrengthStandards from '../../components/StrengthStandards.jsx';
 
 // Astro hydrates a component only where it is written out by name, so each one is rendered explicitly below.
-const COMPONENTS = ['tdee-calculator', 'macro-calculator', 'body-fat', 'one-rep-max', 'protein-target'];
+const COMPONENTS = EMBEDS.map(e => e.slug);
 
 export function getStaticPaths() {
   return EMBEDS.map(e => ({ params: { tool: e.slug } }));
@@ -62,12 +76,34 @@ const full = abs(`/tools/${slug}/`);
       {slug === 'body-fat' && <BodyFatCalculator client:load />}
       {slug === 'one-rep-max' && <OneRepMaxCalculator client:load />}
       {slug === 'protein-target' && <ProteinTarget client:load />}
+      {slug === 'baseline' && <Baseline client:load />}
+      {slug === 'ffmi' && <FfmiCalculator client:load />}
+      {slug === 'deficit-planner' && <DeficitPlanner client:load />}
+      {slug === 'heart-rate-zones' && <CardioCalculator client:load mode="zones" />}
+      {slug === 'calories-burned' && <CardioCalculator client:load mode="burn" />}
+      {slug === 'powerlifting-score' && <PowerliftingScore client:load />}
+      {slug === 'strength-standards' && <StrengthStandards client:load />}
+      {slug === 'rpe-converter' && <RpeConverter client:load />}
+      {slug === 'plate-loader' && <PlateLoader client:load />}
+      {slug === 'hand-portions' && <HandPortions client:load />}
+      {slug === 'healthy-weight' && <HealthyWeight client:load />}
+      {slug === 'sleep-calculator' && <SleepCalculator client:load />}
+      {slug === 'running-pace' && <RunningPace client:load />}
+      {slug === 'caffeine-half-life' && <CaffeineHalfLife client:load />}
+      {slug === 'progressive-overload' && <ProgressiveOverload client:load />}
     </section>
     <p class="embed-foot">
       Estimates from published equations, not medical advice. The method, sources and limits are on the
       <a href={full} target="_blank" rel="noopener">full {tool.name} page</a>.
     </p>
   </main>
+  <script>
+    // A link inside a calculator (the Baseline points to other tools) opens a new tab, not inside the frame.
+    document.addEventListener('click', e => {
+      const a = e.target instanceof Element ? e.target.closest('a[href]') : null;
+      if (a && !a.target) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  </script>
 </body>
 </html>
 <style is:global>

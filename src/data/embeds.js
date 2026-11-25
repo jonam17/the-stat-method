@@ -3,7 +3,7 @@
 // point their canonical at the tool page, stay out of the sitemap, and are the only pages that may be framed
 // (public/_headers). Kept free of astro:content so tests can import it.
 
-/** Tools with an embed page, in the order the Home "popular" row shows them. `height` is the iframe height
+/** Tools with an embed page: the five from the Home "popular" row (v2.54.0), then the rest (v2.55.0). `height` is the iframe height
  *  (px) in the copy-ready snippet: the page's full height at 720 px wide (measured 2026-11-22) plus some room.
  *  Narrower frames scroll inside. */
 export const EMBEDS = [
@@ -12,6 +12,21 @@ export const EMBEDS = [
   { slug: 'body-fat', height: 1700 },
   { slug: 'one-rep-max', height: 1700 },
   { slug: 'protein-target', height: 1500 },
+  { slug: 'baseline', height: 1800 },
+  { slug: 'ffmi', height: 1350 },
+  { slug: 'deficit-planner', height: 1900 },
+  { slug: 'heart-rate-zones', height: 1800 },
+  { slug: 'calories-burned', height: 1450 },
+  { slug: 'powerlifting-score', height: 1950 },
+  { slug: 'strength-standards', height: 1550 },
+  { slug: 'rpe-converter', height: 1500 },
+  { slug: 'plate-loader', height: 1300 },
+  { slug: 'hand-portions', height: 2000 },
+  { slug: 'healthy-weight', height: 1850 },
+  { slug: 'sleep-calculator', height: 1400 },
+  { slug: 'running-pace', height: 1600 },
+  { slug: 'caffeine-half-life', height: 1500 },
+  { slug: 'progressive-overload', height: 1900 },
 ];
 
 export const CREDIT = 'Calculator by The Stat Method';
