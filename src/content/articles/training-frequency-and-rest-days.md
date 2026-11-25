@@ -238,7 +238,9 @@ Frequency and rest are one decision: how to spread a week's training across its 
 
 **For muscle size,** it barely matters. Pick the schedule you will actually keep — full-body three
 times a week, an upper/lower split, or one day per body part — and get your weekly sets in. More
-sessions are mainly a way to fit in more sets.
+sessions are mainly a way to fit in more sets. Our guide to
+[building a routine](/articles/building-a-routine-full-body-splits-and-how-to-choose/) compares the
+layouts.
 
 **For strength,** practise the lifts you care about more than once a week. Frequency helps beyond
 the sets themselves, though each extra session adds less.

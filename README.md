@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 24 sourced articles · 1,472 unit tests · no framework JavaScript on content pages**
+**20 calculators · 25 sourced articles · 1,472 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.56.0 — Article: Building a routine
+
+- **New article, scheduled for Sunday 2026-11-29:** "Building a routine: full-body, splits and how to choose"
+  (Exercise, related tool Progressive Overload). What any routine has to achieve, how the four common layouts
+  spread a week's sets, what the split vs full-body trials found, and how to choose for your week. Six
+  references, all checked; review record in
+  `docs/citation-reviews/building-a-routine-full-body-splits-and-how-to-choose.md`, reviewed by the
+  maintainer 2026-11-24. Publishes at that day's 10:00 UTC rebuild.
+- The training frequency article's bottom line links to it (plain text until the date).
+- README article count 24 → 25.
+- (Replaces the unpushed v2.55.1 draft release.)
 
 ### v2.55.0 — Every calculator embeddable
 
