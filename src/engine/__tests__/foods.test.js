@@ -37,10 +37,12 @@ describe('food files', () => {
           }
         });
         // USDA works calories out with food-specific factors, so 4/4/9 is only a rough
-        // check; per 100 g these foods sit within 10 kcal of it. A bigger gap is a typo.
-        it(`${v.name}: calories within 10 kcal of 4/4/9 per 100 g`, () => {
+        // check; per 100 g these foods sit within 10 kcal of it. A bigger gap is a typo, unless the
+        // form is marked atwaterGap after re-checking (then within 25 kcal).
+        const tol = v.atwaterGap ? 25 : 10;
+        it(`${v.name}: calories within ${tol} kcal of 4/4/9 per 100 g`, () => {
           const p = v.per100;
-          expect(Math.abs(4 * p.protein + 4 * p.carbs + 9 * p.fat - p.kcal)).toBeLessThanOrEqual(10);
+          expect(Math.abs(4 * p.protein + 4 * p.carbs + 9 * p.fat - p.kcal)).toBeLessThanOrEqual(tol);
         });
         it(`${v.name}: protein, carbs, fat and fiber add up to no more than 100 g`, () => {
           const p = v.per100;
@@ -94,5 +96,15 @@ describe('portion maths', () => {
   });
   it('amounts outside 1–2,000 g are refused', () => {
     expect([amountOk(0), amountOk(1), amountOk(2000), amountOk(2001), amountOk(NaN)]).toEqual([false, true, true, false, false]);
+  });
+});
+
+describe('food groups', () => {
+  it('the schema allows exactly the groups the pages list', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/content.config.ts', 'utf8');
+    const m = src.match(/group: z\.enum\(\[([^\]]*)\]\),\s*\/\/ FOOD_GROUPS/);
+    const keys = m[1].split(',').map(s => s.trim().replace(/'/g, ''));
+    expect(keys).toEqual(FOOD_GROUPS.map(g => g.key));
   });
 });

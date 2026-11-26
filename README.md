@@ -7,7 +7,7 @@ and training writing that cites its sources.
 > Calculations run entirely in your browser and cost nothing per user, so they will never
 > be paywalled, gated behind a signup, or used as a lead magnet for coaching.
 
-**20 calculators · 25 sourced articles · 1,472 unit tests · no framework JavaScript on content pages**
+**20 calculators · 25 sourced articles · 1,503 unit tests · no framework JavaScript on content pages**
 
 [Tools](#the-tools) · [Methodology](#methodology) · [Architecture](#architecture-one-engine-many-uis) · [Contributing](#contributing)
 
@@ -356,6 +356,18 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 ## Changelog
 
 Every release is tagged. Newest first.
+
+### v2.57.0 — Foods: oats, rice, Greek yogurt (draft)
+
+- **New foods, `draft: true`** (first batch under the weekly schedule): Oats (rolled or quick, dry and cooked
+  with water), Rice (white enriched and brown long-grain, raw and cooked) and Greek yogurt (plain nonfat and
+  lowfat). USDA FoodData Central, SR Legacy, copied by script; all 224 values (8 forms × 27 nutrients, plus serving weights) re-checked
+  against the source file (0 mismatches). Greek yogurt "plain, whole milk" left out: USDA gives no serving.
+- **New food group, Grains** (between Vegetables and Meat), in `FOOD_GROUPS` and the schema; a test keeps the
+  two lists in step.
+- **`atwaterGap`** for food forms, as on the fast-food pages: raw white rice is 365 kcal per 100 g from USDA's
+  rice-specific factors (3.82/4.16/8.37), 11 kcal off 4/4/9. Flagged forms are checked within 25 kcal.
+- 31 new tests (the per-food checks for the new forms, and the group check); 1,503 in total.
 
 ### v2.56.1 — Links to two pages Google hasn't indexed
 

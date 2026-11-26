@@ -1,0 +1,20 @@
+# Greek yogurt. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Greek yogurt
+group: eggs-dairy
+dek: "Calories, protein, carbs, fat and fiber in plain nonfat and lowfat Greek yogurt, and the nutrients it gives you the most of."
+checked: 2026-11-24
+forms:
+  - name: "Plain, nonfat"
+    usda: "Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)"
+    fdcId: 170894
+    serving: { label: "1 container", g: 170 }
+    per100: { kcal: 59, protein: 10.2, carbs: 3.6, fat: 0.39, fiber: 0 }
+    micros: { vitamin-a: 1, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.01, vitamin-k: 0, thiamin: 0.023, riboflavin: 0.278, niacin: 0.208, vitamin-b6: 0.063, folate: 7, vitamin-b12: 0.75, pantothenic-acid: 0.331, choline: 15.1, calcium: 110, iron: 0.07, magnesium: 11, phosphorus: 135, potassium: 141, zinc: 0.52, copper: 0.017, manganese: 0.009, selenium: 9.7 }
+  - name: "Plain, lowfat"
+    usda: "Yogurt, Greek, plain, lowfat"
+    fdcId: 170903
+    serving: { label: "1 container", g: 200 }
+    per100: { kcal: 73, protein: 9.95, carbs: 3.94, fat: 1.92, fiber: 0 }
+    micros: { vitamin-a: 90, vitamin-c: 0.8, vitamin-d: 0, vitamin-e: 0.04, vitamin-k: 0.2, thiamin: 0.044, riboflavin: 0.233, niacin: 0.197, vitamin-b6: 0.055, folate: 12, vitamin-b12: 0.52, pantothenic-acid: 0.47, choline: 15.2, calcium: 115, iron: 0.04, magnesium: 11, phosphorus: 137, potassium: 141, zinc: 0.6, copper: 0.021, manganese: 0.007, selenium: 12.4 }

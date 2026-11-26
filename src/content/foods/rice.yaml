@@ -1,0 +1,34 @@
+# Rice. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Rice
+group: grains
+dek: "Calories, protein, carbs, fat and fiber in white and brown long-grain rice, raw and cooked, and the nutrients it gives you the most of."
+checked: 2026-11-24
+forms:
+  - name: "White, long-grain, enriched, cooked"
+    usda: "Rice, white, long-grain, regular, enriched, cooked"
+    fdcId: 168878
+    serving: { label: "1 cup", g: 158 }
+    per100: { kcal: 130, protein: 2.69, carbs: 28.2, fat: 0.28, fiber: 0.4 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.04, vitamin-k: 0, thiamin: 0.163, riboflavin: 0.013, niacin: 1.48, vitamin-b6: 0.093, folate: 97, vitamin-b12: 0, pantothenic-acid: 0.39, choline: 2.1, calcium: 10, iron: 1.2, magnesium: 12, phosphorus: 43, potassium: 35, zinc: 0.49, copper: 0.069, manganese: 0.472, selenium: 7.5 }
+  - name: "White, long-grain, enriched, raw"
+    usda: "Rice, white, long-grain, regular, raw, enriched"
+    fdcId: 168877
+    # 365 kcal is USDA's, from rice-specific factors (3.82/4.16/8.37 give 365.5); 4/4/9 gives 354.
+    atwaterGap: true
+    serving: { label: "1 cup", g: 185 }
+    per100: { kcal: 365, protein: 7.13, carbs: 80, fat: 0.66, fiber: 1.3 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.11, vitamin-k: 0.1, thiamin: 0.576, riboflavin: 0.049, niacin: 4.19, vitamin-b6: 0.164, folate: 387, vitamin-b12: 0, pantothenic-acid: 1.01, choline: 5.8, calcium: 28, iron: 4.31, magnesium: 25, phosphorus: 115, potassium: 115, zinc: 1.09, copper: 0.22, manganese: 1.09, selenium: 15.1 }
+  - name: "Brown, long-grain, cooked"
+    usda: "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)"
+    fdcId: 169704
+    serving: { label: "1 cup", g: 202 }
+    per100: { kcal: 123, protein: 2.74, carbs: 25.6, fat: 0.97, fiber: 1.6 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.17, vitamin-k: 0.2, thiamin: 0.178, riboflavin: 0.069, niacin: 2.56, vitamin-b6: 0.123, folate: 9, vitamin-b12: 0, pantothenic-acid: 0.38, choline: 9.2, calcium: 3, iron: 0.56, magnesium: 39, phosphorus: 103, potassium: 86, zinc: 0.71, copper: 0.106, manganese: 0.974, selenium: 5.8 }
+  - name: "Brown, long-grain, raw"
+    usda: "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)"
+    fdcId: 169703
+    serving: { label: "1 cup", g: 185 }
+    per100: { kcal: 367, protein: 7.54, carbs: 76.2, fat: 3.2, fiber: 3.6 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.6, vitamin-k: 0.6, thiamin: 0.541, riboflavin: 0.095, niacin: 6.49, vitamin-b6: 0.477, folate: 23, vitamin-b12: 0, pantothenic-acid: 1.06, choline: 21.5, calcium: 9, iron: 1.29, magnesium: 116, phosphorus: 311, potassium: 250, zinc: 2.13, copper: 0.302, manganese: 2.85, selenium: 17.1 }

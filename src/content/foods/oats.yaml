@@ -1,0 +1,20 @@
+# Oats. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
+# final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
+draft: true
+name: Oats
+group: grains
+dek: "Calories, protein, carbs, fat and fiber in rolled oats, dry and cooked with water, and the nutrients they give you the most of."
+checked: 2026-11-24
+forms:
+  - name: "Rolled or quick, dry"
+    usda: "Cereals, oats, regular and quick, not fortified, dry"
+    fdcId: 173904
+    serving: { label: "1 cup", g: 81 }
+    per100: { kcal: 379, protein: 13.2, carbs: 67.7, fat: 6.52, fiber: 10.1 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.42, vitamin-k: 2, thiamin: 0.46, riboflavin: 0.155, niacin: 1.12, vitamin-b6: 0.1, folate: 32, vitamin-b12: 0, pantothenic-acid: 1.12, choline: 40.4, calcium: 52, iron: 4.25, magnesium: 138, phosphorus: 410, potassium: 362, zinc: 3.64, copper: 0.391, manganese: 3.63, selenium: 28.9 }
+  - name: "Cooked with water, no salt"
+    usda: "Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt"
+    fdcId: 173905
+    serving: { label: "1 cup", g: 234 }
+    per100: { kcal: 71, protein: 2.54, carbs: 12, fat: 1.52, fiber: 1.7 }
+    micros: { vitamin-a: 0, vitamin-c: 0, vitamin-d: 0, vitamin-e: 0.08, vitamin-k: 0.3, thiamin: 0.076, riboflavin: 0.016, niacin: 0.225, vitamin-b6: 0.005, folate: 6, vitamin-b12: 0, pantothenic-acid: 0.311, choline: 7.4, calcium: 9, iron: 0.9, magnesium: 27, phosphorus: 77, potassium: 70, zinc: 1, copper: 0.074, manganese: 0.58, selenium: 5.4 }

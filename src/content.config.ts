@@ -394,13 +394,16 @@ const foods = defineCollection({
   schema: z.object({
     draft: z.boolean().default(false),
     name: z.string(),
-    group: z.enum(['fruits', 'vegetables', 'meat', 'fish', 'eggs-dairy']),   // FOOD_GROUPS
+    group: z.enum(['fruits', 'vegetables', 'grains', 'meat', 'fish', 'eggs-dairy']),   // FOOD_GROUPS (keep in step)
     dek: z.string().min(40).max(200),
     checked: z.coerce.date(),
     forms: z.array(z.object({
       name: z.string(),
       usda: z.string(),
       fdcId: z.number().int().positive(),
+      // Set only where USDA's food-specific energy factors put calories more than 10 kcal per 100 g from
+      // 4/4/9 and the figure was re-checked against the source (raw white rice: 365 vs 354, v2.56.1).
+      atwaterGap: z.boolean().optional(),
       serving: z.object({ label: z.string(), g: z.number().positive() }).optional(),
       per100,
       micros: z.record(z.string(), z.number().min(0)),
