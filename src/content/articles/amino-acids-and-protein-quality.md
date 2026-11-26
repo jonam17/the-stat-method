@@ -65,7 +65,8 @@ means, and they are behind most of what is sold as leucine, BCAAs and "complete"
 Muscle protein is built from twenty amino acids. The body can make eleven of them. The other nine
 it cannot make in useful amounts, so they must come from food. [2] These are the essential, or
 indispensable, amino acids: histidine, isoleucine, leucine, lysine, methionine, phenylalanine,
-threonine, tryptophan and valine. [1]
+threonine, tryptophan and valine. [1] Our [Library page on the essential amino
+acids](/library/other-nutrients/essential-amino-acids/) gives the US reference intakes for each one.
 
 Between the two groups sits a third. Cysteine, tyrosine, taurine, glycine, arginine, glutamine
 and proline can become essential in particular physiological or medical conditions, which is why

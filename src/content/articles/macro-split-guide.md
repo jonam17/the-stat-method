@@ -179,7 +179,8 @@ and central rather than at either edge.
 
 Set protein from lean mass, put a floor under fat, and let carbohydrate take what is left.
 Then stop optimising and start executing, because a split you follow for three months beats
-a theoretically superior one you abandon in a fortnight.
+a theoretically superior one you abandon in a fortnight. If weighing every meal is the part you
+would abandon, [tracking without a scale](/articles/tracking-without-a-scale/) covers the lower-effort alternative.
 
 If you want to adjust from there, do it based on evidence from your own training and
 appetite rather than from an argument on the internet. The calculator lets you type any

@@ -357,6 +357,17 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.56.1 — Links to two pages Google hasn't indexed
+
+- Search Console (export 2026-11-25) lists two pages as "Crawled – currently not indexed" that almost nothing
+  links to: the essential amino acids Library page and the "Tracking macros without a food scale" article.
+  Both now get in-text links from related articles:
+  - Essential amino acids: from the amino acids article (after the list of the nine) and the protein article
+    (the Institute of Medicine report it cites sets the per-amino-acid intakes the page lists).
+  - Tracking without a scale: from the protein article, the macro split guide's bottom line and the TDEE
+    article's "Reading the result".
+- No wording changes otherwise; no `updated` dates changed.
+
 ### v2.56.0 — Article: Building a routine
 
 - **New article, scheduled for Sunday 2026-11-29:** "Building a routine: full-body, splits and how to choose"

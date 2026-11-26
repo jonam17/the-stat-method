@@ -46,7 +46,8 @@ worth knowing what that number is and is not: it is the amount at which nitrogen
 studies found most healthy adults stop losing protein — a threshold for avoiding deficiency,
 not an amount optimal for anything. It was also rounded down from 0.83, and later work using
 different methods has argued it is set too low, particularly for older adults. Treating it as
-a target rather than a floor is the single most common misreading of it. Lifting
+a target rather than a floor is the single most common misreading of it. The same report also
+sets intakes for each [essential amino acid](/library/other-nutrients/essential-amino-acids/). Lifting
 forums say two grams per pound. The supplement label suggests whatever finishes the tub
 fastest.
 
@@ -127,7 +128,8 @@ doses fine; the total across the day is what drives outcomes. Spreading intake a
 or four meals is convenient and probably marginally better for muscle protein synthesis,
 but it isn't the lever people think it is.
 
-Hit the daily number first. Optimise timing afterwards, if ever.
+Hit the daily number first. Optimise timing afterwards, if ever. If you don't weigh your food,
+our article on [tracking without a scale](/articles/tracking-without-a-scale/) shows how to estimate it with your hands.
 
 <aside class="summary">
 <span class="summary-label">Summary</span>
