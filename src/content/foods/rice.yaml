@@ -1,6 +1,6 @@
 # Rice. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Rice
 group: grains
 dek: "Calories, protein, carbs, fat and fiber in white and brown long-grain rice, raw and cooked, and the nutrients it gives you the most of."

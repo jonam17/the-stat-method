@@ -1,6 +1,6 @@
 # Oats. Every value copied from USDA FoodData Central, SR Legacy (April 2018 release, the
 # final one), per 100 g, exactly as published. Serving weights are USDA's portions for the same entry.
-draft: true
+draft: false
 name: Oats
 group: grains
 dek: "Calories, protein, carbs, fat and fiber in rolled oats, dry and cooked with water, and the nutrients they give you the most of."

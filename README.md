@@ -357,6 +357,11 @@ See [`docs/ARTICLE-WORKFLOW.md`](docs/ARTICLE-WORKFLOW.md) before drafting or ed
 
 Every release is tagged. Newest first.
 
+### v2.57.1 — Publish oats, rice and Greek yogurt
+
+- `src/content/foods/{oats,rice,greek-yogurt}.yaml`: `draft: false` after the maintainer checked them. The
+  Library now has 13 foods, with Grains as a new group.
+
 ### v2.57.0 — Foods: oats, rice, Greek yogurt (draft)
 
 - **New foods, `draft: true`** (first batch under the weekly schedule): Oats (rolled or quick, dry and cooked
